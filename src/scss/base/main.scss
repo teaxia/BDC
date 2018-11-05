@@ -1,0 +1,50 @@
+@charset "utf-8";
+@import "./var";
+@import "./button";
+.pd50{
+    padding:50px;
+}
+.mr50 {
+    margin-top:50px;
+}
+.mr40 {
+    margin-top:40px;
+}
+.mr30 {
+    margin-top:30px;
+}
+.mr20 {
+    margin-top:20px;
+}
+.mr10 {
+    margin-top:10px;
+}
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.container{
+    padding:20px;
+}
+.v-cell{
+    padding: 10px 15px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.v-input{
+    border-bottom: 1px solid $font-input-p;
+}
+.v-div{
+    height:auto;
+    overflow: hidden;
+}
+.v-flex{
+    display: flex;
+}
+.v-flex-between{
+    flex-flow:  row nowrap;
+    justify-content: space-between;
+}

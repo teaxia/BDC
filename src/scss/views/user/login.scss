@@ -1,0 +1,33 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.login{
+    padding:50px;
+    h2{
+        color:$font-h2;
+        font-size:48px;
+    }
+    .enterfrom{
+        width: 100%;
+        .input{
+            border: none;
+            width: 100%;
+            height:80px;
+            font-size:38px;
+            &:input-placeholder{
+                color:$border-input;
+            }
+            &:focus {
+                outline:none;
+            }
+        }
+    }
+    .tips{
+        color: $font-link;
+        font-size:30px;
+    }
+    .change{
+        height: 20px;
+        font-size:24px;
+    }
+}
