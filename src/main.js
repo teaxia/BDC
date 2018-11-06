@@ -11,16 +11,21 @@ import {zh} from  './common/lang/zh'
 import {en} from  './common/lang/en'
 import {server} from './common/apis/http-service'    // 定义ajax全局
 import storage from './common/storage/storage'       // 本地数据读取
-import { Group,Flexbox, FlexboxItem } from 'vux'
+import jmCode from './common/config/config'       // 加密串
+import { Group,Flexbox,FlexboxItem,XInput } from 'vux'
+import { ToastPlugin } from 'vux'
 import './scss/base/main.scss'
 Vue.use(VueRouter)
 Vue.use(VueI18n)
 Vue.component('group', Group)
+Vue.component('x-input', XInput)
 Vue.component('flexbox', Flexbox)
 Vue.component('flexbox-item', FlexboxItem)
+Vue.use(ToastPlugin)
 Vue.prototype.$server=server;                        // ajax组件
 Vue.prototype.$storage = storage;                    // 本地数据读取
-Vue.prototype.$md5 = md5;                           // md5加密
+Vue.prototype.$md5 = md5;                            // md5加密
+Vue.prototype.$jm  = jmCode;                         // 加密字符串
 const router = new VueRouter({
   routes
 })

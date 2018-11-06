@@ -1,19 +1,16 @@
 <template>
 	<div class="regist" v-cloak>
-        <vtopbar title="注册用户"></vtopbar>
         <div class="pd50">
-            <el-row>
-                <el-col :span="24">
-                    <h2>BDC钱包</h2>
-                </el-col>
-            </el-row>
-            <div class="enterfrom">
-                <el-select v-model="select" slot="prepend" class="input-select" placeholder="+86">
-                    <el-option v-for="(item,index) in options" :key="index" :label="item.value" :value="item.value"></el-option>
-                </el-select>
-                <el-input placeholder="请输入手机号" v-model="mobile" class="input-with-select"></el-input>
+            <div>
+                <h2>{{ $t("global.title") }}</h2>
             </div>
-            <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("user.login") }}</button>
+            <div class="enterfrom">
+                <select v-model="select" slot="prepend" class="input-select" placeholder="+86">
+                    <option v-for="(item,index) in options" :key="index" :label="item.value" :value="item.value"></option>
+                </select>
+                <input :placeholder="$t('user.tips.phone')" v-model="mobile" class="input-with-select" />
+            </div>
+            <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.next") }}</button>
         </div>
     </div>
 </template>
@@ -23,49 +20,48 @@ export default {
 	name: 'Login',
 	data() {
 		return {
-			UserName : '',
-			PassWord : '',
-            lang	 : 'zh',		//默认语言
             select   : '+86',
-            mobile   : '',
+			mobile   : '',
+			lang	 : '',
             options: [{
                value: '+86',
-            },{
-               value: '+51',
-            },{
-               value: '+52',
             }],
 		}
 	},
 	watch:{
-		lang(){
-			this.$storage.set('lang',this.lang);
-			this.$i18n.locale = this.lang;
-		}
+		
 	},
 	methods: {
 		doSubmit(){
+			let jmcode = "b2.@A%3dwa";
 			this.$server.post(
-			'Login',
+			'PwdBack_SendCode',
 			{
-				jm 	 : 'F993B1E731FF133F8156408CDE648249',//this.$md5('test1'),						// 加密方法name+pwd加密
-				name : 'test1',											// 用户名
-				pwd	 : '2F2ADE889CD0B18C2F2AD788E6F46585',//this.$md5('b2.@A%3dwa123456'),					// 加密方法  b2.@A%3dwa+pwd
-				lv   : 'en'
+				jm 	 		: this.$md5(jmcode+this.mobile).toUpperCase(),					// 加密方法Key+Phone_No加密
+				Key  		: '',															// 注册传空
+				Phone_No	: this.mobile,
+				lv   		: this.lang
 			},
 			).then(data => {
-				if(data.d!='true'){
-					this.$message.error({
-						message: 'jm error',
-						center:true,
+				if(data.Code<0){
+					this.$vux.toast.show({
+						text: data.Msg,
+						type: 'warn'
 					})
+				}else{
+					// 成功，跳转到输入验证码页面！
+					this.$router.push({
+						path:"/user/verification",
+						query:{
+							mobile:this.mobile,
+						}
+					});
 				}
-				console.log(data.d);
 			})
 		}
 	},
 	mounted() {
-		
+		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
 	}
 }
 
