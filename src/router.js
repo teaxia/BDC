@@ -4,18 +4,21 @@ import user from './views/user.vue'
     import login from './views/user/login.vue'                              //  登陆
     import verification from './views/user/verification.vue'                //  验证码验证
     import registinfo from './views/user/registinfo.vue'                    //  注册信息填写
+// 发现
 import Home from './views/home.vue'
+    import discovery from './views/home/index.vue'
 import NotFound from './views/404.vue'
 let routes = [
-    // {
-    //     path: '/index',
-    //     component: vindex,
-    //     name: '',
-    //     hidden: true,
-    //     meta:{
-    //         isIndex: 0                                      //  底部导航图标索引0 1 2 3
-    //     },
-    // },
+    {
+        path: '/index',
+        component: user,
+        redirect: '/user/login',
+        name: '',
+        hidden: true,
+        meta:{
+            isIndex: 0                                      //  底部导航图标索引0 1 2 3
+        },
+    },
     {
         path: "/",
         component: user,
@@ -30,9 +33,15 @@ let routes = [
     },
     {
         path: '/home',
+        redirect: '/home/discovery',
         component: Home,
-        name: '导航一',
-        iconCls: 'el-icon-message',//图标样式class
+        name: 'discovery',
+        meta:{
+            isIndex: 2                                      //  底部导航图标索引0 1 2 3
+        },
+        children: [
+            { path: '/home/discovery', component: discovery, name: 'discovery',meta:{isIndex: 2}}
+        ]
     },
     {
         path: '*',

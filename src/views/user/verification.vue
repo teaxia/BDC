@@ -77,13 +77,13 @@ export default {
 				{
 					jm 	 		: this.$md5(this.$jm.jmCode+this.mobile).toUpperCase(),			// 加密方法Key+Phone_No加密
 					Key  		: '',															// 注册传空
-					Phone_No	: this.mobile,													// 去除格式化手机号产生的空格
+					Phone_No	: this.mobile,
 					lv   		: this.lang
 				},
 				).then(data => {
 					if(data){
 						this.$vux.toast.show({
-							text: this.$t("user.tips.success"),
+							text: this.$t("user.success"),
 							type: 'success'
 						})
 					}

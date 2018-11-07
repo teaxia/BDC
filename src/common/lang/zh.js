@@ -1,11 +1,20 @@
 // 国际化中文语言包
 export const zh = {
+    // 全局
     global:{
         title   : 'BDC钱包',
         next    : '下一步',
         success : '成功！',
         error   : '失败！'
     },
+    // 全局底部菜单
+    menu:{
+        wallet       : '钱包',
+        application  : '应用',
+        discovery    : '发现',
+        mine         : '我的'
+    },
+    //注册登陆
     user: {
         tips    :   {
             username        : '请输入账号',
@@ -22,12 +31,29 @@ export const zh = {
         },
         login   : '登 陆',
         regist  : '注 册',
+        register: {
+            username    :   '登陆账号：',
+            nickname    :   '用户昵称：',
+        },
         type    :   {
             msg     : '短信登陆',
             account : '账号登陆'
         },
         verification:   {
             title   : '请输入验证码',
+        }
+    },
+    // 发现
+    discovery:{
+        topmenu:{
+            bdc         :   '兑换BDC',
+            ctc         :   'CTC',
+            market      :   '行情',
+            bill        :   '账本',
+            calculator  :   '计算器',
+            ent         :   '休闲娱乐',
+            recharge    :   '充值',
+            credit      :   '办理信用卡'
         }
     }
 };

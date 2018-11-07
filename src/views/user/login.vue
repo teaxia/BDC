@@ -38,7 +38,7 @@ export default {
 	name: 'Login',
 	data() {
 		return {
-			langType : [{ key: 'zh', value: 'English' },{ key: 'en', value: '中文' }],
+			langType : [{ key: 'zh', value: '中文' },{ key: 'en', value: 'english' }],
 			UserName : '',
 			PassWord : '',
 			lang	 : 'zh',		// 默认语言
@@ -46,21 +46,21 @@ export default {
 		}
 	},
 	watch:{
-		lang(){
-			this.$storage.set('lang',this.lang);
-			this.$i18n.locale = this.lang;
-			this.$server.post(
-			'SetLanguage',
-			{
-				guid : this.$storage.get('guid'),
-				lv   : this.lang
-			},
-			).then(data => {
-				if(data){
-					console.log(data);
-				}
-			})
-		}
+		// lang(){
+		// 	this.$storage.set('lang',this.lang);
+		// 	this.$i18n.locale = this.lang;
+		// 	this.$server.post(
+		// 	'SetLanguage',
+		// 	{
+		// 		guid : this.$storage.get('guid'),
+		// 		lv   : this.lang
+		// 	},
+		// 	).then(data => {
+		// 		if(data){
+					
+		// 		}
+		// 	})
+		// }
 	},
 	methods: {
 		doSubmit(){
@@ -87,7 +87,10 @@ export default {
 							text: this.$t("user.tips.success"),
 							type: 'success'
 						})
-						this.$storage.set('guid',data.Data);
+						this.$storage.set('guid',data);
+						this.$router.push({
+							path:"/home/discovery",
+						});
 					}
 				})
 			}
@@ -98,6 +101,14 @@ export default {
 	},
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
+		//判断是否自动登陆
+		let guid = this.$storage.get('guid')
+		if(guid&&guid!='undefined'){
+			//如果有的话，自动登陆
+			this.$router.push({
+				path:"/home/discovery",
+			});
+		}
 	},
 	components: {
     	Selector

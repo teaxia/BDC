@@ -46,7 +46,7 @@ export default {
 				});
 			}else{
 				this.$vux.toast.show({
-					text: this.$t("user.tips.mobilenull"),
+					text: this.$t("user.tips.mobileerror"),
 					type: 'warn'
 				})
 			}

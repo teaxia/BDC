@@ -13,7 +13,8 @@ import axios from 'axios'
 import {server} from './common/apis/http-service'    // 定义ajax全局
 import storage from './common/storage/storage'       // 本地数据读取
 import jmCode from './common/config/config'       // 加密串
-import { Group,Flexbox,FlexboxItem,XInput,XHeader } from 'vux'
+import vfooter from './components/vfooter.vue'
+import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem } from 'vux'
 import { ToastPlugin } from 'vux'
 import './scss/base/main.scss'
 Vue.use(VueRouter)
@@ -23,6 +24,9 @@ Vue.component('x-input', XInput)
 Vue.component('flexbox', Flexbox)
 Vue.component('flexbox-item', FlexboxItem)
 Vue.component('x-header', XHeader)
+Vue.component('grid', Grid)
+Vue.component('grid-item', GridItem)
+Vue.component('v-footer',vfooter)
 Vue.use(ToastPlugin)
 Vue.prototype.$server=server;                        // ajax组件
 Vue.prototype.$storage = storage;                    // 本地数据读取
@@ -53,14 +57,20 @@ const app = new Vue({
 //响应拦截器即异常处理
 axios.interceptors.response.use(response => {
   let data = JSON.parse(response.data.d);
-  if(data.Code<0){
+  if(data.Code==-1){
     app.$vux.toast.show({
       text: data.Msg,
       type: 'warn'
     })
     return false;
+  }else if(data.Code==-2){
+    app.$vux.toast.show({
+      text: data.Msg,         //登陆失败，被踢下线
+      type: 'warn'
+    })
+    return false;
   }else{
-    // 成功，跳转到输入验证码页面！
+    // 成功
     return data.Data
   }
 }, err => {
