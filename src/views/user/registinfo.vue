@@ -12,9 +12,11 @@
                     <x-input title="用户昵称" v-model="nickName"></x-input>
                 </group>
                 <group>
-                    <div>性别：</div>
-                    <label>男<input type="radio" v-model="gender" value="男"/></label>
-                    <label>女<input type="radio" v-model="gender" value="女"/></label>
+                    <div class="label">性别：</div>
+                    <div class="radio">
+                        <label>男<input type="radio" v-model="gender" value="男"/></label>
+                        <label>女<input type="radio" v-model="gender" value="女"/></label>
+                    </div>
                 </group>
                 <group>
                     <x-input title="登陆密码" v-model="password"></x-input>
@@ -26,9 +28,11 @@
                     <x-input title="邀请码" v-model="invitation"></x-input>
                 </group>
                 <group>
-                    <div>矿区：</div>
-                    <label>V1<input type="radio" v-model="area" value="A"/></label>
-                    <label>V2<input type="radio" v-model="area" value="B"/></label>
+                    <div class="label">矿区：</div>
+                    <div class="radio">
+                        <label>V1<input type="radio" v-model="area" value="A"/></label>
+                        <label>V2<input type="radio" v-model="area" value="B"/></label>
+                    </div>
                 </group>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("user.regist") }}</button>
