@@ -1,3 +1,13 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+.regist{
+    h2{
+        color:$font-h2;
+        font-size:48px;
+    }
+    .vux-x-input{
+        height: 100px;
+        font-size:28px;
+    }    
+}

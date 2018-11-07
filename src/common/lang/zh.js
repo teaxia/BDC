@@ -11,7 +11,10 @@ export const zh = {
             phone           : '请输入手机号',
             forget          : '忘记密码？',
             success         : '登陆成功！',
-            verification    : '验证码'
+            verification    : '验证码',
+            mobileerror     : '请输入正确的手机号',
+            vcode           : '验证码',
+            verification    : '请输入6位数字验证码'
         },
         login   : '登 陆',
         regist  : '注 册',

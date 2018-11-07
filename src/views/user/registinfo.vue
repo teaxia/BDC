@@ -77,14 +77,9 @@ export default {
 				lv   		: this.lang
 			},
 			).then(data => {
-				if(data.Code<0){
-					this.$vux.toast.show({
-						text: data.Msg,
-						type: 'warn'
-					})
-				}else{
-					// 成功，跳转首页！
-					
+				if(data){
+                    // 成功，跳转首页！
+                    console.log(data);
 				}
 			})
 		}

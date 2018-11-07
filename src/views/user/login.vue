@@ -56,7 +56,9 @@ export default {
 				lv   : this.lang
 			},
 			).then(data => {
-				console.log(data);
+				if(data){
+					console.log(data);
+				}
 			})
 		}
 	},
@@ -80,12 +82,7 @@ export default {
 					lv   : this.lang
 				},
 				).then(data => {
-					if(data.Code<0){
-						this.$vux.toast.show({
-							text: data.Msg,
-							type: 'warn'
-						})
-					}else{
+					if(data){
 						this.$vux.toast.show({
 							text: this.$t("user.tips.success"),
 							type: 'success'

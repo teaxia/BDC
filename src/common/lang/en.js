@@ -11,7 +11,9 @@ export const en = {
             phone           : 'Please enter your phone number',
             forget          : 'Forget password?',
             success         : 'Login success',
-            verification    : 'Verification code'
+            verification    : 'Verification code',
+            vcode           : 'Code',
+            mobileerror     : 'Please fill in the correct cell phone number'
         },
         login   :   'login',
         regist  :   'regist',
