@@ -1,8 +1,10 @@
 // 国际化中文语言包
 export const en = {
     global:{
-        title: 'BDC',
-        next : 'Next'
+        title       : 'BDC',
+        next        : 'Next',
+        success     : 'Success!',
+        error       : 'Error!'
     },
     user: {
         tips    :   {
@@ -12,8 +14,11 @@ export const en = {
             forget          : 'Forget password?',
             success         : 'Login success',
             verification    : 'Verification code',
+            mobileerror     : 'Please input the correct cell phone number.',
             vcode           : 'Code',
-            mobileerror     : 'Please fill in the correct cell phone number'
+            mobileerror     : 'Please fill in the correct cell phone number',
+            setvcode        : 'Get verification code',
+            send            : 'Recapture',
         },
         login   :   'login',
         regist  :   'regist',

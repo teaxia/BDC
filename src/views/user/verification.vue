@@ -1,6 +1,6 @@
 <template>
 	<div class="regist" v-cloak>
-		<x-header title="用户注册"></x-header>
+		<x-header :title="$t('user.regist')"></x-header>
         <div class="pd50">
             <div>
                 <h2>{{ $t("user.verification.title") }}</h2>
@@ -10,9 +10,9 @@
                     <x-input class="test" :title="$t('user.tips.vcode')" v-model="code" required mask="999999" :max="max" :placeholder="$t('user.tips.verification')"></x-input>
                 </group>
             </div>
-			<button class="button" @click="countDown">
-				{{content}}
-			</button>
+			<div class="mr20 v-div">
+				<span class="fr tips" @click="countDown">{{content}}</span>
+			</div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.next") }}</button>
         </div>
     </div>
@@ -27,10 +27,10 @@ export default {
 			mobile   : '',
             lang	 : '',
 			code     : '',
+			content	 : this.$t("user.tips.setvcode"),
 			max		 : 6,
-			content: '发送验证码',  // 按钮里显示的内容
-			totalTime: 10,      //记录具体倒计时时间
-			canClick: true //添加canClick
+			totalTime: 60,      //记录具体倒计时时间
+			canClick: true 		//添加canClick
 		}
 	},
 	watch:{
@@ -39,12 +39,12 @@ export default {
 	methods: {
 		doSubmit(){
 			// 空值判断
-			if(!pattern["Pattern.Verification"].test(this.mobile)){
+			if(!pattern["Pattern.Verification"].test(this.code)){
 				this.$vux.toast.show({
 					text: this.$t("user.tips.verification"),
 					type: 'warn'
 				})
-				return false;
+				return
 			}
 			this.$server.post(
 			'ValidatePhoneNo',
@@ -70,33 +70,32 @@ export default {
 		countDown() {
 			if (!this.canClick){return}   						// 禁止多次点击 
 				this.canClick = false
-				this.content = this.totalTime + 's后重新发送'
-			let clock = window.setInterval(() => {
+				this.content = this.totalTime + 's'+this.$t("user.tips.send")
+				// 发送短信接口
+				this.$server.post(
+				'PwdBack_SendCode',
+				{
+					jm 	 		: this.$md5(this.$jm.jmCode+this.mobile).toUpperCase(),			// 加密方法Key+Phone_No加密
+					Key  		: '',															// 注册传空
+					Phone_No	: this.mobile,													// 去除格式化手机号产生的空格
+					lv   		: this.lang
+				},
+				).then(data => {
+					if(data){
+						this.$vux.toast.show({
+							text: this.$t("user.tips.success"),
+							type: 'success'
+						})
+					}
+				})
+				let clock = window.setInterval(() => {
 				this.totalTime--
-				this.content = this.totalTime + 's后重新发送'
+				this.content = this.totalTime + 's'+this.$t("user.tips.send")
 				if (this.totalTime < 0) {
 					window.clearInterval(clock)
-					this.content = '重新发送验证码'
-					this.totalTime = 10
+					this.content = this.$t("user.tips.setvcode");
+					this.totalTime = 60
 					this.canClick = true  //这里重新开启
-					
-					// 发送短信接口
-					this.$server.post(
-					'PwdBack_SendCode',
-					{
-						jm 	 		: this.$md5(this.$jm.jmCode+this.mobile).toUpperCase(),			// 加密方法Key+Phone_No加密
-						Key  		: '',															// 注册传空
-						Phone_No	: this.mobile,														// 去除格式化手机号产生的空格
-						lv   		: this.lang
-					},
-					).then(data => {
-						if(data){
-							this.$vux.toast.show({
-								text: this.$t("user.tips.success"),
-								type: 'success'
-							})
-						}
-					})
 				}
 			},1000)
 		}
