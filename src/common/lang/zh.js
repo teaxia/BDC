@@ -53,7 +53,7 @@ export const zh = {
             calculator  :   '计算器',
             ent         :   '休闲娱乐',
             recharge    :   '充值',
-            credit      :   '办理信用卡'
+            credit      :   '办信用卡'
         }
     }
 };

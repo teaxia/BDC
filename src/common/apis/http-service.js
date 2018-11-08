@@ -49,7 +49,7 @@ axios.interceptors.response.use(response => {
     return false;
   }else{
     // 成功
-    return data.Data
+    return JSON.parse(data.Data)
   }
 }, err => {
   if (err && err.response) {

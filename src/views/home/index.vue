@@ -10,8 +10,16 @@
 					</grid-item>
 				</grid>
 			</div>
-			<div>
-				<panel :list="news" type="1"></panel>
+			<div class="panel">
+				<div class="dis-grid" v-for="(v,index) in news">
+					<div class="dis-grid-img">
+						<img :src="v.imgurl">
+					</div>
+					<div class="dis-grid-content">
+						<div class="title">{{v.Title}}</div>
+						<div class="content">{{v.Content}}</div>
+					</div>
+				</div>
 			</div>
 		</div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
@@ -19,7 +27,7 @@
 </template>
 
 <script>
-import { Panel } from 'vux'
+
 export default {
 	data() {
 		return {
@@ -67,21 +75,6 @@ export default {
 				}
 			],
 			news:[],
-			// news: [{
-			// 	src: 'http://somedomain.somdomain/x.jpg',
-			// 	fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-			// 	title: '标题一',
-			// 	desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-			// 	url: '/component/cell'
-			// }, {
-			// 	src: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-			// 	title: '标题二',
-			// 	desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-			// 	url: {
-			// 		path: '/component/radio',
-			// 		replace: false
-			// 	},
-			// }],
 		}
 	},
 	methods: {
@@ -97,6 +90,7 @@ export default {
 			).then(data => {
 				if(data){
 					console.log(data);
+					this.news = data;
 				}
 			})
 		}
@@ -104,10 +98,7 @@ export default {
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
 		this.getNews();
-	},
-	components: {
-    	Panel
-  	}
+	}
 }
 
 </script>
