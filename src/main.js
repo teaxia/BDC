@@ -13,6 +13,7 @@ import {server} from './common/apis/http-service'    // 定义ajax全局
 import storage from './common/storage/storage'       // 本地数据读取
 import jmCode from './common/config/config'       // 加密串
 import vfooter from './components/vfooter.vue'
+import vgrid from './components/vgrid.vue'
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
@@ -29,6 +30,7 @@ Vue.component('x-header', XHeader)
 Vue.component('grid', Grid)
 Vue.component('grid-item', GridItem)
 Vue.component('v-footer',vfooter)
+Vue.component('v-grid',vgrid)
 
 Vue.prototype.$server=server;                        // ajax组件
 Vue.prototype.$storage = storage;                    // 本地数据读取

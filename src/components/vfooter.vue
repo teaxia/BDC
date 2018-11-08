@@ -51,7 +51,7 @@ export default {
 
 <style lang="scss">
 .vfooter {
-  position:absolute;
+  position:fixed;
   bottom: 0;
   width: 100%;
   .iconfont{

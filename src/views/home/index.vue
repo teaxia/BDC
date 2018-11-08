@@ -3,22 +3,28 @@
 		<div class="main-pd">
 			<h1>{{$t("menu.discovery")}}</h1>
 			<div class="topmenu">
-				<grid :cols="4" :show-lr-borders="true" :show-vertical-dividers="false">
-					<grid-item v-for="(list,index) in dataList" :key="index">
+				<v-grid>
+					<div :class="['grid-4',index<4?'line-b':'']" v-for="(list,index) in dataList" :key="index">
 						<i :class="[{'iconfont':true},list.icon]"></i>
 						<span class="top-menu">{{list.value}}</span>
-					</grid-item>
-				</grid>
+					</div>
+				</v-grid>
 			</div>
 			<div class="panel">
 				<div class="dis-grid" v-for="(v,index) in news">
-					<div class="dis-grid-img">
-						<img :src="v.imgurl">
-					</div>
-					<div class="dis-grid-content">
-						<div class="title">{{v.Title}}</div>
-						<div class="content">{{v.Content}}</div>
-					</div>
+					<flexbox>
+						<flexbox-item :span="3">
+							<div class="dis-grid-img">
+								<img :src="v.imgurl">
+							</div>
+						</flexbox-item>
+						<flexbox-item>
+							<div class="dis-grid-content line-b">
+								<div class="title ellipsis1">{{v.Title}}</div>
+								<div class="content ellipsis2">{{v.Content}}</div>
+							</div>
+						</flexbox-item>
+					</flexbox>
 				</div>
 			</div>
 		</div>
@@ -89,7 +95,6 @@ export default {
 			},
 			).then(data => {
 				if(data){
-					console.log(data);
 					this.news = data;
 				}
 			})
