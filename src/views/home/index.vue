@@ -96,11 +96,7 @@ export default {
 			},
 			).then(data => {
 				if(data){
-					if(JSON.parse(data.data.d)){
-						console.log(123)
-					}else{
-						console.log(data);
-					}
+					console.log(data);
 				}
 			})
 		}
