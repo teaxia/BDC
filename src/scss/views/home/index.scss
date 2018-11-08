@@ -2,7 +2,6 @@
 @import "../../base/var";
 @import "../../base/button";
 .discovery{
-    padding-bottom: 150px;
     .topmenu{
         margin-top:50px;
         .iconfont,.top-menu{
@@ -28,9 +27,8 @@
         height: auto;
         overflow: hidden;
         .dis-grid-img{
-            
             img{
-                
+                width: 100%;
             }
         }
         .dis-grid-content{

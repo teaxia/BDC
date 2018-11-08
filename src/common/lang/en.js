@@ -55,5 +55,12 @@ export const en = {
             recharge    :   'Recharge',
             credit      :   'Credit card'
         }
+    },
+    // 钱包
+    wallet:{
+        title           :   'BDC wallet',
+        tips:{
+            change      :   'Asset conversion',
+        }
     }
 }

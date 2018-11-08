@@ -1,0 +1,14 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.main-pd{
+    .wallet-change{
+        clear: both;
+        text-align: right
+    }
+    .btc-grid-r{
+        span{
+            display: block;
+        }
+    }
+}

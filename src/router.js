@@ -7,13 +7,18 @@ import user from './views/user.vue'
 // 发现
 import Home from './views/home.vue'
     import discovery from './views/home/index.vue'
+
+// 钱包
+import wallet from './views/wallet.vue'
+    import walletindex from './views/wallet/wallet.vue'
+// 404
 import NotFound from './views/404.vue'
 let routes = [
     {
         path: '/index',
         component: user,
         redirect: '/user/login',
-        name: '',
+        name: 'user',
         hidden: true,
         meta:{
             isIndex: 0                                      //  底部导航图标索引0 1 2 3
@@ -22,7 +27,7 @@ let routes = [
     {
         path: "/",
         component: user,
-        name: "login",
+        name: "loginin",
         redirect: '/user/login',
         children: [
             { path: '/user/regist', component: regist, name: 'regist' },
@@ -40,7 +45,19 @@ let routes = [
             isIndex: 2                                      //  底部导航图标索引0 1 2 3
         },
         children: [
-            { path: '/home/discovery', component: discovery, name: 'discovery',meta:{isIndex: 2}}
+            { path: '/home/discovery', component: discovery, name: 'discoveryindex',meta:{isIndex: 2}}
+        ]
+    },
+    {
+        path: '/wallet',
+        redirect: '/wallet/wallet',
+        component: wallet,
+        name: 'wallet',
+        meta:{
+            isIndex: 0                                      //  底部导航图标索引0 1 2 3
+        },
+        children: [
+            { path: '/wallet/wallet', component: walletindex, name: 'walletindex',meta:{isIndex: 0}}
         ]
     },
     {

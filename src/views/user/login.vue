@@ -87,9 +87,9 @@ export default {
 							text: this.$t("user.tips.success"),
 							type: 'success'
 						})
-						this.$storage.set('guid',data);
+						this.$storage.set('guid',data.Result);
 						this.$router.push({
-							path:"/home/discovery",
+							path:"/wallet/wallet",
 						});
 					}
 				})
@@ -106,7 +106,7 @@ export default {
 		if(guid&&guid!='undefined'){
 			//如果有的话，自动登陆
 			this.$router.push({
-				path:"/home/discovery",
+				path:"/wallet/wallet",
 			});
 		}
 	},

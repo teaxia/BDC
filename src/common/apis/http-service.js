@@ -46,110 +46,134 @@ axios.interceptors.response.use(response => {
       text: data.Msg,                 //登陆失败，被踢下线
       type: 'warn'
     })
+    localStorage.clear();
+    //跳转登陆页面
+    window.app.$router.push({
+      path:"/user/login",
+    });
     return false;
   }else{
     // 成功
-    return JSON.parse(data.Data)
+    //return data.Data
+    return JSON.parse(data.Data);
   }
 }, err => {
   if (err && err.response) {
     switch (err.response.status) {
       case 400:
-      window.app.$vux.toast.show({
+         window.app.$vux.toast.show({
             text: '错误请求',
             type: 'warn'
           })
+          window.app.$vux.loading.hide()
           console.log('错误请求')
         break;
       case 401:
-      window.app.$vux.toast.show({
-        text: '未授权，请重新登录',
-        type: 'warn'
-      })
+          window.app.$vux.toast.show({
+            text: '未授权，请重新登录',
+            type: 'warn'
+          })
+          window.app.$vux.loading.hide()
           console.log('未授权，请重新登录')
         break;
       case 403:
-      window.app.$vux.toast.show({
-        text: '拒绝访问',
-        type: 'warn'
-      })
+        window.app.$vux.toast.show({
+          text: '拒绝访问',
+          type: 'warn'
+        })
+        window.app.$vux.loading.hide()
         console.log('拒绝访问')
         break;
       case 404:
-      window.app.$vux.toast.show({
-        text: '请求错误,未找到该资源',
-        type: 'warn'
-      })
+        window.app.$vux.toast.show({
+          text: '请求错误,未找到该资源',
+          type: 'warn'
+        })
+        window.app.$vux.loading.hide()
         console.log('请求错误,未找到该资源')
         break;
       case 405:
-      window.app.$vux.toast.show({
-        text: '请求方法未允许',
-        type: 'warn'
-      })
+        window.app.$vux.toast.show({
+          text: '请求方法未允许',
+          type: 'warn'
+        })
+        window.app.$vux.loading.hide()
         console.log('请求方法未允许')
         break;
       case 408:
-      window.app.$vux.toast.show({
-        text: '请求超时',
-        type: 'warn'
-      })
+        window.app.$vux.toast.show({
+          text: '请求超时',
+          type: 'warn'
+        })
+        window.app.$vux.loading.hide()
         console.log('请求超时')
         break;
       case 500:
-      window.app.$vux.toast.show({
-        text: '服务器内部错误',
-        type: 'warn'
-      })
+        window.app.$vux.toast.show({
+          text: '服务器内部错误',
+          type: 'warn'
+        })
+        window.app.$vux.loading.hide()
+        //跳转登陆页面
+        window.app.$router.push({
+          path:"/user/login",
+        });
         console.log('服务器内部错误');
         break;
       case 501:
-      window.app.$vux.toast.show({
-        text: '网络未实现',
-        type: 'warn'
-      })
+        window.app.$vux.toast.show({
+          text: '网络未实现',
+          type: 'warn'
+        })
+        window.app.$vux.loading.hide()
         console.log('网络未实现')
         break;
       case 502:
-      window.app.$vux.toast.show({
+        window.app.$vux.toast.show({
           text: '网络错误',
           type: 'warn'
         })
+        window.app.$vux.loading.hide()
         console.log('网络错误')
         break;
       case 503:
-      window.app.$vux.toast.show({
-          text: '服务不可用',
-          type: 'warn'
+        window.app.$vux.toast.show({
+            text: '服务不可用',
+            type: 'warn'
         })
+        window.app.$vux.loading.hide()
         console.log('服务不可用')
         break;
       case 504:
-      window.app.$vux.toast.show({
+        window.app.$vux.toast.show({
           text: '网络超时',
           type: 'warn'
         })
+        window.app.$vux.loading.hide()
         console.log('网络超时')
         break;
       case 505:
-      window.app$vux.toast.show({
+        window.app$vux.toast.show({
           text: 'http版本不支持该请求',
           type: 'warn'
         })
+        window.app.$vux.loading.hide()
         console.log('http版本不支持该请求')
         break;
       default:
-      window.app$vux.toast.show({
+        window.app$vux.toast.show({
           text: '连接错误',
           type: 'warn'
         })
+        window.app.$vux.loading.hide()
         console.log(`连接错误${err.response.status}`)
     }
   } else {
-    window.app$vux.toast.show({
+    window.app.$vux.toast.show({
       text: '连接到服务器失败',
       type: 'warn'
     })
+    window.app.$vux.loading.hide()
   }
   return Promise.resolve(err.response)
 })

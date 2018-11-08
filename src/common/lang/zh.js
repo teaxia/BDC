@@ -14,14 +14,14 @@ export const zh = {
         discovery    : '发现',
         mine         : '我的'
     },
-    //注册登陆
+    //注册登录
     user: {
         tips    :   {
             username        : '请输入账号',
             password        : '请输入密码',
             phone           : '请输入手机号',
             forget          : '忘记密码？',
-            success         : '登陆成功！',
+            success         : '登录成功！',
             verification    : '验证码',
             mobileerror     : '请输入正确的手机号',
             vcode           : '验证码',
@@ -29,15 +29,15 @@ export const zh = {
             setvcode        : '发送验证码',
             send            : '后重新发送',
         },
-        login   : '登 陆',
+        login   : '登 录',
         regist  : '注 册',
         register: {
-            username    :   '登陆账号：',
+            username    :   '登录账号：',
             nickname    :   '用户昵称：',
         },
         type    :   {
-            msg     : '短信登陆',
-            account : '账号登陆'
+            msg     : '短信登录',
+            account : '账号登录'
         },
         verification:   {
             title   : '请输入验证码',
@@ -54,6 +54,13 @@ export const zh = {
             ent         :   '休闲娱乐',
             recharge    :   '充值',
             credit      :   '办信用卡'
+        }
+    },
+    // 钱包
+    wallet:{
+        title           :   'BDC wallet',
+        tips:{
+            change      :   '资产转换',
         }
     }
 };

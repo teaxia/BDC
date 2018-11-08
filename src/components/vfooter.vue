@@ -19,7 +19,7 @@ export default {
         {
           value   : this.$t("menu.wallet"),
           icon    : 'icon-qianbao',
-          url     : '/home/discovery',
+          url     : '/wallet/wallet',
           index : 0
         },
         {
