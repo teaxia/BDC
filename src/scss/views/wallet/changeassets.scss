@@ -1,0 +1,42 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.changeassets{
+    .assets{
+        ul{
+            li{
+                height: 80px;
+                font-size:28px;
+                i{
+                    height: 80px;
+                    font-size:38px;
+                    margin-right:20px;
+                }
+            }
+        }
+        .changelist{
+            height: 80px;
+            font-size:28px;
+            input{
+                width: 100%;
+                font-size:28px;
+                border:none;
+            }
+            .rate{
+                display: block;
+            }
+        }
+        .change-rate{
+            .rate{
+                height: 50px;
+                span{
+                    display: inline-block;
+                    width:130px;
+                    font-size:28px;
+                    text-align: right;
+                }
+            }
+        }
+    }
+    
+}

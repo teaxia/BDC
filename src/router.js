@@ -11,6 +11,7 @@ import Home from './views/home.vue'
 // 钱包
 import wallet from './views/wallet.vue'
     import walletindex from './views/wallet/wallet.vue'
+    import changeassets from './views/wallet/changeassets.vue'
 // 应用
 import application from './views/application.vue'
     import appindex from './views/application/appindex.vue'
@@ -61,7 +62,8 @@ let routes = [
             isIndex: 0                                      //  底部导航图标索引0 1 2 3
         },
         children: [
-            { path: '/wallet/wallet', component: walletindex, name: 'walletindex',meta:{isIndex: 0}}
+            { path: '/wallet/wallet', component: walletindex, name: 'walletindex',meta:{isIndex: 0}},
+            { path: '/wallet/changeassets', component: changeassets, name: 'changeassets',meta:{isIndex: 0}}
         ]
     },
     {

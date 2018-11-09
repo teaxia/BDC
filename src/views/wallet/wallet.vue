@@ -5,8 +5,10 @@
             <div class="assets">
                 <v-grid>
                     <div class="wallet-change pd-lb20">
-                        <i class="iconfont icon-Conversion"></i>
-                        <span>{{$t("wallet.tips.change")}}</span>
+                        <router-link to="/wallet/changeassets">
+                            <i class="iconfont icon-Conversion"></i>
+                            <span>{{$t("wallet.tips.change")}}</span>
+                        </router-link>
                     </div>
                     <div class="wallet-band">
                         <div class="wallet-band-l fl">

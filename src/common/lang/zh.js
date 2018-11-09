@@ -69,7 +69,7 @@ export const zh = {
         btn:{
             send            :   '发送',
             receive         :   '接收'
-        }
+        },
     },
     // 应用
     application:{

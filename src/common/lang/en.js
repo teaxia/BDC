@@ -70,5 +70,12 @@ export const en = {
             send            :   'Send',
             receive         :   'Receive'
         }
+    },
+    // 应用
+    application:{
+        title:{
+            buy             :   'Buy',
+            shop            :   'Shop'
+        }
     }
 }
