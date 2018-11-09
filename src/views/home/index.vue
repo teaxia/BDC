@@ -86,12 +86,12 @@ export default {
 	},
 	methods: {
 		getNews(){
-			let jm     = this.$md5(this.$jm.jmCode+'1').toUpperCase();						// 这里只调用新闻，所以只加密类型1
+			let jm     = this.$md5(this.$jm.jmCode+'0').toUpperCase();						// 这里只调用新闻，所以只加密类型1
 			this.$server.post(
 			'GetNewsbulletinList',
 			{
 				jm 	 : jm,
-				Type : 1,				
+				Type : 0,				
 				lv   : this.lang
 			},
 			).then(data => {

@@ -2,35 +2,37 @@
 	<div class="wallet padding-footer" v-cloak>
 		<div class="main-container">
 			<h1>{{$t("wallet.title")}}</h1>
-            <v-grid>
-                <div class="wallet-change pd-lb20">
-                    <i class="iconfont icon-Conversion"></i>
-                    <span>{{$t("wallet.tips.change")}}</span>
-                </div>
-                <div class="wallet-band">
-                    <div class="wallet-band-l fl">
-                        <div class="wallet-band-tit">{{$t("wallet.tips.count")}}</div>
-                        <div class="wallet-band-bdc">
-                            <span class="num">{{sum}}</span>
-                            <span class="bdc">BDC</span>
+            <div class="assets">
+                <v-grid>
+                    <div class="wallet-change pd-lb20">
+                        <i class="iconfont icon-Conversion"></i>
+                        <span>{{$t("wallet.tips.change")}}</span>
+                    </div>
+                    <div class="wallet-band">
+                        <div class="wallet-band-l fl">
+                            <div class="wallet-band-tit">{{$t("wallet.tips.count")}}</div>
+                            <div class="wallet-band-bdc">
+                                <span class="num">{{sum}}</span>
+                                <span class="bdc">BDC</span>
+                            </div>
+                            <div class="wallet-band-rmb">
+                                ≈¥<span>{{cny}}</span>
+                            </div>
                         </div>
-                        <div class="wallet-band-rmb">
-                            &cong;¥<span>{{cny}}</span>
+                        <div class="wallet-band-r fr">
+                            <div class="wallet-assets">
+                                {{$t("wallet.tips.capitalassets")}}<br/>{{fixedAssets}}（BDC）
+                            </div>
+                            <div class="wallet-assets">
+                                {{$t("wallet.tips.actassets")}}<br/>{{actAssets}}（BDC）
+                            </div>
+                            <div class="wallet-assets">
+                                {{$t("wallet.tips.gameassets")}}<br/>{{gameAssets}}（CNY）
+                            </div>
                         </div>
                     </div>
-                    <div class="wallet-band-r fr">
-                        <div class="wallet-assets">
-                            {{$t("wallet.tips.capitalassets")}}<br/>{{fixedAssets}}（BDC）
-                        </div>
-                        <div class="wallet-assets">
-                            {{$t("wallet.tips.actassets")}}<br/>{{actAssets}}（BDC）
-                        </div>
-                        <div class="wallet-assets">
-                            {{$t("wallet.tips.gameassets")}}<br/>{{gameAssets}}（CNY）
-                        </div>
-                    </div>
-                </div>
-            </v-grid>
+                </v-grid>
+            </div>
             <div class="send">
                 <div class="bts">
                     <button class="btn btn-block btn-round"><i class="iconfont icon-send"></i>{{$t("wallet.btn.send")}}</button>
@@ -44,8 +46,9 @@
                     <flexbox>
                         <flexbox-item :span="11">
                             <ul class="pd-lb20">
-                                <li class="ellipsis1">gonggao1</li>
-                                <li class="ellipsis1">gonggao1</li>
+                                <li v-for="v in news" class="ellipsis1">
+                                    {{v.Title}}
+                                </li>
                             </ul>
                         </flexbox-item>
                         <flexbox-item>
@@ -58,13 +61,15 @@
                 <v-grid>
                     <div class="pd-lb20 btc-grid">
                         <div class="btc-grid-l">
-                            <i class="iconfont"></i>
+                            <svg class="sicon" aria-hidden="true">
+                                <use :xlink:href="`#icon-`+v.CurrencyName"></use>
+                            </svg>
                             <span>{{v.CurrencyName}}</span>
                         </div>
                         <div class="btc-grid-r">
-                            <span>={{v.Money}}CNY</span>
-                            <span v-if="v.CurrencyName!='BDC'">={{(v.Money/BDC).toFixed(4)}}BDC</span>
-                            <span>={{(v.Money/6.8).toFixed(4)}}USD</span>
+                            <span>≈{{v.Money}}CNY</span>
+                            <span v-if="v.CurrencyName!='BDC'">≈{{(v.Money/BDC).toFixed(4)}}BDC</span>
+                            <span>≈{{(v.Money/6.8).toFixed(4)}}USD</span>
                         </div>
                     </div>
                 </v-grid>
@@ -86,7 +91,8 @@ export default {
             cny         :   '0',                                                        // CNY
             currency    :   [],
             BDC         :   '0',                                                        // BDC的计算价格
-            loop        :   ''                                                          // 定时器
+            loop        :   '',                                                         // 定时器
+            news        :   []                                                          // 系统公告
 		}
 	},
 	methods: {
@@ -98,7 +104,6 @@ export default {
 			},
 			).then(data => {
 				if(data){
-                    //this.news = data;
                     // 判断是否本地缓存了数据，如果有缓存则不更新本地缓存
                     this.fixedAssets = data.FixedAssets;
                     this.actAssets   = data.ActAssets;
@@ -138,17 +143,35 @@ export default {
                     this.currency = data;
 				}
 			})
+        },
+        GetSystemGG(){
+            this.$server.post(
+			'GetSystemGG',
+			{
+                guid : this.$storage.get('guid'),
+                Count: 2
+			},{
+                showLoading:false
+            }
+			).then(data => {
+				if(data){
+                    // 总资产折合算法 X=固定+通证+（游戏/BDC价格）(单位：BDC)
+                    this.news = data;
+				}
+			})
         }
 	},
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
-        this.GetAccount();
+        this.GetAccount();                                                          // 获取账户数据
+        this.GetSystemGG();                                                         // 获取公告数据
         // 每隔1分钟请求一次数据
         this.loop = setInterval(()=>{
             this.GetCurrencyPrice()
         },60000)
     },
     beforeDestroy(){
+        // 删除数据
         clearInterval(this.loop);
     }
 }

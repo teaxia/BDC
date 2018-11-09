@@ -4,6 +4,13 @@
 [v-cloak] {
     display: none;
 }
+.sicon {
+    width: 1rem; 
+    height: 1rem;
+    vertical-align: -0.38rem;
+    fill: currentColor;
+    overflow: hidden;
+}
 .main-pd{
     padding: 20px 30px;
 }
@@ -121,9 +128,41 @@
 .vux-header-title{
     height: 1.3rem !important;
 }
+.vux-header-title-area, .vux-header .vux-header-title{
+    height: 1.3rem !important;
+}
 .vux-header .vux-header-title > span{
     font-size: 0.5rem;
     line-height: 1.2rem;
+}
+.overwrite-title{
+    display: flex;
+    justify-content: center;
+    width: 3.066667rem;
+    height: 0.8rem;
+    margin: 0 auto;
+    margin-top: 0.2rem;
+    border: 0.02rem solid $border-line;
+    border-radius: 0.3rem;
+    color:$font-white;
+}
+.overwrite-title-btn{
+    width: 100%;
+    flex:1;
+    text-align: center;
+    line-height: 0.8rem;
+}
+.overwrite-title-act{
+    background:#eee;
+    color:$font-base;
+}
+.overwrite-title-first{
+    border-top-left-radius: 0.2rem;
+    border-bottom-left-radius: 0.2rem;
+}
+.overwrite-title-last{
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
 }
 /*排版*/
 .grid-4{

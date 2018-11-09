@@ -2,7 +2,7 @@
   <div class="vfooter">
     <grid :show-vertical-dividers="false">
       <grid-item :link="list.url" :key="key" v-for="(list,key) in dataList">
-          <i :class="[{'active':list.index==isIndex},{'iconfont':true},list.icon]"></i>
+          <i :class="[{'iconfont':true},list.index==isIndex?list.acicon+' active':list.icon]"></i>
           <span :class="['tab-foot',{'active':list.index==isIndex}]">{{list.value}}</span>
       </grid-item>
     </grid>
@@ -19,24 +19,28 @@ export default {
         {
           value   : this.$t("menu.wallet"),
           icon    : 'icon-qianbao',
+          acicon  : 'icon-qianbao_mianxing',
           url     : '/wallet/wallet',
           index : 0
         },
         {
           value   : this.$t("menu.application"),
-          icon    : 'icon-receive',
-          url     : '/home/discovery',
+          icon    : 'icon-yingyongxianxing',
+          acicon  : 'icon-yingyongmianxing',
+          url     : '/app/index',
           index : 1
         },
         {
           value   : this.$t("menu.discovery"),
-          icon    : 'icon-guanwang',
+          icon    : 'icon-faxianxianxing',
+          acicon  : 'icon-faxianmianxing',
           url     : '/home/discovery',
           index : 2
         },
         {
           value   : this.$t("menu.mine"),
           icon    : 'icon-tianjiakuangquchengyuan',
+          acicon  : 'icon-gerenzhongxinmianxing',
           url     : '/home/discovery',
           index : 3
         },
@@ -67,7 +71,7 @@ export default {
     text-align: center;
   }
   .active{
-    color:#444853;
+    color:#4b5361;
   }
 }
 .vux-grid{

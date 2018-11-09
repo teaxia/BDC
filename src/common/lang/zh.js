@@ -70,5 +70,12 @@ export const zh = {
             send            :   '发送',
             receive         :   '接收'
         }
+    },
+    // 应用
+    application:{
+        title:{
+            buy             :   '购物',
+            shop            :   '商家'
+        }
     }
 };

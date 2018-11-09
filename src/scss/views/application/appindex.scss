@@ -1,0 +1,23 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+
+.appindex{
+    .select{
+        width: 200px;
+        margin:0 auto;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        color:$font-grey;
+        font-size:28px;
+        .select-title{
+            flex: 1;
+        }
+        .select-act{
+            color:$font-base;
+            padding-bottom: 8px;
+            border-bottom:0.01rem solid $font-base;
+        }
+    }
+}

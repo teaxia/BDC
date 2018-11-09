@@ -5,16 +5,27 @@
     .wallet-change{
         clear: both;
         text-align: right;
+        color:$font-white;
+    }
+    .assets{
+        height: auto;
+        overflow: hidden;
+        background:url('~assets/assetsbg.png') top center;
+        background-size:100% 100%;
+    }
+    .wallet-assets{
+        margin-top:5px;
     }
     .wallet-band{
         height: auto;
         overflow: hidden;
         padding-bottom: 30px;
+        color:$font-white;
         .wallet-band-l{
             padding-left: 20px;
             margin-top:30px;
             .wallet-band-tit{
-                color:$font-base;
+                color:$font-empty;
                 font-size:34px;
             }
             .wallet-band-bdc{
