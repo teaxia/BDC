@@ -1,14 +1,61 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
-.main-pd{
+.wallet{
     .wallet-change{
         clear: both;
-        text-align: right
+        text-align: right;
     }
-    .btc-grid-r{
-        span{
-            display: block;
+    .wallet-band{
+        height: auto;
+        overflow: hidden;
+        padding-bottom: 30px;
+        .wallet-band-l{
+            padding-left: 20px;
+            margin-top:30px;
+            .wallet-band-tit{
+                color:$font-base;
+                font-size:34px;
+            }
+            .wallet-band-bdc{
+                line-height: 58px;
+                .num{
+                    font-size:28px;
+                }
+            }
+            .wallet-band-rmb{
+                font-size:28px;
+            }
+        }
+    }
+    .btc-grid{
+        height: auto;
+        overflow: hidden;
+        display:flex;
+        align-items: center;
+        justify-content:space-between;
+        .btc-grid-l{
+            height: 100%;
+        }
+        .btc-grid-r{
+            span{
+                display: block;
+            }
+        }
+    }
+    .send{
+        margin-top: 30px;
+        display: flex;
+        justify-content:space-between;
+        .bts{
+            width: 48%;
+            .btn{
+                i{
+                    padding-right: 15px;
+                }
+                font-size:28px;
+                color:#fff;
+            }
         }
     }
 }

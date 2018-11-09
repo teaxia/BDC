@@ -1,6 +1,6 @@
 <template>
 	<div class="wallet padding-footer" v-cloak>
-		<div class="main-pd">
+		<div class="main-container">
 			<h1>{{$t("wallet.title")}}</h1>
             <v-grid>
                 <div class="wallet-change pd-lb20">
@@ -9,9 +9,10 @@
                 </div>
                 <div class="wallet-band">
                     <div class="wallet-band-l fl">
-                        <div class="wallet-band-tit">资产综合</div>
+                        <div class="wallet-band-tit">资产总合</div>
                         <div class="wallet-band-bdc">
-                            <span>{{sum}}</span><span>BDC</span>
+                            <span class="num">{{sum}}</span>
+                            <span class="bdc">BDC</span>
                         </div>
                         <div class="wallet-band-rmb">
                             &cong;¥<span>{{cny}}</span>
@@ -19,28 +20,55 @@
                     </div>
                     <div class="wallet-band-r fr">
                         <div class="wallet-assets">
-                            固定资产<br/>{{(fixedAssets).toFixed(8)}}（BDC）
+                            固定资产<br/>{{fixedAssets}}（BDC）
                         </div>
                         <div class="wallet-assets">
-                            通证资产<br/>{{(actAssets).toFixed(8)}}（BDC）
+                            通证资产<br/>{{actAssets}}（BDC）
                         </div>
                         <div class="wallet-assets">
-                            游戏资产<br/>{{(gameAssets).toFixed(8)}}（CNY）
+                            游戏资产<br/>{{gameAssets}}（CNY）
                         </div>
                     </div>
                 </div>
             </v-grid>
-            <v-grid v-for="(v,index) in currency" :key="index">
-                <div class="btc-grid-l fl">
-                    <i class="iconfont"></i>
-                    <span>{{v.CurrencyName}}</span>
+            <div class="send">
+                <div class="bts">
+                    <button class="btn btn-block btn-round"><i class="iconfont icon-send"></i>发送</button>
                 </div>
-                <div class="btc-grid-r fr">
-                    <span>={{v.Money}}CNY</span>
-                    <span v-if="v.CurrencyName!='BDC'">={{(v.Money/BDC).toFixed(4)}}BDC</span>
-                    <span>={{(v.Money/6.8).toFixed(4)}}USD</span>
+                <div class="bts">
+                    <button class="btn btn-block btn-round"><i class="iconfont icon-icon"></i>接收</button>
                 </div>
-            </v-grid>
+            </div>
+            <div class="mr30">
+                <v-grid>
+                    <flexbox>
+                        <flexbox-item :span="11">
+                            <ul class="pd-lb20">
+                                <li class="ellipsis1">gonggao1</li>
+                                <li class="ellipsis1">gonggao1</li>
+                            </ul>
+                        </flexbox-item>
+                        <flexbox-item>
+                            <i class="iconfont icon-search"></i>
+                        </flexbox-item>
+                    </flexbox>
+                </v-grid>
+            </div>
+            <div v-for="(v,index) in currency" class="mr30">
+                <v-grid>
+                    <div class="pd-lb20 btc-grid">
+                        <div class="btc-grid-l">
+                            <i class="iconfont"></i>
+                            <span>{{v.CurrencyName}}</span>
+                        </div>
+                        <div class="btc-grid-r">
+                            <span>={{v.Money}}CNY</span>
+                            <span v-if="v.CurrencyName!='BDC'">={{(v.Money/BDC).toFixed(4)}}BDC</span>
+                            <span>={{(v.Money/6.8).toFixed(4)}}USD</span>
+                        </div>
+                    </div>
+                </v-grid>
+            </div>
 		</div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
@@ -57,7 +85,8 @@ export default {
             sum         :   '0',                                                        // 资产总和
             cny         :   '0',                                                        // CNY
             currency    :   [],
-            BDC         :   '0'                                                         // BDC的计算价格
+            BDC         :   '0',                                                        // BDC的计算价格
+            loop        :   ''                                                          // 定时器
 		}
 	},
 	methods: {
@@ -114,8 +143,14 @@ export default {
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
         this.GetAccount();
-        
-	}
+        // 每隔1分钟请求一次数据
+        this.loop = setInterval(()=>{
+            this.GetCurrencyPrice()
+        },60000)
+    },
+    beforeDestroy(){
+        clearInterval(this.loop);
+    }
 }
 
 </script>

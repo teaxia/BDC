@@ -1,6 +1,6 @@
 <template>
 	<div class="discovery padding-footer">
-		<div class="main-pd">
+		<div class="main-container">
 			<h1>{{$t("menu.discovery")}}</h1>
 			<div class="topmenu">
 				<v-grid>
@@ -15,7 +15,7 @@
 					<flexbox>
 						<flexbox-item :span="3">
 							<div class="dis-grid-img">
-								<img v-if="v.ImgUrl" src="../../assets/nopic.png" />
+								<img v-if="v.ImgUrl" :src="v.ImgUrl" />
 								<img v-else src="../../assets/nopic.png" />
 							</div>
 						</flexbox-item>
