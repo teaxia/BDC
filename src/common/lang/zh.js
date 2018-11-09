@@ -60,7 +60,15 @@ export const zh = {
     wallet:{
         title           :   'BDC wallet',
         tips:{
-            change      :   '资产转换',
+            change          :   '资产转换',
+            count           :   '资产总和',
+            capitalassets   :   '固定资产',
+            actassets       :   '通证资产',
+            gameassets      :   '游戏资产'
+        },
+        btn:{
+            send            :   '发送',
+            receive         :   '接收'
         }
     }
 };

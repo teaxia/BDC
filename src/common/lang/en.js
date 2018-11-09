@@ -60,7 +60,15 @@ export const en = {
     wallet:{
         title           :   'BDC wallet',
         tips:{
-            change      :   'Asset conversion',
+            change          :   'Asset conversion',
+            count           :   'Asset count',
+            capitalassets   :   'Capital assets',
+            actassets       :   'Act assets',
+            gameassets      :   'Game assets'
+        },
+        btn:{
+            send            :   'Send',
+            receive         :   'Receive'
         }
     }
 }

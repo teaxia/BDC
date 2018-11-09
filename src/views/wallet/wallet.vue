@@ -9,7 +9,7 @@
                 </div>
                 <div class="wallet-band">
                     <div class="wallet-band-l fl">
-                        <div class="wallet-band-tit">资产总合</div>
+                        <div class="wallet-band-tit">{{$t("wallet.tips.count")}}</div>
                         <div class="wallet-band-bdc">
                             <span class="num">{{sum}}</span>
                             <span class="bdc">BDC</span>
@@ -20,23 +20,23 @@
                     </div>
                     <div class="wallet-band-r fr">
                         <div class="wallet-assets">
-                            固定资产<br/>{{fixedAssets}}（BDC）
+                            {{$t("wallet.tips.capitalassets")}}<br/>{{fixedAssets}}（BDC）
                         </div>
                         <div class="wallet-assets">
-                            通证资产<br/>{{actAssets}}（BDC）
+                            {{$t("wallet.tips.actassets")}}<br/>{{actAssets}}（BDC）
                         </div>
                         <div class="wallet-assets">
-                            游戏资产<br/>{{gameAssets}}（CNY）
+                            {{$t("wallet.tips.gameassets")}}<br/>{{gameAssets}}（CNY）
                         </div>
                     </div>
                 </div>
             </v-grid>
             <div class="send">
                 <div class="bts">
-                    <button class="btn btn-block btn-round"><i class="iconfont icon-send"></i>发送</button>
+                    <button class="btn btn-block btn-round"><i class="iconfont icon-send"></i>{{$t("wallet.btn.send")}}</button>
                 </div>
                 <div class="bts">
-                    <button class="btn btn-block btn-round"><i class="iconfont icon-icon"></i>接收</button>
+                    <button class="btn btn-block btn-round"><i class="iconfont icon-icon"></i>{{$t("wallet.btn.receive")}}</button>
                 </div>
             </div>
             <div class="mr30">
