@@ -34,14 +34,14 @@ export default {
           value   : this.$t("menu.discovery"),
           icon    : 'icon-faxianxianxing',
           acicon  : 'icon-faxianmianxing',
-          url     : '/home/discovery',
+          url     : '/discovery/index',
           index : 2
         },
         {
           value   : this.$t("menu.mine"),
           icon    : 'icon-tianjiakuangquchengyuan',
           acicon  : 'icon-gerenzhongxinmianxing',
-          url     : '/home/discovery',
+          url     : '/mine/myhome',
           index : 3
         },
       ]

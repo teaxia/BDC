@@ -5,9 +5,8 @@ import user from './views/user.vue'
     import verification from './views/user/verification.vue'                //  验证码验证
     import registinfo from './views/user/registinfo.vue'                    //  注册信息填写
 // 发现
-import Home from './views/home.vue'
-    import discovery from './views/home/index.vue'
-
+import discovery from './views/discovery.vue'
+    import discoveryindex from './views/discovery/index.vue'
 // 钱包
 import wallet from './views/wallet.vue'
     import walletindex from './views/wallet/wallet.vue'
@@ -15,7 +14,9 @@ import wallet from './views/wallet.vue'
 // 应用
 import application from './views/application.vue'
     import appindex from './views/application/appindex.vue'
-
+// 我的
+import myhome from './views/mine'
+    import mine from './views/mine/mine.vue'
 // 404
 import NotFound from './views/404.vue'
 let routes = [
@@ -42,15 +43,15 @@ let routes = [
         ]
     },
     {
-        path: '/home',
-        redirect: '/home/discovery',
-        component: Home,
+        path: '/discovery',
+        redirect: '/discovery/index',
+        component: discovery,
         name: 'discovery',
         meta:{
             isIndex: 2                                      //  底部导航图标索引0 1 2 3
         },
         children: [
-            { path: '/home/discovery', component: discovery, name: 'discoveryindex',meta:{isIndex: 2}}
+            { path: '/discovery/index', component: discoveryindex, name: 'discoveryindex',meta:{isIndex: 2}}
         ]
     },
     {
@@ -68,14 +69,26 @@ let routes = [
     },
     {
         path: '/app',
-        redirect: '/application/appindex',
-        component: application,
+        redirect: '/app/index',
+        component: appindex,
         name: 'app',
         meta:{
             isIndex: 1                                      //  底部导航图标索引0 1 2 3
         },
         children: [
             { path: '/app/index', component: appindex, name: 'appindex',meta:{isIndex: 1}}
+        ]
+    },
+    {
+        path: '/mine',
+        redirect: '/mine/myhome',
+        component: myhome,
+        name: 'mine',
+        meta:{
+            isIndex: 3                                      //  底部导航图标索引0 1 2 3
+        },
+        children: [
+            { path: '/mine/myhome', component: mine, name: 'mine',meta:{isIndex: 3}}
         ]
     },
     {

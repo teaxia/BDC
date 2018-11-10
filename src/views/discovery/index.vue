@@ -110,5 +110,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/home/index";
+@import "../../scss/views/discovery/index";
 </style>
