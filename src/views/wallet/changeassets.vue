@@ -4,53 +4,53 @@
 		<div class="main-container">
             <div class="assets">
                 <ul>
-                    <li><i class="iconfont icon-Passingassets"></i>固定资产：<span>{{fixedAssets}}</span><span class="fr">BDC</span></li>
-                    <li><i class="iconfont icon-xiaohongqi01"></i>通证资产：<span>{{actAssets}}</span><span class="fr">BDC</span></li>
-                    <li><i class="iconfont icon-Gameassets"></i>游戏资产：<span>{{gameAssets}}</span><span class="fr">BDC</span></li>   
+                    <li><i class="iconfont icon-Passingassets"></i>{{$t("wallet.tips.capitalassets")}}：<span>{{fixedAssets}}</span><span class="fr">BDC</span></li>
+                    <li><i class="iconfont icon-xiaohongqi01"></i>{{$t("wallet.tips.actassets")}}：<span>{{actAssets}}</span><span class="fr">BDC</span></li>
+                    <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{gameAssets}}</span><span class="fr">BDC</span></li>   
                 </ul>
             </div>
             <div class="assets">
                 <flexbox class="changelist">
                     <flexbox-item :span="3">
                         <div class="changename">
-                            转换方式：
+                            {{$t("wallet.tips.changetype")}}:
                         </div>
                     </flexbox-item>
                     <flexbox-item :span="5">
                         <select v-model="type">
-                            <option value="1">通证转游戏</option>
-                            <option value="2">游戏转通证</option>
-                            <option value="3">通证转固定</option>
+                            <option value="1">{{$t("wallet.transfor.type1")}}</option>
+                            <option value="2">{{$t("wallet.transfor.type2")}}</option>
+                            <option value="3">{{$t("wallet.transfor.type3")}}</option>
                         </select>
                     </flexbox-item>
                 </flexbox>
                 <flexbox class="changelist">
                     <flexbox-item :span="3">
                         <div class="changename">
-                            转换{{meus[type]}}：
+                            {{$t("wallet.tips.transfor")}}{{meus[type]}}：
                         </div>
                     </flexbox-item>
                     <flexbox-item :span="5">
-                        <input type="num" v-model.number="num" :placeholder="'请输入'+meus[type]+'数额'" />
+                        <input type="number" v-model="num" :placeholder="$t('global.entry')+meus[type]+$t('global.num')" />
                     </flexbox-item>
                 </flexbox>
                 <flexbox class="changelist">
                     <flexbox-item :span="3">
                         <div class="changename">
-                            安全密码：
+                            {{$t("wallet.tips.safetycode")}}：
                         </div>
                     </flexbox-item>
                     <flexbox-item>
-                        <input type="num" placeholder="请输入安全码" />
+                        <input type="password" v-model="password" :placeholder="$t('wallet.tips.inputcode')" />
                     </flexbox-item>
                 </flexbox>
-                <div class="change-rate" v-if="type!=3">
-                    <div class="rate"><span>BDC价格:</span>{{PriceBDC}}</div>
-                    <div class="rate"><span>兑换率:</span>{{DHL}}</div>
+                <div class="change-rate" v-if="type!=1">
+                    <div class="rate"><span>BDC{{$t('global.price')}}:</span>{{PriceBDC}}</div>
+                    <div class="rate"><span>{{$t('global.exchange')}}:</span>{{DHL}}</div>
                     <div class="rate"><span>{{meus[type]}}:</span>{{matchprice}}</div>
                 </div>
             </div>
-            <button class="btn btn-block btn-round mr30">立即转换</button>
+            <button @click="TransferAssets()" class="btn btn-block btn-round mr30">{{$t('wallet.tips.btntransfor')}}</button>
 		</div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
@@ -73,17 +73,19 @@ export default {
             PriceBDC    :   '',
             DHL         :   '',
             X           :   '',
+            password    :   '',
+            isHandling  :   false
 		}
     },
     watch:{
         type(){
             switch (this.type){
-                case '1':
+                case '2':
                     this.PriceBDC = this.traninfo[0].PriceBDC;
                     this.DHL      = this.traninfo[0].DHL;
                     this.X        = this.traninfo[0].X;
                     break;
-                case '2':
+                case '3':
                     this.PriceBDC = this.traninfo[1].PriceBDC;
                     this.DHL      = this.traninfo[1].DHL;
                     this.X        = this.traninfo[1].X;
@@ -96,17 +98,21 @@ export default {
             }
         },
         num(){
+            this.num = (this.num<0)?0:this.num;
             switch (this.type){
                 case '1':
-                    //限制不能大于通证资产
+                    //限制不能大于固定资产
+                     this.num = (this.num>this.fixedAssets)?this.fixedAssets:this.num;
+                    break;
+                case '2':
+                    // 限制不能大于通证资产
+                    this.num = (this.num>this.actAssets)?this.actAssets:this.num;
                     this.matchprice = (this.num*this.X).toFixed(8);
                     break;
-                case '2':
-                    //限制不能大于游戏资产
+                case '3':
+                    // 限制不能大于游戏资产
+                    this.num = (this.num>this.gameAssets)?this.gameAssets:this.num;
                     this.matchprice = (this.num/this.X).toFixed(8);
-                    break;
-                case '2':
-                    //限制不能大于固定资产
                     break;
                 default:
                     this.matchprice = 0;
@@ -143,6 +149,43 @@ export default {
                     this.DHL      = data[0].DHL;
                     this.X        = data[0].X;
 				}
+			})
+        },
+        TransferAssets(){
+            // 表单限制
+            if(this.num==''&&this.num <= 0){
+                // 数量不能为空
+                this.$vux.toast.show({
+                    text: this.$t('wallet.transfor.error1'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(this.password==''){
+                // 安全码不能为空
+                this.$vux.toast.show({
+                    text: this.$t('wallet.transfor.error2'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(this.isHandling){
+                return;
+            }
+            this.isHandling = true;
+            this.$server.post(
+			'TransferAssets',
+			{
+                guid            :   this.$storage.get('guid'),
+                Money           :   this.num,
+                TransferType    :   this.type,
+                MoneyPwd        :   this.password,
+                dhl             :   this.DHL,
+                currencyPrice   :   this.matchprice
+
+			},
+			).then(data => {
+				this.isHandling = false;
 			})
         }
 	},

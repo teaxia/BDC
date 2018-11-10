@@ -5,7 +5,11 @@ export const zh = {
         title   : 'BDC钱包',
         next    : '下一步',
         success : '成功！',
-        error   : '失败！'
+        error   : '失败！',
+        entry   : '请输入',
+        num     : '数量',
+        price   : '价格',
+        exchange: '兑换率',
     },
     // 全局底部菜单
     menu:{
@@ -64,7 +68,19 @@ export const zh = {
             count           :   '资产总和',
             capitalassets   :   '固定资产',
             actassets       :   '通证资产',
-            gameassets      :   '游戏资产'
+            gameassets      :   '游戏资产',
+            changetype      :   '转换方式',
+            safetycode      :   '安全码',
+            transfor        :   '转换',
+            inputcode       :   '请输入安全码',
+            btntransfor     :   '立即转换',
+        },
+        transfor:{
+            type1           :   '通证转固定',
+            type2           :   '通证转游戏',
+            type3           :   '游戏转通证',
+            error1          :   '转换数量不能为0',
+            error2          :   '安全码不能为空',
         },
         btn:{
             send            :   '发送',

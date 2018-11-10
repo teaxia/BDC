@@ -5,7 +5,11 @@ export const en = {
         title       : 'BDC',
         next        : 'Next',
         success     : 'Success!',
-        error       : 'Error!'
+        error       : 'Error!',
+        entry       : 'Entry',
+        num         : 'Number',
+        price       : 'Price',
+        exchange    : 'Exchange Rate',
     },
     // 全局底部菜单
     menu:{
@@ -64,7 +68,19 @@ export const en = {
             count           :   'Asset count',
             capitalassets   :   'Capital assets',
             actassets       :   'Act assets',
-            gameassets      :   'Game assets'
+            gameassets      :   'Game assets',
+            changetype      :   'Transformation type',
+            safetycode      :   'Safety code',
+            transfor        :   'Transformation',
+            inputcode       :   'Plase entry Safety code',
+            btntransfor     :   'Transformation',
+        },
+        transfor:{
+            type1           :   'Capital To Act',
+            type2           :   'Act To Game',
+            type3           :   'Game To assets',
+            error1          :   'Transformation number can not be null',
+            error2          :   'Safety code can not be null',
         },
         btn:{
             send            :   'Send',
