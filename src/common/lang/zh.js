@@ -41,7 +41,10 @@ export const zh = {
         },
         type    :   {
             msg     : '短信登录',
-            account : '账号登录'
+            account : '账号登录',
+            sex     : '性别',
+            man     : '男',
+            woman   : '女',
         },
         verification:   {
             title   : '请输入验证码',

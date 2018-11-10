@@ -41,7 +41,10 @@ export const en = {
         },
         type    :   {
             msg     : 'SMS login',
-            account : 'Account login'
+            account : 'Account login',
+            sex     : 'Sex',
+            man     : 'Male',
+            woman   : 'Female',
         },
         verification:   {
             title   : 'Please enter verification code',

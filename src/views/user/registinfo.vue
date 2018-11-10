@@ -12,10 +12,10 @@
                     <x-input :title="this.$t('user.register.nickname')" v-model="nickName"></x-input>
                 </group>
                 <group>
-                    <div class="label">性别：</div>
+                    <div class="label">{{$t('user.type.sex')}}：</div>
                     <div class="radio">
-                        <input type="radio" v-model="gender" id="man" value="男"/><label for="man">男</label>
-                        <input type="radio" v-model="gender" id="woman" value="女"/><label for="woman">女</label>
+                        <input type="radio" v-model="gender" id="man" value="0"/><label for="man">{{$t('user.type.man')}}</label>
+                        <input type="radio" v-model="gender" id="woman" value="1"/><label for="woman">{{$t('user.type.woman')}}</label>
                     </div>
                 </group>
                 <group>
