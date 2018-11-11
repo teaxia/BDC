@@ -113,6 +113,7 @@ li{
     flex-flow:  row nowrap;
     justify-content: space-between;
 }
+/*重写部分*/
 .vux-header{
     height: 1.3rem;
 }
@@ -141,6 +142,13 @@ li{
 .vux-header .vux-header-title > span{
     font-size: 0.5rem;
     line-height: 1.2rem;
+}
+.weui-toast{
+    top: 6.4rem !important;
+}
+.weui-toast__content{
+    font-size:0.5rem !important;
+    text-align: center;
 }
 /*flex*/
 .flex-table{
