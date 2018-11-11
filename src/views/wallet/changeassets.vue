@@ -1,6 +1,6 @@
 <template>
 	<div class="changeassets padding-footer" v-cloak>
-        <x-header :title="$t('wallet.tips.change')"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('wallet.tips.change')"></x-header>
 		<div class="main-container">
             <div class="assets">
                 <ul>

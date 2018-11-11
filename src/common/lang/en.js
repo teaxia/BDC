@@ -10,7 +10,8 @@ export const en = {
         num         : 'Number',
         price       : 'Price',
         exchange    : 'Exchange Rate',
-        Uncertified : 'Uncertified'
+        Uncertified : 'Uncertified',
+        back        : 'back'
     },
     // 全局底部菜单
     menu:{
@@ -100,6 +101,10 @@ export const en = {
                 error       :   'Copy failed. Please manually select copy',
             }
         },
+        // 发送
+        send:{
+            title           :   'Send',
+        }
     },
     // 应用
     application:{

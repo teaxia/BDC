@@ -1,6 +1,6 @@
 <template>
 	<div class="regist" v-cloak>
-		<x-header :title="$t('user.regist')"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('user.regist')"></x-header>
         <div class="pd50">
             <div class="v-flex v-flex-between">
 				<div>

@@ -1,6 +1,6 @@
 <template>
 	<div class="walletmain send padding-footer" v-cloak>
-        <x-header title="发送"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('wallet.send.title')"></x-header>
         <div class="walletmain-top">
 			<v-grid class="walletmain-top-menu">
 				<flexbox>

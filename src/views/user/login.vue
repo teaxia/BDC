@@ -46,21 +46,21 @@ export default {
 		}
 	},
 	watch:{
-		// lang(){
-		// 	this.$storage.set('lang',this.lang);
-		// 	this.$i18n.locale = this.lang;
-		// 	this.$server.post(
-		// 	'SetLanguage',
-		// 	{
-		// 		guid : this.$storage.get('guid'),
-		// 		lv   : this.lang
-		// 	},
-		// 	).then(data => {
-		// 		if(data){
+		lang(){
+			this.$storage.set('lang',this.lang);
+			this.$i18n.locale = this.lang;
+			// this.$server.post(
+			// 'SetLanguage',
+			// {
+			// 	guid : this.$storage.get('guid'),
+			// 	lv   : this.lang
+			// },
+			// ).then(data => {
+			// 	if(data){
 					
-		// 		}
-		// 	})
-		// }
+			// 	}
+			// })
+		}
 	},
 	methods: {
 		doSubmit(){

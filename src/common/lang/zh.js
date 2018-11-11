@@ -10,7 +10,8 @@ export const zh = {
         num                 : '数量',
         price               : '价格',
         exchange            : '兑换率',
-        Uncertified         : '未认证'
+        Uncertified         : '未认证',
+        back                : '返回'
     },
     // 全局底部菜单
     menu:{
@@ -101,6 +102,10 @@ export const zh = {
                 error       :   '复制失败，请手动选择复制',
             }
         },
+        // 发送
+        send:{
+            title           :   '发送',
+        }
     },
     // 应用
     application:{
