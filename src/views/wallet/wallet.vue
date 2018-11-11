@@ -53,8 +53,8 @@
                         <flexbox-item :span="11">
                             <ul class="pd-lb20">
                                 <li v-for="v in news" class="ellipsis1">
-                                    {{v.Title}}
-                                    <span class="fr">{{v.Sendtime}}</span>
+                                    <span class="ellipsis1 title fl">{{v.Title}}</span>
+                                    <span class="ellipsis1 time fr">{{v.Sendtime}}</span>
                                 </li>
                             </ul>
                         </flexbox-item>
