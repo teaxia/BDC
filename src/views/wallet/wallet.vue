@@ -37,10 +37,14 @@
             </div>
             <div class="send">
                 <div class="bts">
-                    <button class="btn btn-block btn-round"><i class="iconfont icon-send"></i>{{$t("wallet.btn.send")}}</button>
+                    <router-link to="/wallet/send">
+                        <button class="btn btn-block btn-round"><i class="iconfont icon-send"></i>{{$t("wallet.btn.send")}}</button>
+                    </router-link>
                 </div>
                 <div class="bts">
-                    <button class="btn btn-block btn-round"><i class="iconfont icon-icon"></i>{{$t("wallet.btn.receive")}}</button>
+                    <router-link to="/wallet/receive">
+                        <button class="btn btn-block btn-round"><i class="iconfont icon-icon"></i>{{$t("wallet.btn.receive")}}</button>
+                    </router-link>
                 </div>
             </div>
             <div class="mr30">
@@ -113,13 +117,14 @@ export default {
                     this.gameAssets  = data.GameAssets;
                     if(!this.$storage.get('NickName')){
                         this.$storage.set('NickName',data.NickName);                        // 昵称
-                        this.$storage.set('NickName',data.Name);                            // 用户名
+                        this.$storage.set('Name',data.Name);                                // 用户名
+                        this.$storage.set('RealName',data.RealName); 
                         this.$storage.set('HeadImg',data.HeadImg);                          // 昵称
                         this.$storage.set('RechargeCode',data.RechargeCode);                // 充值地址
                         this.$storage.set('Mobile',data.PhoneNo);                           // 手机号
                         this.$storage.set('Sex',data.Sex);                                  // 性别
                         this.$storage.set('ParentName',data.ParentName);                    // 推荐人
-                        (data.RealName)?this.$storage.set('RealName',data.RealName):'';     // 判断是否进行了实名认证
+                        (data.RealName!='null')?this.$storage.set('RealName',data.RealName):this.$storage.set('RealName','未认证');     // 判断是否进行了实名认证
                     }
                     // 进行资产计算请求
                     this.GetCurrencyPrice()

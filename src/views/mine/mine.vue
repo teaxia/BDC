@@ -5,18 +5,19 @@
 			<v-grid class="mine-top-menu">
 				<flexbox>
 					<flexbox-item :span="3">
-						<div class="dis-grid-img">
-							<img class="avatar" src="../../assets/nopic.png" />
+						<div class="dis-grid-img" @click="onTourl('/mine/center')">
+							<img v-if="avatar&&avatar!='null'" class="avatar" :src="avatar" />
+							<i v-else class="avatar iconfont icon-touxiang"></i>
 						</div>
 					</flexbox-item>
 					<flexbox-item :span="8">
-						<div class="mine-grid-content">
-							<div class="nickname">昵称</div>
-							<div class="userid">ID：28230</div>
+						<div class="mine-grid-content" @click="onTourl('/mine/center')">
+							<div class="nickname">{{nickname}}</div>
+							<div class="userid">{{realname}}</div>
 						</div>
 					</flexbox-item>
 					<flexbox-item>
-						<div class="mine-grid-content">
+						<div class="mine-grid-content" @click="onTourl('/mine/center')">
 							<i class="iconfont icon-arrow-right"></i>
 						</div>
 					</flexbox-item>
@@ -74,25 +75,40 @@
 					</cell>
 				</group>
 			</v-grid>
-			<button class="btn btn-block btn-round mr30"><i class="iconfont icon-send"></i>退出登录</button>
+			<button @click="logout()" class="btn btn-block btn-round mr30"><i class="iconfont icon-send"></i>退出登录</button>
 		</div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
 
 <script>
-
 export default {
 	data() {
 		return {
-			
+			nickname	:	'',
+			avatar		:	'',
+			realname    :   ''
 		}
 	},
 	methods: {
-		
+		// 个人中心设置
+		onTourl(url){
+			this.$router.push({
+				path:url,
+			});
+		},
+		// 退出
+		logout(){
+			this.$storage.logout();
+			this.$router.push({
+				path:"/user/login",
+			});
+		}
 	},
 	mounted() {
-		
+		this.nickname = this.$storage.get('NickName');
+		this.avatar   = this.$storage.get('HeadImg');
+		this.realname = this.$storage.get('Realname');
 	}
 }
 

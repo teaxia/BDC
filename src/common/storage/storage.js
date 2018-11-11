@@ -14,4 +14,8 @@ Storage.add = function (name, addVal) {
     Storage.set(name, newVal)
 }
 
+Storage.logout = function (){
+    //清除所有本地缓存
+    localStorage.clear();
+}
 export default Storage

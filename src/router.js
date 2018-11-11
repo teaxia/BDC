@@ -11,12 +11,15 @@ import discovery from './views/discovery.vue'
 import wallet from './views/wallet.vue'
     import walletindex from './views/wallet/wallet.vue'
     import changeassets from './views/wallet/changeassets.vue'
+    import send from './views/wallet/send.vue'
+    import receive from './views/wallet/receive.vue'
 // 应用
 import application from './views/application.vue'
     import appindex from './views/application/appindex.vue'
 // 我的
 import myhome from './views/mine'
     import mine from './views/mine/mine.vue'
+    import center from './views/mine/center.vue'
 // 404
 import NotFound from './views/404.vue'
 let routes = [
@@ -30,6 +33,7 @@ let routes = [
             isIndex: 0                                      //  底部导航图标索引0 1 2 3
         },
     },
+    // 登录
     {
         path: "/",
         component: user,
@@ -42,6 +46,7 @@ let routes = [
             { path: '/user/registinfo', component: registinfo, name: 'registinfo' },
         ]
     },
+    // 发现
     {
         path: '/discovery',
         redirect: '/discovery/index',
@@ -54,6 +59,7 @@ let routes = [
             { path: '/discovery/index', component: discoveryindex, name: 'discoveryindex',meta:{isIndex: 2}}
         ]
     },
+    // 钱包
     {
         path: '/wallet',
         redirect: '/wallet/wallet',
@@ -64,9 +70,12 @@ let routes = [
         },
         children: [
             { path: '/wallet/wallet', component: walletindex, name: 'walletindex',meta:{isIndex: 0}},
-            { path: '/wallet/changeassets', component: changeassets, name: 'changeassets',meta:{isIndex: 0}}
+            { path: '/wallet/changeassets', component: changeassets, name: 'changeassets',meta:{isIndex: 0}},
+            { path: '/wallet/send', component: send, name: 'send',meta:{isIndex: 0}},
+            { path: '/wallet/receive', component: receive, name: 'receive',meta:{isIndex: 0}},
         ]
     },
+    // 应用
     {
         path: '/app',
         redirect: '/app/index',
@@ -79,6 +88,7 @@ let routes = [
             { path: '/app/index', component: appindex, name: 'appindex',meta:{isIndex: 1}}
         ]
     },
+    // 我的
     {
         path: '/mine',
         redirect: '/mine/myhome',
@@ -88,7 +98,8 @@ let routes = [
             isIndex: 3                                      //  底部导航图标索引0 1 2 3
         },
         children: [
-            { path: '/mine/myhome', component: mine, name: 'mineindex',meta:{isIndex: 3}}
+            { path: '/mine/myhome', component: mine, name: 'mineindex',meta:{isIndex: 3}},
+            { path: '/mine/center', component: center, name: 'center',meta:{isIndex: 3}}
         ]
     },
     {
