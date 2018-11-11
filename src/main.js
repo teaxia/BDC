@@ -14,7 +14,7 @@ import storage from './common/storage/storage'       // 本地数据读取
 import jmCode from './common/config/config'       // 加密串
 import vfooter from './components/vfooter.vue'
 import vgrid from './components/vgrid.vue'
-import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem } from 'vux'
+import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
 import './scss/base/main.scss'
@@ -31,6 +31,7 @@ Vue.component('grid', Grid)
 Vue.component('grid-item', GridItem)
 Vue.component('v-footer',vfooter)
 Vue.component('v-grid',vgrid)
+Vue.component('cell',Cell)
 
 Vue.prototype.$server=server;                        // ajax组件
 Vue.prototype.$storage = storage;                    // 本地数据读取

@@ -88,7 +88,7 @@ let routes = [
             isIndex: 3                                      //  底部导航图标索引0 1 2 3
         },
         children: [
-            { path: '/mine/myhome', component: mine, name: 'mine',meta:{isIndex: 3}}
+            { path: '/mine/myhome', component: mine, name: 'mineindex',meta:{isIndex: 3}}
         ]
     },
     {

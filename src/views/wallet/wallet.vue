@@ -50,6 +50,7 @@
                             <ul class="pd-lb20">
                                 <li v-for="v in news" class="ellipsis1">
                                     {{v.Title}}
+                                    <span class="fr">{{v.Sendtime}}</span>
                                 </li>
                             </ul>
                         </flexbox-item>
@@ -69,7 +70,7 @@
                             <span>{{v.CurrencyName}}</span>
                         </div>
                         <div class="btc-grid-r">
-                            <span>≈{{v.Money}}CNY</span>
+                            <span>{{v.Money}}CNY</span>
                             <span v-if="v.CurrencyName!='BDC'">≈{{(v.Money/BDC).toFixed(4)}}BDC</span>
                             <span>≈{{(v.Money/6.8).toFixed(4)}}USD</span>
                         </div>

@@ -50,21 +50,13 @@ export default {
 				icon    : 'icon-CTC1',
 				url     : '/home/discovery',
 				},
-				{
-				value   : this.$t("discovery.topmenu.market"),
-				icon    : 'icon-hangqing1',
-				url     : '/home/discovery',
-				},
+				
 				{
 				value   : this.$t("discovery.topmenu.bill"),
 				icon    : 'icon-zhangben2',
 				url     : '/home/discovery',
 				},
-				{
-				value   : this.$t("discovery.topmenu.calculator"),
-				icon    : 'icon-jisuanqi',
-				url     : '/home/discovery',
-				},
+				
 				{
 				value   : this.$t("discovery.topmenu.ent"),
 				icon    : 'icon-xiuxianyule',
