@@ -30,7 +30,8 @@ export default {
 			content	 : this.$t("user.tips.setvcode"),
 			max		 : 6,
 			totalTime: 60,      //记录具体倒计时时间
-			canClick: true 		//添加canClick
+			canClick : true,	//添加canClick
+			clock	 : ''		
 		}
 	},
 	watch:{
@@ -68,7 +69,7 @@ export default {
 			})
 		},
 		countDown() {
-			if (!this.canClick){return}   						// 禁止多次点击 
+			if (!this.canClick){return}   														// 禁止多次点击 
 				this.canClick = false
 				this.content = this.totalTime + 's'+this.$t("user.tips.send")
 				// 发送短信接口
@@ -83,16 +84,16 @@ export default {
 				).then(data => {
 					if(data){
 						this.$vux.toast.show({
-							text: this.$t("user.success"),
+							text: this.$t("global.success"),
 							type: 'success'
 						})
 					}
 				})
-				let clock = window.setInterval(() => {
+				this.clock = window.setInterval(() => {
 				this.totalTime--
 				this.content = this.totalTime + 's'+this.$t("user.tips.send")
 				if (this.totalTime < 0) {
-					window.clearInterval(clock)
+					window.clearInterval(this.clock)
 					this.content = this.$t("user.tips.setvcode");
 					this.totalTime = 60
 					this.canClick = true  //这里重新开启
@@ -104,7 +105,11 @@ export default {
         this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
 		this.mobile = this.$route.query.mobile;
 		this.countDown();
-	}
+	},
+	beforeDestroy(){
+        // 清除计时器
+        window.clearInterval(this.clock);
+    }
 }
 
 </script>

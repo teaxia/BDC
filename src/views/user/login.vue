@@ -69,7 +69,7 @@ export default {
 			// 空值判断
 			if(!this.PassWord&&!this.UserName){
 				this.$vux.toast.show({
-					text: '用户名跟密码必须填写完整！',
+					text: this.$t('user.tips.error'),
 					type: 'warn'
 				})
 			}else{

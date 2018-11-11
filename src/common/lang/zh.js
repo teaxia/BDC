@@ -2,14 +2,15 @@
 export const zh = {
     // 全局
     global:{
-        title   : 'BDC钱包',
-        next    : '下一步',
-        success : '成功！',
-        error   : '失败！',
-        entry   : '请输入',
-        num     : '数量',
-        price   : '价格',
-        exchange: '兑换率',
+        title               : 'BDC钱包',
+        next                : '下一步',
+        success             : '成功！',
+        error               : '失败！',
+        entry               : '请输入',
+        num                 : '数量',
+        price               : '价格',
+        exchange            : '兑换率',
+        Uncertified         : '未认证'
     },
     // 全局底部菜单
     menu:{
@@ -32,9 +33,11 @@ export const zh = {
             verification    : '请输入6位数字验证码',
             setvcode        : '发送验证码',
             send            : '后重新发送',
+            error           : '请填写正确的用户名与密码'
         },
         login   : '登 录',
         regist  : '注 册',
+        logout  : '退出登录',
         register: {
             username    :   '登录账号：',
             nickname    :   '用户昵称：',
@@ -89,12 +92,33 @@ export const zh = {
             send            :   '发送',
             receive         :   '接收'
         },
+        // 接收
+        receive:{
+            title           :   '接收BDC',
+            copy            :   '复制地址',
+            tips:{
+                success     :   '复制成功',
+                error       :   '复制失败，请手动选择复制',
+            }
+        },
     },
     // 应用
     application:{
         title:{
             buy             :   '购物',
             shop            :   '商家'
+        }
+    },
+    // 我的
+    mine:{
+        menus:{
+            spread          :   '推广APP',
+            website         :   '进入官网',
+            members         :   '矿区成员',
+            question        :   '常见问题',
+            feedback        :   '意见反馈',
+            realname        :   '实名认证',
+            setting         :   '设置'
         }
     }
 };

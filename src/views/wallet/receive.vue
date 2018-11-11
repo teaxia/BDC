@@ -1,30 +1,28 @@
 <template>
 	<div class="walletmain receive padding-footer" v-cloak>
-        <x-header title="接收BDC"></x-header>
+        <x-header :title="$t('wallet.receive.title')"></x-header>
         <div class="walletmain-top">
-			<h1>我的</h1>
 			<v-grid class="walletmain-top-menu">
 				<flexbox>
-					<flexbox-item :span="3">
-						<div class="dis-grid-img" @click="onTourl('/mine/center')">
+					<flexbox-item :span="12">
+						<div class="midel" @click="onTourl('/mine/center')">
 							<img v-if="avatar&&avatar!='null'" class="avatar" :src="avatar" />
 							<i v-else class="avatar iconfont icon-touxiang"></i>
-						</div>
-					</flexbox-item>
-					<flexbox-item :span="8">
-						<div class="walletmain-grid-content" @click="onTourl('/mine/center')">
 							<div class="nickname">{{nickname}}</div>
 							<div class="userid">{{realname}}</div>
 						</div>
 					</flexbox-item>
-					<flexbox-item>
-						<div class="walletmain-grid-content" @click="onTourl('/mine/center')">
-							<i class="iconfont icon-arrow-right"></i>
-						</div>
-					</flexbox-item>
 				</flexbox>
+				<qriously class="ercode" :value="code" :size="138"/>
+				<div class="center">
+					<span>{{code}}</span>
+				</div>
+				<div class="center mr20">
+    				<button type="button" class="btn btn-round" v-clipboard:copy="code" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+				</div>
 			</v-grid>
 		</div>
+		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
 
@@ -34,16 +32,29 @@
 			return {
 				nickname	:	'',
                 avatar		:	'',
-                realname    :   ''
+				realname    :   '',
+				code		:	'',					// 转换地址
 			}
 		},
 		methods: {
-			
+			onCopy: function (e) {
+				this.$vux.toast.show({
+					text: this.$t('wallet.receive.tips.success'),
+					type: 'success'
+				})
+			},
+			onError: function (e) {
+				this.$vux.toast.show({
+					text: this.$t('wallet.receive.tips.error'),
+					type: 'warn'
+				})
+			}
 		},
 		mounted() {
 			this.nickname = this.$storage.get('NickName');
-            this.avatar   = this.$storage.get('HeadImg');
-            this.realname = this.$storage.get('Realname');
+			this.avatar   = this.$storage.get('HeadImg');
+			this.code   = this.$storage.get('RechargeCode');
+            this.realname = (this.$storage.get('Realname'))?this.$storage.get('Realname'):this.$t('global.Uncertified');
 		}
 	}
 
@@ -51,4 +62,5 @@
 
 <style scoped lang="scss">
 @import "../../scss/views/wallet/main";
+@import "../../scss/views/wallet/receive";
 </style>

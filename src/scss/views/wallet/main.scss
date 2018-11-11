@@ -7,18 +7,17 @@
     border-radius: 0 0px 20px 20px;
     position: relative;
     padding:20px 35px;
-    h1{
-        color:$font-white;
-        margin-top:50px;
-    }
     .walletmain-top-menu{
         margin:0 auto;
         background:$bg-white;
-        position: absolute;
+        position: relative;
+        overflow: visible;
         padding: 30px;
         width: 620px;
-        bottom: -80px;
-        z-index: 99999999;
+        bottom: -60px;
+        .midel{
+            text-align: center;
+        }
         .walletmain-grid-content{
             font-size:28px;
             color:$font-base;

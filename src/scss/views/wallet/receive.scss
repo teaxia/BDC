@@ -1,0 +1,13 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.walletmain-top{
+    .ercode{
+        margin:0 auto;
+        width: 320px;
+    }
+    .center{
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -11,7 +11,9 @@ import {zh} from  './common/lang/zh'
 import {en} from  './common/lang/en'
 import {server} from './common/apis/http-service'    // 定义ajax全局
 import storage from './common/storage/storage'       // 本地数据读取
-import jmCode from './common/config/config'       // 加密串
+import jmCode from './common/config/config'          // 加密串
+import VueQriously from 'vue-qriously'               // 二维码生成
+import VueClipboard from 'vue-clipboard2'             // 复制内容到剪切板
 import vfooter from './components/vfooter.vue'
 import vgrid from './components/vgrid.vue'
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell } from 'vux'
@@ -29,6 +31,8 @@ Vue.component('flexbox-item', FlexboxItem)
 Vue.component('x-header', XHeader)
 Vue.component('grid', Grid)
 Vue.component('grid-item', GridItem)
+Vue.use(VueQriously)
+Vue.use(VueClipboard)
 Vue.component('v-footer',vfooter)
 Vue.component('v-grid',vgrid)
 Vue.component('cell',Cell)

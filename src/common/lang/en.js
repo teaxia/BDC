@@ -10,6 +10,7 @@ export const en = {
         num         : 'Number',
         price       : 'Price',
         exchange    : 'Exchange Rate',
+        Uncertified : 'Uncertified'
     },
     // 全局底部菜单
     menu:{
@@ -35,6 +36,7 @@ export const en = {
         },
         login   :   'login',
         regist  :   'regist',
+        logout  :   'Logout',
         register: {
             username    :   'User name：',
             nickname    :   'Nick name：',
@@ -88,13 +90,34 @@ export const en = {
         btn:{
             send            :   'Send',
             receive         :   'Receive'
-        }
+        },
+        // 接收
+        receive:{
+            title           :   'Receive BDC',
+            copy            :   'Copy',
+            tips:{
+                success     :   'Success',
+                error       :   'Copy failed. Please manually select copy',
+            }
+        },
     },
     // 应用
     application:{
         title:{
             buy             :   'Buy',
             shop            :   'Shop'
+        }
+    },
+    // 我的
+    mine:{
+        menus:{
+            spread          :   'Spread APP',
+            website         :   'Website',
+            members         :   'Block members',
+            question        :   'Question',
+            feedback        :   'Feedback',
+            realname        :   'Authentication',
+            setting         :   'Setting'
         }
     }
 }

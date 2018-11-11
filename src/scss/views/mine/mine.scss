@@ -8,10 +8,6 @@
         border-radius: 0 0px 20px 20px;
         position: relative;
         padding:20px 35px;
-        h1{
-            color:$font-white;
-            margin-top:50px;
-        }
         .mine-top-menu{
             margin:0 auto;
             background:$bg-white;
@@ -31,6 +27,13 @@
                 font-size:90px;
                 color:$font-base;
             }
+        }
+    }
+    .cell-hei{
+        height: 80px;
+        font-size:40px;
+        .iconfont{
+            margin:0 15px;
         }
     }
 }

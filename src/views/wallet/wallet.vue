@@ -115,7 +115,7 @@ export default {
                     this.fixedAssets = data.FixedAssets;
                     this.actAssets   = data.ActAssets;
                     this.gameAssets  = data.GameAssets;
-                    if(!this.$storage.get('NickName')){
+                    if(!this.$storage.get('NickName')&&this.$storage.get('NickName')!='undefined'){
                         this.$storage.set('NickName',data.NickName);                        // 昵称
                         this.$storage.set('Name',data.Name);                                // 用户名
                         this.$storage.set('RealName',data.RealName); 
@@ -124,7 +124,7 @@ export default {
                         this.$storage.set('Mobile',data.PhoneNo);                           // 手机号
                         this.$storage.set('Sex',data.Sex);                                  // 性别
                         this.$storage.set('ParentName',data.ParentName);                    // 推荐人
-                        (data.RealName!='null')?this.$storage.set('RealName',data.RealName):this.$storage.set('RealName','未认证');     // 判断是否进行了实名认证
+                        this.$storage.set('RealName',data.RealName);                        // 判断是否进行了实名认证
                     }
                     // 进行资产计算请求
                     this.GetCurrencyPrice()
@@ -175,6 +175,8 @@ export default {
         this.GetSystemGG();                                                         // 获取公告数据
         // 每隔1分钟请求一次数据
         this.loop = setInterval(()=>{
+            this.GetSystemGG();
+            this.GetAccount();
             this.GetCurrencyPrice()
         },60000)
     },
