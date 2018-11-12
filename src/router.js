@@ -6,7 +6,10 @@ import user from './views/user.vue'
     import registinfo from './views/user/registinfo.vue'                    //  注册信息填写
 // 发现
 import discovery from './views/discovery.vue'
-    import discoveryindex from './views/discovery/index.vue'
+    import discoveryindex from './views/discovery/index.vue'                // 发现首页
+    import expectinfo from  './views/discovery/expectinfo.vue'              // 兑换BDC
+        import btob from  './views/discovery/btob.vue'                      // 币币兑换
+        import cash from  './views/discovery/cash.vue'                      // 现金购买
 // 钱包
 import wallet from './views/wallet.vue'
     import walletindex from './views/wallet/wallet.vue'
@@ -56,7 +59,11 @@ let routes = [
             isIndex: 2                                      //  底部导航图标索引0 1 2 3
         },
         children: [
-            { path: '/discovery/index', component: discoveryindex, name: 'discoveryindex',meta:{isIndex: 2}}
+            { path: '/discovery/index', component: discoveryindex, name: 'discoveryindex',meta:{isIndex: 2}},
+            { path: '/discovery/expectinfo', component: expectinfo, name: 'expectinfo',meta:{isIndex: 2}},
+            { path: '/discovery/expectinfo/btob', component: btob, name: 'btob',meta:{isIndex: 2}},
+            { path: '/discovery/expectinfo/cash', component: cash, name: 'cash',meta:{isIndex: 2}},
+
         ]
     },
     // 钱包

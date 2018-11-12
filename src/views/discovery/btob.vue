@@ -1,0 +1,169 @@
+<template>
+	<div class="btob" v-cloak>
+        <x-header :left-options="{backText:$t('global.back')}" title="币币兑换"></x-header>
+        <div class="main-container">
+            <h1>
+                兑换类型：
+                <select v-model="act">
+                    <option value="BTC">BTC</option>
+                    <option value="DASH">DASH</option>
+                    <option value="ETH">ETH</option>
+                </select>
+            </h1>
+            <div class="mr50">
+                <v-grid>
+                    <div class="pd-lb20">
+                        <flexbox class="vux-1px-b pb">
+                            <flexbox-item :span="4">
+                                <svg class="sicon" aria-hidden="true">
+                                    <use :xlink:href="`#icon-`+act"></use>
+                                </svg>
+                                <span>{{act}}</span>
+                            </flexbox-item>
+                            <flexbox-item>
+                                兑换比例：1:{{proportion}}
+                            </flexbox-item>
+                        </flexbox>
+                        <flexbox class="mr20 pb">
+                            <flexbox-item :span="6">
+                                <input type="number" v-model="num" placeholder="请输入兑换数量"/>
+                            </flexbox-item>
+                            <flexbox-item>
+                                <div class="price">{{price}}(BDC)</div>
+                            </flexbox-item>
+                        </flexbox>
+                    </div>
+                </v-grid>
+            </div>
+            <div class="mr20">
+                <flexbox class="vux-1px-b pb">
+                    <flexbox-item :span="3">
+                        兑换地址：
+                    </flexbox-item>
+                    <flexbox-item :span="6">
+                        <div class="text">{{this.address}}</div>
+                    </flexbox-item>
+                    <flexbox-item>
+                        <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="address" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                    </flexbox-item>
+                </flexbox>
+            </div>
+            <button @click="submit()" class="btn btn-block btn-round mr40">立即兑换</button>
+        </div>
+        <v-footer :isIndex="$route.meta.isIndex"></v-footer>
+    </div>
+</template>
+
+<script>
+	export default {
+        name:'btob',
+		data() {
+			return {
+                act         :   'BTC',
+                btobinfo    :   [],
+                num         :   '',
+                address     :   '',
+                proportion  :   '',
+                price       :   '',
+                isok        :   false
+			}
+        },
+        watch:{
+            act(){
+                this.num    =   '';
+                this.price  =   '';
+                switch(this.act){
+                    case "BTC":
+                        this.address = this.btobinfo.RechargeAddressBTC;            // 兑换地址
+                        this.proportion = this.btobinfo.PriceBTC;
+                    break;
+                    case "DASH":
+                        this.address = this.btobinfo.RechargeAddressDASH;            // 兑换地址
+                        this.proportion = this.btobinfo.PriceDASH;
+                    break;
+                    case "ETH":
+                        this.address = this.btobinfo.RechargeAddressETH;            // 兑换地址
+                        this.proportion = this.btobinfo.PriceDASH; 
+                    break;
+                }
+            },
+            num(){
+                this.num = (this.num<0)?0:this.num;
+                switch(this.act){
+                    case "BTC":
+                        this.price = (this.num*(this.btobinfo.PriceBTC/this.btobinfo.PriceBDC)).toFixed(8);
+                    break;
+                    case "DASH":
+                        this.price = (this.num*(this.btobinfo.PriceBTC/this.btobinfo.PriceBTC)).toFixed(8);
+                    break;
+                    case "ETH":
+                        this.price = (this.num*(this.btobinfo.PriceBTC/this.btobinfo.PriceETH)).toFixed(8);
+                    break;
+                }
+            }
+        },
+		methods: {
+            onCopy: function (e) {
+				this.$vux.toast.show({
+					text: this.$t('wallet.receive.tips.success'),
+					type: 'success'
+				})
+			},
+			onError: function (e) {
+				this.$vux.toast.show({
+					text: this.$t('wallet.receive.tips.error'),
+					type: 'warn'
+				})
+            },
+            submit(){
+                // 获取详情
+                if(this.isok){
+                    return;
+                }
+                if(this.num==''){
+                    this.$vux.toast.show({
+                        text: '兑换数量不能为空',
+                        type: 'warn'
+                    })
+                }
+                this.isok = true;
+                this.$server.post(
+                'AddRechargeByBB',
+                {
+                    guid 	        :   this.$storage.get('guid'),
+                    CurrencyNum     :   this.price,                          // 价格
+                    OutCurrencyNum  :   this.num,
+                    CurrencyName    :   this.act,
+                    RechargeAddress :   this.address
+                },
+                ).then(data => {
+                    this.$vux.toast.show({
+                        text: '兑换成功！',
+                        type: 'success'
+                    })
+                    this.isok = false;
+                })
+            }
+		},
+		mounted() {
+            // 获取详情
+            this.$server.post(
+			'GetBBInfo',
+			{
+				guid 	:  this.$storage.get('guid'),
+			},
+			).then(data => {
+				if(data){
+                    this.btobinfo = data;
+                    this.address  = data.RechargeAddressBTC;            // 兑换地址
+                    this.proportion = this.btobinfo.PriceBTC;           // 兑换比例 
+				}
+			})
+		}
+	}
+
+</script>
+
+<style scoped lang="scss">
+@import "../../scss/views/discovery/btob";
+</style>

@@ -124,7 +124,6 @@ export default {
                         this.$storage.set('Mobile',data.PhoneNo);                           // 手机号
                         this.$storage.set('Sex',data.Sex);                                  // 性别
                         this.$storage.set('ParentName',data.ParentName);                    // 推荐人
-                        this.$storage.set('RealName',data.RealName);                        // 判断是否进行了实名认证
                     }
                     // 进行资产计算请求
                     this.GetCurrencyPrice()

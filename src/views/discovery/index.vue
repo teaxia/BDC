@@ -5,8 +5,10 @@
 			<div class="topmenu">
 				<v-grid>
 					<div :class="['grid-4',index<4?'line-b':'']" v-for="(list,index) in dataList" :key="index">
-						<i :class="[{'iconfont':true},list.icon]"></i>
-						<span class="top-menu">{{list.value}}</span>
+						<router-link :to="list.url">
+							<i :class="[{'iconfont':true},list.icon]"></i>
+							<span class="top-menu">{{list.value}}</span>
+						</router-link>
 					</div>
 				</v-grid>
 			</div>
@@ -41,36 +43,35 @@ export default {
 			lang	 : 'zh',		// 默认语言
 			dataList:[
 				{
-				value   : this.$t("discovery.topmenu.bdc"),
-				icon    : 'icon-duihuanBDC',
-				url     : '/home/discovery',
+					value   : this.$t("discovery.topmenu.bdc"),
+					icon    : 'icon-duihuanBDC',
+					url     : '/discovery/expectinfo',
 				},
 				{
-				value   : this.$t("discovery.topmenu.ctc"),
-				icon    : 'icon-CTC1',
-				url     : '/home/discovery',
-				},
-				
-				{
-				value   : this.$t("discovery.topmenu.bill"),
-				icon    : 'icon-zhangben2',
-				url     : '/home/discovery',
+					value   : this.$t("discovery.topmenu.ctc"),
+					icon    : 'icon-CTC1',
+					url     : '/home/discovery',
 				},
 				
 				{
-				value   : this.$t("discovery.topmenu.ent"),
-				icon    : 'icon-xiuxianyule',
-				url     : '/home/discovery',
+					value   : this.$t("discovery.topmenu.bill"),
+					icon    : 'icon-zhangben2',
+					url     : '/home/discovery',
 				},
 				{
-				value   : this.$t("discovery.topmenu.recharge"),
-				icon    : 'icon-chongzhi',
-				url     : '/home/discovery',
+					value   : this.$t("discovery.topmenu.ent"),
+					icon    : 'icon-xiuxianyule',
+					url     : '/home/discovery',
 				},
 				{
-				value   : this.$t("discovery.topmenu.credit"),
-				icon    : 'icon-banxinyongqia',
-				url     : '/home/discovery',
+					value   : this.$t("discovery.topmenu.recharge"),
+					icon    : 'icon-chongzhi',
+					url     : '/home/discovery',
+				},
+				{
+					value   : this.$t("discovery.topmenu.credit"),
+					icon    : 'icon-banxinyongqia',
+					url     : '/home/discovery',
 				}
 			],
 			news:[],

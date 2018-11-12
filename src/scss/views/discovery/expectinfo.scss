@@ -1,0 +1,31 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.expectinfo{
+    .exp-grid-center{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        color:$font-base;
+        .bd{
+            width: 100%;
+        }
+        .hot{
+            color:$font-red;
+            margin-left:40px;
+        }
+        .bar_jd{
+            background:#e5e5e5;
+            width: 80%;
+            height: 30px;
+            border-radius: 20px;
+        }
+        .bar_jds{
+            background:$color-base;
+            border-radius: 20px;
+            width: 80%;
+            height: 30px;
+            color:$font-white;
+        }
+    }
+}

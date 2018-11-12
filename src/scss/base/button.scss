@@ -20,7 +20,13 @@ button[disabled]
     -webkit-tap-highlight-color: transparent;
     transition: opacity .2s;
     text-align: center;
-
+    &-xs{
+        width: 1.7rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        padding: 0;
+        display: block;
+    }
     // 圆角按钮
     &-round
     {
