@@ -1,9 +1,9 @@
 <template>
 	<div class="btob" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="币币兑换"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.btob.title')"></x-header>
         <div class="main-container">
             <h1>
-                兑换类型：
+                {{$t('discovery.btob.changtype')}}：
                 <select v-model="act">
                     <option value="BTC">BTC</option>
                     <option value="DASH">DASH</option>
@@ -21,12 +21,12 @@
                                 <span>{{act}}</span>
                             </flexbox-item>
                             <flexbox-item>
-                                兑换比例：1:{{proportion}}
+                                {{$t('discovery.btob.proportion')}}：1:{{proportion}}
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb">
                             <flexbox-item :span="6">
-                                <input type="number" v-model="num" placeholder="请输入兑换数量"/>
+                                <input type="number" v-model="num" :placeholder="$t('discovery.btob.num')"/>
                             </flexbox-item>
                             <flexbox-item>
                                 <div class="price">{{price}}(BDC)</div>
@@ -38,7 +38,7 @@
             <div class="mr20">
                 <flexbox class="vux-1px-b pb">
                     <flexbox-item :span="3">
-                        兑换地址：
+                        {{$t('discovery.btob.address')}}：
                     </flexbox-item>
                     <flexbox-item :span="6">
                         <div class="text">{{this.address}}</div>
@@ -48,7 +48,7 @@
                     </flexbox-item>
                 </flexbox>
             </div>
-            <button @click="submit()" class="btn btn-block btn-round mr40">立即兑换</button>
+            <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.btob.submit')}}</button>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
@@ -122,7 +122,7 @@
                 }
                 if(this.num==''){
                     this.$vux.toast.show({
-                        text: '兑换数量不能为空',
+                        text: this.$t('discovery.btob.null'),
                         type: 'warn'
                     })
                 }
@@ -138,7 +138,7 @@
                 },
                 ).then(data => {
                     this.$vux.toast.show({
-                        text: '兑换成功！',
+                        text: this.$t('global.success'),
                         type: 'success'
                     })
                     this.isok = false;

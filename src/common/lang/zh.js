@@ -65,7 +65,37 @@ export const zh = {
             ent         :   '休闲娱乐',
             recharge    :   '充值',
             credit      :   '办信用卡'
+        },
+        expectinfo:{
+            title       :   '兑换BDC',
+            hot         :   '正在抢购',
+            issue       :   '本期发行量',
+            b2b         :   '币币对换',
+            cash        :   '现金购买',
+            notbuy      :   '未开启',
+        },
+        btob:{
+            title       :   '币币兑换',
+            changtype   :   '兑换类型',
+            proportion  :   '兑换比例',
+            num         :   '请输入兑换数量',
+            address     :   '兑换地址',
+            submit      :   '立即兑换',
+            null        :   '兑换数量不能为空'    
+        },
+        cash:{
+            title       :   '现金兑换',
+            rate        :   '当前汇率',
+            selectbank  :   '选择银行',
+            cardname    :   '开户名',
+            cardnumber  :   '银行卡号',
+            buyname     :   '购买人姓名',
+            tips:{
+                buyname :   '请输入购买人姓名',
+            },
+            buy         :   '立即购买'
         }
+        
     },
     // 钱包
     wallet:{

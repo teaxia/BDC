@@ -1,6 +1,6 @@
 <template>
 	<div class="expectinfo" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="兑换BDC"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.expectinfo.title')"></x-header>
         <div class="main-container">
             <div class="mr30">
                 <v-grid v-for="(v,index) in expectinfo" :key="index" class="mr20">
@@ -8,7 +8,7 @@
                         <flexbox>
                             <flexbox-item :span="9">
                                 <div class="exp-grid-center">
-                                    <div class="bd title">{{v.ExpectNo}}<span v-if="v.IsCanBuy" class="hot">正在热购</span></div>
+                                    <div class="bd title">{{v.ExpectNo}}<span v-if="v.IsCanBuy" class="hot">{{$t('discovery.expectinfo.hot')}}</span></div>
                                     <div class="bd">
                                         <div class="bar_jd fl">
                                             <div class="bar_jds" v-if="v.IsCanBuy"  :style="`width:`+v.Percent+`%`"></div>
@@ -19,14 +19,14 @@
                                             <span v-else>100%</span>
                                         </div>
                                     </div>
-                                    <div class="bd hl">本期发行量：{{v.TotalCurrencyNum}}</div>
+                                    <div class="bd hl">{{$t('discovery.expectinfo.issue')}}：{{v.TotalCurrencyNum}}</div>
                                 </div>
                             </flexbox-item>
                             <flexbox-item>
                                 <div class="exp-grid-center">
-                                    <button v-if="!v.IsCanBuy" class="btn btn-xs btn-round btn-disabled">未开启</button>
-                                    <button @click="onTourl('/discovery/expectinfo/btob')" v-if="v.IsCanBuy" class="btn btn-xs btn-round">币币兑换</button>
-                                    <button @click="onTourl('/discovery/expectinfo/cash')" v-if="v.IsCanBuy" class="btn btn-xs btn-round mr10">现金兑换</button>
+                                    <button v-if="!v.IsCanBuy" class="btn btn-xs btn-round btn-disabled">{{$t('discovery.expectinfo.notbuy')}}</button>
+                                    <button @click="onTourl('/discovery/expectinfo/btob')" v-if="v.IsCanBuy" class="btn btn-xs btn-round">{{$t('discovery.expectinfo.b2b')}}</button>
+                                    <button @click="onTourl('/discovery/expectinfo/cash')" v-if="v.IsCanBuy" class="btn btn-xs btn-round mr10">{{$t('discovery.expectinfo.cash')}}</button>
                                 </div>
                             </flexbox-item>
                         </flexbox>

@@ -64,6 +64,35 @@ export const en = {
             ent         :   'ENT',
             recharge    :   'Recharge',
             credit      :   'Credit card'
+        },
+        expectinfo:{
+            title       :   'Exchange BDC',
+            hot         :   'HOT',
+            issue       :   'Circulation',
+            b2b         :   'Exchange',
+            cash        :   'Buy',
+            notbuy      :   'Unopened',
+        },
+        btob:{
+            title       :   'Exchange',
+            changtype   :   'Exchange Type',
+            proportion  :   'Proportion',
+            num         :   'Please entry quantity',
+            address     :   'Exchange Address',
+            submit      :   'Exchange now',
+            null        :   'Quantity can not be null'    
+        },
+        cash:{
+            title       :   'Cash',
+            rate        :   'Proportion',
+            selectbank  :   'Bank',
+            cardname    :   'Card name',
+            cardnumber  :   'Card number',
+            buyname     :   'Your name',
+            tips:{
+                buyname :   'Please entry Your name',
+            },
+            buy         :   'Buy Now'
         }
     },
     // 钱包

@@ -1,19 +1,19 @@
 <template>
 	<div class="btob" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="币币兑换"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.cash.title')"></x-header>
         <div class="main-container">
             <h3>
-                当前汇率：1BDC={{bdc}}CNY
+                {{$t('discovery.cash.rate')}}：1BDC={{bdc}}CNY
             </h3>
             <div class="mr50">
                 <v-grid>
                     <div class="pd-lb20">
                         <flexbox class="vux-1px-b pb">
                             <flexbox-item :span="3">
-                                兑换BDC
+                                {{$t('discovery.expectinfo.title')}}
                             </flexbox-item>
                             <flexbox-item :span="5">
-                                <input type="number" v-model="num" placeholder="请输入兑换数量"/>
+                                <input type="number" v-model="num" :placeholder="$t('discovery.btob.num')"/>
                             </flexbox-item>
                             <flexbox-item :span="4">
                                 <div class="text-right">
@@ -24,7 +24,7 @@
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3">
-                                选择银行卡：
+                                {{$t('discovery.cash.selectbank')}}：
                             </flexbox-item>
                             <flexbox-item>
                                 <select v-model="bank">
@@ -34,7 +34,7 @@
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3">
-                                开户人姓名：
+                                {{$t('discovery.cash.cardname')}}：
                             </flexbox-item>
                             <flexbox-item :span="6">
                                 {{cardname}}
@@ -45,7 +45,7 @@
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3">
-                                银行卡号：
+                                {{$t('discovery.cash.cardnumber')}}：
                             </flexbox-item>
                             <flexbox-item :span="6">
                                 {{cardnumber}}
@@ -56,16 +56,16 @@
                         </flexbox>
                         <flexbox class="mr20 pb">
                             <flexbox-item :span="3">
-                                购买人姓名：
+                                {{$t('discovery.cash.buyname')}}：
                             </flexbox-item>
                             <flexbox-item>
-                                <input type="text" v-model="name" placeholder="请输入购买人姓名"/>
+                                <input type="text" v-model="name" :placeholder="$t('discovery.cash.tips.buyname')"/>
                             </flexbox-item>
                         </flexbox>
                     </div>
                 </v-grid>
             </div>
-            <button @click="submit()" class="btn btn-block btn-round mr40">立即购买</button>
+            <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
