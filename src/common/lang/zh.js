@@ -13,6 +13,19 @@ export const zh = {
         Uncertified         : '未认证',
         back                : '返回'
     },
+    input:{
+        mobile              :   '手机号',
+        coname              :   '公司名称',
+        oilcard             :   '油卡号码',
+        recharge            :   '充值金额',
+        bdc                 :   'BDC数额',
+        tips:{
+            mobile          :   '请输入手机号',
+            coname          :   '请输入公司名称',
+            oilcard         :   '请输入油卡号码',
+            recharge        :   '请输入充值金额',
+        }
+    },
     // 全局底部菜单
     menu:{
         wallet       : '钱包',
@@ -94,8 +107,21 @@ export const zh = {
                 buyname :   '请输入购买人姓名',
             },
             buy         :   '立即购买'
+        },
+        recharge:{
+            title       :   '充值',
+            price       :   '售价',
+            type:{
+                phone   :   '话费',
+                gprs    :   '流量',
+                oilcard :   '油卡'
+            },
+            error:{
+                num     :   '充值金额不能小于1',
+                full    :   '请填写完整的信息',
+                mobile  :   '手机号不能为空'
+            }
         }
-        
     },
     // 钱包
     wallet:{

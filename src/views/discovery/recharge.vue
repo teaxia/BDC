@@ -1,53 +1,53 @@
 <template>
 	<div class="recharge" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="充值"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.recharge.title')"></x-header>
         <flexbox class="pb select">
             <flexbox-item>
-                <div @click="active('1')" class="menu"><span :class="{'active':type==1}">话费</span></div>
+                <div @click="active('1')" class="menu"><span :class="{'active':type==1}">{{$t('discovery.recharge.type.phone')}}</span></div>
             </flexbox-item>
             <flexbox-item>
-                <div @click="active('2')" class="menu"><span :class="{'active':type==2}">流量</span></div>
+                <div @click="active('2')" class="menu"><span :class="{'active':type==2}">{{$t('discovery.recharge.type.gprs')}}</span></div>
             </flexbox-item>
             <flexbox-item>
-                <div @click="active('3')" class="menu"><span :class="{'active':type==3}">油卡</span></div>
+                <div @click="active('3')" class="menu"><span :class="{'active':type==3}">{{$t('discovery.recharge.type.oilcard')}}</span></div>
             </flexbox-item>
         </flexbox>
         <div class="mr30" v-if="type==1||type==2">
             <group>
-                <x-input class="tel" title="手机号码" mask="999 9999 9999" :max="13" v-model="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"></x-input>
+                <x-input class="tel" :title="$t('input.mobile')" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number" is-type="china-mobile"></x-input>
             </group>
         </div>
         <div class="main-container">
             <div v-if="type==1" class="secrechar">
                 <div v-for="(v,index) in phonecharges" @click="act(index,v.money)" :class="{'sel_div':true,'current':current==index}">
                     <div>{{v.money}}CNY</div>
-                    <div>售价：{{v.money/bdc}} BDC</div>
+                    <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
                 </div>
             </div>
             <div v-if="type==2" class="secrechar">
                 <div v-for="(v,index) in gprs" @click="act(index,v.money)" :class="{'sel_div':true,'current':current==index}">
                     <div>{{v.value}}</div>
-                    <div>售价：{{v.money/bdc}} BDC</div>
+                    <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
                 </div>
             </div>
             <div v-if="type==3">
                 <div class="mr30">
                     <group>
-                        <x-input class="tel" title="公司名称" v-model="coname" placeholder="请输入公司名称"></x-input>
+                        <x-input class="tel" :title="$t('input.coname')" v-model="coname" :placeholder="$t('input.tips.coname')"></x-input>
                     </group>
                     <group>
-                        <x-input class="tel" title="手机号码" mask="999 9999 9999" :max="13" v-model="mobile" placeholder="请输入手机号码" keyboard="number"></x-input>
+                        <x-input class="tel" :title="$t('input.mobile')" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number"></x-input>
                     </group>
                     <group>
-                        <x-input class="tel" title="油卡号码" v-model="oilcard" placeholder="请输入油卡号码" keyboard="number"></x-input>
+                        <x-input class="tel" :title="$t('input.oilcard')" v-model="oilcard" :placeholder="$t('input.tips.oilcard')" keyboard="number"></x-input>
                     </group>
                     <group>
-                        <x-input class="tel" title="充值金额" v-model="num" placeholder="请输入充值金额" keyboard="number"></x-input>
+                        <x-input class="tel" :title="$t('input.recharge')" v-model="num" :placeholder="$t('input.tips.recharge')" keyboard="number"></x-input>
                     </group>
                     <group>
-                        <x-input class="tel" title="BDC数额" readonly v-model="bdcmoney"></x-input>
+                        <x-input class="tel" :title="$t('input.bdc')" readonly v-model="bdcmoney"></x-input>
                     </group>
                 </div>
             </div>
@@ -150,7 +150,7 @@
                 this.mobile = this.mobile.replace(/\s+/g,"")
                 if(this.mobile==''){
                     this.$vux.toast.show({
-                        text: '手机号必须填写完整',
+                        text: this.$t('discovery.recharge.error.mobile'),
                         type: 'warn'
                     })
                     return;
@@ -159,7 +159,7 @@
                 }
                 switch(this.type){
                     case '1':
-                        this.class =    '话费充值';
+                        this.class = '话费充值';
                     break;
                     case '2':
                         this.class = '流量充值';
@@ -170,19 +170,18 @@
                         this.Remakes    = '公司 :'+this.coname+' 油卡号 :'+this.oilcard;
                         if(this.num<'1'){
                             this.$vux.toast.show({
-                                text: '充值金额不能小于1',
+                                text: this.$t('discovery.recharge.error.num'),
                                 type: 'warn'
                             })
                             return ;
                         }
                         if(this.coname==''||this.mobile==''||this.oilcard==''){
                             this.$vux.toast.show({
-                                text: '请填写完整',
+                                text: this.$t('discovery.recharge.error.full'),
                                 type: 'warn'
                             })
                             return ;
                         }
-                        console.log(this.coname);
                     break;
                 }
                 this.isok = true;
@@ -200,7 +199,7 @@
                 },
                 ).then(data => {
                     this.$vux.toast.show({
-                        text: '兑换成功！',
+                        text: this.$t('global.success'),
                         type: 'success'
                     })
                     this.isok = false;

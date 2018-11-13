@@ -13,6 +13,19 @@ export const en = {
         Uncertified : 'Uncertified',
         back        : 'back'
     },
+    input:{
+        mobile              :   'Phone number',
+        coname              :   'Corporate',
+        oilcard             :   'Fuel card',
+        recharge            :   'Recharge',
+        bdc                 :   'BDC',
+        tips:{
+            mobile          :   'Please enter your phone number',
+            coname          :   'Please enter your corporate number',
+            oilcard         :   'Please enter your Fuel card',
+            recharge        :   'Please enter recharge',
+        }
+    },
     // 全局底部菜单
     menu:{
         wallet       : 'Wallet',
@@ -93,6 +106,20 @@ export const en = {
                 buyname :   'Please entry Your name',
             },
             buy         :   'Buy Now'
+        },
+        recharge:{
+            title       :   'Recharge',
+            price       :   'price',
+            type:{
+                phone   :   'Telephone rate',
+                gprs    :   'data',
+                oilcard :   'oilcard'
+            },
+            error:{
+                num     :   'Recharge not less than 1',
+                full    :   'Please fill in the complete',
+                mobile  :   'Phone number do not null'
+            }
         }
     },
     // 钱包
