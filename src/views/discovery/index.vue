@@ -50,28 +50,28 @@ export default {
 				{
 					value   : this.$t("discovery.topmenu.ctc"),
 					icon    : 'icon-CTC1',
-					url     : '/home/discovery',
+					url     : '/discovery/discovery',
 				},
 				
 				{
 					value   : this.$t("discovery.topmenu.bill"),
 					icon    : 'icon-zhangben2',
-					url     : '/home/discovery',
+					url     : '/discovery/discovery',
 				},
 				{
 					value   : this.$t("discovery.topmenu.ent"),
 					icon    : 'icon-xiuxianyule',
-					url     : '/home/discovery',
+					url     : '/discovery/discovery',
 				},
 				{
 					value   : this.$t("discovery.topmenu.recharge"),
 					icon    : 'icon-chongzhi',
-					url     : '/home/discovery',
+					url     : '/discovery/recharge',
 				},
 				{
 					value   : this.$t("discovery.topmenu.credit"),
 					icon    : 'icon-banxinyongqia',
-					url     : '/home/discovery',
+					url     : '/discovery/discovery',
 				}
 			],
 			news:[],

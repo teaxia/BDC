@@ -10,6 +10,8 @@ import discovery from './views/discovery.vue'
     import expectinfo from  './views/discovery/expectinfo.vue'              // 兑换BDC
         import btob from  './views/discovery/btob.vue'                      // 币币兑换
         import cash from  './views/discovery/cash.vue'                      // 现金购买
+        import recharge from  './views/discovery/recharge.vue'              // 充值
+        
 // 钱包
 import wallet from './views/wallet.vue'
     import walletindex from './views/wallet/wallet.vue'
@@ -63,6 +65,7 @@ let routes = [
             { path: '/discovery/expectinfo', component: expectinfo, name: 'expectinfo',meta:{isIndex: 2}},
             { path: '/discovery/expectinfo/btob', component: btob, name: 'btob',meta:{isIndex: 2}},
             { path: '/discovery/expectinfo/cash', component: cash, name: 'cash',meta:{isIndex: 2}},
+            { path: '/discovery/recharge', component: recharge, name: 'recharge',meta:{isIndex: 2}},
 
         ]
     },
