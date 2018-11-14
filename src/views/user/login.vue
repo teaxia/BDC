@@ -7,7 +7,9 @@
 				</h2>
 			</div>
 			<div class="change">
-				<selector :options="langType" v-model="lang"></selector>
+				<Select v-model="lang">
+					<Option v-for="(v,index) in langType" :value="v.key" :key="index">{{v.value}}</Option>
+				</Select>
 			</div>
 		</div>
 		<div class="enterfrom">
@@ -33,7 +35,7 @@
 </template>
 
 <script>
-import { Selector } from 'vux'
+
 export default {
 	name: 'Login',
 	data() {
@@ -110,9 +112,6 @@ export default {
 			});
 		}
 	},
-	components: {
-    	Selector
-  	}
 }
 
 </script>

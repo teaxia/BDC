@@ -49,9 +49,13 @@ export const zh = {
             send            : '后重新发送',
             error           : '请填写正确的用户名与密码'
         },
-        login   : '登 录',
-        regist  : '注 册',
-        logout  : '退出登录',
+        login           : '登 录',
+        regist          : '注 册',
+        logout          : '退出登录',
+        password        : '登录密码',
+        securitypsw     : '安全密码',
+        invitationcode  : '邀请码',
+        area            : '矿区',
         register: {
             username    :   '登录账号：',
             nickname    :   '用户昵称：',
