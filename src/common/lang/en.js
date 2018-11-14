@@ -120,6 +120,20 @@ export const en = {
                 full    :   'Please fill in the complete',
                 mobile  :   'Phone number do not null'
             }
+        },
+        bill:{
+            title       :   'Bill',
+            type1       :   'Expenditure',
+            type2       :   'Income',
+            type3       :   'POS',
+            type4       :   'Consumption',
+            type5       :   'Withdraw money',
+            type6       :   'Pay',
+            type7       :   'Achievement',
+            begin       :   'Start time',
+            end         :   'End time',
+            people      :   'People',
+            money       :   'Money'
         }
     },
     // 钱包

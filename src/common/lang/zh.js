@@ -121,6 +121,20 @@ export const zh = {
                 full    :   '请填写完整的信息',
                 mobile  :   '手机号不能为空'
             }
+        },
+        bill:{
+            title       :   '账本',
+            type1       :   '支出',
+            type2       :   '收入',
+            type3       :   'POS',
+            type4       :   '消费',
+            type5       :   '提币',
+            type6       :   '充值',
+            type7       :   '业绩',
+            begin       :   '开始时间',
+            end         :   '结束时间',
+            people      :   '人数',
+            money       :   '持币'
         }
     },
     // 钱包
