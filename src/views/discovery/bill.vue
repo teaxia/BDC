@@ -25,28 +25,19 @@
             </flexbox-item>
         </flexbox>
         <div class="mr30">
-            <div class="datatime">
-                <select>
-                    <option v-for="v in year" :value="v">{{v}}</option>
-                </select>
-                <span>年</span>
-                <select>
-                    <option v-for="v in month" :value="v">{{v}}</option>
-                </select>
-                <span>月</span>
-                <select>
-                    <option v-for="v in day" :value="v">{{v}}</option>
-                </select>
-                <span>日</span>
-            </div>
+            <flexbox class="pb time">
+                <flexbox-item>
+                    <DatePicker @on-change="startime" type="date" format="yyyy/MM/dd" placement="bottom-start" placeholder="开始时间"></DatePicker>
+                </flexbox-item>
+                <flexbox-item>
+                    <DatePicker @on-change="endtime" type="date" format="yyyy/MM/dd" placement="bottom-end" placeholder="结束时间"></DatePicker>
+                </flexbox-item>
+            </flexbox>
         </div>
         <div class="main-container">
             <div class="secrechar">
                 
             </div>
-            
-            
-            <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
@@ -58,101 +49,117 @@
 		data() {
 			return {
                 type        :   '1',
-                current     :   '0',
-                year        :   [],
-                month       :   [1,2,3,4,5,6,7,8,9,10,11,12],
-                day         :   [],
+                class       :   '0',
+                start       :   '',
+                end         :   '',
                 isok        :   false,
 			}
         },
         watch:{
-            num(){
-                this.bdcmoney = this.num/this.bdc
+            type(){
+                switch(this.type){
+                    case '1':
+                        this.class = "支出"
+                        this.query();
+                    break;
+                    case '2':
+                        this.class = "收入"
+                        this.query();
+                    break;
+                    case '3':
+                        this.class = "POS"
+                        this.query();
+                    break;
+                    case '4':
+                        this.class = "其他"
+                        this.query();
+                    break;
+                    case '5':
+                        // 提币
+                        this.class = "W"
+                        this.getrw();
+                    break;
+                    case '6':
+                        // 充值
+                        this.class = "R"
+                        this.getrw();
+                    break;
+                    case '7':
+                        // 充值
+                        this.class = ""
+                        this.getyj();
+                    break;
+                }
             }
+        
         },
 		methods: {
             active(type){
                 this.type  = type;
             },
-            act(index,money){
-                this.current = index;
-            },
-            submit(){
-                // 获取详情
-                if(this.isok){
-                    return;
-                }
-                this.mobile = this.mobile.replace(/\s+/g,"")
-                if(this.mobile==''){
-                    this.$vux.toast.show({
-                        text: this.$t('discovery.recharge.error.mobile'),
-                        type: 'warn'
-                    })
-                    return;
+            startime(e){
+                this.start = e;
+                if(this.type<=4){
+                    this.query();
+                }else if(this.type=='5'||this.type=='6'){
+                    this.getrw();
                 }else{
-                    this.isok = false;
+                    this.getyj();
                 }
-                switch(this.type){
-                    case '1':
-                        this.class = '话费充值';
-                    break;
-                    case '2':
-                        this.class = '流量充值';
-                    break;
-                    case '3':
-                        this.class      = '油卡充值';
-                        this.RMB        = this.num/this.bdc;
-                        this.Remakes    = '公司 :'+this.coname+' 油卡号 :'+this.oilcard;
-                        if(this.num<'1'){
-                            this.$vux.toast.show({
-                                text: this.$t('discovery.recharge.error.num'),
-                                type: 'warn'
-                            })
-                            return ;
-                        }
-                        if(this.coname==''||this.mobile==''||this.oilcard==''){
-                            this.$vux.toast.show({
-                                text: this.$t('discovery.recharge.error.full'),
-                                type: 'warn'
-                            })
-                            return ;
-                        }
-                    break;
+            },
+            endtime(e){
+                this.end = e;
+                if(this.type<=4){
+                    this.query();
+                }else if(this.type=='5'||this.type=='6'){
+                    this.getrw();
+                }else{
+                    this.getyj();
                 }
-                this.isok = true;
-                
-                // 应用类型
-
+            },
+            query(){
                 this.$server.post(
-                'PayOther',
+                'GetAccountBusiness',
                 {
-                    guid 	        :   this.$storage.get('guid'),
-                    OtherType       :   this.class,                           // 应用类型：1话费充值，2流量充值，3油卡充值
-                    RMB             :   this.RMB,                             // RMB价格
-                    PhoneNo         :   this.mobile,                          // 手机号                      
-                    Remakes         :   this.Remakes,                         // 充值备注
+                    guid     :   this.$storage.get('guid'),
+                    Type     :   this.class,
+                    dtStart  :   this.start,
+                    dtEnd    :   this.end,
                 },
                 ).then(data => {
-                    this.$vux.toast.show({
-                        text: this.$t('global.success'),
-                        type: 'success'
-                    })
-                    this.isok = false;
+                    console.log(data);        
+                })
+            },
+            getrw(){
+                this.$server.post(
+                'GetR_W_Info',
+                {
+                    guid     :   this.$storage.get('guid'),
+                    Type     :   this.class,
+                    dtStart  :   this.start,
+                    dtEnd    :   this.end,
+                },
+                ).then(data => {
+                    console.log(data);        
+                })
+            },
+            getyj(){
+                this.$server.post(
+                'GetAccountBusiness_YJ',
+                {
+                    guid     :   this.$storage.get('guid'),
+                    dtStart  :   this.start,
+                    dtEnd    :   this.end,
+                },
+                ).then(data => {
+                    console.log(data);        
                 })
             }
 		},
 		mounted() {
-            // 初始化年
-            let time = new Date();
-            let year = time.getFullYear();
-            this.year.push(year);
-            for(let i =1;i<=5;i++){
-                this.year.push(year-i);
-            }
-            // 初始化日
-            for(let i =1;i<=31;i++){
-                this.day.push(i);
-            }
+            // 初始化数据
+            this.class="支出";
+            this.type = 1;
 		}
 	}
 

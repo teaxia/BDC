@@ -19,6 +19,8 @@ import vgrid from './components/vgrid.vue'
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
+import { DatePicker } from 'iview';
+import 'iview/dist/styles/iview.css';
 import './scss/base/main.scss'
 Vue.use(VueRouter)
 Vue.use(VueI18n)
@@ -36,6 +38,8 @@ Vue.use(VueClipboard)
 Vue.component('v-footer',vfooter)
 Vue.component('v-grid',vgrid)
 Vue.component('cell',Cell)
+Vue.component('DatePicker',DatePicker)
+
 
 Vue.prototype.$server=server;                        // ajax组件
 Vue.prototype.$storage = storage;                    // 本地数据读取
