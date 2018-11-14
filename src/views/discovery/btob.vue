@@ -4,11 +4,9 @@
         <div class="main-container">
             <h1>
                 {{$t('discovery.btob.changtype')}}：
-                <select v-model="act">
-                    <option value="BTC">BTC</option>
-                    <option value="DASH">DASH</option>
-                    <option value="ETH">ETH</option>
-                </select>
+                <Select v-model="act" class="select">
+                    <Option v-for="item in blist" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                </Select>
             </h1>
             <div class="mr50">
                 <v-grid>
@@ -60,6 +58,20 @@
 		data() {
 			return {
                 act         :   'BTC',
+                blist       :   [
+                    {
+                        value: 'BTC',
+                        label: 'BTC'
+                    },
+                    {
+                        value: 'DASH',
+                        label: 'DASH'
+                    },
+                    {
+                        value: 'ETH',
+                        label: 'ETH'
+                    },
+                ],
                 btobinfo    :   [],
                 num         :   '',
                 address     :   '',

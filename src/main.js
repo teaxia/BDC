@@ -19,7 +19,7 @@ import vgrid from './components/vgrid.vue'
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
-import { DatePicker } from 'iview';
+import { DatePicker,Select,Option,Radio,RadioGroup } from 'iview';
 import 'iview/dist/styles/iview.css';
 import './scss/base/main.scss'
 Vue.use(VueRouter)
@@ -39,6 +39,11 @@ Vue.component('v-footer',vfooter)
 Vue.component('v-grid',vgrid)
 Vue.component('cell',Cell)
 Vue.component('DatePicker',DatePicker)
+Vue.component('Select',Select)
+Vue.component('Option',Option)
+Vue.component('Radio',Radio)
+Vue.component('RadioGroup',RadioGroup)
+
 
 
 Vue.prototype.$server=server;                        // ajax组件

@@ -17,11 +17,9 @@
                         </div>
                     </flexbox-item>
                     <flexbox-item :span="5">
-                        <select v-model="type">
-                            <option value="1">{{$t("wallet.transfor.type1")}}</option>
-                            <option value="2">{{$t("wallet.transfor.type2")}}</option>
-                            <option value="3">{{$t("wallet.transfor.type3")}}</option>
-                        </select>
+                        <Select v-model="type">
+                            <Option v-for="(v,index) in dlist" :key="index" :value="v.value">{{v.label}}</Option>
+                        </Select>
                     </flexbox-item>
                 </flexbox>
                 <flexbox class="changelist">
@@ -74,6 +72,20 @@ export default {
             DHL         :   '',
             X           :   '',
             password    :   '',
+            dlist       :   [
+                {
+                    value: '1',
+                    label: this.$t("wallet.transfor.type1")
+                },
+                {
+                    value: '2',
+                    label: this.$t("wallet.transfor.type2")
+                },
+                {
+                    value: '3',
+                    label: this.$t("wallet.transfor.type3")
+                }
+            ],
             isHandling  :   false
 		}
     },

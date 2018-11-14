@@ -27,9 +27,9 @@
                                 {{$t('discovery.cash.selectbank')}}：
                             </flexbox-item>
                             <flexbox-item>
-                                <select v-model="bank">
-                                    <option v-for="(v,index) in bankinfo" :value="index">{{v.BankName}}</option>
-                                </select>
+                                <Select v-model="bank">
+                                    <Option v-for="(v,index) in bankinfo" :key="index" :value="index">{{v.BankName}}</Option>
+                                </Select>
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">

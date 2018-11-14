@@ -14,8 +14,14 @@
                 <group>
                     <div class="label">{{$t('user.type.sex')}}：</div>
                     <div class="radio">
-                        <input type="radio" v-model="gender" id="man" value="0"/><label for="man">{{$t('user.type.man')}}</label>
-                        <input type="radio" v-model="gender" id="woman" value="1"/><label for="woman">{{$t('user.type.woman')}}</label>
+                        <RadioGroup v-model="gender">
+                            <Radio label="0">
+                                <span>{{$t('user.type.man')}}</span>
+                            </Radio>
+                            <Radio label="1">
+                                <span>{{$t('user.type.woman')}}</span>
+                            </Radio>
+                        </RadioGroup>
                     </div>
                 </group>
                 <group>
@@ -30,8 +36,14 @@
                 <group>
                     <div class="label">矿区：</div>
                     <div class="radio">
-                        <input type="radio" v-model="area" id="v1" value="A"/><label for="v1">V1</label>
-                        <input type="radio" v-model="area" id="v2" value="B"/><label for="v2">V2</label>
+                        <RadioGroup v-model="area">
+                            <Radio label="A">
+                                <span>V1</span>
+                            </Radio>
+                            <Radio label="B">
+                                <span>V2</span>
+                            </Radio>
+                        </RadioGroup>
                     </div>
                 </group>
             </div>
@@ -47,7 +59,7 @@ export default {
 		return {
             mobile      : '',
             code        : '',
-            gender      : '男',                // 性别
+            gender      : '0',                 // 性别
             nickName    : '',                  // 昵称
             password    : '',                  // 密码
             safetycode  : '',                  // 安全码
