@@ -56,7 +56,7 @@ export default {
 				{
 					value   : this.$t("discovery.topmenu.bill"),
 					icon    : 'icon-zhangben2',
-					url     : '/discovery/discovery',
+					url     : '/discovery/bill',
 				},
 				{
 					value   : this.$t("discovery.topmenu.ent"),

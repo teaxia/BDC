@@ -1,0 +1,18 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.bill{
+    .select{
+        height: 120px;
+        background:$color-base;
+        color:$font-white;
+        .menu{
+            text-align: center;
+            padding:7px 0;
+        }
+        .active{
+            padding-bottom: 10px;
+            border-bottom: 0.01rem solid $color-active;
+        }
+    }
+}
