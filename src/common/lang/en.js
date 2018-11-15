@@ -12,7 +12,8 @@ export const en = {
         exchange    : 'Exchange Rate',
         Uncertified : 'Uncertified',
         back        : 'back',
-        copy        : 'Copy'
+        copy        : 'Copy',
+        article     : 'Article'
     },
     input:{
         mobile              :   'Phone number',

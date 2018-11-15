@@ -12,7 +12,8 @@ export const zh = {
         exchange            : '兑换率',
         Uncertified         : '未认证',
         back                : '返回',
-        copy                : '复制'
+        copy                : '复制',
+        article             : '文章'
     },
     input:{
         mobile              :   '手机号',

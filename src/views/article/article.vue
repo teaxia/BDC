@@ -1,6 +1,6 @@
 <template>
 	<div class="notice padding-footer" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="系统公告详情"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('global.article')"></x-header>
         <div class="main-container">
 			<div class="title">
                 <h1>{{title}}</h1>
