@@ -32,6 +32,9 @@ import myhome from './views/mine'
     import area from './views/mine/area.vue'                            // 矿区成员
 // 404
 import NotFound from './views/404.vue'
+// 文章详情
+import article from './views/article.vue'
+    import articleview from './views/article/article.vue'
 let routes = [
     {
         path: '/index',
@@ -121,6 +124,17 @@ let routes = [
             { path: '/mine/area', component: area, name: 'area',meta:{isIndex: 3}}
         ]
     },
+    // 文章
+    {
+        path: '/article',
+        redirect: '/article/view',
+        component: article,
+        name: 'article',
+        children: [
+            { path: '/article/view', component: articleview, name: 'mineindex'},
+        ]
+    },
+    // 404
     {
         path: '*',
         hidden: true,

@@ -3,16 +3,16 @@
         <x-header :left-options="{backText:$t('global.back')}" title="系统公告详情"></x-header>
         <div class="main-container">
 			<div class="title">
-            
+                <h1>{{title}}</h1>
             </div>
             <div class="time">
-
+                <h5>{{time}}</h5>
             </div>
-            <div class="content">
+            <div class="content" v-html="content">
 
             </div>
 		</div>
-		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
+		<v-footer :isIndex="this.isIndex"></v-footer>
     </div>
 </template>
 
@@ -20,14 +20,19 @@
 	export default {
 		data() {
 			return {
-				dataList	:	[],
+                dataList	:	[],
+                isIndex     :   '',
+                title       :   '',
+                time        :   '',
+                content     :   ''
 			}
 		},
 		methods: {
 			
 		},
 		mounted() {
-            let id = this.$route.query.id;
+            let id          = this.$route.query.id;
+            this.isIndex    = this.$route.query.index;
 			this.$server.post(
 			'GetNewsbulletinById',
 			{
@@ -36,7 +41,9 @@
 			},
 			).then(data => {
 				if(data){
-                    console.log(data);
+                    this.title   = data.Title;
+                    this.time    = data.Sendtime;
+                    this.content = data.Content; 
                 }
 			})
 		}
