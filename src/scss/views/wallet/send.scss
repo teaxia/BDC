@@ -1,0 +1,13 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.send{
+    .label{
+        float: left;
+        margin-left: 15px;
+    }
+    .radio{
+        float: left;
+        margin-left: 25px;
+    }
+}
