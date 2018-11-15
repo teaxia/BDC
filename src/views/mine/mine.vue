@@ -38,7 +38,7 @@
 							<span>{{$t('mine.menus.website')}}</span>
 						</span>
 					</cell>
-					<cell is-link class="cell-hei">
+					<cell link="/mine/area" is-link class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-tianjiakuangquchengyuan"></i>
 							<span>{{$t('mine.menus.members')}}</span>

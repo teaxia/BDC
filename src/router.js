@@ -11,7 +11,7 @@ import discovery from './views/discovery.vue'
         import btob from  './views/discovery/btob.vue'                      // 币币兑换
         import cash from  './views/discovery/cash.vue'                      // 现金购买
         import recharge from  './views/discovery/recharge.vue'              // 充值
-    import bill from  './views/discovery/bill.vue'              // 兑换BDC
+    import bill from  './views/discovery/bill.vue'                          // 兑换BDC
         
 // 钱包
 import wallet from './views/wallet.vue'
@@ -26,6 +26,7 @@ import application from './views/application.vue'
 import myhome from './views/mine'
     import mine from './views/mine/mine.vue'
     import center from './views/mine/center.vue'
+    import area from './views/mine/area.vue'                            // 矿区成员
 // 404
 import NotFound from './views/404.vue'
 let routes = [
@@ -111,7 +112,8 @@ let routes = [
         },
         children: [
             { path: '/mine/myhome', component: mine, name: 'mineindex',meta:{isIndex: 3}},
-            { path: '/mine/center', component: center, name: 'center',meta:{isIndex: 3}}
+            { path: '/mine/center', component: center, name: 'center',meta:{isIndex: 3}},
+            { path: '/mine/area', component: area, name: 'area',meta:{isIndex: 3}}
         ]
     },
     {

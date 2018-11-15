@@ -1,0 +1,27 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.area{
+    .pb{
+        padding:15px;
+    }
+    .up{
+        height: 80px;
+        line-height: 75px;
+        font-size:32px;
+    }
+    .table{
+        width: 100%;
+        border-collapse:collapse;
+        border: 0.01rem solid $border-line;
+        th{
+            border:$border-line 0.01rem solid;
+            background:$bg-border;
+        }
+        td{
+            border-bottom: 0.01rem solid $border-line;
+            padding:15px 0;
+            text-align: center;
+        }
+    }
+}
