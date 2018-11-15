@@ -14,7 +14,8 @@ export const zh = {
         back                : '返回',
         copy                : '复制',
         article             : '文章',
-        close               : '关闭'
+        close               : '关闭',
+        submit              : '提交',
     },
     input:{
         mobile              :   '手机号',
@@ -41,6 +42,7 @@ export const zh = {
         tips    :   {
             username        : '请输入账号',
             password        : '请输入密码',
+            repassword      : '请再输入一次密码',
             phone           : '请输入手机号',
             forget          : '忘记密码？',
             success         : '登录成功！',
@@ -56,8 +58,10 @@ export const zh = {
         regist          : '注 册',
         logout          : '退出登录',
         password        : '登录密码',
+        repassword      : '重复密码',
         securitypsw     : '安全密码',
         invitationcode  : '邀请码',
+        forget          : '忘记密码',
         area            : '矿区',
         register: {
             username    :   '登录账号：',
@@ -152,7 +156,7 @@ export const zh = {
                 cib     :   '兴业银行',
                 comm    :   '交通银行'
             },
-            tips        :   '注意：申请信用卡必须为实名认证本人'
+            tips        :   '信用卡申请必须用实名认证'
         }
     },
     // 钱包

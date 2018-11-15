@@ -5,6 +5,7 @@ import user from './views/user.vue'
     import verification from './views/user/verification.vue'                //  验证码验证
     import registinfo from './views/user/registinfo.vue'                    //  注册信息填写
     import smglogin from './views/user/smglogin.vue'                        //  短信登陆
+    import forget from './views/user/forget.vue'                            //  忘记密码
 
 // 发现
 import discovery from './views/discovery.vue'
@@ -14,7 +15,7 @@ import discovery from './views/discovery.vue'
         import cash from  './views/discovery/cash.vue'                      // 现金购买
         import recharge from  './views/discovery/recharge.vue'              // 充值
     import bill from  './views/discovery/bill.vue'                          // 兑换BDC
-    import credit from  './views/discovery/credit.vue'                          // 办理信用卡
+    import credit from  './views/discovery/credit.vue'                      // 办理信用卡
         
 // 钱包
 import wallet from './views/wallet.vue'
@@ -61,6 +62,8 @@ let routes = [
             { path: '/user/verification', component: verification, name: 'verification' },
             { path: '/user/registinfo', component: registinfo, name: 'registinfo' },
             { path: '/user/smglogin', component: smglogin, name: 'smglogin' },
+            { path: '/user/forget', component: forget, name: 'forget' },
+            
         ]
     },
     // 发现

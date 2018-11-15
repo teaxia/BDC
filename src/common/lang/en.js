@@ -14,7 +14,8 @@ export const en = {
         back        : 'back',
         copy        : 'Copy',
         article     : 'Article',
-        close       : 'close'
+        close       : 'close',
+        submit      : 'Submit',
     },
     input:{
         mobile              :   'Phone number',
@@ -50,13 +51,16 @@ export const en = {
             verification    : 'Please enter 6 digit verification code',
             setvcode        : 'Get verification code',
             send            : 'Recapture',
+            error           : 'Please fill in the correct username and password'
         },
         login               :   'login',
         regist              :   'regist',
         logout              :   'Logout',
         password            :   'Password',
+        repassword          :   'Repassword',
         securitypsw         :   'Security password',
         invitationcode      :   'Invitation Code',
+        forget              :   'Forget password',
         area                :   'Area',
         register: {
             username    :   'User name：',
