@@ -4,6 +4,7 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
 import VueI18n from 'vue-i18n'                       // 国际化插件
+import math from 'mathjs'
 import App from './App'
 import routes from './router'
 import md5 from 'js-md5'
@@ -53,7 +54,7 @@ Vue.prototype.$server=server;                        // ajax组件
 Vue.prototype.$storage = storage;                    // 本地数据读取
 Vue.prototype.$md5 = md5;                            // md5加密
 Vue.prototype.$jm  = jmCode;                         // 加密字符串
-
+Vue.prototype.$math = math;                          // 精度计算
 const router = new VueRouter({
   routes
 })

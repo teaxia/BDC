@@ -144,10 +144,11 @@ export default {
 			).then(data => {
 				if(data){
                     // 总资产折合算法 X=固定+通证+（游戏/BDC价格）(单位：BDC)
-                    let t = this.gameAssets/data[0].Money;
-                    let x = t+this.fixedAssets+this.actAssets;
+                    //let t = this.gameAssets/data[0].Money;
+                    //let x = this.$math.add(t,this.fixedAssets,this.actAssets);
+                    let x = this.$math.add(this.gameAssets,this.fixedAssets,this.actAssets);
                     this.sum = x.toFixed(8);
-                    this.cny = (x*data[0].Money).toFixed(8)
+                    this.cny = this.$math.eval(x/this.PriceToBDC)
                     this.BDC = data[0].Money;
                     this.currency = data;
 				}
