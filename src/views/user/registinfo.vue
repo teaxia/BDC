@@ -6,7 +6,7 @@
             </div>
             <div class="enterfrom">
                 <group>
-                    <x-input :title="this.$t('user.register.username')" v-model="mobile"></x-input>
+                    <x-input :disabled="true" :title="this.$t('user.register.username')" v-model="mobile"></x-input>
                 </group>
                 <group>
                     <x-input :title="this.$t('user.register.nickname')" v-model="nickName"></x-input>
@@ -25,16 +25,16 @@
                     </div>
                 </group>
                 <group>
-                    <x-input :title="$t('user.type.password')" v-model="password"></x-input>
+                    <x-input :title="$t('user.password')" v-model="password"></x-input>
                 </group>
                 <group>
-                    <x-input :title="$t('user.type.securitypsw')" v-model="safetycode"></x-input>
+                    <x-input :title="$t('user.securitypsw')" v-model="safetycode"></x-input>
                 </group>
                 <group>
-                    <x-input :title="$t('user.type.invitationcode')" v-model="invitation"></x-input>
+                    <x-input :title="$t('user.invitationcode')" v-model="invitation"></x-input>
                 </group>
                 <group>
-                    <div class="label">{{$t('user.type.area')}}</div>
+                    <div class="label">{{$t('user.area')}}</div>
                     <div class="radio">
                         <RadioGroup v-model="area">
                             <Radio label="A">
@@ -83,7 +83,7 @@ export default {
                 }
 
 			this.$server.post(
-			'RegistAccount',
+			'RegistAccountWithLogin',
 			{
 				jm 	 		: this.$md5(this.$jm.jmCode+this.invitation).toUpperCase(),					// 加密方法invitation加密
 				InviteCode  : this.invitation,                                          		        // 邀请码
@@ -94,12 +94,14 @@ export default {
 			},
 			).then(data => {
 				if(data){
-                    // 成功，跳转首页！
-                    // 应该要返回用户的GUID 然后直接跳转到首页
-                    console.log(data);
-                    // this.$router.push({
-                    //     path:"/user/login",
-                    // });
+                    this.$vux.toast.show({
+                        text: this.$t("user.tips.success"),
+                        type: 'success'
+                    })
+                    this.$storage.set('guid',data.Result);
+                    this.$router.push({
+                        path:"/wallet/wallet",
+                    });
 				}
 			})
 		}

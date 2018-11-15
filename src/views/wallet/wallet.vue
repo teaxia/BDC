@@ -52,7 +52,7 @@
                     <flexbox>
                         <flexbox-item :span="11">
                             <ul class="pd-lb20">
-                                <li v-for="v in news" class="ellipsis1">
+                                <li v-for="v in news" class="ellipsis1" @click="onTourl('/wallet/notice')">
                                     <span class="ellipsis1 title fl">{{v.Title}}</span>
                                     <span class="ellipsis1 time fr">{{v.Sendtime}}</span>
                                 </li>
@@ -166,6 +166,11 @@ export default {
                     this.news = data;
 				}
 			})
+        },
+        onTourl(url){
+            this.$router.push({
+                path:url,
+            });
         }
 	},
 	mounted() {

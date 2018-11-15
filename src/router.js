@@ -19,6 +19,9 @@ import wallet from './views/wallet.vue'
     import changeassets from './views/wallet/changeassets.vue'
     import send from './views/wallet/send.vue'
     import receive from './views/wallet/receive.vue'
+    import notice from './views/wallet/notice.vue'                          // 公告列表
+        import noticeview from './views/wallet/noticeview.vue'              // 公告列表
+
 // 应用
 import application from './views/application.vue'
     import appindex from './views/application/appindex.vue'
@@ -86,6 +89,8 @@ let routes = [
             { path: '/wallet/changeassets', component: changeassets, name: 'changeassets',meta:{isIndex: 0}},
             { path: '/wallet/send', component: send, name: 'send',meta:{isIndex: 0}},
             { path: '/wallet/receive', component: receive, name: 'receive',meta:{isIndex: 0}},
+            { path: '/wallet/notice', component: notice, name: 'notice',meta:{isIndex: 0}},
+            { path: '/wallet/notice/view', component: noticeview, name: 'noticeview',meta:{isIndex: 0}},
         ]
     },
     // 应用
