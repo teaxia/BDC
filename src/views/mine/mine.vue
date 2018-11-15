@@ -26,7 +26,7 @@
 		<div class="main-container">
 			<v-grid class="mr100">
 				<group>
-					<cell is-link class="cell-hei">
+					<cell link="/mine/extension" is-link class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-search"></i>
 							<span>{{$t('mine.menus.spread')}}</span>

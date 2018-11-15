@@ -29,6 +29,7 @@ import application from './views/application.vue'
 import myhome from './views/mine'
     import mine from './views/mine/mine.vue'
     import center from './views/mine/center.vue'
+    import extension from './views/mine/extension.vue'
     import area from './views/mine/area.vue'                            // 矿区成员
 // 404
 import NotFound from './views/404.vue'
@@ -121,7 +122,9 @@ let routes = [
         children: [
             { path: '/mine/myhome', component: mine, name: 'mineindex',meta:{isIndex: 3}},
             { path: '/mine/center', component: center, name: 'center',meta:{isIndex: 3}},
-            { path: '/mine/area', component: area, name: 'area',meta:{isIndex: 3}}
+            { path: '/mine/area', component: area, name: 'area',meta:{isIndex: 3}},
+            { path: '/mine/extension', component: extension, name: 'extension',meta:{isIndex: 3}}
+            
         ]
     },
     // 文章
@@ -131,7 +134,7 @@ let routes = [
         component: article,
         name: 'article',
         children: [
-            { path: '/article/view', component: articleview, name: 'mineindex'},
+            { path: '/article/view', component: articleview, name: 'view'},
         ]
     },
     // 404

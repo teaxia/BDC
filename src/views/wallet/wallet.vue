@@ -15,21 +15,21 @@
                             <div class="wallet-band-tit">{{$t("wallet.tips.count")}}</div>
                             <div class="wallet-band-bdc">
                                 <span class="num">{{sum}}</span>
-                                <span class="bdc">BDC</span>
+                                <span class="bdc">(BDC)</span>
                             </div>
                             <div class="wallet-band-rmb">
-                                ≈¥<span>{{cny}}</span>
+                                ≈<span>{{cny}}{{CurrencyCode}}</span>
                             </div>
                         </div>
                         <div class="wallet-band-r fr">
                             <div class="wallet-assets">
-                                {{$t("wallet.tips.capitalassets")}}<br/>{{fixedAssets}}（BDC）
+                                {{$t("wallet.tips.capitalassets")}}<br/>{{fixedAssets}}（BDC）<br/>{{(fixedAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
                             </div>
                             <div class="wallet-assets">
-                                {{$t("wallet.tips.actassets")}}<br/>{{actAssets}}（BDC）
+                                {{$t("wallet.tips.actassets")}}<br/>{{actAssets}}（BDC）<br/>{{(actAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
                             </div>
                             <div class="wallet-assets">
-                                {{$t("wallet.tips.gameassets")}}<br/>{{gameAssets}}（CNY）
+                                {{$t("wallet.tips.gameassets")}}<br/>{{gameAssets}}（BDC）<br/>{{(gameAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
                             </div>
                         </div>
                     </div>
@@ -87,8 +87,9 @@
 </template>
 
 <script>
-
+import { GetCurrency } from '../../common/mixins/getcurrency';
 export default {
+    mixins:[GetCurrency],
 	data() {
 		return {
             fixedAssets :   '',                                                         // 固定资产
@@ -124,6 +125,7 @@ export default {
                         this.$storage.set('Mobile',data.PhoneNo);                           // 手机号
                         this.$storage.set('Sex',data.Sex);                                  // 性别
                         this.$storage.set('ParentName',data.ParentName);                    // 推荐人
+                        this.$storage.set('InviteCode',data.InviteCode);                    // 邀请码
                     }
                     // 进行资产计算请求
                     this.GetCurrencyPrice()
@@ -162,7 +164,6 @@ export default {
             }
 			).then(data => {
 				if(data){
-                    // 总资产折合算法 X=固定+通证+（游戏/BDC价格）(单位：BDC)
                     this.news = data;
 				}
 			})
@@ -181,11 +182,12 @@ export default {
         this.loop = setInterval(()=>{
             this.GetSystemGG();
             this.GetAccount();
-            this.GetCurrencyPrice()
+            this.GetCurrencyPrice();
         },60000)
+        this.getcurren();
     },
     beforeDestroy(){
-        // 删除数据
+        // 清除计时器
         clearInterval(this.loop);
     }
 }
