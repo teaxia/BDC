@@ -12,6 +12,7 @@ import discovery from './views/discovery.vue'
         import cash from  './views/discovery/cash.vue'                      // 现金购买
         import recharge from  './views/discovery/recharge.vue'              // 充值
     import bill from  './views/discovery/bill.vue'                          // 兑换BDC
+    import credit from  './views/discovery/credit.vue'                          // 办理信用卡
         
 // 钱包
 import wallet from './views/wallet.vue'
@@ -20,7 +21,6 @@ import wallet from './views/wallet.vue'
     import send from './views/wallet/send.vue'
     import receive from './views/wallet/receive.vue'
     import notice from './views/wallet/notice.vue'                          // 公告列表
-        import noticeview from './views/wallet/noticeview.vue'              // 公告列表
 
 // 应用
 import application from './views/application.vue'
@@ -76,7 +76,7 @@ let routes = [
             { path: '/discovery/expectinfo/cash', component: cash, name: 'cash',meta:{isIndex: 2}},
             { path: '/discovery/recharge', component: recharge, name: 'recharge',meta:{isIndex: 2}},
             { path: '/discovery/bill', component: bill, name: 'bill',meta:{isIndex: 2}},
-
+            { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
         ]
     },
     // 钱包
@@ -94,7 +94,6 @@ let routes = [
             { path: '/wallet/send', component: send, name: 'send',meta:{isIndex: 0}},
             { path: '/wallet/receive', component: receive, name: 'receive',meta:{isIndex: 0}},
             { path: '/wallet/notice', component: notice, name: 'notice',meta:{isIndex: 0}},
-            { path: '/wallet/notice/view', component: noticeview, name: 'noticeview',meta:{isIndex: 0}},
         ]
     },
     // 应用

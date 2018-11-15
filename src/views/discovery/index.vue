@@ -13,7 +13,7 @@
 				</v-grid>
 			</div>
 			<div class="panel">
-				<div class="dis-grid" v-for="(v,index) in news">
+				<div @click="goto(v.Id)" class="dis-grid" v-for="(v,index) in news" :key="index">
 					<flexbox>
 						<flexbox-item :span="3">
 							<div class="dis-grid-img">
@@ -71,7 +71,7 @@ export default {
 				{
 					value   : this.$t("discovery.topmenu.credit"),
 					icon    : 'icon-banxinyongqia',
-					url     : '/discovery/discovery',
+					url     : '/discovery/credit',
 				}
 			],
 			news:[],
@@ -92,6 +92,12 @@ export default {
 					this.news = data;
 				}
 			})
+		},
+		goto(id){
+			this.$router.push({
+				path    :   '/article/view',
+				query   :   {'id':id,'index':this.$route.meta.isIndex}
+			});
 		}
 	},
 	mounted() {

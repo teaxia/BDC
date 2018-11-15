@@ -32,12 +32,14 @@
 							<span>{{$t('mine.menus.spread')}}</span>
 						</span>
 					</cell>
+					<div @click="go()">
 					<cell is-link class="cell-hei">
-						<span slot="title">
+						<span slot="title" >
 							<i class="iconfont icon-guanwang"></i>
 							<span>{{$t('mine.menus.website')}}</span>
 						</span>
 					</cell>
+					</div>
 					<cell link="/mine/area" is-link class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-tianjiakuangquchengyuan"></i>
@@ -76,6 +78,13 @@
 			</v-grid>
 			<button @click="logout()" class="btn btn-block btn-round mr30"><i class="iconfont icon-send"></i>{{$t('user.logout')}}</button>
 		</div>
+		<div v-if="show" class=fram>
+			<iframe :src="golink" class="iframe" frameborder="0">
+			</iframe>
+			<div class="btnclose">
+				<button @click="close()" class="btn btn-block btn-round mr30">{{$t('global.close')}}</button>
+			</div>
+		</div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -86,7 +95,9 @@ export default {
 		return {
 			nickname	:	'',
 			avatar		:	'',
-			realname    :   ''
+			realname    :   '',
+			golink		:	'',
+			show		:	false,
 		}
 	},
 	methods: {
@@ -102,6 +113,13 @@ export default {
 			this.$router.push({
 				path:"/user/login",
 			});
+		},
+		go(){
+			this.show = true;
+			this.golink = 'http://belden-bdc.com';
+		},
+		close(){
+			this.show = false;
 		}
 	},
 	mounted() {

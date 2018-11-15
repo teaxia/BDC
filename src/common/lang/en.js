@@ -13,7 +13,8 @@ export const en = {
         Uncertified : 'Uncertified',
         back        : 'back',
         copy        : 'Copy',
-        article     : 'Article'
+        article     : 'Article',
+        close       : 'close'
     },
     input:{
         mobile              :   'Phone number',
@@ -140,6 +141,17 @@ export const en = {
             end         :   'End time',
             people      :   'People',
             money       :   'Money'
+        },
+        credit:{
+            title       :   'Credit card',
+            bank:{
+                cmb     :   'CMB bank',
+                cmbc    :   'CMBC bank',
+                spdb    :   'SPDB bank',
+                cib     :   'CIB  bank',
+                comm    :   'COMM bank'
+            },
+            tips        :   'Tips：Application for credit card must be authenticated by real name.'
         }
     },
     // 钱包

@@ -21,13 +21,14 @@ export default {
           icon    : 'icon-qianbao',
           acicon  : 'icon-qianbao_mianxing',
           url     : '/wallet/wallet',
-          index : 0
+          index   : 0
         },
         {
           value   : this.$t("menu.application"),
           icon    : 'icon-yingyongxianxing',
           acicon  : 'icon-yingyongmianxing',
-          url     : '/app/index',
+          //url     : '/app/index',
+          url     : '',
           index : 1
         },
         {

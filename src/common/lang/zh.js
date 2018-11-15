@@ -13,7 +13,8 @@ export const zh = {
         Uncertified         : '未认证',
         back                : '返回',
         copy                : '复制',
-        article             : '文章'
+        article             : '文章',
+        close               : '关闭'
     },
     input:{
         mobile              :   '手机号',
@@ -141,6 +142,17 @@ export const zh = {
             end         :   '结束时间',
             people      :   '人数',
             money       :   '持币'
+        },
+        credit:{
+            title       :   '信用卡办理',
+            bank:{
+                cmb     :   '招商银行',
+                cmbc    :   '民生银行',
+                spdb    :   '浦发银行',
+                cib     :   '兴业银行',
+                comm    :   '交通银行'
+            },
+            tips        :   '注意：申请信用卡必须为实名认证本人'
         }
     },
     // 钱包
