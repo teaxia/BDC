@@ -22,7 +22,7 @@
 			</div>
 		</div>
 		<div class="mr20 v-div">
-			<span class="fl tips">{{ $t("user.type.msg") }}</span>
+		 	<router-link to="/user/smglogin"><span class="fl tips">{{ $t("user.type.msg") }}</span></router-link>
 			<span class="fr tips">{{ $t("user.tips.forget") }}</span>
 		</div>
 		<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr10">{{ $t("user.login") }}</button>

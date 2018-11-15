@@ -4,6 +4,8 @@ import user from './views/user.vue'
     import login from './views/user/login.vue'                              //  登陆
     import verification from './views/user/verification.vue'                //  验证码验证
     import registinfo from './views/user/registinfo.vue'                    //  注册信息填写
+    import smglogin from './views/user/smglogin.vue'                        //  短信登陆
+
 // 发现
 import discovery from './views/discovery.vue'
     import discoveryindex from './views/discovery/index.vue'                // 发现首页
@@ -58,6 +60,7 @@ let routes = [
             { path: '/user/login', component: login, name: 'login' },
             { path: '/user/verification', component: verification, name: 'verification' },
             { path: '/user/registinfo', component: registinfo, name: 'registinfo' },
+            { path: '/user/smglogin', component: smglogin, name: 'smglogin' },
         ]
     },
     // 发现
