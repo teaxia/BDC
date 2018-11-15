@@ -11,7 +11,8 @@ export const en = {
         price       : 'Price',
         exchange    : 'Exchange Rate',
         Uncertified : 'Uncertified',
-        back        : 'back'
+        back        : 'back',
+        copy        : 'Copy'
     },
     input:{
         mobile              :   'Phone number',
@@ -197,6 +198,21 @@ export const en = {
             feedback        :   'Feedback',
             realname        :   'Authentication',
             setting         :   'Setting'
-        }
+        },
+        area:{
+            title           :   'Area',
+            levelup         :   'Up',
+            enter           :   'Search....',
+            nickname        :   'Nick name',
+            invitecode      :   'Invite Code',
+            v1count         :   'V1 Count',
+            v1bdc           :   'V1 BDC',
+            v2count         :   'V2 Count',
+            v2bdc           :   'V2 BDC',
+            groupcount      :   'Group count',
+            groupbdc        :   'Group BDC',
+            edit            :   'Operation',
+            area            :   'Area',
+        },
     }
 }

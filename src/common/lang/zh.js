@@ -11,7 +11,8 @@ export const zh = {
         price               : '价格',
         exchange            : '兑换率',
         Uncertified         : '未认证',
-        back                : '返回'
+        back                : '返回',
+        copy                : '复制'
     },
     input:{
         mobile              :   '手机号',
@@ -198,6 +199,21 @@ export const zh = {
             feedback        :   '意见反馈',
             realname        :   '实名认证',
             setting         :   '设置'
-        }
+        },
+        area:{
+            title           :   '矿区',
+            levelup         :   '上一级',
+            enter           :   '输入矿区成员',
+            nickname        :   '昵称',
+            invitecode      :   '邀请码',
+            v1count         :   'V1矿区人数',
+            v1bdc           :   'V1矿区BDC',
+            v2count         :   'V2矿区人数',
+            v2bdc           :   'V2矿区BDC',
+            groupcount      :   '团队总人数',
+            groupbdc        :   '团队BDC',
+            edit            :   '操作',
+            area            :   '矿区',
+        },
     }
 };
