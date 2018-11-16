@@ -36,8 +36,8 @@
                         <tr v-for="(v,index) in dataList" :key="index">
                             <td @click="query(v.AccountId)">{{v.Area}}</td>
                             <td @click="query(v.AccountId)">{{v.NickName}}</td>
-                            <td @click="query(v.AccountId)">{{v.InviteCode}}</td>
                             <td @click="query(v.AccountId)">{{v.TotalAssets}}</td>
+                            <td @click="query(v.AccountId)">{{v.InviteCode}}</td>
                             <td><span v-clipboard:copy="v.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</span></td>
                         </tr>
                     </tbody>
@@ -60,10 +60,10 @@
                         title: this.$t('mine.area.nickname'),
                     },
                     {
-                        title: this.$t('mine.area.invitecode'),
+                        title: 'BDC',
                     },
                     {
-                        title: 'BDC',
+                        title: this.$t('mine.area.invitecode'),
                     },
                     {
                         title: this.$t('mine.area.edit'),

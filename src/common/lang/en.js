@@ -220,7 +220,7 @@ export const en = {
             title           :   'Area',
             levelup         :   'Up',
             enter           :   'Search....',
-            nickname        :   'Nick name',
+            nickname        :   'User name',
             invitecode      :   'Invite Code',
             v1count         :   'V1 Count',
             v1bdc           :   'V1 BDC',

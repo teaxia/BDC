@@ -197,6 +197,11 @@ export default {
 
 			},
 			).then(data => {
+                this.$vux.toast.show({
+                    text: this.$t('global.success'),
+                    type: 'success'
+                })
+                this.GetAccount();
 				this.isHandling = false;
 			})
         }

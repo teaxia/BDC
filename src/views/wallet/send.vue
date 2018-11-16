@@ -26,13 +26,18 @@
 					</x-input>
                 </group>
 				<group>
+                    <x-input class="test" type="password" title="安全密码" :show-clear="false" v-model="psw" placeholder="请输入安全密码">
+						<div slot="right" class="math">≈{{mathnum}}{{CurrencyCode}}</div>
+					</x-input>
+                </group>
+				<group>
                     <div class="label">类别</div>
                     <div class="radio">
                         <RadioGroup v-model="type">
-                            <Radio label="A">
+                            <Radio label="2">
                                 <span>固定资产</span>
                             </Radio>
-                            <Radio label="B">
+                            <Radio label="4">
                                 <span>通证资产</span>
                             </Radio>
                         </RadioGroup>
@@ -57,7 +62,8 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 				bdcaddress  :   '',
 				num			:	'',
 				mathnum		:	'',
-				type		:	'',
+				type		:	'2',
+				psw			:	'',
 			}
 		},
 		watch:{
@@ -70,7 +76,19 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 		},
 		methods: {
 			doSubmit(){
-
+				this.$server.post(
+				'TransferAssets',
+				{
+					guid 				:	this.$storage.get('guid'),
+					Money				:	this.num,
+					intTransferType		:	this.type,
+					MoneyPwd			:	this.psw
+				},
+				).then(data => {
+					if(data){
+						console.log(data);
+					}
+				})
 			},
 			scan(){
 				// 创建扫描控件
