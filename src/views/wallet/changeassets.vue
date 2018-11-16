@@ -193,7 +193,7 @@ export default {
                 TransferType    :   this.type,
                 MoneyPwd        :   this.password,
                 dhl             :   this.DHL,
-                currencyPrice   :   this.matchprice
+                currencyPrice   :   this.PriceBDC
 
 			},
 			).then(data => {

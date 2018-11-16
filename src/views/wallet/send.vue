@@ -77,12 +77,14 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 		methods: {
 			doSubmit(){
 				this.$server.post(
-				'TransferAssets',
+				'TransferAccount',
 				{
 					guid 				:	this.$storage.get('guid'),
+					RechargeCode		:	this.bdcaddress,
 					Money				:	this.num,
-					intTransferType		:	this.type,
-					MoneyPwd			:	this.psw
+					BusinessType		:	this.type,
+					MoneyPwd			:	this.psw,
+					Remakes				:	''
 				},
 				).then(data => {
 					if(data){
@@ -118,6 +120,7 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 					// 获得code
 					result = result.replace(/\n/g, '')
 					that.bdcaddress = result
+					alert(result);
 				}
 			},
 			// 开始扫描
