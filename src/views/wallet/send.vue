@@ -17,7 +17,7 @@
 			<div class="enterfrom mr100">
                 <group>
                     <x-input class="test" title="对方地址" :show-clear="false" placeholder="输入/长按粘贴BDC账户" v-model="bdcaddress">
-						<div slot="right" class="scan" @click="startScan()"><i class="iconfont icon-scanning"></i></div>
+						<div slot="right" class="scan" @click="startRecognize()"><i class="iconfont icon-scanning"></i></div>
 					</x-input>
                 </group>
                 <group>
@@ -44,14 +44,20 @@
                     </div>
                 </group>
 				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">发送</button>
+				<button @click="startRecognize()" class="btn btn-block btn-default btn-round mr50">开始扫描</button>
             </div>
+		</div>
+		<div id="bcid" v-if="showscan">
+			<div style="height:100%"></div>
+			<p class="tip">...载入中...</p>
 		</div>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
 	</div>
 </template>
 
-<script>
+<script type='text/ecmascript-6'>
 import { GetCurrency } from '../../common/mixins/getcurrency';
+let scan = null;
 	export default {
 		mixins:[GetCurrency],
 		data() {
@@ -64,15 +70,13 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 				mathnum		:	'',
 				type		:	'2',
 				psw			:	'',
+				showscan	:	false,
 			}
 		},
 		watch:{
 			num(){
 				this.mathnum = (this.num*this.PriceToBDC).toFixed(4)
 			},
-			bdcaddress(){
-				
-			}
 		},
 		methods: {
 			doSubmit(){
@@ -84,7 +88,7 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 					Money				:	this.num,
 					BusinessType		:	this.type,
 					MoneyPwd			:	this.psw,
-					Remakes				:	''
+					Remakes				:	'',
 				},
 				).then(data => {
 					if(data){
@@ -92,51 +96,48 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 					}
 				})
 			},
-			scan(){
-				// 创建扫描控件
-				let that = this
-      			if (!window.plus) return
-				// eslint-disable-next-line
-				scan = new plus.barcode.Barcode('bcid')
-				scan.onmarked = onmarked
+			//创建扫描控件
+			startRecognize() {
+				this.showscan = true;
+				let that = this;
+				if (!window.plus) return;
+				scan = new plus.barcode.Barcode('bcid');
+				scan.onmarked = onmarked;
 				function onmarked(type, result, file) {
 					switch (type) {
-					// eslint-disable-next-line
-					case plus.barcode.QR:
-						type = 'QR'
-						break
-					// eslint-disable-next-line
-					case plus.barcode.EAN13:
-						type = 'EAN13'
-						break
-					// eslint-disable-next-line
-					case plus.barcode.EAN8:
-						type = 'EAN8'
-						break
-					default:
-						type = '其它' + type
-						break
+						case plus.barcode.QR:
+						type = 'QR';
+						break;
+						case plus.barcode.EAN13:
+						type = 'EAN13';
+						break;
+						case plus.barcode.EAN8:
+						type = 'EAN8';
+						break;
+						default:
+						type = '其它' + type;
+						break;
 					}
-					// 获得code
-					result = result.replace(/\n/g, '')
-					that.bdcaddress = result
-					alert(result);
+					result = result.replace(/\n/g, '');
+					that.bdcaddress = result;
+					that.closeScan();
+					that.showscan = false;
 				}
 			},
-			// 开始扫描
+			//开始扫描
 			startScan() {
-				if (!window.plus) return
-				scan.start()
+				if (!window.plus) return;
+				scan.start();
 			},
-			// 关闭扫描
+			//关闭扫描
 			cancelScan() {
-				if (!window.plus) return
-				scan.cancel()
+				if (!window.plus) return;
+				scan.cancel();
 			},
-			// 关闭条码识别控件
+			//关闭条码识别控件
 			closeScan() {
-				if (!window.plus) return
-				scan.close()
+				if (!window.plus) return;
+				scan.close();
 			}
 		},
 		mounted() {
@@ -144,6 +145,7 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
             this.avatar   = this.$storage.get('HeadImg');
 			this.realname = (this.$storage.get('Realname'))?this.$storage.get('Realname'):this.$t('global.Uncertified');
 			this.getcurren();
+			this.startRecognize();
 		}
 	}
 
