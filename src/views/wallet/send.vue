@@ -45,6 +45,7 @@
                 </group>
 				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
 				<button @click="startRecognize()" class="btn btn-block btn-default btn-round mr50">开始扫描</button>
+				<button @click="startScan()" class="btn btn-block btn-default btn-round mr50">开2描</button>
             </div>
 		</div>
 		<div id="bcid" v-if="showscan">

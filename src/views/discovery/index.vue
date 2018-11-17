@@ -61,7 +61,7 @@ export default {
 				{
 					value   : this.$t("discovery.topmenu.ent"),
 					icon    : 'icon-xiuxianyule',
-					url     : '/discovery/discovery',
+					url     : '/discovery/index',
 				},
 				{
 					value   : this.$t("discovery.topmenu.recharge"),
