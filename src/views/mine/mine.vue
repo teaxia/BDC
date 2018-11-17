@@ -4,19 +4,19 @@
 			<v-grid class="mine-top-menu">
 				<flexbox>
 					<flexbox-item :span="3">
-						<div class="dis-grid-img" @click="onTourl('/mine/center')">
+						<div class="dis-grid-img">
 							<img v-if="avatar&&avatar!='null'" class="avatar" :src="avatar" />
 							<i v-else class="avatar iconfont icon-touxiang"></i>
 						</div>
 					</flexbox-item>
 					<flexbox-item :span="8">
-						<div class="mine-grid-content" @click="onTourl('/mine/center')">
+						<div class="mine-grid-content">
 							<div class="nickname">{{nickname}}</div>
 							<div class="userid">{{realname}}</div>
 						</div>
 					</flexbox-item>
 					<flexbox-item>
-						<div class="mine-grid-content" @click="onTourl('/mine/center')">
+						<div class="mine-grid-content">
 							<i class="iconfont icon-arrow-right"></i>
 						</div>
 					</flexbox-item>
@@ -68,7 +68,7 @@
 							<span>{{$t('mine.menus.realname')}}</span>
 						</span>
 					</cell>
-					<cell is-link class="cell-hei">
+					<cell is-link link="/mine/setting" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-shezhi"></i>
 							<span>{{$t('mine.menus.setting')}}</span>

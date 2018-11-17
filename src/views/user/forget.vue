@@ -10,6 +10,9 @@
 				</div>
 			</div>
             <div class="enterfrom">
+				<group>
+                    <x-input class="test" :title="$t('user.register.username')" required :placeholder="$t('user.tips.username')" v-model="username"></x-input>
+                </group>
                 <group>
                     <x-input class="test" title="+86" required mask="999 9999 9999" :max="max" :placeholder="$t('user.tips.phone')" v-model="mobile"></x-input>
                 </group>
@@ -48,6 +51,7 @@ export default {
 			clock	 : '',
 			password : '',
 			repassword : '',
+			username	:	'',
 		}
 	},
 	watch:{
@@ -69,12 +73,13 @@ export default {
 				})
 				return ;
 			}
+			let phone = this.mobile.replace(/\s+/g,"");
 			this.$server.post(
             'EditPwdByPhoneCode',
             {
-                jm 	 		: this.$md5(this.$jm.jmCode+this.code).toUpperCase(),			// 加密方法Key+Phone_No加密															// 注册传空
-				Phone_No	: this.mobile.replace(/\s+/g,""),
-				AccountName : this.mobile.replace(/\s+/g,""),
+                jm 	 		: this.$md5(this.$jm.jmCode+this.username+phone).toUpperCase(),			// 加密方法Key+Phone_No加密															// 注册传空
+				Phone_No	: phone,
+				AccountName : this.username,
                 phoneCode   : this.code,
 				lv   		: this.lang,
 				type		: 'dlmm',
@@ -127,7 +132,11 @@ export default {
 	},
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
-	}
+	},
+    beforeDestroy(){
+        // 清除计时器
+        clearInterval(this.clock);
+    }
 }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
 	<div class="extension padding-footer" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="推广"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.extension.tg')"></x-header>
         <div class="main-container">
             <div class="w-cont">
                 <div class="center-avatar">
@@ -8,7 +8,7 @@
                     <i v-else class="avatar iconfont icon-touxiang"></i>
                 </div>
                 <div class="invitecode">
-                    <i class="iconfont icon-feiji"></i>我的邀请码<br/>
+                    <i class="iconfont icon-feiji"></i>{{$t('mine.extension.invitecode')}}<br/>
                     {{InviteCode}}
                 </div>
                 <div class="ercode">

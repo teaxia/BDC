@@ -16,7 +16,9 @@ export const zh = {
         article             : '文章',
         close               : '关闭',
         submit              : '提交',
-        ok                  : '确认'
+        ok                  : '确认',
+        notice              : '系统公告',
+        msg                 : '短信登陆',
     },
     input:{
         mobile              :   '手机号',
@@ -204,6 +206,9 @@ export const zh = {
         // 发送
         send:{
             title           :   '发送',
+            dfaddress       :   '对方地址',
+            num             :   '发送数额',
+            class           :   '类别',
         }
     },
     // 应用
@@ -239,5 +244,30 @@ export const zh = {
             edit            :   '操作',
             area            :   '矿区',
         },
+        setting:{
+            settile         :   '设置',
+            editpsw         :   '修改登陆密码',
+            safepsw         :   '修改安全密码',
+            language        :   '语言选择',
+            price           :   '货币选择',
+            oldpsw          :   '旧密码',
+            newpsw          :   '新密码',
+            confirmpsw      :   '确认密码',
+            english         :   'english',
+            chinaese        :   '中文',
+            rmb             :   '人民币',
+            usd             :   '美元',
+            tips:{
+                oldpsw          :   '请输入旧密码',
+                newpsw          :   '请输入新密码',
+                confirmpsw      :   '请再输入一次密码',
+                repsw           :   '新密码与旧密码必须填写',
+                notpsw          :   '两次输入的密码不一致'
+            }
+        },
+        extension:{
+            tg          :       '推广',
+            invitecode  :       '我的邀请码',
+        }
     }
 };

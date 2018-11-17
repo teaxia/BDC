@@ -16,34 +16,34 @@
 			</v-grid>
 			<div class="enterfrom mr100">
                 <group>
-                    <x-input class="test" title="对方地址" :show-clear="false" placeholder="输入/长按粘贴BDC账户" v-model="bdcaddress">
+                    <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" placeholder="输入/长按粘贴BDC账户" v-model="bdcaddress">
 						<div slot="right" class="scan" @click="startRecognize()"><i class="iconfont icon-scanning"></i></div>
 					</x-input>
                 </group>
                 <group>
-                    <x-input class="test" title="发送数额" :show-clear="false" v-model="num" placeholder="最小发送数量0.0001">
+                    <x-input class="test" :title="$t('wallet.send.num')" :show-clear="false" v-model="num" placeholder="最小发送数量0.0001">
 						<div slot="right" class="math">≈{{mathnum}}{{CurrencyCode}}</div>
 					</x-input>
                 </group>
 				<group>
-                    <x-input class="test" type="password" title="安全密码" :show-clear="false" v-model="psw" placeholder="请输入安全密码">
+                    <x-input class="test" type="password" :title="$t('wallet.tips.safetycode')" :show-clear="false" v-model="psw" placeholder="请输入安全密码">
 						<div slot="right" class="math">≈{{mathnum}}{{CurrencyCode}}</div>
 					</x-input>
                 </group>
 				<group>
-                    <div class="label">类别</div>
+                    <div class="label">{{$t('wallet.send.class')}}</div>
                     <div class="radio">
                         <RadioGroup v-model="type">
                             <Radio label="2">
-                                <span>固定资产</span>
+                                <span>{{$t('wallet.tips.capitalassets')}}</span>
                             </Radio>
                             <Radio label="4">
-                                <span>通证资产</span>
+                                <span>{{$t('wallet.tips.actassets')}}</span>
                             </Radio>
                         </RadioGroup>
                     </div>
                 </group>
-				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">发送</button>
+				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
 				<button @click="startRecognize()" class="btn btn-block btn-default btn-round mr50">开始扫描</button>
             </div>
 		</div>

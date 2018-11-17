@@ -35,6 +35,8 @@
         .wallet-band-l{
             padding-left: 20px;
             margin-top:30px;
+            width:320px;
+            white-space:normal;
             .wallet-band-tit{
                 color:$font-empty;
                 font-size:34px;
@@ -47,6 +49,7 @@
             }
             .wallet-band-rmb{
                 font-size:28px;
+                text-overflow:nowrap;
             }
         }
     }

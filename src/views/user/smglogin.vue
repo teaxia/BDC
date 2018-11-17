@@ -1,6 +1,6 @@
 <template>
 	<div class="regist" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" title="短信登陆"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('global.msg')"></x-header>
         <div class="pd50">
             <div class="v-flex v-flex-between">
 				<div>

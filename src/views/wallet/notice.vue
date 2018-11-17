@@ -1,6 +1,6 @@
 <template>
 	<div class="notice padding-footer" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="系统公告"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('global.notice')"></x-header>
         <div class="main-container">
 			<v-grid class="mr30" v-for="(v,index) in dataList" :key="index">
                 <div class="systeamgg" @click="goto(v.Id)">

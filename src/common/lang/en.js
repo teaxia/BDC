@@ -16,7 +16,9 @@ export const en = {
         article     : 'Article',
         close       : 'close',
         submit      : 'Submit',
-        ok          : 'OK'
+        ok          : 'OK',
+        notice      : 'Notice',
+        msg         : 'Msg login',
     },
     input:{
         mobile              :   'Phone number',
@@ -202,6 +204,9 @@ export const en = {
         // 发送
         send:{
             title           :   'Send',
+            dfaddress       :   'address',
+            num             :   'num',
+            class           :   'category',
         }
     },
     // 应用
@@ -237,5 +242,30 @@ export const en = {
             edit            :   'Operation',
             area            :   'Area',
         },
+        setting:{
+            settile         :   'Setting',
+            editpsw         :   'Modify login password',
+            safepsw         :   'Modify security password',
+            language        :   'language',
+            price           :   'currency',
+            oldpsw          :   'Old password',
+            newpsw          :   'New password',
+            confirmpsw      :   'Confirm the password',
+            english         :   'english',
+            chinaese        :   '中文',
+            rmb             :   'RMB',
+            usd             :   'USD',
+            tips:{
+                oldpsw          :   'Please input the old password',
+                newpsw          :   'Please enter a new password',
+                confirmpsw      :   'Please enter the password again',
+                repsw           :   'New password and old password must be filled in',
+                notpsw          :   'The password entered two times is inconsistent'
+            }
+        },
+        extension:{
+            tg          :       'Extension',
+            invitecode  :       'InviteCode',
+        }
     }
 }

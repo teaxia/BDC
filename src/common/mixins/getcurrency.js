@@ -19,6 +19,8 @@ export const GetCurrency = {
                 }else if(lang=="en"){
                     var cy = "USD"
                 }
+            }else{
+                cy = currency
             }
             this.$server.post(
             'GetCountyCurrency',

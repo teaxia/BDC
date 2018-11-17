@@ -164,7 +164,7 @@ export default {
                     //let x = this.$math.add(t,this.fixedAssets,this.actAssets);
                     let x = this.$math.add(this.gameAssets,this.fixedAssets,this.actAssets);
                     this.sum = x.toFixed(8);
-                    this.cny = this.$math.eval(x/this.PriceToBDC)
+                    this.cny = (this.$math.eval(x/this.PriceToBDC)).toFixed(8)
                     this.BDC = data[0].Money;
                     this.currency = data;
 				}

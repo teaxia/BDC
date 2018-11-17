@@ -35,6 +35,12 @@ import myhome from './views/mine'
     import extension from './views/mine/extension.vue'
     import area from './views/mine/area.vue'                            // 矿区成员
     import question from './views/mine/question.vue'                    // 常见问题
+    import setting from './views/mine/setting.vue'                      // 设置
+        import editpsw from './views/mine/editpsw.vue'                  // 密码
+        import safepsw from './views/mine/safepsw.vue'                  // 安全密码
+        import language from './views/mine/language.vue'                // 语言
+        import price from './views/mine/price.vue'                      // 货币
+    
 // 404
 import NotFound from './views/404.vue'
 // 文章详情
@@ -130,7 +136,13 @@ let routes = [
             { path: '/mine/center', component: center, name: 'center',meta:{isIndex: 3}},
             { path: '/mine/area', component: area, name: 'area',meta:{isIndex: 3}},
             { path: '/mine/extension', component: extension, name: 'extension',meta:{isIndex: 3}},
-            { path: '/mine/question', component: question, name: 'question',meta:{isIndex: 3}}
+            { path: '/mine/question', component: question, name: 'question',meta:{isIndex: 3}},
+            { path: '/mine/setting', component: setting, name: 'setting',meta:{isIndex: 3}},
+                { path: '/mine/editpsw', component: editpsw, name: 'editpsw',meta:{isIndex: 3}},
+                { path: '/mine/safepsw', component: safepsw, name: 'safepsw',meta:{isIndex: 3}},
+                { path: '/mine/language', component: language, name: 'language',meta:{isIndex: 3}},
+                { path: '/mine/price', component: price, name: 'price',meta:{isIndex: 3}},
+                
             
         ]
     },
