@@ -27,10 +27,10 @@
         <div class="mr30">
             <flexbox class="pb time">
                 <flexbox-item>
-                    <DatePicker @on-change="startime" type="date" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
+                    <DatePicker @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
                 </flexbox-item>
                 <flexbox-item>
-                    <DatePicker @on-change="endtime" type="date" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
+                    <DatePicker @on-change="endtime" type="date"  v-model="enddate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
                 </flexbox-item>
             </flexbox>
         </div>
@@ -79,6 +79,8 @@
                 start       :   '',
                 dataList    :   [],
                 end         :   '',
+                stardate    :   '',
+                enddate     :   '',
                 isok        :   false,
 			}
         },
@@ -125,7 +127,20 @@
                 this.type  = type;
             },
             startime(e){
-                this.start = e;
+                // 如果结束时间大于选择时间，则结束时间与选择时间一致
+                let str = e.replace(/\//g,"");
+                let end = this.end.replace(/\//g,"");
+                if(str>end){
+                    this.start        =  this.end;
+                    this.stardate     =  this.end;
+                }else{
+                    this.start        =  e;
+                    this.stardate     =  e;
+                }
+                // 限制某一项日期为空的话，不操作
+                if(this.start==''||this.end==''){
+                    return;
+                }
                 if(this.type<=4){
                     this.query();
                 }else if(this.type=='5'||this.type=='6'){
@@ -135,7 +150,19 @@
                 }
             },
             endtime(e){
+                // 如果结束时间大于选择时间，则结束时间与选择时间一致
+                let end = e.replace(/\//g,"");
+                let str = this.start.replace(/\//g,"");
+                if(str>end){
+                    this.start        =  e;
+                    this.stardate     =  e;
+                }
                 this.end = e;
+                this.enddate = e;
+                // 限制某一项日期为空的话，不操作
+                if(this.start==''||this.end==''){
+                    return;
+                }
                 if(this.type<=4){
                     this.query();
                 }else if(this.type=='5'||this.type=='6'){
@@ -199,6 +226,15 @@
             // 初始化数据
             this.class="支出";
             this.type = 1;
+            // 获取今天日期
+            let date = new Date();
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            let day = date.getDate();
+            this.stardate = (year+'/'+month+'/'+day);
+            this.enddate = (year+'/'+month+'/'+day);
+            this.start = (year+'/'+month+'/'+day);
+            this.end = (year+'/'+month+'/'+day);
 		}
 	}
 
