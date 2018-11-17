@@ -34,6 +34,7 @@ import myhome from './views/mine'
     import center from './views/mine/center.vue'
     import extension from './views/mine/extension.vue'
     import area from './views/mine/area.vue'                            // 矿区成员
+    import question from './views/mine/question.vue'                    // 常见问题
 // 404
 import NotFound from './views/404.vue'
 // 文章详情
@@ -128,7 +129,8 @@ let routes = [
             { path: '/mine/myhome', component: mine, name: 'mineindex',meta:{isIndex: 3}},
             { path: '/mine/center', component: center, name: 'center',meta:{isIndex: 3}},
             { path: '/mine/area', component: area, name: 'area',meta:{isIndex: 3}},
-            { path: '/mine/extension', component: extension, name: 'extension',meta:{isIndex: 3}}
+            { path: '/mine/extension', component: extension, name: 'extension',meta:{isIndex: 3}},
+            { path: '/mine/question', component: question, name: 'question',meta:{isIndex: 3}}
             
         ]
     },

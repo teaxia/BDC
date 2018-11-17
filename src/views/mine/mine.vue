@@ -50,7 +50,7 @@
 			</v-grid>
 			<v-grid class="mr40">
 				<group>
-					<cell is-link class="cell-hei">
+					<cell is-link link="/mine/question" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-changjianwenti"></i>
 							<span>{{$t('mine.menus.question')}}</span>
