@@ -16,6 +16,7 @@ export const en = {
         article     : 'Article',
         close       : 'close',
         submit      : 'Submit',
+        ok          : 'OK'
     },
     input:{
         mobile              :   'Phone number',
@@ -172,6 +173,11 @@ export const en = {
             transfor        :   'Transformation',
             inputcode       :   'Plase entry Safety code',
             btntransfor     :   'Transformation',
+            lock            :   'Lock',
+            lastdate        :   'Last Date',
+            lockenddate     :   'Lock end date',
+            lockdays        :   'Lock days',
+            assetsview      :   'Assets',
         },
         transfor:{
             type1           :   'Capital To Act',

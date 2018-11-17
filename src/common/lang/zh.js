@@ -16,6 +16,7 @@ export const zh = {
         article             : '文章',
         close               : '关闭',
         submit              : '提交',
+        ok                  : '确认'
     },
     input:{
         mobile              :   '手机号',
@@ -173,6 +174,12 @@ export const zh = {
             transfor        :   '转换',
             inputcode       :   '请输入安全码',
             btntransfor     :   '立即转换',
+            lock            :   '锁仓情况',
+            lastdate        :   '最后存入时间',
+            lockenddate     :   '锁仓结束时间',
+            lockdays        :   '锁仓倒计时',
+            assetsview      :   '固定资产详情',
+            
         },
         transfor:{
             type1           :   '通证转固定',

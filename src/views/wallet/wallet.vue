@@ -23,7 +23,7 @@
                         </div>
                         <div class="wallet-band-r fr">
                             <div class="wallet-assets">
-                                {{$t("wallet.tips.capitalassets")}}<br/>{{fixedAssets}}（BDC）<br/>{{(fixedAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
+                                {{$t("wallet.tips.capitalassets")}}<span @click="showclock()" class="lock fr">{{$t("wallet.tips.lock")}}</span><br/>{{fixedAssets}}（BDC）<br/>{{(fixedAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
                             </div>
                             <div class="wallet-assets">
                                 {{$t("wallet.tips.actassets")}}<br/>{{actAssets}}（BDC）<br/>{{(actAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
@@ -54,7 +54,7 @@
                             <ul class="pd-lb20">
                                 <li v-for="v in news" class="ellipsis1" @click="onTourl('/wallet/notice')">
                                     <span class="ellipsis1 title fl">{{v.Title}}</span>
-                                    <span class="ellipsis1 time fr">{{v.Sendtime}}</span>
+                                    <span class="ellipsis1 time fr">{{(v.Sendtime).substring(0,10)}}</span>
                                 </li>
                             </ul>
                         </flexbox-item>
@@ -82,6 +82,20 @@
                 </v-grid>
             </div>
 		</div>
+        <Modal v-model="showbox" cancel-text="" class-name="vertical-center-modal" :ok-text="$t('global.ok')" title="">
+            <h2>{{$t("wallet.tips.lock")}}</h2>
+            <div>{{$t("wallet.tips.lastdate")}}：<span class="fr">{{clockdata.LastDate}}</span></div>
+            <div>{{$t("wallet.tips.lockenddate")}}：<span class="fr">{{clockdata.LockEndDate}}</span></div>
+            <div>{{$t("wallet.tips.lockdays")}}：<span class="fr">{{clockdata.LockDays}}</span></div>
+            <h2>{{$t("wallet.tips.assetsview")}}</h2>
+            <table class="table">
+                <tr v-for="(v,index) in clockdata.List" :key="index">
+                    <td>+{{v.Money}}</td>
+                    <td>{{v.MoneyAfter}}</td>
+                    <td>{{(v.CreateTime).substring(0,10)}}</td>
+                </tr>
+            </table>
+        </Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -100,7 +114,9 @@ export default {
             currency    :   [],
             BDC         :   '0',                                                        // BDC的计算价格
             loop        :   '',                                                         // 定时器
-            news        :   []                                                          // 系统公告
+            news        :   [],                                                         // 系统公告
+            showbox     :   false,
+            clockdata   :   '',
 		}
 	},
 	methods: {
@@ -173,7 +189,24 @@ export default {
             this.$router.push({
                 path:url,
             });
-        }
+        },
+        showclock(){
+            this.$server.post(
+			'GetFixedAssetsInfo',
+			{
+                guid : this.$storage.get('guid'),
+                Count: 2
+			}
+			).then(data => {
+				if(data){
+                    this.clockdata = data;
+                    this.showbox = true;
+				}
+			})
+        },
+        ok(){
+            this.$Message.info('Clicked ok');
+        },
 	},
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';

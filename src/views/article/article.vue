@@ -6,7 +6,7 @@
                 <h1>{{title}}</h1>
             </div>
             <div class="time">
-                <h5>{{time}}</h5>
+                <h5>{{time.substring(0,10)}}</h5>
             </div>
             <div class="content" v-html="content">
 

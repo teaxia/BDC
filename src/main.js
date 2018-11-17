@@ -20,7 +20,7 @@ import vgrid from './components/vgrid.vue'
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
-import { DatePicker,Select,Option,Radio,RadioGroup,Input } from 'iview';
+import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal } from 'iview';
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
@@ -46,6 +46,7 @@ Vue.component('Option',Option)
 Vue.component('Radio',Radio)
 Vue.component('RadioGroup',RadioGroup)
 Vue.component('Input',Input)
+Vue.component('Modal',Modal)
 
 
 

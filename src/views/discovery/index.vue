@@ -24,7 +24,7 @@
 						<flexbox-item>
 							<div class="dis-grid-content line-b">
 								<div class="title ellipsis1">{{v.Title}}</div>
-								<div class="content ellipsis2">{{v.Content}}</div>
+								<div class="content ellipsis2">{{(v.Sendtime).substring(0,10)}}</div>
 							</div>
 						</flexbox-item>
 					</flexbox>

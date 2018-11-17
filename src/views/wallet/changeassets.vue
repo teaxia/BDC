@@ -6,7 +6,7 @@
                 <ul>
                     <li><i class="iconfont icon-Passingassets"></i>{{$t("wallet.tips.capitalassets")}}：<span>{{fixedAssets}}</span><span class="fr">BDC</span></li>
                     <li><i class="iconfont icon-xiaohongqi01"></i>{{$t("wallet.tips.actassets")}}：<span>{{actAssets}}</span><span class="fr">BDC</span></li>
-                    <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{gameAssets}}</span><span class="fr">BDC</span></li>   
+                    <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{gameAssets}}</span><span class="fr">CNY</span></li>   
                 </ul>
             </div>
             <div class="assets">
@@ -45,7 +45,11 @@
                 <div class="change-rate" v-if="type!=1">
                     <div class="rate"><span>BDC{{$t('global.price')}}:</span>{{PriceBDC}}</div>
                     <div class="rate"><span>{{$t('global.exchange')}}:</span>{{DHL}}</div>
-                    <div class="rate"><span>{{meus[type]}}:</span>{{matchprice}}</div>
+                    <div class="rate">
+                        <span v-if="type!=2">CNY:</span>
+                        <span v-else>BDC:</span>
+                        {{matchprice}}
+                    </div>
                 </div>
             </div>
             <button @click="TransferAssets()" class="btn btn-block btn-round mr30">{{$t('wallet.tips.btntransfor')}}</button>
@@ -96,11 +100,13 @@ export default {
                     this.PriceBDC = this.traninfo[0].PriceBDC;
                     this.DHL      = this.traninfo[0].DHL;
                     this.X        = this.traninfo[0].X;
+                    this.matchprice = (this.num*this.X).toFixed(8);
                     break;
                 case '3':
                     this.PriceBDC = this.traninfo[1].PriceBDC;
                     this.DHL      = this.traninfo[1].DHL;
                     this.X        = this.traninfo[1].X;
+                    this.matchprice = (this.num/this.X).toFixed(8);
                     break;
                 default:
                     this.PriceBDC = 0;
@@ -141,7 +147,6 @@ export default {
 			},
 			).then(data => {
 				if(data){
-                    // 判断是否本地缓存了数据，如果有缓存则不更新本地缓存
                     this.fixedAssets = data.FixedAssets;
                     this.actAssets   = data.ActAssets;
                     this.gameAssets  = data.GameAssets;

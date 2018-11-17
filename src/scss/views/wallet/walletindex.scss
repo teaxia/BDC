@@ -80,4 +80,22 @@
             }
         }
     }
+    .vertical-center-modal{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .ivu-modal{
+            top: 0;
+        }
+    }
+    .lock{
+        margin-right: 10px;
+    }
+}
+.table{
+    width: 100%;
+    text-align: center;
+}
+h2{
+    text-align: center;
 }

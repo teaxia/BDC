@@ -5,7 +5,7 @@
 			<v-grid class="mr30" v-for="(v,index) in dataList" :key="index">
                 <div class="systeamgg" @click="goto(v.Id)">
                     <div>{{v.Title}}</div>
-                    <div>{{v.Sendtime}}</div>
+                    <div>{{(v.Sendtime).substring(0,10)}}</div>
                 </div>
 			</v-grid>
 		</div>
