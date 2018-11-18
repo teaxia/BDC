@@ -16,18 +16,16 @@
 			</v-grid>
 			<div class="enterfrom mr100">
                 <group>
-                    <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" placeholder="输入/长按粘贴BDC账户" v-model="bdcaddress">
-						<div slot="right" class="scan" @click="startRecognize()"><i class="iconfont icon-scanning"></i></div>
+                    <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" placeholder="输入/长按粘贴BDC地址" v-model="bdcaddress">
+						<div slot="right" class="scan"><router-link to="/wallet/scan"><i class="iconfont icon-scanning"></i></router-link></div>
 					</x-input>
                 </group>
                 <group>
                     <x-input class="test" :title="$t('wallet.send.num')" :show-clear="false" v-model="num" placeholder="最小发送数量0.0001">
-						<div slot="right" class="math">≈{{mathnum}}{{CurrencyCode}}</div>
 					</x-input>
                 </group>
 				<group>
                     <x-input class="test" type="password" :title="$t('wallet.tips.safetycode')" :show-clear="false" v-model="psw" placeholder="请输入安全密码">
-						<div slot="right" class="math">≈{{mathnum}}{{CurrencyCode}}</div>
 					</x-input>
                 </group>
 				<group>
@@ -44,23 +42,14 @@
                     </div>
                 </group>
 				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
-				<button @click="startRecognize()" class="btn btn-block btn-default btn-round mr50">开始扫描</button>
-				<button @click="startScan()" class="btn btn-block btn-default btn-round mr50">开2描</button>
             </div>
-		</div>
-		<div id="bcid" v-if="showscan">
-			<div style="height:100%"></div>
-			<p class="tip">...载入中...</p>
 		</div>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
 	</div>
 </template>
 
 <script type='text/ecmascript-6'>
-import { GetCurrency } from '../../common/mixins/getcurrency';
-let scan = null;
 	export default {
-		mixins:[GetCurrency],
 		data() {
 			return {
 				nickname	:	'',
@@ -71,16 +60,25 @@ let scan = null;
 				mathnum		:	'',
 				type		:	'2',
 				psw			:	'',
-				showscan	:	false,
 			}
-		},
-		watch:{
-			num(){
-				this.mathnum = (this.num*this.PriceToBDC).toFixed(4)
-			},
 		},
 		methods: {
 			doSubmit(){
+				//
+				if(this.num<0.0001){
+					this.$vux.toast.show({
+                        text: '最小发送数量不能少于0.0001',
+                        type: 'warn'
+					})
+					return;
+				}
+				if(this.bdcaddress==''||this.num==''||this.psw==''){
+					this.$vux.toast.show({
+						text: '请填写完整信息',
+						type: 'warn'
+					})
+					return ;
+				}
 				this.$server.post(
 				'TransferAccount',
 				{
@@ -93,60 +91,24 @@ let scan = null;
 				},
 				).then(data => {
 					if(data){
-						console.log(data);
+						this.$vux.toast.show({
+							text: '成功！',
+							type: 'success'
+						})
 					}
 				})
 			},
-			//创建扫描控件
-			startRecognize() {
-				this.showscan = true;
-				let that = this;
-				if (!window.plus) return;
-				scan = new plus.barcode.Barcode('bcid');
-				scan.onmarked = onmarked;
-				function onmarked(type, result, file) {
-					switch (type) {
-						case plus.barcode.QR:
-						type = 'QR';
-						break;
-						case plus.barcode.EAN13:
-						type = 'EAN13';
-						break;
-						case plus.barcode.EAN8:
-						type = 'EAN8';
-						break;
-						default:
-						type = '其它' + type;
-						break;
-					}
-					result = result.replace(/\n/g, '');
-					that.bdcaddress = result;
-					that.closeScan();
-					that.showscan = false;
-				}
-			},
-			//开始扫描
-			startScan() {
-				if (!window.plus) return;
-				scan.start();
-			},
-			//关闭扫描
-			cancelScan() {
-				if (!window.plus) return;
-				scan.cancel();
-			},
-			//关闭条码识别控件
-			closeScan() {
-				if (!window.plus) return;
-				scan.close();
+			startscan(){
+				this.$router.push({
+					path:"/wallet/scan",
+				});
 			}
 		},
 		mounted() {
             this.nickname = this.$storage.get('NickName');
             this.avatar   = this.$storage.get('HeadImg');
 			this.realname = (this.$storage.get('Realname'))?this.$storage.get('Realname'):this.$t('global.Uncertified');
-			this.getcurren();
-			this.startRecognize();
+			this.bdcaddress = (this.$route.query.addr)?this.$route.query.addr:'';
 		}
 	}
 

@@ -22,6 +22,7 @@ import wallet from './views/wallet.vue'
     import walletindex from './views/wallet/wallet.vue'
     import changeassets from './views/wallet/changeassets.vue'
     import send from './views/wallet/send.vue'
+        import scan from './views/wallet/scan.vue'                          // 扫码
     import receive from './views/wallet/receive.vue'
     import notice from './views/wallet/notice.vue'                          // 公告列表
 
@@ -105,6 +106,7 @@ let routes = [
             { path: '/wallet/wallet', component: walletindex, name: 'walletindex',meta:{isIndex: 0}},
             { path: '/wallet/changeassets', component: changeassets, name: 'changeassets',meta:{isIndex: 0}},
             { path: '/wallet/send', component: send, name: 'send',meta:{isIndex: 0}},
+            { path: '/wallet/scan', component: scan, name: 'scan',meta:{isIndex: 0}},
             { path: '/wallet/receive', component: receive, name: 'receive',meta:{isIndex: 0}},
             { path: '/wallet/notice', component: notice, name: 'notice',meta:{isIndex: 0}},
         ]
