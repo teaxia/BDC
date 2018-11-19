@@ -69,14 +69,13 @@
                     <div class="pd-lb20 btc-grid">
                         <div class="btc-grid-l">
                             <svg class="sicon" aria-hidden="true">
-                                <use :xlink:href="`#icon-`+v.CurrencyName"></use>
+                                <use :xlink:href="`#icon-`+v.Name"></use>
                             </svg>
-                            <span>{{v.CurrencyName}}</span>
+                            <span>{{v.Name}}</span>
                         </div>
                         <div class="btc-grid-r">
-                            <span>{{v.Money}}CNY</span>
-                            <span v-if="v.CurrencyName!='BDC'">≈{{(v.Money/BDC).toFixed(4)}}BDC</span>
-                            <span>≈{{(v.Money/6.8).toFixed(4)}}USD</span>
+                            <span>{{v.BDCPrice}}</span>
+                            <span>≈{{v.CurrencyPrice}}</span>
                         </div>
                     </div>
                 </v-grid>
@@ -166,6 +165,21 @@ export default {
                     this.sum = x.toFixed(8);
                     this.cny = (this.$math.eval(x/this.PriceToBDC)).toFixed(8)
                     this.BDC = data[0].Money;
+				}
+			})
+        },
+        GetPriceByCurrency(){
+            this.$server.post(
+			'GetPriceByCurrency',
+			{
+                guid            : this.$storage.get('guid'),
+                currencyCode    : this.$storage.get('currency')
+			},{
+                showLoading:false
+            }
+			).then(data => {
+				if(data){
+                    console.log(data);
                     this.currency = data;
 				}
 			})
@@ -212,11 +226,13 @@ export default {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
         this.GetAccount();                                                          // 获取账户数据
         this.GetSystemGG();                                                         // 获取公告数据
+        this.GetPriceByCurrency();                                                  // 获取信息
         // 每隔1分钟请求一次数据
         this.loop = setInterval(()=>{
             this.GetSystemGG();
             this.GetAccount();
             this.GetCurrencyPrice();
+            this.GetPriceByCurrency();
         },60000)
         this.getcurren();
     },

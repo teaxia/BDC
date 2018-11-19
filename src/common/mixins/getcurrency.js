@@ -15,9 +15,12 @@ export const GetCurrency = {
             if(!currency){
                 let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
                 if(lang=="zh"){
+                    //并且设置缓存为设置货币
                     var cy = 'CNY'
+                    this.$storage.set('currency','CNY');
                 }else if(lang=="en"){
                     var cy = "USD"
+                    this.$storage.set('currency','USD');
                 }
             }else{
                 cy = currency
