@@ -121,7 +121,7 @@ export const zh = {
             tips:{
                 buyname :   '请输入购买人姓名',
             },
-            buy         :   '立即购买'
+            buy         :   '立即充值'
         },
         recharge:{
             title       :   '充值',
