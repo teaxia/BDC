@@ -179,7 +179,6 @@ export default {
             }
 			).then(data => {
 				if(data){
-                    console.log(data);
                     this.currency = data;
 				}
 			})

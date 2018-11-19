@@ -5,25 +5,29 @@ export const GetCurrency = {
         return {
             CurrencyCode : '',
             PriceToBDC   : '',
-            PriceToCNY   : ''
+            PriceToCNY   : '',
+            CurrencyList : ''
         }
     },
     methods: {
-        getcurren(){
-            // 首先，判断本地是否有缓存
-            let currency = (this.$storage.get('currency'))?this.$storage.get('currency'):'';
-            if(!currency){
-                let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
-                if(lang=="zh"){
-                    //并且设置缓存为设置货币
-                    var cy = 'CNY'
-                    this.$storage.set('currency','CNY');
-                }else if(lang=="en"){
-                    var cy = "USD"
-                    this.$storage.set('currency','USD');
+        getcurren(full='false'){
+            // 判断是否获取所有数据
+            if(full=='false'){
+                // 首先，判断本地是否有缓存
+                let currency = (this.$storage.get('currency'))?this.$storage.get('currency'):'';
+                if(!currency){
+                    let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
+                    if(lang=="zh"){
+                        //并且设置缓存为设置货币
+                        var cy = 'CNY'
+                        this.$storage.set('currency','CNY');
+                    }else if(lang=="en"){
+                        var cy = "USD"
+                        this.$storage.set('currency','USD');
+                    }
+                }else{
+                    cy = currency
                 }
-            }else{
-                cy = currency
             }
             this.$server.post(
             'GetCountyCurrency',
@@ -32,6 +36,7 @@ export const GetCurrency = {
                 currencyCode    : (cy)?cy:'',
             }).then(data => {
                 if(data){
+                    this.CurrencyList = data;
                     this.CurrencyCode = data[0].CurrencyCode;
                     this.PriceToBDC   = data[0].PriceToBDC;
                     this.PriceToCNY   = data[0].PriceToCNY;

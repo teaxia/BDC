@@ -5,17 +5,12 @@
             <div class="enterfrom">
                 <group>
                     <div class="label">{{$t('mine.setting.price')}}：</div>
-                    <div class="radio">
-                        <RadioGroup v-model="cy">
-                            <Radio label="CNY">
-                                <span>{{$t('mine.setting.rmb')}}</span>
-                            </Radio>
-                            <Radio label="USD">
-                                <span>{{$t('mine.setting.usd')}}</span>
-                            </Radio>
-                        </RadioGroup>
-                    </div>
                 </group>
+                <div class="radio">
+                    <Select v-model="cy">
+                        <Option v-for="(v,index) in CurrencyList" :value="v.CurrencyCode" :key="index">{{v.CurrencyName}}</Option>
+                    </Select>
+                </div>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
         </div>
@@ -23,8 +18,10 @@
 </template>
 
 <script>
+import { GetCurrency } from '../../common/mixins/getcurrency';
 export default {
-	name: 'Login',
+    name: 'regist',
+    mixins:[GetCurrency], 
 	data() {
 		return {
 			cy	    : '',
@@ -40,6 +37,7 @@ export default {
 		}
 	},
 	mounted() {
+        this.getcurren('full');
         let currency = (this.$storage.get('currency'))?this.$storage.get('currency'):'';
         if(!currency){
             let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
