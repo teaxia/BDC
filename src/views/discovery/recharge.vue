@@ -53,6 +53,16 @@
             </div>
             <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
         </div>
+        <Modal v-model="modal" @on-ok="ok" @on-cancel="cancel">
+            <div v-if="type<=3">
+                <div>{{$t('input.mobile')}}:{{confirminfo}}</div>
+                <div>{{$t('input.mobile')}}:{{confirminfo}}</div>
+                <div>{{$t('input.mobile')}}:{{confirminfo}}</div>
+            </div>
+            <div v-else>
+
+            </div>
+        </Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -74,6 +84,8 @@
                 mobile      :   '',
                 num         :   '',
                 isok        :   false,
+                modal       :   false,
+                confirminfo :   '',
                 phonecharges:[
                     {
                         money   :   '50'
@@ -142,6 +154,16 @@
                 this.RMB     = money/this.bdc;
                 this.Remakes = (this.type==2)?this.gprs[index].value:'';
             },
+            confirm(){
+                this.mobile = this.mobile.replace(/\s+/g,"")
+                if(this.mobile==''){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.recharge.error.mobile'),
+                        type: 'warn'
+                    })
+                    return;
+                }
+            },
             submit(){
                 // 获取详情
                 if(this.isok){
@@ -204,6 +226,12 @@
                     })
                     this.isok = false;
                 })
+            },
+            ok () {
+                this.$Message.info('Clicked ok');
+            },
+            cancel () {
+                this.$Message.info('Clicked cancel');
             }
 		},
 		mounted() {
