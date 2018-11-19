@@ -12,7 +12,7 @@
                     </Select>
                 </div>
             </div>
-            <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
+            <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.ok") }}</button>
         </div>
     </div>
 </template>
