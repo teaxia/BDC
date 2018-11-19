@@ -19,6 +19,7 @@ export const en = {
         ok          : 'OK',
         notice      : 'Notice',
         msg         : 'Msg login',
+        unopened    : 'Unopened',
     },
     input:{
         mobile              :   'Phone number',

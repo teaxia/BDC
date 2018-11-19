@@ -5,10 +5,10 @@
 			<div class="topmenu">
 				<v-grid>
 					<div :class="['grid-4',index<4?'line-b':'']" v-for="(list,index) in dataList" :key="index">
-						<router-link :to="list.url">
+						<div @click="onTorul(list.url)">
 							<i :class="[{'iconfont':true},list.icon]"></i>
 							<span class="top-menu">{{list.value}}</span>
-						</router-link>
+						</div>
 					</div>
 				</v-grid>
 			</div>
@@ -50,7 +50,7 @@ export default {
 				{
 					value   : this.$t("discovery.topmenu.ctc"),
 					icon    : 'icon-CTC1',
-					url     : '/discovery/discovery',
+					url     : 'false',
 				},
 				
 				{
@@ -61,7 +61,7 @@ export default {
 				{
 					value   : this.$t("discovery.topmenu.ent"),
 					icon    : 'icon-xiuxianyule',
-					url     : '/discovery/index',
+					url     : 'false',
 				},
 				{
 					value   : this.$t("discovery.topmenu.recharge"),
@@ -98,6 +98,19 @@ export default {
 				path    :   '/article/view',
 				query   :   {'id':id,'index':this.$route.meta.isIndex}
 			});
+		},
+		onTorul(url){
+			// 如果没有开放，则提示未开放
+			if(url=='false'){
+				this.$vux.toast.show({
+					text: this.$t('global.unopened'),
+					type: 'warn'
+				})
+			}else{
+				this.$router.push({
+					path    :   url,
+				});
+			}
 		}
 	},
 	mounted() {

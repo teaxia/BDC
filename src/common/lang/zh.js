@@ -19,6 +19,7 @@ export const zh = {
         ok                  : '确认',
         notice              : '系统公告',
         msg                 : '短信登陆',
+        unopened            : '暂未开放',
     },
     input:{
         mobile              :   '手机号',
