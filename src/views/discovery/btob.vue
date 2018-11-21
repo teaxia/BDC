@@ -175,7 +175,7 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 				}
             })
             this.getcurren();
-            console.log(this.currency);
+
         },
 	}
 

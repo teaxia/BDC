@@ -112,7 +112,7 @@
 import { GetCurrency } from '../../common/mixins/getcurrency';
 export default {
     mixins:[GetCurrency],
-	data() {
+	data() { 
 		return {
             fixedAssets :   '',                                                         // 固定资产
             actAssets   :   '',                                                         // 通证资产
