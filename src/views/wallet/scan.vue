@@ -44,7 +44,7 @@ export default {
         result = result.replace(/\n/g, '')
         if(result){
           // 成功，关闭控件，带参数跳转到正常页面去
-          console.log(result);
+          alert(result);
           that.closeScan();
           that.$router.push({
             path:"/wallet/send",
@@ -52,7 +52,7 @@ export default {
           });
         }else{
           // 失败，关闭控件，重新扫描
-          console.log('失败了？');
+          alert('失败了？');
           that.closeScan();
           that.$router.push({
             path:"/wallet/send",
