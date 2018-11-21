@@ -5,9 +5,9 @@
     .wallet-change{
         clear: both;
         text-align: right;
-        color:$font-white;
-        a{
-            color:$font-white;
+        i,span{
+            font-size:24px;
+            color:#ffe00f;
         }
     }
     .title{
@@ -17,6 +17,7 @@
     .time{
         display: block;
         width:180px;
+        text-align: right;
     }
     .assets{
         height: auto;
@@ -25,31 +26,62 @@
         background-size:100% 100%;
     }
     .wallet-assets{
-        margin-top:5px;
+        margin-top:10px;
+        background:$font-white;
+        border-radius: 60px 0 0 60px;
+        text-align: center;
+        color:$font-baseh2;
+        width: 320px;
+        padding:5px 0px 5px 20px;
+        .assets-h1{
+            color:$font-base;
+            padding-bottom: 5px;
+            border-bottom:0.01rem solid $font-base;
+            font-size:20px;
+        }
+        .wallet_bdc{
+            color:$font-base;
+        }
     }
     .wallet-band{
         height: auto;
         overflow: hidden;
         padding-bottom: 30px;
         color:$font-white;
+        position: relative;
         .wallet-band-l{
             padding-left: 20px;
-            margin-top:30px;
-            width:320px;
+            margin-top:100px;
+            width:380px;
             white-space:normal;
             .wallet-band-tit{
                 color:$font-empty;
-                font-size:34px;
+                font-size:30px;
             }
             .wallet-band-bdc{
                 line-height: 58px;
                 .num{
                     font-size:28px;
+                    color:$font-white;
+                    font-weight: bold;
                 }
             }
             .wallet-band-rmb{
-                font-size:28px;
+                font-size:24px;
+                color:#a2a6ab;
                 text-overflow:nowrap;
+            }
+        }
+        .changeassets{
+            position: absolute;
+            bottom: 20px;
+            background: rgba(255,255,255,.2);
+            border: 0.01rem solid #586474;
+            border-radius: 4px;
+            width: 170px;
+            text-align: center;
+            a{
+                color:$font-white;
             }
         }
     }
@@ -59,6 +91,8 @@
         display:flex;
         align-items: center;
         justify-content:space-between;
+        color:$font-baseh2;
+        font-size:20px;
         .btc-grid-l{
             height: 100%;
         }
@@ -67,6 +101,10 @@
                 display: block;
                 text-align: right;
             }
+        }
+        .btc-grid-bdc{
+            color:$font-base;
+            font-size:28px;
         }
     }
     .send{

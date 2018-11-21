@@ -25,8 +25,7 @@ export default {
     height: auto;
     overflow: hidden;
     padding:10px 0;
-    border:0.01rem solid $border-base;
-    border-radius: 15px;
-    box-shadow: 0 0 25px 0 $border-base;
+    border-radius: 10px;
+    box-shadow:  0px 2px 6px #dadbde;
 }
 </style>

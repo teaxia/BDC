@@ -5,31 +5,35 @@
             <div class="assets">
                 <v-grid>
                     <div class="wallet-change pd-lb20">
-                        <router-link to="/wallet/changeassets">
-                            <i class="iconfont icon-Conversion"></i>
-                            <span>{{$t("wallet.tips.change")}}</span>
-                        </router-link>
+                        <i class="iconfont icon-laiyuanqingkuang"></i>
+                        <span @click="showclock()" class="lock fr">{{$t("wallet.tips.lock")}}</span>
                     </div>
                     <div class="wallet-band">
                         <div class="wallet-band-l fl">
                             <div class="wallet-band-tit">{{$t("wallet.tips.count")}}</div>
                             <div class="wallet-band-bdc">
                                 <span class="num">{{sum}}</span>
-                                <span class="bdc">(BDC)</span>
+                                <span class="bdc">BDC</span>
                             </div>
                             <div class="wallet-band-rmb">
                                 ≈<span>{{cny}}{{CurrencyCode}}</span>
                             </div>
+                            <div class="changeassets">
+                                <router-link to="/wallet/changeassets">
+                                    <i class="iconfont icon-Conversion"></i>
+                                    <span>{{$t("wallet.tips.change")}}</span>
+                                </router-link>
+                            </div>
                         </div>
                         <div class="wallet-band-r fr">
                             <div class="wallet-assets">
-                                {{$t("wallet.tips.capitalassets")}}<span @click="showclock()" class="lock fr">{{$t("wallet.tips.lock")}}</span><br/>{{fixedAssets}}（BDC）<br/>{{(fixedAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
+                                <span class="assets-h1">{{$t("wallet.tips.capitalassets")}}</span><br/><span class="wallet_bdc">{{fixedAssets}}</span>（BDC）<br/>{{(fixedAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
                             </div>
                             <div class="wallet-assets">
-                                {{$t("wallet.tips.actassets")}}<br/>{{actAssets}}（BDC）<br/>{{(actAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
+                                <span class="assets-h1">{{$t("wallet.tips.actassets")}}</span><br/><span class="wallet_bdc">{{actAssets}}</span>（BDC）<br/>{{(actAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
                             </div>
                             <div class="wallet-assets">
-                                {{$t("wallet.tips.gameassets")}}<br/>{{gameAssets}}（BDC）<br/>{{(gameAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
+                               <span class="assets-h1"> {{$t("wallet.tips.gameassets")}}</span><br/><span class="wallet_bdc">{{gameAssets}}</span>（BDC）<br/>{{(gameAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
                             </div>
                         </div>
                     </div>
@@ -52,7 +56,7 @@
                     <flexbox>
                         <flexbox-item :span="11">
                             <ul class="pd-lb20">
-                                <li v-for="v in news" class="ellipsis1" @click="onTourl('/wallet/notice')">
+                                <li v-for="(v,index) in news" class="ellipsis1" @click="onTourl('/wallet/notice')" :key="index">
                                     <span class="ellipsis1 title fl">{{v.Title}}</span>
                                     <span class="ellipsis1 time fr">{{(v.Sendtime).substring(0,10)}}</span>
                                 </li>
@@ -64,17 +68,17 @@
                     </flexbox>
                 </v-grid>
             </div>
-            <div v-for="(v,index) in currency" class="mr30">
+            <div v-for="(v,index) in currency" class="mr30" :key="index">
                 <v-grid>
                     <div class="pd-lb20 btc-grid">
                         <div class="btc-grid-l">
                             <svg class="sicon" aria-hidden="true">
                                 <use :xlink:href="`#icon-`+v.Name"></use>
                             </svg>
-                            <span>{{v.Name}}</span>
+                            <span class="btc-grid-bdc">{{v.Name}}</span>
                         </div>
                         <div class="btc-grid-r">
-                            <span>{{v.BDCPrice}}</span>
+                            <span class="btc-grid-bdc">{{v.BDCPrice}}</span>
                             <span>≈{{v.CurrencyPrice}}</span>
                         </div>
                     </div>
@@ -184,7 +188,7 @@ export default {
             }
 			).then(data => {
 				if(data){
-                    this.currency = data;
+                    this.currency = data; 
 				}
 			})
         },

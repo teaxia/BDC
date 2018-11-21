@@ -18,7 +18,7 @@ export default {
       dataList:[
         {
           value   : this.$t("menu.wallet"),
-          icon    : 'icon-qianbao',
+          icon    : 'icon-qianbao_xianxing',
           acicon  : 'icon-qianbao_mianxing',
           url     : '/wallet/wallet',
           index   : 0
