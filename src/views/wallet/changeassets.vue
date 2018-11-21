@@ -25,11 +25,11 @@
                 <flexbox class="changelist">
                     <flexbox-item :span="3">
                         <div class="changename">
-                            {{$t("wallet.tips.transfor")}}{{meus[type]}}：
+                            {{$t("wallet.tips.transfor")}}{{feus[type]}}：
                         </div>
                     </flexbox-item>
                     <flexbox-item :span="5">
-                        <input type="number" v-model="num" :placeholder="$t('global.entry')+meus[type]+$t('global.num')" />
+                        <input type="number" v-model="num" :placeholder="$t('global.entry')+feus[type]+$t('global.num')" />
                     </flexbox-item>
                 </flexbox>
                 <flexbox class="changelist">
@@ -46,7 +46,7 @@
                     <div class="rate"><span>BDC{{$t('global.price')}}:</span>{{PriceBDC}}</div>
                     <div class="rate"><span>{{$t('global.exchange')}}:</span>{{DHL}}</div>
                     <div class="rate">
-                        <span v-if="type!=2">CNY:</span>
+                        <span v-if="type!=3">CNY:</span>
                         <span v-else>BDC:</span>
                         {{matchprice}}
                     </div>
@@ -71,6 +71,7 @@ export default {
             num         :   '',                                                         // 兑换的数量
             matchprice  :   '0',                                                        // 计算的结果
             meus        :   ['','BDC','CNY','BDC'],
+            feus        :   ['','BDC','BDC','CNY'],
             traninfo    :   [],                                                         // 接收到的行情数据
             PriceBDC    :   '',
             DHL         :   '',

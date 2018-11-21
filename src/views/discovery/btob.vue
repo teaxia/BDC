@@ -53,8 +53,10 @@
 </template>
 
 <script>
+import { GetCurrency } from '../../common/mixins/getcurrency';
 	export default {
         name:'btob',
+        mixins:[GetCurrency],
 		data() {
 			return {
                 act         :   'BTC',
@@ -77,7 +79,8 @@
                 address     :   '',
                 proportion  :   '',
                 price       :   '',
-                isok        :   false
+                isok        :   false,
+                currency    :   [],
 			}
         },
         watch:{
@@ -170,8 +173,10 @@
                     this.address  = data.RechargeAddressBTC;            // 兑换地址
                     this.proportion = this.btobinfo.PriceBTC;           // 兑换比例 
 				}
-			})
-		}
+            })
+            this.getcurren();
+            console.log(this.currency);
+        },
 	}
 
 </script>
