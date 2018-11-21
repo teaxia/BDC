@@ -101,6 +101,7 @@ export const zh = {
             b2b         :   '币币兑换',
             cash        :   '现金购买',
             notbuy      :   '未开启',
+            success     :   '已完成',
         },
         btob:{
             title       :   '币币兑换',
@@ -182,7 +183,9 @@ export const zh = {
             lockenddate     :   '锁仓结束时间',
             lockdays        :   '锁仓倒计时',
             assetsview      :   '固定资产详情',
-            
+            income          :   '收入',
+            balance         :   '余额',
+            date            :   '时间',            
         },
         transfor:{
             type1           :   '通证转固定',
@@ -198,7 +201,7 @@ export const zh = {
         // 接收
         receive:{
             title           :   '接收BDC',
-            copy            :   '复制地址',
+            copy            :   '复制',
             tips:{
                 success     :   '复制成功',
                 error       :   '复制失败，请手动选择复制',

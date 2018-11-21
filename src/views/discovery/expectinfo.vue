@@ -11,12 +11,10 @@
                                     <div class="bd title">{{v.ExpectNo}}<span v-if="v.IsCanBuy" class="hot">{{$t('discovery.expectinfo.hot')}}</span></div>
                                     <div class="bd">
                                         <div class="bar_jd fl">
-                                            <div class="bar_jds" v-if="v.IsCanBuy"  :style="`width:`+v.Percent+`%`"></div>
-                                            <div class="bar_jds" v-else style="width:100%"></div>
+                                            <div class="bar_jds" :style="`width:`+v.Percent+`%`"></div>
                                         </div>
                                         <div class="fr">
-                                            <span v-if="v.IsCanBuy">{{v.Percent}}%</span>
-                                            <span v-else>100%</span>
+                                            <span>{{v.Percent}}%</span>
                                         </div>
                                     </div>
                                     <div class="bd hl">{{$t('discovery.expectinfo.issue')}}：{{v.TotalCurrencyNum}}</div>
@@ -24,7 +22,8 @@
                             </flexbox-item>
                             <flexbox-item>
                                 <div class="exp-grid-center">
-                                    <button v-if="!v.IsCanBuy" class="btn btn-xs btn-round btn-disabled">{{$t('discovery.expectinfo.notbuy')}}</button>
+                                    <button v-if="!v.IsCanBuy&&v.Percent!='100'" class="btn btn-xs btn-round btn-disabled">{{$t('discovery.expectinfo.notbuy')}}</button>
+                                    <button v-else-if="v.Percent=='100'" class="btn btn-xs btn-round btn-disabled">{{$t('discovery.expectinfo.success')}}</button>
                                     <button @click="onTourl('/discovery/expectinfo/btob')" v-if="v.IsCanBuy" class="btn btn-xs btn-round">{{$t('discovery.expectinfo.b2b')}}</button>
                                     <button @click="onTourl('/discovery/expectinfo/cash')" v-if="v.IsCanBuy" class="btn btn-xs btn-round mr10">{{$t('discovery.expectinfo.cash')}}</button>
                                 </div>

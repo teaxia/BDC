@@ -100,6 +100,7 @@ export const en = {
             b2b         :   'Exchange',
             cash        :   'Buy',
             notbuy      :   'Unopened',
+            success     :   'Success'
         },
         btob:{
             title       :   'Exchange',
@@ -181,6 +182,9 @@ export const en = {
             lockenddate     :   'Lock end date',
             lockdays        :   'Lock days',
             assetsview      :   'Assets',
+            income          :   'Income',
+            balance         :   'Balance',
+            date            :   'Date', 
         },
         transfor:{
             type1           :   'Capital To Act',

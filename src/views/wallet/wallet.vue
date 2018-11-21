@@ -88,6 +88,11 @@
             <div>{{$t("wallet.tips.lockdays")}}：<span class="fr">{{clockdata.LockDays}}</span></div>
             <h2>{{$t("wallet.tips.assetsview")}}</h2>
             <table class="table">
+                <tr>
+                    <td>{{$t("wallet.tips.income")}}</td>
+                    <td>{{$t("wallet.tips.balance")}}</td>
+                    <td>{{$t("wallet.tips.date")}}</td>
+                </tr>   
                 <tr v-for="(v,index) in clockdata.List" :key="index">
                     <td>+{{v.Money}}</td>
                     <td>{{v.MoneyAfter}}</td>

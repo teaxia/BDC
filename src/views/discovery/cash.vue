@@ -17,8 +17,7 @@
                             </flexbox-item>
                             <flexbox-item :span="4">
                                 <div class="text-right">
-                                ={{pricecny}}CNY<br/>
-                                ={{priceusd}}USD
+                                ={{pricecny}}CNY
                                 </div>
                             </flexbox-item>
                         </flexbox>

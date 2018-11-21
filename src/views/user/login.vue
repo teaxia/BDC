@@ -92,6 +92,9 @@ export default {
 	},
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
+		if(this.$i18n.locale == 'en'){
+			this.lang = 'en'
+		}
 		//判断是否自动登陆
 		let guid = this.$storage.get('guid')
 		if(guid&&guid!='undefined'){

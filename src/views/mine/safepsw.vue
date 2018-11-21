@@ -4,13 +4,19 @@
         <div class="pd50">
             <div class="enterfrom">
                 <group>
-                    <x-input class="test" :title="$t('mine.setting.oldpsw')" required :placeholder="$t('mine.setting.tips.oldpsw')" v-model="oldpsw"></x-input>
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('mine.setting.oldpsw')" required :placeholder="$t('mine.setting.tips.oldpsw')" v-model="oldpsw">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
                 </group>
                 <group>
-                    <x-input class="test" :title="$t('mine.setting.newpsw')" v-model="newpsw" required :placeholder="$t('mine.setting.tips.newpsw')"></x-input>
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('mine.setting.newpsw')" v-model="newpsw" required :placeholder="$t('mine.setting.tips.newpsw')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
                 </group>
                 <group>
-                    <x-input class="test" :title="$t('mine.setting.confirmpsw')" v-model="confirmpsw" required :placeholder="$t('mine.setting.tips.confirmpsw')"></x-input>
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('mine.setting.confirmpsw')" v-model="confirmpsw" required :placeholder="$t('mine.setting.tips.confirmpsw')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
                 </group>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
@@ -26,6 +32,7 @@ export default {
 			oldpsw      :  '',
             newpsw	    :  '',
             confirmpsw  :  '',
+            type	    : false,		// 切换密码状态
 		}
 	},
 	methods: {
@@ -65,6 +72,9 @@ export default {
                 }
             })
         },
+        changType(){
+			this.type = !this.type
+		}
 	},
 	mounted() {
 		

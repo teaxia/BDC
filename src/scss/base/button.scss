@@ -20,7 +20,7 @@ button[disabled]
     -webkit-tap-highlight-color: transparent;
     transition: opacity .2s;
     text-align: center;
-    font-size:32px;
+    font-size:24px;
     &-xs{
         width: 1.7rem;
         height: 0.5rem;
@@ -39,6 +39,7 @@ button[disabled]
     {
         width: 100%;
         height: 80px;
+        font-size:32px;
         display: block;
     }
 
