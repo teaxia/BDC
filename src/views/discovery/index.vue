@@ -72,6 +72,11 @@ export default {
 					value   : this.$t("discovery.topmenu.credit"),
 					icon    : 'icon-banxinyongqia',
 					url     : '/discovery/credit',
+				},
+				{
+					value   : this.$t("discovery.topmenu.extract"),
+					icon    : 'icon-Fixedassets',
+					url     : '/discovery/extract',
 				}
 			],
 			news:[],

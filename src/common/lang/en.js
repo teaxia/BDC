@@ -92,7 +92,8 @@ export const en = {
             calculator  :   'Calculator',
             ent         :   'ENT',
             recharge    :   'Recharge',
-            credit      :   'Credit card'
+            credit      :   'Credit card',
+            extract     :   'Extract',
         },
         expectinfo:{
             title       :   'Exchange BDC',
@@ -138,6 +139,20 @@ export const en = {
                 num     :   'Recharge not less than 1',
                 full    :   'Please fill in the complete',
                 mobile  :   'Phone number do not null'
+            }
+        },
+        extract:{
+            title       :   'Extract',
+            address     :   'Extract address',
+            bdc         :   'BDC',
+            safetycode  :   'Safety code',
+            bdcnum      :   'Please enter BDC num',
+            addresstip  :   'Please enter address',
+            tips:{
+                safetycode  :   'Safety code number can not be null',
+                num         :   'BDC num can not be null',
+                address     :   'Extract address can not be null',
+                tips        :   'Please check your withdrawal address carefully. If the withdrawal address is incorrect, you will not be able to return your BDC if the withdrawal fails'
             }
         },
         bill:{
@@ -264,7 +279,7 @@ export const en = {
             rmb             :   'RMB',
             usd             :   'USD',
             tips:{
-                oldpsw          :   'Please input the old password',
+                oldpsw          :   'Please enter the old password',
                 newpsw          :   'Please enter a new password',
                 confirmpsw      :   'Please enter the password again',
                 repsw           :   'New password and old password must be filled in',

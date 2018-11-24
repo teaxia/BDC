@@ -93,7 +93,8 @@ export const zh = {
             calculator  :   '计算器',
             ent         :   '休闲娱乐',
             recharge    :   '充值',
-            credit      :   '办信用卡'
+            credit      :   '办信用卡',
+            extract     :   '提币',
         },
         expectinfo:{
             title       :   '兑换BDC',
@@ -140,6 +141,20 @@ export const zh = {
                 num     :   '充值金额不能小于1',
                 full    :   '请填写完整的信息',
                 mobile  :   '手机号不能为空'
+            }
+        },
+        extract:{
+            title       :   '提币',
+            address     :   '提币地址',
+            bdc         :   'BDC数量',
+            safetycode  :   '安全码',
+            bdcnum      :   '请输入提币数量',
+            addresstip  :   '请输入提币地址',
+            tips:{
+                safetycode  :   '安全码不能为空',
+                num         :   '提币数量不能为空',
+                address     :   '提币地址不能为空',
+                tip         :   '请仔细核对您的提币地址无误，提币地址错误提币失败将无法退还您的BDC',
             }
         },
         bill:{

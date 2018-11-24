@@ -16,6 +16,7 @@ import discovery from './views/discovery.vue'
         import recharge from  './views/discovery/recharge.vue'              // 充值
     import bill from  './views/discovery/bill.vue'                          // 兑换BDC
     import credit from  './views/discovery/credit.vue'                      // 办理信用卡
+    import extract from  './views/discovery/extract.vue'                    // 提币
         
 // 钱包
 import wallet from './views/wallet.vue'
@@ -91,6 +92,7 @@ let routes = [
             { path: '/discovery/recharge', component: recharge, name: 'recharge',meta:{isIndex: 2}},
             { path: '/discovery/bill', component: bill, name: 'bill',meta:{isIndex: 2}},
             { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
+            { path: '/discovery/extract', component: extract, name: 'extract',meta:{isIndex: 2}},
         ]
     },
     // 钱包
