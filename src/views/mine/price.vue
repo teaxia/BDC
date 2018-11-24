@@ -6,9 +6,14 @@
                 <group>
                     <div class="label">{{$t('mine.setting.price')}}：</div>
                 </group>
-                <div class="radio">
+                <div class="radio" v-if="ishow">
                     <Select v-model="cy">
-                        <Option v-for="(v,index) in CurrencyList" :value="v.CurrencyCode" :key="index">{{v.CurrencyName}}</Option>
+                        <Option v-for="(v,index) in CurrencyList" :value="v.CurrencyCode" :key="index">{{v.CurrencyName}}({{v.CurrencyCode}})</Option>
+                    </Select>
+                </div>
+                <div class="radio" v-else>
+                    <Select v-model="cy">
+                        <Option v-for="(v,index) in CurrencyList" :value="v.CurrencyCode" :key="index">{{v.CurrencyCode}}</Option>
                     </Select>
                 </div>
             </div>
@@ -24,7 +29,8 @@ export default {
     mixins:[GetCurrency], 
 	data() {
 		return {
-			cy	    : '',
+			cy	    :   '',
+            ishow   :   false,
 		}
 	},
 	methods: {
@@ -39,15 +45,20 @@ export default {
 	mounted() {
         this.getcurren('full');
         let currency = (this.$storage.get('currency'))?this.$storage.get('currency'):'';
+        let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
         if(!currency){
-            let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
             if(lang=="zh"){
-                this.cy = 'CNY'
+                this.cy     =   'CNY'
+                this.ishow  =   true
             }else if(lang=="en"){
-                this.cy = "USD"
+                this.cy     =   "USD"
+                this.ishow  =   false
             }
         }else{
             this.cy = currency;
+            if(lang=="zh"){
+                this.ishow  =   true
+            }
         }
 	}
 }

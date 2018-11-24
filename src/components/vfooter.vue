@@ -1,9 +1,9 @@
 <template>
   <div class="vfooter">
     <grid :show-vertical-dividers="false">
-      <grid-item :link="list.url" :key="key" v-for="(list,key) in dataList">
-          <i :class="[{'iconfont':true},list.index==isIndex?list.acicon+' active':list.icon]"></i>
-          <span :class="['tab-foot',{'active':list.index==isIndex}]">{{list.value}}</span>
+      <grid-item :key="key" v-for="(list,key) in dataList">
+          <i @click="onUrl(list.url)" :class="[{'iconfont':true},list.index==isIndex?list.acicon+' active':list.icon]"></i>
+          <span @click="onUrl(list.url)" :class="['tab-foot',{'active':list.index==isIndex}]">{{list.value}}</span>
       </grid-item>
     </grid>
   </div>
@@ -28,7 +28,7 @@ export default {
           icon    : 'icon-yingyongxianxing',
           acicon  : 'icon-yingyongmianxing',
           //url     : '/app/index',
-          url     : '',
+          url     : 'false',
           index : 1
         },
         {
@@ -48,8 +48,19 @@ export default {
       ]
     }
   },
-  mounted(){
-    
+  methods:{
+    onUrl(url){
+      if(url=='false'){
+				this.$vux.toast.show({
+					text: this.$t('global.unopened'),
+					type: 'warn'
+				})
+			}else{
+				this.$router.push({
+					path    :   url,
+				});
+			}
+    }
   }
 }
 </script>

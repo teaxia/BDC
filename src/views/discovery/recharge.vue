@@ -51,16 +51,28 @@
                     </group>
                 </div>
             </div>
-            <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
+            <button @click="subconfirm()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
+            <!-- <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>  -->
         </div>
-        <Modal v-model="modal" @on-ok="ok" @on-cancel="cancel">
-            <div v-if="type<=3">
-                <div>{{$t('input.mobile')}}:{{confirminfo}}</div>
-                <div>{{$t('input.mobile')}}:{{confirminfo}}</div>
-                <div>{{$t('input.mobile')}}:{{confirminfo}}</div>
+        <Modal v-model="modal" @on-ok="ok" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
+            <div v-if="type<=2">
+                <!-- 电话卡，流量充值 -->
+                <div>
+                    <span v-if="type==1">{{$t('discovery.recharge.group')}}：{{$t('discovery.recharge.type.phone')}}</span>
+                    <span v-if="type==2">{{$t('discovery.recharge.group')}}：{{$t('discovery.recharge.type.gprs')}}</span>
+                </div>
+                <div>{{$t('input.mobile')}}:{{this.mobile}}</div>
+                <div>{{$t('discovery.recharge.price')}}:{{this.RMB}}（BDC）</div>
+                <div>{{$t('discovery.recharge.title')}}:{{this.Remakes}}</div>
             </div>
             <div v-else>
-
+                <!-- 油卡充值 -->
+                <div><span>{{$t('discovery.recharge.type.oilcards')}}</span></div>
+                <div>{{$t('input.coname')}}:{{this.coname}}</div>
+                <div>{{$t('input.mobile')}}:{{this.mobile}}</div>
+                <div>{{$t('input.tips.oilcard')}}:{{this.oilcard}}</div>
+                <div>{{$t('discovery.recharge.money')}}:{{this.num}}</div>
+                <div>{{$t('discovery.recharge.price')}}:{{this.RMB}}（BDC）</div>
             </div>
         </Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
@@ -83,6 +95,7 @@
                 bdcmoney    :   '',
                 mobile      :   '',
                 num         :   '',
+                info        :   '',
                 isok        :   false,
                 modal       :   false,
                 confirminfo :   '',
@@ -145,30 +158,23 @@
                 this.current = 0;
                 if(type==1){
                     this.RMB     = this.phonecharges[0].money/this.bdc;
+                    this.Remakes = this.phonecharges[0].money+'CNY';
                 }else if(type==2){
                     this.RMB     = this.gprs[0].money/this.bdc;
+                    this.Remakes = this.gprs[0].value;
                 }
             },
             act(index,money){
                 this.current = index;
                 this.RMB     = money/this.bdc;
-                this.Remakes = (this.type==2)?this.gprs[index].value:'';
-            },
-            confirm(){
-                this.mobile = this.mobile.replace(/\s+/g,"")
-                if(this.mobile==''){
-                    this.$vux.toast.show({
-                        text: this.$t('discovery.recharge.error.mobile'),
-                        type: 'warn'
-                    })
-                    return;
+                if(this.type==1){
+                    this.Remakes = this.phonecharges[index].money+'CNY'
+                }else if(this.type==2){
+                    this.Remakes = this.gprs[index].value
                 }
+                
             },
-            submit(){
-                // 获取详情
-                if(this.isok){
-                    return;
-                }
+            subconfirm(){
                 this.mobile = this.mobile.replace(/\s+/g,"")
                 if(this.mobile==''){
                     this.$vux.toast.show({
@@ -206,6 +212,23 @@
                         }
                     break;
                 }
+                this.modal = true;
+            },
+            confirm(){
+                this.mobile = this.mobile.replace(/\s+/g,"")
+                if(this.mobile==''){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.recharge.error.mobile'),
+                        type: 'warn'
+                    })
+                    return;
+                }
+            },
+            submit(){
+                // 获取详情
+                if(this.isok){
+                    return;
+                }
                 this.isok = true;
                 
                 // 应用类型
@@ -228,10 +251,10 @@
                 })
             },
             ok () {
-                this.$Message.info('Clicked ok');
+                this.submit();
             },
             cancel () {
-                this.$Message.info('Clicked cancel');
+                this.modal = false;
             }
 		},
 		mounted() {
@@ -245,8 +268,9 @@
 			},
 			).then(data => {
 				if(data){
-                    this.bdc =  data[0].Money;
-                    this.RMB     = this.phonecharges[0].money/this.bdc;
+                    this.bdc     =  data[0].Money;
+                    this.RMB     =  this.phonecharges[0].money/this.bdc;
+                    this.Remakes =  this.phonecharges[0].money+"CNY"
 				}
             })
 		}

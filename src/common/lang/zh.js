@@ -17,6 +17,7 @@ export const zh = {
         close               : '关闭',
         submit              : '提交',
         ok                  : '确认',
+        cancel              : '取消',
         notice              : '系统公告',
         msg                 : '短信登陆',
         unopened            : '暂未开放',
@@ -127,10 +128,13 @@ export const zh = {
         recharge:{
             title       :   '充值',
             price       :   '售价',
-            type:{
+            group       :   '充值类型',
+            money       :   '金额',
+            type:{ 
                 phone   :   '话费',
                 gprs    :   '流量',
-                oilcard :   '油卡'
+                oilcard :   '油卡',
+                oilcards:   '油卡充值',
             },
             error:{
                 num     :   '充值金额不能小于1',

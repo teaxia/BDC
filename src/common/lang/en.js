@@ -17,6 +17,7 @@ export const en = {
         close       : 'close',
         submit      : 'Submit',
         ok          : 'OK',
+        cancel      : 'Cancel',
         notice      : 'Notice',
         msg         : 'Msg login',
         unopened    : 'Unopened',
@@ -126,6 +127,8 @@ export const en = {
         recharge:{
             title       :   'Recharge',
             price       :   'price',
+            group       :   'Recharge type',
+            money       :   'Money',
             type:{
                 phone   :   'Telephone rate',
                 gprs    :   'data',
