@@ -16,6 +16,16 @@ Storage.add = function (name, addVal) {
 
 Storage.logout = function (){
     //清除所有本地缓存
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem('Name');
+    localStorage.removeItem('NickName');
+    localStorage.removeItem('RechargeCode');
+    localStorage.removeItem('guid');
+    localStorage.removeItem('InviteCode');
+    localStorage.removeItem('RealName');
+    localStorage.removeItem('HeadImg');
+    localStorage.removeItem('Mobile');
+    localStorage.removeItem('Sex');
+    localStorage.removeItem('ParentName');
 }
 export default Storage
