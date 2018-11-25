@@ -53,10 +53,8 @@
 </template>
 
 <script>
-import { GetCurrency } from '../../common/mixins/getcurrency';
 	export default {
         name:'btob',
-        mixins:[GetCurrency],
 		data() {
 			return {
                 act         :   'BTC',
@@ -90,15 +88,15 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
                 switch(this.act){
                     case "BTC":
                         this.address = this.btobinfo.RechargeAddressBTC;            // 兑换地址
-                        this.proportion = this.btobinfo.PriceBTC;
+                        this.proportion = this.btobinfo.PriceBTC/this.btobinfo.PriceBDC;
                     break;
                     case "DASH":
                         this.address = this.btobinfo.RechargeAddressDASH;            // 兑换地址
-                        this.proportion = this.btobinfo.PriceDASH;
+                        this.proportion = this.btobinfo.PriceDASH/this.btobinfo.PriceBDC;
                     break;
                     case "ETH":
                         this.address = this.btobinfo.RechargeAddressETH;            // 兑换地址
-                        this.proportion = this.btobinfo.PriceDASH; 
+                        this.proportion = this.btobinfo.PriceETH/this.btobinfo.PriceBDC; 
                     break;
                 }
             },
@@ -109,10 +107,10 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
                         this.price = (this.num*(this.btobinfo.PriceBTC/this.btobinfo.PriceBDC)).toFixed(8);
                     break;
                     case "DASH":
-                        this.price = (this.num*(this.btobinfo.PriceBTC/this.btobinfo.PriceBTC)).toFixed(8);
+                        this.price = (this.num*(this.btobinfo.PriceDASH/this.btobinfo.PriceBDC)).toFixed(8);
                     break;
                     case "ETH":
-                        this.price = (this.num*(this.btobinfo.PriceBTC/this.btobinfo.PriceETH)).toFixed(8);
+                        this.price = (this.num*(this.btobinfo.PriceETH/this.btobinfo.PriceBDC)).toFixed(8);
                     break;
                 }
             }
@@ -170,11 +168,11 @@ import { GetCurrency } from '../../common/mixins/getcurrency';
 			).then(data => {
 				if(data){
                     this.btobinfo = data;
-                    this.address  = data.RechargeAddressBTC;            // 兑换地址
-                    this.proportion = this.btobinfo.PriceBTC;           // 兑换比例 
+                    this.address  = data.RechargeAddressBTC;                                    // 兑换地址
+                    this.proportion = this.btobinfo.PriceBTC/this.btobinfo.PriceBDC;            // 兑换比例 
 				}
             })
-            this.getcurren();
+
 
         },
 	}

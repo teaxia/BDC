@@ -19,7 +19,7 @@ export const zh = {
         ok                  : '确认',
         cancel              : '取消',
         notice              : '系统公告',
-        msg                 : '短信登陆',
+        msg                 : '短信登录',
         unopened            : '暂未开放',
     },
     input:{
@@ -269,7 +269,7 @@ export const zh = {
         },
         setting:{
             settile         :   '设置',
-            editpsw         :   '修改登陆密码',
+            editpsw         :   '修改登录密码',
             safepsw         :   '修改安全密码',
             language        :   '语言选择',
             price           :   '货币选择',
