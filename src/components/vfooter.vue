@@ -51,10 +51,11 @@ export default {
   methods:{
     onUrl(url){
       if(url=='false'){
-				this.$vux.toast.show({
-					text: this.$t('global.unopened'),
-					type: 'warn'
-				})
+				// this.$vux.toast.show({
+				// 	text: this.$t('global.unopened'),
+				// 	type: 'warn'
+				// })
+        window.location.href = 'http://bdcmalls.com/';
 			}else{
 				this.$router.push({
 					path    :   url,

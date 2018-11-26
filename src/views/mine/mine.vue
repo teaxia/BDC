@@ -56,7 +56,7 @@
 							<span>{{$t('mine.menus.question')}}</span>
 						</span>
 					</cell>
-					<cell is-link class="cell-hei">
+					<cell is-link link="/mine/feedback" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-yijianfankui"></i>
 							<span>{{$t('mine.menus.feedback')}}</span>

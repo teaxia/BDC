@@ -24,6 +24,7 @@ export default {
 .grid{
     height: auto;
     overflow: hidden;
+    border:0.01rem solid #dadbde;
     padding:10px 0;
     border-radius: 10px;
     box-shadow:  0px 2px 6px #dadbde;

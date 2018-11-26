@@ -17,10 +17,10 @@ import VueQriously from 'vue-qriously'               // 二维码生成
 import VueClipboard from 'vue-clipboard2'             // 复制内容到剪切板
 import vfooter from './components/vfooter.vue'
 import vgrid from './components/vgrid.vue'
-import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell } from 'vux'
+import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
-import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse } from 'iview';
+import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Upload,Icon } from 'iview';
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
@@ -49,9 +49,9 @@ Vue.component('Input',Input)
 Vue.component('Modal',Modal)
 Vue.component('Collapse',Collapse)
 Vue.component('Panel',Panel)
-
-
-
+Vue.component('x-textarea', XTextarea)
+Vue.component('Upload',Upload)
+Vue.component('Icon',Icon)
 
 
 

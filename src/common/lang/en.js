@@ -286,6 +286,11 @@ export const en = {
                 notpsw          :   'The password entered two times is inconsistent'
             }
         },
+        feedback:{
+            title       :   'Feedback',
+            msg         :   'Thank you for your valuable advice...',
+            tip         :   'Feedback should not be empty',
+        },
         extension:{
             tg          :       'Extension',
             invitecode  :       'InviteCode',

@@ -42,6 +42,8 @@ import myhome from './views/mine'
         import safepsw from './views/mine/safepsw.vue'                  // 安全密码
         import language from './views/mine/language.vue'                // 语言
         import price from './views/mine/price.vue'                      // 货币
+        import feedback from './views/mine/feedback.vue'                // 意见反馈
+        import auth from './views/mine/auth.vue'                        // 实名认证
     
 // 404
 import NotFound from './views/404.vue'
@@ -141,13 +143,13 @@ let routes = [
             { path: '/mine/area', component: area, name: 'area',meta:{isIndex: 3}},
             { path: '/mine/extension', component: extension, name: 'extension',meta:{isIndex: 3}},
             { path: '/mine/question', component: question, name: 'question',meta:{isIndex: 3}},
+            { path: '/mine/feedback', component: feedback, name: 'feedback',meta:{isIndex: 3}},
             { path: '/mine/setting', component: setting, name: 'setting',meta:{isIndex: 3}},
+            { path: '/mine/auth', component: auth, name: 'auth',meta:{isIndex: 3}},
                 { path: '/mine/editpsw', component: editpsw, name: 'editpsw',meta:{isIndex: 3}},
                 { path: '/mine/safepsw', component: safepsw, name: 'safepsw',meta:{isIndex: 3}},
                 { path: '/mine/language', component: language, name: 'language',meta:{isIndex: 3}},
                 { path: '/mine/price', component: price, name: 'price',meta:{isIndex: 3}},
-                
-            
         ]
     },
     // 文章

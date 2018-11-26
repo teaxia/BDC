@@ -4,8 +4,8 @@ export const zh = {
     global:{
         title               : 'BDC钱包',
         next                : '下一步',
-        success             : '成功！',
-        error               : '失败！',
+        success             : '成功',
+        error               : '失败',
         entry               : '请输入',
         num                 : '数量',
         price               : '价格',
@@ -49,8 +49,8 @@ export const zh = {
             password        : '请输入密码',
             repassword      : '请再输入一次密码',
             phone           : '请输入手机号',
-            forget          : '忘记密码？',
-            success         : '登录成功！',
+            forget          : '忘记密码?',
+            success         : '登录成功',
             verification    : '验证码',
             mobileerror     : '请输入正确的手机号',
             vcode           : '验证码',
@@ -287,6 +287,11 @@ export const zh = {
                 repsw           :   '新密码与旧密码必须填写',
                 notpsw          :   '两次输入的密码不一致'
             }
+        },
+        feedback:{
+            title       :   '意见反馈',
+            msg         :   '感谢您的宝贵建议...',
+            tip         :   '意见反馈不能为空',
         },
         extension:{
             tg          :       '推广',

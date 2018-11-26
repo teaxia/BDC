@@ -1,0 +1,13 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.auth{
+    .upload{
+        border:0.03rem dashed $border-line;
+        border-radius: 10px;
+        height: 250px;
+    }
+    .file{
+        opacity: 0;
+    }
+}
