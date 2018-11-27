@@ -39,7 +39,14 @@ axios.interceptors.request.use(
 
 //响应拦截器即异常处理
 axios.interceptors.response.use(response => {
-  let data = JSON.parse(response.data.d);
+  if(response.data.d){
+      // 非上传接口
+      var data = JSON.parse(response.data.d);
+  }else{
+      // 上传接口
+      var data = response;
+  }
+  
   // 隐藏loading
   window.app.$vux.loading.hide()
   if(data.Code==-1){
@@ -62,7 +69,13 @@ axios.interceptors.response.use(response => {
   }else{
     // 成功
     //return data.Data
-    return JSON.parse(data.Data);
+    if(response.data.d){
+      // 非上传接口
+        return JSON.parse(data.Data);
+    }else{
+        // 上传接口
+        return data.data
+    }
   }
 }, err => {
   if (err && err.response) {
