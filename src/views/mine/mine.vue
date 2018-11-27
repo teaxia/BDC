@@ -62,7 +62,7 @@
 							<span>{{$t('mine.menus.feedback')}}</span>
 						</span>
 					</cell>
-					<cell is-link class="cell-hei">
+					<cell is-link link="/mine/auth" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-shimingrenzheng"></i>
 							<span>{{$t('mine.menus.realname')}}</span>

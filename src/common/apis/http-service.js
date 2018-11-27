@@ -18,9 +18,15 @@ axios.interceptors.request.use(
         text: 'Loading'
        })
     }
-    config.data = JSON.stringify(config.data);
-    config.headers = {
-        'Content-Type': 'application/json',
+    if(config.upload){
+      config.headers = {
+          'Content-Type': 'multipart/form-data',
+      }
+    }else{
+      config.data = JSON.stringify(config.data);
+      config.headers = {
+          'Content-Type': 'application/json',
+      }
     }
     return config;
   },
@@ -213,7 +219,7 @@ export function get(url,params={}){
  * @returns {Promise}
  */
 
- export function post(url,data = {},config = {showLoading:true}){
+ export function post(url,data = {},config = {showLoading:true,upload:false}){
    return new Promise((resolve,reject) => {
      axios.post(url,data,config)
         .then(response => {

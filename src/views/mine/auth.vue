@@ -2,36 +2,20 @@
 	<div class="auth padding-footer" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" title="实名认证"></x-header>
         <div class="main-container">
-			<div class="upload upload-a" v-for="item in uploadList">
-                <template>
-                    <img :src="item.url">
-                    <div class="demo-upload-list-cover">
-                        <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
-                        <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
-                    </div>
-                </template>
+			<div class="upload">
+                <input type="file" @change="selectimg($event,'a')" class="file" ref="front" value="" id="filea" accept="image/gif,image/jpeg,image/jpg,image/png" />
+                <label for="filea" class="label">选择正面</label>
+                <img :src="filea" class="card" />
             </div>
-            <Upload
-                ref="upload"
-                :show-upload-list="false"
-                :default-file-list="defaultList"
-                :on-success="handleSuccess"
-                :format="['jpg','jpeg','png']"
-                :max-size="2048"
-                :on-format-error="handleFormatError"
-                :on-exceeded-size="handleMaxSize"
-                :before-upload="handleBeforeUpload"
-                multiple
-                type="drag"
-                action="//jsonplaceholder.typicode.com/posts/"
-                style="display: inline-block;width:58px;">
-                <div style="width: 58px;height:58px;line-height: 58px;">
-                    <Icon type="ios-camera" size="20"></Icon>
-                </div>
-            </Upload>
-            <Modal title="View Image" v-model="visible">
-                <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
-            </Modal>
+            <div class="upload mr50">
+                <input type="file" @change="selectimg($event,'b')" class="file" ref="back" value="" id="fileb" accept="image/gif,image/jpeg,image/jpg,image/png" />
+                <label for="fileb" class="label">选择反面</label>
+                <img :src="fileb" class="card" />
+            </div>
+            <group>
+                <x-input class="test" title="真实姓名" required placeholder="请输入真实姓名" v-model="realname">
+                </x-input>
+            </group>
             <button class="btn btn-block btn-round mr50" @click="submit()">{{$t('global.submit')}}</button>
 		</div>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
@@ -42,52 +26,78 @@
 	export default {
 		data() {
 			return {
-                defaultList     :   [],
-				imgName         :   '',
-                visible         :   false,
-                uploadList      :   []
+                filea : '',
+                fileb : '',
+                dataa   :'',
+                datab   :'',
+                realname:''
 			}
 		},
 		methods: {
 			submit(){
-                //
-            },
-            handleView (name) {
-                this.imgName = name;
-                this.visible = true;
-            },
-            handleRemove (file) {
-                const fileList = this.$refs.upload.fileList;
-                this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
-            },
-            handleSuccess (res, file) {
-                file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
-                file.name = '7eb99afb9d5f317c912f08b5212fd69a';
-            },
-            handleFormatError (file) {
-                this.$Notice.warning({
-                    title: 'The file format is incorrect',
-                    desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
-                });
-            },
-            handleMaxSize (file) {
-                this.$Notice.warning({
-                    title: 'Exceeding file size limit',
-                    desc: 'File  ' + file.name + ' is too large, no more than 2M.'
-                });
-            },
-            handleBeforeUpload () {
-                const check = this.uploadList.length < 5;
-                if (!check) {
-                    this.$Notice.warning({
-                        title: 'Up to five pictures can be uploaded.'
-                    });
+                if(this.realname==''){
+                    this.$vux.toast.show({
+                        text: '请输入您的真实姓名',
+                        type: 'warn'
+                    })
+                    return
                 }
-                return check;
+                if(this.filea==''){
+                    this.$vux.toast.show({
+                        text: '请上传身份证正面',
+                        type: 'warn'
+                    })
+                    return
+                }
+                if(this.fileb==''){
+                    this.$vux.toast.show({
+                        text: '请上传身份证反面',
+                        type: 'warn'
+                    })
+                    return
+                }
+                var idcard = new FormData()
+                idcard.append('guid',this.$storage.get('guid'))         // guid
+                idcard.append('front', this.dataa)                      // 身份证正面
+                idcard.append('back', this.datab)                       // 反面
+                idcard.append('name',this.realname)                     // 真实姓名
+                this.$server.post('SetRealName',idcard,{upload:true}).then(data => {
+                    if(data){
+                        this.$vux.toast.show({
+                            text: this.$t("global.success"),
+                            type: 'success'
+                        })
+                    }
+                })
+            },
+            selectimg(e,file){
+                if(e==''){
+                    return;
+                }
+                var that = this
+                var files = e.target.files[0]
+                if(files.size/1024>5120){
+                    this.$vux.toast.show({
+                        text: '图片大小不能超过5M',
+                        type: 'warn'
+                    })
+                    return
+                }
+                let reader = new FileReader()
+                reader.readAsDataURL(files)
+                reader.onloadend = function () {
+                    if(file=="a"){
+                        that.filea = this.result
+                        that.dataa = e.target.files[0]
+                    }else{
+                        that.fileb = this.result
+                        that.datab = e.target.files[0]
+                    }
+                }
             }
 		},
 		mounted() {
-            this.uploadList = this.$refs.upload.fileList;
+            
 		}
 	}
 
