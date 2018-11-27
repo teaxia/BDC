@@ -146,7 +146,7 @@ export default {
                     if(!this.$storage.get('NickName')&&this.$storage.get('NickName')!='undefined'){
                         this.$storage.set('NickName',data.NickName);                        // 昵称
                         this.$storage.set('Name',data.Name);                                // 用户名
-                        this.$storage.set('RealName',data.RealName); 
+                        (data.RealName)?this.$storage.set('RealName',data.RealName):this.$storage.set('RealName','');
                         this.$storage.set('HeadImg',data.HeadImg);                          // 昵称
                         this.$storage.set('RechargeCode',data.RechargeCode);                // 充值地址
                         this.$storage.set('Mobile',data.PhoneNo);                           // 手机号

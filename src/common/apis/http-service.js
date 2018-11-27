@@ -14,8 +14,8 @@ axios.interceptors.request.use(
     // 判断是否重复提交请求，也就是loading是否还存在，如果存在则不显示新的loading
     let isShow = window.app.$vux.loading.isVisible()
     if(!isShow&&config.showLoading){
-        window.app.$vux.loading.show({
-        text: 'Loading'
+       window.app.$vux.loading.show({
+          text: 'Loading'
        })
     }
     if(config.upload){

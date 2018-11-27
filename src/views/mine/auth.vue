@@ -1,23 +1,44 @@
 <template>
 	<div class="auth padding-footer" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="实名认证"></x-header>
-        <div class="main-container">
+        <x-header title="slot:overwrite-title">
+            <div class="overwrite-title" slot="overwrite-title">
+                <div @click="change()" :class="{'overwrite-title-btn':true,'overwrite-title-first':true,'overwrite-title-act':active}">
+                    {{$t('mine.auth.idcard')}}
+                </div>
+                <div @click="change()" :class="{'overwrite-title-btn':true,'overwrite-title-last':true,'overwrite-title-act':!active}">
+                    {{$t('mine.auth.passport')}}
+                </div>
+            </div>
+        </x-header>
+        <img class="card_info" :src="cardbg"/>
+        <div class="main-container pic">
 			<div class="upload">
                 <input type="file" @change="selectimg($event,'a')" class="file" ref="front" value="" id="filea" accept="image/gif,image/jpeg,image/jpg,image/png" />
-                <label for="filea" class="label">选择正面</label>
-                <img :src="filea" class="card" />
+                <label for="filea" class="label">
+                </label>
+                <div class="zindex">
+                    <i class="iconfont icon-weimingming-"></i>
+                    <span>{{$t('mine.auth.front')}}</span>
+                </div>
+                <img v-if="filea" :src="filea" class="card" />
             </div>
-            <div class="upload mr50">
+            <div class="upload">
                 <input type="file" @change="selectimg($event,'b')" class="file" ref="back" value="" id="fileb" accept="image/gif,image/jpeg,image/jpg,image/png" />
-                <label for="fileb" class="label">选择反面</label>
-                <img :src="fileb" class="card" />
+                <label for="fileb" class="label">
+                </label>
+                <div class="zindex">
+                    <i class="iconfont icon-weimingming-"></i>
+                    <span>{{$t('mine.auth.back')}}</span>
+                </div>
+                <img v-if="fileb" :src="fileb" class="card" />
             </div>
+		</div>
+        <div class="main-container">
             <group>
-                <x-input class="test" title="真实姓名" required placeholder="请输入真实姓名" v-model="realname">
-                </x-input>
+                <x-input class="test" :title="$t('mine.auth.realname')" required :placeholder="$t('mine.auth.tips.realname')" v-model="realname"></x-input>
             </group>
             <button class="btn btn-block btn-round mr50" @click="submit()">{{$t('global.submit')}}</button>
-		</div>
+        </div>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -26,62 +47,61 @@
 	export default {
 		data() {
 			return {
-                filea : '',
-                fileb : '',
-                dataa   :'',
-                datab   :'',
-                realname:''
+                filea       :   '',
+                fileb       :   '',
+                dataa       :   '',
+                datab       :   '',
+                realname    :   '',
+                active      :   true,
+                cardbg      :   '/static/images/card.jpg',
 			}
-		},
+        },
+        watch:{
+            active(){
+                if(this.active){
+                    this.cardbg = '/static/images/card.jpg'
+                }else{
+                    this.cardbg = '/static/images/vist.jpg'
+                }
+            }
+        },
 		methods: {
 			submit(){
                 if(this.realname==''){
                     this.$vux.toast.show({
-                        text: '请输入您的真实姓名',
+                        text: this.$t('mine.auth.tips.realname'),
                         type: 'warn'
                     })
                     return
                 }
                 if(this.filea==''){
                     this.$vux.toast.show({
-                        text: '请上传身份证正面',
+                        text: this.$t('mine.auth.tips.realname'),
                         type: 'warn'
                     })
                     return
                 }
                 if(this.fileb==''){
                     this.$vux.toast.show({
-                        text: '请上传身份证反面',
+                        text: this.$t('mine.auth.tips.back'),
                         type: 'warn'
                     })
                     return
                 }
-                // var idcard = new FormData()
-                // idcard.append('guid',this.$storage.get('guid'))         // guid
-                // idcard.append('front', this.dataa)                      // 身份证正面
-                // idcard.append('back', this.datab)                       // 反面
-                // idcard.append('name',this.realname)                     // 真实姓名
-                // this.$server.post('SetRealName',idcard,{upload:true}).then(data => {
-                //     if(data){
-                //         this.$vux.toast.show({
-                //             text: this.$t("global.success"),
-                //             type: 'success'
-                //         })
-                //     }
-                // })
                 this.$server.post(
                 'SetRealName',
                 {
                     guid 	    :   this.$storage.get('guid'),
                     name        :   this.realname,
-                    front       :   this.filea,
-                    back   	    :   this.fileb
+                    front       :   this.dataa,
+                    back   	    :   this.datab
                 }).then(data => {
                     if(data){
                         this.$vux.toast.show({
-                            text: this.$t("global.success"),
+                            text: this.$t('mine.auth.tips.auth'),
                             type: 'success'
                         })
+                        this.GetAccount();
                     }
                 })
             },
@@ -93,7 +113,7 @@
                 var files = e.target.files[0]
                 if(files.size/1024>5120){
                     this.$vux.toast.show({
-                        text: '图片大小不能超过5M',
+                        text: this.$t('mine.auth.tips.pic'),
                         type: 'warn'
                     })
                     return
@@ -101,18 +121,67 @@
                 let reader = new FileReader()
                 reader.readAsDataURL(files)
                 reader.onloadend = function () {
-                    if(file=="a"){
-                        that.filea = this.result
-                        that.dataa = e.target.files[0]
-                    }else{
-                        that.fileb = this.result
-                        that.datab = e.target.files[0]
-                    }
+                    let myDate = new Date();
+                    let day = myDate.getDate();
+                    // 图片上传
+                    let jm     = that.$md5(that.$jm.jmCode+day).toUpperCase();
+                    var idcard = new FormData()
+                    idcard.append('img', e.target.files[0])
+                    idcard.append('jm', jm)
+                    window.app.$vux.loading.show({
+                        text: 'Loading'
+                    })
+                    that.$server.post('http://107.150.127.54:50004/Handler1.ashx',idcard,{upload:true}).then(data => {
+                        if(data){
+                            if(file=="a"){
+                                that.filea = this.result
+                                that.dataa = data.Data;
+                            }else{
+                                that.fileb = this.result
+                                that.datab = data.Data;
+                            }
+                            window.app.$vux.loading.hide()
+                        }
+                    })
                 }
+            },
+            GetAccount(){
+                this.$server.post(
+                'GetAccountById',
+                {
+                    guid : this.$storage.get('guid')
+                }).then(data => {
+                    if(data){
+                        // 判断是否本地缓存了数据，如果有缓存则不更新本地缓存
+                        this.$storage.set('NickName',data.NickName);                        // 昵称
+                        this.$storage.set('Name',data.Name);                                // 用户名
+                        this.$storage.set('RealName',data.RealName); 
+                        this.$storage.set('HeadImg',data.HeadImg);                          // 头像
+                        this.$storage.set('RechargeCode',data.RechargeCode);                // 充值地址
+                        this.$storage.set('Mobile',data.PhoneNo);                           // 手机号
+                        this.$storage.set('Sex',data.Sex);                                  // 性别
+                        this.$storage.set('ParentName',data.ParentName);                    // 推荐人
+                        this.$storage.set('InviteCode',data.InviteCode);                    // 邀请码
+                        this.$router.push({
+                            path:'/mine/myhome',
+                        });
+                    }
+                })
+            },
+            change(){
+                this.active = !this.active;
             }
 		},
 		mounted() {
-            
+            if(this.$storage.get('RealName')!=''){
+                this.$vux.toast.show({
+                    text: this.$t('mine.auth.tips.success'),
+                    type: 'warn'
+                })
+                this.$router.push({
+                    path:'/mine/myhome',
+                });
+            }
 		}
 	}
 

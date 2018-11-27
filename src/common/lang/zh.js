@@ -297,6 +297,21 @@ export const zh = {
         extension:{
             tg          :       '推广',
             invitecode  :       '我的邀请码',
+        },
+        auth:{
+            idcard      :   '身份证',
+            passport    :   '护照',
+            front       :   '选择正面',
+            back        :   '选择反面',
+            realname    :   '真实姓名',
+            tips:{
+                realname    :   '请输入真实姓名',
+                front       :   '请上传正面',
+                back        :   '请上传反面',
+                auth        :   '认证成功',
+                pic         :   '图片大小不能超过5M',
+                success     :   '您已经通过认证'
+            }
         }
     }
 };

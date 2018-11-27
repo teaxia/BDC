@@ -125,7 +125,7 @@ export default {
 	mounted() {
 		this.nickname = this.$storage.get('NickName');
 		this.avatar   = this.$storage.get('HeadImg');
-		this.realname = (this.$storage.get('Realname'))?this.$storage.get('Realname'):this.$t('global.Uncertified');
+		this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
 	}
 }
 

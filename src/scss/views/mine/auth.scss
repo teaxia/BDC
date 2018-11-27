@@ -2,25 +2,49 @@
 @import "../../base/var";
 @import "../../base/button";
 .auth{
-    .upload{
-        border:0.03rem dashed $border-line;
-        border-radius: 10px;
-        height: 250px;
-        position: relative;
+    background:#fafafa;
+    .pic{
+        display: flex;
+        justify-content: space-between;
+        .upload{
+            border:0.03rem dashed $border-line;
+            border-radius: 10px;
+            height: 250px;
+            width: 340px;
+            position: relative;
+            img{
+                height: 100%;
+            }
+        }
+        .card{
+            position: absolute;
+            width: 100%;
+            height: 348px;
+            left: 0;
+            top: 0;
+            z-index:10;
+        }
+        .label{
+            position: relative;
+            z-index:11;
+            text-align: center;
+            height: 248px;
+            line-height: 248px;
+        }
+        .file{
+            display: none;
+            opacity: 0;
+        }
+        .zindex{
+            position: absolute;
+            z-index:1;
+            left: 90px;
+            top: 90px;
+        }
     }
-    .file{
-        opacity: 0;
-    }
-    .card{
-        position: absolute;
-        width: 100%;
-        height: 248px;
-        left: 0;
-        top: 0;
-        z-index:10;
-    }
-    .label{
-        position: relative;
-        z-index:11;
+    .card_info{
+        width: 80%;
+        margin:0 auto;
+        display: block;
     }
 }

@@ -295,6 +295,21 @@ export const en = {
         extension:{
             tg          :       'Extension',
             invitecode  :       'InviteCode',
+        },
+        auth:{
+            idcard      :   'ID',
+            passport    :   'Passport',
+            front       :   'Front',
+            back        :   'Back',
+            realname    :   'Realname',
+            tips:{
+                realname    :   'Please enter your real name.',
+                front       :   'Please upload the front.',
+                back        :   'Please upload the reverse side',
+                auth        :   'Certification success',
+                pic         :   'Picture size should not exceed 5M',
+                success     :   'You have passed the certification.'
+            }
         }
     }
 }
