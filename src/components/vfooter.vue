@@ -27,8 +27,8 @@ export default {
           value   : this.$t("menu.application"),
           icon    : 'icon-yingyongxianxing',
           acicon  : 'icon-yingyongmianxing',
-          //url     : '/app/index',
-          url     : 'false',
+          url     : '/app/index',
+          //url     : 'false',
           index : 1
         },
         {
@@ -55,7 +55,7 @@ export default {
 				// 	text: this.$t('global.unopened'),
 				// 	type: 'warn'
 				// })
-        window.location.href = 'http://bdcmalls.com/';
+        //window.location.href = 'http://bdcmalls.com/';
 			}else{
 				this.$router.push({
 					path    :   url,

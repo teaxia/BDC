@@ -56,12 +56,27 @@
                     })
                     return
                 }
-                var idcard = new FormData()
-                idcard.append('guid',this.$storage.get('guid'))         // guid
-                idcard.append('front', this.dataa)                      // 身份证正面
-                idcard.append('back', this.datab)                       // 反面
-                idcard.append('name',this.realname)                     // 真实姓名
-                this.$server.post('SetRealName',idcard,{upload:true}).then(data => {
+                // var idcard = new FormData()
+                // idcard.append('guid',this.$storage.get('guid'))         // guid
+                // idcard.append('front', this.dataa)                      // 身份证正面
+                // idcard.append('back', this.datab)                       // 反面
+                // idcard.append('name',this.realname)                     // 真实姓名
+                // this.$server.post('SetRealName',idcard,{upload:true}).then(data => {
+                //     if(data){
+                //         this.$vux.toast.show({
+                //             text: this.$t("global.success"),
+                //             type: 'success'
+                //         })
+                //     }
+                // })
+                this.$server.post(
+                'SetRealName',
+                {
+                    guid 	    :   this.$storage.get('guid'),
+                    name        :   this.realname,
+                    front       :   this.filea,
+                    back   	    :   this.fileb
+                }).then(data => {
                     if(data){
                         this.$vux.toast.show({
                             text: this.$t("global.success"),

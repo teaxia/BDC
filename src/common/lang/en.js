@@ -202,7 +202,8 @@ export const en = {
             assetsview      :   'Assets',
             income          :   'Income',
             balance         :   'Balance',
-            date            :   'Date', 
+            date            :   'Date',
+            release         :   'Release'
         },
         transfor:{
             type1           :   'Capital To Act',

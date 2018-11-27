@@ -17,10 +17,20 @@ li{
 input{
     border:none;
     min-height: 1rem !important;
-    font-size:0.5rem !important;
+    font-size:0.3rem !important;
 }
 .weui-label{
-    font-size:0.5rem;
+    font-size:0.4rem;
+}
+.label,.radio{
+    height: 1rem;
+    font-size:0.4rem;
+    line-height: 1rem;
+    display: block;
+}
+.ivu-radio-group{
+    height:1rem;
+    font-size:0.4rem;
 }
 .main-pd{
     padding: 20px 30px;

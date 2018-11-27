@@ -20,6 +20,7 @@ axios.interceptors.request.use(
     }
     if(config.upload){
       config.headers = {
+          'Accept': 'application/json',
           'Content-Type': 'multipart/form-data',
       }
     }else{

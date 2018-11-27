@@ -1,22 +1,21 @@
 <template>
 	<div class="appindex" v-cloak>
-        <!-- <x-header title="slot:overwrite-title">
+        <x-header title="slot:overwrite-title">
             <div class="overwrite-title" slot="overwrite-title">
                 <div @click="change()" :class="{'overwrite-title-btn':true,'overwrite-title-first':true,'overwrite-title-act':active}">{{$t("application.title.buy")}}</div>
                 <div @click="change()" :class="{'overwrite-title-btn':true,'overwrite-title-last':true,'overwrite-title-act':!active}">{{$t("application.title.shop")}}</div>
             </div>
-        </x-header> -->
+        </x-header>
         <div class="main-container">
-            <h1>{{$t("menu.application")}}</h1>
-            <div class="select">
+            <!-- <div class="select">
                 <div @click="change()" :class="{'select-title':true}">
                     <span :class="{'select-act':active}">{{$t("application.title.buy")}}</span>
                 </div>
                 <div @click="change()" :class="{'select-title':true}">
                     <span :class="{'select-act':!active}">{{$t("application.title.shop")}}</span>
                 </div>
-            </div>
-            <div class="mr30">
+            </div> -->
+            <!-- <div class="mr30">
                 <v-grid>
                     <div class="pd-lb20">
                         <flexbox>
@@ -34,8 +33,9 @@
                         </flexbox>
                     </div>
                 </v-grid>
-            </div>
+            </div> -->
         </div>
+        <iframe src="http://bdcmalls.com/" class="iframe" frameborder="0"></iframe>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>

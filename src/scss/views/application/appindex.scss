@@ -1,8 +1,11 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
-
+.main-container{
+    padding: 0;
+}
 .appindex{
+    height: 1070px;
     .select{
         width: 200px;
         margin:0 auto;
@@ -19,5 +22,9 @@
             padding-bottom: 8px;
             border-bottom:0.01rem solid $font-base;
         }
+    }
+    .iframe{
+        height: 100%;
+        width: 100%;
     }
 }

@@ -204,7 +204,8 @@ export const zh = {
             assetsview      :   '固定资产详情',
             income          :   '收入',
             balance         :   '余额',
-            date            :   '时间',            
+            date            :   '时间',
+            release         :   '正在释放'            
         },
         transfor:{
             type1           :   '通证转固定',
