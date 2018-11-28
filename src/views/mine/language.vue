@@ -3,19 +3,17 @@
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.language')"></x-header>
         <div class="pd50">
             <div class="enterfrom">
-                <group>
-                    <div class="label">{{$t('mine.setting.language')}}：</div>
-                    <div class="radio">
-                        <RadioGroup v-model="lang">
-                            <Radio label="en">
-                                <span>{{$t('mine.setting.english')}}</span>
-                            </Radio>
-                            <Radio label="zh">
-                                <span>{{$t('mine.setting.chinaese')}}</span>
-                            </Radio>
-                        </RadioGroup>
-                    </div>
-                </group>
+                <div class="label">{{$t('mine.setting.language')}}：</div>
+                <div class="radio">
+                    <RadioGroup v-model="lang">
+                        <Radio label="en">
+                            <span>{{$t('mine.setting.english')}}</span>
+                        </Radio>
+                        <Radio label="zh">
+                            <span>{{$t('mine.setting.chinaese')}}</span>
+                        </Radio>
+                    </RadioGroup>
+                </div>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
         </div>
@@ -64,8 +62,9 @@ export default {
         float: left;
         height: 50px;
         line-height: 50px;;
-        font-size: 18px;
-        width: 150px;
+        font-size: 32px;
+        width: 180px;
+        margin-top:20px;
         padding-left: 0.2rem;
     }
 }

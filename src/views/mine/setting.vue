@@ -1,9 +1,9 @@
 <template>
 	<div class="setting" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.settile')"></x-header>
-        <div class="pd50">
+        <div class="main-container">
             <div class="enterfrom">
-                <v-grid class="mr50">
+                <v-grid class="mr10">
                     <group>
                         <cell link="/mine/editpsw" is-link class="cell-hei">
                             <span slot="title">
@@ -29,6 +29,7 @@
                 </v-grid>
             </div>
         </div>
+        <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
 

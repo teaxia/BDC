@@ -17,6 +17,7 @@
             justify-content: center;
             position: absolute;
             top:-80px;
+            background:$bg-white;
             .avatar {
                 font-size:100px;
             }
@@ -25,7 +26,8 @@
             flex-wrap: wrap;
             text-align: center;
             width: 100%;
-            margin-top:50px;
+            margin-top:58px;
+            font-size:38px;
         }
     }
 }

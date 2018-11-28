@@ -62,8 +62,9 @@
 		},
 		methods: {
 			go(link){
-                this.show = true;
-                this.golink = link;
+                //this.show = true;
+                window.open(link);
+                //this.golink = link;
             },
             close(){
                 this.show = false;

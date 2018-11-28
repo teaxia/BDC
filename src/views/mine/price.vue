@@ -72,7 +72,7 @@ export default {
         float: left;
         height: 50px;
         line-height: 50px;;
-        font-size: 18px;
+        font-size: 28px;
         width: 200px;
         padding-left: 0.2rem;
     }

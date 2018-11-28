@@ -9,7 +9,7 @@
                 <v-grid>
                     <div class="pd-lb20">
                         <flexbox class="vux-1px-b pb">
-                            <flexbox-item :span="3">
+                            <flexbox-item :span="3" class="lable">
                                 {{$t('discovery.expectinfo.title')}}
                             </flexbox-item>
                             <flexbox-item :span="5">
@@ -22,7 +22,7 @@
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
-                            <flexbox-item :span="3">
+                            <flexbox-item :span="3" class="lable">
                                 {{$t('discovery.cash.selectbank')}}：
                             </flexbox-item>
                             <flexbox-item>
@@ -32,7 +32,7 @@
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
-                            <flexbox-item :span="3">
+                            <flexbox-item :span="3" class="lable">
                                 {{$t('discovery.cash.cardname')}}：
                             </flexbox-item>
                             <flexbox-item :span="6">
@@ -43,7 +43,7 @@
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
-                            <flexbox-item :span="3">
+                            <flexbox-item :span="3" class="lable">
                                 {{$t('discovery.cash.cardnumber')}}：
                             </flexbox-item>
                             <flexbox-item :span="6">
@@ -54,7 +54,7 @@
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb">
-                            <flexbox-item :span="3">
+                            <flexbox-item :span="3" class="lable">
                                 {{$t('discovery.cash.buyname')}}：
                             </flexbox-item>
                             <flexbox-item>
@@ -76,7 +76,7 @@
 		data() {
 			return {
                 bankinfo    :   [],
-                bank        :   '2',
+                bank        :    2,
                 bankname    :   '',   
                 name        :   '',
                 num         :   '',
@@ -154,7 +154,7 @@
 			},
 			).then(data => {
 				if(data){
-                    this.bankinfo = data;
+                    this.bankinfo     = data;
                     this.cardname     = data[this.bank].OpenCardName;
                     this.cardnumber   = data[this.bank].BankCardNo;
                     this.bankname     = data[this.bank].BankName;

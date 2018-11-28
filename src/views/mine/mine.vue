@@ -32,14 +32,12 @@
 							<span>{{$t('mine.menus.spread')}}</span>
 						</span>
 					</cell>
-					<div @click="go()">
 					<cell is-link class="cell-hei">
-						<span slot="title" >
+						<span slot="title" @click="go()">
 							<i class="iconfont icon-guanwang"></i>
 							<span>{{$t('mine.menus.website')}}</span>
 						</span>
 					</cell>
-					</div>
 					<cell link="/mine/area" is-link class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-tianjiakuangquchengyuan"></i>
@@ -67,6 +65,7 @@
 							<i class="iconfont icon-shimingrenzheng"></i>
 							<span>{{$t('mine.menus.realname')}}</span>
 						</span>
+						<div slot="default" v-if="isreal" class="authrel">{{realname}}</div>
 					</cell>
 					<cell is-link link="/mine/setting" class="cell-hei">
 						<span slot="title">
@@ -98,6 +97,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			show		:	false,
+			isreal		:	'',
 		}
 	},
 	methods: {
@@ -125,6 +125,7 @@ export default {
 	mounted() {
 		this.nickname = this.$storage.get('NickName');
 		this.avatar   = this.$storage.get('HeadImg');
+		this.isreal	  = (this.$storage.get('RealName'))?false:true;
 		this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
 	}
 }

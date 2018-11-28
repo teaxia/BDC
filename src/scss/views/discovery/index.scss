@@ -32,11 +32,13 @@
             }
         }
         .dis-grid-content{
-            .content,.title{
+            .content{
                 padding:10px;
+                color:$font-baseh2;
+            }
+            .title{
                 color:$font-base;
             }
-            
         }
     }
     

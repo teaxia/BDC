@@ -16,9 +16,15 @@ li{
 }
 input{
     border:none;
-    min-height: 1rem !important;
-    font-size:0.3rem !important;
+    min-height: 1rem;
+    font-size:0.426667rem;
 }
+*:focus { 
+    outline: none;
+    background-color: transparent;
+}
+::selection{background:transparent; }
+::-moz-selection{background:transparent; }
 .weui-label{
     font-size:0.4rem;
 }
@@ -166,6 +172,24 @@ input{
 .weui-toast__content{
     font-size:0.5rem !important;
     text-align: center;
+}
+.weui-cells{
+    margin-top:0 !important;
+    &:before,&:after{
+        display: none;
+    }
+}
+.vux-x-input{
+    border-bottom:0.01rem solid $border-line !important;
+}
+.weui-cell{
+    border-bottom:0.01rem solid $border-line;
+    &:before,&:after{
+        display: none;
+    }
+    &:last-child{
+        border:none;
+    }
 }
 /*flex*/
 .flex-table{

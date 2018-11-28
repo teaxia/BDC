@@ -1,9 +1,9 @@
 <template>
 	<div class="feedback padding-footer" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.feedback.title')"></x-header>
-        <div class="main-container">
+        <div class="main-container"> 
 			<group>
-                <x-textarea class="textarea" v-model="value" max="200" :show-counter="true" :placeholder="$t('mine.feedback.msg')"></x-textarea>
+                <x-textarea class="textarea" v-model="value" :max="200" :show-counter="true" :placeholder="$t('mine.feedback.msg')"></x-textarea>
             </group>
             <button class="btn btn-block btn-round mr50" @click="submit()">{{$t('global.submit')}}</button>
 		</div>

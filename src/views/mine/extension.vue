@@ -8,8 +8,8 @@
                     <i v-else class="avatar iconfont icon-touxiang"></i>
                 </div>
                 <div class="invitecode">
-                    <i class="iconfont icon-feiji"></i>{{$t('mine.extension.invitecode')}}<br/>
-                    {{InviteCode}}
+                    <p><i class="iconfont icon-feiji"></i>{{$t('mine.extension.invitecode')}}</p>
+                    <p>{{InviteCode}}</p>
                 </div>
                 <div class="ercode">
                     <qriously class="ercode" :value="InviteCode" :size="138"/>
