@@ -85,7 +85,7 @@ export const zh = {
     },
     // 发现
     discovery:{
-        topmenu:{
+        topmenu:{ 
             bdc         :   '兑换BDC',
             ctc         :   'CTC',
             market      :   '行情',
@@ -233,6 +233,10 @@ export const zh = {
             dfaddress       :   '对方地址',
             num             :   '发送数额',
             class           :   '类别',
+            tips:{
+                input       :   '输入/长按粘贴BDC地址',
+                min         :   '最小发送数量0.0001'
+            }
         }
     },
     // 应用

@@ -18,7 +18,7 @@
 					<span>{{code}}</span>
 				</div>
 				<div class="center mr20">
-    				<button type="button" class="btn btn-round" v-clipboard:copy="code" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+    				<button type="button" class="btn btn-round btn-xs" v-clipboard:copy="code" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
 				</div>
 			</v-grid>
 		</div>

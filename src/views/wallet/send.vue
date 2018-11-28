@@ -16,19 +16,19 @@
 			</v-grid>
 			<div class="enterfrom mr100">
                 <group>
-                    <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" placeholder="输入/长按粘贴BDC地址" v-model="bdcaddress">
+                    <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" :placeholder="$t('wallet.send.tips.input')" v-model="bdcaddress">
 						<div slot="right" class="scan"><router-link to="/wallet/scan"><i class="iconfont icon-scanning"></i></router-link></div>
 					</x-input>
                 </group>
                 <group>
-                    <x-input class="test" :title="$t('wallet.send.num')" :show-clear="false" v-model="num" placeholder="最小发送数量0.0001">
+                    <x-input class="test" :title="$t('wallet.send.num')" :show-clear="false" v-model="num" :placeholder="$t('wallet.send.tips.min')">
 					</x-input>
                 </group>
 				<group>
-                    <x-input class="test" type="password" :title="$t('wallet.tips.safetycode')" :show-clear="false" v-model="psw" placeholder="请输入安全密码">
+                    <x-input class="test" type="password" :title="$t('wallet.tips.safetycode')" :show-clear="false" v-model="psw" :placeholder="$t('user.securitypsw')">
 					</x-input>
                 </group>
-				<group>
+				<div class="send_label">
                     <div class="label">{{$t('wallet.send.class')}}</div>
                     <div class="radio">
                         <RadioGroup v-model="type">
@@ -40,7 +40,7 @@
                             </Radio>
                         </RadioGroup>
                     </div>
-                </group>
+                </div>
 				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
             </div>
 		</div>
@@ -67,14 +67,14 @@
 				//
 				if(this.num<0.0001){
 					this.$vux.toast.show({
-                        text: '最小发送数量不能少于0.0001',
+                        text: this.$t('wallet.send.tips.min'),
                         type: 'warn'
 					})
 					return;
 				}
 				if(this.bdcaddress==''||this.num==''||this.psw==''){
 					this.$vux.toast.show({
-						text: '请填写完整信息',
+						text: this.$t('discovery.recharge.error.full'),
 						type: 'warn'
 					})
 					return ;
@@ -92,7 +92,7 @@
 				).then(data => {
 					if(data){
 						this.$vux.toast.show({
-							text: '成功！',
+							text: this.$t('global.success'),
 							type: 'success'
 						})
 					}

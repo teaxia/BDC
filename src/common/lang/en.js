@@ -231,6 +231,10 @@ export const en = {
             dfaddress       :   'address',
             num             :   'num',
             class           :   'category',
+            tips:{
+                input       :   'Input/Long Press Paste BDC Address',
+                min         :   'Minimum number of transmissions 0.0001'
+            }
         }
     },
     // 应用
