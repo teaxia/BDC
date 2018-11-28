@@ -312,6 +312,7 @@ export const en = {
                 back        :   'Please upload the reverse side',
                 auth        :   'Certification success',
                 pic         :   'Picture size should not exceed 5M',
+                picerror    :   'Picture type does not match',
                 success     :   'You have passed the certification.'
             }
         }

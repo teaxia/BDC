@@ -314,6 +314,7 @@ export const zh = {
                 back        :   '请上传反面',
                 auth        :   '认证成功',
                 pic         :   '图片大小不能超过5M',
+                picerror    :   '图片类型不符合',
                 success     :   '您已经通过认证'
             }
         }

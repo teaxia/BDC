@@ -111,6 +111,13 @@
                 }
                 var that = this
                 var files = e.target.files[0]
+                if(files.type!='image/jpeg'&&files.type!='image/gif'&&files.type!='image/png'){
+                    this.$vux.toast.show({
+                        text: this.$t('mine.auth.tips.picerror'),
+                        type: 'warn'
+                    })
+                    return
+                }
                 if(files.size/1024>5120){
                     this.$vux.toast.show({
                         text: this.$t('mine.auth.tips.pic'),
