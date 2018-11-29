@@ -50,6 +50,7 @@ import NotFound from './views/404.vue'
 // 文章详情
 import article from './views/article.vue'
     import articleview from './views/article/article.vue'
+import iframe from './views/article/iframe.vue'
 let routes = [
     {
         path: '/index',
@@ -160,6 +161,7 @@ let routes = [
         name: 'article',
         children: [
             { path: '/article/view', component: articleview, name: 'view'},
+            { path: '/iframe', component: iframe, name: 'iframe'},
         ]
     },
     // 404

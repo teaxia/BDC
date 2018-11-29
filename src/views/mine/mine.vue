@@ -77,13 +77,6 @@
 			</v-grid>
 			<button @click="logout()" class="btn btn-block btn-round mr30"><i class="iconfont icon-send"></i>{{$t('user.logout')}}</button>
 		</div>
-		<div v-if="show" class=fram>
-			<iframe :src="golink" class="iframe" frameborder="0">
-			</iframe>
-			<div class="btnclose">
-				<button @click="close()" class="btn btn-block btn-round mr30">{{$t('global.close')}}</button>
-			</div>
-		</div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -96,7 +89,6 @@ export default {
 			avatar		:	'',
 			realname    :   '',
 			golink		:	'',
-			show		:	false,
 			isreal		:	'',
 		}
 	},
@@ -115,11 +107,12 @@ export default {
 			});
 		},
 		go(){
-			this.show = true;
-			this.golink = 'http://belden-bdc.com';
-		},
-		close(){
-			this.show = false;
+			this.$router.push({
+				name:"iframe",
+				params:{
+					url:'http://www.belden-bdc.net/',
+				}
+			});
 		}
 	},
 	mounted() {

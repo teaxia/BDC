@@ -15,13 +15,6 @@
             </div>
 		</div>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
-        <div v-if="show" class=fram>
-            <iframe :src="golink" class="iframe" frameborder="0">
-            </iframe>
-            <div class="btnclose">
-                <button @click="close()" class="btn btn-block btn-round mr30">{{$t('global.close')}}</button>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -40,38 +33,36 @@
                         link    :   'https://creditcard.cmbc.com.cn/wsv2/?enstr=ZBXUTCGbHYokaXR242HLvWQioqXE5mJuOboTSAMs3NXd1fzKBAaEgu6jFs1xBqQUZBFIsSnyjNUv4hhY9leUvDf0zUpwzTeqdPiemlVAaWjBx6G7ATx6GUbeDnf%2f2i5HOC7n6clO4Lm5YTjZ4ylYaYKtbBgWmZ%2bN27v9KAeDiSlw9naDPMJpUL7Njj1jNiDUyHfe20%2fo6YM6l6m%2b40IbocavnMOphtsnvS1MHNfnzFz83BmMJYFf6Qd9CmM4ajLwT0r4ObjFxWO0k3n9Sc87eXCYF9tZZ6WzzDPsmQRl4%2bCrqetXhIpSHg3cIj4rsPC2hTldZfM6EPQgkGfuuuZhUQ%3d%3d',
                         icon    :   'icon-minshengyinhang',
                     },
-                    {
+                    { 
                         title   :   this.$t('discovery.credit.bank.spdb'),
-                        link    :   'https://ccclub.cmbchina.com/mca/MPreContract.aspx?cardSel=uc&where=bk27&WT.mc_id=N3700MM1061Q530700FS',
+                        link    :   'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=ZF2794961&itemcode=0000001998',
                         icon    :   'icon-pufayinhang',
                     },
                     {
                         title   :   this.$t('discovery.credit.bank.cib'),
-                        link    :   'https://ccclub.cmbchina.com/mca/MPreContract.aspx?cardSel=uc&where=bk27&WT.mc_id=N3700MM1061Q530700FS',
+                        link    :   'https://ccshop.cib.com.cn:8010/application/cardapp/newfast/ApplyCard/toSelectCard?id=08a45a9e327d4cd6a5b2c2030404bf1b',
                         icon    :   'icon-xingyeyinhang',
                     },
                     {
                         title   :   this.$t('discovery.credit.bank.comm'),
-                        link    :   'https://ccclub.cmbchina.com/mca/MPreContract.aspx?cardSel=uc&where=bk27&WT.mc_id=N3700MM1061Q530700FS',
+                        link    :   'https://creditcardapp.bankcomm.com/applynew/front/apply/new/reversion/cardlist.html?trackCode=A0428102275722&commercial_id=null&telecom_id=null',
                         icon    :   'icon-jiaotongyinhang',
                     },
                 ],
-                golink		:	'',
-			    show		:	false,
 			}
 		},
 		methods: {
 			go(link){
-                //this.show = true;
-                window.open(link);
-                //this.golink = link;
-            },
-            close(){
-                this.show = false;
+                this.$router.push({
+                    name:"iframe",
+                    params:{
+                        url:link,
+                    }
+                });
             }
 		},
 		mounted() {
-			
+           
 		}
 	}
 
@@ -79,18 +70,22 @@
 
 <style scoped lang="scss">
 @import "../../scss/views/wallet/notice";
-.fram{
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top:0;
-    background:rgba(0,0,0,.8);
-    z-index:99;
+.notice{
+    position: relative;
+    .fram{
+        position: fixed;;
+        width: 100%;
+        height: 85%;
+        top:0;
+        background:rgba(0,0,0,.8);
+        z-index:99;
+    }
+    .iframe{
+        width: 100%;
+        height: 85%;
+    }
 }
-.iframe{
-    width: 100%;
-    height: 85%;
-}
+
 .btnclose{
     width: 50%;
     margin:0  auto;
