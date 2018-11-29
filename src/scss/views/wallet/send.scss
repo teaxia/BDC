@@ -14,14 +14,24 @@
         float: left;
         margin-left: 25px; 
     }
-    /*二维码扫码控件*/
-    #bcid{
-        height: 50%;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 999999999;
-        background:rgba(0,0,0,.6);
+    .user_info{
+        width: auto;
+        display: inline;
+        text-align: center;
+        .nickname,.userid{
+            display: inline-block;
+            color:$font-base;
+        }
+        .nickname{
+            font-size:36px;
+        }
+        .userid{
+            font-size:24px;
+        }
+    }
+    .scan{
+        a{
+            color:#ddd;
+        }
     }
 }

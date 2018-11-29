@@ -26,7 +26,8 @@ input{
 ::selection{background:transparent; }
 ::-moz-selection{background:transparent; }
 .weui-label{
-    font-size:0.4rem;
+    font-size:0.45rem;
+    width: 2.2rem !important;
 }
 .label,.radio{
     height: 1rem;
@@ -192,7 +193,8 @@ input{
     }
 }
 .weui-input{
-    font-size:0.426667rem !important;
+    font-size:12px !important;
+    color:$font-baseh2 !important;
 }
 /*flex*/
 .flex-table{

@@ -4,12 +4,17 @@
         <div class="walletmain-top">
 			<v-grid class="walletmain-top-menu">
 				<flexbox>
-					<flexbox-item :span="12">
-						<div class="midel" @click="onTourl('/mine/center')">
-							<img v-if="avatar&&avatar!='null'" class="avatar" :src="avatar" />
-							<i v-else class="avatar iconfont icon-touxiang"></i>
-							<div class="nickname">{{nickname}}</div>
-							<div class="userid">{{realname}}</div>
+					<flexbox-item :span="3">
+						<img v-if="avatar&&avatar!='null'" class="avatar" :src="avatar" /> 
+						<i v-else class="avatar iconfont icon-touxiang"></i>
+					</flexbox-item>
+					<flexbox-item :span="9">
+						<div class="user_info">
+							<div class="nickname">
+								{{nickname}}<br>
+								<div class="userid">{{realname}}</div>
+							</div>
+							
 						</div>
 					</flexbox-item>
 				</flexbox>
