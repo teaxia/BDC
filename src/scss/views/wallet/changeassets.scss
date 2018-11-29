@@ -3,10 +3,12 @@
 @import "../../base/button";
 .changeassets{
     .assets{
+        padding:0 15px;
         ul{
             li{
                 height: 80px;
                 font-size:28px;
+                line-height: 80px;
                 i{
                     height: 80px;
                     font-size:38px;
@@ -16,7 +18,9 @@
         }
         .changelist{
             height: 80px;
-            font-size:28px;
+            .changename{
+                font-size:28px;
+            }
             input{
                 width: 100%;
                 font-size:28px;
@@ -27,14 +31,14 @@
             }
         }
         .change-rate{
-            margin-top:20px;
             .rate{
                 height: 80px;
+                line-height: 80px;
                 span{
                     display: inline-block;
-                    width:125px;
+                    width:125px; 
                     font-size:28px;
-                    text-align: right;
+                    text-align: left;
                     margin-right: 70px;
                 }
             }

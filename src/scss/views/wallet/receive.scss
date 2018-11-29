@@ -9,5 +9,14 @@
     .center{
         display: flex;
         justify-content: center;
+        span{
+            background: $border-line;
+            padding:2px 10px;
+            border-radius: 20px;
+            font-size:20px;
+        }
+        .copy{
+            font-size:24px;
+        }
     }
-}
+} 

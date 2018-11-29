@@ -6,15 +6,16 @@
         background:$color-base;
         text-align: center;
         color:$font-white;
+        font-size:30px;
         .menu{
             padding:7px 0;
         }
         .active{
-            padding-bottom: 10px;
-            border-bottom: 0.01rem solid $color-active;
+            padding-bottom: 7px;
+            border-bottom: 4px solid $color-active;
         }
     }
-    .tel{
+    .tel{ 
         height: 80px;
     }
     .secrechar{

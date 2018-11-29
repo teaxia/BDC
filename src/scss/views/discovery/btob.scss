@@ -5,6 +5,13 @@
     .pb{
         padding:10px 0;
     }
+    .title{
+        font-size:32px;
+        font-weight: bold;
+    }
+    .bdc{
+        font-size:32px;
+    }
     .select{
         width: 200px;
     }
@@ -16,10 +23,16 @@
     .text-right{
         text-align: center;
     }
-    input{
+    input{ 
         font-size:24px;
     }
     .lable{
         font-size:24px;
+    }
+    .copy{
+        background:#52c3af;
+        text-align: center;
+        color:$font-white;
+        border-radius: 10px;
     }
 }

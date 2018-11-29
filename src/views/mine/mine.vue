@@ -15,11 +15,11 @@
 							<div class="userid">{{realname}}</div>
 						</div>
 					</flexbox-item>
-					<flexbox-item>
+					<!-- <flexbox-item>
 						<div class="mine-grid-content">
 							<i class="iconfont icon-arrow-right"></i>
 						</div>
-					</flexbox-item>
+					</flexbox-item> -->
 				</flexbox>
 			</v-grid>
 		</div>

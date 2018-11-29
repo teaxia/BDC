@@ -2,15 +2,18 @@
 	<div class="changeassets padding-footer" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('wallet.tips.change')"></x-header>
 		<div class="main-container">
+            <v-grid>
+                <div class="assets">
+                    <ul>
+                        <li><i class="iconfont icon-Passingassets"></i>{{$t("wallet.tips.capitalassets")}}：<span>{{fixedAssets}}</span><span class="fr">BDC</span></li>
+                        <li><i class="iconfont icon-xiaohongqi01"></i>{{$t("wallet.tips.actassets")}}：<span>{{actAssets}}</span><span class="fr">BDC</span></li>
+                        <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{gameAssets}}</span><span class="fr">CNY</span></li>   
+                    </ul>
+                </div>
+            </v-grid>
+            <v-grid class="mr20">
             <div class="assets">
-                <ul>
-                    <li><i class="iconfont icon-Passingassets"></i>{{$t("wallet.tips.capitalassets")}}：<span>{{fixedAssets}}</span><span class="fr">BDC</span></li>
-                    <li><i class="iconfont icon-xiaohongqi01"></i>{{$t("wallet.tips.actassets")}}：<span>{{actAssets}}</span><span class="fr">BDC</span></li>
-                    <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{gameAssets}}</span><span class="fr">CNY</span></li>   
-                </ul>
-            </div>
-            <div class="assets">
-                <flexbox class="changelist">
+                <flexbox class="changelist line-b">
                     <flexbox-item :span="3">
                         <div class="changename">
                             {{$t("wallet.tips.changetype")}}:
@@ -22,7 +25,7 @@
                         </Select>
                     </flexbox-item>
                 </flexbox>
-                <flexbox class="changelist">
+                <flexbox class="changelist line-b">
                     <flexbox-item :span="3">
                         <div class="changename">
                             {{$t("wallet.tips.transfor")}}{{feus[type]}}：
@@ -32,7 +35,7 @@
                         <input type="number" v-model="num" :placeholder="$t('global.entry')+feus[type]+$t('global.num')" />
                     </flexbox-item>
                 </flexbox>
-                <flexbox class="changelist">
+                <flexbox class="changelist line-b">
                     <flexbox-item :span="3">
                         <div class="changename">
                             {{$t("wallet.tips.safetycode")}}：
@@ -43,15 +46,15 @@
                     </flexbox-item>
                 </flexbox>
                 <div class="change-rate" v-if="type!=1">
-                    <div class="rate"><span>BDC{{$t('global.price')}}:</span>{{PriceBDC}}</div>
-                    <div class="rate"><span>{{$t('global.exchange')}}:</span>{{DHL}}</div>
+                    <div class="rate line-b"><span>BDC{{$t('global.price')}}:</span>{{PriceBDC}}</div>
+                    <div class="rate line-b"><span>{{$t('global.exchange')}}:</span>{{DHL}}</div>
                     <div class="rate">
                         <span v-if="type!=3">CNY:</span>
-                        <span v-else>BDC:</span>
-                        {{matchprice}}
+                        <span v-else>BDC:</span>{{matchprice}}
                     </div>
                 </div>
             </div>
+            </v-grid>
             <button @click="TransferAssets()" class="btn btn-block btn-round mr30">{{$t('wallet.tips.btntransfor')}}</button>
 		</div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>

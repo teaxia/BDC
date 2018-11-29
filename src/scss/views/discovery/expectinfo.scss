@@ -6,17 +6,22 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        font-size:28px;
         color:$font-base;
         .bd{
             width: 100%;
+        }
+        .hl{
+            color:$font-baseh2;
+            font-size:20px;
         }
         .hot{
             color:$font-red;
             margin-left:40px;
         }
         .bar_jd{
-            background:#e5e5e5;
-            width: 80%;
+            background:$bg-disabled;
+            width: 80%; 
             height: 30px;
             border-radius: 20px;
         }

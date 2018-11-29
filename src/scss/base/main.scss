@@ -84,7 +84,7 @@ input{
 }
 
 .line-b{
-    border-bottom: 0.01rem solid $border-base;
+    border-bottom: 0.01rem solid $border-line;
 }
 .padding-footer{
     padding-bottom: 2rem;
@@ -169,10 +169,16 @@ input{
 }
 .weui-toast{
     top: 6.4rem !important;
+    width: 3.5rem !important;
 }
 .weui-toast__content{
     font-size:0.5rem !important;
     text-align: center;
+}
+.weui-cell_access .weui-cell__ft:after{
+    height: 0.2rem !important;
+    width: 0.2rem !important;
+    border-color:$font-base  !important;
 }
 .weui-cells{
     margin-top:0 !important;

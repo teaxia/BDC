@@ -2,12 +2,12 @@
 	<div class="btob padding-footer" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.btob.title')"></x-header>
         <div class="main-container">
-            <h1>
+            <div class="title">
                 {{$t('discovery.btob.changtype')}}：
                 <Select v-model="act" class="select">
                     <Option v-for="item in blist" :value="item.value" :key="item.value">{{ item.label }}</Option>
                 </Select>
-            </h1>
+            </div>
             <div class="mr50">
                 <v-grid>
                     <div class="pd-lb20">
@@ -16,9 +16,9 @@
                                 <svg class="sicon" aria-hidden="true">
                                     <use :xlink:href="`#icon-`+act"></use>
                                 </svg>
-                                <span>{{act}}</span>
+                                <span class="bdc">{{act}}</span>
                             </flexbox-item>
-                            <flexbox-item>
+                            <flexbox-item class="bdc">
                                 {{$t('discovery.btob.proportion')}}：1:{{proportion}}
                             </flexbox-item>
                         </flexbox>
@@ -35,14 +35,14 @@
             </div>
             <div class="mr20">
                 <flexbox class="vux-1px-b pb">
-                    <flexbox-item :span="3">
+                    <flexbox-item :span="2">
                         {{$t('discovery.btob.address')}}：
                     </flexbox-item>
-                    <flexbox-item :span="6">
+                    <flexbox-item :span="8">
                         <div class="text">{{this.address}}</div>
                     </flexbox-item>
                     <flexbox-item>
-                        <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="address" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                        <div class="copy" v-clipboard:copy="address" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</div>
                     </flexbox-item>
                 </flexbox>
             </div>
