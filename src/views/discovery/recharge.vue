@@ -19,14 +19,14 @@
         </div>
         <div class="main-container">
             <div v-if="type==1" class="secrechar">
-                <div v-for="(v,index) in phonecharges" @click="act(index,v.money)" :class="{'sel_div':true,'current':current==index}">
+                <div v-for="(v,index) in phonecharges" @click="act(index,v.money)" :key="index" :class="{'sel_div':true,'current':current==index}">
                     <div>{{v.money}}CNY</div>
                     <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
                 </div>
             </div>
             <div v-if="type==2" class="secrechar">
-                <div v-for="(v,index) in gprs" @click="act(index,v.money)" :class="{'sel_div':true,'current':current==index}">
+                <div v-for="(v,index) in gprs" @click="act(index,v.money)" :key="index" :class="{'sel_div':true,'current':current==index}">
                     <div>{{v.value}}</div>
                     <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
