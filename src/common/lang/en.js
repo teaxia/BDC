@@ -157,13 +157,13 @@ export const en = {
         },
         bill:{
             title       :   'Bill',
-            type1       :   'Expenditure',
+            type1       :   'Exp',
             type2       :   'Income',
             type3       :   'POS',
-            type4       :   'Consumption',
-            type5       :   'Withdraw money',
+            type4       :   'Consume',
+            type5       :   'Buy BDC',
             type6       :   'Pay',
-            type7       :   'Achievement',
+            type7       :   'ACHV',
             begin       :   'Start time',
             end         :   'End time',
             people      :   'People',
@@ -240,8 +240,12 @@ export const en = {
     // 应用
     application:{
         title:{
-            buy             :   'Buy',
+            buy             :   'Mall',
             shop            :   'Shop'
+        },
+        btn                 :   'Entry',
+        tips:{
+            error           :   'In preparation'
         }
     },
     // 我的

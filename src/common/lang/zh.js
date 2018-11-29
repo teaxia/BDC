@@ -164,7 +164,7 @@ export const zh = {
             type3       :   'POS',
             type4       :   '消费',
             type5       :   '提币',
-            type6       :   '充值',
+            type6       :   '购币',
             type7       :   '业绩',
             begin       :   '开始时间',
             end         :   '结束时间',
@@ -242,8 +242,12 @@ export const zh = {
     // 应用
     application:{
         title:{
-            buy             :   '购物',
+            buy             :   '商城',
             shop            :   '商家'
+        },
+        btn                 :   '进入商城',
+        tips:{
+            error           :   '商家准备中'
         }
     },
     // 我的
