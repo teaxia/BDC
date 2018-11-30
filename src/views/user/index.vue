@@ -21,6 +21,7 @@
                 text: 'Loading'
             })
             this.loop = setInterval(()=>{
+                this.$vux.loading.hide();
                 this.$router.push({
                     path:"/user/login",
                 });
