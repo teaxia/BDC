@@ -4,7 +4,8 @@
 .walletmain-top{
     .ercode{
         margin:0 auto;
-        width: 280px;
+        display: flex;
+        justify-content: center;
     }
     .center{
         display: flex;

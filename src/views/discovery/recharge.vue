@@ -35,19 +35,19 @@
             <div v-if="type==3">
                 <div class="mr30">
                     <group>
-                        <x-input class="tel" :title="$t('input.coname')" v-model="coname" :placeholder="$t('input.tips.coname')"></x-input>
+                        <x-input class="tel" :title="$t('input.coname')+':'" v-model="coname" :placeholder="$t('input.tips.coname')"></x-input>
                     </group>
                     <group>
-                        <x-input class="tel" :title="$t('input.mobile')" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number"></x-input>
+                        <x-input class="tel" :title="$t('input.mobile')+':'" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number"></x-input>
                     </group>
                     <group>
-                        <x-input class="tel" :title="$t('input.oilcard')" v-model="oilcard" :placeholder="$t('input.tips.oilcard')" keyboard="number"></x-input>
+                        <x-input class="tel" :title="$t('input.oilcard')+':'" v-model="oilcard" :placeholder="$t('input.tips.oilcard')" keyboard="number"></x-input>
                     </group>
                     <group>
-                        <x-input class="tel" :title="$t('input.recharge')" v-model="num" :placeholder="$t('input.tips.recharge')" keyboard="number"></x-input>
+                        <x-input class="tel" :title="$t('input.recharge')+':'" v-model="num" :placeholder="$t('input.tips.recharge')" keyboard="number"></x-input>
                     </group>
                     <group>
-                        <x-input class="tel" :title="$t('input.bdc')" readonly v-model="bdcmoney"></x-input>
+                        <x-input class="tel" :title="$t('input.bdc')+':'" readonly v-model="bdcmoney"></x-input>
                     </group>
                 </div>
             </div>

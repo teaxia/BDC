@@ -40,7 +40,7 @@ export default {
         },
         {
           value   : this.$t("menu.mine"),
-          icon    : 'icon-tianjiakuangquchengyuan',
+          icon    : 'icon-gerenzhongxinxianxing',
           acicon  : 'icon-gerenzhongxinmianxing',
           url     : '/mine/myhome',
           index : 3

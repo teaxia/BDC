@@ -37,7 +37,14 @@ input{
 }
 .ivu-radio-group{
     height:1rem;
-    font-size:0.4rem;
+    font-size:0.45rem;
+}
+.ivu-radio-wrapper{
+    
+    margin-top: -9px;
+    span{
+        font-size:0.45rem;
+    }
 }
 .main-pd{
     padding: 20px 30px;
@@ -199,7 +206,7 @@ input{
     }
 }
 .weui-input{
-    font-size:12px !important;
+    font-size:0.44rem !important;
     color:$font-baseh2 !important;
 }
 /*flex*/

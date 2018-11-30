@@ -32,12 +32,14 @@
 							<span>{{$t('mine.menus.spread')}}</span>
 						</span>
 					</cell>
-					<cell is-link class="cell-hei">
-						<span slot="title" @click="go()">
-							<i class="iconfont icon-guanwang"></i>
-							<span>{{$t('mine.menus.website')}}</span>
-						</span>
-					</cell>
+					<div @click="go()" class="line-b">
+						<cell is-link  class="cell-hei">
+							<span slot="title">
+								<i class="iconfont icon-guanwang"></i>
+								<span>{{$t('mine.menus.website')}}</span>
+							</span>
+						</cell>
+					</div>
 					<cell link="/mine/area" is-link class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-tianjiakuangquchengyuan"></i>
