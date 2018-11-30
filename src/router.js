@@ -1,5 +1,6 @@
 // 用户中心，注册登陆
 import user from './views/user.vue'
+    import index from  './views/user/index.vue'                             // 引导页
     import regist from './views/user/regist.vue'                            //  注册
     import login from './views/user/login.vue'                              //  登陆
     import verification from './views/user/verification.vue'                //  验证码验证
@@ -67,8 +68,9 @@ let routes = [
         path: "/",
         component: user,
         name: "loginin",
-        redirect: '/user/login',
+        redirect: '/user/index',
         children: [
+            { path: '/user/index', component: index, name: 'index' },
             { path: '/user/regist', component: regist, name: 'regist' },
             { path: '/user/login', component: login, name: 'login' },
             { path: '/user/verification', component: verification, name: 'verification' },
