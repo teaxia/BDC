@@ -1,16 +1,16 @@
 <template>
-	<div class="appindex" v-cloak>
+	<div class="appindex padding-footer" v-cloak>
         <div class="main-container">
             <h1>{{$t("menu.application")}}</h1>
             <div class="select">
                 <div @click="change()" :class="{'select-title':true}">
-                    <span :class="{'select-act':active}">{{$t("application.title.shop")}}</span>
+                    <span :class="{'select-act':active}">{{$t("application.title.buy")}}</span>
                 </div>
                 <div @click="change()" :class="{'select-title':true}">
-                    <span :class="{'select-act':!active}">{{$t("application.title.buy")}}</span>
+                    <span :class="{'select-act':!active}">{{$t("application.title.shop")}}</span>
                 </div>
             </div>
-            <div class="mr30" v-if="active">
+            <div class="mr30" v-if="!active">
                 <v-grid v-for="(v,index) in shop" :key="index" class="mr20">
                     <div class="pd-lb20" @click="onTourl(v.url)">
                         <flexbox class="line-b">
@@ -29,7 +29,7 @@
                     </div>
                 </v-grid>
             </div>
-            <div class="mr30" v-if="!active">
+            <div class="mr30" v-if="active">
                 <v-grid v-for="(v,index) in mall" :key="index" class="mr20">
                     <div class="pd-lb20" @click="onTourl(v.url)">
                         <flexbox class="line-b">
