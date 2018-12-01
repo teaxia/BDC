@@ -37,10 +37,10 @@
                     <div class="label">{{$t('wallet.send.class')}}</div>
                     <div class="radio">
                         <RadioGroup v-model="type">
-                            <Radio label="2">
+                            <Radio label="2" class="sedn-radio">
                                 <span>{{$t('wallet.tips.capitalassets')}}</span>
                             </Radio>
-                            <Radio label="4">
+                            <Radio label="4" class="sedn-radio">
                                 <span>{{$t('wallet.tips.actassets')}}</span>
                             </Radio>
                         </RadioGroup>

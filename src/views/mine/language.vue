@@ -3,7 +3,7 @@
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.language')"></x-header>
         <div class="pd50">
             <div class="enterfrom">
-                <div class="label">{{$t('mine.setting.language')}}：</div>
+                <div class="label">{{$t('mine.setting.language')}}:</div>
                 <div class="radio">
                     <RadioGroup v-model="lang">
                         <Radio label="en">
@@ -62,7 +62,7 @@ export default {
         float: left;
         height: 50px;
         line-height: 50px;;
-        font-size: 32px;
+        font-size: 0.45rem;
         width: 180px;
         margin-top:20px;
         padding-left: 0.2rem;

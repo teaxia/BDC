@@ -14,11 +14,10 @@
                     <x-input class="test" :title="$t('user.register.username')" required :placeholder="$t('user.tips.username')" v-model="username"></x-input>
                 </group>
                 <group>
-                    <x-input class="test" title="+86" required mask="999 9999 9999" :max="max" :placeholder="$t('user.tips.phone')" v-model="mobile"></x-input>
+                    <x-input class="test" title="+86" required mask="999 9999 9999" :max="max" :placeholder="$t('user.tips.phone')" v-model="mobile">
+						<span slot="right" class="fr tips" @click="countDown">{{content}}</span>
+					</x-input>
                 </group>
-                <div class="mr20 v-div">
-                    <span class="fr tips" @click="countDown">{{content}}</span>
-                </div>
                 <group>
                     <x-input class="test" :title="$t('user.tips.vcode')" v-model="code" required mask="999999" :max="codemax" :placeholder="$t('user.tips.verification')"></x-input>
                 </group>
