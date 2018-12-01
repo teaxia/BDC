@@ -21,6 +21,7 @@ export const en = {
         notice      : 'Notice',
         msg         : 'Msg login',
         unopened    : 'Unopened',
+        wait        : 'Processing in progress, please wait a moment'
     },
     input:{
         mobile              :   'Phone number',

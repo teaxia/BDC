@@ -244,7 +244,7 @@
                 },
                 ).then(data => {
                     this.$vux.toast.show({
-                        text: this.$t('global.success'),
+                        text: this.$t('global.wait'),
                         type: 'success'
                     })
                     this.isok = false;
