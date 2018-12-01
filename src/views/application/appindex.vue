@@ -54,6 +54,10 @@
             </div>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
+        <div class="fram" v-if="show">
+			<iframe :src="url" :width="w" :height="h" :scrolling="this.isscro" frameborder="0"></iframe>
+			<button @click="close()" class="btn btn-close btn-round">{{$t('global.close')}}</button>
+		</div>
     </div>
 </template>
 
@@ -63,6 +67,10 @@
 		data() {
 			return {
                 active      :    true,                             //头部切换索引
+                show		:	false,
+                w			:	'',
+                h			:	'',
+                url         :   '',
                 shop        :    [
                     {
                         img     :   '/static/images/shop-1.png',
@@ -120,16 +128,24 @@
                     })
                     return
                 }
-                this.$router.push({
-                    name:"iframe",
-                    params:{
-                        url:url,
-                    }
-                });
+                this.show = true;
+                this.url = url
+            },
+            close(){
+                this.show = false;
             }
 		},
 		mounted() {
-            
+            // 解决宽度兼容问题
+            if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  //判断是苹果设备还是其他设备 
+                this.isscro = 'no';
+                this.h = '100%';
+            }else{
+                //安卓设备允许滚动
+                this.isscro = 'yes';
+                this.h = window.screen.height
+            }
+            this.w = window.screen.width
 		}
 	}
 

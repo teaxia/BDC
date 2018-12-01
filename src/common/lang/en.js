@@ -315,6 +315,7 @@ export const en = {
                 front       :   'Please upload the front.',
                 back        :   'Please upload the reverse side',
                 auth        :   'Certification success',
+                sub         :   'Please wait for the audit',
                 pic         :   'Picture size should not exceed 5M',
                 picerror    :   'Picture type does not match',
                 success     :   'You have passed the certification.'

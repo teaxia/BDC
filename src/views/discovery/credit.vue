@@ -15,6 +15,10 @@
             </div>
 		</div>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
+        <div class="fram" v-if="show">
+			<iframe :src="url" :width="w" :height="h" :scrolling="this.isscro" frameborder="0"></iframe>
+			<button @click="close()" class="btn btn-close btn-round">{{$t('global.close')}}</button>
+		</div>
     </div>
 </template>
 
@@ -49,20 +53,32 @@
                         icon    :   'icon-jiaotongyinhang',
                     },
                 ],
+                show		:	false,
+                w			:	'',
+                h			:	'',
+                url         :   ''
 			}
 		},
 		methods: {
 			go(link){
-                this.$router.push({
-                    name:"iframe",
-                    params:{
-                        url:link,
-                    }
-                });
+                this.show = true;
+                this.url = link
+            },
+            close(){
+                this.show = false;
             }
 		},
 		mounted() {
-           
+           // 解决宽度兼容问题
+            if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  //判断是苹果设备还是其他设备 
+                this.isscro = 'no';
+                this.h = '100%';
+            }else{
+                //安卓设备允许滚动
+                this.isscro = 'yes';
+                this.h = window.screen.height
+            }
+            this.w = window.screen.width
 		}
 	}
 
@@ -71,24 +87,16 @@
 <style scoped lang="scss">
 @import "../../scss/views/wallet/notice";
 .notice{
-    position: relative;
     .fram{
-        position: fixed;;
+        position: fixed;
         width: 100%;
-        height: 85%;
+        height: 100%;
         top:0;
         background:rgba(0,0,0,.8);
         z-index:99;
+        -webkit-overflow-scrolling: touch;
+        overflow: scroll;
     }
-    .iframe{
-        width: 100%;
-        height: 85%;
-    }
-}
-
-.btnclose{
-    width: 50%;
-    margin:0  auto;
 }
 .tips{
     color:#f90;

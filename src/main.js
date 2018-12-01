@@ -16,6 +16,7 @@ import jmCode from './common/config/config'          // 加密串
 import VueQriously from 'vue-qriously'               // 二维码生成
 import VueClipboard from 'vue-clipboard2'             // 复制内容到剪切板
 import vfooter from './components/vfooter.vue'
+
 import vgrid from './components/vgrid.vue'
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea } from 'vux'
 import { ToastPlugin } from 'vux'

@@ -22,7 +22,7 @@ export const zh = {
         msg                 : '短信登录',
         unopened            : '暂未开放',
     },
-    input:{
+    input:{ 
         mobile              :   '手机号',
         coname              :   '公司名称',
         oilcard             :   '油卡号码',
@@ -317,6 +317,7 @@ export const zh = {
                 front       :   '请上传正面',
                 back        :   '请上传反面',
                 auth        :   '认证成功',
+                sub         :   '已提交，请等待审核',
                 pic         :   '图片大小不能超过5M',
                 picerror    :   '图片类型不符合',
                 success     :   '您已经通过认证'

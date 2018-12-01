@@ -49,7 +49,12 @@ button[disabled]
         font-size:32px;
         display: block;
     }
-
+    &-close{
+        width: 500px;
+        margin:20px  auto;
+        font-size:32px;
+        display: block;
+    }
     // 默认按钮样式
     &-default
     {
