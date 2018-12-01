@@ -1,7 +1,8 @@
 import axios from 'axios';
 axios.defaults.timeout = 5000;
-//axios.defaults.baseURL ='http://107.150.127.54:50009/WebService1.asmx'; //  填写域名
-axios.defaults.baseURL ='http://107.150.127.54:50004/WebService1.asmx';   //  测试接口地址
+axios.defaults.baseURL ='http://107.150.127.54:50006/WebService1.asmx'; //  填写域名
+//axios.defaults.baseURL ='http://107.150.127.54:50004/WebService1.asmx';   //  测试接口地址
+
 //http request 拦截器
 axios.interceptors.request.use(
   config => {

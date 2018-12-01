@@ -103,7 +103,14 @@ export default {
 	},
 	mounted() {
         this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
-		this.mobile = this.$route.query.mobile;
+		let mobile = this.$route.params.mobile;
+		if(!mobile){
+			this.$router.push({
+                path:"/user/login",
+            });
+			return
+		}
+		this.mobile = mobile;
 		this.countDown();
 	},
 	beforeDestroy(){

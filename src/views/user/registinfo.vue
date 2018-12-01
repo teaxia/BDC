@@ -6,13 +6,13 @@
             </div>
             <div class="enterfrom">
                 <group>
-                    <x-input :disabled="true" :title="this.$t('user.register.username')" v-model="mobile"></x-input>
+                    <x-input :disabled="true" :title="this.$t('user.register.username')+':'" v-model="mobile"></x-input>
                 </group>
                 <group>
-                    <x-input :title="this.$t('user.register.nickname')" v-model="nickName"></x-input>
+                    <x-input :title="this.$t('user.register.nickname')+':'" v-model="nickName"></x-input>
                 </group>
-                <group>
-                    <div class="label">{{$t('user.type.sex')}}：</div>
+                <div class="radioin line-b">
+                    <div class="label">{{$t('user.type.sex')}}:</div>
                     <div class="radio">
                         <RadioGroup v-model="gender">
                             <Radio label="0">
@@ -23,18 +23,18 @@
                             </Radio>
                         </RadioGroup>
                     </div>
+                </div>
+                <group>
+                    <x-input :title="$t('user.password')+':'" v-model="password"></x-input>
                 </group>
                 <group>
-                    <x-input :title="$t('user.password')" v-model="password"></x-input>
+                    <x-input :title="$t('user.securitypsw')+':'" v-model="safetycode"></x-input>
                 </group>
                 <group>
-                    <x-input :title="$t('user.securitypsw')" v-model="safetycode"></x-input>
+                    <x-input :title="$t('user.invitationcode')+':'" v-model="invitation"></x-input>
                 </group>
-                <group>
-                    <x-input :title="$t('user.invitationcode')" v-model="invitation"></x-input>
-                </group>
-                <group>
-                    <div class="label">{{$t('user.area')}}</div>
+                <div class="radioin line-b">
+                    <div class="label">{{$t('user.area')}}:</div>
                     <div class="radio">
                         <RadioGroup v-model="area">
                             <Radio label="A">
@@ -45,9 +45,17 @@
                             </Radio>
                         </RadioGroup>
                     </div>
-                </group>
+                </div>
             </div>
-            <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("user.regist") }}</button>
+            <flexbox>
+                <flexbox-item>
+                    <button @click="back()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.back") }}</button>
+                </flexbox-item>
+                <flexbox-item>
+                    <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("user.regist") }}</button>
+                </flexbox-item>
+            </flexbox>
+            
         </div>
     </div>
 </template>
@@ -104,7 +112,12 @@ export default {
                     });
 				}
 			})
-		}
+        },
+        back(){
+            this.$router.push({
+                path:"/user/login",
+            });
+        }
 	},
 	mounted() {
         this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';

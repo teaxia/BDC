@@ -39,8 +39,8 @@ export default {
 				let mobile = this.mobile.replace(/\s+/g,"");
 				// 成功，跳转到输入验证码页面！
 				this.$router.push({
-					path:"/user/verification",
-					query:{
+					name:"verification",
+					params:{
 						mobile:this.mobile.replace(/\s+/g,""),
 					}
 				});

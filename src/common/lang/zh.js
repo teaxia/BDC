@@ -69,8 +69,8 @@ export const zh = {
         forget          : '忘记密码',
         area            : '矿区',
         register: {
-            username    :   '登录账号：',
-            nickname    :   '用户昵称：',
+            username    :   '登录账号',
+            nickname    :   '用户昵称',
         },
         type    :   {
             msg     : '短信登录',
