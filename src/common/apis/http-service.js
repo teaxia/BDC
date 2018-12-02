@@ -261,5 +261,5 @@ export const server = {
     },
     post: function(api,paramObj,config){
         return post(api,paramObj,config);
-    },
+    }
 }

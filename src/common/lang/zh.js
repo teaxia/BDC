@@ -21,7 +21,7 @@ export const zh = {
         notice              : '系统公告',
         msg                 : '短信登录',
         unopened            : '暂未开放',
-        wait                : '正在处理，请稍后'
+        wait                : '等待确认'
     },
     input:{ 
         mobile              :   '手机号',

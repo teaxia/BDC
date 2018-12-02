@@ -68,7 +68,7 @@ let routes = [
         path: "/",
         component: user,
         name: "loginin",
-        redirect: '/user/index',
+        redirect: '/user/login',
         children: [
             { path: '/user/index', component: index, name: 'index' },
             { path: '/user/regist', component: regist, name: 'regist' },

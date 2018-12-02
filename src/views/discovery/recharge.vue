@@ -19,7 +19,7 @@
         </div>
         <div class="main-container">
             <div v-if="type==1" class="secrechar">
-                <div v-for="(v,index) in phonecharges" @click="act(index,v.money)" :key="index" :class="{'sel_div':true,'current':current==index}">
+                <div v-for="(v,index) in phonecharges" @click="act(index,v.money,v.status)" :key="index" :class="{'sel_div':true,'current':current==index}">
                     <div>{{v.money}}CNY</div>
                     <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
@@ -101,48 +101,60 @@
                 confirminfo :   '',
                 phonecharges:[
                     {
-                        money   :   '50'
+                        money   :   '50',
+                        status  :   true
                     },
                     {
-                        money   :   '100'
+                        money   :   '100',
+                        status  :   true
                     },
                     {
-                        money   :   '200'
+                        money   :   '200',
+                        status  :   true
                     },
                     {
-                        money   :   '300'
+                        money   :   '300',
+                        status  :   true
                     },
                     {
-                        money   :   '500'
+                        money   :   '500',
+                        status  :   false
                     },
                     {
-                        money   :   '1000'
+                        money   :   '1000',
+                        status  :   false
                     },
                 ],
                 gprs        :[
                     {
                         value   :   '100M',
-                        money   :   '10'
+                        money   :   '10',
+                        status  :   true
                     },
                     {
                         value   :   '200M',
-                        money   :   '15'
+                        money   :   '15',
+                        status  :   true
                     },
                     {
                         value   :   '300M',
-                        money   :   '20'
+                        money   :   '20',
+                        status  :   true
                     },
                     {
                         value   :   '500M',
-                        money   :   '30'
+                        money   :   '30',
+                        status  :   true
                     },
                     {
                         value   :   '1G',
-                        money   :   '50'
+                        money   :   '50',
+                        status  :   true
                     },
                     {
                         value   :   '2G',
-                        money   :   '80'
+                        money   :   '80',
+                        status  :   true
                     }
                 ]   
 			}
@@ -164,13 +176,15 @@
                     this.Remakes = this.gprs[0].value;
                 }
             },
-            act(index,money){
-                this.current = index;
-                this.RMB     = money/this.bdc;
-                if(this.type==1){
-                    this.Remakes = this.phonecharges[index].money+'CNY'
-                }else if(this.type==2){
-                    this.Remakes = this.gprs[index].value
+            act(index,money,status=true){
+                if(status){
+                    this.current = index;
+                    this.RMB     = money/this.bdc;
+                    if(this.type==1){
+                        this.Remakes = this.phonecharges[index].money+'CNY'
+                    }else if(this.type==2){
+                        this.Remakes = this.gprs[index].value
+                    }
                 }
                 
             },
