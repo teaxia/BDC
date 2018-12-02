@@ -242,12 +242,14 @@
                     PhoneNo         :   this.mobile,                          // 手机号                      
                     Remakes         :   this.Remakes,                         // 充值备注
                 },
-                ).then(data => {
-                    this.$vux.toast.show({
-                        text: this.$t('global.wait'),
-                        type: 'success'
-                    })
-                    this.isok = false;
+                ).then(data => { 
+                    if(data){
+                        this.$vux.toast.show({
+                            text: this.$t('global.wait'),
+                            type: 'success'
+                        })
+                        this.isok = false;
+                    }
                 })
             },
             ok () {

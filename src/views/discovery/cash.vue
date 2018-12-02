@@ -137,11 +137,14 @@
                     saverName       :   this.name
                 },
                 ).then(data => {
-                    this.$vux.toast.show({
-                        text: '兑换成功！',
-                        type: 'success'
-                    })
-                    this.isok = false;
+                    if(data){
+                        this.$vux.toast.show({
+                            text: '兑换成功！',
+                            type: 'success'
+                        })
+                        this.isok = false;
+                    }
+                    
                 })
             }
 		},

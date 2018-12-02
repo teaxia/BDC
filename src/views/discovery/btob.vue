@@ -150,11 +150,13 @@
                     RechargeAddress :   this.address
                 },
                 ).then(data => {
-                    this.$vux.toast.show({
-                        text: this.$t('global.success'),
-                        type: 'success'
-                    })
-                    this.isok = false;
+                    if(data){
+                        this.$vux.toast.show({
+                            text: this.$t('global.success'),
+                            type: 'success'
+                        })
+                        this.isok = false;
+                    }
                 })
             }
 		},
