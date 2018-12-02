@@ -105,7 +105,7 @@ export default {
 				'PwdBack_SendCode',
 				{
 					jm 	 		: this.$md5(this.$jm.jmCode+this.mobile.replace(/\s+/g,"")).toUpperCase(),			// 加密方法Key+Phone_No加密
-					Key  		: '',															// 注册传空
+					Key  		: this.username,																	// 忘记密码传用户名
 					Phone_No	: this.mobile.replace(/\s+/g,""),
 					lv   		: this.lang
 				},
