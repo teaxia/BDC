@@ -139,7 +139,7 @@
                 ).then(data => {
                     if(data){
                         this.$vux.toast.show({
-                            text: '兑换成功！',
+                            text: this.$t('global.wait'),
                             type: 'success'
                         })
                         this.isok = false;
@@ -153,12 +153,13 @@
             this.$server.post(
 			'GetBankInfoList',
 			{
-				guid 	:  this.$storage.get('guid'),
+                guid 	:  this.$storage.get('guid'),
+                
 			},
 			).then(data => {
 				if(data){
                     this.bankinfo     = data;
-                    this.cardname     = data[this.bank].OpenCardName;
+                    this.cardname     = (data[this.bank].OpenCardName)?data[this.bank].OpenCardName:'';
                     this.cardnumber   = data[this.bank].BankCardNo;
                     this.bankname     = data[this.bank].BankName;
 				}
