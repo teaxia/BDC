@@ -119,28 +119,28 @@ export default {
                     break;
             }
         },
-        num(){
-            this.num = (this.num<0)?0:this.num;
-            switch (this.type){
-                case '1':
-                    //限制不能大于固定资产
-                     this.num = (this.num>this.fixedAssets)?this.fixedAssets:this.num;
-                    break;
-                case '2':
-                    // 限制不能大于通证资产
-                    this.num = (this.num>this.actAssets)?this.actAssets:this.num;
-                    this.matchprice = (this.num*this.X).toFixed(8);
-                    break;
-                case '3':
-                    // 限制不能大于游戏资产
-                    this.num = (this.num>this.gameAssets)?this.gameAssets:this.num;
-                    this.matchprice = (this.num/this.X).toFixed(8);
-                    break;
-                default:
-                    this.matchprice = 0;
-                    break;
-            }
-        }
+        // num(){
+        //     this.num = (this.num<0)?0:this.num;
+        //     switch (this.type){
+        //         case '1':
+        //             //限制不能大于固定资产
+        //              this.num = (this.num>this.fixedAssets)?this.fixedAssets:this.num;
+        //             break;
+        //         case '2':
+        //             // 限制不能大于通证资产
+        //             this.num = (this.num>this.actAssets)?this.actAssets:this.num;
+        //             this.matchprice = (this.num*this.X).toFixed(8);
+        //             break;
+        //         case '3':
+        //             // 限制不能大于游戏资产
+        //             this.num = (this.num>this.gameAssets)?this.gameAssets:this.num;
+        //             this.matchprice = (this.num/this.X).toFixed(8);
+        //             break;
+        //         default:
+        //             this.matchprice = 0;
+        //             break;
+        //     }
+        // }
     },
 	methods: {
 		GetAccount(){
