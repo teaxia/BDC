@@ -49,6 +49,13 @@
 				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
             </div>
 		</div>
+		<Modal v-model="show" :closable="false" :mask-closable="false">
+			<div slot="header"></div>
+			<div class="modal-body">{{$t('global.authentication')}}</div>
+			<div slot="footer">
+				<button class="btn btn-block btn-round" @click="ok()">{{$t('wallet.send.auth')}}</button>
+			</div>
+		</Modal>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
 	</div>
 </template>
@@ -65,6 +72,7 @@
 				mathnum		:	'',
 				type		:	'2',
 				psw			:	'',
+				show		:	false,				// 跳转至强制认证界面
 			}
 		},
 		methods: {
@@ -107,13 +115,21 @@
 				this.$router.push({
 					path:"/wallet/scan",
 				});
-			}
+			},
+			ok () {
+                this.$router.push({
+					path:"/mine/auth",
+				});
+            },
 		},
 		mounted() {
             this.nickname = this.$storage.get('NickName');
             this.avatar   = this.$storage.get('HeadImg');
 			this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
 			this.bdcaddress = (this.$route.query.addr)?this.$route.query.addr:'';
+			if(this.realname==this.$t('global.Uncertified')){
+				this.show = true;
+			}
 		}
 	}
 

@@ -21,7 +21,9 @@ export const zh = {
         notice              : '系统公告',
         msg                 : '短信登录',
         unopened            : '暂未开放',
-        wait                : '等待确认'
+        wait                : '等待确认',
+        authentication      : '该操作需要先通过实名认证'
+        
     },
     input:{ 
         mobile              :   '手机号',
@@ -236,6 +238,7 @@ export const zh = {
             dfaddress       :   '对方地址',
             num             :   '发送数额',
             class           :   '类别',
+            auth            :   '立即认证',
             tips:{
                 input       :   '输入/长按粘贴BDC地址',
                 min         :   '最小发送数量0.0001'
