@@ -10,7 +10,7 @@
                     <div class="pd-lb20">
                         <flexbox class="vux-1px-b pb">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.expectinfo.title')}}
+                                {{$t('discovery.expectinfo.title')}}:
                             </flexbox-item>
                             <flexbox-item :span="5">
                                 <input type="number" v-model="num" :placeholder="$t('discovery.btob.num')"/>
@@ -23,7 +23,7 @@
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.cash.selectbank')}}：
+                                {{$t('discovery.cash.selectbank')}}:
                             </flexbox-item>
                             <flexbox-item>
                                 <Select v-model="bank">
@@ -33,7 +33,7 @@
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.cash.cardname')}}：
+                                {{$t('discovery.cash.cardname')}}:
                             </flexbox-item>
                             <flexbox-item :span="6">
                                 {{cardname}}
@@ -44,7 +44,7 @@
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.cash.cardnumber')}}：
+                                {{$t('discovery.cash.cardnumber')}}:
                             </flexbox-item>
                             <flexbox-item :span="6">
                                 {{cardnumber}}
@@ -55,7 +55,7 @@
                         </flexbox>
                         <flexbox class="mr20 pb">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.cash.buyname')}}：
+                                {{$t('discovery.cash.buyname')}}:
                             </flexbox-item>
                             <flexbox-item>
                                 <input type="text" v-model="name" :placeholder="$t('discovery.cash.tips.buyname')"/>
@@ -117,7 +117,7 @@
                 if(this.isok){
                     return;
                 }
-                if(this.num==''&&this.name==''){
+                if(this.num==''||this.name==''){
                     this.$vux.toast.show({
                         text: '购买数量跟购买人不能为空',
                         type: 'warn'

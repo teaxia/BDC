@@ -36,7 +36,7 @@
             <div class="mr20">
                 <flexbox class="vux-1px-b pb">
                     <flexbox-item :span="2">
-                        {{$t('discovery.btob.address')}}：
+                        {{$t('discovery.btob.address')}}:
                     </flexbox-item>
                     <flexbox-item :span="8">
                         <div class="text">{{this.address}}</div>
