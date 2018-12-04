@@ -132,6 +132,8 @@ export const zh = {
             price       :   '售价',
             group       :   '充值类型',
             money       :   '金额',
+            petrochina  :   '中国石油',
+            sinopec     :   '中国石油',
             type:{ 
                 phone   :   '话费',
                 gprs    :   '流量',
@@ -142,7 +144,7 @@ export const zh = {
                 num     :   '充值金额不能小于1',
                 full    :   '请填写完整的信息',
                 mobile  :   '手机号不能为空'
-            }
+            },
         },
         extract:{
             title       :   '提币',

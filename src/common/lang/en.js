@@ -131,6 +131,8 @@ export const en = {
             price       :   'price',
             group       :   'Recharge type',
             money       :   'Money',
+            petrochina  :   'PetroChina',
+            sinopec     :   'SINOPEC',
             type:{
                 phone   :   'Telephone rate',
                 gprs    :   'data',

@@ -128,11 +128,11 @@
                 MoneyPwd    :   '',                 // 安全码
                 company     :   [
                     {
-                        name    :   '中国石油',
+                        name    :   this.$t('discovery.recharge.petrochina'),
                         status  :   true
                     },
                     {
-                        name    :   '中国石化',
+                        name    :   this.$t('discovery.recharge.sinopec'),
                         status  :   true
                     },
                 ],
