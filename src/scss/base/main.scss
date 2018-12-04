@@ -195,6 +195,13 @@ input{
 .vux-x-input{
     border-bottom:0.01rem solid $border-line !important;
 }
+.ivu-select-selection{
+    height: 32px !important;
+    input{
+        min-height: 32px !important;
+        line-height: 32px !important;
+    }
+}
 .weui-cell{
     border-bottom:0.01rem solid $border-line;
     &:before,&:after{

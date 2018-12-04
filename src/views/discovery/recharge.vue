@@ -34,9 +34,20 @@
             </div>
             <div v-if="type==3">
                 <div class="mr30">
-                    <group>
-                        <x-input class="tel" :title="$t('input.coname')+':'" v-model="coname" :placeholder="$t('input.tips.coname')"></x-input>
-                    </group>
+                    <div>
+                        <div class="">
+                            <div class="vux-x-input weui-cell tel">
+                                <div class="weui-cell__hd">
+                                    <label for="vux-x-input-m2pna" class="weui-label" style="width: 4.5em;">{{$t('input.coname')}}</label> 
+                                </div>
+                                <div class="wd100">
+                                    <Select v-model="coname" filterable>
+                                        <Option v-for="item in company" :value="item.name" :key="item.name">{{ item.name }}</Option>
+                                    </Select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <group>
                         <x-input class="tel" :title="$t('input.mobile')+':'" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number"></x-input>
                     </group>
@@ -99,6 +110,16 @@
                 isok        :   false,
                 modal       :   false,
                 confirminfo :   '',
+                company     :   [
+                    {
+                        name    :   '中国石油',
+                        status  :   true
+                    },
+                    {
+                        name    :   '中国石化',
+                        status  :   true
+                    },
+                ],
                 phonecharges:[
                     {
                         money   :   '50',

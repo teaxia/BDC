@@ -82,13 +82,13 @@ export default {
 	methods: {
 		doSubmit(){
             let straccount = {
-                    Name    : this.mobile,
-                    NickName: this.nickName,
-                    Pwd     : this.password,
-                    MoneyPwd: this.safetycode,
-                    Sex     : this.gender,
-                    PhoneNo : this.mobile
-                }
+                Name    : this.mobile,
+                NickName: this.nickName,
+                Pwd     : this.password,
+                MoneyPwd: this.safetycode,
+                Sex     : this.gender,
+                PhoneNo : this.mobile
+            }
 
 			this.$server.post(
 			'RegistAccountWithLogin',
@@ -99,8 +99,7 @@ export default {
                 phoneCode   : this.code,
                 area        : this.area,
 				lv   		: this.lang
-			},
-			).then(data => {
+			}).then(data => {
 				if(data){
                     this.$vux.toast.show({
                         text: this.$t("user.tips.success"),
