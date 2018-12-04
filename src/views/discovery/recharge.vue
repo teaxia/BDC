@@ -16,6 +16,9 @@
             <group>
                 <x-input class="tel" :title="$t('input.mobile')" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number" is-type="china-mobile"></x-input>
             </group>
+            <group>
+                <x-input class="tel" :title="$t('user.securitypsw')" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" keyboard="number" type="password"></x-input>
+            </group>
         </div>
         <div class="main-container">
             <div v-if="type==1" class="secrechar">
@@ -55,11 +58,23 @@
                         <x-input class="tel" :title="$t('input.oilcard')+':'" v-model="oilcard" :placeholder="$t('input.tips.oilcard')" keyboard="number"></x-input>
                     </group>
                     <group>
+                        <x-input class="tel" :title="$t('user.securitypsw')+':'" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" keyboard="number" type="password"></x-input>
+                    </group>
+                    <!-- <group>
                         <x-input class="tel" :title="$t('input.recharge')+':'" v-model="num" :placeholder="$t('input.tips.recharge')" keyboard="number"></x-input>
-                    </group>
-                    <group>
+                    </group> -->
+                    <div>
+                        <div class="secrechar">
+                            <div v-for="(v,index) in oil" @click="act(index,v.money,v.status)" :key="index" :class="{'sel_div':true,'current':current==index}">
+                                <div>{{v.money}}CNY</div>
+                                <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
+                                <i v-if="current==index" class="iconfont icon-xuanze"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <group>
                         <x-input class="tel" :title="$t('input.bdc')+':'" readonly v-model="bdcmoney"></x-input>
-                    </group>
+                    </group> -->
                 </div>
             </div>
             <button @click="subconfirm()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
@@ -110,6 +125,7 @@
                 isok        :   false,
                 modal       :   false,
                 confirminfo :   '',
+                MoneyPwd    :   '',                 // 安全码
                 company     :   [
                     {
                         name    :   '中国石油',
@@ -144,6 +160,24 @@
                     {
                         money   :   '1000',
                         status  :   false
+                    },
+                ],
+                oil:[
+                    {
+                        money   :   '100',
+                        status  :   true
+                    },
+                    {
+                        money   :   '200',
+                        status  :   true
+                    },
+                    {
+                        money   :   '500',
+                        status  :   true
+                    },
+                    {
+                        money   :   '1000',
+                        status  :   true
                     },
                 ],
                 gprs        :[
@@ -195,6 +229,9 @@
                 }else if(type==2){
                     this.RMB     = this.gprs[0].money/this.bdc;
                     this.Remakes = this.gprs[0].value;
+                }else if(type==3){
+                    this.RMB     = this.oil[0].money/this.bdc;
+                    this.num     = this.oil[0].money+'CNY'
                 }
             },
             act(index,money,status=true){
@@ -205,6 +242,8 @@
                         this.Remakes = this.phonecharges[index].money+'CNY'
                     }else if(this.type==2){
                         this.Remakes = this.gprs[index].value
+                    }else if(this.type==3){
+                        this.num  = this.oil[index].money+'CNY'
                     }
                 }
                 
@@ -229,15 +268,15 @@
                     break;
                     case '3':
                         this.class      = '油卡充值';
-                        this.RMB        = this.num/this.bdc;
+                        // this.RMB        = this.num/this.bdc;
                         this.Remakes    = '公司 :'+this.coname+' 油卡号 :'+this.oilcard;
-                        if(this.num<'1'){
-                            this.$vux.toast.show({
-                                text: this.$t('discovery.recharge.error.num'),
-                                type: 'warn'
-                            })
-                            return ;
-                        }
+                        // if(this.num<'1'){
+                        //     this.$vux.toast.show({
+                        //         text: this.$t('discovery.recharge.error.num'),
+                        //         type: 'warn'
+                        //     })
+                        //     return ;
+                        // }
                         if(this.coname==''||this.mobile==''||this.oilcard==''){
                             this.$vux.toast.show({
                                 text: this.$t('discovery.recharge.error.full'),
@@ -276,8 +315,8 @@
                     RMB             :   this.RMB,                             // RMB价格
                     PhoneNo         :   this.mobile,                          // 手机号                      
                     Remakes         :   this.Remakes,                         // 充值备注
-                },
-                ).then(data => { 
+                    MoneyPwd        :   this.MoneyPwd,                        // 安全码
+                }).then(data => { 
                     if(data){
                         this.$vux.toast.show({
                             text: this.$t('global.wait'),
