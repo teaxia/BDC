@@ -24,7 +24,7 @@
 			goto(id){
                 this.$router.push({
                     path    :   '/article/view',
-                    query   :   {'id':id,'index':this.$route.meta.isIndex}
+                    query   :   {'id':id,'index':this.$route.meta.isIndex,type:0}
                 });
             }
 		},
