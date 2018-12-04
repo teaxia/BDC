@@ -116,9 +116,9 @@
 					path:"/wallet/scan",
 				});
 			},
-			ok () {
+			ok () { 
                 this.$router.push({
-					path:"/mine/auth",
+					path:"/mine/myhome",
 				});
             },
 		},
