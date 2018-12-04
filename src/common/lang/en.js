@@ -22,7 +22,8 @@ export const en = {
         msg             : 'Msg login',
         unopened        : 'Unopened',
         wait            : 'Processing in progress, please wait a moment',
-        authentication  : 'This operation needs to be authenticated by real name first'
+        authentication  : 'This operation needs to be authenticated by real name first',
+        off             : 'Off',
     },
     input:{
         mobile              :   'Phone number',
@@ -130,6 +131,7 @@ export const en = {
         recharge:{
             title       :   'Recharge',
             price       :   'price',
+            discount    :   'Discount',
             group       :   'Recharge type',
             money       :   'Money',
             petrochina  :   'PetroChina',

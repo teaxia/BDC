@@ -22,8 +22,8 @@ export const zh = {
         msg                 : '短信登录',
         unopened            : '暂未开放',
         wait                : '等待确认',
-        authentication      : '该操作需要先通过实名认证'
-        
+        authentication      : '该操作需要先通过实名认证',
+        off                 : '限时优惠',
     },
     input:{ 
         mobile              :   '手机号',
@@ -132,10 +132,11 @@ export const zh = {
         recharge:{
             title       :   '充值',
             price       :   '售价',
+            discount    :   '优惠价',
             group       :   '充值类型',
             money       :   '金额',
             petrochina  :   '中国石油',
-            sinopec     :   '中国石油',
+            sinopec     :   '中国石化',
             type:{ 
                 phone   :   '话费',
                 gprs    :   '流量',

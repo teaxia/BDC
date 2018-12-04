@@ -22,16 +22,34 @@
         </div>
         <div class="main-container">
             <div v-if="type==1" class="secrechar">
-                <div v-for="(v,index) in phonecharges" @click="act(index,v.money,v.status)" :key="index" :class="{'sel_div':true,'current':current==index}">
+                <div v-for="(v,index) in phonecharges" @click="act(index,v.money,v.status,v.off)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
                     <div>{{v.money}}CNY</div>
-                    <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
+                    <div>
+                        <div>
+                            <span>{{$t('discovery.recharge.price')}}：</span>
+                            <span :class="v.off?'del':''">{{v.money/bdc}}BDC</span> 
+                        </div>
+                        <div v-if="v.off" class="off">
+                            {{$t('discovery.recharge.discount')}}：
+                            <span v-if="v.off">{{(v.money/bdc)*v.off}}BDC</span>
+                        </div> 
+                    </div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
                 </div>
             </div>
             <div v-if="type==2" class="secrechar">
-                <div v-for="(v,index) in gprs" @click="act(index,v.money)" :key="index" :class="{'sel_div':true,'current':current==index}">
+                <div v-for="(v,index) in gprs" @click="act(index,v.money,true,v.off)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
                     <div>{{v.value}}</div>
-                    <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
+                    <div>
+                        <div>
+                            <span>{{$t('discovery.recharge.price')}}：</span>
+                            <span :class="v.off?'del':''">{{v.money/bdc}}BDC</span> 
+                        </div>
+                        <div v-if="v.off" class="off">
+                            {{$t('discovery.recharge.discount')}}：
+                            <span v-if="v.off">{{(v.money/bdc)*v.off}}BDC</span>
+                        </div> 
+                    </div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
                 </div>
             </div>
@@ -65,7 +83,7 @@
                     </group> -->
                     <div>
                         <div class="secrechar">
-                            <div v-for="(v,index) in oil" @click="act(index,v.money,v.status)" :key="index" :class="{'sel_div':true,'current':current==index}">
+                            <div v-for="(v,index) in oil" @click="act(index,v.money,v.status)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
                                 <div>{{v.money}}CNY</div>
                                 <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
                                 <i v-if="current==index" class="iconfont icon-xuanze"></i>
@@ -77,6 +95,7 @@
                     </group> -->
                 </div>
             </div>
+            <div class="off" v-if="type==1||type==2">{{$t('global.off')}}50%</div>
             <button @click="subconfirm()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
             <!-- <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>  -->
         </div>
@@ -88,7 +107,8 @@
                     <span v-if="type==2">{{$t('discovery.recharge.group')}}：{{$t('discovery.recharge.type.gprs')}}</span>
                 </div>
                 <div>{{$t('input.mobile')}}:{{this.mobile}}</div>
-                <div>{{$t('discovery.recharge.price')}}:{{this.RMB}}（BDC）</div>
+                <div :class="{'del':offprice}">{{$t('discovery.recharge.price')}}:{{this.RMB}}（BDC）</div>
+                <div v-if="offprice" class="off">{{$t('discovery.recharge.discount')}}:{{this.offprice}}（BDC）</div>
                 <div>{{$t('discovery.recharge.title')}}:{{this.Remakes}}</div>
             </div>
             <div v-else>
@@ -106,6 +126,7 @@
 </template>
 
 <script>
+    import pattern from '../../common/utils/pattern'
 	export default {
         name:'recharge',
 		data() {
@@ -126,6 +147,7 @@
                 modal       :   false,
                 confirminfo :   '',
                 MoneyPwd    :   '',                 // 安全码
+                offprice    :   '',                 // 确定时用到的折扣
                 company     :   [
                     {
                         name    :   this.$t('discovery.recharge.petrochina'),
@@ -136,30 +158,37 @@
                         status  :   true
                     },
                 ],
+                // off折扣规则 如果该值不为false，则直接*价格
                 phonecharges:[
                     {
                         money   :   '50',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,            
                     },
                     {
                         money   :   '100',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     },
                     {
                         money   :   '200',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     },
                     {
                         money   :   '300',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     },
                     {
                         money   :   '500',
-                        status  :   false
+                        status  :   false,
+                        off     :   0.5,
                     },
                     {
                         money   :   '1000',
-                        status  :   false
+                        status  :   false,
+                        off     :   0.5,
                     },
                 ],
                 oil:[
@@ -184,32 +213,38 @@
                     {
                         value   :   '100M',
                         money   :   '10',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     },
                     {
                         value   :   '200M',
                         money   :   '15',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     },
                     {
                         value   :   '300M',
                         money   :   '20',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     },
                     {
                         value   :   '500M',
                         money   :   '30',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     },
                     {
                         value   :   '1G',
                         money   :   '50',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     },
                     {
                         value   :   '2G',
                         money   :   '80',
-                        status  :   true
+                        status  :   true,
+                        off     :   0.5,
                     }
                 ]   
 			}
@@ -220,6 +255,7 @@
             }
         },
 		methods: {
+            // 充值类型切换
             active(type){
                 this.type  = type;
                 this.current = 0;
@@ -234,10 +270,15 @@
                     this.num     = this.oil[0].money+'CNY'
                 }
             },
-            act(index,money,status=true){
+            // 充值金额选择
+            act(index,money,status=true,off=false){
                 if(status){
                     this.current = index;
                     this.RMB     = money/this.bdc;
+                    // 如果有折，则显示折扣金额
+                    if(off){
+                        this.offprice   =  (money/this.bdc)*off
+                    }
                     if(this.type==1){
                         this.Remakes = this.phonecharges[index].money+'CNY'
                     }else if(this.type==2){
@@ -249,8 +290,7 @@
                 
             },
             subconfirm(){
-                this.mobile = this.mobile.replace(/\s+/g,"")
-                if(this.mobile==''){
+                if(!pattern["Pattern.Cellphone"].test(this.mobile)){
                     this.$vux.toast.show({
                         text: this.$t('discovery.recharge.error.mobile'),
                         type: 'warn'
@@ -341,12 +381,13 @@
 			{
                 guid 	:  this.$storage.get('guid'),
                 Count   :  0
-			},
-			).then(data => {
+			}).then(data => {
 				if(data){
                     this.bdc     =  data[0].Money;
                     this.RMB     =  this.phonecharges[0].money/this.bdc;
                     this.Remakes =  this.phonecharges[0].money+"CNY"
+                    this.offprice   =  (this.phonecharges[0].money/this.bdc)*0.5
+                    
 				}
             })
 		}

@@ -263,3 +263,10 @@ input{
     font-size:0.47rem;
     text-align: center;
 }
+.del{
+    text-decoration:line-through;
+}
+.off{
+    color:$font-red;
+    font-weight: bold;
+}
