@@ -22,7 +22,8 @@
 			<div class="enterfrom mr100">
                 <group>
                     <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" :placeholder="$t('wallet.send.tips.input')" v-model="bdcaddress">
-						<div slot="right" class="scan"><router-link to="/wallet/scan"><i class="iconfont icon-scanning"></i></router-link></div>
+						<div slot="right" class="scan" @click="startscan()"><i class="iconfont icon-scanning"></i></div>
+						<!-- <router-link to="/wallet/scan"></router-link> -->
 					</x-input>
                 </group>
                 <group>
@@ -115,8 +116,21 @@
 				})
 			},
 			startscan(){
-				this.$router.push({
-					path:"/wallet/scan",
+				// this.$router.push({
+				// 	path:"/wallet/scan",
+				// });
+				var that = this;
+				var FNScanner = api.require('FNScanner');
+				FNScanner.open({
+					autorotation: true
+				}, function(ret, err) {
+					if (ret) {
+						let content = ret.content;
+						alert(content);
+						that.bdcaddress = content;
+					} else {
+						alert(JSON.stringify(err));
+					}
 				});
 			},
 			ok () { 

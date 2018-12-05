@@ -9,21 +9,48 @@
     <script type="text/javascript" src="static/js/flex.js"></script>
     <script rel="prefetch" type="text/javascript" src="static/iconfont/iconfont.js"></script>
     <link rel="stylesheet" href="static/iconfont/iconfont.css">
+    <script src="script/api.js"></script>
     <title>BDC钱包</title>
   </head>
   <body>
     <div id="app-box"></div> 
     <script>
-      // 扩展API是否准备好，如果没有则监听“plusready"事件
-      if (window.plus) {
-        plusReady();
-        // alert(window.plus)
-      } else {
-        document.addEventListener("plusready", plusReady, false);
-      }
-      // 扩展API准备完成后要执行的操作
-      function plusReady() {
-        var ws = plus.webview.currentWebview(); //pw回车可输出plus.webview
+      // // 扩展API是否准备好，如果没有则监听“plusready"事件
+      // if (window.plus) {
+      //   plusReady();
+      //   // alert(window.plus)
+      // } else {
+      //   document.addEventListener("plusready", plusReady, false);
+      // }
+      // // 扩展API准备完成后要执行的操作
+      // function plusReady() {
+      //   var ws = plus.webview.currentWebview(); //pw回车可输出plus.webview
+      // }
+      window.apiready = function () {
+        var timer = 0
+        api.addEventListener({
+          name: 'keyback'
+        }, function (ret, err) {
+          var currentTime = +new Date()
+          api.historyBack(function (ret, err) {
+            if (!ret.status) {
+              if ((currentTime - timer) > 2000) {
+                timer = currentTime
+                api.toast({
+                  msg: '再按一次返回键退出app',
+                  duration: 2000,
+                  location: 'bottom'
+                })
+              } else {
+                api.closeWidget({
+                  id: 'A6098435313024', //这里改成自己的应用ID
+                  retData: {name: 'closeWidget'},
+                  silent: true
+                })
+              }
+            }
+          })
+        })
       }
       var scan
       var app
