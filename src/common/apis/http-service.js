@@ -1,6 +1,6 @@
 import axios from 'axios';
 axios.defaults.timeout = 5000;
-//axios.defaults.baseURL ='http://107.150.127.54:50006/WebService1.asmx'; //  测试地址
+//axios.defaults.baseURL ='http://107.150.127.54:50006/WebService1.asmx';     //  测试地址
 axios.defaults.baseURL ='http://107.150.127.54:50004/WebService1.asmx';   //  正式地址
 
 //http request 拦截器
@@ -83,7 +83,7 @@ axios.interceptors.response.use(response => {
     switch (err.response.status) {
       case 400:
          window.app.$vux.toast.show({
-            text: '错误请求',
+            text: '系统忙，请重试',
             type: 'warn'
           })
           window.app.$vux.loading.hide()
@@ -91,7 +91,7 @@ axios.interceptors.response.use(response => {
         break;
       case 401:
           window.app.$vux.toast.show({
-            text: '未授权，请重新登录',
+            text: '系统忙，请重试',
             type: 'warn'
           })
           window.app.$vux.loading.hide()
@@ -99,7 +99,7 @@ axios.interceptors.response.use(response => {
         break;
       case 403:
         window.app.$vux.toast.show({
-          text: '拒绝访问',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -107,7 +107,7 @@ axios.interceptors.response.use(response => {
         break;
       case 404:
         window.app.$vux.toast.show({
-          text: '请求错误,未找到该资源',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -115,7 +115,7 @@ axios.interceptors.response.use(response => {
         break;
       case 405:
         window.app.$vux.toast.show({
-          text: '请求方法未允许',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -123,7 +123,7 @@ axios.interceptors.response.use(response => {
         break;
       case 408:
         window.app.$vux.toast.show({
-          text: '请求超时',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -131,7 +131,7 @@ axios.interceptors.response.use(response => {
         break;
       case 500:
         window.app.$vux.toast.show({
-          text: '服务器内部错误',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -143,7 +143,7 @@ axios.interceptors.response.use(response => {
         break;
       case 501:
         window.app.$vux.toast.show({
-          text: '网络未实现',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -151,7 +151,7 @@ axios.interceptors.response.use(response => {
         break;
       case 502:
         window.app.$vux.toast.show({
-          text: '网络错误',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -159,7 +159,7 @@ axios.interceptors.response.use(response => {
         break;
       case 503:
         window.app.$vux.toast.show({
-            text: '服务不可用',
+            text: '系统忙，请重试',
             type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -167,15 +167,15 @@ axios.interceptors.response.use(response => {
         break;
       case 504:
         window.app.$vux.toast.show({
-          text: '网络超时',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
-        console.log('网络超时')
+        console.log('系统忙，请重试')
         break;
       case 505:
         window.app$vux.toast.show({
-          text: 'http版本不支持该请求',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -183,7 +183,7 @@ axios.interceptors.response.use(response => {
         break;
       default:
         window.app$vux.toast.show({
-          text: '连接错误',
+          text: '系统忙，请重试',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -191,7 +191,7 @@ axios.interceptors.response.use(response => {
     }
   } else {
     window.app.$vux.toast.show({
-      text: '连接到服务器失败',
+      text: '系统忙，请重试',
       type: 'warn'
     })
     window.app.$vux.loading.hide()
