@@ -20,12 +20,22 @@
 				</flexbox>
 			</v-grid>
 			<div class="enterfrom mr100">
-                <group>
-                    <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" :placeholder="$t('wallet.send.tips.input')" v-model="bdcaddress">
+                <div class="text">
+                    <!-- <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" :placeholder="$t('wallet.send.tips.input')" v-model="bdcaddress">
 						<div slot="right" class="scan" @click="startscan()"><i class="iconfont icon-scanning"></i></div>
-						<!-- <router-link to="/wallet/scan"></router-link> -->
-					</x-input>
-                </group>
+						<router-link to="/wallet/scan"></router-link>
+					</x-input> -->
+					<div class="vux-x-input weui-cell test line-b">
+						<div class="lable fl">{{$t('wallet.send.dfaddress')}}</div>
+						<div class="content fl">
+							<textarea :placeholder="$t('wallet.send.tips.input')" v-model="bdcaddress"></textarea>
+						</div>
+						<div class="iconscan">
+							<div class="scan" @click="startscan()"><i class="iconfont icon-scanning"></i></div>
+						</div>
+					</div>
+					
+                </div>
                 <group>
                     <x-input class="test" :title="$t('wallet.send.num')" :show-clear="false" v-model="num" :placeholder="$t('wallet.send.tips.min')">
 					</x-input>
@@ -116,9 +126,6 @@
 				})
 			},
 			startscan(){
-				// this.$router.push({
-				// 	path:"/wallet/scan",
-				// });
 				var that = this;
 				var FNScanner = api.require('FNScanner');
 				FNScanner.open({
@@ -128,8 +135,6 @@
 						let content = ret.content;
 						alert(content);
 						that.bdcaddress = content;
-					} else {
-						alert(JSON.stringify(err));
 					}
 				});
 			},

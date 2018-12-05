@@ -83,7 +83,7 @@ axios.interceptors.response.use(response => {
     switch (err.response.status) {
       case 400:
          window.app.$vux.toast.show({
-            text: '系统忙，请重试',
+            text: '加载中',
             type: 'warn'
           })
           window.app.$vux.loading.hide()
@@ -91,7 +91,7 @@ axios.interceptors.response.use(response => {
         break;
       case 401:
           window.app.$vux.toast.show({
-            text: '系统忙，请重试',
+            text: '加载中',
             type: 'warn'
           })
           window.app.$vux.loading.hide()
@@ -99,7 +99,7 @@ axios.interceptors.response.use(response => {
         break;
       case 403:
         window.app.$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -107,7 +107,7 @@ axios.interceptors.response.use(response => {
         break;
       case 404:
         window.app.$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -115,7 +115,7 @@ axios.interceptors.response.use(response => {
         break;
       case 405:
         window.app.$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -123,7 +123,7 @@ axios.interceptors.response.use(response => {
         break;
       case 408:
         window.app.$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -131,7 +131,7 @@ axios.interceptors.response.use(response => {
         break;
       case 500:
         window.app.$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -143,7 +143,7 @@ axios.interceptors.response.use(response => {
         break;
       case 501:
         window.app.$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -151,7 +151,7 @@ axios.interceptors.response.use(response => {
         break;
       case 502:
         window.app.$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -159,7 +159,7 @@ axios.interceptors.response.use(response => {
         break;
       case 503:
         window.app.$vux.toast.show({
-            text: '系统忙，请重试',
+            text: '加载中',
             type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -167,15 +167,15 @@ axios.interceptors.response.use(response => {
         break;
       case 504:
         window.app.$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
-        console.log('系统忙，请重试')
+        console.log('加载中')
         break;
       case 505:
         window.app$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -183,7 +183,7 @@ axios.interceptors.response.use(response => {
         break;
       default:
         window.app$vux.toast.show({
-          text: '系统忙，请重试',
+          text: '加载中',
           type: 'warn'
         })
         window.app.$vux.loading.hide()
@@ -191,7 +191,7 @@ axios.interceptors.response.use(response => {
     }
   } else {
     window.app.$vux.toast.show({
-      text: '系统忙，请重试',
+      text: '加载中',
       type: 'warn'
     })
     window.app.$vux.loading.hide()

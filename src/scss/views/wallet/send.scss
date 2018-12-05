@@ -32,8 +32,30 @@
             font-size:24px;
         }
     }
-    .sedn-radio{
-        
+    .text{
+        clear: both;
+        height:auto;
+        overflow: hidden;
+        width: 100%;
+        .lable{
+            font-size: 0.45rem;
+            width: 2.2rem;
+        }
+        .iconscan{
+            position: absolute;
+            right: 0;
+            i{
+                font-size:52px;
+            }
+        }
+        .content{
+            width:6rem;
+            textarea{
+                width: 100%;
+                border:none;
+                font-size: 0.44rem !important;
+            }
+        }
     }
     .scan{
         a{
