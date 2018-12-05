@@ -108,6 +108,9 @@
 							text: this.$t('global.success'),
 							type: 'success'
 						})
+						this.bdcaddress = '';
+						this.num 		= '';
+						this.psw 		= '';
 					}
 				})
 			},

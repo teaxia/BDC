@@ -73,31 +73,31 @@
                 url         :   '',
                 shop        :    [
                     {
-                        img     :   '/static/images/shop-1.png',
+                        img     :   './static/images/shop-1.png',
                         title   :   '奥克斯厨房电器旗舰店',
                         desc    :   '主营：绞肉机 破壁料理机 榨汁机 电热水壶 电热水瓶',
                         url     :   false
                     },
                     {
-                        img     :   '/static/images/shop-2.png',
+                        img     :   './static/images/shop-2.png',
                         title   :   '美的厨房电器旗舰店',
                         desc    :   '主营：烟灶套装 燃气灶 油烟机 消毒柜 洗碗机',
                         url     :   false
                     },
                     {
-                        img     :   '/static/images/shop-3.png',
+                        img     :   './static/images/shop-3.png',
                         title   :   '小浣熊优萌专卖店',
                         desc    :   '主营：养生壶 电煮锅 电热饭盒 煮粥锅',
                         url     :   false
                     },
                     {
-                        img     :   '/static/images/shop-4.png',
+                        img     :   './static/images/shop-4.png',
                         title   :   '康佳生活电器旗舰店',
                         desc    :   '主营：电烤箱 电饭煲 电磁炉 榨汁机 料理机',
                         url     :   false
                     },
                     {
-                        img     :   '/static/images/shop-5.png',
+                        img     :   './static/images/shop-5.png',
                         title   :   '艾美特电器旗舰店',
                         desc    :   '主营：电风扇 塔扇 空调扇 转页扇 干衣机 除湿机',
                         url     :   false
@@ -105,7 +105,7 @@
                 ],
                 mall       :    [
                     {
-                        img     :   '/static/images/mall-1.png',
+                        img     :   './static/images/mall-1.png',
                         title   :   'BDC商城',
                         desc    :   '支持BDC支付的跨境电商',
                         url     :   'http://bdcmalls.com'

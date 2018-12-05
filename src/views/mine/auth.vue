@@ -18,7 +18,7 @@
                 </label>
                 <div class="zindex">
                     <i class="iconfont icon-weimingming-"></i>
-                    <span>{{$t('mine.auth.front')}}</span>
+                    <span>{{$t('mine.auth.front')}}</span> 
                 </div>
                 <img v-if="filea" :src="filea" class="card" />
             </div>
@@ -32,6 +32,7 @@
                 </div>
                 <img v-if="fileb" :src="fileb" class="card" />
             </div>
+            
 		</div>
         <div class="main-container">
             <group>
@@ -53,15 +54,15 @@
                 datab       :   '',
                 realname    :   '',
                 active      :   true,
-                cardbg      :   '/static/images/card.jpg',
+                cardbg      :   './static/images/card.jpg',
 			}
         },
         watch:{
             active(){
                 if(this.active){
-                    this.cardbg = '/static/images/card.jpg'
+                    this.cardbg = './static/images/card.jpg'
                 }else{
-                    this.cardbg = '/static/images/vist.jpg'
+                    this.cardbg = './static/images/vist.jpg'
                 }
             }
         },
@@ -101,6 +102,7 @@
                             text: this.$t('mine.auth.tips.sub'),
                             type: 'success'
                         })
+                        this.realname = '';
                         this.$router.push({
                             path:'/mine/myhome',
                         });

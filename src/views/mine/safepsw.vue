@@ -66,7 +66,7 @@ export default {
                         text: this.$t("global.success"),
                         type: 'success'
                     })
-                    this.oldPwd = '';
+                    this.oldpsw = '';
                     this.newpsw = '';
                     this.confirmpsw = '';
                 }
