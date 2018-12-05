@@ -53,13 +53,16 @@
                 </flexbox-item>
                 <flexbox-item class="text-right">
                     <template v-if="type<=4">
+                        <div v-if="type==4">&nbsp;</div>
                         <div>{{v.Money}}</div>
                         <div>{{v.CreateTime}}</div>
                     </template>
                     <template v-if="type==5||type==6">
+                        <div>&nbsp;</div>
                         <div>{{v.CreateTime}}</div>
                     </template>
                     <template v-if="type==7">
+                        <div>&nbsp;</div>
                         <div>{{$t('discovery.bill.money')}}：{{v.TotalCurrency }}</div>
                     </template>
                 </flexbox-item>
