@@ -105,11 +105,26 @@ export default {
 	},
 	methods: {
 		// 个人中心设置
-		onTourl(url){
-			this.$router.push({
-				path:url,
-			});
-		},
+		GetAccount(){
+			this.$server.post(
+			'GetAccountById',
+			{
+				guid : this.$storage.get('guid')
+			},
+			).then(data => {
+				if(data){
+					this.$storage.set('NickName',data.NickName);                        // 昵称
+					this.$storage.set('Name',data.Name);                                // 用户名
+					(data.RealName)?this.$storage.set('RealName',data.RealName):this.$storage.set('RealName','');
+					this.$storage.set('HeadImg',data.HeadImg);                          // 昵称
+					this.$storage.set('RechargeCode',data.RechargeCode);                // 充值地址
+					this.$storage.set('Mobile',data.PhoneNo);                           // 手机号
+					this.$storage.set('Sex',data.Sex);                                  // 性别
+					this.$storage.set('ParentName',data.ParentName);                    // 推荐人
+					this.$storage.set('InviteCode',data.InviteCode);                    // 邀请码
+				}
+			})
+        },
 		// 退出
 		logout(){
 			this.$storage.logout();
@@ -133,6 +148,8 @@ export default {
 	mounted() {
 		// 判断是否有登录，如果没有登录则跳转至登录界面
 		this.islogin();
+		// 更新个人中心资料
+		this.GetAccount();
 		// 解决宽度兼容问题
 		if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  //判断是苹果设备还是其他设备 
 			this.isscro = 'no';
