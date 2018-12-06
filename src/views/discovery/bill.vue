@@ -35,38 +35,40 @@
             </flexbox>
         </div>
         <div class="main-container">
-            <flexbox class="pb vux-1px-b relist" v-for="(v,index) in dataList" :key="index">
-                <flexbox-item class="text-left">
-                    <template v-if="type<=4">
-                        <div>{{v.BusinessType}}</div>
-                        <div>BDC:{{v.MoneyAfter}}</div>
-                        <div>{{v.Remakes}}</div>
-                    </template>
-                    <template v-if="type==5||type==6">
-                        <div>{{v.CurrencyNum}}</div>
-                        <div>{{v.Status}}</div>
-                    </template>
-                    <template v-if="type==7">
-                        <div>{{v.Area}}</div>
-                        <div>{{$t('discovery.bill.people')}}：{{v.MemberCount}}</div>
-                    </template>
-                </flexbox-item>
-                <flexbox-item class="text-right">
-                    <template v-if="type<=4">
-                        <div v-if="type==4">&nbsp;</div>
-                        <div>{{v.Money}}</div>
-                        <div>{{v.CreateTime}}</div>
-                    </template>
-                    <template v-if="type==5||type==6">
-                        <div>&nbsp;</div>
-                        <div>{{v.CreateTime}}</div>
-                    </template>
-                    <template v-if="type==7">
-                        <div>&nbsp;</div>
-                        <div>{{$t('discovery.bill.money')}}：{{v.TotalCurrency }}</div>
-                    </template>
-                </flexbox-item>
-            </flexbox>
+            <div class="table line-b" v-for="(v,index) in dataList" :key="index">
+                <div v-if="type<=4"><!--收入、支出、POS、消费-->
+                    <div class="tb">
+                        <span class="fl">{{v.BusinessType}}</span>
+                        <span class="fr">{{v.Money}}</span>
+                    </div>
+                    <div class="tb">
+                        <span class="fl">BDC:{{v.MoneyAfter}}</span>
+                        <span class="fr">{{v.CreateTime}}</span>
+                    </div>
+                    <div class="tb">
+                        <div>{{v.RechargeCode}}</div>
+                        <div v-if="v.RechargeCode"><span class="btn btn-xs" v-clipboard:copy="v.RechargeCode.substring(0,32)" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copyaddress')}}</span></div>
+                    </div>
+                </div><!--收入、支出、POS、消费结束-->
+                <div v-if="type==5||type==6"><!--提币、购币-->
+                    <div class="tb">
+                        <span>{{v.CurrencyNum}}</span>
+                    </div>
+                    <div class="tb">
+                        <span class="fl">{{v.Status}}</span>
+                        <span class="fr" v-if="v.CreateTime">{{(v.CreateTime.substring(0,10))}}</span>
+                    </div>
+                </div><!--收入、支出、POS、消费结束-->
+                <div v-if="type==7">
+                    <div class="tb">
+                        {{v.Area}}
+                    </div>
+                    <div class="tb">
+                        <span class="fl">{{$t('discovery.bill.people')}}：{{v.MemberCount}}</span>
+                        <span class="fr">{{$t('discovery.bill.money')}}：{{v.TotalCurrency }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
@@ -92,33 +94,40 @@
                 switch(this.type){
                     case '1':
                         this.class = "支出"
+                        this.dataList = []
                         this.query();
                     break;
                     case '2':
                         this.class = "收入"
+                        this.dataList = []
                         this.query();
                     break;
                     case '3':
                         this.class = "POS"
+                        this.dataList = []
                         this.query();
                     break;
                     case '4':
                         this.class = "其他"
+                        this.dataList = []
                         this.query();
                     break;
                     case '5':
                         // 提币
                         this.class = "W"
+                        this.dataList = []
                         this.getrw();
                     break;
                     case '6':
                         // 充值
                         this.class = "R"
+                        this.dataList = []
                         this.getrw();
                     break;
                     case '7':
                         // 充值
                         this.class = ""
+                        this.dataList = []
                         this.getyj();
                     break;
                 }
@@ -182,8 +191,7 @@
                     Type     :   this.class,
                     dtStart  :   this.start,
                     dtEnd    :   this.end,
-                },
-                ).then(data => {
+                }).then(data => {
                     if(!data.Result){
                         this.dataList = data;
                     }else{
@@ -199,8 +207,7 @@
                     Type     :   this.class,
                     dtStart  :   this.start,
                     dtEnd    :   this.end,
-                },
-                ).then(data => {
+                }).then(data => {
                     if(!data.Result){
                         this.dataList = data;
                     }else{
@@ -215,15 +222,26 @@
                     guid     :   this.$storage.get('guid'),
                     dtStart  :   this.start,
                     dtEnd    :   this.end,
-                },
-                ).then(data => {
+                }).then(data => {
                     if(!data.Result){
                         this.dataList = data;
                     }else{
                         this.dataList = []
                     }
                 })
-            }
+            },
+            onCopy: function (e) {
+				this.$vux.toast.show({
+					text: this.$t('wallet.receive.tips.success'),
+					type: 'success'
+				})
+			},
+			onError: function (e) {
+				this.$vux.toast.show({
+					text: this.$t('wallet.receive.tips.error'),
+					type: 'warn'
+				})
+            },
 		},
 		mounted() {
             // 初始化数据

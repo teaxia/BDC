@@ -28,4 +28,13 @@
             text-align: right;
         }
     }
+    .table{
+        height: auto;
+        overflow: hidden;
+        padding:10px 0;
+        .tb{
+            height: auto;
+            overflow: hidden;
+        }
+    }
 }

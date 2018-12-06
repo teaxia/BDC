@@ -13,6 +13,7 @@ export const zh = {
         Uncertified         : '未认证',
         back                : '返回',
         copy                : '复制',
+        copyaddress         : '复制地址',
         article             : '文章',
         close               : '关闭',
         submit              : '提交',

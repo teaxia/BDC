@@ -13,6 +13,7 @@ export const en = {
         Uncertified     : 'Uncertified',
         back            : 'back',
         copy            : 'Copy',
+        copyaddress     : 'Copy Address',
         article         : 'Article',
         close           : 'close',
         submit          : 'Submit',
