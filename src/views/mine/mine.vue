@@ -88,7 +88,9 @@
 </template>
 
 <script>
+import { islogin } from '../../common/mixins/islogin';
 export default {
+	mixins:[islogin],
 	data() {
 		return {
 			nickname	:	'',
@@ -129,6 +131,8 @@ export default {
 		}
 	},
 	mounted() {
+		// 判断是否有登录，如果没有登录则跳转至登录界面
+		this.islogin();
 		// 解决宽度兼容问题
 		if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  //判断是苹果设备还是其他设备 
 			this.isscro = 'no';

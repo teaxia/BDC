@@ -113,8 +113,9 @@
 
 <script>
 import { GetCurrency } from '../../common/mixins/getcurrency';
+import { islogin } from '../../common/mixins/islogin';
 export default {
-    mixins:[GetCurrency],
+    mixins:[GetCurrency,islogin],
 	data() { 
 		return {
             fixedAssets :   '',                                                         // 固定资产
@@ -234,6 +235,8 @@ export default {
         },
 	},
 	mounted() {
+        // 判断是否登录
+        this.islogin();
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
         this.GetAccount();                                                          // 获取账户数据
         this.GetSystemGG();                                                         // 获取公告数据
