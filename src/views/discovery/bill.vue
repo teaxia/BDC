@@ -46,6 +46,7 @@
                         <span class="fr">{{v.CreateTime}}</span>
                     </div>
                     <div class="tb">
+                        <div v-if="v.Remakes" class="RechargeCode">{{v.Remakes}}</div>
                         <div class="RechargeCode">{{v.RechargeCode}}</div>
                         <div v-if="v.RechargeCode"><span class="btn btn-xs" v-clipboard:copy="v.RechargeCode.substring(0,32)" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copyaddress')}}</span></div>
                     </div>
@@ -56,7 +57,7 @@
                     </div>
                     <div class="tb">
                         <span class="fl">{{v.Status}}</span>
-                        <span class="fr" v-if="v.CreateTime">{{(v.CreateTime.substring(0,10))}}</span>
+                        <span class="fr" v-if="v.CreateTime">{{v.CreateTime}}</span>
                     </div>
                 </div><!--收入、支出、POS、消费结束-->
                 <div v-if="type==7">
