@@ -17,6 +17,10 @@
     <script>
       window.apiready = function () {
         var timer = 0
+        api.setStatusBarStyle({
+            style: 'white',
+            color: '#ffffff'
+        });
         api.addEventListener({
           name: 'keyback'
         }, function (ret, err) {

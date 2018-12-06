@@ -71,7 +71,7 @@
 	</div>
 </template>
 
-<script type='text/ecmascript-6'>
+<script>
 	export default {
 		data() {
 			return {
@@ -129,11 +129,11 @@
 				var that = this;
 				var FNScanner = api.require('FNScanner');
 				FNScanner.open({
-					autorotation: true
+					autorotation: true,
+					hintText	: '对准二维码，即可自动扫描'
 				}, function(ret, err) {
 					if (ret) {
 						let content = ret.content;
-						alert(content);
 						that.bdcaddress = content;
 					}
 				});
