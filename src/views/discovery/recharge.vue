@@ -122,13 +122,22 @@
             </div>
         </Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
+        <Modal v-model="show" :closable="false" :mask-closable="false">
+			<div slot="header"></div>
+			<div class="modal-body">{{$t('global.authentication')}}</div>
+			<div slot="footer">
+				<button class="btn btn-block btn-round" @click="goauth()">{{$t('wallet.send.auth')}}</button>
+			</div>
+		</Modal>
     </div>
 </template>
 
 <script>
+    import { GetAccount } from '../../common/mixins/getaccount';
     import pattern from '../../common/utils/pattern'
 	export default {
         name:'recharge',
+        mixins:[GetAccount],
 		data() {
 			return {
                 type        :   '1',
@@ -148,6 +157,8 @@
                 confirminfo :   '',
                 MoneyPwd    :   '',                 // 安全码
                 offprice    :   '',                 // 确定时用到的折扣
+                show        :	false,				// 跳转至强制认证界面
+                realname    :   '',
                 company     :   [
                     {
                         name    :   this.$t('discovery.recharge.petrochina'),
@@ -308,15 +319,7 @@
                     break;
                     case '3':
                         this.class      = '油卡充值';
-                        // this.RMB        = this.num/this.bdc;
                         this.Remakes    = '公司 :'+this.coname+' 油卡号 :'+this.oilcard;
-                        // if(this.num<'1'){
-                        //     this.$vux.toast.show({
-                        //         text: this.$t('discovery.recharge.error.num'),
-                        //         type: 'warn'
-                        //     })
-                        //     return ;
-                        // }
                         if(this.coname==''||this.mobile==''||this.oilcard==''){
                             this.$vux.toast.show({
                                 text: this.$t('discovery.recharge.error.full'),
@@ -371,9 +374,21 @@
             },
             cancel () {
                 this.modal = false;
-            }
+            },
+            goauth () { 
+                this.$router.push({
+                    path:"/mine/myhome",
+                });
+            },
+
 		},
 		mounted() {
+            // 更新个人中心资料
+            this.GetAccount();
+            this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
+			if(this.realname==this.$t('global.Uncertified')){
+				this.show = true;
+			}
             // 获取详情
             // 获取价格 GetCurrencyPrice
             this.$server.post(
@@ -387,7 +402,6 @@
                     this.RMB     =  this.phonecharges[0].money/this.bdc;
                     this.Remakes =  this.phonecharges[0].money+"CNY"
                     this.offprice   =  (this.phonecharges[0].money/this.bdc)*0.5
-                    
 				}
             })
 		}

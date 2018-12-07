@@ -36,7 +36,6 @@
 </template>
 
 <script>
-
 export default {
 	data() {
 		return {
@@ -91,8 +90,7 @@ export default {
 				jm 	 : jm,
 				Type : 0,				
 				lv   : this.lang
-			},
-			).then(data => {
+			}).then(data => {
 				if(data){
 					this.news = data;
 				}
@@ -116,7 +114,7 @@ export default {
 					path    :   url,
 				});
 			}
-		}
+		},
 	},
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';

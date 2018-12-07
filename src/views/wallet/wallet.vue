@@ -164,7 +164,7 @@ export default {
             this.$server.post(
 			'GetCurrencyPrice',
 			{
-                guid : this.$storage.get('guid'),
+                guid : this.$storage.get('guid'),  
                 Count: 0
 			},{
                 showLoading:false
