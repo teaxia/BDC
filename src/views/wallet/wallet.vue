@@ -137,8 +137,7 @@ export default {
 			'GetAccountById',
 			{
 				guid : this.$storage.get('guid')
-			},
-			).then(data => {
+			}).then(data => {
 				if(data){
                     // 判断是否本地缓存了数据，如果有缓存则不更新本地缓存
                     this.fixedAssets = data.FixedAssets;
