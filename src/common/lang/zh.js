@@ -18,7 +18,7 @@ export const zh = {
         close               : '关闭',
         submit              : '提交',
         ok                  : '确认',
-        cancel              : '取消',
+        cancel              : '取消', 
         notice              : '系统公告',
         msg                 : '短信登录',
         unopened            : '暂未开放',
@@ -316,19 +316,24 @@ export const zh = {
         },
         auth:{
             idcard      :   '身份证',
-            passport    :   '护照',
+            idno        :   '身份证号',
+            passport    :   '护照号',
             front       :   '选择正面',
             back        :   '选择反面',
             realname    :   '真实姓名',
             tips:{
                 realname    :   '请输入真实姓名',
+                idno        :   '请输入身份证号',
                 front       :   '请上传正面',
                 back        :   '请上传反面',
                 auth        :   '认证成功',
                 sub         :   '已提交，请等待审核',
                 pic         :   '图片大小不能超过5M',
                 picerror    :   '图片类型不符合',
-                success     :   '您已经通过认证'
+                success     :   '您已经通过认证',
+                passport    :   '请输入护照号码',
+                tips        :   'Tip:同一实名信息只能绑定一个用户',
+                number      :   '请输入有效证件号码'
             }
         }
     }

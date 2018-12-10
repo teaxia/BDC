@@ -314,7 +314,8 @@ export const en = {
         },
         auth:{
             idcard      :   'ID',
-            passport    :   'Passport',
+            idno        :   'ID number',
+            passport    :   'Passport No.',
             front       :   'Front',
             back        :   'Back',
             realname    :   'Realname',
@@ -326,7 +327,10 @@ export const en = {
                 sub         :   'Please wait for the audit',
                 pic         :   'Picture size should not exceed 5M',
                 picerror    :   'Picture type does not match',
-                success     :   'You have passed the certification.'
+                success     :   'You have passed the certification.',
+                passport    :   'Please enter your passport number.',
+                tips        :   'Tip:Only one user can be bound to the same real name information',
+                number      :   '请输入有效证件号码'
             }
         }
     }

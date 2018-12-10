@@ -148,8 +148,7 @@
                     OutCurrencyNum  :   this.num,
                     CurrencyName    :   this.act,
                     RechargeAddress :   this.address
-                },
-                ).then(data => {
+                }).then(data => {
                     if(data){
                         this.$vux.toast.show({
                             text: this.$t('global.wait'), 

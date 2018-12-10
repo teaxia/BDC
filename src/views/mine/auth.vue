@@ -38,6 +38,13 @@
             <group>
                 <x-input class="test" :title="$t('mine.auth.realname')" required :placeholder="$t('mine.auth.tips.realname')" v-model="realname"></x-input>
             </group>
+            <group v-if="active">
+                <x-input class="test" :title="$t('mine.auth.idno')" required :placeholder="$t('mine.auth.tips.idno')" v-model="idNo"></x-input>
+            </group>
+            <group v-else>
+                <x-input class="test" :title="$t('mine.auth.passport')" required :placeholder="$t('mine.auth.tips.passport')" v-model="idNo"></x-input>
+            </group>
+            <div class="tips">{{$t('mine.auth.tips.tips')}}</div>
             <button class="btn btn-block btn-round mr50" @click="submit()">{{$t('global.submit')}}</button>
         </div>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
@@ -54,6 +61,7 @@
                 datab       :   '',
                 realname    :   '',
                 active      :   true,
+                idNo        :   '',
                 cardbg      :   './static/images/card.jpg',
 			}
         },
@@ -69,6 +77,7 @@
 		methods: {
 			submit(){
                 if(this.realname==''){
+                    // 验证是否填写姓名
                     this.$vux.toast.show({
                         text: this.$t('mine.auth.tips.realname'),
                         type: 'warn'
@@ -76,15 +85,25 @@
                     return
                 }
                 if(this.filea==''){
+                    // 验证是否上传正面
                     this.$vux.toast.show({
-                        text: this.$t('mine.auth.tips.realname'),
+                        text: this.$t('mine.auth.tips.front'),
                         type: 'warn'
                     })
                     return
                 }
                 if(this.fileb==''){
+                    // 验证是否上传背面
                     this.$vux.toast.show({
                         text: this.$t('mine.auth.tips.back'),
+                        type: 'warn'
+                    })
+                    return
+                }
+                if(this.idno==''){
+                    // 验证身份证号
+                    this.$vux.toast.show({
+                        text: this.$t('mine.auth.tips.number'),
                         type: 'warn'
                     })
                     return
@@ -95,7 +114,8 @@
                     guid 	    :   this.$storage.get('guid'),
                     name        :   this.realname,
                     front       :   this.dataa,
-                    back   	    :   this.datab
+                    back   	    :   this.datab,
+                    IdNo        :   this.idNo
                 }).then(data => {
                     if(data){
                         this.$vux.toast.show({
