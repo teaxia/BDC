@@ -5,7 +5,7 @@
             <div class="title">
                 {{$t('discovery.btob.changtype')}}：
                 <Select v-model="act" class="select">
-                    <Option v-for="item in blist" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                    <Option v-for="(item,index) in blist" :value="index" :key="index">{{ item.Name }}</Option>
                 </Select>
             </div>
             <div class="mr50">
@@ -14,9 +14,9 @@
                         <flexbox class="vux-1px-b pb">
                             <flexbox-item :span="4">
                                 <svg class="sicon" aria-hidden="true">
-                                    <use :xlink:href="`#icon-`+act"></use>
+                                    <use :xlink:href="`#icon-`+actBB"></use>
                                 </svg>
-                                <span class="bdc">{{act}}</span>
+                                <span class="bdc">{{actBB}}</span>
                             </flexbox-item>
                             <flexbox-item class="bdc">
                                 {{$t('discovery.btob.proportion')}}：1:{{proportion}}
@@ -57,21 +57,9 @@
         name:'btob',
 		data() {
 			return {
-                act         :   'BTC',
-                blist       :   [
-                    {
-                        value: 'BTC',
-                        label: 'BTC'
-                    },
-                    {
-                        value: 'DASH',
-                        label: 'DASH'
-                    },
-                    {
-                        value: 'ETH',
-                        label: 'ETH'
-                    },
-                ],
+                act         :   0,
+                blist       :   [],
+                actBB       :   'BTC',
                 btobinfo    :   [],
                 num         :   '',
                 address     :   '',
@@ -83,36 +71,17 @@
         },
         watch:{
             act(){
-                this.num    =   '';
-                this.price  =   '';
-                switch(this.act){
-                    case "BTC":
-                        this.address = this.btobinfo.RechargeAddressBTC;            // 兑换地址
-                        this.proportion = this.btobinfo.PriceBTC/this.btobinfo.PriceBDC;
-                    break;
-                    case "DASH":
-                        this.address = this.btobinfo.RechargeAddressDASH;            // 兑换地址
-                        this.proportion = this.btobinfo.PriceDASH/this.btobinfo.PriceBDC;
-                    break;
-                    case "ETH":
-                        this.address = this.btobinfo.RechargeAddressETH;            // 兑换地址
-                        this.proportion = this.btobinfo.PriceETH/this.btobinfo.PriceBDC; 
-                    break;
-                }
+                this.num        =   '';
+                this.price      =   '';
+                let i           =   this.act
+                this.address    =   this.blist[i].RechargeAddress
+                this.proportion =   this.blist[i].Proportion
+                this.actBB      =   this.blist[i].Name
             },
             num(){
+                let i           =   this.act
                 this.num = (this.num<0)?0:this.num;
-                switch(this.act){
-                    case "BTC":
-                        this.price = (this.num*(this.btobinfo.PriceBTC/this.btobinfo.PriceBDC)).toFixed(8);
-                    break;
-                    case "DASH":
-                        this.price = (this.num*(this.btobinfo.PriceDASH/this.btobinfo.PriceBDC)).toFixed(8);
-                    break;
-                    case "ETH":
-                        this.price = (this.num*(this.btobinfo.PriceETH/this.btobinfo.PriceBDC)).toFixed(8);
-                    break;
-                }
+                this.price = (this.num*this.blist[i].Proportion).toFixed(8);
             }
         },
 		methods: {
@@ -157,23 +126,25 @@
                         this.isok = false;
                     }
                 })
+            },
+            GetList(){
+                this.$server.post(
+                'GetBBInfoNew',
+                {
+                    guid 	        :   this.$storage.get('guid'),
+                }).then(data => {
+                    if(data){
+                        this.blist = data;
+                        this.btobinfo = data;
+                        this.address  = data[0].RechargeAddress;            // 兑换地址
+                        this.proportion = data[0].Proportion;               // 兑换比例 
+                    }
+                })
             }
 		},
 		mounted() {
             // 获取详情
-            this.$server.post(
-			'GetBBInfo',
-			{
-				guid 	:  this.$storage.get('guid'),
-			},
-			).then(data => {
-				if(data){
-                    this.btobinfo = data;
-                    this.address  = data.RechargeAddressBTC;                                    // 兑换地址
-                    this.proportion = this.btobinfo.PriceBTC/this.btobinfo.PriceBDC;            // 兑换比例 
-				}
-            })
-
+            this.GetList();
 
         },
 	}
