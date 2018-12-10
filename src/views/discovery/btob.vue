@@ -115,7 +115,7 @@
                     guid 	        :   this.$storage.get('guid'),
                     CurrencyNum     :   this.price,                          // 价格
                     OutCurrencyNum  :   this.num,
-                    CurrencyName    :   this.act,
+                    CurrencyName    :   this.blist[this.act].Name,
                     RechargeAddress :   this.address
                 }).then(data => {
                     if(data){
