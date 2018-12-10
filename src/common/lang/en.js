@@ -155,6 +155,7 @@ export const en = {
             safetycode  :   'Safety code',
             bdcnum      :   'Please enter BDC num',
             addresstip  :   'Please enter address',
+            tip         :   "Tip:Please enter Im'token address or exchange address",
             tips:{
                 safetycode  :   'Safety code number can not be null',
                 num         :   'BDC num can not be null',

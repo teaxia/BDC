@@ -157,6 +157,7 @@ export const zh = {
             safetycode  :   '安全码',
             bdcnum      :   '请输入提币数量',
             addresstip  :   '请输入提币地址',
+            tip         :   "Tip:请输入Im'token地址或交易所地址",
             tips:{
                 safetycode  :   '安全码不能为空',
                 num         :   '提币数量不能为空',

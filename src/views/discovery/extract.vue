@@ -7,6 +7,7 @@
                     <x-input class="test" :title="$t('discovery.extract.address')" required :placeholder="$t('discovery.extract.addresstip')" v-model="addrs">
                     </x-input>
                 </group>
+                <div class="tips">{{$t('discovery.extract.tip')}}</div>
                 <group>
                     <x-input class="test" :title="$t('discovery.extract.bdc')" v-model="bdcnum" required :placeholder="$t('discovery.extract.bdcnum')">
                     </x-input>
@@ -39,9 +40,9 @@ export default {
 	data() {
 		return {
 			safecode    :  '',
-            bdcnum	        :  '',
-            addrs     :  '',
-            type	    : false,		// 切换密码状态'
+            bdcnum	    :  '',
+            addrs       :  '',
+            type	    :   false,		// 切换密码状态'
             modal       :   false,
 		}
 	},
@@ -108,4 +109,11 @@ export default {
 
 <style scoped lang="scss">
 @import "../../scss/views/user/regist";
+.tips{
+    margin-left: 15px;
+    font-style: italic;
+    color:$font-red!important;
+    font-size:20px;
+    line-height: 40px;
+}
 </style>
