@@ -66,6 +66,12 @@ const router = new VueRouter({
 
 
 FastClick.attach(document.body)
+FastClick.prototype.onTouchEnd = function(event) {
+  if(event.target.hasAttribute("type") && event.target.getAttribute("type") == "text") {
+    event.preventDefault();　　　
+    return false;　　
+  }
+}
 Vue.config.productionTip = false
 // 创建带有选项的 VueI18n 实例
 const i18n = new VueI18n({
