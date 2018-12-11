@@ -54,10 +54,6 @@
             </div>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
-        <div class="fram" v-if="show">
-			<iframe :src="url" :width="w" :height="h" :scrolling="this.isscro" frameborder="0"></iframe>
-			<button @click="close()" class="btn btn-close btn-round">{{$t('global.close')}}</button>
-		</div>
     </div>
 </template>
 
@@ -67,9 +63,6 @@
 		data() {
 			return {
                 active      :    true,                             //头部切换索引
-                show		:	false,
-                w			:	'',
-                h			:	'',
                 url         :   '',
                 shop        :    [
                     {
@@ -128,24 +121,24 @@
                     })
                     return
                 }
-                this.show = true;
-                this.url = url
+                // 调用第三方浏览器打开网页
+                if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  
+                    //苹果设备 
+                    api.openApp({
+                        iosUrl: url, //打开微信的，其中weixin为微信的URL Scheme
+                    });
+                }else{
+                    //安卓设备
+                    api.openApp({
+                        androidPkg: 'android.intent.action.VIEW',
+                        mimeType: 'text/html',
+                        uri: url
+                    });
+                }
             },
-            close(){
-                this.show = false;
-            }
 		},
 		mounted() {
-            // 解决宽度兼容问题
-            if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  //判断是苹果设备还是其他设备 
-                this.isscro = 'no';
-                this.h = '100%';
-            }else{
-                //安卓设备允许滚动
-                this.isscro = 'yes';
-                this.h = window.screen.height
-            }
-            this.w = window.screen.width
+            
 		}
 	}
 

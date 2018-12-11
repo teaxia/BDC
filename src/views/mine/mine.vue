@@ -79,10 +79,6 @@
 			</v-grid>
 			<button @click="logout()" class="btn btn-block btn-round mr30"><i class="iconfont icon-send"></i>{{$t('user.logout')}}</button>
 		</div>
-		<div class="fram" v-if="show">
-			<iframe src="http://www.belden-bdc.net/" :width="w" :height="h" :scrolling="this.isscro" frameborder="0"></iframe>
-			<button @click="close()" class="btn btn-close btn-round">{{$t('global.close')}}</button>
-		</div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -99,9 +95,6 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			show		:	false,
-			w			:	'',
-			h			:	''
 		}
 	},
 	methods: {
@@ -115,16 +108,20 @@ export default {
 			});
 		},
 		go(){
-			this.show = true;
-			// this.$router.push({
-			// 	name:"iframe",
-			// 	params:{
-			// 		url:'http://www.belden-bdc.net/',
-			// 	}
-			// });
-		},
-		close(){
-			this.show = false;
+			// 调用第三方浏览器打开网页
+			if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  
+				//苹果设备 
+				api.openApp({
+					iosUrl: 'http://www.belden-bdc.net/', //打开微信的，其中weixin为微信的URL Scheme
+				});
+			}else{
+				//安卓设备
+				api.openApp({
+					androidPkg: 'android.intent.action.VIEW',
+					mimeType: 'text/html',
+					uri: 'http://www.belden-bdc.net/'
+				});
+			}
 		}
 	},
 	mounted() {
@@ -132,16 +129,6 @@ export default {
 		this.islogin();
 		// 更新个人中心资料
 		this.GetAccount();
-		// 解决宽度兼容问题
-		if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  //判断是苹果设备还是其他设备 
-			this.isscro = 'no';
-			this.h = '100%';
-		}else{
-			//安卓设备允许滚动
-			this.isscro = 'yes';
-			this.h = window.screen.height
-		}
-		this.w = window.screen.width
 		this.nickname = this.$storage.get('NickName');
 		this.avatar   = this.$storage.get('HeadImg');
 		this.isreal	  = (this.$storage.get('RealName'))?false:true;
