@@ -15,6 +15,7 @@ import storage from './common/storage/storage'       // 本地数据读取
 import jmCode from './common/config/config'          // 加密串
 import VueQriously from 'vue-qriously'               // 二维码生成
 import VueClipboard from 'vue-clipboard2'             // 复制内容到剪切板
+import html2canvas from 'html2canvas'                // dom转换图片
 import vfooter from './components/vfooter.vue'
 
 import vgrid from './components/vgrid.vue'
@@ -60,6 +61,7 @@ Vue.prototype.$storage = storage;                    // 本地数据读取
 Vue.prototype.$md5 = md5;                            // md5加密
 Vue.prototype.$jm  = jmCode;                         // 加密字符串
 Vue.prototype.$math = math;                          // 精度计算
+Vue.prototype.$html2canvas = html2canvas;
 const router = new VueRouter({
   routes
 })

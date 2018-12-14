@@ -12,6 +12,7 @@
   "dependencies": {
     "clipboard": "^2.0.1",
     "fastclick": "^1.0.6",
+    "html2canvas": "^1.0.0-alpha.12",
     "iview": "^3.1.5",
     "js-md5": "^0.7.3",
     "mathjs": "^5.2.3",
