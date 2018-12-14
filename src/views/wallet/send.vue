@@ -21,10 +21,6 @@
 			</v-grid>
 			<div class="enterfrom mr100">
                 <div class="text">
-                    <!-- <x-input class="test" :title="$t('wallet.send.dfaddress')" :show-clear="false" :placeholder="$t('wallet.send.tips.input')" v-model="bdcaddress">
-						<div slot="right" class="scan" @click="startscan()"><i class="iconfont icon-scanning"></i></div>
-						<router-link to="/wallet/scan"></router-link>
-					</x-input> -->
 					<div class="vux-x-input weui-cell test line-b">
 						<div class="lable fl">{{$t('wallet.send.dfaddress')}}</div>
 						<div class="content fl">
@@ -130,11 +126,14 @@
 				var FNScanner = api.require('FNScanner');
 				FNScanner.open({
 					autorotation: true,
-					hintText	: '对准二维码，即可自动扫描'
+					hintText	: that.$t('wallet.send.tips.scan')
 				}, function(ret, err) {
 					if (ret) {
-						let content = ret.content;
-						that.bdcaddress = content;
+						let content = ret.content
+						let newStr = content.split(".")
+						// 分割数组
+						that.bdcaddress = newStr[0]		//	发送地址
+						that.num		= newStr[1]		//	发送数量
 					}
 				});
 			},

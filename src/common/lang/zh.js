@@ -230,9 +230,13 @@ export const zh = {
         receive:{
             title           :   '接收BDC',
             copy            :   '复制',
+            num             :   '接收数量',
+            setnum          :   '设置数量',
+            save            :   '保存到相册',
             tips:{
                 success     :   '复制成功',
                 error       :   '复制失败，请手动选择复制',
+                num         :   '请输入接收数量',
             }
         },
         // 发送
@@ -244,7 +248,9 @@ export const zh = {
             auth            :   '立即认证',
             tips:{
                 input       :   '输入/长按粘贴BDC地址',
-                min         :   '最小发送数量0.0001'
+                min         :   '最小发送数量0.0001',
+                warn        :   '保存失败，请重试',
+                scan        :   '对准二维码，即可自动扫描',
             }
         }
     },

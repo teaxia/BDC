@@ -195,6 +195,10 @@ input{
 .vux-x-input{
     border-bottom:0.01rem solid $border-line !important;
 }
+.weui-icon_toast.weui-loading{
+    width: 1rem !important;
+    height: 1rem !important;
+}
 .ivu-select-selection{
     height: 32px !important;
     input{

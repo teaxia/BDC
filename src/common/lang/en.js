@@ -228,9 +228,13 @@ export const en = {
         receive:{
             title           :   'Receive BDC',
             copy            :   'Copy',
+            num             :   'Receiving Num',
+            setnum          :   'Set up',
+            save            :   'Save to album',
             tips:{
                 success     :   'Success',
                 error       :   'Copy failed. Please manually select copy',
+                num         :   'Please enter the number of receipts',
             }
         },
         // 发送
@@ -242,7 +246,9 @@ export const en = {
             auth            :   'Authentication',
             tips:{
                 input       :   'Input/Long Press Paste BDC Address',
-                min         :   'Minimum number of transmissions 0.0001'
+                min         :   'Minimum number of transmissions 0.0001',
+                warn        :   'Save failed, please try again',
+                scan        :   'Alignment of two-dimensional codes allows automatic scanning',
             }
         }
     },
