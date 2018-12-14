@@ -1,6 +1,9 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+.receive{
+    height: 19rem;
+}
 .walletmain-top{
     .ercode{
         margin:0 auto;
@@ -19,8 +22,20 @@
         .copy{
             font-size:24px;
         }
-        .btn-input{
-            height: 1rem;
+    }
+    .send{
+        margin-top: 30px;
+        display: flex;
+        justify-content:space-between;
+        .bts{
+            width: 48%;
+            .btn{
+                i{
+                    padding-right: 15px;
+                }
+                font-size:28px;
+                color:#fff;
+            }
         }
     }
 } 

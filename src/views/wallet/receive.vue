@@ -27,10 +27,14 @@
 				</div>
 				<div class="center mr20">
 					<input v-model="num" type="number" :placeholder="$t('wallet.receive.tips.num')">
-					<button class="btn btn-xs btn-input" @click="setNum()">{{$t('wallet.receive.setnum')}}</button>
 				</div>
-				<div class="center mr20">
-					<button @click="save()" class="btn btn-block btn-round">{{$t('wallet.receive.save')}}</button>
+				<div class="send">
+					<div class="bts">
+						<button class="btn btn-block btn-round" @click="save()">{{$t('wallet.receive.save')}}</button>
+					</div>
+					<div class="bts">
+						<button class="btn btn-block btn-round" @click="setNum()">{{$t('wallet.receive.setnum')}}</button>
+					</div>
 				</div>
 			</v-grid>
 		</div>
@@ -64,7 +68,6 @@
 				})
 			},
 			save(){
-				this.setNum();
 				//首先先截取base64图片
 				let ref = document.getElementById('screenshot') // 截图区域				
 				let that = this;
@@ -78,7 +81,7 @@
 					var imgName = Math.floor((Math.random() * 100) + 1) + "share.jpg";
 					var trans = api.require('trans');
 					trans.saveImage({
-						base64Str: base64Str, //base64字符串不能包含data:image/png;base64,前缀
+						base64Str: base64Str, 					//base64字符串不能包含data:image/png;base64,前缀
 						album: false,
 						imgPath: imgPath,
 						imgName: imgName
@@ -88,6 +91,7 @@
 								path: imgPath+imgName
 							}, function(ret, err) {
 								if (ret && ret.status) {
+									
 									that.$vux.toast.show({
 										text: that.$t('global.success'),
 										type: 'success'
@@ -118,6 +122,7 @@
 					this.num = 0
 				}
 				this.ercode = this.code+'.'+this.num;
+				
 			}
 		},
 		mounted() {
