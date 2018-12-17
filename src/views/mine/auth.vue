@@ -63,6 +63,7 @@
                 active      :   true,
                 idNo        :   '',
                 cardbg      :   './static/images/card.jpg',
+                upUrl       :   '',                                 // 上传图片地址
 			}
         },
         watch:{
@@ -149,6 +150,7 @@
                     })
                     return
                 }
+                // 模拟表单图片上传
                 let reader = new FileReader()
                 reader.readAsDataURL(files)
                 reader.onloadend = function () {
@@ -162,7 +164,8 @@
                     window.app.$vux.loading.show({
                         text: 'Loading'
                     })
-                    that.$server.post('http://107.150.127.54:50004/Handler1.ashx',idcard,{upload:true}).then(data => {
+                    let upUrl = that.upUrl
+                    that.$server.post(upUrl,idcard,{upload:true}).then(data => {
                         if(data){
                             if(file=="a"){
                                 that.filea = this.result
@@ -176,33 +179,25 @@
                     })
                 }
             },
-            // GetAccount(){
-            //     this.$server.post(
-            //     'GetAccountById',
-            //     {
-            //         guid : this.$storage.get('guid')
-            //     }).then(data => {
-            //         if(data){
-            //             this.$storage.set('NickName',data.NickName);                        // 昵称
-            //             this.$storage.set('Name',data.Name);                                // 用户名
-            //             this.$storage.set('RealName',data.RealName); 
-            //             this.$storage.set('HeadImg',data.HeadImg);                          // 头像
-            //             this.$storage.set('RechargeCode',data.RechargeCode);                // 充值地址
-            //             this.$storage.set('Mobile',data.PhoneNo);                           // 手机号
-            //             this.$storage.set('Sex',data.Sex);                                  // 性别
-            //             this.$storage.set('ParentName',data.ParentName);                    // 推荐人
-            //             this.$storage.set('InviteCode',data.InviteCode);                    // 邀请码
-            //             this.$router.push({
-            //                 path:'/mine/myhome',
-            //             });
-            //         }
-            //     })
-            // },
+            GetImgUpLoadUrl(){
+                this.$server.post(
+                'GetImgUpLoadUrl',
+                {
+                    guid : this.$storage.get('guid')
+                }).then(data => {
+                    if(data){
+                        this.upUrl = data.Result;
+                    }else{
+                        this.GetImgUpLoadUrl()
+                    }
+                })
+            },
             change(){
                 this.active = !this.active;
             }
 		},
 		mounted() {
+            this.GetImgUpLoadUrl();
             if(this.$storage.get('RealName')!=''){
                 this.$vux.toast.show({
                     text: this.$t('mine.auth.tips.success'),
