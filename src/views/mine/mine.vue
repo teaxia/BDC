@@ -75,6 +75,9 @@
 							<span>{{$t('mine.menus.setting')}}</span>
 						</span>
 					</cell>
+					<cell class="cell-hei">
+					当前版本号：{{version}}
+					</cell>
 				</group>
 			</v-grid>
 			<button @click="logout()" class="btn btn-block btn-round mr30"><i class="iconfont icon-send"></i>{{$t('user.logout')}}</button>
@@ -95,6 +98,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
+			version 	:	''
 		}
 	},
 	methods: {
@@ -133,6 +137,7 @@ export default {
 		this.avatar   = this.$storage.get('HeadImg');
 		this.isreal	  = (this.$storage.get('RealName'))?false:true;
 		this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
+		this.version  =  api.version
 	}
 }
 

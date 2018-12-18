@@ -166,16 +166,24 @@
                     })
                     let upUrl = that.upUrl
                     that.$server.post(upUrl,idcard,{upload:true}).then(data => {
-                        if(data){
-                            if(file=="a"){
-                                that.filea = this.result
-                                that.dataa = data.Data;
-                            }else{
-                                that.fileb = this.result
-                                that.datab = data.Data;
-                            }
+                        // 拦截器
+                        if(data.Code == '-1'){
+                            window.app.$vux.toast.show({
+                                text: data.Msg,
+                                type: 'warn'
+                            })
                             window.app.$vux.loading.hide()
+                            return
                         }
+                        if(file=="a"){
+                            that.filea = this.result
+                            that.dataa = data.Data;
+                        }else{
+                            that.fileb = this.result
+                            that.datab = data.Data;
+                        }
+                        window.app.$vux.loading.hide()
+                        
                     })
                 }
             },

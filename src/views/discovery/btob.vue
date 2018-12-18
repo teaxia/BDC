@@ -100,13 +100,14 @@
             submit(){
                 // 获取详情
                 if(this.isok){
-                    return;
+                    return
                 }
                 if(this.num==''){
                     this.$vux.toast.show({
                         text: this.$t('discovery.btob.null'),
                         type: 'warn'
                     })
+                    return
                 }
                 this.isok = true;
                 this.$server.post(
