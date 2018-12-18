@@ -21,7 +21,7 @@
                             </flexbox-item>
                             <flexbox-item>
                                 <div class="dis-grid-content">
-                                    <div class="title ellipsis1">{{v.title}}</div>
+                                    <div :class="{title:true,ellipsis1:true,link:v.url}">{{v.title}}</div>
                                     <div class="content ellipsis1">{{v.desc}}</div>
                                 </div>
                             </flexbox-item>

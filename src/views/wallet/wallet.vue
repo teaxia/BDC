@@ -167,17 +167,18 @@ export default {
                 Count: 0
 			},{
                 showLoading:false
-            }
-			).then(data => {
+            }).then(data => {
 				if(data){
                     // 总资产折合算法 X=固定+通证+（游戏/BDC价格）(单位：BDC)
                     //let t = this.gameAssets/data[0].Money;
                     //let x = this.$math.add(t,this.fixedAssets,this.actAssets);
-                    let x = this.$math.add(this.gameAssets,this.fixedAssets,this.actAssets);
-                    this.sum = x.toFixed(8);
+                    let x = this.$math.add(this.gameAssets,this.fixedAssets,this.actAssets)
+                    this.sum = x.toFixed(8)
                     this.cny = (this.$math.eval(x/this.PriceToBDC)).toFixed(8)
-                    this.BDC = data[0].Money;
-				}
+                    this.BDC = data[0].Money
+				}else{
+                    this.GetCurrencyPrice()
+                }
 			})
         },
         GetPriceByCurrency(){
@@ -188,11 +189,12 @@ export default {
                 currencyCode    : this.$storage.get('currency')
 			},{
                 showLoading:false
-            }
-			).then(data => {
+            }).then(data => {
 				if(data){
                     this.currency = data; 
-				}
+				}else{
+                    this.GetPriceByCurrency()
+                }
 			})
         },
         GetSystemGG(){
@@ -203,8 +205,7 @@ export default {
                 Count: 2
 			},{
                 showLoading:false
-            }
-			).then(data => {
+            }).then(data => {
 				if(data){
                     this.news = data;
 				}
@@ -221,8 +222,7 @@ export default {
 			{
                 guid : this.$storage.get('guid'),
                 Count: 2
-			}
-			).then(data => {
+			}).then(data => {
 				if(data){
                     this.clockdata = data;
                     this.showbox = true;
