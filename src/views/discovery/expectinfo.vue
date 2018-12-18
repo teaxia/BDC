@@ -61,8 +61,7 @@
 			'GetBuyExpectInfo',
 			{
 				guid 	:  this.$storage.get('guid'),
-			},
-			).then(data => {
+			}).then(data => {
 				if(data){
                     this.expectinfo = data;
 				}
