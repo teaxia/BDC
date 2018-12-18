@@ -114,6 +114,8 @@
                 }).then(data => {
                     if(data){
                         this.shop = data
+                    }else{
+                        this.GetShopList();
                     }
                 })
             }
