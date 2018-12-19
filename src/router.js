@@ -18,6 +18,7 @@ import discovery from './views/discovery.vue'
     import bill from  './views/discovery/bill.vue'                          // 兑换BDC
     import credit from  './views/discovery/credit.vue'                      // 办理信用卡
     import extract from  './views/discovery/extract.vue'                    // 提币
+    import games from  './views/discovery/games.vue'                        // 游戏
         
 // 钱包
 import wallet from './views/wallet.vue'
@@ -97,6 +98,7 @@ let routes = [
             { path: '/discovery/bill', component: bill, name: 'bill',meta:{isIndex: 2}},
             { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
             { path: '/discovery/extract', component: extract, name: 'extract',meta:{isIndex: 2}},
+            { path: '/discovery/games', component: games, name: 'games',meta:{isIndex: 2}},
         ]
     },
     // 钱包

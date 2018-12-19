@@ -4,7 +4,7 @@
 			<h1>{{$t("menu.discovery")}}</h1>
 			<div class="topmenu">
 				<v-grid>
-					<div :class="['grid-4',index<4?'line-b':'']" v-for="(list,index) in dataList" :key="index">
+					<div :class="['grid-4',index<4?'line-b':'',list.url=='false'?'close':'']" v-for="(list,index) in dataList" :key="index">
 						<div @click="onTorul(list.url)">
 							<i :class="[{'iconfont':true},list.icon]"></i>
 							<span class="top-menu">{{list.value}}</span>
@@ -60,7 +60,7 @@ export default {
 				{
 					value   : this.$t("discovery.topmenu.ent"),
 					icon    : 'icon-xiuxianyule',
-					url     : 'false',
+					url     : '/discovery/games',
 				},
 				{
 					value   : this.$t("discovery.topmenu.recharge"),
