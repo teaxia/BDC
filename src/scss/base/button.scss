@@ -89,14 +89,14 @@ button[disabled]
     // 绿色按钮样式
     &-success
     {
-        background-color: green;
+        background-color: #299e83;
         color: #fff;
     
         &.outline
         {
-            color: green;
+            color: #299e83;
             background-color: #fff;
-            border: 1px solid green;
+            border: 1px solid #299e83;
         }
 
         &:active
