@@ -10,7 +10,7 @@
             </div>
             <div class="content" v-html="content">
             </div>
-            <div class="notice mr40" v-if="type==0||type==3">
+            <div class="notice mr40" v-if="type==3||type==2">
                 <div>BDC团队</div>
                 <div>{{time}}</div>
             </div>
@@ -29,7 +29,7 @@
                 time        :   '',
                 content     :   '',
                 name        :   '',
-                type        :   1             // 0为系统公告 1文章 3站内信
+                type        :   1             // 1文章 2站内信 3系统公告
 			}
 		},
 		methods: {
@@ -66,18 +66,19 @@
             let Id          = this.$route.query.id;
             this.isIndex    = this.$route.query.index;
             this.type       = (this.$route.query.type)?this.$route.query.type:1;
-            if(this.type==3){
-                // 站内信
-                this.name = this.$t('global.message')
-                this.GetLetterMessagInfo(Id);
-            }else if(this.type==0){
-                // 公告
-                this.name = this.$t('global.notice')
-                this.GetNewsbulletinById(Id);
-            }else if(this.type==1){
-                // 文章
-                this.name = this.$t('global.article')
-                this.GetNewsbulletinById(Id);
+            switch(this.type){
+                case 1:     // 文章
+                    this.name = this.$t('global.article')
+                    this.GetNewsbulletinById(Id);
+                break;
+                case 2:     // 站内信
+                    this.name = this.$t('global.message')
+                    this.GetLetterMessagInfo(Id);
+                break;
+                case 3:     // 公告
+                    this.name = this.$t('global.notice')
+                    this.GetNewsbulletinById(Id);
+                break;
             }
 			
 		}

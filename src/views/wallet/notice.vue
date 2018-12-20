@@ -3,13 +3,13 @@
         <x-header :left-options="{backText:$t('global.back')}" :title="title"></x-header>
         <div class="main-container">
 			<v-grid class="mr30" v-for="(v,index) in dataList" v-if="type==0" :key="index">
-                <div class="systeamgg" @click="goto(v.Id)">
+                <div class="systeamgg" @click="goto(v.Id,0,3)">
                     <div>{{v.Title}}</div>
                     <div>{{v.Sendtime}}</div>
                 </div>
 			</v-grid>
 			<v-grid class="mr30" v-for="(v,index) in dataList" v-if="type==1" :key="index">
-                <div class="systeammsg" @click="goto(v.Id,3,3)">
+                <div class="systeammsg" @click="goto(v.Id,3,2)">
                     <div>{{v.Subject}}</div>
                     <div>{{v.SentTime}}</div>
 					<div class="isread">
@@ -33,7 +33,7 @@
 			}
 		},
 		methods: {
-			goto(id,index=0,type=0){
+			goto(id,index,type){
                 this.$router.push({
                     path    :   '/article/view',
                     query   :   {'id':id,'index':index,'type':type}
