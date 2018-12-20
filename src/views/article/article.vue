@@ -5,7 +5,7 @@
 			<div class="title">
                 <h1>{{title}}</h1>
             </div>
-            <div class="time">
+            <div class="time" v-if="type==1">
                 <h5>{{time}}</h5>
             </div>
             <div class="content" v-html="content">

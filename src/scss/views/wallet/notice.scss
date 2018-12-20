@@ -4,10 +4,11 @@
 .notice{
     .systeamgg,.systeammsg{
         padding:0 30px;
+        font-size:24px;
     }
     .systeammsg{
         position: relative;
-        .isread{
+        .isread{ 
             position: absolute;
             right: 15px;
             top:25px;
@@ -17,7 +18,7 @@
         }
     }
     .time{
-        color:$font-baseh2;
+        color:$font-baseh2; 
     }
     .title{
         color:$font-base;
