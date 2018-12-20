@@ -15,7 +15,7 @@ export const en = {
         copy            : 'Copy',
         copyaddress     : 'Copy Address',
         article         : 'Article',
-        close           : 'close',
+        close           : 'Close',
         submit          : 'Submit',
         ok              : 'OK',
         cancel          : 'Cancel',
@@ -25,6 +25,11 @@ export const en = {
         wait            : 'Processing in progress, please wait a moment',
         authentication  : 'This operation needs to be authenticated by real name first',
         off             : 'Off',
+        message         : 'Message',
+    },
+    messgae:{
+        Aread               :   'Already read',
+        Unread              :   'Unread',
     },
     input:{
         mobile              :   'Phone number',
@@ -51,6 +56,7 @@ export const en = {
         tips    :   {
             username        : 'Please enter your account',
             password        : 'Please enter your password',
+            repassword      : 'Please enter your password again',
             phone           : 'Please enter your phone number',
             forget          : 'Forget password?',
             success         : 'Login success',
@@ -62,8 +68,8 @@ export const en = {
             send            : 'Recapture',
             error           : 'Please fill in the correct username and password'
         },
-        login               :   'login',
-        regist              :   'regist',
+        login               :   'Login',
+        regist              :   'Regist',
         logout              :   'Logout',
         password            :   'Password',
         repassword          :   'Repassword',
@@ -139,8 +145,8 @@ export const en = {
             sinopec     :   'SINOPEC',
             type:{
                 phone   :   'Telephone rate',
-                gprs    :   'data',
-                oilcard :   'oilcard'
+                gprs    :   'Data',
+                oilcard :   'Oilcard'
             },
             error:{
                 num     :   'Recharge not less than 1',
@@ -240,14 +246,14 @@ export const en = {
         // 发送
         send:{
             title           :   'Send',
-            dfaddress       :   'address',
-            num             :   'num',
-            class           :   'category',
+            dfaddress       :   'Address',
+            num             :   'Num',
+            class           :   'Category',
             auth            :   'Authentication',
             tips:{
                 input       :   'Input/Long Press Paste BDC Address',
                 min         :   'Minimum number of transmissions 0.0001',
-                warn        :   'Save failed, please try again',
+                warn        :   'Save failed, please try again', 
                 scan        :   'Alignment of two-dimensional codes allows automatic scanning',
             }
         }
@@ -293,12 +299,12 @@ export const en = {
             settile         :   'Setting',
             editpsw         :   'Modify login password',
             safepsw         :   'Modify security password',
-            language        :   'language',
-            price           :   'currency',
+            language        :   'Language',
+            price           :   'Currency',
             oldpsw          :   'Old password',
             newpsw          :   'New password',
             confirmpsw      :   'Confirm the password',
-            english         :   'english',
+            english         :   'English',
             chinaese        :   '中文',
             rmb             :   'RMB',
             usd             :   'USD',
@@ -328,6 +334,7 @@ export const en = {
             realname    :   'Realname',
             tips:{
                 realname    :   'Please enter your real name.',
+                idno        :   'Please enter your ID number.',
                 front       :   'Please upload the front.',
                 back        :   'Please upload the reverse side',
                 auth        :   'Certification success',
@@ -337,7 +344,7 @@ export const en = {
                 success     :   'You have passed the certification.',
                 passport    :   'Please enter your passport number.',
                 tips        :   'Tip:Only one user can be bound to the same real name information',
-                number      :   '请输入有效证件号码'
+                number      :   'Please enter a valid ID number'
             }
         }
     }

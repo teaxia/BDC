@@ -25,6 +25,11 @@ export const zh = {
         wait                : '等待确认',
         authentication      : '该操作需要先通过实名认证',
         off                 : '限时优惠',
+        message             : '站内信',
+    },
+    message:{
+        Aread               :   '已读',
+        Unread              :   '未读',
     },
     input:{ 
         mobile              :   '手机号',

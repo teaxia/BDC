@@ -2,8 +2,19 @@
 @import "../../base/var";
 @import "../../base/button";
 .notice{
-    .systeamgg{
+    .systeamgg,.systeammsg{
         padding:0 30px;
+    }
+    .systeammsg{
+        position: relative;
+        .isread{
+            position: absolute;
+            right: 15px;
+            top:25px;
+            .noread{
+                color:$font-red;
+            }
+        }
     }
     .time{
         color:$font-baseh2;

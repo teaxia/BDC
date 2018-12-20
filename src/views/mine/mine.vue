@@ -69,6 +69,13 @@
 						</span>
 						<div slot="default" v-if="isreal" class="authrel">{{realname}}</div>
 					</cell>
+					<cell is-link link="/wallet/notice?index=3&type=1" class="cell-hei">
+						<span slot="title">
+							<i class="iconfont icon-xiaoxi"></i>
+							<span>站内消息</span>
+						</span>
+						<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
+					</cell>
 					<cell is-link link="/mine/setting" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-shezhi"></i>
@@ -89,6 +96,7 @@
 <script>
 import { islogin } from '../../common/mixins/islogin';
 import { GetAccount } from '../../common/mixins/getaccount';
+
 export default {
 	mixins:[islogin,GetAccount],
 	data() {
@@ -98,12 +106,11 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	''
+			version 	:	'',
+			messageNum	:	''
 		}
 	},
 	methods: {
-		// 个人中心设置
-		
 		// 退出
 		logout(){
 			this.$storage.logout();
@@ -126,6 +133,21 @@ export default {
 					uri: 'http://www.belden-bdc.net/'
 				});
 			}
+		},
+		GetLetterMessageCount(){
+			// 获取消息中心数量
+			this.$server.post(
+			'GetLetterMessageCount',
+			{
+				guid    : this.$storage.get('guid'),
+				Count   : 0
+			}).then(data => {
+				if(data){
+					this.messageNum = data.Result;
+				}else{
+					this.GetLetterMessageCount()	
+				}
+			})
 		}
 	},
 	mounted() {
@@ -133,6 +155,8 @@ export default {
 		this.islogin();
 		// 更新个人中心资料
 		this.GetAccount();
+		// 消息行数
+		this.GetLetterMessageCount()
 		this.nickname = this.$storage.get('NickName');
 		this.avatar   = this.$storage.get('HeadImg');
 		this.isreal	  = (this.$storage.get('RealName'))?false:true;
