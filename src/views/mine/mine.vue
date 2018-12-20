@@ -71,8 +71,8 @@
 					</cell>
 					<cell is-link link="/wallet/notice?index=3&type=1" class="cell-hei">
 						<span slot="title">
-							<i class="iconfont icon-xiaoxi"></i>
-							<span>站内消息</span>
+							<i class="iconfont icon-xiaoxi1"></i>
+							<span>{{$t('global.message')}}</span>
 						</span>
 						<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
 					</cell>
@@ -83,7 +83,7 @@
 						</span>
 					</cell>
 					<cell class="cell-hei">
-					当前版本号：{{version}}
+					{{$t('global.ver')}}：{{version}}
 					</cell>
 				</group>
 			</v-grid>

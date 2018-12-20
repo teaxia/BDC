@@ -26,6 +26,7 @@ export const en = {
         authentication  : 'This operation needs to be authenticated by real name first',
         off             : 'Off',
         message         : 'Message',
+        ver             : 'Ver',
     },
     messgae:{
         Aread               :   'Already read',
