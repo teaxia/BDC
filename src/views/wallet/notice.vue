@@ -8,7 +8,7 @@
                     <div>{{v.Sendtime}}</div>
                 </div>
 			</v-grid>
-			<v-grid class="mr30" v-for="(v,index) in dataList" v-if="type==1" :key="index">
+			<v-grid class="mr30" v-for="(v,index) in dataList" v-if="type==1&&v.Subject" :key="index">
                 <div class="systeammsg" @click="goto(v.Id,3,2)">
                     <div>{{v.Subject}}</div>
                     <div>{{v.SentTime}}</div>

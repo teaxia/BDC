@@ -106,7 +106,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'',
+			version 	:	'2.0.15',
 			messageNum	:	''
 		}
 	},
@@ -161,7 +161,6 @@ export default {
 		this.avatar   = this.$storage.get('HeadImg');
 		this.isreal	  = (this.$storage.get('RealName'))?false:true;
 		this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
-		this.version  =  api.version
 	}
 }
 
