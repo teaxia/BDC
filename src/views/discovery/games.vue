@@ -24,7 +24,7 @@
                             </div>
                         </flexbox-item>
                         <flexbox-item>
-                            <button class="btn btn-xs btn-round btn-success">开始游戏</button>
+                            <button class="btn btn-xs btn-round btn-success">{{$t('global.stargame')}}</button>
                         </flexbox-item>
                     </flexbox>
                 </div>
@@ -52,8 +52,6 @@
                 }else{
                     //安卓设备
                     api.openApp({
-                        androidPkg: 'android.intent.action.VIEW',
-                        mimeType: 'text/html',
                         uri: link
                     });
                 }

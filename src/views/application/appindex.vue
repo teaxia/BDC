@@ -99,8 +99,6 @@
                 }else{
                     //安卓设备
                     api.openApp({
-                        androidPkg: 'android.intent.action.VIEW',
-                        mimeType: 'text/html',
                         uri: url
                     });
                 }

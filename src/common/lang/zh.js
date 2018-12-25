@@ -27,6 +27,7 @@ export const zh = {
         off                 : '限时优惠',
         message             : '站内消息',
         ver                 : '版本号',
+        stargame            : '开始游戏',
     },
     message:{
         Aread               :   '已读',

@@ -27,6 +27,7 @@ export const en = {
         off             : 'Off',
         message         : 'Message',
         ver             : 'Ver',
+        stargame        : 'Start',
     },
     messgae:{
         Aread               :   'Already read',
