@@ -92,4 +92,10 @@
 .title{
     font-size:32px;
 }
+.dis-grid-img{
+    img{
+        width: 100px;
+        height: 100px;
+    }
+}
 </style>

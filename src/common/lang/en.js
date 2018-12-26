@@ -303,6 +303,7 @@ export const en = {
             safepsw         :   'Modify security password',
             language        :   'Language',
             price           :   'Currency',
+            mycard          :   'Bind Credit Card',
             oldpsw          :   'Old password',
             newpsw          :   'New password',
             confirmpsw      :   'Confirm the password',
@@ -310,17 +311,24 @@ export const en = {
             chinaese        :   '中文',
             rmb             :   'RMB',
             usd             :   'USD',
+            card            :   'Card No.',
+            bank            :   'Opening bank',
+            name            :   'Name',
             tips:{
                 oldpsw          :   'Please enter the old password',
                 newpsw          :   'Please enter a new password',
                 confirmpsw      :   'Please enter the password again',
                 repsw           :   'New password and old password must be filled in',
-                notpsw          :   'The password entered two times is inconsistent'
+                notpsw          :   'The password entered two times is inconsistent',
+                card            :   'Please enter the bank card number.',
+                bank            :   'Please enter an account bank',
+                name            :   'Please enter your name.',
             }
         },
         feedback:{
             title       :   'Feedback',
             msg         :   'Thank you for your valuable advice...',
+            imgerror    :   'Up to 5 pictures',
             tip         :   'Feedback should not be empty',
         },
         extension:{
@@ -347,6 +355,21 @@ export const en = {
                 passport    :   'Please enter your passport number.',
                 tips        :   'Tip:Only one user can be bound to the same real name information',
                 number      :   'Please enter a valid ID number'
+            }
+        },
+        mycard:{
+            tip         :   'Tips',
+            No          :   'No.',
+            bank        :   'Bank',
+            cardnumber  :   'Card Number',
+            time        :   'Time',
+            tips:{
+                p1      :   '1、每个游戏账户最多绑定',
+                p2      :   '张银行卡，您已经成功绑定',
+                p3      :   '张',
+                p4      :   '2、银行卡锁定以后，不能增加新的银行卡绑定，同时也不能解绑已绑定的银行卡',
+                p5      :   '3、新绑定的提款银行卡需要绑定时间超过6小时才能正常取款',
+                p6      :   '4、一个账户只能帮顶同一个开户人姓名的银行卡'
             }
         }
     }

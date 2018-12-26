@@ -304,24 +304,32 @@ export const zh = {
             safepsw         :   '修改安全密码',
             language        :   '语言选择',
             price           :   '货币选择',
+            mycard          :   '绑定银行卡',
             oldpsw          :   '旧密码',
             newpsw          :   '新密码',
             confirmpsw      :   '确认密码',
-            english         :   'english',
+            english         :   'English',
             chinaese        :   '中文',
             rmb             :   '人民币',
             usd             :   '美元',
+            card            :   '银行卡号',
+            bank            :   '开户行',
+            name            :   '姓名',
             tips:{
                 oldpsw          :   '请输入旧密码',
                 newpsw          :   '请输入新密码',
                 confirmpsw      :   '请再输入一次密码',
                 repsw           :   '新密码与旧密码必须填写',
-                notpsw          :   '两次输入的密码不一致'
+                notpsw          :   '两次输入的密码不一致',
+                card            :   '请输入银行卡号',
+                bank            :   '请输入开户行',
+                name            :   '请输入姓名',
             }
         },
         feedback:{
             title       :   '意见反馈',
             msg         :   '感谢您的宝贵建议...',
+            imgerror    :   '最多只能上传5张图片',
             tip         :   '意见反馈不能为空',
         },
         extension:{
@@ -348,6 +356,21 @@ export const zh = {
                 passport    :   '请输入护照号码',
                 tips        :   'Tip:同一实名信息只能绑定一个用户',
                 number      :   '请输入有效证件号码'
+            }
+        },
+        mycard:{
+            tip         :   '温馨提示',
+            No          :   '序号',
+            bank        :   '银行名称',
+            cardnumber  :   '卡号',
+            time        :   '绑定时间',
+            tips:{
+                p1      :   '1、每个游戏账户最多绑定',
+                p2      :   '张银行卡，您已经成功绑定',
+                p3      :   '张',
+                p4      :   '2、银行卡锁定以后，不能增加新的银行卡绑定，同时也不能解绑已绑定的银行卡',
+                p5      :   '3、新绑定的提款银行卡需要绑定时间超过6小时才能正常取款',
+                p6      :   '4、一个账户只能帮顶同一个开户人姓名的银行卡'
             }
         }
     }

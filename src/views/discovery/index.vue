@@ -4,7 +4,7 @@
 			<h1>{{$t("menu.discovery")}}</h1>
 			<div class="topmenu">
 				<v-grid>
-					<div :class="['grid-4',index<4?'line-b':'',list.url=='false'?'close':'']" v-for="(list,index) in dataList" :key="index">
+					<div :class="['grid-3',index<3?'line-b':'',list.url=='false'?'close':'']" v-for="(list,index) in dataList" :key="index">
 						<div @click="onTorul(list.url)">
 							<i :class="[{'iconfont':true},list.icon]"></i>
 							<span class="top-menu">{{list.value}}</span>
@@ -42,38 +42,38 @@ export default {
 			lang	 : 'zh',		// 默认语言
 			dataList:[
 				{
-					value   : this.$t("discovery.topmenu.bdc"),
-					icon    : 'icon-duihuanBDC',
+					value   : this.$t("discovery.topmenu.bdc"),				// 兑换BDC
+					icon    : 'icon-duihuanBDC',	
 					url     : '/discovery/expectinfo',
 				},
 				{
-					value   : this.$t("discovery.topmenu.ctc"),
+					value   : this.$t("discovery.topmenu.ctc"),				// CTC
 					icon    : 'icon-CTC1',
 					url     : 'false',
 				},
 				
 				{
-					value   : this.$t("discovery.topmenu.bill"),
+					value   : this.$t("discovery.topmenu.bill"),			// 账本
 					icon    : 'icon-zhangben2',
 					url     : '/discovery/bill',
 				},
 				{
-					value   : this.$t("discovery.topmenu.ent"),
+					value   : this.$t("discovery.topmenu.ent"),				// 休闲娱乐
 					icon    : 'icon-xiuxianyule',
 					url     : '/discovery/games',
 				},
+				// {
+				// 	value   : this.$t("discovery.topmenu.recharge"),		// 充值
+				// 	icon    : 'icon-chongzhi',
+				// 	url     : '/discovery/recharge',
+				// },
 				{
-					value   : this.$t("discovery.topmenu.recharge"),
-					icon    : 'icon-chongzhi',
-					url     : '/discovery/recharge',
-				},
-				{
-					value   : this.$t("discovery.topmenu.credit"),
+					value   : this.$t("discovery.topmenu.credit"),			// 信用卡
 					icon    : 'icon-banxinyongqia',
 					url     : '/discovery/credit',
 				},
 				{
-					value   : this.$t("discovery.topmenu.extract"),
+					value   : this.$t("discovery.topmenu.extract"),			// 提币
 					icon    : 'icon-Fixedassets',
 					url     : '/discovery/extract',
 				}

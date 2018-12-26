@@ -25,6 +25,11 @@
                                 <span>{{$t('mine.setting.price')}}</span>
                             </span>
                         </cell>
+                        <cell link="/mine/mycard" is-link class="cell-hei">
+                            <span slot="title">
+                                <span>{{$t('mine.setting.mycard')}}</span>
+                            </span>
+                        </cell>
                     </group>
                 </v-grid>
             </div>

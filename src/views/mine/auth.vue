@@ -161,6 +161,7 @@
                     var idcard = new FormData()
                     idcard.append('img', e.target.files[0])
                     idcard.append('jm', jm)
+                    idcard.append('type','RealName')
                     window.app.$vux.loading.show({
                         text: 'Loading'
                     })
@@ -195,7 +196,7 @@
                 }).then(data => {
                     if(data){
                         this.upUrl = data.Result;
-                    }else{
+                    }else{ 
                         this.GetImgUpLoadUrl()
                     }
                 })

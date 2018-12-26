@@ -45,6 +45,7 @@ import myhome from './views/mine'
         import price from './views/mine/price.vue'                      // 货币
         import feedback from './views/mine/feedback.vue'                // 意见反馈
         import auth from './views/mine/auth.vue'                        // 实名认证
+        import mycard from './views/mine/mycard.vue'                    // 绑定银行卡
     
 // 404
 import NotFound from './views/404.vue'
@@ -153,6 +154,7 @@ let routes = [
                 { path: '/mine/safepsw', component: safepsw, name: 'safepsw',meta:{isIndex: 3}},
                 { path: '/mine/language', component: language, name: 'language',meta:{isIndex: 3}},
                 { path: '/mine/price', component: price, name: 'price',meta:{isIndex: 3}},
+                { path: '/mine/mycard', component: mycard, name: 'mycard',meta:{isIndex: 3}},
         ]
     },
     // 文章

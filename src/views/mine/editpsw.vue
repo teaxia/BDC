@@ -26,7 +26,7 @@
 
 <script>
 export default {
-	name: 'Login',
+	name: 'Editpsw',
 	data() {
 		return {
 			oldpsw      :  '',
