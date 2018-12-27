@@ -11,9 +11,10 @@
                     <div class="title wd">
                         {{$t('mine.setting.bank')}}
                     </div>
-                    <Select v-model="bank" filterable>
+                    <vselect v-model='bank' :Arr="banks" :placeholder="$t('mine.setting.tips.name')"></vselect>
+                    <!-- <Select v-model="bank" filterable remote :remote-method="fixquery" clearSingleSelect ref="setQuery"> 
                         <Option v-for="(item,index) in banks" :value="item" :key="index">{{ item }}</Option>
-                    </Select>
+                    </Select> -->
                 </div>
                 <group>
                     <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="name" required :placeholder="$t('mine.setting.tips.name')">
@@ -64,12 +65,13 @@
 
 <script>
 import {province,city} from '../../common/utils/city'
+
 export default {
 	name: 'mycard',
 	data() {
 		return {
             card      :  '',
-            banks     :  [],                        // 请求的开户行数据
+            banks     :  [],                       // 请求的开户行数据
             bank      :  '',
             name      :  '',
             province  :  '',                       // 省
@@ -79,16 +81,17 @@ export default {
             AllowCount:  0,                        // 允许绑卡的数据
             BindCount :  0,                        // 已绑卡数量
             cardList  :  [],                       // 已绑卡数据
+            orderbank :  ''                        // 其他银行
 
 		}
 	},
 	methods: {
 		doSubmit(){
             // 判断不为空
-            if(this.card==''){
+            if(this.card==''||this.card.length<10){
                 // 判断银行卡
                 this.$vux.toast.show({
-                    text: this.$t('mine.setting.tips.card'),
+                    text: this.$t('mine.mycard.tips.bankerror'),
                     type: 'warn'
                 })
                 return;
@@ -124,6 +127,11 @@ export default {
                         text: this.$t('global.success'),
                         type: 'success'
                     })
+                    // 清空数据
+                    this.bank = ''
+                    this.card = ''
+                    this.name = ''
+                    this.GetBindBankCardList();
                 }
             })
             
@@ -165,7 +173,7 @@ export default {
         this.city     = city[0]
         this.GetBindBankInfo()
         this.GetBindBankCardList()
-	}
+    }
 }
 
 </script>
