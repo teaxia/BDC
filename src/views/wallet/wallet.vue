@@ -41,9 +41,10 @@
             </div>
             <div class="send">
                 <div class="bts">
-                    <router-link to="/wallet/send">
+                    <router-link to="/wallet/send" v-if="send">
                         <button class="btn btn-block btn-round"><i class="iconfont icon-send"></i>{{$t("wallet.btn.send")}}</button>
                     </router-link>
+                    <button v-if="!send" @click="statusFalse()" class="btn btn-block btn-round"><i class="iconfont icon-send"></i>{{$t("wallet.btn.send")}}</button>
                 </div>
                 <div class="bts">
                     <router-link to="/wallet/receive">
@@ -129,6 +130,7 @@ export default {
             news        :   [],                                                         // 系统公告
             showbox     :   false,
             clockdata   :   '',
+            send        :   false                                                       // 发送功能，默认关闭
 		}
 	},
 	methods: {
@@ -232,6 +234,25 @@ export default {
         ok(){
             this.$Message.info('Clicked ok');
         },
+        GetBlackShow(){
+			// 黑名单权限管控
+			this.$server.post(
+			'GetBlackShow',
+			{
+				guid 	    :   this.$storage.get('guid'),
+			}).then(data => {
+				if(data){
+                    this.send   =   data.isShow_FS
+				}
+			})
+        },
+        statusFalse(){
+            // 权限提示
+            this.$vux.toast.show({
+				text: this.$t('global.authority'),
+				type: 'warn'
+			})
+		}
 	},
 	mounted() {
         // 判断是否登录
@@ -248,6 +269,7 @@ export default {
             this.GetPriceByCurrency();
         },60000)
         this.getcurren();
+        this.GetBlackShow();
     },
     beforeDestroy(){
         // 清除计时器

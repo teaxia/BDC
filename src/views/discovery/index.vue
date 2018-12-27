@@ -4,8 +4,12 @@
 			<h1>{{$t("menu.discovery")}}</h1>
 			<div class="topmenu">
 				<v-grid>
-					<div :class="['grid-3',index<3?'line-b':'',list.url=='false'?'close':'']" v-for="(list,index) in dataList" :key="index">
-						<div @click="onTorul(list.url)">
+					<div :class="['grid-4',index<4?'line-b':'',list.url=='false'?'close':'',list.status?'':'close']" v-for="(list,index) in dataList" :key="index">
+						<div @click="onTorul(list.url)" v-if="list.status">
+							<i :class="[{'iconfont':true},list.icon]"></i>
+							<span class="top-menu">{{list.value}}</span>
+						</div>
+						<div @click="statusFalse()" v-if="!list.status">
 							<i :class="[{'iconfont':true},list.icon]"></i>
 							<span class="top-menu">{{list.value}}</span>
 						</div>
@@ -45,40 +49,47 @@ export default {
 					value   : this.$t("discovery.topmenu.bdc"),				// 兑换BDC
 					icon    : 'icon-duihuanBDC',	
 					url     : '/discovery/expectinfo',
+					status	: true,
 				},
 				{
 					value   : this.$t("discovery.topmenu.ctc"),				// CTC
 					icon    : 'icon-CTC1',
 					url     : 'false',
+					status	: true,
 				},
 				
 				{
 					value   : this.$t("discovery.topmenu.bill"),			// 账本
 					icon    : 'icon-zhangben2',
 					url     : '/discovery/bill',
+					status	: true,
 				},
 				{
 					value   : this.$t("discovery.topmenu.ent"),				// 休闲娱乐
 					icon    : 'icon-xiuxianyule',
 					url     : '/discovery/games',
+					status	: true,
 				},
-				// {
-				// 	value   : this.$t("discovery.topmenu.recharge"),		// 充值
-				// 	icon    : 'icon-chongzhi',
-				// 	url     : '/discovery/recharge',
-				// },
+				{
+					value   : this.$t("discovery.topmenu.recharge"),		// 充值
+					icon    : 'icon-chongzhi',
+					url     : '/discovery/recharge',
+					status	: false,
+				},
 				{
 					value   : this.$t("discovery.topmenu.credit"),			// 信用卡
 					icon    : 'icon-banxinyongqia',
 					url     : '/discovery/credit',
+					status	: true,
 				},
 				{
 					value   : this.$t("discovery.topmenu.extract"),			// 提币
 					icon    : 'icon-Fixedassets',
 					url     : '/discovery/extract',
+					status	: false,
 				}
 			],
-			news:[],
+			news	:	[],
 		}
 	},
 	methods: {
@@ -115,10 +126,30 @@ export default {
 				});
 			}
 		},
+		GetBlackShow(){
+			// 黑名单权限管控
+			this.$server.post(
+			'GetBlackShow',
+			{
+				guid 	    :   this.$storage.get('guid'),
+			}).then(data => {
+				if(data){
+					this.dataList[4].status = data.isShow_CZ		//	充值
+					this.dataList[6].status = data.isShow_TB		//	充值
+				}
+			})
+		},
+		statusFalse(){
+			this.$vux.toast.show({
+				text: this.$t('global.authority'),
+				type: 'warn'
+			})
+		}
 	},
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
 		this.getNews();
+		this.GetBlackShow();
 	}
 }
 

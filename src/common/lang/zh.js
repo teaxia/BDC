@@ -28,6 +28,7 @@ export const zh = {
         message             : '消息中心',
         ver                 : '版本号',
         stargame            : '开始游戏',
+        authority           : '没有权限',
     },
     message:{
         Aread               :   '已读',
