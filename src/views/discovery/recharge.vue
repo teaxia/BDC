@@ -22,33 +22,35 @@
         </div>
         <div class="main-container">
             <div v-if="type==1" class="secrechar">
-                <div v-for="(v,index) in phonecharges" @click="act(index,v.money,v.status,v.off)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
+                <div v-for="(v,index) in phonecharges" @click="act(index,v.money,v.status,HFOff)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
                     <div>{{v.money}}CNY</div>
                     <div>
                         <div>
                             <span>{{$t('discovery.recharge.price')}}：</span>
-                            <span :class="v.off?'del':''">{{v.money/bdc}}BDC</span> 
+                            <span>{{(v.money/bdc)*HFOff}}BDC</span> 
+                            <!-- <span :class="v.off?'del':''">{{(v.money/bdc)*HFOff}}BDC</span>  -->
                         </div>
-                        <div v-if="v.off" class="off">
+                        <!-- <div v-if="HFOff" class="off">
                             {{$t('discovery.recharge.discount')}}：
-                            <span v-if="v.off">{{(v.money/bdc)*v.off}}BDC</span>
-                        </div> 
+                            <span v-if="HFOff">{{(v.money/bdc)*HFOff}}BDC</span>
+                        </div>  -->
                     </div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
                 </div>
             </div>
             <div v-if="type==2" class="secrechar">
-                <div v-for="(v,index) in gprs" @click="act(index,v.money,true,v.off)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
+                <div v-for="(v,index) in gprs" @click="act(index,v.money,true,LLOff)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
                     <div>{{v.value}}</div>
                     <div>
                         <div>
                             <span>{{$t('discovery.recharge.price')}}：</span>
-                            <span :class="v.off?'del':''">{{v.money/bdc}}BDC</span> 
+                            <!-- <span :class="v.off?'del':''">{{v.money/bdc}}BDC</span> -->
+                            <span>{{(v.money/bdc)*LLOff}}BDC</span> 
                         </div>
-                        <div v-if="v.off" class="off">
+                        <!-- <div v-if="v.off" class="off">
                             {{$t('discovery.recharge.discount')}}：
                             <span v-if="v.off">{{(v.money/bdc)*v.off}}BDC</span>
-                        </div> 
+                        </div>  -->
                     </div>
                     <i v-if="current==index" class="iconfont icon-xuanze"></i>
                 </div>
@@ -83,9 +85,9 @@
                     </group> -->
                     <div>
                         <div class="secrechar">
-                            <div v-for="(v,index) in oil" @click="act(index,v.money,v.status)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
+                            <div v-for="(v,index) in oil" @click="act(index,v.money,v.status,YKOff)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
                                 <div>{{v.money}}CNY</div>
-                                <div>{{$t('discovery.recharge.price')}}：{{v.money/bdc}} BDC</div>
+                                <div>{{$t('discovery.recharge.price')}}：{{(v.money/bdc)*YKOff}} BDC</div>
                                 <i v-if="current==index" class="iconfont icon-xuanze"></i>
                             </div>
                         </div>
@@ -95,7 +97,7 @@
                     </group> -->
                 </div>
             </div>
-            <div class="off" v-if="type==1||type==2">{{$t('global.off')}}50%</div>
+            <!-- <div class="off" v-if="type==1||type==2">{{$t('global.off')}}50%</div> -->
             <button @click="subconfirm()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
             <!-- <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>  -->
         </div>
@@ -107,8 +109,10 @@
                     <span v-if="type==2">{{$t('discovery.recharge.group')}}：{{$t('discovery.recharge.type.gprs')}}</span>
                 </div>
                 <div>{{$t('input.mobile')}}:{{this.mobile}}</div>
-                <div :class="{'del':offprice}">{{$t('discovery.recharge.price')}}:{{this.RMB}}（BDC）</div>
-                <div v-if="offprice" class="off">{{$t('discovery.recharge.discount')}}:{{this.offprice}}（BDC）</div>
+                <!-- <div :class="{'del':offprice}">{{$t('discovery.recharge.price')}}:{{this.RMB}}（BDC）</div> -->
+                <div v-if="type==1">{{$t('discovery.recharge.price')}}:{{this.RMB*this.HFOff}}（BDC）</div>
+                <div v-if="type==2">{{$t('discovery.recharge.price')}}:{{this.RMB*this.LLOff}}（BDC）</div>
+                <!-- <div v-if="offprice" class="off">{{$t('discovery.recharge.discount')}}:{{this.offprice}}（BDC）</div> -->
                 <div>{{$t('discovery.recharge.title')}}:{{this.Remakes}}</div>
             </div>
             <div v-else>
@@ -118,7 +122,7 @@
                 <div>{{$t('input.mobile')}}:{{this.mobile}}</div>
                 <div>{{$t('input.tips.oilcard')}}:{{this.oilcard}}</div>
                 <div>{{$t('discovery.recharge.money')}}:{{this.num}}</div>
-                <div>{{$t('discovery.recharge.price')}}:{{this.RMB}}（BDC）</div>
+                <div>{{$t('discovery.recharge.price')}}:{{this.RMB*this.YKOff}}（BDC）</div>
             </div>
         </Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
@@ -159,6 +163,9 @@
                 offprice    :   '',                 // 确定时用到的折扣
                 show        :	false,				// 跳转至强制认证界面
                 realname    :   '',
+                HFOff       :   '',                 // 话费折扣
+                LLOff       :   '',                 // 流量折扣
+                YKOff       :   '',                 // 油卡折扣
                 company     :   [
                     {
                         name    :   this.$t('discovery.recharge.petrochina'),
@@ -380,7 +387,20 @@
                     path:"/mine/myhome",
                 });
             },
-
+            GetRechargeOff(){
+                // 获取价格折扣，有可能比原来的高
+                this.$server.post(
+                'GetRechargeOff',
+                {
+                    guid 	:  this.$storage.get('guid'),
+                }).then(data => {
+                    if(data){
+                        this.HFOff = data.HF
+                        this.LLOff = data.LL
+                        this.YKOff = data.YK
+                    }
+                })
+            }
 		},
 		mounted() {
             // 更新个人中心资料
@@ -404,6 +424,8 @@
                     this.offprice   =  (this.phonecharges[0].money/this.bdc)*0.5
 				}
             })
+            // 获取折扣信息
+            this.GetRechargeOff()
 		}
 	}
 
