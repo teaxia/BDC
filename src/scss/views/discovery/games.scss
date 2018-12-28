@@ -1,0 +1,32 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.btn{
+    font-size:24px;
+}
+.title{
+    font-size:32px;
+}
+.dis-grid-img{
+    img{
+        width: 100px;
+        height: 100px;
+    }
+}
+.select{
+    width: 400px;
+    margin:0 auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color:$font-grey;
+    font-size:28px;
+    .select-title{
+        flex: 1;
+    }
+    .select-act{
+        color:$font-base;
+        padding-bottom: 8px;
+        border-bottom:0.01rem solid $font-base;
+    }
+}
