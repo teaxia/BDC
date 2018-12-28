@@ -9,14 +9,15 @@
                 </group>
                 <div class="tips">{{$t('discovery.extract.tip')}}</div>
                 <group>
-                    <x-input class="test" :title="$t('discovery.extract.bdc')" v-model="bdcnum" required :placeholder="$t('discovery.extract.bdcnum')">
-                    </x-input>
-                </group>
-                <group>
                     <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.extract.safetycode')" v-model="safecode" required :placeholder="$t('discovery.extract.safetycode')">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group>
+                <group>
+                    <x-input class="test" :title="$t('discovery.extract.bdc')" v-model="bdcnum" required :placeholder="$t('discovery.extract.bdcnum')">
+                    </x-input>
+                </group>
+                <div class="tips"><span>{{$t('discovery.extract.tax')}}：{{(bdcnum*tax).toFixed(2)}}</span><span>{{$t('discovery.extract.fee')}}：{{bdcnum-(bdcnum*tax).toFixed(2)}}</span></div>
             </div>
             <button @click="subconfirm()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
         </div>
@@ -43,7 +44,10 @@ export default {
             bdcnum	    :  '',
             addrs       :  '',
             type	    :   false,		// 切换密码状态'
-            modal       :   false,
+            modal       :   false,      // 模态框
+            tax         :  '',          // 手续费
+            fee         :   '',         // 实际到账
+            
 		}
 	},
 	methods: {
@@ -55,8 +59,7 @@ export default {
                 Money    	    : this.bdcnum,
                 MoneyPwd        : this.safecode,
                 RechargeCode   	: this.addrs,
-            },
-            ).then(data => {
+            }).then(data => {
                 if(data){
                     this.$vux.toast.show({
                         text: this.$t("global.success"),
@@ -98,10 +101,22 @@ export default {
         },
         cancel () {
             this.modal = false;
+        },
+        GetPoundage(){
+            // 获取手续费
+            this.$server.post(
+            'GetPoundage_TB',
+            {
+                guid 	        : this.$storage.get('guid'),
+            }).then(data => {
+                if(data){
+                    this.tax = data.Result
+                }
+            })
         }
 	},
 	mounted() {
-		
+        this.GetPoundage()
 	}
 }
 

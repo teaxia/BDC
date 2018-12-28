@@ -165,6 +165,8 @@ export const en = {
             bdcnum      :   'Please enter BDC num',
             addresstip  :   'Please enter address',
             tip         :   "Tip:Please enter Im'token address or exchange address",
+            tax         :   'Tax',
+            fee         :   'Amount of actual balance',
             tips:{
                 safetycode  :   'Safety code number can not be null',
                 num         :   'BDC num can not be null',
