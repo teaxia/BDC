@@ -34,9 +34,7 @@
                 <div class="tips">
                     <p>{{$t("mine.mycard.tip")}}:</p>
                     <p>1、每个游戏账户最多绑定<span class="bindnum">{{AllowCount}}</span>张银行卡，您已经成功绑定<span class="bindnum">{{BindCount}}</span>张</p>
-                    <p>2、银行卡锁定以后，不能增加新的银行卡绑定，同时也不能解绑已绑定的银行卡</p>
-                    <p>3、新绑定的提款银行卡需要绑定时间超过6小时才能正常取款</p>
-                    <p>4、一个账户只能帮顶同一个开户人姓名的银行卡</p>
+                    <p>2、一个账户只能绑定同一个开户人姓名的银行卡</p>
                 </div>
                 <div class="mr20">
                     <table class="table">
