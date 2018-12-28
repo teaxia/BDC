@@ -58,14 +58,22 @@
                 </div>
             </div>
         </div>
+        <Modal v-model="show" :closable="false" :mask-closable="false">
+			<div slot="header"></div>
+			<div class="modal-body">{{$t('global.authentication')}}</div>
+			<div slot="footer">
+				<button class="btn btn-block btn-round" @click="goauth()">{{$t('wallet.send.auth')}}</button>
+			</div>
+		</Modal>
     </div>
 </template>
 
 <script>
 import {province,city} from '../../common/utils/city'
-
+import { GetAccount } from '../../common/mixins/getaccount'
 export default {
-	name: 'mycard',
+    name: 'mycard',
+    mixins:[GetAccount],
 	data() {
 		return {
             card      :  '',
@@ -79,8 +87,8 @@ export default {
             AllowCount:  0,                        // 允许绑卡的数据
             BindCount :  0,                        // 已绑卡数量
             cardList  :  [],                       // 已绑卡数据
-            orderbank :  ''                        // 其他银行
-
+            orderbank :  '',                       // 其他银行
+            show      :	 false,         		   // 跳转至强制认证界面
 		}
 	},
 	methods: {
@@ -158,7 +166,18 @@ export default {
                     this.BindCount      =   data.BindCount
                 }
             })
-        }
+        },
+        ok () {
+            this.submit();
+        },
+        cancel () {
+            this.modal = false;
+        },
+        goauth () { 
+            this.$router.push({
+                path:"/mine/myhome",
+            });
+        },
     },
     watch:{
         sProvince(){
@@ -168,6 +187,12 @@ export default {
         }
     },
 	mounted() {
+        // 更新个人中心资料
+        this.GetAccount();
+        this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
+        if(this.realname==this.$t('global.Uncertified')){
+            this.show = true;
+        }
         this.province = province
         this.city     = city[0]
         this.GetBindBankInfo()

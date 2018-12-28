@@ -56,6 +56,7 @@
 				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
             </div>
 		</div>
+		<!-- 实名认证 -->
 		<Modal v-model="show" :closable="false" :mask-closable="false">
 			<div slot="header"></div>
 			<div class="modal-body">{{$t('global.authentication')}}</div>
@@ -108,8 +109,7 @@
 					BusinessType		:	this.type,
 					MoneyPwd			:	this.psw,
 					Remakes				:	'',
-				},
-				).then(data => {
+				}).then(data => {
 					if(data){
 						this.$vux.toast.show({
 							text: this.$t('global.success'),

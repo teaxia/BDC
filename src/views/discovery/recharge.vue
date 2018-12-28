@@ -139,7 +139,7 @@
 </template>
 
 <script>
-    import { GetAccount } from '../../common/mixins/getaccount';
+    import { GetAccount } from '../../common/mixins/getaccount'; 
     import pattern from '../../common/utils/pattern'
 	export default {
         name:'recharge',
