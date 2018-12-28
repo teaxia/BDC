@@ -21,12 +21,12 @@
                     </x-input>
                 </group>
                 <div class="province mr30">
-                    <Select v-model="sProvince" class="wd">
-                        <Option v-for="(item,index) in province" :value="index" :key="index">{{ item }}</Option>
-                    </Select>
-                    <Select v-model="sCity" class="wd">
-                        <Option v-for="(item,index) in city" :value="index" :key="index">{{ item }}</Option>
-                    </Select>
+                    <select v-model="sProvince" class="wd select">
+                        <option v-for="(item,index) in province" :value="index" :key="index">{{ item }}</option>
+                    </select>
+                    <select v-model="sCity" class="wd select">
+                        <option v-for="(item,index) in city" :value="index" :key="index">{{ item }}</option>
+                    </select>
                 </div>
             </div>
             <button v-if="BindCount<AllowCount" @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
@@ -217,5 +217,12 @@ export default {
             text-align: center;
         }
     }
+}
+.select{
+    border: 0.02rem solid #dcdee2;
+    background:#fff;
+    border-radius: 5px;
+    height: 1rem;
+    font-size:30px;
 }
 </style>

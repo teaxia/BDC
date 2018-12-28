@@ -5,6 +5,7 @@
 			<group>
                 <x-textarea class="textarea" v-model="value" :max="200" :show-counter="true" :placeholder="$t('mine.feedback.msg')"></x-textarea>
             </group>
+            <div class="mr203">{{$t('mine.feedback.upimg')}}：</div>
             <div class="upimg">
                 <div class="upload">
                     <input type="file" @change="selectimg($event)" class="file" ref="back" value="" id="add" accept="image/gif,image/jpeg,image/jpg,image/png" />

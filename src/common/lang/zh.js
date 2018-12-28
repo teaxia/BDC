@@ -284,7 +284,7 @@ export const zh = {
             question        :   '常见问题',
             feedback        :   '意见反馈',
             realname        :   '实名认证',
-            setting         :   '设置'
+            setting         :   '设置',
         },
         area:{
             title           :   '矿区',
@@ -334,6 +334,7 @@ export const zh = {
             msg         :   '感谢您的宝贵建议...',
             imgerror    :   '最多只能上传5张图片',
             tip         :   '意见反馈不能为空',
+            upimg       :   '上传截图',
         },
         extension:{
             tg          :       '推广',

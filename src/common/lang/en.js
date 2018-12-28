@@ -333,6 +333,7 @@ export const en = {
             msg         :   'Thank you for your valuable advice...',
             imgerror    :   'Up to 5 pictures',
             tip         :   'Feedback should not be empty',
+            upimg       :   'Upliad Img',
         },
         extension:{
             tg          :       'Extension',

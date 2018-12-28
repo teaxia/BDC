@@ -17,7 +17,8 @@
                     <x-input class="test" :title="$t('discovery.extract.bdc')" v-model="bdcnum" required :placeholder="$t('discovery.extract.bdcnum')">
                     </x-input>
                 </group>
-                <div class="tips"><span>{{$t('discovery.extract.tax')}}：{{(bdcnum*tax).toFixed(2)}}</span><span>{{$t('discovery.extract.fee')}}：{{bdcnum-(bdcnum*tax).toFixed(2)}}</span></div>
+                <div class="tips"><span>{{$t('discovery.extract.tax')}}：{{tax*100}}%</span></div>
+                <div class="tips"><span>{{$t('discovery.extract.fee')}}：{{bdcnum-(bdcnum*tax).toFixed(2)}}</span></div>
             </div>
             <button @click="subconfirm()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
         </div>
@@ -59,6 +60,7 @@ export default {
                 Money    	    : this.bdcnum,
                 MoneyPwd        : this.safecode,
                 RechargeCode   	: this.addrs,
+                Poundage        : this.tax
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
