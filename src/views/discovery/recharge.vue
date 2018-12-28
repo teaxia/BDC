@@ -12,15 +12,16 @@
                 <div @click="active('3')" class="menu"><span :class="{'active':type==3}">{{$t('discovery.recharge.type.oilcard')}}</span></div>
             </flexbox-item>
         </flexbox>
-        <div class="mr30" v-if="type==1||type==2">
-            <group>
-                <x-input class="tel" :title="$t('input.mobile')" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number" is-type="china-mobile"></x-input>
-            </group>
-            <group>
-                <x-input class="tel" :title="$t('user.securitypsw')" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" keyboard="number" type="password"></x-input>
-            </group>
-        </div>
+        
         <div class="main-container">
+            <div v-if="type==1||type==2">
+                <group>
+                    <x-input class="tel" :title="$t('input.mobile')" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number" is-type="china-mobile"></x-input>
+                </group>
+                <group>
+                    <x-input class="tel" :title="$t('user.securitypsw')" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" keyboard="number" type="password"></x-input>
+                </group>
+            </div>
             <div v-if="type==1" class="secrechar">
                 <div v-for="(v,index) in phonecharges" @click="act(index,v.money,v.status,HFOff)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
                     <div>{{v.money}}CNY</div>
@@ -56,46 +57,47 @@
                 </div>
             </div>
             <div v-if="type==3">
-                <div class="mr30">
-                    <div>
-                        <div class="">
-                            <div class="vux-x-input weui-cell tel">
-                                <div class="weui-cell__hd">
-                                    <label for="vux-x-input-m2pna" class="weui-label" style="width: 4.5em;">{{$t('input.coname')}}</label> 
-                                </div>
-                                <div class="wd100">
-                                    <Select v-model="coname" filterable>
-                                        <Option v-for="item in company" :value="item.name" :key="item.name">{{ item.name }}</Option>
-                                    </Select>
-                                </div>
+                <div>
+                    <div class="">
+                        <div class="vux-x-input weui-cell tel">
+                            <div class="weui-cell__hd">
+                                <label for="vux-x-input-m2pna" class="weui-label" style="width: 4.5em;">{{$t('input.coname')}}</label> 
+                            </div>
+                            <div class="wd100">
+                                <!-- <Select v-model="coname" filterable>
+                                    <Option v-for="item in company" :value="item.name" :key="item.name">{{ item.name }}</Option>
+                                </Select> -->
+                                <!-- 切换为自定义下拉输入控件 -->
+                                <vselect v-model='coname' ref="sect" :Arr="company" :placeholder="$t('input.coname')"></vselect>
                             </div>
                         </div>
                     </div>
-                    <group>
-                        <x-input class="tel" :title="$t('input.mobile')+':'" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number"></x-input>
-                    </group>
-                    <group>
-                        <x-input class="tel" :title="$t('input.oilcard')+':'" v-model="oilcard" :placeholder="$t('input.tips.oilcard')" keyboard="number"></x-input>
-                    </group>
-                    <group>
-                        <x-input class="tel" :title="$t('user.securitypsw')+':'" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" keyboard="number" type="password"></x-input>
-                    </group>
-                    <!-- <group>
-                        <x-input class="tel" :title="$t('input.recharge')+':'" v-model="num" :placeholder="$t('input.tips.recharge')" keyboard="number"></x-input>
-                    </group> -->
-                    <div>
-                        <div class="secrechar">
-                            <div v-for="(v,index) in oil" @click="act(index,v.money,v.status,YKOff)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
-                                <div>{{v.money}}CNY</div>
-                                <div>{{$t('discovery.recharge.price')}}：{{(v.money/bdc)*YKOff}} BDC</div>
-                                <i v-if="current==index" class="iconfont icon-xuanze"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <group>
-                        <x-input class="tel" :title="$t('input.bdc')+':'" readonly v-model="bdcmoney"></x-input>
-                    </group> -->
                 </div>
+                <group>
+                    <x-input class="tel" :title="$t('input.mobile')+':'" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number"></x-input>
+                </group>
+                <group>
+                    <x-input class="tel" :title="$t('input.oilcard')+':'" v-model="oilcard" :placeholder="$t('input.tips.oilcard')" keyboard="number"></x-input>
+                </group>
+                <group>
+                    <x-input class="tel" :title="$t('user.securitypsw')+':'" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" keyboard="number" type="password"></x-input>
+                </group>
+                <!-- <group>
+                    <x-input class="tel" :title="$t('input.recharge')+':'" v-model="num" :placeholder="$t('input.tips.recharge')" keyboard="number"></x-input>
+                </group> -->
+                
+                <div class="secrechar">
+                    <div v-for="(v,index) in oil" @click="act(index,v.money,v.status,YKOff)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
+                        <div>{{v.money}}CNY</div>
+                        <div>{{$t('discovery.recharge.price')}}：{{(v.money/bdc)*YKOff}} BDC</div>
+                        <i v-if="current==index" class="iconfont icon-xuanze"></i>
+                    </div>
+                </div>
+                
+                <!-- <group>
+                    <x-input class="tel" :title="$t('input.bdc')+':'" readonly v-model="bdcmoney"></x-input>
+                </group> -->
+                
             </div>
             <!-- <div class="off" v-if="type==1||type==2">{{$t('global.off')}}50%</div> -->
             <button @click="subconfirm()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
@@ -166,16 +168,17 @@
                 HFOff       :   '',                 // 话费折扣
                 LLOff       :   '',                 // 流量折扣
                 YKOff       :   '',                 // 油卡折扣
-                company     :   [
-                    {
-                        name    :   this.$t('discovery.recharge.petrochina'),
-                        status  :   true
-                    },
-                    {
-                        name    :   this.$t('discovery.recharge.sinopec'),
-                        status  :   true
-                    },
-                ],
+                // company     :   [
+                //     {
+                //         name    :   this.$t('discovery.recharge.petrochina'),
+                //         status  :   true
+                //     },
+                //     {
+                //         name    :   this.$t('discovery.recharge.sinopec'),
+                //         status  :   true
+                //     },
+                // ],
+                company     :   [this.$t('discovery.recharge.petrochina'),this.$t('discovery.recharge.sinopec')],
                 // off折扣规则 如果该值不为false，则直接*价格
                 phonecharges:[
                     {
@@ -326,8 +329,8 @@
                     break;
                     case '3':
                         this.class      = '油卡充值';
-                        this.Remakes    = '公司 :'+this.coname+' 油卡号 :'+this.oilcard;
-                        if(this.coname==''||this.mobile==''||this.oilcard==''){
+                        this.Remakes    = '公司 :'+this.$refs.sect.value+' 油卡号 :'+this.oilcard;
+                        if(this.$refs.sect.value==''||this.mobile==''||this.oilcard==''){
                             this.$vux.toast.show({
                                 text: this.$t('discovery.recharge.error.full'),
                                 type: 'warn'
@@ -336,6 +339,7 @@
                         }
                     break;
                 }
+                this.coname = this.$refs.sect.value
                 this.modal = true;
             },
             confirm(){

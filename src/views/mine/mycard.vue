@@ -11,7 +11,7 @@
                     <div class="title wd">
                         {{$t('mine.setting.bank')}}
                     </div>
-                    <vselect v-model='bank' :Arr="banks" :placeholder="$t('mine.setting.tips.name')"></vselect>
+                    <vselect v-model='bank' ref="sect" :Arr="banks" :placeholder="$t('mine.setting.tips.bank')"></vselect>
                     <!-- <Select v-model="bank" filterable remote :remote-method="fixquery" clearSingleSelect ref="setQuery"> 
                         <Option v-for="(item,index) in banks" :value="item" :key="index">{{ item }}</Option>
                     </Select> -->
@@ -87,6 +87,7 @@ export default {
 	},
 	methods: {
 		doSubmit(){
+            // 解决问题的关键方法
             // 判断不为空
             if(this.card==''||this.card.length<10){
                 // 判断银行卡
@@ -96,7 +97,7 @@ export default {
                 })
                 return;
             }
-            if(this.bank==''){
+            if(this.$refs.sect.value==''){
                 // 判断开户行
                 this.$vux.toast.show({
                     text: this.$t('mine.setting.tips.bank'),
@@ -116,7 +117,7 @@ export default {
             this.$server.post(
             'BindBankCard',{
                 guid 	    :   this.$storage.get('guid'),
-                bankName    :   this.bank,
+                bankName    :   this.$refs.sect.value,
                 cardNo      :   this.card,
                 accountName :   this.name,
                 pName       :   province[this.sProvince],
@@ -128,7 +129,7 @@ export default {
                         type: 'success'
                     })
                     // 清空数据
-                    this.bank = ''
+                    this.$refs.sect.value = ''
                     this.card = ''
                     this.name = ''
                     this.GetBindBankCardList();
