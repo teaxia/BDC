@@ -4,16 +4,16 @@
         <div class="main-container">
             <div class="select">
                 <div @click="change()" :class="{'select-title':true}">
-                    <span :class="{'select-act':active}">棋牌游戏</span>
+                    <span :class="{'select-act':active}">{{$t('discovery.games.gambling')}}</span>
                 </div>
                 <div @click="change()" :class="{'select-title':true}">
-                    <span :class="{'select-act':!active}">休闲游戏</span>
+                    <span :class="{'select-act':!active}">{{$t('discovery.games.relax')}}</span>
                 </div>
             </div>
             <div v-if="active">
                 <!-- 赌博游戏 -->
                 <v-grid v-for="(v,index) in gambling" :key="index" class="mr20">
-                    <div class="pd-lb20" @click="gambling(v.code)">
+                    <div class="pd-lb20" @click="Gambling(v.code,index)">
                         <flexbox>
                             <flexbox-item :span="3">
                                 <div class="dis-grid-img">
@@ -55,6 +55,42 @@
                 </v-grid>
             </div>
 		</div>
+        <Modal v-model="modal" class="model" @on-ok="ok" :title="GameName" :ok-text="$t('global.stargame')" cancel-text="" @on-cancel="cancel">
+            <div class="wd line-b">
+                <div class="gameimg">
+                    <!-- 游戏图标 -->
+                    <img :src="imgSrc">
+                    <div class="assets">
+                        <div class="lable">
+                            {{$t('discovery.games.gamebalance')}}
+                        </div>
+                        <div class="num">
+                            {{Balance}}(BDC)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="input line-b mr20">
+                <div class="assets">
+                    <div class="lable">
+                        {{$t('discovery.games.assetsbalance')}}
+                    </div>
+                    <div class="num">
+                        {{actAssets}}(BDC)
+                    </div>
+                </div>
+            </div>
+            <group>
+                <x-input type="text" :title="$t('discovery.games.taccounts')" v-model="bdcNum" :placeholder="$t('discovery.games.num')">
+                    <span class="right" slot="right">BDC</span>
+                </x-input>
+            </group>
+            <div class="input mr30">
+                <button class="btn btn-xs btn-round" @click="TranIn()">{{$t('discovery.games.tranIn')}}</button>
+                <button class="btn btn-xs btn-round" @click="TranOut()">{{$t('discovery.games.tranOut')}}</button>
+                <button class="btn btn-xs btn-round" @click="Refresh()">{{$t('discovery.games.refresh')}}</button>
+            </div>
+        </Modal>
 		<v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -63,8 +99,15 @@
 	export default {
 		data() {
 			return {
-                active      :    true,                             //头部切换索引
+                active      :   true,                               // 头部切换索引
                 dataList	:	[],
+                modal       :   false,                              // 弹出框
+                GameName    :   '',                                 // 弹出框游戏名字
+                imgSrc      :   '',                                 // 弹出框游戏图标
+                actAssets   :   '',                                 // 固定资产
+                Balance     :   '',                                 // 游戏资产
+                bdcNum      :   '',                                 // 转入BDC数量
+                upstatus    :   false,                              // 点击状态
                 gambling    :   [
                     {
                         'Name'  :   'BD棋牌',
@@ -108,18 +151,42 @@
                     }
                 })
             },
+            GetAccount(){
+                // 获取固定资产
+                this.$server.post(
+                'GetAccountById',
+                {
+                    guid : this.$storage.get('guid')
+                }).then(data => {
+                    if(data){
+                        this.actAssets   = data.ActAssets;
+                    }
+                })
+            },
             GameRegister(){
                 // 棋牌游戏注册&登录
                 this.$server.post(
                 'WJGame_Register',
                 {
                     guid 	:   this.$storage.get('guid'),
-                    ip      :   ''//ip 地址
+                    ip      :   ''                              //  ip地址
                 }).then(data => {
                     if(data){
-                        this.dataList = data
+                        // 调用第三方浏览器打开网页
+                        if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  
+                            //苹果设备 
+                            api.openApp({
+                                iosUrl: data.Result, //打开微信的，其中weixin为微信的URL Scheme
+                            });
+                        }else{
+                            //安卓设备
+                            api.openApp({
+                                uri: data.Result
+                            });
+                        }
+                        
                     }else{
-                        this.GetGameList()
+                        this.GameRegister()
                     }
                 })
             },
@@ -129,22 +196,101 @@
                 'WJGame_GetBalance',
                 {
                     guid 	:   this.$storage.get('guid'),
-                    ip      :   ''//ip 地址
+                    ip      :   ''                             //  ip地址
                 }).then(data => {
                     if(data){
-                        this.dataList = data
+                        this.Balance = data.Result
                     }else{
-                        this.GetGameList()
+                        this.GetBalance()
                     }
                 })
             },
-            gambling(code){
+            TranIn(){
+                // 判断是否点击
+                if(this.upstatus){
+                    return
+                }
+                this.upstatus = true         
+                // 转入资产到游戏平台 限制小数
+                this.$server.post(
+                'WJGame_TranIn',
+                {
+                    guid 	:   this.$storage.get('guid'),
+                    Num     :   this.bdcNum                            //  BDC数量
+                }).then(data => {
+                    if(data){
+                        this.$vux.toast.show({
+							text: this.$t('global.success'),
+							type: 'success'
+						})
+                        this.GetBalance()                               // 重新查询余额
+                        this.GetAccount()                               // 重新获取固定资产
+                        this.upstatus = false
+                        this.bdcNum = ''
+                    }else{
+                        this.TranIn()
+                        this.upstatus = false
+                    }
+                })
+            },
+            TranOut(){
+                // 判断是否点击
+                if(this.upstatus){
+                    return
+                }
+                this.upstatus = true    
+                // 转出资产到钱包 限制小数
+                this.$server.post(
+                'WJGame_TranOut',
+                {
+                    guid 	:   this.$storage.get('guid'),
+                    Num     :   this.bdcNum                            //  BDC数量
+                }).then(data => {
+                    if(data){
+                        this.$vux.toast.show({
+							text: this.$t('global.success'),
+							type: 'success'
+						})
+                        this.GetBalance()                               // 重新查询游戏资产余额
+                        this.GetAccount()                               // 重新获取固定资产
+                        this.upstatus = false
+                        this.bdcNum = ''
+                    }else{
+                        this.TranOut()
+                        this.upstatus = false
+                    }
+                })
+            },
+            Gambling(code,index){
                 // @code bd = bd棋牌
                 // 赌博游戏接入
+                this.GameName = this.gambling[index].Name           // 游戏名
+                this.imgSrc   = this.gambling[index].Img            // 游戏图标
+                switch (code) {
+                    case 'bd':
+                        this.GetBalance()
+                        break;
+                    default:
+                        break;
+                }
+                this.modal = true
+            },
+            ok () {
+                // 模态框开始游戏按钮
+                this.GameRegister();
+            },
+            cancel () {
+                this.modal = false
+            },
+            Refresh(){
+                // 刷新资产信息
+                this.GetBalance()                               // 重新查询游戏资产余额
+                this.GetAccount()                               // 重新获取固定资产
             }
         },
 		mounted() {
-            this.GetGameList();
+            this.GetGameList()
+            this.GetAccount()
 		}
 	}
 

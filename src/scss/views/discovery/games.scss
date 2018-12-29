@@ -30,3 +30,47 @@
         border-bottom:0.01rem solid $font-base;
     }
 }
+.model{
+    .gameimg{
+        height: auto;
+        overflow: hidden;
+        width: 400px;
+        margin:auto;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 30px;
+        .assets{
+            margin-top:50px;
+            font-size:34px;
+            text-align: center;
+            .lable{
+                width: 150px;
+            }
+            .num{
+                color:$font-red;
+            }
+        }
+        img{
+            width: 200px;
+            height: 200px;
+        }
+    }
+    .input{
+        height: auto;
+        overflow: hidden;
+        display: flex;
+        font-size:34px;
+        padding:0 10px 20px 10px;
+        justify-content: space-between;
+        .assets{
+            display: flex;
+            .lable{
+                width: 150px;
+            }
+        }
+    }
+    .right{
+        color:#515a6e;
+        font-size:34px;
+    }
+}

@@ -198,7 +198,21 @@ export const en = {
                 comm    :   'COMM bank'
             },
             tips        :   'Tips：Application for credit card must be authenticated by real name.'
-        }
+        },
+        games:{
+            
+        },
+        games:{
+            relax           :   'Casual games',
+            gambling        :   'Chess game',           
+            gamebalance     :   'Game balance',
+            assetsbalance   :   'Assets balance',
+            tranIn          :   'Change into',
+            tranOut         :   'Turn out',
+            refresh         :   'Refresh',
+            taccounts       :   'Change into',
+            num             :   'Please enter the number of entries'
+        },
     },
     // 钱包
     wallet:{

@@ -199,7 +199,18 @@ export const zh = {
                 comm    :   '交通银行'
             },
             tips        :   '信用卡申请必须用实名认证'
-        }
+        },
+        games:{
+            relax           :   '休闲游戏',
+            gambling        :   '棋牌游戏',           
+            gamebalance     :   '游戏余额',
+            assetsbalance   :   '通证资产',
+            tranIn          :   '转入',
+            tranOut         :   '转出',
+            refresh         :   '刷新',
+            taccounts       :   '转入',
+            num             :   '请输入转入数量'
+        },
     },
     // 钱包
     wallet:{
