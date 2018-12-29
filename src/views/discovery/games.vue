@@ -65,7 +65,7 @@
                             {{$t('discovery.games.gamebalance')}}
                         </div>
                         <div class="num">
-                            {{Balance}}(BDC)
+                            {{Balance}}({{bdctype}})
                         </div>
                     </div>
                 </div>
@@ -76,13 +76,13 @@
                         {{$t('discovery.games.assetsbalance')}}
                     </div>
                     <div class="num">
-                        {{actAssets}}(BDC)
+                        <span v-if="bdctype=='BDC'">{{actAssets}}</span><span v-if="bdctype=='CNY'">{{gameAssets}}</span>({{bdctype}})
                     </div>
                 </div>
             </div>
             <group>
                 <x-input type="text" :title="$t('discovery.games.taccounts')" v-model="bdcNum" :placeholder="$t('discovery.games.num')">
-                    <span class="right" slot="right">BDC</span>
+                    <span class="right" slot="right">{{bdctype}}</span>
                 </x-input>
             </group>
             <div class="input mr30">
@@ -105,14 +105,29 @@
                 GameName    :   '',                                 // 弹出框游戏名字
                 imgSrc      :   '',                                 // 弹出框游戏图标
                 actAssets   :   '',                                 // 固定资产
-                Balance     :   '',                                 // 游戏资产
+                Balance     :   '',                                 // 游戏余额
+                gameAssets  :   '',                                 // 游戏资产
+                bdctype     :   '',                                 // 资金类型 BDC OR CNY
                 bdcNum      :   '',                                 // 转入BDC数量
                 upstatus    :   false,                              // 点击状态
+                PName       :   '',                                 // 游戏平台 PT AG BD
                 gambling    :   [
                     {
                         'Name'  :   'BD棋牌',
-                        'code'  :   'bd',
+                        'code'  :   'BD',
                         'Img'   :   './static/images/bd.png',
+                        'Url'   :   true
+                    },
+                    {
+                        'Name'  :   'AG视讯',
+                        'code'  :   'AG',
+                        'Img'   :   './static/images/ag.png',
+                        'Url'   :   true
+                    },
+                    {
+                        'Name'  :   'PT游戏',
+                        'code'  :   'PT',
+                        'Img'   :   './static/images/pt.png',
                         'Url'   :   true
                     }
                 ]
@@ -138,7 +153,7 @@
                 this.active = !this.active;
             },
             GetGameList(){
-                // 获取商家界面信息
+                // 获取休闲游戏列表
                 this.$server.post(
                 'GetGameList',
                 {
@@ -160,6 +175,7 @@
                 }).then(data => {
                     if(data){
                         this.actAssets   = data.ActAssets;
+                        this.gameAssets   = data.GameAssets;
                     }
                 })
             },
@@ -168,8 +184,10 @@
                 this.$server.post(
                 'WJGame_Register',
                 {
-                    guid 	:   this.$storage.get('guid'),
-                    ip      :   ''                              //  ip地址
+                    guid 	        :   this.$storage.get('guid'),
+                    ip              :   '',                              //  ip地址
+                    platformName    :   this.PName,                           //  BD,AG,PT
+                    gameName        :   ''                               //  （游戏名称：传空即可，仅平台名为PT时，传中文游戏名,例：超级888）
                 }).then(data => {
                     if(data){
                         // 调用第三方浏览器打开网页
@@ -195,8 +213,9 @@
                 this.$server.post(
                 'WJGame_GetBalance',
                 {
-                    guid 	:   this.$storage.get('guid'),
-                    ip      :   ''                             //  ip地址
+                    guid 	        :   this.$storage.get('guid'),
+                    ip              :   '',                             //  ip地址
+                    platformName    :   this.PName,                     //  游戏平台
                 }).then(data => {
                     if(data){
                         this.Balance = data.Result
@@ -206,6 +225,10 @@
                 })
             },
             TranIn(){
+                //判断是否为正整数
+                if(!this.checkRate(this.bdcNum)){
+                    return
+                }
                 // 判断是否点击
                 if(this.upstatus){
                     return
@@ -215,8 +238,9 @@
                 this.$server.post(
                 'WJGame_TranIn',
                 {
-                    guid 	:   this.$storage.get('guid'),
-                    Num     :   this.bdcNum                            //  BDC数量
+                    guid 	        :   this.$storage.get('guid'),
+                    num             :   this.bdcNum,                            //  BDC数量
+                    platformName    :   this.PName,                             //  游戏平台
                 }).then(data => {
                     if(data){
                         this.$vux.toast.show({
@@ -234,6 +258,10 @@
                 })
             },
             TranOut(){
+                // 判断是否为正整数
+                if(!this.checkRate(this.bdcNum)){
+                    return
+                }
                 // 判断是否点击
                 if(this.upstatus){
                     return
@@ -243,8 +271,9 @@
                 this.$server.post(
                 'WJGame_TranOut',
                 {
-                    guid 	:   this.$storage.get('guid'),
-                    Num     :   this.bdcNum                            //  BDC数量
+                    guid 	        :   this.$storage.get('guid'),
+                    num             :   this.bdcNum,                            //  BDC数量
+                    platformName    :   this.PName,                             //  游戏平台
                 }).then(data => {
                     if(data){
                         this.$vux.toast.show({
@@ -267,9 +296,21 @@
                 this.GameName = this.gambling[index].Name           // 游戏名
                 this.imgSrc   = this.gambling[index].Img            // 游戏图标
                 switch (code) {
-                    case 'bd':
+                    case 'BD':
+                        this.PName   = 'BD'
+                        this.bdctype = 'BDC'
                         this.GetBalance()
                         break;
+                    case 'AG':
+                        this.PName = 'AG'
+                        this.bdctype = 'CNY'
+                        this.GetBalance()
+                    break;
+                    case 'PT':
+                        this.$router.push({
+							path:"/discovery/gamespt",
+						});
+                    break;
                     default:
                         break;
                 }
@@ -286,6 +327,18 @@
                 // 刷新资产信息
                 this.GetBalance()                               // 重新查询游戏资产余额
                 this.GetAccount()                               // 重新获取固定资产
+            },
+            checkRate(value){
+                let re = /^[1-9]+[0-9]*]*$/
+                if (!re.test(value)){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.games.num'),
+                        type: 'warn'
+                    })
+                    return false;
+                }else{
+                    return true;
+                }
             }
         },
 		mounted() {

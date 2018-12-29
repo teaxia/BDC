@@ -74,3 +74,8 @@
         font-size:34px;
     }
 }
+.fixed{
+    height: 650px;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+}

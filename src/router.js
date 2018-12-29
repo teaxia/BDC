@@ -19,6 +19,8 @@ import discovery from './views/discovery.vue'
     import credit from  './views/discovery/credit.vue'                      // 办理信用卡
     import extract from  './views/discovery/extract.vue'                    // 提币
     import games from  './views/discovery/games.vue'                        // 游戏
+    import gamesPt from  './views/discovery/gamesPt.vue'                    // PT平台单独页面
+    
         
 // 钱包
 import wallet from './views/wallet.vue'
@@ -100,6 +102,7 @@ let routes = [
             { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
             { path: '/discovery/extract', component: extract, name: 'extract',meta:{isIndex: 2}},
             { path: '/discovery/games', component: games, name: 'games',meta:{isIndex: 2}},
+            { path: '/discovery/gamespt', component: gamesPt, name: 'gamesPt',meta:{isIndex: 2}},
         ]
     },
     // 钱包

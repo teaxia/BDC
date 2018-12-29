@@ -208,8 +208,8 @@ export const zh = {
             tranIn          :   '转入',
             tranOut         :   '转出',
             refresh         :   '刷新',
-            taccounts       :   '转入',
-            num             :   '请输入转入数量'
+            taccounts       :   '余额转账',
+            num             :   '请输入正整数'
         },
     },
     // 钱包

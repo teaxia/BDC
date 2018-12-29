@@ -210,8 +210,8 @@ export const en = {
             tranIn          :   'Change into',
             tranOut         :   'Turn out',
             refresh         :   'Refresh',
-            taccounts       :   'Change into',
-            num             :   'Please enter the number of entries'
+            taccounts       :   'Balance transfer',
+            num             :   'Please enter a positive integer'
         },
     },
     // 钱包
