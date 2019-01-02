@@ -79,7 +79,7 @@
                     {
                         'Name'  :   '爱尔兰运气',
                         'Img'   :   './static/images/ptimg/aelyq.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '白狮',
@@ -89,7 +89,7 @@
                     {
                         'Name'  :   '白狮王',
                         'Img'   :   './static/images/ptimg/bsw.png',
-                        'status':   true
+                        'status':   true                                // 参数报错
                     },
                     {
                         'Name'  :   '宝石女王',
@@ -109,7 +109,7 @@
                     {
                         'Name'  :   '财富魔方',
                         'Img'   :   './static/images/ptimg/cfmf.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '超级888',
@@ -119,7 +119,7 @@
                     {
                         'Name'  :   '超级高速公路之王',
                         'Img'   :   './static/images/ptimg/cjgsglzw.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '沉默的武士',
@@ -129,7 +129,7 @@
                     {
                         'Name'  :   '沉默的武士彩池游戏',
                         'Img'   :   './static/images/ptimg/cmdwsccyx.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '丛林之心',
@@ -139,12 +139,12 @@
                     {
                         'Name'  :   '大草原现金',
                         'Img'   :   './static/images/ptimg/dcyxj.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
-                        'Name'  :   '戴夫和荷鲁斯之眼',
+                        'Name'  :   '大胆的戴夫和荷鲁斯之眼',
                         'Img'   :   './static/images/ptimg/dfhhlszy.png',
-                        'status':   true
+                        'status':   false                                       // 参数错误
                     },
                     {
                         'Name'  :   '戴图理的神奇七大奖',
@@ -194,7 +194,7 @@
                     {
                         'Name'  :   '浮冰流',
                         'Img'   :   './static/images/ptimg/fbl.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '弓兵',
@@ -269,22 +269,22 @@
                     {
                         'Name'  :   '金字塔女王',
                         'Img'   :   './static/images/ptimg/jztnw.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '经典老虎机刮刮乐',
                         'Img'   :   './static/images/ptimg/jdlhjggl.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '警察与土匪',
                         'Img'   :   './static/images/ptimg/jcytf.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '爵士俱乐部',
                         'Img'   :   './static/images/ptimg/jsjlb.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '开心假期',

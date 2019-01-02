@@ -184,6 +184,7 @@ export const zh = {
             type5       :   '提币',
             type6       :   '购币',
             type7       :   '业绩',
+            type8       :   '游戏',
             begin       :   '开始时间',
             end         :   '结束时间',
             people      :   '人数',

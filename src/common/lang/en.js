@@ -183,6 +183,7 @@ export const en = {
             type5       :   'Withdraw BDC',
             type6       :   'Buy BDC',
             type7       :   'ACHV',
+            type8       :   'Game',
             begin       :   'Start time',
             end         :   'End time',
             people      :   'People',

@@ -69,7 +69,7 @@
                     </flexbox>
                 </v-grid>
             </div>
-            <div v-for="(v,index) in currency" class="mr30" :key="index">
+            <div v-for="(v,index) in currency" class="mr30" :key="index" @click="bTob(v.Name)">
                 <v-grid>
                     <div class="pd-lb20 btc-grid">
                         <div class="btc-grid-l">
@@ -179,7 +179,7 @@ export default {
                     this.cny = (this.$math.eval(x/this.PriceToBDC)).toFixed(8)
                     this.BDC = data[0].Money
 				}else{
-                    this.GetCurrencyPrice()
+                    // this.GetCurrencyPrice()
                 }
 			})
         },
@@ -195,7 +195,7 @@ export default {
 				if(data){
                     this.currency = data; 
 				}else{
-                    this.GetPriceByCurrency()
+                    // this.GetPriceByCurrency()
                 }
 			})
         },
@@ -252,7 +252,14 @@ export default {
 				text: this.$t('global.authority'),
 				type: 'warn'
 			})
-		}
+        },
+        bTob(name){
+            // 跳转到币币兑换页面
+            this.$router.push({
+                path:"/discovery/expectinfo/btob",
+                query:{bbname:name}
+            });
+        }
 	},
 	mounted() {
         // 判断是否登录

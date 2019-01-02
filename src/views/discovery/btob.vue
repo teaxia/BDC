@@ -67,12 +67,13 @@
                 price       :   '',
                 isok        :   false,
                 currency    :   [],
+                bbName      :   ''
 			}
         },
         watch:{
             act(){
-                this.num        =   '';
-                this.price      =   '';
+                this.num        =   ''
+                this.price      =   ''
                 let i           =   this.act
                 this.address    =   this.blist[i].RechargeAddress
                 this.proportion =   this.blist[i].Proportion
@@ -138,15 +139,36 @@
                         this.blist = data;
                         this.btobinfo = data;
                         this.address  = data[0].RechargeAddress;            // 兑换地址
-                        this.proportion = data[0].Proportion;               // 兑换比例 
+                        this.proportion = data[0].Proportion;               // 兑换比例
+                        this.bTb(this.bbName)
                     }
                 })
+            },
+            bTb(name){
+                // 默认币种兑换
+                // 获取该币种的索引
+                let item = this.blist.findIndex(item=>{
+                    return item.Name == name
+                })
+                // 判断该币种是否存在，-1表示不存在
+                if(item>-1){
+                    // 币种索引正常
+                    // 把索引传值给act选择索引
+                    this.act = item
+                    // 把币种名称传值给选择币种
+                    this.actBB = name
+                }else{
+                    // 没有该币种，默认BTC
+                    this.act = 0
+                    this.actBB = 'BTC'
+                }
+                
             }
 		},
 		mounted() {
             // 获取详情
             this.GetList();
-
+            this.bbName = (this.$route.query.bbname)?this.$route.query.bbname:'BTC'
         },
 	}
 

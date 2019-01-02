@@ -23,6 +23,9 @@
             <flexbox-item>
                 <div @click="active('7')" class="menu"><span :class="{'active':type==7}">{{$t('discovery.bill.type7')}}</span></div>
             </flexbox-item>
+            <flexbox-item>
+                <div @click="active('8')" class="menu"><span :class="{'active':type==8}">{{$t('discovery.bill.type8')}}</span></div>
+            </flexbox-item>
         </flexbox>
         <div class="mr30">
             <flexbox class="pb time">
@@ -36,7 +39,7 @@
         </div>
         <div class="main-container">
             <div class="table line-b" v-for="(v,index) in dataList" :key="index">
-                <div v-if="type<=4"><!--收入、支出、POS、消费-->
+                <div v-if="type<=4||type==8"><!--收入、支出、POS、消费-->
                     <div class="tb">
                         <span class="fl">{{v.BusinessType}}</span>
                         <span class="fr">{{v.Money}}</span>
@@ -130,6 +133,11 @@
                         this.class = ""
                         this.dataList = []
                         this.getyj();
+                    case '8':
+                        // 游戏
+                        this.class = "游戏"
+                        this.dataList = []
+                        this.query();
                     break;
                 }
             }
@@ -154,7 +162,7 @@
                 if(this.start==''||this.end==''){
                     return;
                 }
-                if(this.type<=4){
+                if(this.type<=4||this.type==8){
                     this.query();
                 }else if(this.type=='5'||this.type=='6'){
                     this.getrw();
