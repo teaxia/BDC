@@ -17,10 +17,10 @@
 					</flexbox-item>
 					<flexbox-item :span="7">
 						<div class="mine-grid-content">
-							<div class="earnings earning">我的收益：{{MyEarnings}}（CNY）</div>
+							<div class="earnings earning">{{$t('mine.menus.withdrawal')}}：{{MyEarnings}}（CNY）</div>
 							<div class="withdrawal earning">
 								<router-link to="/discovery/withdrawal">
-									<button class="btn btn-xs btn-round">提现</button>
+									<button class="btn btn-xs btn-round">{{$t('mine.menus.cash')}}</button>
 								</router-link>
 							</div>
 						</div>
@@ -111,7 +111,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'2.0.15',
+			version 	:	'2.1.16',				// 增加新功能，修复BUG
 			messageNum	:	''
 		}
 	},

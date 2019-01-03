@@ -232,7 +232,8 @@ export const en = {
             remarks         :   'Remarks',
             tips:{
                 money       :   'Check the amount is correct. The decimal point can only be reserved for two bits.',
-                input       :   'Please enter the amount of cash withdrawal.'
+                input       :   'Please enter the amount of cash withdrawal.',
+                bind        :   'Please bind the bank card first'
             }
         }
     },
@@ -319,7 +320,9 @@ export const en = {
             question        :   'Question',
             feedback        :   'Feedback',
             realname        :   'Authentication',
-            setting         :   'Setting'
+            setting         :   'Setting',
+            withdrawal      :   'Profit',
+            cash            :   'Withdrawal',
         },
         area:{
             title           :   'Area',

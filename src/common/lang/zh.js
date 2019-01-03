@@ -232,7 +232,8 @@ export const zh = {
             remarks         :   '备注',
             tips:{
                 money       :   '请检查金额是否正确。小数点只能保留2位',
-                input       :   '请输入提现金额'
+                input       :   '请输入提现金额',
+                bind        :   '该操作请先绑定银行卡'
             }
         }
     },
@@ -320,6 +321,8 @@ export const zh = {
             feedback        :   '意见反馈',
             realname        :   '实名认证',
             setting         :   '设置',
+            withdrawal      :   '我的收益',
+            cash            :   '提现',
         },
         area:{
             title           :   '矿区',

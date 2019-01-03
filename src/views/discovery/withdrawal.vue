@@ -88,6 +88,14 @@
                 </table>
             </div>
         </div>
+        <!-- 绑定银行卡 -->
+		<Modal v-model="bindcard" :closable="false" :mask-closable="false">
+			<div slot="header"></div>
+			<div class="modal-body">{{$t('global.authentication')}}</div>
+			<div slot="footer">
+				<button class="btn btn-block btn-round" @click="ok()">{{$t('discovery.withdrawal.tips.bind')}}</button>
+			</div>
+		</Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -115,6 +123,7 @@
                 totalIn             :   '',         // 查询时间段收益总计
                 listIn              :   '',         // 获取的收益数据
                 listOut             :   '',         // 获取的提现数据
+                bindcard            :   false,         // 是否跳转到绑定银行卡
                 isok        :   false,
 			}
         },
@@ -173,8 +182,12 @@
                     guid     :   this.$storage.get('guid'),
                 }).then(data => {
                     if(data){
+                        if(data.cardList.length>0){
+                            this.cardNo     =   data.cardList[0].Id     // 默认银行卡
+                        }else{
+                            this.bindcard = true
+                        }
                         this.cardList   =   data.cardList           // 银行卡数据
-                        this.cardNo     =   data.cardList[0].Id     // 默认银行卡
                         this.myEarnings =   data. myEarnings        // 
                         this.myEarningsByHistory    =   data. myEarningsByHistory       // 历史总收益 
                         this.myEarningsByMonth      =   data. myEarningsByMonth        // 月收益
@@ -250,7 +263,13 @@
             select(type){
                 // 切换类型
                 this.type = type
-            }
+            },
+            ok(){
+                // 跳转到绑卡页面
+                this.$router.push({
+					path:"/mine/mycard",
+				});
+            },
             
 		},
 		mounted() {
