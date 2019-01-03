@@ -230,6 +230,14 @@
                     })
                     return
                 }
+                // 判断安全码
+                if(this.moneyPwd==''){
+                    this.$vux.toast.show({
+                        text: this.$t('wallet.tips.inputcode'),
+                        type: 'warn'
+                    })
+                    return
+                }
                 this.show = true
             },
             submit(){
