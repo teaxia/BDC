@@ -179,7 +179,7 @@ export default {
                     this.cny = (this.$math.eval(x/this.PriceToBDC)).toFixed(8)
                     this.BDC = data[0].Money
 				}else{
-                    // this.GetCurrencyPrice()
+                    this.GetCurrencyPrice()
                 }
 			})
         },
@@ -195,7 +195,7 @@ export default {
 				if(data){
                     this.currency = data; 
 				}else{
-                    // this.GetPriceByCurrency()
+                    this.GetPriceByCurrency()
                 }
 			})
         },
@@ -272,7 +272,6 @@ export default {
         this.loop = setInterval(()=>{
             this.GetSystemGG();
             this.GetAccount();
-            this.GetCurrencyPrice();
             this.GetPriceByCurrency();
         },60000)
         this.getcurren();

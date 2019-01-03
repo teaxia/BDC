@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="fixed mr30">
-                <v-grid v-for="(v,index) in gambling" :key="index" class="20">
+                <v-grid v-for="(v,index) in gambling" :key="index" v-if="v.status" class="20">
                     <div class="pd-lb20" @click="Gambling(v.Name)">
                         <flexbox>
                             <flexbox-item :span="3">
@@ -314,7 +314,7 @@
                     {
                         'Name'  :   '罗马与荣耀',
                         'Img'   :   './static/images/ptimg/lmyry.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '洛基传奇',
@@ -334,7 +334,7 @@
                     {
                         'Name'  :   '猫女王',
                         'Img'   :   './static/images/ptimg/mnw.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '魔豆的赏金',
@@ -344,12 +344,12 @@
                     {
                         'Name'  :   '木乃伊迷城',
                         'Img'   :   './static/images/ptimg/mnymc.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '年年有余',
                         'Img'   :   './static/images/ptimg/nnyy.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '牛仔和外星人',
@@ -359,7 +359,7 @@
                     {
                         'Name'  :   '欧莱礼的黄金作物',
                         'Img'   :   './static/images/ptimg/olldhjlw.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '欧洲轮盘',
@@ -399,7 +399,7 @@
                     {
                         'Name'  :   '三个朋友',
                         'Img'   :   './static/images/ptimg/sgpy.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '三剑客和女王',
@@ -409,7 +409,7 @@
                     {
                         'Name'  :   '沙漠宝藏2',
                         'Img'   :   './static/images/ptimg/smbz2.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '神的时代：奥林匹斯',
@@ -489,7 +489,7 @@
                     {
                         'Name'  :   '艺妓故事彩池游戏',
                         'Img'   :   './static/images/ptimg/yjgsccyx.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '樱桃之恋',
@@ -504,7 +504,7 @@
                     {
                         'Name'  :   '约翰韦恩',
                         'Img'   :   './static/images/ptimg/yhwe.png',
-                        'status':   true
+                        'status':   false 
                     },
                     {
                         'Name'  :   '湛蓝深海',
@@ -524,7 +524,7 @@
                     {
                         'Name'  :   '真爱',
                         'Img'   :   './static/images/ptimg/za.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '中国厨房',
@@ -534,7 +534,7 @@
                     {
                         'Name'  :   '众神时代：狂怒4',
                         'Img'   :   './static/images/ptimg/zssdkn4.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '众神时代：轮盘',
@@ -549,7 +549,7 @@
                     {
                         'Name'  :   '众神时代：宙斯',
                         'Img'   :   './static/images/ptimg/zssdzs.png',
-                        'status':   true
+                        'status':   false
                     },
                     {
                         'Name'  :   '壮志凌云',
