@@ -45,7 +45,7 @@
                         <span class="fr">{{v.Money}}</span>
                     </div>
                     <div class="tb">
-                        <span class="fl">BDC:{{v.MoneyAfter}}</span>
+                        <span class="fl"><span v-if="type<=4">BDC:</span><span v-else>{{v.MoneyType}}:</span>{{v.MoneyAfter}}</span>
                         <span class="fr">{{v.CreateTime}}</span>
                     </div>
                     <div class="tb">
