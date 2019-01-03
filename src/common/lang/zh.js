@@ -207,6 +207,7 @@ export const zh = {
             gambling        :   '棋牌游戏',           
             gamebalance     :   '游戏余额',
             assetsbalance   :   '通证资产',
+            gamesbalance    :   '游戏资产',
             tranIn          :   '转入',
             tranOut         :   '转出',
             refresh         :   '刷新',

@@ -111,7 +111,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'2.1.16',				// 增加新功能，修复BUG
+			version 	:	'2.1.17',				// 增加新功能，修复BUG
 			messageNum	:	''
 		}
 	},

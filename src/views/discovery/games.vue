@@ -73,10 +73,16 @@
             <div class="input line-b mr20">
                 <div class="assets">
                     <div class="lable">
-                        {{$t('discovery.games.assetsbalance')}}
+                        <span v-if="bdctype=='BDC'">
+                            {{$t('discovery.games.assetsbalance')}}
+                        </span>
+                        <span v-if="bdctype=='CNY'">
+                            {{$t('discovery.games.gamesbalance')}}
+                        </span>
                     </div>
                     <div class="num">
-                        <span v-if="bdctype=='BDC'">{{actAssets}}</span><span v-if="bdctype=='CNY'">{{gameAssets}}</span>({{bdctype}})
+                        <span v-if="bdctype=='BDC'">{{actAssets}}</span>
+                        <span v-if="bdctype=='CNY'">{{gameAssets}}</span>({{bdctype}})
                     </div>
                 </div>
             </div>

@@ -207,6 +207,7 @@ export const en = {
             gambling        :   'Chess game',           
             gamebalance     :   'Game balance',
             assetsbalance   :   'Assets balance',
+            gamesbalance    :   'Game balance',
             tranIn          :   'Change into',
             tranOut         :   'Turn out',
             refresh         :   'Refresh',
