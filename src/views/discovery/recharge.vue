@@ -328,6 +328,7 @@
                         this.class = '流量充值';
                     break;
                     case '3':
+                        this.coname = this.$refs.sect.value
                         this.class      = '油卡充值';
                         this.Remakes    = '公司 :'+this.$refs.sect.value+' 油卡号 :'+this.oilcard;
                         if(this.$refs.sect.value==''||this.mobile==''||this.oilcard==''){
@@ -339,7 +340,6 @@
                         }
                     break;
                 }
-                this.coname = this.$refs.sect.value
                 this.modal = true;
             },
             confirm(){

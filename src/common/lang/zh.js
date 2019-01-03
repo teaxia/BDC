@@ -141,7 +141,7 @@ export const zh = {
         recharge:{
             title       :   '充值',
             price       :   '售价',
-            discount    :   '优惠价',
+            discount    :   '优惠价', 
             group       :   '充值类型',
             money       :   '金额',
             petrochina  :   '中国石油',
@@ -212,6 +212,29 @@ export const zh = {
             taccounts       :   '余额转账',
             num             :   '请输入正整数'
         },
+        withdrawal:{
+            title           :   '收益提现',
+            week            :   '本周收益',
+            month           :   '本月收益',
+            total           :   '总计收益',
+            myEarnings      :   '收益余额',
+            money           :   '提现金额',
+            bank            :   '提现银行',
+            submit          :   '立即提现',
+            querywtih       :   '提现查询',
+            queryProfit     :   '收益查询',
+            datewith        :   '查询时间段收益总计',
+            dateProfit      :   '查询时间段提现总计',
+            moneyBefore     :   '原有资金',
+            moneychange     :   '资金变动',
+            moneyAfter      :   '现有资金',
+            createTime      :   '时间',
+            remarks         :   '备注',
+            tips:{
+                money       :   '请检查金额是否正确。小数点只能保留2位',
+                input       :   '请输入提现金额'
+            }
+        }
     },
     // 钱包
     wallet:{

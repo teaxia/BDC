@@ -9,17 +9,22 @@
 							<i v-else class="avatar iconfont icon-touxiang"></i>
 						</div>
 					</flexbox-item>
-					<flexbox-item :span="8">
+					<flexbox-item :span="2">
 						<div class="mine-grid-content">
 							<div class="nickname">{{nickname}}</div>
 							<div class="userid">{{realname}}</div>
 						</div>
 					</flexbox-item>
-					<!-- <flexbox-item>
+					<flexbox-item :span="7">
 						<div class="mine-grid-content">
-							<i class="iconfont icon-arrow-right"></i>
+							<div class="earnings earning">我的收益：{{MyEarnings}}（CNY）</div>
+							<div class="withdrawal earning">
+								<router-link to="/discovery/withdrawal">
+									<button class="btn btn-xs btn-round">提现</button>
+								</router-link>
+							</div>
 						</div>
-					</flexbox-item> -->
+					</flexbox-item>
 				</flexbox>
 			</v-grid>
 		</div>

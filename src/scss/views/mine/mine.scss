@@ -28,6 +28,13 @@
                 color:$font-base;
             }
         }
+        .earning{
+            display: flex;
+            flex-wrap: wrap;
+            font-size:28px;
+            color:$font-red;
+            justify-content: center;
+        }
     }
     .cell-hei{
         height: 80px;

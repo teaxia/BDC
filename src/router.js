@@ -20,10 +20,11 @@ import discovery from './views/discovery.vue'
     import extract from  './views/discovery/extract.vue'                    // 提币
     import games from  './views/discovery/games.vue'                        // 游戏
     import gamesPt from  './views/discovery/gamesPt.vue'                    // PT平台单独页面
+    import withdrawal from './views/discovery/withdrawal.vue'                // 收益提现
     
         
 // 钱包
-import wallet from './views/wallet.vue'
+import wallet from './views/wallet.vue' 
     import walletindex from './views/wallet/wallet.vue'
     import changeassets from './views/wallet/changeassets.vue'
     import send from './views/wallet/send.vue'
@@ -103,6 +104,7 @@ let routes = [
             { path: '/discovery/extract', component: extract, name: 'extract',meta:{isIndex: 2}},
             { path: '/discovery/games', component: games, name: 'games',meta:{isIndex: 2}},
             { path: '/discovery/gamespt', component: gamesPt, name: 'gamesPt',meta:{isIndex: 2}},
+            { path: '/discovery/withdrawal', component: withdrawal, name: 'withdrawal',meta:{isIndex: 2}},
         ]
     },
     // 钱包

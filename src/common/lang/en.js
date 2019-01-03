@@ -149,7 +149,8 @@ export const en = {
             type:{
                 phone   :   'Telephone rate',
                 gprs    :   'Data',
-                oilcard :   'Oilcard'
+                oilcard :   'Oilcard',
+                oilcards:   'Oilcard recharge',
             },
             error:{
                 num     :   'Recharge not less than 1',
@@ -201,9 +202,6 @@ export const en = {
             tips        :   'Tips：Application for credit card must be authenticated by real name.'
         },
         games:{
-            
-        },
-        games:{
             relax           :   'Casual games',
             gambling        :   'Chess game',           
             gamebalance     :   'Game balance',
@@ -214,6 +212,29 @@ export const en = {
             taccounts       :   'Balance transfer',
             num             :   'Please enter a positive integer'
         },
+        withdrawal:{
+            title           :   'Withdrawal',
+            week            :   'Profit week',
+            month           :   'Profit month',
+            total           :   'Profit total',
+            myEarnings      :   'Balance',
+            money           :   'Money',
+            bank            :   'Bank',
+            submit          :   'Submit',
+            querywtih       :   'Cash Query',
+            queryProfit     :   'Profit query',
+            datewith        :   'Total revenue for query period',
+            dateProfit      :   'Total Discount of Query Period',
+            moneyBefore     :   'Original funds',
+            moneychange     :   'Change',
+            moneyAfter      :   'Existing funds',
+            createTime      :   'Time',
+            remarks         :   'Remarks',
+            tips:{
+                money       :   'Check the amount is correct. The decimal point can only be reserved for two bits.',
+                input       :   'Please enter the amount of cash withdrawal.'
+            }
+        }
     },
     // 钱包
     wallet:{
