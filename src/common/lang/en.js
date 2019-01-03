@@ -24,6 +24,7 @@ export const en = {
         unopened        : 'Unopened',
         wait            : 'Processing in progress, please wait a moment',
         authentication  : 'This operation needs to be authenticated by real name first',
+        bindbank        : 'This operation requires binding the bank card first.',
         off             : 'Off',
         message         : 'Message',
         ver             : 'Ver',

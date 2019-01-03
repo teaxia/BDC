@@ -24,6 +24,7 @@ export const zh = {
         unopened            : '暂未开放',
         wait                : '等待确认',
         authentication      : '该操作需要先通过实名认证',
+        bindbank            : '该操作需要先绑定银行卡',
         off                 : '限时优惠',
         message             : '消息中心',
         ver                 : '版本号',

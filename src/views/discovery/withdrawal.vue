@@ -36,6 +36,11 @@
                 <group>
                     <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
                 </group>
+                <group>
+                    <x-input :type="showtype?'text':'password'" class="test" :title="$t('wallet.tips.safetycode')" v-model="moneyPwd" :placeholder="$t('wallet.tips.inputcode')">
+                         <i slot="right" @click="changType()" :class="['iconfont',showtype?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
                 <div class="line-b sbank">
                     <div class="bank wd">
                         {{$t('discovery.withdrawal.bank')}}
@@ -91,7 +96,7 @@
         <!-- 绑定银行卡 -->
 		<Modal v-model="bindcard" :closable="false" :mask-closable="false">
 			<div slot="header"></div>
-			<div class="modal-body">{{$t('global.authentication')}}</div>
+			<div class="modal-body">{{$t('global.bindbank')}}</div>
 			<div slot="footer">
 				<button class="btn btn-block btn-round" @click="ok()">{{$t('discovery.withdrawal.tips.bind')}}</button>
 			</div>
@@ -136,6 +141,8 @@
                 show        :   false,
                 cardNoshow  :   '',                 // 显示的卡号
                 bankName    :   '',                 // 显示的银行
+                moneyPwd    :   '',                 // 安全密码
+                showtype    :   false,		// 切换密码状态
 			}
         },
         watch:{
@@ -236,7 +243,8 @@
                 {
                     guid     :   this.$storage.get('guid'),
                     Id       :   this.cardList[this.cardNo].Id,
-                    money    :   this.money
+                    money    :   this.money,
+                    moneyPwd :   this.moneyPwd
                 }).then(data => {
                     if(data){
                         this.$vux.toast.show({
@@ -302,6 +310,10 @@
             cancel () {
                 this.modal = false;
             },
+            changType(){
+                // 切换密码状态
+                this.showtype = !this.showtype
+            }
 		},
 		mounted() {
             // 初始化数据
