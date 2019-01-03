@@ -230,10 +230,13 @@ export const en = {
             moneyAfter      :   'Existing funds',
             createTime      :   'Time',
             remarks         :   'Remarks',
+            confirm         :   'Confirm',
             tips:{
                 money       :   'Check the amount is correct. The decimal point can only be reserved for two bits.',
                 input       :   'Please enter the amount of cash withdrawal.',
-                bind        :   'Please bind the bank card first'
+                bind        :   'Please bind the bank card first',
+                thisTime    :   'This Time money',
+                bank        :   'Bank Information',
             }
         }
     },

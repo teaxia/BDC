@@ -34,17 +34,17 @@
             </flexbox>
             <div class="mr20 line-b">
                 <group>
-                    <x-input type="number" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
+                    <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
                 </group>
                 <div class="line-b sbank">
                     <div class="bank wd">
                         {{$t('discovery.withdrawal.bank')}}
                     </div>
                     <Select v-model="cardNo"> 
-                        <Option v-for="(item,index) in cardList" :value="item.Id" :key="index">{{ item.cardNo }}{{item.bankName}}</Option>
+                        <Option v-for="(item,index) in cardList" :value="index" :key="index">{{ item.cardNo }}{{item.bankName}}</Option>
                     </Select>
                 </div>
-                <button class="btn btn-block btn-round" @click="submit()">{{$t('discovery.withdrawal.submit')}}</button>
+                <button class="btn btn-block btn-round" @click="confirm()">{{$t('discovery.withdrawal.confirm')}}</button>
             </div>
             <flexbox class="mr20 sreach">
                 <flexbox-item>
@@ -96,6 +96,14 @@
 				<button class="btn btn-block btn-round" @click="ok()">{{$t('discovery.withdrawal.tips.bind')}}</button>
 			</div>
 		</Modal>
+        <!-- 二次确认框 -->
+		<Modal v-model="show" @on-ok="submit" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
+			<div slot="header"></div>
+			<div class="modal-body">
+                <div>{{$t('discovery.withdrawal.tips.thisTime')}}:{{money}}</div>
+                <div>{{$t('discovery.withdrawal.tips.bank')}}：{{cardNoshow}}{{bankName}}</div>
+            </div>
+		</Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -111,7 +119,7 @@
                 start       :   '',
                 cardList    :   [],                 // 银行卡
                 dataList    :   [],                 // 列表数据
-                cardNo      :   '',                 // 卡号
+                cardNo      :   0,                 // 卡号
                 end         :   '',
                 stardate    :   '',
                 enddate     :   '',
@@ -125,6 +133,9 @@
                 listOut             :   '',         // 获取的提现数据
                 bindcard            :   false,         // 是否跳转到绑定银行卡
                 isok        :   false,
+                show        :   false,
+                cardNoshow  :   '',                 // 显示的卡号
+                bankName    :   '',                 // 显示的银行
 			}
         },
         watch:{
@@ -139,6 +150,10 @@
                     // 提现
                     this.dataList = this.listOut
                 }
+            },
+            cardNo(){
+                this.cardNoshow = this.cardList[this.cardNo].cardNo         // 卡号
+                this.bankName = this.cardList[this.cardNo].bankName         // 银行名称
             }
         },
 		methods: {
@@ -182,8 +197,10 @@
                     guid     :   this.$storage.get('guid'),
                 }).then(data => {
                     if(data){
+                        // 判断是否绑定银行卡
                         if(data.cardList.length>0){
-                            this.cardNo     =   data.cardList[0].Id     // 默认银行卡
+                            this.cardNoshow = data.cardList[0].cardNo         // 卡号
+                            this.bankName = data.cardList[0].bankName         // 银行名称
                         }else{
                             this.bindcard = true
                         }
@@ -197,7 +214,7 @@
                     }
                 })
             },
-            submit(){
+            confirm(){
                 // 效验操作
                 if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.money)){
                     this.$vux.toast.show({
@@ -206,6 +223,9 @@
                     })
                     return
                 }
+                this.show = true
+            },
+            submit(){
                 // 提现操作
                 if(this.isok){
                     return
@@ -215,7 +235,7 @@
                 'Withdraw_MyEarnings',
                 {
                     guid     :   this.$storage.get('guid'),
-                    Id       :   this.cardNo,
+                    Id       :   this.cardList[this.cardNo].Id,
                     money    :   this.money
                 }).then(data => {
                     if(data){
@@ -227,6 +247,7 @@
                         this.money = ''
                         this.isok  = false
                         this.GetInfoMyEarnings()
+                        this.MyEarningsList()
                     }
                 })
             },
@@ -242,9 +263,17 @@
                     if(data){
                         this.listOut  = data.listOut
                         this.listIn   = data.listIn
-                        this.dataList = data.listOut
                         this.totalOut = data.totalOut
                         this.totalIn  = data.totalIn
+                        // 根据当前选择查询类型赋值
+                        if(this.type==1){
+                            // 提现
+                            this.dataList = data.listOut
+                        }
+                        if(this.type==0){
+                            // 收益
+                            this.dataList = data.listIn
+                        }
                     }
                 })
             },
@@ -270,7 +299,9 @@
 					path:"/mine/mycard",
 				});
             },
-            
+            cancel () {
+                this.modal = false;
+            },
 		},
 		mounted() {
             // 初始化数据

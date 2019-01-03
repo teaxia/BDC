@@ -230,10 +230,13 @@ export const zh = {
             moneyAfter      :   '现有资金',
             createTime      :   '时间',
             remarks         :   '备注',
+            confirm         :   '提交',
             tips:{
                 money       :   '请检查金额是否正确。小数点只能保留2位',
                 input       :   '请输入提现金额',
-                bind        :   '该操作请先绑定银行卡'
+                bind        :   '该操作请先绑定银行卡',
+                thisTime    :   '本次提现金额',
+                bank        :   '提现银行卡',
             }
         }
     },

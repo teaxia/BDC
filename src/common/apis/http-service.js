@@ -1,5 +1,5 @@
 import axios from 'axios';
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 15000;
 axios.defaults.baseURL ='http://107.150.127.54:50011/WebService1.asmx';     //  测试地址
 //axios.defaults.baseURL ='http://107.150.127.54:50004/WebService1.asmx';   //  正式地址
 
