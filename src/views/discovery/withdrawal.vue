@@ -53,10 +53,10 @@
             </div>
             <flexbox class="mr20 sreach">
                 <flexbox-item>
-                    <DatePicker @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
+                    <DatePicker @on-change="startTime" type="date" v-model="startDate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
                 </flexbox-item>
                 <flexbox-item>
-                    <DatePicker @on-change="endtime" type="date"  v-model="enddate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
+                    <DatePicker @on-change="endtime" type="date"  v-model="endDate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
                 </flexbox-item>
             </flexbox>
             <div class="mr20">
@@ -81,7 +81,12 @@
                         <template v-for="v in dataList">
                             <tr>
                                 <td :class="v.remarks?'':'line-b height'">{{v.moneyBefore}}</td>
-                                <td :class="v.remarks?'':'line-b height'"><span :class="type==0?'red':'green'">{{v.money}}</span></td>
+                                <td :class="v.remarks?'':'line-b height'">
+                                    <span :class="type==0?'red':'green'">
+                                    <span v-if="type==0">+</span>
+                                    <span v-if="type==1">-</span>
+                                    {{v.money}}</span>
+                                </td>
                                 <td :class="v.remarks?'':'line-b height'">{{v.moneyAfter}}</td>
                                 <td :class="v.remarks?'':'line-b height'">{{v.createTime}}</td>
                             </tr>
@@ -126,8 +131,8 @@
                 dataList    :   [],                 // 列表数据
                 cardNo      :   0,                 // 卡号
                 end         :   '',
-                stardate    :   '',
-                enddate     :   '',
+                startDate   :   '',
+                endDate     :   '',
                 myEarnings  :   '',                 // 收益余额
                 myEarningsByWeek    :   '',         // 本周收益
                 myEarningsByMonth   :   '',         // 本月收益
@@ -137,7 +142,6 @@
                 listIn              :   '',         // 获取的收益数据
                 listOut             :   '',         // 获取的提现数据
                 bindcard            :   false,         // 是否跳转到绑定银行卡
-                isok        :   false,
                 show        :   false,
                 cardNoshow  :   '',                 // 显示的卡号
                 bankName    :   '',                 // 显示的银行
@@ -164,16 +168,16 @@
             }
         },
 		methods: {
-            startime(e){
+            startTime(e){
                 // 如果结束时间大于选择时间，则结束时间与选择时间一致
                 let str = e.replace(/\//g,"");
                 let end = this.end.replace(/\//g,"");
                 if(str>end){
                     this.start        =  this.end;
-                    this.stardate     =  this.end;
+                    this.startDate     =  this.end;
                 }else{
                     this.start        =  e;
-                    this.stardate     =  e;
+                    this.startDate     =  e;
                 }
                 // 限制某一项日期为空的话，不操作
                 if(this.start==''||this.end==''){
@@ -187,10 +191,10 @@
                 let str = this.start.replace(/\//g,"");
                 if(str>end){
                     this.start        =  e;
-                    this.stardate     =  e;
+                    this.startDate     =  e;
                 }
                 this.end = e;
-                this.enddate = e;
+                this.endDate = e;
                 // 限制某一项日期为空的话，不操作
                 if(this.start==''||this.end==''){
                     return;
@@ -242,10 +246,6 @@
             },
             submit(){
                 // 提现操作
-                if(this.isok){
-                    return
-                }
-                this.isok = true
                 this.$server.post(
                 'Withdraw_MyEarnings',
                 {
@@ -261,7 +261,6 @@
                         })
                         // 清空输入数据
                         this.money = ''
-                        this.isok  = false
                         this.GetInfoMyEarnings()
                         this.MyEarningsList()
                     }
@@ -273,8 +272,8 @@
                 'GetInfo_MyEarningsList',
                 {
                     guid        :   this.$storage.get('guid'),
-                    dtStart     :   this.stardate,
-                    dtEnd       :   this.enddate
+                    dtStart     :   this.startDate,
+                    dtEnd       :   this.endDate
                 }).then(data => {
                     if(data){
                         this.listOut  = data.listOut
@@ -299,8 +298,8 @@
                 let year = date.getFullYear();
                 let month = date.getMonth() + 1;
                 let day = date.getDate();
-                this.stardate = (year+'/'+month+'/'+day);
-                this.enddate = (year+'/'+month+'/'+day);
+                this.startDate = (year+'/'+month+'/'+day);
+                this.endDate = (year+'/'+month+'/'+day);
                 this.start = (year+'/'+month+'/'+day);
                 this.end = (year+'/'+month+'/'+day);
                 this.MyEarningsList()

@@ -33,7 +33,8 @@ export const GetCurrency = {
             'GetCountyCurrency',
             {
                 guid            : this.$storage.get('guid'),
-                currencyCode    : (cy)?cy:'',
+                currencyCode    : (cy)?cy:'',                         // 默认传值CNY
+                //currencyCode    : 'CNY'  
             }).then(data => {
                 if(data){
                     this.CurrencyList = data;

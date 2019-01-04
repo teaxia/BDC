@@ -32,7 +32,7 @@
                         </div>
                     </flexbox-item>
                     <flexbox-item :span="5">
-                        <input type="number" v-model="num" :placeholder="$t('global.entry')+feus[type]+$t('global.num')" />
+                        <input type="text" v-model="num" :placeholder="$t('global.entry')+feus[type]+$t('global.num')" />
                     </flexbox-item>
                 </flexbox>
                 <flexbox class="changelist line-b">
@@ -94,7 +94,6 @@ export default {
                     label: this.$t("wallet.transfor.type3")
                 }
             ],
-            isHandling  :   false
 		}
     },
     watch:{
@@ -162,8 +161,7 @@ export default {
 			'GetActGameTranInfo',
 			{
 				guid : this.$storage.get('guid')
-			},
-			).then(data => {
+			}).then(data => {
 				if(data){
                     this.traninfo = data;
                     this.PriceBDC = data[0].PriceBDC;
@@ -190,10 +188,6 @@ export default {
                 })
                 return;
             }
-            if(this.isHandling){
-                return;
-            }
-            this.isHandling = true;
             this.$server.post(
 			'TransferAssets',
 			{
@@ -204,15 +198,15 @@ export default {
                 dhl             :   this.DHL,
                 currencyPrice   :   this.PriceBDC
 
-			},
-			).then(data => {
+			}).then(data => {
                 if(data){
                     this.$vux.toast.show({
                         text: this.$t('global.success'),
                         type: 'success'
                     })
+                    this.num        =   ''
+                    this.password   =   ''
                     this.GetAccount();
-                    this.isHandling = false;
                 }
 			})
         }
