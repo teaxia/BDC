@@ -28,7 +28,7 @@
                     <div>
                         <div>
                             <span>{{$t('discovery.recharge.price')}}：</span>
-                            <span>{{(v.money/bdc)*HFOff}}BDC</span> 
+                            <span>{{((v.money/bdc)*HFOff).toFixed(8)}}<br/>BDC</span> 
                             <!-- <span :class="v.off?'del':''">{{(v.money/bdc)*HFOff}}BDC</span>  -->
                         </div>
                         <!-- <div v-if="HFOff" class="off">
@@ -89,7 +89,7 @@
                 <div class="secrechar">
                     <div v-for="(v,index) in oil" @click="act(index,v.money,v.status,YKOff)" :key="index" :class="{'sel_div':true,'current':current==index,'isoff':v.off}">
                         <div>{{v.money}}CNY</div>
-                        <div>{{$t('discovery.recharge.price')}}：{{(v.money/bdc)*YKOff}} BDC</div>
+                        <div>{{$t('discovery.recharge.price')}}：{{((v.money/bdc)*YKOff).toFixed(8)}} <br/>BDC</div>
                         <i v-if="current==index" class="iconfont icon-xuanze"></i>
                     </div>
                 </div>
@@ -112,8 +112,8 @@
                 </div>
                 <div>{{$t('input.mobile')}}:{{this.mobile}}</div>
                 <!-- <div :class="{'del':offprice}">{{$t('discovery.recharge.price')}}:{{this.RMB}}（BDC）</div> -->
-                <div v-if="type==1">{{$t('discovery.recharge.price')}}:{{this.RMB*this.HFOff}}（BDC）</div>
-                <div v-if="type==2">{{$t('discovery.recharge.price')}}:{{this.RMB*this.LLOff}}（BDC）</div>
+                <div v-if="type==1">{{$t('discovery.recharge.price')}}:{{(this.RMB*this.HFOff).toFixed(8)}}（BDC）</div>
+                <div v-if="type==2">{{$t('discovery.recharge.price')}}:{{(this.RMB*this.LLOff).toFixed(8)}}（BDC）</div>
                 <!-- <div v-if="offprice" class="off">{{$t('discovery.recharge.discount')}}:{{this.offprice}}（BDC）</div> -->
                 <div>{{$t('discovery.recharge.title')}}:{{this.Remakes}}</div>
             </div>
@@ -124,7 +124,7 @@
                 <div>{{$t('input.mobile')}}:{{this.mobile}}</div>
                 <div>{{$t('input.tips.oilcard')}}:{{this.oilcard}}</div>
                 <div>{{$t('discovery.recharge.money')}}:{{this.num}}</div>
-                <div>{{$t('discovery.recharge.price')}}:{{this.RMB*this.YKOff}}（BDC）</div>
+                <div>{{$t('discovery.recharge.price')}}:{{(this.RMB*this.YKOff).toFixed(8)}}（BDC）</div>
             </div>
         </Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>

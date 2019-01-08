@@ -29,7 +29,8 @@
              margin:10px;
              padding:10px;
              width: 220px;
-             height: 140px;
+             height: auto;
+             overflow: hidden;
              position: relative;             
              i{
                  position: absolute;
