@@ -36,7 +36,8 @@
         padding:5px 0px 5px 20px;
         margin-right: 1px;
         .assets-h1{
-            color:$font-base;
+            color:$font-orange;
+            font-weight:bold;
             padding-bottom: 5px;
             border-bottom:0.01rem solid $font-base;
             font-size:20px;
@@ -53,11 +54,10 @@
         position: relative;
         .wallet-band-l{
             padding-left: 20px;
-            margin-top:100px;
             width:380px;
             white-space:normal;
             .wallet-band-tit{
-                color:$font-empty;
+                color:$font-orange;
                 font-size:30px;
             }
             .wallet-band-bdc{
@@ -84,6 +84,13 @@
             text-align: center;
             a{
                 color:$font-white;
+            }
+        }
+        .game{
+            .assets-h1{
+                color:#01bd8b;
+                font-weight: 400;
+                border-bottom:0.01rem solid #01bd8b;
             }
         }
     }

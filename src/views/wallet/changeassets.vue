@@ -80,6 +80,7 @@ export default {
             DHL         :   '',
             X           :   '',
             password    :   '',
+            key         :   '',
             dlist       :   [
                 {
                     value: '1',
@@ -147,8 +148,7 @@ export default {
 			'GetAccountById',
 			{
 				guid : this.$storage.get('guid')
-			},
-			).then(data => {
+			}).then(data => {
 				if(data){
                     this.fixedAssets = data.FixedAssets;
                     this.actAssets   = data.ActAssets;
@@ -163,10 +163,11 @@ export default {
 				guid : this.$storage.get('guid')
 			}).then(data => {
 				if(data){
-                    this.traninfo = data;
-                    this.PriceBDC = data[0].PriceBDC;
-                    this.DHL      = data[0].DHL;
-                    this.X        = data[0].X;
+                    this.traninfo = data.list;
+                    this.PriceBDC = data.list[0].PriceBDC;
+                    this.DHL      = data.list[0].DHL;
+                    this.X        = data.list[0].X;
+                    this.key      = data.key
 				}
 			})
         },
@@ -195,8 +196,10 @@ export default {
                 Money           :   this.num,
                 TransferType    :   this.type,
                 MoneyPwd        :   this.password,
-                dhl             :   this.DHL,
-                currencyPrice   :   this.PriceBDC
+                // @接口删除兑换率跟价格 直接传入key代替
+                // dhl             :   this.DHL,
+                // currencyPrice   :   this.PriceBDC
+                key             :   this.key
 
 			}).then(data => {
                 if(data){

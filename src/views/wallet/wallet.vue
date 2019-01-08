@@ -32,8 +32,9 @@
                             <div class="wallet-assets">
                                 <span class="assets-h1">{{$t("wallet.tips.actassets")}}</span><br/><span class="wallet_bdc">{{actAssets}}</span>（BDC）<br/>{{(actAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
                             </div>
-                            <div class="wallet-assets">
-                               <span class="assets-h1"> {{$t("wallet.tips.gameassets")}}</span><br/><span class="wallet_bdc">{{(gameAssets*PriceToBDC).toFixed(8)}}</span>（BDC）<br/>{{gameAssets}}（{{CurrencyCode}}）
+                            <div class="wallet-assets game">
+                                <!-- <span class="wallet_bdc">{{(gameAssets*PriceToBDC).toFixed(8)}}</span>（BDC）<br/> -->
+                               <span class="assets-h1"> {{$t("wallet.tips.gameassets")}}</span><br/>{{gameAssets}}（CNY）
                             </div>
                         </div>
                     </div>
@@ -174,7 +175,7 @@ export default {
                     // 总资产折合算法 X=固定+通证+（游戏/BDC价格）(单位：BDC)
                     //let t = this.gameAssets/data[0].Money;
                     //let x = this.$math.add(t,this.fixedAssets,this.actAssets);
-                    let x = this.$math.add(this.gameAssets*this.PriceToBDC,this.fixedAssets,this.actAssets)             // 资产总和，没有四舍五入BDC
+                    let x = this.$math.add(this.fixedAssets,this.actAssets)             // 资产总和，没有四舍五入BDC
                     this.sum = x.toFixed(8)                                                                             // 资产总和，四舍五入
                     this.cny = (this.$math.eval(this.sum/this.PriceToBDC)).toFixed(8)                                   // CNY资产总和，使用四舍五入后的值计算
                     this.BDC = data[0].Money
@@ -274,7 +275,7 @@ export default {
             this.GetAccount();
             this.GetPriceByCurrency();
         },60000)
-        this.getcurren('CNY');
+        this.getcurren();
         this.GetBlackShow();
     },
     beforeDestroy(){

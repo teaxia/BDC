@@ -24,7 +24,7 @@
                         </flexbox>
                         <flexbox class="mr20 pb">
                             <flexbox-item :span="6">
-                                <input type="number" v-model="num" :placeholder="$t('discovery.btob.num')"/>
+                                <input type="text" v-model="num" :placeholder="$t('discovery.btob.num')"/>
                             </flexbox-item>
                             <flexbox-item>
                                 <div class="price">{{price}}(BDC)</div>
@@ -60,14 +60,14 @@
                 act         :   0,
                 blist       :   [],
                 actBB       :   'BTC',
-                btobinfo    :   [],
                 num         :   '',
                 address     :   '',
                 proportion  :   '',
                 price       :   '',
-                isok        :   false,
+                // isok        :   false,
                 currency    :   [],
-                bbName      :   ''
+                bbName      :   '',
+                key         :   ''
 			}
         },
         watch:{
@@ -100,9 +100,9 @@
             },
             submit(){
                 // 获取详情
-                if(this.isok){
-                    return
-                }
+                // if(this.isok){
+                //     return
+                // }
                 if(this.num==''){
                     this.$vux.toast.show({
                         text: this.$t('discovery.btob.null'),
@@ -115,7 +115,9 @@
                 'AddRechargeByBB',
                 {
                     guid 	        :   this.$storage.get('guid'),
-                    CurrencyNum     :   this.price,                          // 价格
+                    // @使用key代替
+                    // CurrencyNum     :   this.price,                          // 价格
+                    key             :   this.key,
                     OutCurrencyNum  :   this.num,
                     CurrencyName    :   this.blist[this.act].Name,
                     RechargeAddress :   this.address
@@ -125,7 +127,8 @@
                             text: this.$t('global.wait'), 
                             type: 'success'
                         })
-                        this.isok = false;
+                        this.num = ''
+                        // this.isok = false;
                     }
                 })
             },
@@ -136,11 +139,12 @@
                     guid 	        :   this.$storage.get('guid'),
                 }).then(data => {
                     if(data){
-                        this.blist = data;
-                        this.btobinfo = data;
-                        this.address  = data[0].RechargeAddress;            // 兑换地址
-                        this.proportion = data[0].Proportion;               // 兑换比例
+                        this.blist      = data.list;
+                        this.address    = data.list[0].RechargeAddress;            // 兑换地址
+                        this.proportion = data.list[0].Proportion;                 // 兑换比例
+                        this.key        = data.key
                         this.bTb(this.bbName)
+                        
                     }
                 })
             },
