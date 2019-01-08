@@ -285,7 +285,7 @@
                     this.Remakes = this.phonecharges[0].money+'CNY|'+this.phonecharges[0].money;
                 }else if(type==2){
                     this.RMB     = this.gprs[0].money/this.bdc;
-                    this.Remakes = this.gprs[0].money+'CNY|'+this.gprs[0].money;
+                    this.Remakes = this.gprs[0].value+'|'+this.gprs[0].money;
                 }else if(type==3){
                     this.RMB     = this.oil[0].money/this.bdc;
                     this.num     = this.oil[0].money
@@ -303,7 +303,7 @@
                     if(this.type==1){
                         this.Remakes = this.phonecharges[index].money+'CNY|'+this.phonecharges[index].money
                     }else if(this.type==2){
-                        this.Remakes = this.gprs[index].money+'CNY|'+this.gprs[index].money
+                        this.Remakes = this.gprs[index].value+'|'+this.gprs[index].money
                     }else if(this.type==3){
                         this.num  = this.oil[index].money
                     }
@@ -329,8 +329,8 @@
                     break;
                     case '3':
                         this.coname = this.$refs.sect.value
-                        this.class      = '油卡充值';
-                        this.Remakes    = '公司 :'+this.$refs.sect.value+' 油卡号 :'+this.oilcard+' '+this.num+'CNY|'+this.num;
+                        this.class      = '油卡充值'
+                        this.Remakes    = '公司 :'+this.$refs.sect.value+' 油卡号 :'+this.oilcard+' |'+this.num
                         if(this.$refs.sect.value==''||this.mobile==''||this.oilcard==''){
                             this.$vux.toast.show({
                                 text: this.$t('discovery.recharge.error.full'),
@@ -376,7 +376,8 @@
                             text: this.$t('global.wait'),
                             type: 'success'
                         })
-                        this.isok = false;
+                        this.mobile = ''
+                        this.MoneyPwd = ''
                     }
                 })
             },
