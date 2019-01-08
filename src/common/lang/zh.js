@@ -156,7 +156,7 @@ export const zh = {
             error:{
                 num     :   '充值金额不能小于1',
                 full    :   '请填写完整的信息',
-                mobile  :   '手机号不能为空'
+                mobile  :   '请输入正确的手机号'
             },
         },
         extract:{

@@ -282,10 +282,10 @@
                 this.current = 0;
                 if(type==1){
                     this.RMB     = this.phonecharges[0].money/this.bdc;
-                    this.Remakes = this.phonecharges[0].money+'CNY';
+                    this.Remakes = this.phonecharges[0].money+'CNY:'+this.phonecharges[0].money;
                 }else if(type==2){
                     this.RMB     = this.gprs[0].money/this.bdc;
-                    this.Remakes = this.gprs[0].value;
+                    this.Remakes = this.gprs[0].money+'CNY:'+this.gprs[0].money;
                 }else if(type==3){
                     this.RMB     = this.oil[0].money/this.bdc;
                     this.num     = this.oil[0].money+'CNY'
@@ -301,9 +301,9 @@
                         this.offprice   =  (money/this.bdc)*off
                     }
                     if(this.type==1){
-                        this.Remakes = this.phonecharges[index].money+'CNY'
+                        this.Remakes = this.phonecharges[index].money+'CNY:'+this.phonecharges[index].money
                     }else if(this.type==2){
-                        this.Remakes = this.gprs[index].value
+                        this.Remakes = this.gprs[index].money+'CNY:'+this.gprs[index].money
                     }else if(this.type==3){
                         this.num  = this.oil[index].money+'CNY'
                     }
@@ -424,7 +424,7 @@
 				if(data){
                     this.bdc     =  data[0].Money;
                     this.RMB     =  this.phonecharges[0].money/this.bdc;
-                    this.Remakes =  this.phonecharges[0].money+"CNY"
+                    this.Remakes =  this.phonecharges[0].money+"CNY:"+this.phonecharges[0].money
                     this.offprice   =  (this.phonecharges[0].money/this.bdc)*0.5
 				}
             })
