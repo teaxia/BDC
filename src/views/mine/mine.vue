@@ -111,7 +111,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'2.2.18',				// 资产总和不再包含游戏资产、游戏资产更名游戏钱包
+			version 	:	'2.2.19',				// 修复CNY传值，修复充值页面小数点问题
 			messageNum	:	''
 		}
 	},
