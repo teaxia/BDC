@@ -111,7 +111,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'2.2.19',				// 修复CNY传值，修复充值页面小数点问题
+			version 	:	'2.3.19',				// 更新官网、更新游戏平台图标、更新层级结构
 			messageNum	:	''
 		}
 	},
@@ -128,12 +128,12 @@ export default {
 			if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  
 				//苹果设备 
 				api.openApp({
-					iosUrl: 'http://www.belden-bdc.net/', //打开微信的，其中weixin为微信的URL Scheme
+					iosUrl: 'http://www.belden-bdc.com/', //打开微信的，其中weixin为微信的URL Scheme
 				});
 			}else{
 				//安卓设备
 				api.openApp({
-					uri: 'http://www.belden-bdc.net/'
+					uri: 'http://www.belden-bdc.com/'
 				});
 			}
 		},
