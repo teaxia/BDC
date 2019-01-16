@@ -116,6 +116,7 @@ export const zh = {
             issue       :   '本期发行量',
             b2b         :   '在线兑换',
             cash        :   '现金购买',
+            self        :   '自助购买',
             notbuy      :   '未开启',
             success     :   '已完成',
         },

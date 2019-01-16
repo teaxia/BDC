@@ -116,6 +116,7 @@ export const en = {
             issue       :   'Circulation',
             b2b         :   'Exchange',
             cash        :   'Buy',
+            salf        :   'Buy',
             notbuy      :   'Unopened',
             success     :   'Success'
         },
