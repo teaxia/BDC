@@ -14,7 +14,6 @@
 								{{nickname}}<br>
 								<div class="userid">{{realname}}</div>
 							</div>
-							
 						</div>
 					</flexbox-item>
 				</flexbox>
@@ -22,7 +21,10 @@
 			<div class="enterfrom mr100">
                 <div class="text">
 					<div class="vux-x-input weui-cell test line-b">
-						<div class="lable fl">{{$t('wallet.send.dfaddress')}}</div>
+						<div class="lable fl">
+							{{$t('wallet.send.dfaddress')}}
+							<button slot="right" @click="getCli()" class="btn btn-xs btn-round">{{$t('global.paste')}}</button>
+						</div>
 						<div class="content fl">
 							<textarea :placeholder="$t('wallet.send.tips.input')" v-model="bdcaddress"></textarea>
 						</div>
@@ -141,7 +143,17 @@
                 this.$router.push({
 					path:"/mine/myhome",
 				});
-            },
+			},
+			getCli(){
+				var clipBoard = api.require('clipBoard');
+				var that = this
+				clipBoard.get(function(ret, err) {
+					if (ret) {
+						let addresss = ret
+						that.addrs = addresss.value
+					}
+				});
+			}
 		},
 		mounted() {
             this.nickname = this.$storage.get('NickName');

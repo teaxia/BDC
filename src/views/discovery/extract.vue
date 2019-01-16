@@ -4,7 +4,8 @@
         <div class="pd50">
             <div class="enterfrom">
                 <group>
-                    <x-input class="test" :title="$t('discovery.extract.address')" required :placeholder="$t('discovery.extract.addresstip')" v-model="addrs">
+                    <x-input class="test" :title="$t('discovery.extract.address')" :show-clear='false' :placeholder="$t('discovery.extract.addresstip')" v-model="addrs">
+                        <button slot="right" @click="getCli()" class="btn btn-xs btn-round">{{$t('global.paste')}}</button>
                     </x-input>
                 </group>
                 <div class="tips">{{$t('discovery.extract.tip')}}</div>
@@ -115,6 +116,16 @@ export default {
                     this.tax = data.Result
                 }
             })
+        },
+        getCli(){
+            var clipBoard = api.require('clipBoard');
+            var that = this
+            clipBoard.get(function(ret, err) {
+                if (ret) {
+                    let addresss = ret
+                    that.addrs = addresss.value
+                }
+            });
         }
 	},
 	mounted() {

@@ -30,6 +30,7 @@ export const en = {
         ver             : 'Ver',
         stargame        : 'Start',
         authority       : 'No authority',
+        paste           : 'paste',
     },
     messgae:{
         Aread               :   'Already read',

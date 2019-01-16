@@ -30,6 +30,7 @@ export const zh = {
         ver                 : '版本号',
         stargame            : '开始游戏',
         authority           : '账户未授权',
+        paste               : '粘贴',
     },
     message:{
         Aread               :   '已读',
