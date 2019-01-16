@@ -14,6 +14,7 @@ import discovery from './views/discovery.vue'
     import expectinfo from  './views/discovery/expectinfo.vue'              // 兑换BDC
         import btob from  './views/discovery/btob.vue'                      // 币币兑换
         import cash from  './views/discovery/cash.vue'                      // 现金购买
+        import self from  './views/discovery/self.vue'                      // 现金购买
         import recharge from  './views/discovery/recharge.vue'              // 充值
     import bill from  './views/discovery/bill.vue'                          // 兑换BDC
     import credit from  './views/discovery/credit.vue'                      // 办理信用卡
@@ -96,8 +97,9 @@ let routes = [
         children: [
             { path: '/discovery/index', component: discoveryindex, name: 'discoveryindex',meta:{isIndex: 2}},
             { path: '/discovery/expectinfo', component: expectinfo, name: 'expectinfo',meta:{isIndex: 2}},
-            { path: '/discovery/expectinfo/btob', component: btob, name: 'btob',meta:{isIndex: 2}},
-            { path: '/discovery/expectinfo/cash', component: cash, name: 'cash',meta:{isIndex: 2}},
+                { path: '/discovery/expectinfo/btob', component: btob, name: 'btob',meta:{isIndex: 2}},
+                { path: '/discovery/expectinfo/cash', component: cash, name: 'cash',meta:{isIndex: 2}},
+                { path: '/discovery/expectinfo/self', component: self, name: 'self',meta:{isIndex: 2}},
             { path: '/discovery/recharge', component: recharge, name: 'recharge',meta:{isIndex: 2}},
             { path: '/discovery/bill', component: bill, name: 'bill',meta:{isIndex: 2}},
             { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
