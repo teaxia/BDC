@@ -24,4 +24,72 @@
             text-align: center;
         }
     }
+    .ov{
+        
+    }
+    // 树形结构图谱
+    .family{
+        overflow: scroll;
+        height: 750px;
+        .root{
+            width:1000px;
+            display: block;
+            height: auto;
+            .childBlock{
+                margin:10px auto;
+                background:rgba(53,73,94,.7);
+                border-radius: 15px;
+                color:$font-white;
+            }
+        }
+        .father{
+            width:1000px;
+            height: auto;
+            overflow: hidden;
+            .mr{
+                width: 750px;
+                height: auto;
+                overflow: hidden;
+            }
+            .childBlock{
+                float: left;
+                background:rgba(53,73,94,.5);
+                border-radius: 15px;
+                color:$font-white;
+            }
+            .blank{
+                width: 250px;
+                height: 200px;
+                float: left;
+            }
+        }
+        .child{
+            width:1000px;
+            margin:0 auto;
+            height: auto;
+            overflow: hidden;
+            .childBlock{
+                float: left;
+                background:rgba(53,73,94,.1);
+            }
+        }
+    }
+    .childRow{
+        clear: both;
+    }
+    .mr{
+        margin:0 auto;
+    }
+    .childBlock{
+        width:240px;
+        height: auto;
+        margin:10px 5px;
+        word-wrap: break-word;
+        text-align: left;
+    }
+    .border{
+        padding: 15px;
+        border:0.02rem solid gray;
+        border-radius: 15px;
+    }
 }

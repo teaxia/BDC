@@ -26,7 +26,7 @@
                 </v-grid>
             </div>
             <div class="mr20">
-                <table class="table">
+                <!-- <table class="table">
                     <thead>
                         <tr>
                             <th v-for="(v,index) in th" :key="index">{{v.title}}</th>
@@ -41,7 +41,66 @@
                             <td><span v-clipboard:copy="v.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</span></td>
                         </tr>
                     </tbody>
-                </table>
+                </table> -->
+                <div class="family">
+                    <div class="root">
+                        <div class="childBlock border">
+                            <div>{{Area}}</div>
+                            <div>{{NickName}}</div>
+                            <div>{{GroupBDC}}</div>
+                            <div>{{InviteCode}}</div>
+                            <div><span v-clipboard:copy="InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</span></div>
+                        </div>
+                    </div>
+                    <div class="father childRow">
+                        <div class="mr">
+                            <!-- 循环二级层 -->
+                            <div class="childBlock">
+                                <div v-for="(v,index) in dataList" :key="index" v-if="v.Area=='V1'" :id="v.Area" class="border">
+                                    <div @click="query(v.AccountId)">{{v.Area}}</div>
+                                    <div @click="query(v.AccountId)">{{v.NickName}}</div>
+                                    <div @click="query(v.AccountId)">{{v.TotalAssets}}</div>
+                                    <div @click="query(v.AccountId)">{{v.InviteCode}}</div>
+                                    <div><span v-clipboard:copy="v.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</span></div>
+                                </div>
+                            </div>
+                            <div class="blank">
+                                <!-- 占位 -->
+                            </div>
+                            <div class="childBlock">
+                                <div v-for="(v,index) in dataList" :key="index" v-if="v.Area=='V2'" :id="v.Area" class="border">
+                                    <div @click="query(v.AccountId)">{{v.Area}}</div>
+                                    <div @click="query(v.AccountId)">{{v.NickName}}</div>
+                                    <div @click="query(v.AccountId)">{{v.TotalAssets}}</div>
+                                    <div @click="query(v.AccountId)">{{v.InviteCode}}</div>
+                                    <div><span v-clipboard:copy="v.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="child childRow">
+                        <template v-for="v in dataList">
+                            <div class="childBlock">
+                                <div v-for="n in v.child" :key="n.AccountId" v-if="n.Area=='V1'" :id="n.Area" class="border">
+                                    <div @click="query(n.AccountId)">{{n.Area}}</div>
+                                    <div @click="query(n.AccountId)">{{n.NickName}}</div>
+                                    <div @click="query(n.AccountId)">{{n.TotalAssets}}</div>
+                                    <div @click="query(n.AccountId)">{{n.InviteCode}}</div>
+                                    <div><span v-clipboard:copy="n.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</span></div>
+                                </div>
+                            </div>
+                            <div class="childBlock">
+                                <div v-for="n in v.child" :key="n.AccountId" v-if="n.Area=='V2'" :id="n.Area" class="border">
+                                    <div @click="query(n.AccountId)">{{n.Area}}</div>
+                                    <div @click="query(n.AccountId)">{{n.NickName}}</div>
+                                    <div @click="query(n.AccountId)">{{n.TotalAssets}}</div>
+                                    <div @click="query(n.AccountId)">{{n.InviteCode}}</div>
+                                    <div><span v-clipboard:copy="n.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</span></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
             </div>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
@@ -72,13 +131,14 @@
                 dataList: [],
                 NickName    :   '',         // 昵称
                 InviteCode  :   '',         // 邀请码
+                Area        :   '',         // 根节点的矿区
                 V1_Count    :   '',
                 V1_BDC      :   '',
                 V2_Count    :   '',
                 V2_BDC      :   '',         
                 GroupCount  :   '',         // 团队人数
                 GroupBDC    :   '',         // 团队资产
-                level       :   '',          // 上一级ID
+                level       :   '',         // 上一级ID
                 keyword     :   ''
 			}
 		},
@@ -101,7 +161,29 @@
                         this.GroupCount  =   data.GroupCount;         // 团队人数
                         this.GroupBDC    =   data.GroupBDC;
                         this.level       =   data.ParentId;
-                        this.dataList    =   data.TreeList;
+                        
+                        // 平行数组根据Level映射成有父子关系的数组
+                        let tree        =    data.TreeList
+                        this.Area       =    data.TreeList[0].Area
+                        tree.forEach(ele => { 
+                            let ParentId = ele.ParentId;
+                            if (ParentId != 0) {
+                                //如果ele是子元素的话 ,把ele扔到他的父亲的child数组中.
+                                tree.forEach(d => {
+                                    if (d.AccountId === ParentId) {
+                                        let childArray = d.child;
+                                        if (!childArray) {
+                                            childArray = []
+                                        }
+                                        childArray.push(ele); 
+                                        d.child = childArray;
+                                    }
+                                })
+                            }
+                        });
+                        //去除重复元素
+                        let newData = tree.filter(ele => ele.ParentId === 0);
+                        this.dataList    =   newData;
                     }
                 })
             },
