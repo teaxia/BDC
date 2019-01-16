@@ -45,12 +45,14 @@
                 <div class="family">
                     <div class="root">
                         <div class="childBlock border">
-                            <div>{{Area}}</div>
-                            <div>{{NickName}}</div>
-                            <div>{{GroupBDC}}</div>
-                            <div class="copy">
-                                <div>{{InviteCode}}</div>
-                                <div><button class="btn btn-xs btn-round" v-clipboard:copy="InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                            <div v-if="f1.InviteCode">
+                                <div @click="query(f1.AccountId)">{{f1.Area}}</div>
+                                <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.NickName}}</div>
+                                <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.TotalAssets}}</div>
+                                <div class="copy">
+                                    <div>{{f1.InviteCode}}</div>
+                                    <div><button class="btn btn-xs btn-round" v-clipboard:copy="f1.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -58,13 +60,13 @@
                         <div class="mr">
                             <!-- 循环二级层 -->
                             <div class="childBlock">
-                                <div v-for="(v,index) in dataList" :key="index" v-if="v.Area=='V1'&&v.Level==2" :id="v.Area" class="border">
-                                    <div @click="query(v.AccountId)">{{v.Area}}</div>
-                                    <div @click="query(v.AccountId)">{{v.NickName}}</div>
-                                    <div @click="query(v.AccountId)">{{v.TotalAssets}}</div>
+                                <div v-if="f2.InviteCode">
+                                    <div @click="query(f2.AccountId)">{{f2.Area}}</div>
+                                    <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.NickName}}</div>
+                                    <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.TotalAssets}}</div>
                                     <div class="copy">
-                                        <div>{{v.InviteCode}}</div>
-                                        <div><button class="btn btn-xs btn-round" v-clipboard:copy="v.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                                        <div>{{f2.InviteCode}}</div>
+                                        <div><button class="btn btn-xs btn-round" v-clipboard:copy="f2.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                     </div>
                                 </div>
                             </div>
@@ -72,43 +74,63 @@
                                 <!-- 占位 -->
                             </div>
                             <div class="childBlock">
-                                <div v-for="(v,index) in dataList" :key="index" v-if="v.Area=='V2'&&v.Level==2" :id="v.Area" class="border">
-                                    <div @click="query(v.AccountId)">{{v.Area}}</div>
-                                    <div @click="query(v.AccountId)">{{v.NickName}}</div>
-                                    <div @click="query(v.AccountId)">{{v.TotalAssets}}</div>
+                                <div v-if="f3.InviteCode">
+                                    <div @click="query(f3.AccountId)">{{f3.Area}}</div>
+                                    <div @click="query(f3.AccountId)" class="ellipsis1">{{f3.NickName}}</div>
+                                    <div @click="query(f3.AccountId)" class="ellipsis1">{{f3.TotalAssets}}</div>
                                     <div class="copy">
-                                        <div>{{v.InviteCode}}</div>
-                                        <div><button class="btn btn-xs btn-round" v-clipboard:copy="v.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                                        <div>{{f3.InviteCode}}</div>
+                                        <div><button class="btn btn-xs btn-round" v-clipboard:copy="f3.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="child childRow">
-                        <template v-for="v in dataList">
-                            <div class="childBlock">
-                                <div v-for="n in v.child" :key="n.AccountId" v-if="n.Area=='V1'&&n.Level==3" :id="n.Area" class="border">
-                                    <div @click="query(n.AccountId)">{{n.Area}}</div>
-                                    <div @click="query(n.AccountId)">{{n.NickName}}</div>
-                                    <div @click="query(n.AccountId)">{{n.TotalAssets}}</div>
-                                    <div class="copy">
-                                        <div>{{n.InviteCode}}</div>
-                                        <div><button class="btn btn-xs btn-round" v-clipboard:copy="n.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
-                                    </div>
+                        <div class="childBlock">
+                            <div v-if="f4.InviteCode">
+                                <div @click="query(f4.AccountId)">{{f4.Area}}</div>
+                                <div @click="query(f4.AccountId)" class="ellipsis1">{{f4.NickName}}</div>
+                                <div @click="query(f4.AccountId)" class="ellipsis1">{{f4.TotalAssets}}</div>
+                                <div class="copy">
+                                    <div>{{f4.InviteCode}}</div>
+                                    <div><button class="btn btn-xs btn-round" v-clipboard:copy="f4.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                 </div>
                             </div>
-                            <div class="childBlock">
-                                <div v-for="n in v.child" :key="n.AccountId" v-if="n.Area=='V2'&&n.Level==3" :id="n.Area" class="border">
-                                    <div @click="query(n.AccountId)">{{n.Area}}</div>
-                                    <div @click="query(n.AccountId)">{{n.NickName}}</div>
-                                    <div @click="query(n.AccountId)">{{n.TotalAssets}}</div>
-                                    <div class="copy">
-                                        <div>{{n.InviteCode}}</div>
-                                        <div><button class="btn btn-xs btn-round" v-clipboard:copy="n.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
-                                    </div>
+                        </div>
+                        <div class="childBlock">
+                            <div v-if="f5.InviteCode">
+                                <div @click="query(f5.AccountId)">{{f5.Area}}</div>
+                                <div @click="query(f5.AccountId)" class="ellipsis1">{{f5.NickName}}</div>
+                                <div @click="query(f5.AccountId)" class="ellipsis1">{{f5.TotalAssets}}</div>
+                                <div class="copy">
+                                    <div>{{f5.InviteCode}}</div>
+                                    <div><button class="btn btn-xs btn-round" v-clipboard:copy="f5.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                 </div>
                             </div>
-                        </template>
+                        </div>
+                        <div class="childBlock">
+                            <div v-if="f6.InviteCode">
+                                <div @click="query(f6.AccountId)">{{f6.Area}}</div>
+                                <div @click="query(f6.AccountId)" class="ellipsis1">{{f6.NickName}}</div>
+                                <div @click="query(f6.AccountId)" class="ellipsis1">{{f6.TotalAssets}}</div>
+                                <div class="copy">
+                                    <div>{{f6.InviteCode}}</div>
+                                    <div><button class="btn btn-xs btn-round" v-clipboard:copy="f6.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="childBlock">
+                            <div v-if="f7.InviteCode">
+                                <div @click="query(f7.AccountId)">{{f7.Area}}</div>
+                                <div @click="query(f7.AccountId)" class="ellipsis1">{{f7.NickName}}</div>
+                                <div @click="query(f7.AccountId)" class="ellipsis1">{{f7.TotalAssets}}</div>
+                                <div class="copy">
+                                    <div>{{f7.InviteCode}}</div>
+                                    <div><button class="btn btn-xs btn-round" v-clipboard:copy="f7.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,7 +160,7 @@
                         title: this.$t('mine.area.edit'),
                     }
                 ],
-                dataList: [],
+                dataList    :   [],
                 NickName    :   '',         // 昵称
                 InviteCode  :   '',         // 邀请码
                 Area        :   '',         // 根节点的矿区
@@ -149,7 +171,14 @@
                 GroupCount  :   '',         // 团队人数
                 GroupBDC    :   '',         // 团队资产
                 level       :   '',         // 上一级ID
-                keyword     :   ''
+                keyword     :   '',
+                f1          :   [],
+                f2          :   [],
+                f3          :   [],
+                f4          :   [],
+                f5          :   [],
+                f6          :   [],
+                f7          :   [],
 			}
 		},
 		methods: {
@@ -170,30 +199,38 @@
                         this.GroupCount  =   data.GroupCount;         // 团队人数
                         this.GroupBDC    =   data.GroupBDC;
                         this.level       =   data.ParentId;
-                        
-                        // 平行数组根据Level映射成有父子关系的数组
-                        let tree        =    data.TreeList
-                        this.Area       =    data.TreeList[0].Area
-                        tree.forEach(ele => { 
-                            let ParentId = ele.ParentId;
-                            if (ParentId != 0) {
-                                //如果ele是子元素的话 ,把ele扔到他的父亲的child数组中.
-                                tree.forEach(d => {
-                                    if (d.AccountId === ParentId) {
-                                        let childArray = d.child;
-                                        if (!childArray) {
-                                            childArray = []
-                                        }
-                                        childArray.push(ele); 
-                                        d.child = childArray;
-                                    }
-                                })
+                        let tree         =   data.TreeList;
+                        this.f1 = ''
+                        this.f2 = ''
+                        this.f3 = ''
+                        this.f4 = ''
+                        this.f5 = ''
+                        this.f6 = ''
+                        this.f7 = ''
+                        tree.forEach((ele,index) => {
+                            // 循环给层级赋值（以后慢慢换吧）
+                            if(ele.Level==1){
+                                this.f1 = ele
                             }
-                        });
-                        //去除重复元素
-                        let newData = tree.filter(ele => ele.ParentId === 0);
-                        this.dataList    =   newData;
-                        console.log(data)
+                            if(ele.Level==2&&ele.Area=='V1'){
+                                this.f2 = ele
+                            }
+                            if(ele.Level==2&&ele.Area=='V2'){
+                                this.f3 = ele
+                            }
+                            if(ele.Level==3&&ele.Area=='V1'&&this.f2.AccountId==ele.ParentId){
+                                this.f4 = ele
+                            }
+                            if(ele.Level==3&&ele.Area=='V2'&&this.f2.AccountId==ele.ParentId){
+                                this.f5 = ele
+                            }
+                            if(ele.Level==3&&ele.Area=='V1'&&this.f3.AccountId==ele.ParentId){
+                                this.f6 = ele
+                            }
+                            if(ele.Level==3&&ele.Area=='V2'&&this.f3.AccountId==ele.ParentId){
+                                this.f7 = ele
+                            }
+                        })
                     }
                 })
             },

@@ -150,7 +150,7 @@
 				clipBoard.get(function(ret, err) {
 					if (ret) {
 						let addresss = ret
-						that.addrs = addresss.value
+						that.bdcaddress = addresss.value
 					}
 				});
 			}
