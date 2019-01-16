@@ -141,6 +141,20 @@ export const zh = {
             },
             buy         :   '立即充值'
         },
+        self:{
+            title       :   '自助购买',
+            num         :   'BDC数量',
+            CNYNum      :   '人民币价格',
+            BankCardNo  :   '银行卡号',
+            name        :   '转账人姓名',
+            remarks     :   '备注',
+            tips:{
+                num         :   '请输入BDC数量',
+                CNYNum      :   '请输入人民币价格',
+                BankCardNo  :   '银行卡号后四位',
+                name        :   '请输入转账人姓名',
+            }
+        },
         recharge:{
             title       :   '充值',
             price       :   '售价',

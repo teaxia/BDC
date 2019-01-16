@@ -139,7 +139,21 @@ export const en = {
             tips:{
                 buyname :   'Please entry Your name',
             },
-            buy         :   'Buy Now'
+            buy         :   'Buy'
+        },
+        self:{
+            title       :   'Buy',
+            num         :   'BDC Num',
+            CNYNum      :   'CNY Num',
+            BankCardNo  :   'Card No',
+            name        :   'Name',
+            remarks     :   'Remarks',
+            tips:{
+                num         :   'Please enter the number of BDCs',
+                CNYNum      :   'Please enter RMB price',
+                BankCardNo  :   'Four places behind the bank card number',
+                name        :   'Please enter the name',
+            }
         },
         recharge:{
             title       :   'Recharge',

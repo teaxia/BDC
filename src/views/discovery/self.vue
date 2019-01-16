@@ -1,70 +1,55 @@
 <template>
 	<div class="btob padding-footer" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.cash.title')"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.self.title')"></x-header>
         <div class="main-container">
-            <h3>
-                {{$t('discovery.cash.rate')}}：1BDC={{bdc}}CNY
-            </h3>
-            <div class="mr50">
+            <div class="mr10">
                 <v-grid>
                     <div class="pd-lb20">
                         <flexbox class="vux-1px-b pb">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.expectinfo.title')}}:
+                                {{$t('discovery.self.num')}}:
                             </flexbox-item>
                             <flexbox-item :span="5">
-                                <input type="number" v-model="num" :placeholder="$t('discovery.btob.num')"/>
-                            </flexbox-item>
-                            <flexbox-item :span="4">
-                                <div class="text-right">
-                                ={{pricecny}}CNY
-                                </div>
+                                <input type="text" v-model="num" :placeholder="$t('discovery.self.tips.num')"/>
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.cash.selectbank')}}:
+                                {{$t('discovery.self.CNYNum')}}:
                             </flexbox-item>
                             <flexbox-item>
-                                <Select v-model="bank">
-                                    <Option v-for="(v,index) in bankinfo" :key="index" :value="index">{{v.BankName}}</Option>
-                                </Select>
+                                <input type="text" v-model="cnynum" :placeholder="$t('discovery.self.tips.CNYNum')"/>
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.cash.cardname')}}:
+                                {{$t('discovery.self.BankCardNo')}}:
                             </flexbox-item>
                             <flexbox-item :span="6">
-                                {{cardname}}
-                            </flexbox-item>
-                            <flexbox-item>
-                                <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="cardname" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                                <input type="text" v-model="BankCardNo" :placeholder="$t('discovery.self.tips.BankCardNo')"/>
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.cash.cardnumber')}}:
+                                {{$t('discovery.self.name')}}:
                             </flexbox-item>
                             <flexbox-item :span="6">
-                                {{cardnumber}}
-                            </flexbox-item>
-                            <flexbox-item>
-                                <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="cardnumber" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                                <input type="text" v-model="name" :placeholder="$t('discovery.self.tips.name')"/>
                             </flexbox-item>
                         </flexbox>
-                        <flexbox class="mr20 pb">
+                        <flexbox class="mr20 pb"> 
                             <flexbox-item :span="3" class="lable">
-                                {{$t('discovery.cash.buyname')}}:
+                                {{$t('discovery.self.remarks')}}:
                             </flexbox-item>
                             <flexbox-item>
-                                <input type="text" v-model="name" :placeholder="$t('discovery.cash.tips.buyname')"/>
+                                <textarea type="text" v-model="remarks">
+                                </textarea>
                             </flexbox-item>
                         </flexbox>
                     </div>
                 </v-grid>
             </div>
-            <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.cash.buy')}}</button>
+            <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('global.submit')}}</button>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
@@ -75,107 +60,70 @@
         name:'btob',
 		data() {
 			return {
-                bankinfo    :   [],
-                bank        :    2,
-                bankname    :   '',   
-                name        :   '',
                 num         :   '',
-                cardname    :   '',
-                cardnumber  :   '',
-                bdc         :   '',
-                pricecny    :   '',
-                priceusd    :   '',
-                isok        :   false
+                cnynum      :   '',         // 人民币价格
+                BankCardNo  :   '',         // 银行卡号后四位
+                name        :   '',         // 转账人姓名
+                remarks     :   '',         // 备注
 			}
         },
-        watch:{
-            bank(){
-                this.cardname     = this.bankinfo[this.bank].OpenCardName;
-                this.cardnumber   = this.bankinfo[this.bank].BankCardNo;
-                this.bankname     = this.bankinfo[this.bank].BankName;
-            },
-            num(){
-                this.pricecny = this.bdc*this.num;
-                this.priceusd = ((this.bdc/6.8)*this.num).toFixed(2);
-            }
-        },
 		methods: {
-            onCopy: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.success'),
-					type: 'success'
-				})
-			},
-			onError: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.error'),
-					type: 'warn'
-				})
-            },
             submit(){
-                // 获取详情
-                if(this.isok){
-                    return;
-                }
-                if(this.num==''||this.name==''){
+                if(this.num==''){
                     this.$vux.toast.show({
-                        text: '购买数量跟购买人不能为空',
+                        text: this.$t('discovery.self.tips.num'),
                         type: 'warn'
                     })
                     return;
                 }
-                this.isok = true;
+                if(this.cnynum==''){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.self.tips.CNYNum'),
+                        type: 'warn'
+                    })
+                    return;
+                }
+                if(this.BankCardNo==''){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.self.tips.BankCardNo'),
+                        type: 'warn'
+                    })
+                    return;
+                }
+                if(this.name==''){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.self.tips.name'),
+                        type: 'warn'
+                    })
+                    return;
+                }
                 this.$server.post(
-                'AddRecharge',
+                'AddRechargeBySelf',
                 {
                     guid 	        :   this.$storage.get('guid'),
-                    CurrencyNum     :   this.num,                           // 购买数量
-                    RMB             :   this.pricecny,                      // RMB价格
-                    BankName        :   this.bankname,
-                    OpenCardName    :   this.cardname,
-                    BankCardNo      :   this.cardnumber,
-                    saverName       :   this.name
-                },
-                ).then(data => {
+                    BDCNum          :   this.num,                           // 购买数量
+                    CNYNum          :   this.cnynum,                      // RMB价格
+                    BankCardNo      :   this.BankCardNo,
+                    SaverName       :   this.name,
+                    Remarks         :   this.remarks
+                }).then(data => {
                     if(data){
                         this.$vux.toast.show({
                             text: this.$t('global.wait'),
                             type: 'success'
                         })
-                        this.isok = false;
+                        this.num = ''
+                        this.cnynum = ''
+                        this.BankCardNo = ''
+                        this.name = ''
+                        this.remarks = ''
                     }
                     
                 })
             }
 		},
 		mounted() {
-            // 获取详情
-            this.$server.post(
-			'GetBankInfoList',
-			{
-                guid 	:  this.$storage.get('guid'),
-                
-			},
-			).then(data => {
-				if(data){
-                    this.bankinfo     = data;
-                    this.cardname     = (data[this.bank].OpenCardName)?data[this.bank].OpenCardName:'';
-                    this.cardnumber   = data[this.bank].BankCardNo;
-                    this.bankname     = data[this.bank].BankName;
-				}
-            })
-            // 获取价格 GetCurrencyPrice
-            this.$server.post(
-			'GetCurrencyPrice',
-			{
-                guid 	:  this.$storage.get('guid'),
-                Count   :  0
-			},
-			).then(data => {
-				if(data){
-                    this.bdc =  data[0].Money;
-				}
-            })
+            
 		}
 	}
 
