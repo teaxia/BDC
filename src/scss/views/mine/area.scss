@@ -30,6 +30,7 @@
     // 树形结构图谱
     .family{
         overflow: scroll;
+        -webkit-overflow-scrolling: touch;
         height: 750px;
         .root{
             width:1000px;
@@ -91,5 +92,13 @@
         padding: 15px;
         border:0.02rem solid gray;
         border-radius: 15px;
+    }
+    .copy{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .btn-xs{
+            width: 1rem;
+        }
     }
 }
