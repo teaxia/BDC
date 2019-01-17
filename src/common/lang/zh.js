@@ -361,6 +361,9 @@ export const zh = {
             groupbdc        :   '团队BDC',
             edit            :   '操作',
             area            :   '矿区',
+            tips:{
+                error       :   '查无此信息'
+            },
         },
         setting:{
             settile         :   '设置',

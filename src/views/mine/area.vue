@@ -197,6 +197,14 @@
                     accountInfo   :  (Info)?Info:'',
                 }).then(data => {
                     if(data){
+                        // 判断是否有此人
+                        if(!data.GroupCount){
+                            this.$vux.toast.show({
+                                text: this.$t('mine.area.tips.error'),
+                                type: 'warn'
+                            })
+                            return
+                        }
                         this.NickName    =   data.NickName;           // 昵称
                         this.InviteCode  =   data.InviteCode;         // 邀请码
                         this.V1_Count    =   data.V1_Count;

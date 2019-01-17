@@ -361,6 +361,9 @@ export const en = {
             groupbdc        :   'Group BDC',
             edit            :   'Operation',
             area            :   'Area',
+            tips:{
+                error       :   'This information is not available.'
+            },
         },
         setting:{
             settile         :   'Setting',
