@@ -43,12 +43,15 @@
                     </tbody>
                 </table> -->
                 <div class="family">
-                    <div class="root">
+                    <div class="root mr">
                         <div class="childBlock border">
                             <div v-if="f1.InviteCode">
                                 <div @click="query(f1.AccountId)">{{f1.Area}}</div>
                                 <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.NickName}}</div>
+                                <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.LevelName}}</div>
                                 <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.TotalAssets}}</div>
+                                <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.GroupSurplus}}</div>
+                                
                                 <div class="copy">
                                     <div>{{f1.InviteCode}}</div>
                                     <div><button class="btn btn-xs btn-round" v-clipboard:copy="f1.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -56,28 +59,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="father childRow">
+                    <div class="father mr childRow">
                         <div class="mr">
                             <!-- 循环二级层 -->
                             <div class="childBlock">
                                 <div v-if="f2.InviteCode">
                                     <div @click="query(f2.AccountId)">{{f2.Area}}</div>
                                     <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.NickName}}</div>
+                                    <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.LevelName}}</div>
                                     <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.TotalAssets}}</div>
+                                    <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.GroupSurplus}}</div>
                                     <div class="copy">
                                         <div>{{f2.InviteCode}}</div>
                                         <div><button class="btn btn-xs btn-round" v-clipboard:copy="f2.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="blank">
-                                <!-- 占位 -->
-                            </div>
+                            <!-- <div class="blank">
+                                
+                            </div> -->
                             <div class="childBlock">
                                 <div v-if="f3.InviteCode">
-                                    <div @click="query(f3.AccountId)">{{f3.Area}}</div>
-                                    <div @click="query(f3.AccountId)" class="ellipsis1">{{f3.NickName}}</div>
-                                    <div @click="query(f3.AccountId)" class="ellipsis1">{{f3.TotalAssets}}</div>
+                                    <div @click="query(f3.AccountId)" class="fz">{{f3.Area}}</div>
+                                    <div @click="query(f3.AccountId)" class="ellipsis1 fz">{{f3.NickName}}</div>
+                                    <div @click="query(f3.AccountId)" class="ellipsis1 fz">{{f3.LevelName}}</div>
+                                    <div @click="query(f3.AccountId)" class="ellipsis1 fz">{{f3.TotalAssets}}</div>
+                                    <div @click="query(f3.AccountId)" class="ellipsis1 fz">{{f3.GroupSurplus}}</div>
                                     <div class="copy">
                                         <div>{{f3.InviteCode}}</div>
                                         <div><button class="btn btn-xs btn-round" v-clipboard:copy="f3.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -86,7 +93,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="child childRow">
+                    <!-- <div class="child childRow">
                         <div class="childBlock">
                             <div v-if="f4.InviteCode">
                                 <div @click="query(f4.AccountId)">{{f4.Area}}</div>
@@ -131,7 +138,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

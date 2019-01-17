@@ -24,16 +24,13 @@
             text-align: center;
         }
     }
-    .ov{
-        
-    }
     // 树形结构图谱
     .family{
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
-        height: 750px;
+        // height: 750px;
         .root{
-            width:1000px;
+            width:500px;
             display: block;
             height: auto;
             .childBlock{
@@ -44,17 +41,16 @@
             }
         }
         .father{
-            width:1000px;
+            width:500px;
             height: auto;
             overflow: hidden;
             .mr{
-                width: 750px;
                 height: auto;
                 overflow: hidden;
             }
             .childBlock{
                 float: left;
-                background:rgba(53,73,94,.5);
+                background:rgba(53,73,94,.3);
                 border-radius: 15px;
                 color:$font-white;
             }
@@ -84,13 +80,14 @@
     }
     .childBlock{
         width:240px;
-        height: 220px;
+        height: 300px;
         margin:10px 5px;
         word-wrap: break-word;
         text-align: left;
         border:0.02rem dashed gray;
         padding: 15px;
         border-radius: 15px;
+        font-size:28px;
     }
     .copy{
         width: 100%;
