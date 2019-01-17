@@ -31,6 +31,8 @@ export const zh = {
         stargame            : '开始游戏',
         authority           : '账户未授权',
         paste               : '粘贴',
+        selectArea          : '您选择的矿区为',
+        confirm             : '单击“确定”继续注册。单击“取消”重新选择'
     },
     message:{
         Aread               :   '已读',

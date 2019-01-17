@@ -31,6 +31,8 @@ export const en = {
         stargame        : 'Start',
         authority       : 'No authority',
         paste           : 'paste',
+        selectArea      : 'The mining area you choose is',
+        confirm         : 'Click OK to continue registration. Click Cancel to reset'
     },
     messgae:{
         Aread               :   'Already read',

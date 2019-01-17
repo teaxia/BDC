@@ -52,11 +52,17 @@
                     <button @click="back()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.back") }}</button>
                 </flexbox-item>
                 <flexbox-item>
-                    <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("user.regist") }}</button>
+                    <button @click="confirm()" class="btn btn-block btn-default btn-round mr50">{{ $t("user.regist") }}</button>
                 </flexbox-item>
             </flexbox>
-            
         </div>
+        <Modal v-model="show" :closable="false" :ok-text="$t('global.ok')" @on-ok="onOk" :mask-closable="false">
+			<div slot="header"></div>
+			<div class="modal-body">
+                {{ $t("global.selectArea") }}<span v-if="area=='A'">V1</span><span v-else>V2</span><br/>
+                {{ $t("global.confirm") }}
+            </div>
+		</Modal>
     </div>
 </template>
 
@@ -73,7 +79,8 @@ export default {
             safetycode  : '',                  // 安全码
             invitation  : '',                  // 邀请码
             area        : 'A',                 // 矿区
-			lang	    : '',
+            lang	    : '',
+            show		:	false,			   // 确认页面
 		}
 	},
 	watch:{
@@ -116,6 +123,16 @@ export default {
             this.$router.push({
                 path:"/user/login",
             });
+        },
+        confirm(){
+            // 二次确认
+            this.show = true
+        },
+        onOk(){
+            console.log(123)
+            this.show = false
+            this.doSubmit()
+            
         }
 	},
 	mounted() {
