@@ -26,7 +26,7 @@
 			<router-link to="/user/forget"><span class="fr tips">{{ $t("user.tips.forget") }}</span></router-link>
 		</div>
 		<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr10">{{ $t("user.login") }}</button>
-		<router-link to='/user/regist'>
+		<router-link to='/user/registinfo'>
 			<button class="btn btn-block btn-default btn-round mr20">
 				{{ $t("user.regist") }}
 			</button>
@@ -71,8 +71,7 @@ export default {
 					name : this.UserName,											// 用户名
 					pwd	 : pwd,					
 					lv   : this.lang
-				},
-				).then(data => {
+				}).then(data => {
 					if(data){
 						this.$vux.toast.show({
 							text: this.$t("user.tips.success"),

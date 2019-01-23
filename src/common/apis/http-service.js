@@ -30,7 +30,7 @@ axios.interceptors.request.use(
           'Content-Type': 'application/json',
       }
     }
-    return config;
+    return config; 
   },
   error => {
     return Promise.reject(err);

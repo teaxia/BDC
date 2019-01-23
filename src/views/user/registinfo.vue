@@ -6,10 +6,18 @@
             </div>
             <div class="enterfrom">
                 <group>
-                    <x-input :disabled="true" :title="this.$t('user.register.username')+':'" v-model="mobile"></x-input>
+                    <x-input :title="this.$t('user.register.username')" :placeholder="$t('user.tips.username')" v-model="userName"></x-input>
                 </group>
                 <group>
-                    <x-input :title="this.$t('user.register.nickname')+':'" v-model="nickName"></x-input>
+                    <x-input class="test" title="手机号" mask="999 9999 9999" :show-clear='false' :max="13" :placeholder="$t('user.tips.phone')" v-model="mobile">
+                        <button slot="right" class="btn btn-min btn-round" @click="countDown">{{content}}</button>
+                    </x-input> 
+                </group>
+                <group>
+                    <x-input class="test" :title="$t('user.tips.vcode')" v-model="code" required mask="999999" :max="6" :placeholder="$t('user.tips.verification')"></x-input>
+                </group>
+                <group>
+                    <x-input :title="this.$t('user.register.nickname')" v-model="nickName"></x-input>
                 </group>
                 <div class="radioin line-b">
                     <div class="label">{{$t('user.type.sex')}}:</div>
@@ -25,13 +33,13 @@
                     </div>
                 </div>
                 <group>
-                    <x-input :title="$t('user.password')+':'" v-model="password"></x-input>
+                    <x-input :title="$t('user.password')" v-model="password"></x-input>
                 </group>
                 <group>
-                    <x-input :title="$t('user.securitypsw')+':'" v-model="safetycode"></x-input>
+                    <x-input :title="$t('user.securitypsw')" v-model="safetycode"></x-input>
                 </group>
                 <group>
-                    <x-input :title="$t('user.invitationcode')+':'" v-model="invitation"></x-input>
+                    <x-input :title="$t('user.invitationcode')" v-model="invitation"></x-input>
                 </group>
                 <div class="radioin line-b">
                     <div class="label">{{$t('user.area')}}:</div>
@@ -67,20 +75,29 @@
 </template>
 
 <script>
+// @2019-01-23合并为一步注册
+import pattern from '../../common/utils/pattern'
 export default {
 	name: 'Login',
 	data() {
 		return {
-            mobile      : '',
-            code        : '',
-            gender      : '0',                 // 性别
-            nickName    : '',                  // 昵称
-            password    : '',                  // 密码
-            safetycode  : '',                  // 安全码
-            invitation  : '',                  // 邀请码
-            area        : 'A',                 // 矿区
-            lang	    : '',
+            userName    :   '',                 // 用户名（6-20位英文）
+            mobile      :   '',
+            code        :   '',
+            gender      :   '0',                 // 性别
+            nickName    :   '',                  // 昵称
+            password    :   '',                  // 密码
+            safetycode  :   '',                  // 安全码
+            invitation  :   '',                  // 邀请码
+            area        :   'A',                 // 矿区
+            pid         :   '0',                 // (上级ID，默认传0，矿区注册时传值传上级ID)
+            lang	    :   '',
             show		:	false,			   // 确认页面
+            content	    :   this.$t("user.tips.setvcode"),      // 倒计时
+            totalTime   :   60,      //记录具体倒计时时间
+			canClick    :   true,	//添加canClick
+            clock	    :   '',	
+            code        :   '',
 		}
 	},
 	watch:{
@@ -88,15 +105,23 @@ export default {
 	},
 	methods: {
 		doSubmit(){
+            // 验证用户名是否有效
+            if(!pattern["Pattern.UserName"].test(this.userName)){
+				this.$vux.toast.show({
+					text: this.$t("user.tips.nameerror"),
+					type: 'warn'
+				})
+				return
+			}
+            let phoneNo = this.mobile.replace(/\s+/g,"")
             let straccount = {
-                Name    : this.mobile,
+                Name    : this.userName,
                 NickName: this.nickName,
                 Pwd     : this.password,
                 MoneyPwd: this.safetycode,
                 Sex     : this.gender,
-                PhoneNo : this.mobile
+                PhoneNo : phoneNo,
             }
-
 			this.$server.post(
 			'RegistAccountWithLogin',
 			{
@@ -105,7 +130,8 @@ export default {
 				account 	: JSON.stringify(straccount),
                 phoneCode   : this.code,
                 area        : this.area,
-				lv   		: this.lang
+                lv   		: this.lang,
+                pId         : this.pid
 			}).then(data => {
 				if(data){
                     this.$vux.toast.show({
@@ -129,17 +155,73 @@ export default {
             this.show = true
         },
         onOk(){
-            console.log(123)
             this.show = false
             this.doSubmit()
-            
-        }
+        },
+        // verification(){
+        //     // 发送短信验证码（提交时会验证，应该是不需要的）
+		// 	// 空值判断
+		// 	if(!pattern["Pattern.Verification"].test(this.code)){
+		// 		this.$vux.toast.show({
+		// 			text: this.$t("user.tips.verification"),
+		// 			type: 'warn'
+		// 		})
+		// 		return
+		// 	}
+		// 	this.$server.post(
+		// 	'ValidatePhoneNo',
+		// 	{
+		// 		jm 	 		: this.$md5(this.$jm.jmCode+this.code).toUpperCase(),					// 加密方法jmcode+Phone_No加密									                    // 注册传空
+        //         Phone_No	: this.mobile,
+        //         phoneCode   : this.code,		
+		// 		lv   		: this.lang
+		// 	}).then(data => {
+		// 		// 验证成功
+				
+		// 	})
+		// },
+		countDown() {
+			    if (!this.canClick){return}   														// 禁止多次点击 
+                // 发送短信接口
+                let phoneNo = this.mobile.replace(/\s+/g,"")
+				this.$server.post(
+				'PwdBack_SendCode',
+				{
+					jm 	 		: this.$md5(this.$jm.jmCode+phoneNo).toUpperCase(),			// 加密方法Key+Phone_No加密
+					Key  		: '',															// 注册传空
+					Phone_No	: phoneNo,
+					lv   		: this.lang
+				}).then(data => {
+					if(data){
+						this.$vux.toast.show({
+							text: this.$t("global.success"),
+							type: 'success'
+                        })
+                        this.canClick = false                                               // 禁止多次点击
+				        this.content = this.totalTime + 's'+this.$t("user.tips.send")       // 改变按钮
+                        this.clock = window.setInterval(() => {                             // 增加计时器  
+                            this.totalTime--
+                            this.content = this.totalTime + 's'+this.$t("user.tips.send")
+                            if (this.totalTime < 0) {
+                                window.clearInterval(this.clock)
+                                this.content = this.$t("user.tips.setvcode");
+                                this.totalTime = 60
+                                this.canClick = true  //这里重新开启
+                            }
+                        },1000)
+					}
+				})
+		}
 	},
 	mounted() {
         this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
-        this.code = this.$route.query.code;
-        this.mobile = this.$route.query.mobile;
-	}
+        // this.code = this.$route.query.code;
+        // this.mobile = this.$route.query.mobile;
+    },
+    beforeDestroy(){
+        // 清除计时器
+        window.clearInterval(this.clock);
+    }
 }
 
 </script>

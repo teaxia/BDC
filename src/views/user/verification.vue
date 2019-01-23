@@ -54,8 +54,7 @@ export default {
                 Phone_No	: this.mobile,
                 phoneCode   : this.code,		
 				lv   		: this.lang
-			},
-			).then(data => {
+			}).then(data => {
 				// 成功，跳转到注册填写信息页面
 				if(data){
 					this.$router.push({
@@ -80,8 +79,7 @@ export default {
 					Key  		: '',															// 注册传空
 					Phone_No	: this.mobile,
 					lv   		: this.lang
-				},
-				).then(data => {
+				}).then(data => {
 					if(data){
 						this.$vux.toast.show({
 							text: this.$t("global.success"),
