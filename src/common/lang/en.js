@@ -73,7 +73,8 @@ export const en = {
             verification    : 'Please enter 6 digit verification code',
             setvcode        : 'Get verification code',
             send            : 'Recapture',
-            error           : 'Please fill in the correct username and password'
+            error           : 'Please fill in the correct username and password',
+            nameerror       : 'User names must be 6-20 digits in English or numeric'
         },
         login               :   'Login',
         regist              :   'Regist',

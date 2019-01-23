@@ -72,8 +72,9 @@ export const zh = {
             vcode           : '验证码',
             verification    : '请输入6位数字验证码',
             setvcode        : '发送验证码',
-            send            : '后重新发送',
-            error           : '请填写正确的用户名与密码'
+            send            : '重新发送',
+            error           : '请填写正确的用户名与密码',
+            nameerror       : '用户名必须为6-20位的英文或者数字'
         },
         login           : '登 录',
         regist          : '注 册',
