@@ -74,6 +74,11 @@
                                         <div><button class="btn btn-xs btn-round" v-clipboard:copy="f2.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                     </div>
                                 </div>
+                                <div v-else>
+                                    <!-- A区传值 -->
+                                    <button class="btn btn-auto btn-round"  @click="toRegist(InviteCode,'A')">{{$t('global.regist')}}（{{$t('mine.area.invitecode')}}：{{InviteCode}}）</button>
+                                    <button class="btn btn-auto btn-round mr50"  @click="toRegist(MyInviteCode,'A')">{{$t('global.regist')}}（{{$t('mine.area.invitecode')}}：{{MyInviteCode}}）</button>
+                                </div>
                             </div>
                             <!-- <div class="blank">
                                 
@@ -89,6 +94,11 @@
                                         <div>{{f3.InviteCode}}</div>
                                         <div><button class="btn btn-xs btn-round" v-clipboard:copy="f3.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                     </div>
+                                </div>
+                                <div v-else>
+                                    <!-- B区传值 -->
+                                    <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'B')">{{$t('global.regist')}}（邀请码：{{InviteCode}}）</button>
+                                    <button class="btn btn-auto btn-round mr50" @click="toRegist(MyInviteCode,'B')">{{$t('global.regist')}}（邀请码：{{MyInviteCode}}）</button>
                                 </div>
                             </div>
                         </div>
@@ -170,6 +180,7 @@
                 dataList    :   [],
                 NickName    :   '',         // 昵称
                 InviteCode  :   '',         // 邀请码
+                MyInviteCode:   '',         // 登陆用户的邀请码
                 Area        :   '',         // 根节点的矿区
                 V1_Count    :   '',
                 V1_BDC      :   '',
@@ -261,10 +272,18 @@
 					type: 'warn'
 				})
             },
+            toRegist(InviteCode,area){
+                // 跳转到币币兑换页面
+                this.$router.push({
+                    path:"/user/registinfo",
+                    query:{InviteCode:InviteCode,area:area}
+                });
+            }
 		},
 		mounted() {
             this.query();
-		}
+            this.MyInviteCode = this.$storage.get('InviteCode');
+        }
 	}
 
 </script>

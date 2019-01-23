@@ -214,9 +214,9 @@ export default {
 		}
 	},
 	mounted() {
-        this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
-        // this.code = this.$route.query.code;
-        // this.mobile = this.$route.query.mobile;
+        this.lang           =   (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
+        this.invitation     =   (this.$route.query.InviteCode)?this.$route.query.InviteCode:''                                   // 传过来的邀请码
+        this.area           =   (this.$route.query.area)?this.$route.query.area:'A'                                              // 传过来的矿区选项
     },
     beforeDestroy(){
         // 清除计时器

@@ -48,10 +48,13 @@ button[disabled]
         font-size:32px;
         display: block;
     }
-    &-close{
-        width: 500px;
-        margin:20px  auto;
-        font-size:32px;
+    // 宽高自动按钮
+    &-auto{
+        width: auto;
+        height: auto;
+        padding: 10px;
+        font-size:24px;
+        //margin:20px  auto;
         display: block;
     }
     // 默认按钮样式
