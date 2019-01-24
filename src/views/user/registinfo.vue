@@ -217,6 +217,7 @@ export default {
         this.lang           =   (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
         this.invitation     =   (this.$route.query.InviteCode)?this.$route.query.InviteCode:''                                   // 传过来的邀请码
         this.area           =   (this.$route.query.area)?this.$route.query.area:'A'                                              // 传过来的矿区选项
+        this.pid           =   (this.$route.query.pId)?this.$route.query.pId:'0'
     },
     beforeDestroy(){
         // 清除计时器

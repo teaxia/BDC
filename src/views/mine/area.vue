@@ -97,8 +97,8 @@
                                 </div>
                                 <div v-else>
                                     <!-- B区传值 -->
-                                    <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'B')">{{$t('global.regist')}}（邀请码：{{InviteCode}}）</button>
-                                    <button class="btn btn-auto btn-round mr50" @click="toRegist(MyInviteCode,'B')">{{$t('global.regist')}}（邀请码：{{MyInviteCode}}）</button>
+                                    <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'B',f1.AccountId)">{{$t('global.regist')}}（邀请码：{{InviteCode}}）</button>
+                                    <button class="btn btn-auto btn-round mr50" @click="toRegist(MyInviteCode,'B',f1.AccountId)">{{$t('global.regist')}}（邀请码：{{MyInviteCode}}）</button>
                                 </div>
                             </div>
                         </div>
@@ -272,11 +272,12 @@
 					type: 'warn'
 				})
             },
-            toRegist(InviteCode,area){
+            toRegist(InviteCode,area,pid){
+                // InviteCode 邀请码 Area矿区  pid为顶级用户ID
                 // 跳转到币币兑换页面
                 this.$router.push({
                     path:"/user/registinfo",
-                    query:{InviteCode:InviteCode,area:area}
+                    query:{InviteCode:InviteCode,area:area,pId:pid}
                 });
             }
 		},
