@@ -17,7 +17,7 @@
                     <x-input class="test" :title="$t('user.tips.vcode')" v-model="code" required mask="999999" :max="6" :placeholder="$t('user.tips.verification')"></x-input>
                 </group>
                 <group>
-                    <x-input :title="this.$t('user.register.nickname')" v-model="nickName"></x-input>
+                    <x-input :title="this.$t('user.register.nickname')" :placeholder="$t('user.tips.nickname')" v-model="nickName"></x-input>
                 </group>
                 <div class="radioin line-b">
                     <div class="label">{{$t('user.type.sex')}}:</div>
@@ -33,13 +33,13 @@
                     </div>
                 </div>
                 <group>
-                    <x-input :title="$t('user.password')" v-model="password"></x-input>
+                    <x-input :title="$t('user.password')" :placeholder="$t('user.tips.password')" v-model="password"></x-input>
                 </group>
                 <group>
-                    <x-input :title="$t('user.securitypsw')" v-model="safetycode"></x-input>
+                    <x-input :title="$t('user.securitypsw')" :placeholder="$t('user.tips.security')" v-model="safetycode"></x-input>
                 </group>
                 <group>
-                    <x-input :title="$t('user.invitationcode')" v-model="invitation"></x-input>
+                    <x-input :title="$t('user.invitationcode')" :placeholder="$t('user.tips.invitationcode')" v-model="invitation"></x-input>
                 </group>
                 <div class="radioin line-b">
                     <div class="label">{{$t('user.area')}}:</div>
@@ -81,7 +81,7 @@ export default {
 	name: 'Login',
 	data() {
 		return {
-            userName    :   '',                 // 用户名（6-20位英文）
+            userName    :   '',                 // 用户名（5-20位英文）
             mobile      :   '',
             code        :   '',
             gender      :   '0',                 // 性别
@@ -92,7 +92,7 @@ export default {
             area        :   'A',                 // 矿区
             pid         :   '0',                 // (上级ID，默认传0，矿区注册时传值传上级ID)
             lang	    :   '',
-            show		:	false,			   // 确认页面
+            show		:	false,			     // 确认页面
             content	    :   this.$t("user.tips.setvcode"),      // 倒计时
             totalTime   :   60,      //记录具体倒计时时间
 			canClick    :   true,	//添加canClick
@@ -112,7 +112,15 @@ export default {
 					type: 'warn'
 				})
 				return
-			}
+            }
+            // 验证昵称是否为空
+            if(this.nickName==''){
+                this.$vux.toast.show({
+					text: this.$t("user.tips.nickname"),
+					type: 'warn'
+				})
+				return
+            }
             let phoneNo = this.mobile.replace(/\s+/g,"")
             let straccount = {
                 Name    : this.userName,
