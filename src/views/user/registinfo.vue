@@ -123,7 +123,7 @@ export default {
                 PhoneNo : phoneNo,
             }
 			this.$server.post(
-			'RegistAccountWithLogin',
+			'RegistAccountWithLoginNew',
 			{
 				jm 	 		: this.$md5(this.$jm.jmCode+this.invitation).toUpperCase(),					// 加密方法invitation加密
 				InviteCode  : this.invitation,                                          		        // 邀请码
