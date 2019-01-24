@@ -1,9 +1,9 @@
 // 用户中心，注册登陆
 import user from './views/user.vue'
     import index from  './views/user/index.vue'                             // 引导页
-    import regist from './views/user/regist.vue'                            //  注册
+    // import regist from './views/user/regist.vue'                            //  注册
     import login from './views/user/login.vue'                              //  登陆
-    import verification from './views/user/verification.vue'                //  验证码验证
+    // import verification from './views/user/verification.vue'                //  验证码验证
     import registinfo from './views/user/registinfo.vue'                    //  注册信息填写
     import smglogin from './views/user/smglogin.vue'                        //  短信登陆
     import forget from './views/user/forget.vue'                            //  忘记密码
@@ -76,9 +76,9 @@ let routes = [
         redirect: '/user/login',
         children: [
             { path: '/user/index', component: index, name: 'index' },
-            { path: '/user/regist', component: regist, name: 'regist' },
+            //{ path: '/user/regist', component: regist, name: 'regist' },
             { path: '/user/login', component: login, name: 'login' },
-            { path: '/user/verification', component: verification, name: 'verification' },
+            //{ path: '/user/verification', component: verification, name: 'verification' },
             { path: '/user/registinfo', component: registinfo, name: 'registinfo' },
             { path: '/user/smglogin', component: smglogin, name: 'smglogin' },
             { path: '/user/forget', component: forget, name: 'forget' },

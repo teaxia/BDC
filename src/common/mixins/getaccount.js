@@ -23,7 +23,7 @@ export const GetAccount = {
 					this.$storage.set('Sex',data.Sex)                                  // 性别
 					this.$storage.set('ParentName',data.ParentName)                    // 推荐人
 					this.$storage.set('InviteCode',data.InviteCode)                    // 邀请码
-					this.MyEarnings = data.MyEarnings
+					this.MyEarnings = data.MyEarnings									// 我的收益
 				}
 			})
         }

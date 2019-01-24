@@ -57,12 +57,12 @@ Vue.component('Dropdown', Dropdown)
 Vue.component('DropdownMenu', DropdownMenu)
 Vue.component('DropdownItem', DropdownItem)
 
-Vue.prototype.$server=server;                        // ajax组件
-Vue.prototype.$storage = storage;                    // 本地数据读取
-Vue.prototype.$md5 = md5;                            // md5加密
-Vue.prototype.$jm  = jmCode;                         // 加密字符串
-Vue.prototype.$math = math;                          // 精度计算
-Vue.prototype.$html2canvas = html2canvas;
+Vue.prototype.$server       = server;                           // ajax组件
+Vue.prototype.$storage      =   storage;                        // 本地数据读取
+Vue.prototype.$md5          =   md5;                            // md5加密
+Vue.prototype.$jm           =   jmCode;                         // 加密字符串
+Vue.prototype.$math         =   math;                           // 精度计算
+Vue.prototype.$html2canvas  =   html2canvas;                    // 图片生成
 const router = new VueRouter({
   routes
 })
