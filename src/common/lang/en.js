@@ -74,7 +74,7 @@ export const en = {
             setvcode        : 'Get verification code',
             send            : 'Recapture',
             error           : 'Please fill in the correct username and password',
-            nameerror       : 'User names must be 6-20 digits in English or numeric',
+            nameerror       : 'User names must be 5-20 digits in English or numeric',
             nickname        : 'Please enter a user nickname',
             security        : 'Please enter a Security password',
             invitationcode  : 'Please enter a InvitationCode',

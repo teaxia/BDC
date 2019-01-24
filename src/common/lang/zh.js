@@ -74,7 +74,7 @@ export const zh = {
             setvcode        : '发送验证码',
             send            : '重新发送',
             error           : '请填写正确的用户名与密码',
-            nameerror       : '用户名必须为6-20位的英文或者数字',
+            nameerror       : '用户名必须为5-20位的英文或者数字',
             nickname        : '请输入用户昵称',
             security        : '请输入安全码',
             invitationcode  : '请输入邀请码',
