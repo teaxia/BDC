@@ -83,7 +83,7 @@
         name:'bill',
 		data() {
 			return {
-                type        :   '1',
+                type        :   '',
                 class       :   '0',
                 start       :   '',
                 dataList    :   [],
@@ -129,7 +129,7 @@
                         this.getrw();
                     break;
                     case '7':
-                        // 充值
+                        // 业绩
                         this.class = ""
                         this.dataList = []
                         this.getyj();
@@ -254,8 +254,8 @@
 		},
 		mounted() {
             // 初始化数据
-            this.class="支出";
-            this.type = 1;
+            // 获取用户
+            this.type = (this.$route.query.type)?this.type = this.$route.query.type:this.type='1',this.class="支出";
             // 获取今天日期
             let date = new Date();
             let year = date.getFullYear();

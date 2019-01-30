@@ -148,6 +148,10 @@ input{
     flex-flow:  row nowrap;
     justify-content: space-between;
 }
+// 虚线
+.v-dottedline{
+    border-bottom:1px dotted #dadbde;
+}
 /*重写部分*/
 .vux-header{
     height: 1.3rem;

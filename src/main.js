@@ -22,7 +22,7 @@ import vgrid from './components/vgrid.vue'
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
-import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem} from 'iview';
+import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table} from 'iview';
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
@@ -56,7 +56,7 @@ Vue.component('vselect', vselect)
 Vue.component('Dropdown', Dropdown)
 Vue.component('DropdownMenu', DropdownMenu)
 Vue.component('DropdownItem', DropdownItem)
-
+Vue.component('Table', Table)
 Vue.prototype.$server       = server;                           // ajax组件
 Vue.prototype.$storage      =   storage;                        // 本地数据读取
 Vue.prototype.$md5          =   md5;                            // md5加密

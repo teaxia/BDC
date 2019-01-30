@@ -365,6 +365,10 @@ export const zh = {
             groupbdc        :   '团队BDC',
             edit            :   '操作',
             area            :   '矿区',
+            mychild         :   '我的直推',
+            achievement     :   '新增业绩',
+            num             :   '购币量',
+            date            :   '注册时间',
             tips:{
                 error       :   '查无此信息'
             },

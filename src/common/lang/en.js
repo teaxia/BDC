@@ -365,6 +365,10 @@ export const en = {
             groupbdc        :   'Group BDC',
             edit            :   'Operation',
             area            :   'Area',
+            mychild         :   'Recommend',
+            achievement     :   'Achievement',
+            num             :   'Number',
+            date            :   'Date',
             tips:{
                 error       :   'This information is not available.'
             },

@@ -1,5 +1,5 @@
 <template>
-	<div class="area padding-footer" v-cloak>
+	<div class="area" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.area.title')">
             <div @click="query(level)" class="up" slot="right">{{$t('mine.area.levelup')}}</div>
         </x-header>
@@ -7,20 +7,20 @@
             <div>
                 <Input search @on-search="query(keyword)" v-model="keyword" enter-button :placeholder="$t('mine.area.enter')" />
             </div>
-            <div class="mr20">
+            <div class="mr20 base-color">
                 <v-grid class="pb">
                     <flexbox>
                         <flexbox-item class="text-left">
-                            <div>{{$t('mine.area.nickname')}}：{{NickName}}</div>
-                            <div>{{$t('mine.area.invitecode')}}：{{InviteCode}}</div>
-                            <div>{{$t('mine.area.v1count')}}：{{V1_Count}}</div>
-                            <div>{{$t('mine.area.v1bdc')}}：{{V1_BDC}}</div>
+                            <div class="v-dottedline">{{$t('mine.area.nickname')}}：{{NickName}}</div>
+                            <div class="v-dottedline">{{$t('mine.area.invitecode')}}：{{InviteCode}}</div>
+                            <!-- <div>{{$t('mine.area.v1count')}}：{{V1_Count}}</div> -->
+                            <div class="v-dottedline">{{$t('mine.area.v1bdc')}}：{{V1_BDC}}</div>
                         </flexbox-item>
                         <flexbox-item class="text-right">
-                            <div>{{$t('mine.area.groupcount')}}：{{GroupCount}}</div>
-                            <div>{{$t('mine.area.groupbdc')}}：{{GroupBDC}}</div>
-                            <div>{{$t('mine.area.v2count')}}：{{V2_Count}}</div>
-                            <div>{{$t('mine.area.v2bdc')}}：{{V2_BDC}}</div>
+                            <div class="v-dottedline">{{$t('mine.area.groupcount')}}：{{GroupCount}}</div>
+                            <div class="v-dottedline">{{$t('mine.area.groupbdc')}}：{{GroupBDC}}</div>
+                            <!-- <div>{{$t('mine.area.v2count')}}：{{V2_Count}}</div> -->
+                            <div class="v-dottedline">{{$t('mine.area.v2bdc')}}：{{V2_BDC}}</div>
                         </flexbox-item>
                     </flexbox>
                 </v-grid>
@@ -46,12 +46,10 @@
                     <div class="root mr">
                         <div class="childBlock border">
                             <div v-if="f1.InviteCode">
-                                <div @click="query(f1.AccountId)">{{f1.Area}}</div>
-                                <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.NickName}}</div>
-                                <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.LevelName}}</div>
-                                <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.TotalAssets}}</div>
-                                <div @click="query(f1.AccountId)" class="ellipsis1">{{f1.GroupSurplus}}</div>
-                                
+                                <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.Area}}</div>
+                                <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.NickName}}{{f1.LevelName}}</div>
+                                <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.TotalAssets}}</div>
+                                <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.GroupSurplus}}</div>
                                 <div class="copy">
                                     <div>{{f1.InviteCode}}</div>
                                     <div><button class="btn btn-xs btn-round" v-clipboard:copy="f1.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -60,15 +58,14 @@
                         </div>
                     </div>
                     <div class="father mr childRow">
-                        <div class="mr">
+                        <!-- <div class="mr"> -->
                             <!-- 循环二级层 -->
                             <div class="childBlock">
                                 <div v-if="f2.InviteCode">
-                                    <div @click="query(f2.AccountId)">{{f2.Area}}</div>
-                                    <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.NickName}}</div>
-                                    <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.LevelName}}</div>
-                                    <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.TotalAssets}}</div>
-                                    <div @click="query(f2.AccountId)" class="ellipsis1">{{f2.GroupSurplus}}</div>
+                                    <div class="v-dottedline" @click="query(f2.AccountId)">{{f2.Area}}</div>
+                                    <div class="v-dottedline nick" @click="query(f2.AccountId)">{{f2.NickName}}{{f2.LevelName}}</div>
+                                    <div class="v-dottedline" @click="query(f2.AccountId)">{{f2.TotalAssets}}</div>
+                                    <div class="v-dottedline" @click="query(f2.AccountId)">{{f2.GroupSurplus}}</div>
                                     <div class="copy">
                                         <div>{{f2.InviteCode}}</div>
                                         <div><button class="btn btn-xs btn-round" v-clipboard:copy="f2.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -85,11 +82,10 @@
                             </div> -->
                             <div class="childBlock">
                                 <div v-if="f3.InviteCode">
-                                    <div @click="query(f3.AccountId)" class="fz">{{f3.Area}}</div>
-                                    <div @click="query(f3.AccountId)" class="ellipsis1 fz">{{f3.NickName}}</div>
-                                    <div @click="query(f3.AccountId)" class="ellipsis1 fz">{{f3.LevelName}}</div>
-                                    <div @click="query(f3.AccountId)" class="ellipsis1 fz">{{f3.TotalAssets}}</div>
-                                    <div @click="query(f3.AccountId)" class="ellipsis1 fz">{{f3.GroupSurplus}}</div>
+                                    <div class="v-dottedline" @click="query(f3.AccountId)">{{f3.Area}}</div>
+                                    <div class="v-dottedline nick" @click="query(f3.AccountId)">{{f3.NickName}}{{f3.LevelName}}</div>
+                                    <div class="v-dottedline" @click="query(f3.AccountId)">{{f3.TotalAssets}}</div>
+                                    <div class="v-dottedline" @click="query(f3.AccountId)">{{f3.GroupSurplus}}</div>
                                     <div class="copy">
                                         <div>{{f3.InviteCode}}</div>
                                         <div><button class="btn btn-xs btn-round" v-clipboard:copy="f3.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -97,18 +93,18 @@
                                 </div>
                                 <div v-else>
                                     <!-- B区传值 -->
-                                    <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'B',f1.AccountId)">{{$t('global.regist')}}（邀请码：{{InviteCode}}）</button>
-                                    <button class="btn btn-auto btn-round mr50" @click="toRegist(MyInviteCode,'B',f1.AccountId)">{{$t('global.regist')}}（邀请码：{{MyInviteCode}}）</button>
+                                    <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'B',f1.AccountId)">{{$t('global.regist')}}（{{$t('mine.area.invitecode')}}：{{InviteCode}}）</button>
+                                    <button class="btn btn-auto btn-round mr50" @click="toRegist(MyInviteCode,'B',f1.AccountId)">{{$t('global.regist')}}（{{$t('mine.area.invitecode')}}：{{MyInviteCode}}）</button>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <!-- <div class="child childRow">
                         <div class="childBlock">
                             <div v-if="f4.InviteCode">
                                 <div @click="query(f4.AccountId)">{{f4.Area}}</div>
-                                <div @click="query(f4.AccountId)" class="ellipsis1">{{f4.NickName}}</div>
-                                <div @click="query(f4.AccountId)" class="ellipsis1">{{f4.TotalAssets}}</div>
+                                <div @click="query(f4.AccountId)">{{f4.NickName}}</div>
+                                <div @click="query(f4.AccountId)">{{f4.TotalAssets}}</div>
                                 <div class="copy">
                                     <div>{{f4.InviteCode}}</div>
                                     <div><button class="btn btn-xs btn-round" v-clipboard:copy="f4.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -118,8 +114,8 @@
                         <div class="childBlock">
                             <div v-if="f5.InviteCode">
                                 <div @click="query(f5.AccountId)">{{f5.Area}}</div>
-                                <div @click="query(f5.AccountId)" class="ellipsis1">{{f5.NickName}}</div>
-                                <div @click="query(f5.AccountId)" class="ellipsis1">{{f5.TotalAssets}}</div>
+                                <div @click="query(f5.AccountId)">{{f5.NickName}}</div>
+                                <div @click="query(f5.AccountId)">{{f5.TotalAssets}}</div>
                                 <div class="copy">
                                     <div>{{f5.InviteCode}}</div>
                                     <div><button class="btn btn-xs btn-round" v-clipboard:copy="f5.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -129,8 +125,8 @@
                         <div class="childBlock">
                             <div v-if="f6.InviteCode">
                                 <div @click="query(f6.AccountId)">{{f6.Area}}</div>
-                                <div @click="query(f6.AccountId)" class="ellipsis1">{{f6.NickName}}</div>
-                                <div @click="query(f6.AccountId)" class="ellipsis1">{{f6.TotalAssets}}</div>
+                                <div @click="query(f6.AccountId)">{{f6.NickName}}</div>
+                                <div @click="query(f6.AccountId)">{{f6.TotalAssets}}</div>
                                 <div class="copy">
                                     <div>{{f6.InviteCode}}</div>
                                     <div><button class="btn btn-xs btn-round" v-clipboard:copy="f6.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -140,8 +136,8 @@
                         <div class="childBlock">
                             <div v-if="f7.InviteCode">
                                 <div @click="query(f7.AccountId)">{{f7.Area}}</div>
-                                <div @click="query(f7.AccountId)" class="ellipsis1">{{f7.NickName}}</div>
-                                <div @click="query(f7.AccountId)" class="ellipsis1">{{f7.TotalAssets}}</div>
+                                <div @click="query(f7.AccountId)">{{f7.NickName}}</div>
+                                <div @click="query(f7.AccountId)">{{f7.TotalAssets}}</div>
                                 <div class="copy">
                                     <div>{{f7.InviteCode}}</div>
                                     <div><button class="btn btn-xs btn-round" v-clipboard:copy="f7.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
@@ -151,8 +147,24 @@
                     </div> -->
                 </div>
             </div>
+            <!-- 三个按钮 -->
+            <div class="foot-botton">
+                <router-link :to="{ path: '/discovery/bill', query: { type: '7' }}"><button class="btn  btn-block btn-round">{{$t("mine.area.achievement")}}</button></router-link>
+                <router-link to="/discovery/withdrawal"><button class="btn  btn-block btn-round">{{$t("mine.menus.withdrawal")}}</button></router-link>
+                <div><button @click="GetMyChildList" class="btn  btn-block btn-round">{{$t("mine.area.mychild")}}</button></div>
+            </div>
         </div>
-        <v-footer :isIndex="$route.meta.isIndex"></v-footer>
+        <!-- 我的直推 -->
+		<Modal v-model="show" :closable="true" align="center" :mask-closable="true" cancel-text=''>
+			<h2>{{$t("mine.area.mychild")}}</h2>
+			<div class="modal-body content">
+                <Table height="300" :columns="coltitle" :data="MyChildList"></Table>
+            </div>
+			<!-- <div slot="footer">
+				<button class="btn btn-block btn-round" @click="ok()">{{$t('wallet.send.auth')}}</button>
+			</div> -->
+		</Modal>
+        <!-- <v-footer :isIndex="$route.meta.isIndex"></v-footer> -->
     </div>
 </template>
 
@@ -177,6 +189,22 @@
                         title: this.$t('mine.area.edit'),
                     }
                 ],
+                coltitle:[
+                    {
+                        title: this.$t('mine.area.nickname'),       // 用户名
+                        key: 'name',
+                        width: 130,
+                    },
+                    {
+                        title: this.$t('mine.area.num'),       //'购币量',
+                        key: 'buyNum',
+                        align: 'center',
+                    },
+                    {
+                        title: this.$t('mine.area.date'),       //'注册时间',
+                        key: 'createTime'
+                    }
+                ],
                 dataList    :   [],
                 NickName    :   '',         // 昵称
                 InviteCode  :   '',         // 邀请码
@@ -197,6 +225,8 @@
                 f5          :   [],
                 f6          :   [],
                 f7          :   [],
+                MyChildList :   [],         // 我的直推
+                show        :   false,      // 我的直推显示     
 			}
 		},
 		methods: {
@@ -279,7 +309,20 @@
                     path:"/user/registinfo",
                     query:{InviteCode:InviteCode,area:area,pId:pid}
                 });
-            }
+            },
+            GetMyChildList(){
+                // 我的直推列表
+                this.$server.post(
+                'GetMyChildList',
+                {
+                    guid 	      :  this.$storage.get('guid'),
+                }).then(data => {
+                    if(data){
+                        this.MyChildList = data;
+                        this.show = true
+                    }
+                })
+            } 
 		},
 		mounted() {
             this.query();
