@@ -93,7 +93,7 @@
             <div>{{$t("wallet.tips.lockenddate")}}：<span class="fr">{{clockdata.LockEndDate}}</span></div>
             <div>{{$t("wallet.tips.lockdays")}}：
                 <span class="fr" v-if="clockdata.LockDays>1">{{clockdata.LockDays}}</span>
-                <span class="fr" v-if="clockdata.LockDays<1">{{$t(release)}}</span>
+                <span class="fr" v-if="clockdata.LockDays<1&&clockdata.LockDays">{{$t('wallet.tips.release')}}</span>
             </div>
             <h2>{{$t("wallet.tips.assetsview")}}</h2>
             <table class="table">
