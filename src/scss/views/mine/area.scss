@@ -95,6 +95,12 @@
         &:last-child{
             margin-left: 25px;
         }
+        .areareg{
+            .btnreg{
+                display: flex;
+                justify-content:space-between;
+            }
+        }
     }
     .copy{
         width: 100%;
@@ -128,5 +134,10 @@
     }
     .content{
         height: 500px;
+    }
+}
+.w-cont{
+    .invitecode{
+        font-size:24px;
     }
 }

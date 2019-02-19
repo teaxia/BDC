@@ -71,10 +71,19 @@
                                         <div><button class="btn btn-xs btn-round" v-clipboard:copy="f2.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                     </div>
                                 </div>
-                                <div v-else>
+                                <div class="areareg" v-else>
                                     <!-- A区传值 -->
-                                    <button class="btn btn-auto btn-round"  @click="toRegist(InviteCode,'A')">{{$t('global.regist')}}（{{$t('mine.area.invitecode')}}：{{InviteCode}}）</button>
-                                    <button class="btn btn-auto btn-round mr50"  @click="toRegist(MyInviteCode,'A')">{{$t('global.regist')}}（{{$t('mine.area.invitecode')}}：{{MyInviteCode}}）</button>
+                                    <div>{{$t('mine.area.note')}}：{{f1.AccountId}}A</div>
+                                    {{$t('mine.area.invitecode')}}：{{InviteCode}}
+                                    <div class="btnreg">
+                                        <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('global.regist')}}</button>
+                                        <button class="btn btn-auto btn-round" @click="ViewLink(InviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('mine.area.viewLink')}}</button>
+                                    </div>
+                                    {{$t('mine.area.invitecode')}}：{{MyInviteCode}}
+                                    <div class="btnreg">
+                                        <button class="btn btn-auto btn-round" @click="toRegist(MyInviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('global.regist')}}</button>
+                                        <button class="btn btn-auto btn-round" @click="ViewLink(InviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('mine.area.viewLink')}}</button>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <div class="blank">
@@ -91,10 +100,19 @@
                                         <div><button class="btn btn-xs btn-round" v-clipboard:copy="f3.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
                                     </div>
                                 </div>
-                                <div v-else>
+                                <div class="areareg" v-else>
                                     <!-- B区传值 -->
-                                    <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'B',f1.AccountId)">{{$t('global.regist')}}（{{$t('mine.area.invitecode')}}：{{InviteCode}}）</button>
-                                    <button class="btn btn-auto btn-round mr50" @click="toRegist(MyInviteCode,'B',f1.AccountId)">{{$t('global.regist')}}（{{$t('mine.area.invitecode')}}：{{MyInviteCode}}）</button>
+                                    <div>{{$t('mine.area.note')}}：{{f1.AccountId}}B</div>
+                                    {{$t('mine.area.invitecode')}}：{{InviteCode}}
+                                    <div class="btnreg">
+                                        <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('global.regist')}}</button>
+                                        <button class="btn btn-auto btn-round" @click="ViewLink(InviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('mine.area.viewLink')}}</button>
+                                    </div>
+                                    {{$t('mine.area.invitecode')}}：{{MyInviteCode}}
+                                    <div class="btnreg">
+                                        <button class="btn btn-auto btn-round" @click="toRegist(MyInviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('global.regist')}}</button>
+                                        <button class="btn btn-auto btn-round" @click="ViewLink(InviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('mine.area.viewLink')}}</button>
+                                    </div>
                                 </div>
                             </div>
                         <!-- </div> -->
@@ -164,6 +182,27 @@
 				<button class="btn btn-block btn-round" @click="ok()">{{$t('wallet.send.auth')}}</button>
 			</div> -->
 		</Modal>
+
+        <!-- 查看链接 -->
+        <Modal v-model="showViewLink" :closable="true" align="center" :mask-closable="true" cancel-text='' :ok-text="this.$t('global.close')">
+			<div class="w-cont" id="extension">
+                <div class="invitecode">
+                    <p><i class="iconfont icon-feiji"></i>{{$t('mine.extension.invitecode')}}</p>
+                    <p>{{InviteCode}}</p>
+                    <p>{{$t('mine.area.note')}}：{{VNoteCode}}</p>
+                </div>
+                <div class="ercode">
+                    <qriously class="ercode" :value="`http://belden-bdc.net/register/register_test.html?InviteCode=`+VInviteCode+`&NoteCode=`+VNoteCode" :size="138"/>
+                </div>
+                <div class="InviteCode">
+                    <span v-text="`http://belden-bdc.net/register/register_test.html?InviteCode=`+VInviteCode+`&NoteCode=`+VNoteCode"></span>
+                    <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="`http://belden-bdc.net/register/register_test.html?InviteCode=`+InviteCode+`&NoteCode=`+VNoteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                </div>
+            </div>
+            <div class="center mr20">
+                <button @click="save()" class="btn btn-block btn-round">{{$t('wallet.receive.save')}}</button>
+            </div>
+		</Modal>
         <!-- <v-footer :isIndex="$route.meta.isIndex"></v-footer> -->
     </div>
 </template>
@@ -226,7 +265,10 @@
                 f6          :   [],
                 f7          :   [],
                 MyChildList :   [],         // 我的直推
-                show        :   false,      // 我的直推显示     
+                show        :   false,      // 我的直推显示
+                showViewLink:   false,      // 查看链接显示
+                VInviteCode :   '',         // 盒子显示的邀请码
+                VNoteCode   :   '',         // 盒子显示的节点码     
 			}
 		},
 		methods: {
@@ -302,13 +344,19 @@
 					type: 'warn'
 				})
             },
-            toRegist(InviteCode,area,pid){
-                // InviteCode 邀请码 Area矿区  pid为顶级用户ID
+            toRegist(InviteCode,area,pid,NoteCode){
+                // InviteCode 邀请码 Area矿区  pid为顶级用户ID NoteCode矿区节点码
                 // 跳转到币币兑换页面
                 this.$router.push({
                     path:"/user/registinfo",
-                    query:{InviteCode:InviteCode,area:area,pId:pid}
+                    query:{InviteCode:InviteCode,area:area,pId:pid,NoteCode:NoteCode}
                 });
+            },
+            ViewLink(InviteCode,area,pid,NoteCode){
+                // 查看链接
+                this.showViewLink   =   true
+                this.VInviteCode    =   InviteCode
+                this.VNoteCode      =   NoteCode
             },
             GetMyChildList(){
                 // 我的直推列表
@@ -322,7 +370,52 @@
                         this.show = true
                     }
                 })
-            } 
+            },
+            save(){
+                // 保存
+				// 首先先截取base64图片
+				let ref = document.getElementById('extension') // 截图区域				
+				let that = this;
+				this.$html2canvas(ref, {
+					backgroundColor: '#ffffff'
+				}).then((canvas) => {
+					var image = new Image();
+					image.src = canvas.toDataURL("image/webp", 1);
+					var base64Str = image.src.split('base64,')[1];
+					var imgPath = "fs://extension/";
+					var imgName = Math.floor((Math.random() * 100) + 1) + "clip.jpg";
+					var trans = api.require('trans');
+					trans.saveImage({
+						base64Str: base64Str, //base64字符串不能包含data:image/png;base64,前缀
+						album: false,
+						imgPath: imgPath,
+						imgName: imgName
+					}, function(ret, err) {
+						if (ret.status) {
+							api.saveMediaToAlbum({
+								path: imgPath+imgName
+							}, function(ret, err) {
+								if (ret && ret.status) {
+									that.$vux.toast.show({
+										text: that.$t('global.success'),
+										type: 'success'
+									})
+								} else {
+									that.$vux.toast.show({
+										text: that.$t('wallet.receive.tips.warn'),
+										type: 'warn'
+									})
+								}
+							});
+						} else {
+							that.$vux.toast.show({
+								text: that.$t('wallet.receive.tips.warn'),
+								type: 'warn'
+							})
+						}
+					});
+				})
+			},
 		},
 		mounted() {
             this.query();
