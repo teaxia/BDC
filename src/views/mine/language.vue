@@ -35,8 +35,7 @@ export default {
 			{
 				guid : this.$storage.get('guid'),
 				lv   : this.lang
-			},
-			).then(data => {
+			}).then(data => {
 				if(data){
 					this.$storage.set('lang',this.lang);
                     this.$i18n.locale = this.lang;
