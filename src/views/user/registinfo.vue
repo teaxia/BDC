@@ -9,7 +9,7 @@
                     <x-input :title="this.$t('user.register.username')" :placeholder="$t('user.tips.username')" v-model="userName"></x-input>
                 </group>
                 <group>
-                    <x-input class="test" title="手机号" mask="999 9999 9999" :show-clear='false' :max="13" :placeholder="$t('user.tips.phone')" v-model="mobile">
+                    <x-input class="test" title="$t('input.mobile')" mask="999 9999 9999" :show-clear='false' :max="13" :placeholder="$t('user.tips.phone')" v-model="mobile">
                         <button slot="right" class="btn btn-min btn-round" @click="countDown">{{content}}</button>
                     </x-input> 
                 </group>
@@ -45,11 +45,14 @@
                     <div class="label">{{$t('user.area')}}:</div>
                     <div class="radio">
                         <RadioGroup v-model="area">
-                            <Radio label="A">
+                            <Radio label="A" :disabled="NoteType">
                                 <span>V1</span>
                             </Radio>
-                            <Radio label="B">
+                            <Radio label="B" :disabled="NoteType">
                                 <span>V2</span>
+                            </Radio>
+                            <Radio label="order">
+                                <span><input :disabled="NoteType" class="notecode" :placeholder="$t('user.tips.notecode')" v-model="NoteCode" /></span>
                             </Radio>
                         </RadioGroup>
                     </div>
@@ -67,7 +70,7 @@
         <Modal v-model="show" :closable="false" :ok-text="$t('global.ok')" @on-ok="onOk" :mask-closable="false">
 			<div slot="header"></div>
 			<div class="modal-body">
-                {{ $t("global.selectArea") }}<span v-if="area=='A'">V1</span><span v-else>V2</span><br/>
+                {{ $t("global.selectArea") }}<span v-if="area=='A'">V1</span><span v-if="area=='B'">V2</span><span v-if="area=='order'">{{NoteCode}}</span><br/>
                 {{ $t("global.confirm") }}
             </div>
 		</Modal>
@@ -94,10 +97,13 @@ export default {
             lang	    :   '',
             show		:	false,			     // 确认页面
             content	    :   this.$t("user.tips.setvcode"),      // 倒计时
-            totalTime   :   60,      //记录具体倒计时时间
-			canClick    :   true,	//添加canClick
+            totalTime   :   60,                  // 记录具体倒计时时间
+			canClick    :   true,	             // 添加canClick
             clock	    :   '',	
             code        :   '',
+            NoteType    :   false,               // 是否可以选择注册项
+            NoteCode    :   '',                  // 节点码
+            field       :   '',                  // 矿区
 		}
 	},
 	watch:{
@@ -137,7 +143,7 @@ export default {
 				InviteCode  : this.invitation,                                          		        // 邀请码
 				account 	: JSON.stringify(straccount),
                 phoneCode   : this.code,
-                area        : this.area,
+                area        : this.field,
                 lv   		: this.lang,
                 pId         : this.pid
 			}).then(data => {
@@ -159,6 +165,20 @@ export default {
             });
         },
         confirm(){
+            // 判断矿区所属并赋值
+            if(this.area == 'order'){
+                // 自定义节点矿区
+                if(this.NoteCode==''){
+                    this.$vux.toast.show({
+                        text: this.$t("user.tips.notecode"),
+                        type: 'warn'
+                    })
+                    return
+                }
+                this.field = this.NoteCode          // 节点码
+            }else{
+                this.field = this.area
+            }
             // 二次确认
             this.show = true
         },
@@ -224,8 +244,18 @@ export default {
 	mounted() {
         this.lang           =   (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
         this.invitation     =   (this.$route.query.InviteCode)?this.$route.query.InviteCode:''                                   // 传过来的邀请码
-        this.area           =   (this.$route.query.area)?this.$route.query.area:'A'                                              // 传过来的矿区选项
-        this.pid           =   (this.$route.query.pId)?this.$route.query.pId:'0'
+        // 矿区判断
+        if(this.$route.query.NoteCode){
+            // 有矿区节点
+            this.NoteCode   =   (this.$route.query.NoteCode)?this.$route.query.NoteCode:''                                       // 传过来的节点码
+            this.area       =   'order'                                                                                          // 选中自定义节点码
+            this.NoteType   =   true                                                                                             // 不允许自定义选择
+        }else{
+            // 没有矿区节点
+            this.area       =   (this.$route.query.area)?this.$route.query.area:'A'                                              // 传过来的矿区选项
+        }
+        
+        this.pid            =   (this.$route.query.pId)?this.$route.query.pId:'0'
     },
     beforeDestroy(){
         // 清除计时器
