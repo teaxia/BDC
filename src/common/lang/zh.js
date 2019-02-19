@@ -78,6 +78,7 @@ export const zh = {
             nickname        : '请输入用户昵称',
             security        : '请输入安全码',
             invitationcode  : '请输入邀请码',
+            notecode        : '请输入节点码'
         },
         login           : '登 录',
         regist          : '注 册',
@@ -101,6 +102,7 @@ export const zh = {
         },
         verification:   {
             title   : '请输入验证码',
+            notecode: '节点码不能为空',
         }
     },
     // 发现
@@ -369,6 +371,8 @@ export const zh = {
             achievement     :   '新增业绩',
             num             :   '购币量',
             date            :   '注册时间',
+            note            :   '节点码',
+            viewLink        :   '查看链接',
             tips:{
                 error       :   '查无此信息'
             },

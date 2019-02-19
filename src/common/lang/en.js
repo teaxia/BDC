@@ -78,6 +78,7 @@ export const en = {
             nickname        : 'Please enter a user nickname',
             security        : 'Please enter a Security password',
             invitationcode  : 'Please enter a InvitationCode',
+            notecode        : 'Node Code',
         },
         login               :   'Login',
         regist              :   'Regist',
@@ -101,6 +102,7 @@ export const en = {
         },
         verification:   {
             title   : 'Please enter verification code',
+            notecode: 'Please enter node code',
         }
     },
     // 发现
@@ -369,6 +371,8 @@ export const en = {
             achievement     :   'Achievement',
             num             :   'Number',
             date            :   'Date',
+            note            :   'Note',
+            viewLink        :   'View Link',
             tips:{
                 error       :   'This information is not available.'
             },
