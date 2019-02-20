@@ -192,11 +192,11 @@
                     <p>{{$t('mine.area.note')}}：{{VNoteCode}}</p>
                 </div>
                 <div class="ercode">
-                    <qriously class="ercode" :value="`http://belden-bdc.net/register/register_test.html?InviteCode=`+VInviteCode+`&NoteCode=`+VNoteCode" :size="138"/>
+                    <qriously class="ercode" :value="`http://belden-bdc.net/register/index.html?InviteCode=`+VInviteCode+`&NoteCode=`+VNoteCode" :size="138"/>
                 </div>
                 <div class="InviteCode">
-                    <span v-text="`http://belden-bdc.net/register/register_test.html?InviteCode=`+VInviteCode+`&NoteCode=`+VNoteCode"></span>
-                    <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="`http://belden-bdc.net/register/register_test.html?InviteCode=`+InviteCode+`&NoteCode=`+VNoteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                    <span v-text="`http://belden-bdc.net/register/index.html?InviteCode=`+VInviteCode+`&NoteCode=`+VNoteCode"></span>
+                    <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="`http://belden-bdc.net/register/index.html?InviteCode=`+InviteCode+`&NoteCode=`+VNoteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
                 </div>
             </div>
             <div class="center mr20">
