@@ -7,15 +7,16 @@
 						<div class="dis-grid-img">
 							<img v-if="avatar&&avatar!='null'" class="avatar" :src="avatar" />
 							<i v-else class="avatar iconfont icon-touxiang"></i>
-						</div>
-					</flexbox-item>
-					<flexbox-item :span="2">
-						<div class="mine-grid-content">
 							<div class="nickname">{{nickname}}</div>
-							<div class="userid">{{realname}}</div>
 						</div>
 					</flexbox-item>
-					<flexbox-item :span="7">
+					<flexbox-item :span="3">
+						<div class="mine-grid-content">
+							<div class="userid">{{realname}}</div>
+							<div class="ParentName">{{$t('mine.extension.parentname')}}：{{ParentName}}</div>
+						</div>
+					</flexbox-item>
+					<flexbox-item :span="6">
 						<div class="mine-grid-content">
 							<div class="earnings earning">{{$t('mine.menus.withdrawal')}}：{{MyEarnings}}（CNY）</div>
 							<div class="withdrawal earning">
@@ -26,6 +27,7 @@
 						</div>
 					</flexbox-item>
 				</flexbox>
+				
 			</v-grid>
 		</div>
 		<div class="main-container">
@@ -112,7 +114,8 @@ export default {
 			golink		:	'',
 			isreal		:	'',
 			version 	:	'2.6.21',				
-			messageNum	:	''
+			messageNum	:	'',
+			ParentName	:	''
 		}
 		// 版本更新说明 
 		// @版本号 @更新人 @更新时间 @更新内容
@@ -168,10 +171,11 @@ export default {
 		this.GetAccount();
 		// 消息行数
 		this.GetLetterMessageCount()
-		this.nickname = this.$storage.get('NickName');
-		this.avatar   = this.$storage.get('HeadImg');
-		this.isreal	  = (this.$storage.get('RealName'))?false:true;
-		this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
+		this.nickname 	= this.$storage.get('NickName');
+		this.avatar   	= this.$storage.get('HeadImg');
+		this.isreal	  	= (this.$storage.get('RealName'))?false:true;
+		this.realname 	= (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
+		this.ParentName	= this.$storage.get('ParentName');
 	}
 }
 

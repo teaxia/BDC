@@ -415,6 +415,7 @@ export const zh = {
         extension:{
             tg          :       '推广',
             invitecode  :       '我的邀请码',
+            parentname  :       '推荐人',
         },
         auth:{
             idcard      :   '身份证',

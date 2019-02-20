@@ -9,7 +9,7 @@
                     <x-input :title="this.$t('user.register.username')" :placeholder="$t('user.tips.username')" v-model="userName"></x-input>
                 </group>
                 <group>
-                    <x-input class="test" title="$t('input.mobile')" mask="999 9999 9999" :show-clear='false' :max="13" :placeholder="$t('user.tips.phone')" v-model="mobile">
+                    <x-input class="test" :title="this.$t('input.mobile')" mask="999 9999 9999" :show-clear='false' :max="13" :placeholder="$t('user.tips.phone')" v-model="mobile">
                         <button slot="right" class="btn btn-min btn-round" @click="countDown">{{content}}</button>
                     </x-input> 
                 </group>

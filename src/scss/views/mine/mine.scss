@@ -56,5 +56,12 @@
             border-radius: 50%;
         }
     }
-    
+    .dis-grid-img{
+        text-align: center;
+        .nickname{
+            font-size:28px;
+            color:$font-blue;
+        }
+    }
+    //.ParentName{margin-left: 180px;font-size:28px;}
 }

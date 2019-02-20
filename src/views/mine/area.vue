@@ -82,7 +82,7 @@
                                     {{$t('mine.area.invitecode')}}：{{MyInviteCode}}
                                     <div class="btnreg">
                                         <button class="btn btn-auto btn-round" @click="toRegist(MyInviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('global.regist')}}</button>
-                                        <button class="btn btn-auto btn-round" @click="ViewLink(InviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('mine.area.viewLink')}}</button>
+                                        <button class="btn btn-auto btn-round" @click="ViewLink(MyInviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('mine.area.viewLink')}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                     {{$t('mine.area.invitecode')}}：{{MyInviteCode}}
                                     <div class="btnreg">
                                         <button class="btn btn-auto btn-round" @click="toRegist(MyInviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('global.regist')}}</button>
-                                        <button class="btn btn-auto btn-round" @click="ViewLink(InviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('mine.area.viewLink')}}</button>
+                                        <button class="btn btn-auto btn-round" @click="ViewLink(MyInviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('mine.area.viewLink')}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@
 			<div class="w-cont" id="extension">
                 <div class="invitecode">
                     <p><i class="iconfont icon-feiji"></i>{{$t('mine.extension.invitecode')}}</p>
-                    <p>{{InviteCode}}</p>
+                    <p>{{VInviteCode}}</p>
                     <p>{{$t('mine.area.note')}}：{{VNoteCode}}</p>
                 </div>
                 <div class="ercode">

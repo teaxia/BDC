@@ -415,6 +415,7 @@ export const en = {
         extension:{
             tg          :       'Extension',
             invitecode  :       'InviteCode',
+            parentname  :       'Recommender',
         },
         auth:{
             idcard      :   'ID',
