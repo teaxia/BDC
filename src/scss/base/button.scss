@@ -125,4 +125,22 @@ button[disabled]
             background: #FF9595;
         }
     }
+    // 深红色按钮样式
+    &-red
+    {
+        background-color: #e83a37;
+        color: $font-white;
+    
+        &.outline
+        {
+            color: #e83a37;
+            background-color: #fff;
+            border: 1px solid #e83a37;
+        }
+
+        &:active
+        {
+            background: #e83a37;
+        }
+    }
 }

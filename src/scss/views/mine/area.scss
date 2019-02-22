@@ -97,9 +97,16 @@
         }
         .areareg{
             .btnreg{
+                margin:0 auto;
+                width: 200px;
                 display: flex;
                 justify-content:space-between;
             }
+            .note{
+                margin: 10px;
+                display: flex;
+                justify-content:center
+           }
         }
     }
     .copy{
