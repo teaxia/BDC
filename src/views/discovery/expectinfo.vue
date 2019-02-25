@@ -23,7 +23,7 @@
                             </flexbox-item>
                             <flexbox-item>
                                 <div class="exp-grid-center">
-                                    <button @click="onTourl('/discovery/expectinfo/self')" v-if="v.IsCanBuy" class="btn btn-min btn-round">{{$t('discovery.expectinfo.self')}}</button>
+                                    <!-- <button @click="onTourl('/discovery/expectinfo/self')" v-if="v.IsCanBuy" class="btn btn-min btn-round">{{$t('discovery.expectinfo.self')}}</button> -->
                                     <button v-if="!v.IsCanBuy&&v.Percent!='100'" class="btn btn-min btn-round btn-disabled">{{$t('discovery.expectinfo.notbuy')}}</button>
                                     <button v-else-if="v.Percent=='100'" class="btn btn-min btn-round btn-disabled">{{$t('discovery.expectinfo.success')}}</button>
                                     <button @click="onTourl('/discovery/expectinfo/btob')" v-if="v.IsCanBuy" class="btn btn-min btn-round">{{$t('discovery.expectinfo.b2b')}}</button>
