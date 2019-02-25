@@ -41,14 +41,19 @@
                          <i slot="right" @click="changType()" :class="['iconfont',showtype?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group>
-                <div class="line-b sbank">
+                <group>
+                    <x-input class="test" :title="$t('discovery.extract.address')" :show-clear='false' :placeholder="$t('discovery.extract.addresstip')" v-model="addrs">
+                        <button slot="right" @click="getCli()" class="btn btn-xs btn-round">{{$t('global.paste')}}</button>
+                    </x-input>
+                </group>
+                <!-- <div class="line-b sbank">
                     <div class="bank wd">
                         {{$t('discovery.withdrawal.bank')}}
                     </div>
                     <Select v-model="cardNo"> 
                         <Option v-for="(item,index) in cardList" :value="index" :key="index">{{ item.cardNo }}{{item.bankName}}</Option>
                     </Select>
-                </div>
+                </div> -->
                 <button class="btn btn-block btn-round" @click="confirm()">{{$t('discovery.withdrawal.confirm')}}</button>
             </div>
             <flexbox class="mr20 sreach">
@@ -99,19 +104,20 @@
             </div>
         </div>
         <!-- 绑定银行卡 -->
-		<Modal v-model="bindcard" :closable="false" :mask-closable="false">
+		<!-- <Modal v-model="bindcard" :closable="false" :mask-closable="false">
 			<div slot="header"></div>
 			<div class="modal-body">{{$t('global.bindbank')}}</div>
 			<div slot="footer">
 				<button class="btn btn-block btn-round" @click="ok()">{{$t('discovery.withdrawal.tips.bind')}}</button>
 			</div>
-		</Modal>
+		</Modal> -->
         <!-- 二次确认框 -->
 		<Modal v-model="show" @on-ok="submit" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
 			<div slot="header"></div>
 			<div class="modal-body">
                 <div>{{$t('discovery.withdrawal.tips.thisTime')}}:{{money}}</div>
-                <div>{{$t('discovery.withdrawal.tips.bank')}}：{{cardNoshow}}{{bankName}}</div>
+                <!-- <div>{{$t('discovery.withdrawal.tips.bank')}}：{{cardNoshow}}{{bankName}}</div> -->
+                <div>{{$t('discovery.extract.address')}}:{{addrs}}</div>
             </div>
 		</Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
@@ -127,9 +133,9 @@
                 type        :   0,                  // 0为收益查询 1为提现查询
                 money       :   '',
                 start       :   '',
-                cardList    :   [],                 // 银行卡
+                //cardList    :   [],                 // 银行卡
                 dataList    :   [],                 // 列表数据
-                cardNo      :   0,                 // 卡号
+                //cardNo      :   0,                 // 卡号
                 end         :   '',
                 startDate   :   '',
                 endDate     :   '',
@@ -141,12 +147,13 @@
                 totalIn             :   '',         // 查询时间段收益总计
                 listIn              :   '',         // 获取的收益数据
                 listOut             :   '',         // 获取的提现数据
-                bindcard            :   false,         // 是否跳转到绑定银行卡
+                // bindcard            :   false,         // 是否跳转到绑定银行卡
                 show        :   false,
-                cardNoshow  :   '',                 // 显示的卡号
-                bankName    :   '',                 // 显示的银行
+                // cardNoshow  :   '',                 // 显示的卡号
+                // bankName    :   '',                 // 显示的银行
                 moneyPwd    :   '',                 // 安全密码
                 showtype    :   false,		// 切换密码状态
+                addrs       :  '',              // 提币地址
 			}
         },
         watch:{
@@ -209,13 +216,13 @@
                 }).then(data => {
                     if(data){
                         // 判断是否绑定银行卡
-                        if(data.cardList.length>0){
-                            this.cardNoshow = data.cardList[0].cardNo         // 卡号
-                            this.bankName = data.cardList[0].bankName         // 银行名称
-                        }else{
-                            this.bindcard = true
-                        }
-                        this.cardList   =   data.cardList           // 银行卡数据
+                        // if(data.cardList.length>0){
+                        //     this.cardNoshow = data.cardList[0].cardNo         // 卡号
+                        //     this.bankName = data.cardList[0].bankName         // 银行名称
+                        // }else{
+                        //     this.bindcard = true
+                        // }
+                        // this.cardList   =   data.cardList           // 银行卡数据
                         this.myEarnings =   data. myEarnings        // 
                         this.myEarningsByHistory    =   data. myEarningsByHistory       // 历史总收益 
                         this.myEarningsByMonth      =   data. myEarningsByMonth        // 月收益
@@ -249,10 +256,11 @@
                 this.$server.post(
                 'Withdraw_MyEarnings',
                 {
-                    guid     :   this.$storage.get('guid'),
-                    Id       :   this.cardList[this.cardNo].Id,
-                    money    :   this.money,
-                    moneyPwd :   this.moneyPwd
+                    guid        :   this.$storage.get('guid'),
+                    //Id        :   this.cardList[this.cardNo].Id,
+                    money       :   this.money,
+                    moneyPwd    :   this.moneyPwd,
+                    RechargeCode:   this.addrs
                 }).then(data => {
                     if(data){
                         this.$vux.toast.show({
@@ -320,6 +328,17 @@
             changType(){
                 // 切换密码状态
                 this.showtype = !this.showtype
+            },
+            getCli(){
+                // 粘贴
+                var clipBoard = api.require('clipBoard');
+                var that = this
+                clipBoard.get(function(ret, err) {
+                    if (ret) {
+                        let addresss = ret
+                        that.addrs = addresss.value
+                    }
+                });
             }
 		},
 		mounted() {
