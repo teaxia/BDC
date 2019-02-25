@@ -47,13 +47,15 @@ export default {
         let currency = (this.$storage.get('currency'))?this.$storage.get('currency'):'';
         let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
         if(!currency){
-            if(lang=="zh"){
-                this.cy     =   'CNY'
-                this.ishow  =   true
-            }else if(lang=="en"){
-                this.cy     =   "USD"
-                this.ishow  =   false
-            }
+            // if(lang=="zh"){
+            //     this.cy     =   'USD'
+            //     this.ishow  =   true
+            // }else if(lang=="en"){
+            //     this.cy     =   "USD"
+            //     this.ishow  =   false
+            // }
+            this.cy     =   "USD"
+            this.ishow  =   false
         }else{
             this.cy = currency;
             if(lang=="zh"){
