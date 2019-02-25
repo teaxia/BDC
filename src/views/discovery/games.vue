@@ -137,7 +137,7 @@
                         'Url'   :   true
                     },
                     {
-                        'Name'  :   '沙巴体育',
+                        'Name'  :   '体育赛事',
                         'code'  :   'IBC',
                         'Img'   :   './static/images/sb1.png',
                         'Url'   :   true
