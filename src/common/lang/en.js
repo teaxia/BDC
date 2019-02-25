@@ -186,7 +186,7 @@ export const en = {
         extract:{
             title       :   'Extract',
             address     :   'Extract address',
-            bdc         :   'BDC',
+            bdc         :   'USDT',
             safetycode  :   'Safety code',
             bdcnum      :   'Please enter BDC num',
             addresstip  :   'Please enter address',
@@ -197,7 +197,7 @@ export const en = {
                 safetycode  :   'Safety code number can not be null',
                 num         :   'BDC num can not be null',
                 address     :   'Extract address can not be null',
-                tips        :   'Please check your withdrawal address carefully. If the withdrawal address is incorrect, you will not be able to return your BDC if the withdrawal fails'
+                tips        :   'Please check your withdrawal address carefully. If the withdrawal address is incorrect, you will not be able to return your USDT if the withdrawal fails'
             }
         },
         bill:{

@@ -19,7 +19,7 @@
                     </x-input>
                 </group>
                 <div class="tips"><span>{{$t('discovery.extract.tax')}}：{{tax*100}}%</span></div>
-                <div class="tips"><span>{{$t('discovery.extract.fee')}}：{{bdcnum-(bdcnum*tax).toFixed(2)}}</span></div>
+                <div class="tips"><span>{{$t('discovery.extract.fee')}}：{{(bdcnum*Proportion*(1+tax)).toFixed(2)}}</span></div>
             </div>
             <button @click="subconfirm()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
         </div>
@@ -42,14 +42,15 @@ export default {
 	name: 'extract',
 	data() {
 		return {
-			safecode    :  '',
-            bdcnum	    :  '',
-            addrs       :  '',
+			safecode    :   '',
+            bdcnum	    :   '',
+            addrs       :   '',
             type	    :   false,		// 切换密码状态'
             modal       :   false,      // 模态框
-            tax         :  '',          // 手续费
+            tax         :   '',          // 手续费
             fee         :   '',         // 实际到账
-            
+            //Poundage    :   '',         // 提币手续费
+            Proportion  :   ''   // USDT:BDC价格兑换比
 		}
 	},
 	methods: {
@@ -61,7 +62,8 @@ export default {
                 Money    	    : this.bdcnum,
                 MoneyPwd        : this.safecode,
                 RechargeCode   	: this.addrs,
-                Poundage        : this.tax
+                //Poundage        : this.tax
+                key             : this.key
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -113,7 +115,9 @@ export default {
                 guid 	        : this.$storage.get('guid'),
             }).then(data => {
                 if(data){
-                    this.tax = data.Result
+                    this.key        =   data.key            // 加密串
+                    this.tax        =   data.Poundage       // 提币手续费
+                    this.Proportion =   data.Proportion     // USDT:BDC价格兑换比
                 }
             })
         },

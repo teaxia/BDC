@@ -186,18 +186,18 @@ export const zh = {
         extract:{
             title       :   '提币',
             address     :   '提币地址',
-            bdc         :   'BDC数量',
+            bdc         :   'USDT数量',
             safetycode  :   '安全码',
             bdcnum      :   '请输入提币数量',
             addresstip  :   '请输入提币地址',
             tax         :   '手续费',
-            fee         :   '实际到账',
+            fee         :   '扣除BDC',
             tip         :   "Tip:请输入Im'token地址或交易所地址",
             tips:{
                 safetycode  :   '安全码不能为空',
                 num         :   '提币数量不能为空',
                 address     :   '提币地址不能为空',
-                tip         :   '请仔细核对您的提币地址无误，提币地址错误提币失败将无法退还您的BDC',
+                tip         :   '请仔细核对您的提币地址无误，提币地址错误提币失败将无法退还您的USDT',
             }
         },
         bill:{
@@ -244,7 +244,7 @@ export const zh = {
             month           :   '本月收益',
             total           :   '总计收益',
             myEarnings      :   '收益余额',
-            money           :   '提现金额',
+            money           :   '提币金额',
             bank            :   '提现银行',
             submit          :   '立即提现',
             querywtih       :   '提现查询',
@@ -351,7 +351,7 @@ export const zh = {
             realname        :   '实名认证',
             setting         :   '设置',
             withdrawal      :   '我的收益',
-            cash            :   '提现',
+            cash            :   '提币',
         },
         area:{
             title           :   '矿区',

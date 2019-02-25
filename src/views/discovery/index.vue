@@ -87,7 +87,7 @@ export default {
 					value   : this.$t("discovery.topmenu.extract"),			// 提币
 					icon    : 'icon-Fixedassets',
 					url     : '/discovery/extract',
-					status	: false,
+					status	: true,
 				}
 			],
 			news	:	[],
