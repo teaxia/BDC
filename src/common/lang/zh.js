@@ -186,7 +186,7 @@ export const zh = {
         extract:{
             title       :   '提币',
             address     :   '提币地址',
-            bdc         :   'USDT数量',
+            bdc         :   'USDT',
             safetycode  :   '安全码',
             bdcnum      :   '请输入提币数量',
             addresstip  :   '请输入提币地址',
