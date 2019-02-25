@@ -27,7 +27,8 @@ export default {
           value   : this.$t("menu.application"),
           icon    : 'icon-yingyongxianxing',
           acicon  : 'icon-yingyongmianxing',
-          url     : '/app/index',
+          //url     : '/app/index',
+          url     : '/discovery/games',
           //url     : 'false',
           index : 1
         },

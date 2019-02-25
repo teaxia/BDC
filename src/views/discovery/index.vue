@@ -64,12 +64,13 @@ export default {
 					url     : '/discovery/bill',
 					status	: true,
 				},
-				{
-					value   : this.$t("discovery.topmenu.ent"),				// 休闲娱乐
-					icon    : 'icon-xiuxianyule',
-					url     : '/discovery/games',
-					status	: true,
-				},
+				// {
+				// 	value   : this.$t("discovery.topmenu.ent"),				// 休闲娱乐
+				// 	icon    : 'icon-xiuxianyule',
+				// 	url     : '/discovery/games',
+				// 	status	: true,
+				// },
+				// 2019-02-25 移动至应用界面
 				{
 					value   : this.$t("discovery.topmenu.recharge"),		// 充值
 					icon    : 'icon-chongzhi',

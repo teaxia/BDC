@@ -33,8 +33,8 @@ import wallet from './views/wallet.vue'
     import notice from './views/wallet/notice.vue'                          // 公告列表
 
 // 应用
-import application from './views/application.vue'
-    import appindex from './views/application/appindex.vue'
+// import application from './views/application.vue'
+//     import appindex from './views/application/appindex.vue'
 // 我的
 import myhome from './views/mine'
     import mine from './views/mine/mine.vue'
@@ -104,7 +104,7 @@ let routes = [
             { path: '/discovery/bill', component: bill, name: 'bill',meta:{isIndex: 2}},
             { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
             { path: '/discovery/extract', component: extract, name: 'extract',meta:{isIndex: 2}},
-            { path: '/discovery/games', component: games, name: 'games',meta:{isIndex: 2}},
+            { path: '/discovery/games', component: games, name: 'games',meta:{isIndex: 1}},
             { path: '/discovery/gamespt', component: gamesPt, name: 'gamesPt',meta:{isIndex: 2}},
             { path: '/discovery/withdrawal', component: withdrawal, name: 'withdrawal',meta:{isIndex: 2}},
         ]
@@ -127,18 +127,18 @@ let routes = [
         ]
     },
     // 应用
-    {
-        path: '/app',
-        redirect: '/app/index',
-        component: appindex,
-        name: 'app',
-        meta:{
-            isIndex: 1                                      //  底部导航图标索引0 1 2 3
-        },
-        children: [
-            { path: '/app/index', component: appindex, name: 'appindex',meta:{isIndex: 1}}
-        ]
-    },
+    // {
+    //     path: '/app',
+    //     redirect: '/app/index',
+    //     component: appindex,
+    //     name: 'app',
+    //     meta:{
+    //         isIndex: 1                                      //  底部导航图标索引0 1 2 3
+    //     },
+    //     children: [
+    //         { path: '/app/index', component: appindex, name: 'appindex',meta:{isIndex: 1}}
+    //     ]
+    // },
     // 我的
     {
         path: '/mine',
