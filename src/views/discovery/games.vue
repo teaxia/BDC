@@ -116,7 +116,7 @@
                 bdctype     :   '',                                 // 资金类型 BDC OR CNY
                 bdcNum      :   '',                                 // 转入BDC数量
                 upstatus    :   false,                              // 点击状态
-                PName       :   '',                                 // 游戏平台 PT AG BD
+                PName       :   '',                                 // 游戏平台 PT AG BD IBC
                 gambling    :   [
                     {
                         'Name'  :   'BD棋牌',
@@ -125,7 +125,7 @@
                         'Url'   :   true
                     },
                     {
-                        'Name'  :   'AG视讯',
+                        'Name'  :   '亚游',
                         'code'  :   'AG',
                         'Img'   :   './static/images/ag.png',
                         'Url'   :   true
@@ -135,7 +135,13 @@
                         'code'  :   'PT',
                         'Img'   :   './static/images/pt.png',
                         'Url'   :   true
-                    }
+                    },
+                    {
+                        'Name'  :   '沙巴体育',
+                        'code'  :   'IBC',
+                        'Img'   :   './static/images/sb1.png',
+                        'Url'   :   true
+                    },
                 ]
 			}
 		},
@@ -192,7 +198,7 @@
                 {
                     guid 	        :   this.$storage.get('guid'),
                     ip              :   '',                              //  ip地址
-                    platformName    :   this.PName,                           //  BD,AG,PT
+                    platformName    :   this.PName,                      //  BD,AG,PT,IBC
                     gameName        :   ''                               //  （游戏名称：传空即可，仅平台名为PT时，传中文游戏名,例：超级888）
                 }).then(data => {
                     if(data){
@@ -312,11 +318,17 @@
                         this.bdctype = 'CNY'
                         this.GetBalance()
                     break;
+                    case 'IBC':
+                        this.PName = 'IBC'
+                        this.bdctype = 'CNY'
+                        this.GetBalance()
+                    break;
                     case 'PT':
                         this.$router.push({
 							path:"/discovery/gamespt",
 						});
                     break;
+                    
                     default:
                         break;
                 }
