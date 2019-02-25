@@ -70,7 +70,7 @@ export default {
             fixedAssets :   '',                                                         // 固定资产
             actAssets   :   '',                                                         // 通证资产
             gameAssets  :   '',                                                         // 游戏资产 
-            type        :   '1',                                                        // 转换类型
+            type        :   '2',                                                        // 转换类型
             num         :   '',                                                         // 兑换的数量
             matchprice  :   '0',                                                        // 计算的结果
             meus        :   ['','BDC','CNY','BDC'],
@@ -82,10 +82,10 @@ export default {
             password    :   '',
             key         :   '',
             dlist       :   [
-                {
-                    value: '1',
-                    label: this.$t("wallet.transfor.type1")
-                },
+                // {
+                //     value: '1',
+                //     label: this.$t("wallet.transfor.type1")
+                // },
                 {
                     value: '2',
                     label: this.$t("wallet.transfor.type2")
