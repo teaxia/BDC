@@ -135,8 +135,8 @@ export default {
 				guid 	    :   this.$storage.get('guid'),
 			}).then(data => {
 				if(data){
-					this.dataList[4].status = data.isShow_CZ		//	充值
-					this.dataList[6].status = data.isShow_TB		//	充值
+					this.dataList[3].status = data.isShow_CZ		//	充值
+					this.dataList[5].status = data.isShow_TB		//	充值
 				}
 			})
 		},
