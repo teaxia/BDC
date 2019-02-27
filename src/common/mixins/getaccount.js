@@ -3,6 +3,7 @@
 export const GetAccount = {
 	data(){
 		return{
+			actAssets		:	'',			// 通证资产
 			MyEarnings 		:	'',			// 我的收益
 		}
 	},
@@ -14,6 +15,7 @@ export const GetAccount = {
 				guid : this.$storage.get('guid')
 			}).then(data => {
 				if(data){
+					this.actAssets   = data.ActAssets;
 					this.$storage.set('NickName',data.NickName)                        // 昵称
 					this.$storage.set('Name',data.Name);                                // 用户名
 					(data.RealName)?this.$storage.set('RealName',data.RealName):this.$storage.set('RealName','')

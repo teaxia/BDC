@@ -88,9 +88,10 @@
                                 <td :class="v.remarks?'':'line-b height'">{{v.moneyBefore}}</td>
                                 <td :class="v.remarks?'':'line-b height'">
                                     <span :class="type==0?'red':'green'">
-                                    <span v-if="type==0">+</span>
-                                    <span v-if="type==1">-</span>
-                                    {{v.money}}</span>
+                                        <span v-if="type==0">+{{v.money}}</span>
+                                        <span v-if="type==1&&v.moneyAfter<=v.moneyBefore">-{{v.money}}</span>
+                                    </span>
+                                    <span class="red" v-if="type==1&&v.moneyAfter>v.moneyBefore">+{{v.money}}</span>
                                 </td>
                                 <td :class="v.remarks?'':'line-b height'">{{v.moneyAfter}}</td>
                                 <td :class="v.remarks?'':'line-b height'">{{v.createTime}}</td>
