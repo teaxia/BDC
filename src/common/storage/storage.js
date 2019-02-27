@@ -27,5 +27,6 @@ Storage.logout = function (){
     localStorage.removeItem('Mobile');
     localStorage.removeItem('Sex');
     localStorage.removeItem('ParentName');
+    localStorage.removeItem('currency');
 }
 export default Storage
