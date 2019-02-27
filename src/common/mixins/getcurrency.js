@@ -14,7 +14,7 @@ export const GetCurrency = {
             // 判断是否获取所有数据
             if(full=='false'){
                 // 首先，判断本地是否有缓存
-                let currency = (this.$storage.get('currency'))?this.$storage.get('currency'):'';
+                let currency = (this.$storage.get('currency_new'))?this.$storage.get('currency_new'):'';
                 // 根据语言来设置默认货币
                 if(!currency){
                     // let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
@@ -28,7 +28,7 @@ export const GetCurrency = {
                     // }
                     // 修改为默认USD货币，不根据语言默认货币
                     var cy = "USD"
-                    this.$storage.set('currency','USD');
+                    this.$storage.set('currency_new','USD');
                 }else{
                     cy = currency
                 }

@@ -199,7 +199,7 @@ export default {
 			'GetPriceByCurrency',
 			{
                 guid            : this.$storage.get('guid'),
-                currencyCode    : (this.$storage.get('currency'))?this.$storage.get('currency'):'USD'                   // 更改默认货币
+                currencyCode    : (this.$storage.get('currency_new'))?this.$storage.get('currency_new'):'USD'                   // 更改默认货币
 			},{
                 showLoading:false
             }).then(data => {

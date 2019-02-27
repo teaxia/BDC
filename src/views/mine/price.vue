@@ -39,12 +39,12 @@ export default {
                 text: this.$t("global.success"),
                 type: 'success'
             })
-			this.$storage.set('currency',this.cy);
+			this.$storage.set('currency_new',this.cy);
 		}
 	},
 	mounted() {
         this.getcurren('full');
-        let currency = (this.$storage.get('currency'))?this.$storage.get('currency'):'';
+        let currency = (this.$storage.get('currency_new'))?this.$storage.get('currency_new'):'';
         let lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
         if(!currency){
             // if(lang=="zh"){
