@@ -288,7 +288,7 @@
                 {
                     guid        :   this.$storage.get('guid'),
                     //Id        :   this.cardList[this.cardNo].Id,
-                    money       :   this.money,
+                    money       :   this.amount,
                     moneyPwd    :   this.moneyPwd,
                     RechargeCode:   this.addrs
                 }).then(data => {
