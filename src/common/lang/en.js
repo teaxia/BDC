@@ -263,6 +263,8 @@ export const en = {
                 bind        :   'Please bind the bank card first',
                 thisTime    :   'This Time money',
                 bank        :   'Bank Information',
+                min         :   'Min extract',
+                reduce      :   'Reduce',
             }
         }
     },

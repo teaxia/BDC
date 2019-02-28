@@ -47,9 +47,9 @@
                     <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
                 </group>
                 <dir>
-                    <div class="tips"><span class="space">最低提币：</span>200</div>
-                    <div class="tips"><span class="space">手续费：</span>5</div>
-                    <div class="tips"><span class="space">扣除余额：</span>{{amount}}</div>
+                    <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.min')}}：</span>200</div>
+                    <div class="tips"><span class="space">{{$t('discovery.extract.tax')}}：</span>5</div>
+                    <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.reduce')}}：</span>{{amount}}</div>
                 </dir>
                 <!-- <div class="line-b sbank">
                     <div class="bank wd">

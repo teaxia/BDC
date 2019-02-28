@@ -263,6 +263,8 @@ export const zh = {
                 bind        :   '该操作请先绑定银行卡',
                 thisTime    :   '本次提现数量',
                 bank        :   '提现银行卡',
+                min         :   '最低提币',
+                reduce      :   '扣除余额',
             }
         }
     },
