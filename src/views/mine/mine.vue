@@ -113,7 +113,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'2.6.23',				
+			version 	:	'2.6.24',				
 			messageNum	:	'',
 			ParentName	:	''
 		}
