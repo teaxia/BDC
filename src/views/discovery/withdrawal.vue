@@ -34,7 +34,9 @@
             </flexbox>
             <div class="mr20 line-b">
                 <group>
-                    <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
+                    <x-input class="test" :title="$t('discovery.extract.address')" :show-clear='false' :placeholder="$t('discovery.extract.addresstip')" v-model="addrs">
+                        <button slot="right" @click="getCli()" class="btn btn-xs btn-round">{{$t('global.paste')}}</button>
+                    </x-input>
                 </group>
                 <group>
                     <x-input :type="showtype?'text':'password'" class="test" :title="$t('wallet.tips.safetycode')" v-model="moneyPwd" :placeholder="$t('wallet.tips.inputcode')">
@@ -42,10 +44,13 @@
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" :title="$t('discovery.extract.address')" :show-clear='false' :placeholder="$t('discovery.extract.addresstip')" v-model="addrs">
-                        <button slot="right" @click="getCli()" class="btn btn-xs btn-round">{{$t('global.paste')}}</button>
-                    </x-input>
+                    <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
                 </group>
+                <dir>
+                    <div class="tips"><span class="space">最低提币：</span>200</div>
+                    <div class="tips"><span class="space">手续费：</span>5</div>
+                    <div class="tips"><span class="space">扣除余额：</span>{{amount}}</div>
+                </dir>
                 <!-- <div class="line-b sbank">
                     <div class="bank wd">
                         {{$t('discovery.withdrawal.bank')}}
@@ -155,6 +160,7 @@
                 moneyPwd    :   '',                 // 安全密码
                 showtype    :   false,		// 切换密码状态
                 addrs       :  '',              // 提币地址
+                amount      :   0,             // 扣除余额
 			}
         },
         watch:{
@@ -173,6 +179,13 @@
             cardNo(){
                 this.cardNoshow = this.cardList[this.cardNo].cardNo         // 卡号
                 this.bankName = this.cardList[this.cardNo].bankName         // 银行名称
+            },
+            money(){
+                if(this.money>0){
+                    this.amount = this.$math.add(this.money,5)
+                }else{
+                    this.amount = 0
+                }
             }
         },
 		methods: {
@@ -246,6 +259,22 @@
                 if(this.moneyPwd==''){
                     this.$vux.toast.show({
                         text: this.$t('wallet.tips.inputcode'),
+                        type: 'warn'
+                    })
+                    return
+                }
+                // 判断最低提币是否小于200
+                if(this.money<200){
+                    this.$vux.toast.show({
+                        text: '提币额不能小于200',
+                        type: 'warn'
+                    })
+                    return
+                }
+                // 判断提现额是否大于收益余额
+                if(this.money>this.myEarnings){
+                    this.$vux.toast.show({
+                        text: '您的收益额度不足',
                         type: 'warn'
                     })
                     return
