@@ -181,8 +181,8 @@
                 this.bankName = this.cardList[this.cardNo].bankName         // 银行名称
             },
             money(){
-                if(this.money>0){
-                    this.amount = this.$math.add(this.money,5)
+                if(this.money>=200){
+                    this.amount = this.$math.subtract(this.money,5)
                 }else{
                     this.amount = 0
                 }
@@ -237,10 +237,10 @@
                         //     this.bindcard = true
                         // }
                         // this.cardList   =   data.cardList           // 银行卡数据
-                        this.myEarnings =   data. myEarnings        // 
-                        this.myEarningsByHistory    =   data. myEarningsByHistory       // 历史总收益 
+                        this.myEarnings             =   data. myEarnings        // 
+                        this.myEarningsByHistory    =   data. myEarningsByHistory      // 历史总收益
                         this.myEarningsByMonth      =   data. myEarningsByMonth        // 月收益
-                        this.myEarningsByWeek       =   data. myEarningsByWeek        // 周收益
+                        this.myEarningsByWeek       =   data. myEarningsByWeek         // 周收益
                     }else{
                         this.GetInfoMyEarnings()
                     }

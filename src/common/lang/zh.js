@@ -265,7 +265,7 @@ export const zh = {
                 thisTime    :   '本次提现数量',
                 bank        :   '提现银行卡',
                 min         :   '最低提币',
-                reduce      :   '扣除余额',
+                reduce      :   '实际到账',
             }
         }
     },
