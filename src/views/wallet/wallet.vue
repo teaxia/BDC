@@ -34,7 +34,9 @@
                             </div>
                             <div class="wallet-assets game">
                                 <!-- <span class="wallet_bdc">{{(gameAssets*PriceToBDC).toFixed(8)}}</span>（BDC）<br/> -->
-                               <span class="assets-h1"> {{$t("wallet.tips.gameassets")}}</span><br/>{{gameAssets}}（CNY）
+                                <router-link to="/discovery/games">
+                                    <span class="assets-h1"> {{$t("wallet.tips.gameassets")}}</span><br/>{{gameAssets}}（CNY）
+                                </router-link>
                             </div>
                         </div>
                     </div>
