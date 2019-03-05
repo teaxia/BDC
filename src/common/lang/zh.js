@@ -193,6 +193,7 @@ export const zh = {
             tax         :   '手续费',
             fee         :   '扣除BDC',
             tip         :   "Tip:请输入Im'token地址或交易所地址",
+            min         :   '最低提币额度为200',
             tips:{
                 safetycode  :   '安全码不能为空',
                 num         :   '提币数量不能为空',

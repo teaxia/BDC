@@ -193,6 +193,7 @@ export const en = {
             tip         :   "Tip:Please enter Im'token address or exchange address",
             tax         :   'Tax',
             fee         :   'Amount of actual balance',
+            min         :   'The min extract 200',
             tips:{
                 safetycode  :   'Safety code number can not be null',
                 num         :   'BDC num can not be null',
