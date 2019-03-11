@@ -1,3 +1,95 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+.otc{
+    .title{
+        width: 250px;
+        display: flex;
+        margin:0 auto;
+        margin-top:25px;
+        .select-title{
+            &:first-child{
+                border-right: 0;
+                border-radius:15px 0 0 15px;
+            }
+            &:last-child{
+                border-radius:0 15px 15px 0;
+            }
+            border: 0.02rem solid $border-base;
+            border-radius: 15px;
+            flex:1;
+            font-size: 0.4rem;
+            line-height: 0.6rem;
+        }
+        .act-bd{
+            background: $bg-white;
+            .select-act{
+                color:$font-base;
+            }
+        }
+    }
+    .right{
+        font-size: 0.4rem;
+        line-height: 1rem;
+    }
+    .select{
+        text-align: center;
+        margin-top:20px;
+        .menu{
+            border-bottom: 0.01rem solid $font-base;
+            padding-bottom: 15px;
+        }
+    }
+    .otc-item{
+        .otc-grid{
+            padding: 5px 20px;
+        }
+        .otc-grid-title{
+            display: flex;
+            padding-bottom: 10px;
+            border-bottom: 0.01rem solid $border-base;
+            vertical-align:middle;
+            .grid-avatar{
+                background: $font-light-blue;
+                width:40px;
+                height: 40px;
+                border-radius: 50%;
+                color:$font-white;
+                text-align: center;
+                line-height: 40px;
+                font-size: 12px;
+            }
+            .grid-username{
+                height: 40px;
+                line-height: 40px;
+                margin-left: 5px;
+            }
+        }
+        .otc-grid-price{
+            flex: 3;
+            font-size:18px;
+            color: $font-empty;
+            .price{
+                color: $font-h2;
+                font-size:32px;
+                font-weight: bold;
+            }
+        }
+        .otc-grid-pay{
+            flex: 1;
+            .otc-grid-paylist{
+                margin-top:10px;
+                text-align: right;
+                .icon{
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+            .otc-grid-right{
+                margin-top: 5px;
+                text-align: right;
+                color: $font-empty;
+            }
+        }
+    }
+}
