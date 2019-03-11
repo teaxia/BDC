@@ -109,7 +109,7 @@ export const zh = {
     discovery:{
         topmenu:{ 
             bdc         :   '兑换BDC',
-            ctc         :   'CTC',
+            OTC         :   'OTC',
             market      :   '行情',
             bill        :   '账本',
             calculator  :   '计算器',

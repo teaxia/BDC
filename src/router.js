@@ -21,7 +21,8 @@ import discovery from './views/discovery.vue'
     import extract from  './views/discovery/extract.vue'                    // 提币
     import games from  './views/discovery/games.vue'                        // 游戏
     import gamesPt from  './views/discovery/gamesPt.vue'                    // PT平台单独页面
-    import withdrawal from './views/discovery/withdrawal.vue'                // 收益提现
+    import withdrawal from './views/discovery/withdrawal.vue'               // 收益提现
+    import OTC from './views/discovery/otc.vue'                             // OTC首页
     
         
 // 钱包
@@ -107,6 +108,8 @@ let routes = [
             { path: '/discovery/games', component: games, name: 'games',meta:{isIndex: 1}},
             { path: '/discovery/gamespt', component: gamesPt, name: 'gamesPt',meta:{isIndex: 2}},
             { path: '/discovery/withdrawal', component: withdrawal, name: 'withdrawal',meta:{isIndex: 2}},
+            { path: '/discovery/OTC', component: OTC, name: 'OTC',meta:{isIndex: 2}},
+            
         ]
     },
     // 钱包

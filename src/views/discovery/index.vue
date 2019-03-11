@@ -52,9 +52,9 @@ export default {
 					status	: true,
 				},
 				{
-					value   : this.$t("discovery.topmenu.ctc"),				// CTC
+					value   : this.$t("discovery.topmenu.OTC"),				// OTC
 					icon    : 'icon-CTC1',
-					url     : 'false',
+					url     : '/discovery/otc',
 					status	: true,
 				},
 				

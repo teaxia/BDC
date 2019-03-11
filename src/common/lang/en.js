@@ -109,7 +109,7 @@ export const en = {
     discovery:{
         topmenu:{
             bdc         :   'BDC',
-            ctc         :   'CTC',
+            OTC         :   'OTC',
             market      :   'Market',
             bill        :   'Bill',
             calculator  :   'Calculator',
