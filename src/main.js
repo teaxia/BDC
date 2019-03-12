@@ -18,11 +18,12 @@ import VueClipboard from 'vue-clipboard2'             // 复制内容到剪切�
 import html2canvas from 'html2canvas'                // dom转换图片
 import vselect from './components/vselect.vue'       // 自定义下拉框搜索组件
 import vfooter from './components/vfooter.vue'       // 自定义底部组件
+import myScroll from './components/myScroll.vue'       // 下拉刷新，上拉加载
 import vgrid from './components/vgrid.vue'
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
-import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table} from 'iview';
+import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Scroll} from 'iview';
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
@@ -41,6 +42,7 @@ Vue.component('grid', Grid)
 Vue.component('grid-item', GridItem)
 Vue.component('v-footer',vfooter)
 Vue.component('v-grid',vgrid)
+Vue.component('my-scroll',myScroll)
 Vue.component('cell',Cell)
 Vue.component('DatePicker',DatePicker)
 Vue.component('Select',Select)
