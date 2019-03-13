@@ -76,7 +76,6 @@ export default {
     width: 100%;
     height: 100%;
     background:rgba(0,0,0,0.5);
-    z-index:99999;
     overflow: hidden;
     .close{
         height: 450px;
@@ -121,6 +120,7 @@ export default {
 }
 .show{
     opacity: 1;
+    z-index:99999;
 }
 .hidden{
     opacity: 0;
