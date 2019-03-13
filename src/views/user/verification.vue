@@ -50,7 +50,7 @@ export default {
 			this.$server.post(
 			'ValidatePhoneNo',
 			{
-				jm 	 		: this.$md5(this.$jm.jmCode+this.code).toUpperCase(),					// 加密方法jmcode+Phone_No加密									                    // 注册传空
+				jm 	 		: this.$md5(this.$jm+this.code).toUpperCase(),					// 加密方法jmcode+Phone_No加密									                    // 注册传空
                 Phone_No	: this.mobile,
                 phoneCode   : this.code,		
 				lv   		: this.lang
@@ -75,7 +75,7 @@ export default {
 				this.$server.post(
 				'PwdBack_SendCode',
 				{
-					jm 	 		: this.$md5(this.$jm.jmCode+this.mobile).toUpperCase(),			// 加密方法Key+Phone_No加密
+					jm 	 		: this.$md5(this.$jm+this.mobile).toUpperCase(),			// 加密方法Key+Phone_No加密
 					Key  		: '',															// 注册传空
 					Phone_No	: this.mobile,
 					lv   		: this.lang

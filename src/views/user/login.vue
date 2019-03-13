@@ -55,8 +55,8 @@ export default {
 	},
 	methods: {
 		doSubmit(){
-			let pwd    = this.$md5(this.$jm.jmCode+this.PassWord).toUpperCase()  ;							// 加密方法 jmcode+pwd
-			let jm     = this.$md5(this.$jm.jmCode+this.UserName+pwd).toUpperCase();						// 加密方法 jmcode+username+md5(psw)加密
+			let pwd    = this.$md5(this.$jm+this.PassWord).toUpperCase()  ;							// 加密方法 jmcode+pwd
+			let jm     = this.$md5(this.$jm+this.UserName+pwd).toUpperCase();						// 加密方法 jmcode+username+md5(psw)加密
 			// 空值判断
 			if(!this.PassWord&&!this.UserName){
 				this.$vux.toast.show({

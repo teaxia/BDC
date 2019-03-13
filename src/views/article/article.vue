@@ -37,7 +37,7 @@
                 this.$server.post(
                 'GetNewsbulletinById',
                 {
-                    jm      : this.$md5(this.$jm.jmCode+Id).toUpperCase(),
+                    jm      : this.$md5(this.$jm+Id).toUpperCase(),
                     Id      : Id
                 }).then(data => {
                     if(data){

@@ -76,7 +76,7 @@ export default {
 			this.$server.post(
             'EditPwdByPhoneCode',
             {
-                jm 	 		: this.$md5(this.$jm.jmCode+this.username+phone).toUpperCase(),			// 加密方法Key+Phone_No加密															// 注册传空
+                jm 	 		: this.$md5(this.$jm+this.username+phone).toUpperCase(),			// 加密方法Key+Phone_No加密															// 注册传空
 				Phone_No	: phone,
 				AccountName : this.username,
                 phoneCode   : this.code,
@@ -104,7 +104,7 @@ export default {
 				this.$server.post(
 				'PwdBack_SendCode',
 				{
-					jm 	 		: this.$md5(this.$jm.jmCode+this.username+this.mobile.replace(/\s+/g,"")).toUpperCase(),			// 加密方法Key+Phone_No加密
+					jm 	 		: this.$md5(this.$jm+this.username+this.mobile.replace(/\s+/g,"")).toUpperCase(),			// 加密方法Key+Phone_No加密
 					Key  		: this.username,																	// 忘记密码传用户名
 					Phone_No	: this.mobile.replace(/\s+/g,""),
 					lv   		: this.lang
