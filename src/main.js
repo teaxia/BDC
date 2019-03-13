@@ -14,13 +14,14 @@ import {server} from './common/apis/http-service'    // 定义ajax全局
 import storage from './common/storage/storage'       // 本地数据读取
 import jmCode from './common/config/config'          // 加密串
 import VueQriously from 'vue-qriously'               // 二维码生成
-import VueClipboard from 'vue-clipboard2'             // 复制内容到剪切板
+import VueClipboard from 'vue-clipboard2'            // 复制内容到剪切板
 import html2canvas from 'html2canvas'                // dom转换图片
 import vselect from './components/vselect.vue'       // 自定义下拉框搜索组件
 import vfooter from './components/vfooter.vue'       // 自定义底部组件
-import myScroll from './components/myScroll.vue'       // 下拉刷新，上拉加载
+import myScroll from './components/myScroll.vue'     // 下拉刷新，上拉加载
+import vpopup from './components/popup.vue'          // 弹出层组件
 import vgrid from './components/vgrid.vue'
-import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Popup } from 'vux'
+import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
 import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Scroll} from 'iview';
@@ -55,6 +56,7 @@ Vue.component('Collapse',Collapse)
 Vue.component('Panel',Panel)
 Vue.component('x-textarea', XTextarea)
 Vue.component('vselect', vselect)
+Vue.component('vpopup', vpopup)
 Vue.component('Dropdown', Dropdown)
 Vue.component('DropdownMenu', DropdownMenu)
 Vue.component('DropdownItem', DropdownItem)

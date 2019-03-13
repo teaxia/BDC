@@ -1,0 +1,135 @@
+<template>
+    <div :value="value" :class="[ showPupop ? 'show' : 'hidden','mask' ]">
+        <div class="close" @click="close">
+
+        </div>
+        <div :class="[ showPupop ? 'bottom-in-active' : 'bottom-out-active','margin-top' ]">
+            <div class="title">
+                <div class="flex text left">{{leftText}}</div>
+                <div class="fx3 text">
+                    {{titleText}}
+                    <slot name='title'></slot>
+                </div>
+                <div class="flex text right">{{rightText}}</div>
+            </div>
+            <div class="content">
+                <slot name='list'></slot>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script type="text/javascript">
+export default {
+  name:'vselect',
+  props: {
+        leftText           :    String,              //  标题左边文字 
+        rightText          :    String,              //  标题右边文字
+        titleText          :    String,              //  标题文字
+        value: {
+            type: Boolean,
+            default:false
+        },
+        'onLeftText':{ // 左边按钮回调
+            type:Function, 
+            require:true
+        },
+        'onRightText':{ // 右边按钮回调
+            type:Function,
+            require:true
+        },
+  },
+  data () {
+    return {
+        showPupop            :       false,
+    }
+  },
+  methods:{
+      close(){
+          // 关闭遮罩
+          this.showPupop = false
+      }
+  },
+  watch:{
+      value(val) {
+        this.showPupop = val;
+      },
+      showPupop(val){
+        this.$emit("input",val);
+      }
+  },
+  mounted(){
+    if (this.value) {
+        this.showPupop = true;
+    }
+      //this.w = document.getElementById("sel").offsetWidth
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.mask{
+    transition-property: transform;
+    transition-duration: 300ms;
+    position: fixed;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.5);
+    z-index:99999;
+    overflow: hidden;
+    .close{
+        height: 450px;
+    }
+    .margin-top{
+        transition-property: transform;
+        transition-duration: 300ms;
+        height: 100%;
+        background:#fff;
+        padding: 20px;
+        .title{
+            background: #ffffff;
+            display: flex;
+            padding:10px 5px;
+            border-bottom: 0.01rem solid #e7e7e7;
+            .text{
+                text-align: center;
+                padding-bottom: 10px;
+                font-size: 28px;
+            }
+            .left{
+                color: #828282;
+            }
+            .right{
+                color: #FF9900;
+            }
+            .flex{
+                flex: 1;
+            }
+            .fx3{
+                flex: 3;
+            }
+        }
+        .content{
+            margin-top:10px;
+            height: auto;
+            overflow: hidden;
+            // overflow-y: scroll;
+            // -webkit-overflow-scrolling: touch;
+        }
+    }
+}
+.show{
+    opacity: 1;
+}
+.hidden{
+    opacity: 0;
+    z-index: -1;
+}
+.bottom-out-active {
+    transform: translate3d(0, 100%, 0);
+}
+.bottom-in-active {
+    transform: translate3d(0, 0, 0);
+}
+</style>
