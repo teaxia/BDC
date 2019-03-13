@@ -26,7 +26,9 @@
                 <div slot="scrollList" class="otc-item" @click="buy()" v-for="(v,index) in dataList" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
-                            <div class="grid-avatar">这</div>
+                            <Avatar size="small"  style="background:#f56a00">
+                                这
+                            </Avatar>
                             <div class="grid-username">{{v.name}}</div>
                         </div>
                         <div class="otc-grid-main">
@@ -70,6 +72,25 @@
                 发布
             </span>
         </div>
+        <div>
+            <vpopup leftText="取消" titleText="选择币种" rightText="确定" v-model="showPupop">
+                <div slot="list">
+                    <ul class="clist">
+                        <li v-for="(v,index) in currency" :key="index">
+                            <svg class="sicon" aria-hidden="true" v-if="v.indexOf($currency)>0">
+                                <use :xlink:href="`#icon-`+v"></use>
+                            </svg>
+                            <Avatar v-else size="large"  style="background:#f56a00">
+                                {{v}}
+                            </Avatar>
+                            <span class="font">
+                                {{v}}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </vpopup>
+        </div>
         <!-- 实名认证 -->
 		<Modal v-model="show" :closable="false" :mask-closable="false">
 			<div slot="header"></div>
@@ -90,7 +111,7 @@
                 active      :   true,                               //头部切换索引
                 realname    :   '',                   
                 show		:	false,      		                // 跳转至强制认证界面
-                otclist     :   ['BDC','BTC','ETH','DASH','USDT','XRP','BCH','EOS'],
+                //otclist     :   ['BDC','BTC','ETH','DASH','USDT','XRP','BCH','EOS'],
                 vindex      :   '',                                 // 菜单索引
                 page:{
                     counter:1,  
@@ -98,6 +119,8 @@
                     pageEnd:1,  
                     total:10
                 },
+                showPupop   :   false,                              // popup是否显示
+                currency    :   ['BDC','BTC','ETH','DASH','USDT','XRP','BCH','EOS','GGBC'],
                 dataList    :   [
                     {
                         name    :   '这是一个头像很长很长的用户',
@@ -188,7 +211,7 @@
 			}
         },
         watch:{
-
+            
         },
 		methods: {
 			change(){
@@ -200,9 +223,9 @@
                 this.vindex = vindex
             },
             onRefresh(mun){ //刷新回调
-                    setTimeout(()=>{
-                        this.$root.$emit('setState',3)
-                    },500)
+                setTimeout(()=>{
+                    this.$root.$emit('setState',3)
+                },500)
             },
             onPull(mun){ //加载回调
                 if(this.page.counter<=this.page.total){
@@ -235,6 +258,7 @@
                 }
             },
             buy(){
+                this.showPupop = true
                 console.log('买卖')
             }
 		},
@@ -245,7 +269,8 @@
             this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
 			if(this.realname==this.$t('global.Uncertified')){
 				this.show = false;
-			}
+            }
+            //this.currency = this.$currency
 		}
 	}
 
