@@ -12,7 +12,7 @@ import {zh} from  './common/lang/zh'
 import {en} from  './common/lang/en'
 import {server} from './common/apis/http-service'    // 定义ajax全局
 import storage from './common/storage/storage'       // 本地数据读取
-import jmCode from './common/config/config'          // 加密串
+import {jmCode,currency} from './common/config/config'          // 加密串
 import VueQriously from 'vue-qriously'               // 二维码生成
 import VueClipboard from 'vue-clipboard2'            // 复制内容到剪切板
 import html2canvas from 'html2canvas'                // dom转换图片
@@ -67,6 +67,8 @@ Vue.prototype.$md5          =   md5;                            // md5加密
 Vue.prototype.$jm           =   jmCode;                         // 加密字符串
 Vue.prototype.$math         =   math;                           // 精度计算
 Vue.prototype.$html2canvas  =   html2canvas;                    // 图片生成
+Vue.prototype.$currency     =   currency;                       // 有图标的币种
+
 const router = new VueRouter({
   routes
 })
