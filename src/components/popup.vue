@@ -72,9 +72,10 @@ export default {
     transition-property: transform;
     transition-duration: 300ms;
     position: fixed;
+    left:0;
     top:0;
-    width: 100%;
-    height: 100%;
+    right:0;
+    bottom:0;
     background:rgba(0,0,0,0.5);
     overflow: hidden;
     .close{
