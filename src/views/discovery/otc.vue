@@ -15,11 +15,11 @@
         </x-header>
         <div>
             <!-- 选择币种 -->
-            <flexbox class="pb select">
+            <!-- <flexbox class="pb select">
                 <flexbox-item v-for="(v,index) in otclist" :key="index">
                     <div @click="select(v,index)" :class="[(vindex==index)?'menu':'']"><span>{{v}}</span></div>
                 </flexbox-item>
-            </flexbox>
+            </flexbox> -->
         </div>
         <div class="main-container">
             <my-scroll :page="page" :on-refresh="onRefresh" :on-pull="onPull">
@@ -66,6 +66,9 @@
             <svg class="icon-sell" aria-hidden="true">
                 <use xlink:href="#icon-paimailiang"></use>
             </svg>
+            <span>
+                发布
+            </span>
         </div>
         <!-- 实名认证 -->
 		<Modal v-model="show" :closable="false" :mask-closable="false">
@@ -176,7 +179,7 @@
                     }
                 ],
                 page:{
-                    counter:1,             // 分页条数  
+                    counter:1,              // 分页条数  
                     pageStart:1,            // 开始页面
                     pageEnd:1,              // 结束页面
                     total:13                // 总共条数

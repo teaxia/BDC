@@ -20,7 +20,7 @@ import vselect from './components/vselect.vue'       // 自定义下拉框搜索
 import vfooter from './components/vfooter.vue'       // 自定义底部组件
 import myScroll from './components/myScroll.vue'       // 下拉刷新，上拉加载
 import vgrid from './components/vgrid.vue'
-import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea } from 'vux'
+import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Popup } from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
 import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Scroll} from 'iview';
