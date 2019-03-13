@@ -141,8 +141,8 @@
 <style lang="scss" scoped>
     .my-scroll{
         max-width: 100%;
-        max-height: 1080px;
-        height: 1080px;
+        max-height: 1170px;
+        height: 1170px;
         overflow:hidden;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
