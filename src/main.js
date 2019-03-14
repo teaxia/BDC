@@ -21,7 +21,7 @@ import vfooter from './components/vfooter.vue'       // 自定义底部组件
 import myScroll from './components/myScroll.vue'     // 下拉刷新，上拉加载
 import vpopup from './components/popup.vue'          // 弹出层组件
 import vgrid from './components/vgrid.vue'
-import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea } from 'vux'
+import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma} from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
 import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Avatar} from 'iview';
@@ -62,15 +62,17 @@ Vue.component('DropdownMenu', DropdownMenu)
 Vue.component('DropdownItem', DropdownItem)
 Vue.component('Table', Table)
 Vue.component('Avatar', Avatar)
+Vue.component('radio', NRadio)
 
-Vue.prototype.$server       = server;                           // ajax组件
+
+Vue.prototype.$server       =   server;                         // ajax组件
 Vue.prototype.$storage      =   storage;                        // 本地数据读取
 Vue.prototype.$md5          =   md5;                            // md5加密
 Vue.prototype.$jm           =   jmCode;                         // 加密字符串
 Vue.prototype.$math         =   math;                           // 精度计算
 Vue.prototype.$html2canvas  =   html2canvas;                    // 图片生成
 Vue.prototype.$currency     =   currency;                       // 有图标的币种
-
+Vue.prototype.$numberComma  =   numberComma;                       // 用于分割数字，默认为3位分割，一般用于格式化金额
 const router = new VueRouter({
   routes
 })
