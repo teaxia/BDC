@@ -27,15 +27,15 @@
                         </div>
                         <div class="wallet-band-r fr">
                             <div class="wallet-assets">
-                                <span class="assets-h1">{{$t("wallet.tips.capitalassets")}}</span><br/><span class="wallet_bdc">{{fixedAssets}}</span>（BDC）<br/>{{(fixedAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
+                                <span class="assets-h1">{{$t("wallet.tips.capitalassets")}}</span><br/><span class="wallet_bdc">{{$numberComma(fixedAssets)}}</span>（BDC）<br/>{{$numberComma((fixedAssets/PriceToBDC).toFixed(8))}}（{{CurrencyCode}}）
                             </div>
                             <div class="wallet-assets">
-                                <span class="assets-h1">{{$t("wallet.tips.actassets")}}</span><br/><span class="wallet_bdc">{{actAssets}}</span>（BDC）<br/>{{(actAssets/PriceToBDC).toFixed(8)}}（{{CurrencyCode}}）
+                                <span class="assets-h1">{{$t("wallet.tips.actassets")}}</span><br/><span class="wallet_bdc">{{$numberComma(actAssets)}}</span>（BDC）<br/>{{$numberComma((actAssets/PriceToBDC).toFixed(8))}}（{{CurrencyCode}}）
                             </div>
                             <div class="wallet-assets game">
                                 <!-- <span class="wallet_bdc">{{(gameAssets*PriceToBDC).toFixed(8)}}</span>（BDC）<br/> -->
                                 <router-link to="/discovery/games">
-                                    <span class="assets-h1"> {{$t("wallet.tips.gameassets")}}</span><br/>{{gameAssets}}（CNY）
+                                    <span class="assets-h1"> {{$t("wallet.tips.gameassets")}}</span><br/>{{$numberComma(gameAssets)}}（CNY）
                                 </router-link>
                             </div>
                         </div>
@@ -82,8 +82,8 @@
                             <span class="btc-grid-bdc">{{v.Name}}</span>
                         </div>
                         <div class="btc-grid-r">
-                            <span class="btc-grid-bdc">{{v.BDCPrice}}</span>
-                            <span>≈{{v.CurrencyPrice}}</span>
+                            <span class="btc-grid-bdc">{{$numberComma(v.BDCPrice)}}</span>
+                            <span>≈{{$numberComma(v.CurrencyPrice)}}</span>
                         </div>
                     </div>
                 </v-grid>
