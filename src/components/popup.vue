@@ -5,12 +5,12 @@
         </div>
         <div :class="[ showPupop ? 'bottom-in-active' : 'bottom-out-active','margin-top' ]">
             <div class="title">
-                <div class="flex text left">{{leftText}}</div>
+                <div @click="$emit('onLeftText')" class="flex text left">{{leftText}}</div>
                 <div class="fx3 text">
                     {{titleText}}
                     <slot name='title'></slot>
                 </div>
-                <div class="flex text right">{{rightText}}</div>
+                <div @click="$emit('onRightText')" class="flex text right">{{rightText}}</div>
             </div>
             <div class="content">
                 <slot name='list'></slot>
@@ -30,14 +30,6 @@ export default {
             type: Boolean,
             default:false
         },
-        'onLeftText':{ // 左边按钮回调
-            type:Function, 
-            require:true
-        },
-        'onRightText':{ // 右边按钮回调
-            type:Function,
-            require:true
-        },
   },
   data () {
     return {
@@ -45,10 +37,10 @@ export default {
     }
   },
   methods:{
-      close(){
-          // 关闭遮罩
-          this.showPupop = false
-      }
+        close(){
+            // 关闭遮罩
+            this.showPupop = false
+        },
   },
   watch:{
       value(val) {
@@ -82,11 +74,23 @@ export default {
         height: 450px;
     }
     .margin-top{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: #eee;
+        z-index: 501;
+        -webkit-transition-property: -webkit-transform;
+        transition-property: -webkit-transform;
         transition-property: transform;
+        transition-property: transform, -webkit-transform;
+        -webkit-transition-duration: 300ms;
         transition-duration: 300ms;
-        height: 100%;
-        background:#fff;
-        padding: 20px;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        height: auto;
+        max-height: 50%;
+//        padding: 20px;
         .title{
             background: #ffffff;
             display: flex;
@@ -94,7 +98,7 @@ export default {
             border-bottom: 0.01rem solid #e7e7e7;
             .text{
                 text-align: center;
-                padding-bottom: 10px;
+                //padding-bottom: 10px;
                 font-size: 28px;
             }
             .left{
@@ -111,9 +115,8 @@ export default {
             }
         }
         .content{
-            margin-top:10px;
-            height: auto;
             overflow: hidden;
+            position: relative;
             // overflow-y: scroll;
             // -webkit-overflow-scrolling: touch;
         }

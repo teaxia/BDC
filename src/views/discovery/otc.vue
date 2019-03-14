@@ -15,11 +15,23 @@
         </x-header>
         <div>
             <!-- 选择币种 -->
-            <!-- <flexbox class="pb select">
-                <flexbox-item v-for="(v,index) in otclist" :key="index">
-                    <div @click="select(v,index)" :class="[(vindex==index)?'menu':'']"><span>{{v}}</span></div>
+            <flexbox class="pb select">
+                <flexbox-item>
+                    <div @click="selectCurrency()">币种</div>
                 </flexbox-item>
-            </flexbox> -->
+                <flexbox-item>
+                    <div>
+                        时间
+                        <i class="iconfont icon-sanjiao_xia"></i>
+                    </div>
+                </flexbox-item>
+                <flexbox-item>
+                    <div>
+                        价格
+                        <i class="iconfont icon-sanjiao_xia"></i>
+                    </div>
+                </flexbox-item>
+            </flexbox>
         </div>
         <div class="main-container">
             <my-scroll :page="page" :on-refresh="onRefresh" :on-pull="onPull">
@@ -73,21 +85,23 @@
             </span>
         </div>
         <div>
-            <vpopup leftText="取消" titleText="选择币种" rightText="确定" v-model="showPupop">
+            <vpopup leftText="取消" titleText="选择币种" rightText="确定" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
                 <div slot="list">
-                    <ul class="clist">
-                        <li v-for="(v,index) in currency" :key="index">
-                            <svg class="sicon" aria-hidden="true" v-if="v.indexOf($currency)>0">
-                                <use :xlink:href="`#icon-`+v"></use>
-                            </svg>
-                            <Avatar v-else size="large"  style="background:#f56a00">
-                                {{v}}
-                            </Avatar>
-                            <span class="font">
-                                {{v}}
-                            </span>
-                        </li>
-                    </ul>
+                    <group gutter="0">
+                        <radio :options="currency" v-model="scurrency">
+                            <template slot="each-item" slot-scope="props">
+                                <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(currency[props.index])>0">
+                                    <use :xlink:href="`#icon-`+currency[props.index]"></use>
+                                </svg>
+                                <Avatar v-else style="background:#f56a00;margin-left:0.1rem;">
+                                    {{currency[props.index]}}
+                                </Avatar>
+                                <span class="font">
+                                    {{currency[props.index]}}
+                                </span>
+                            </template>
+                        </radio>
+                    </group>
                 </div>
             </vpopup>
         </div>
@@ -120,7 +134,9 @@
                     total:10
                 },
                 showPupop   :   false,                              // popup是否显示
-                currency    :   ['BDC','BTC','ETH','DASH','USDT','XRP','BCH','EOS','GGBC'],
+                scurrency   :   'ALL',                              // 当前选择的币种
+                deepcurrency:   '',                                 // 用于存储监听前的币种数据对象
+                currency    :   ['ALL','BDC','BTC','ETH','DASH','USDT','XRP','BCH','EOS','GGBC'],
                 dataList    :   [
                     {
                         name    :   '这是一个头像很长很长的用户',
@@ -211,7 +227,10 @@
 			}
         },
         watch:{
-            
+            scurrency(){
+                //this.showPupop = false
+                console.log(this.scurrency);
+            }
         },
 		methods: {
 			change(){
@@ -258,8 +277,21 @@
                 }
             },
             buy(){
-                this.showPupop = true
                 console.log('买卖')
+            },
+            cancelPupop(){
+                // 取消选择
+                this.showPupop = false
+                this.scurrency = this.deepcurrency
+            },
+            okPupop(){
+                // 确定选择
+                this.showPupop = false
+            },
+            selectCurrency(){
+                // 币种选择
+                this.deepcurrency = this.scurrency
+                this.showPupop = true
             }
 		},
 		mounted() {
