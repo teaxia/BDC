@@ -20,8 +20,8 @@
                 </group>
                 <div class="tips"><span>{{$t('discovery.extract.min')}}</span></div>
                 <div class="tips"><span>{{$t('discovery.extract.tax')}}：{{tax*100}}%</span></div>
-                <div class="tips"><span>{{$t('wallet.tips.actassets')}}：{{this.actAssets}}</span></div>
-                <div class="tips"><span>{{$t('discovery.extract.fee')}}：{{(bdcnum*Proportion*(1+tax)).toFixed(8)}}</span></div>
+                <div class="tips"><span>{{$t('wallet.tips.actassets')}}：{{$numberComma(this.actAssets)}}</span></div>
+                <div class="tips"><span>{{$t('discovery.extract.fee')}}：{{$numberComma((bdcnum*Proportion*(1+tax)).toFixed(8))}}</span></div>
             </div>
             <button @click="subconfirm()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
         </div>

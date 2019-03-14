@@ -5,9 +5,9 @@
             <v-grid>
                 <div class="assets">
                     <ul>
-                        <li><i class="iconfont icon-Passingassets"></i>{{$t("wallet.tips.capitalassets")}}：<span>{{fixedAssets}}</span><span class="fr">BDC</span></li>
-                        <li><i class="iconfont icon-xiaohongqi01"></i>{{$t("wallet.tips.actassets")}}：<span>{{actAssets}}</span><span class="fr">BDC</span></li>
-                        <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{gameAssets}}</span><span class="fr">CNY</span></li>   
+                        <li><i class="iconfont icon-Passingassets"></i>{{$t("wallet.tips.capitalassets")}}：<span>{{$numberComma(fixedAssets)}}</span><span class="fr">BDC</span></li>
+                        <li><i class="iconfont icon-xiaohongqi01"></i>{{$t("wallet.tips.actassets")}}：<span>{{$numberComma(actAssets)}}</span><span class="fr">BDC</span></li>
+                        <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{$numberComma(gameAssets)}}</span><span class="fr">CNY</span></li>   
                     </ul>
                 </div>
             </v-grid>
@@ -46,11 +46,11 @@
                     </flexbox-item>
                 </flexbox>
                 <div class="change-rate" v-if="type!=1">
-                    <div class="rate line-b"><span>BDC{{$t('global.price')}}:</span>{{PriceBDC}}</div>
+                    <div class="rate line-b"><span>BDC{{$t('global.price')}}:</span>{{$numberComma(PriceBDC)}}</div>
                     <div class="rate line-b"><span>{{$t('global.exchange')}}:</span>{{DHL}}</div>
                     <div class="rate">
                         <span v-if="type!=3">CNY:</span>
-                        <span v-else>BDC:</span>{{matchprice}}
+                        <span v-else>BDC:</span>{{$numberComma(matchprice)}}
                     </div>
                 </div>
             </div>

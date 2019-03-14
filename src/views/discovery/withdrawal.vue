@@ -7,28 +7,28 @@
                     <div class="center">
                         <div class="font"><i class="iconfont icon-benyueshouyi"></i></div>
                         <div>{{$t('discovery.withdrawal.week')}}</div>
-                        <div class="myearnings">{{myEarningsByWeek}}</div>
+                        <div class="myearnings">{{$numberComma(myEarningsByWeek)}}</div>
                     </div>
                 </flexbox-item>
                 <flexbox-item>
                     <div class="center">
                         <div class="font"><i class="iconfont icon-month"></i></div>
                         <div>{{$t('discovery.withdrawal.month')}}</div>
-                        <div class="myearnings">{{myEarningsByMonth}}</div>
+                        <div class="myearnings">{{$numberComma(myEarningsByMonth)}}</div>
                     </div>
                 </flexbox-item>
                 <flexbox-item>
                     <div class="center">
                         <div class="font"><i class="iconfont icon-zongji"></i></div>
                         <div>{{$t('discovery.withdrawal.total')}}</div>
-                        <div class="myearnings">{{myEarningsByHistory}}</div>
+                        <div class="myearnings">{{$numberComma(myEarningsByHistory)}}</div>
                     </div>
                 </flexbox-item>
                 <flexbox-item>
                     <div class="center">
                         <div class="font"><i class="iconfont icon-jinlingyingcaiwangtubiao81"></i></div>
                         <div>{{$t('discovery.withdrawal.myEarnings')}}</div>
-                        <div class="myearnings">{{myEarnings}}</div>
+                        <div class="myearnings">{{$numberComma(myEarnings)}}</div>
                     </div>
                 </flexbox-item>
             </flexbox>
@@ -49,7 +49,7 @@
                 <dir>
                     <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.min')}}：</span>200</div>
                     <div class="tips"><span class="space">{{$t('discovery.extract.tax')}}：</span>5</div>
-                    <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.reduce')}}：</span>{{amount}}</div>
+                    <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.reduce')}}：</span>{{$numberComma(amount)}}</div>
                 </dir>
                 <!-- <div class="line-b sbank">
                     <div class="bank wd">
@@ -75,8 +75,8 @@
                     <div class="select" :class="type==0?'act':''" @click="select(0)">{{$t('discovery.withdrawal.queryProfit')}}</div>
                 </div>
                 <div class="mr20">
-                    <div v-if="type==0">{{$t('discovery.withdrawal.datewith')}}：{{totalIn}}</div>
-                    <div v-if="type==1">{{$t('discovery.withdrawal.dateProfit')}}：{{totalOut}}</div>
+                    <div v-if="type==0">{{$t('discovery.withdrawal.datewith')}}：{{$numberComma(totalIn)}}</div>
+                    <div v-if="type==1">{{$t('discovery.withdrawal.dateProfit')}}：{{$numberComma(totalOut)}}</div>
                 </div>
                 <table class="table mr20" border="0" cellpadding="0" cellspacing="0">
                     <thead>
@@ -90,16 +90,16 @@
                     <tbody>
                         <template v-for="v in dataList">
                             <tr>
-                                <td :class="v.remarks?'':'line-b height'">{{v.moneyBefore}}</td>
+                                <td :class="v.remarks?'':'line-b height'">{{$numberComma(v.moneyBefore)}}</td>
                                 <td :class="v.remarks?'':'line-b height'">
                                     <span :class="type==0?'red':'green'">
-                                        <span v-if="type==0">+{{v.money}}</span>
-                                        <span v-if="type==1&&v.moneyAfter<=v.moneyBefore">-{{v.money}}</span>
+                                        <span v-if="type==0">+{{$numberComma(v.money)}}</span>
+                                        <span v-if="type==1&&v.moneyAfter<=v.moneyBefore">-{{$numberComma(v.money)}}</span>
                                     </span>
-                                    <span class="red" v-if="type==1&&v.moneyAfter>v.moneyBefore">+{{v.money}}</span>
+                                    <span class="red" v-if="type==1&&v.moneyAfter>v.moneyBefore">+{{$numberComma(v.money)}}</span>
                                 </td>
-                                <td :class="v.remarks?'':'line-b height'">{{v.moneyAfter}}</td>
-                                <td :class="v.remarks?'':'line-b height'">{{v.createTime}}</td>
+                                <td :class="v.remarks?'':'line-b height'">{{$numberComma(v.moneyAfter)}}</td>
+                                <td :class="v.remarks?'':'line-b height'">{{$numberComma(v.createTime)}}</td>
                             </tr>
                             <tr>
                                <td colspan="4" class="line-b"><span v-if="v.remarks">{{$t('discovery.withdrawal.remarks')}}：{{v.remarks}}</span></td> 
@@ -121,7 +121,7 @@
 		<Modal v-model="show" @on-ok="submit" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
 			<div slot="header"></div>
 			<div class="modal-body">
-                <div>{{$t('discovery.withdrawal.tips.thisTime')}}:{{money}}</div>
+                <div>{{$t('discovery.withdrawal.tips.thisTime')}}:{{$numberComma(money)}}</div>
                 <!-- <div>{{$t('discovery.withdrawal.tips.bank')}}：{{cardNoshow}}{{bankName}}</div> -->
                 <div>{{$t('discovery.extract.address')}}:{{addrs}}</div>
             </div>

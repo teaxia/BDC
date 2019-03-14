@@ -19,7 +19,7 @@
                                 <span class="bdc">{{actBB}}</span>
                             </flexbox-item>
                             <flexbox-item class="bdc">
-                                {{$t('discovery.btob.proportion')}}：1:{{proportion}}
+                                {{$t('discovery.btob.proportion')}}：1:{{$numberComma(proportion)}}
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb">
@@ -27,7 +27,7 @@
                                 <input type="text" v-model="num" :placeholder="$t('discovery.btob.num')"/>
                             </flexbox-item>
                             <flexbox-item>
-                                <div class="price">{{price}}(BDC)</div>
+                                <div class="price">{{$numberComma(price)}}(BDC)</div>
                             </flexbox-item>
                         </flexbox>
                     </div>

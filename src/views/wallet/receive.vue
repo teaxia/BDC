@@ -19,7 +19,7 @@
 						<span>{{code}}</span>
 					</div>
 					<div class="center">
-						<div>{{$t('wallet.receive.num')}}：{{num}}</div>
+						<div>{{$t('wallet.receive.num')}}：{{$numberComma(num)}}</div>
 					</div>
 				</div>
 				<div class="center mr20">

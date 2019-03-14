@@ -105,8 +105,8 @@
                     <td>{{$t("wallet.tips.date")}}</td>
                 </tr>   
                 <tr v-for="(v,index) in clockdata.List" :key="index">
-                    <td>+{{v.Money}}</td>
-                    <td>{{v.MoneyAfter}}</td>
+                    <td>+{{$numberComma(v.Money)}}</td>
+                    <td>{{$numberComma(v.MoneyAfter)}}</td>
                     <td>{{(v.CreateTime).substring(0,10)}}</td>
                 </tr>
             </table>

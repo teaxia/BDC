@@ -18,7 +18,7 @@
 					</flexbox-item>
 					<flexbox-item :span="6">
 						<div class="mine-grid-content">
-							<div class="earnings earning">{{$t('mine.menus.withdrawal')}}：{{MyEarnings}}（USDT）</div>
+							<div class="earnings earning">{{$t('mine.menus.withdrawal')}}：{{$numberComma(MyEarnings)}}（USDT）</div>
 							<div class="withdrawal earning">
 								<router-link to="/discovery/withdrawal">
 									<button class="btn btn-xs btn-round">{{$t('mine.menus.cash')}}</button>

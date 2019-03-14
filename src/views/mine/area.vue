@@ -14,13 +14,13 @@
                             <div class="v-dottedline">{{$t('mine.area.nickname')}}：{{NickName}}</div>
                             <div class="v-dottedline">{{$t('mine.area.invitecode')}}：{{InviteCode}}</div>
                             <!-- <div>{{$t('mine.area.v1count')}}：{{V1_Count}}</div> -->
-                            <div class="v-dottedline">{{$t('mine.area.v1bdc')}}：{{V1_BDC}}</div>
+                            <div class="v-dottedline">{{$t('mine.area.v1bdc')}}：{{$numberComma(V1_BDC)}}</div>
                         </flexbox-item>
                         <flexbox-item class="text-right">
-                            <div class="v-dottedline">{{$t('mine.area.groupcount')}}：{{GroupCount}}</div>
-                            <div class="v-dottedline">{{$t('mine.area.groupbdc')}}：{{GroupBDC}}</div>
+                            <div class="v-dottedline">{{$t('mine.area.groupcount')}}：{{$numberComma(GroupCount)}}</div>
+                            <div class="v-dottedline">{{$t('mine.area.groupbdc')}}：{{$numberComma(GroupBDC)}}</div>
                             <!-- <div>{{$t('mine.area.v2count')}}：{{V2_Count}}</div> -->
-                            <div class="v-dottedline">{{$t('mine.area.v2bdc')}}：{{V2_BDC}}</div>
+                            <div class="v-dottedline">{{$t('mine.area.v2bdc')}}：{{$numberComma(V2_BDC)}}</div>
                         </flexbox-item>
                     </flexbox>
                 </v-grid>
@@ -48,7 +48,7 @@
                             <div v-if="f1.InviteCode">
                                 <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.Area}}</div>
                                 <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.NickName}}{{f1.LevelName}}</div>
-                                <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.TotalAssets}}</div>
+                                <div class="v-dottedline" @click="query(f1.AccountId)">{{$numberComma(f1.TotalAssets)}}</div>
                                 <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.GroupSurplus}}</div>
                                 <div class="copy">
                                     <div>{{f1.InviteCode}}</div>
@@ -64,7 +64,7 @@
                                 <div v-if="f2.InviteCode">
                                     <div class="v-dottedline" @click="query(f2.AccountId)">{{f2.Area}}</div>
                                     <div class="v-dottedline nick" @click="query(f2.AccountId)">{{f2.NickName}}{{f2.LevelName}}</div>
-                                    <div class="v-dottedline" @click="query(f2.AccountId)">{{f2.TotalAssets}}</div>
+                                    <div class="v-dottedline" @click="query(f2.AccountId)">{{$numberComma(f2.TotalAssets)}}</div>
                                     <div class="v-dottedline" @click="query(f2.AccountId)">{{f2.GroupSurplus}}</div>
                                     <div class="copy">
                                         <div>{{f2.InviteCode}}</div>
@@ -93,7 +93,7 @@
                                 <div v-if="f3.InviteCode">
                                     <div class="v-dottedline" @click="query(f3.AccountId)">{{f3.Area}}</div>
                                     <div class="v-dottedline nick" @click="query(f3.AccountId)">{{f3.NickName}}{{f3.LevelName}}</div>
-                                    <div class="v-dottedline" @click="query(f3.AccountId)">{{f3.TotalAssets}}</div>
+                                    <div class="v-dottedline" @click="query(f3.AccountId)">{{$numberComma(f3.TotalAssets)}}</div>
                                     <div class="v-dottedline" @click="query(f3.AccountId)">{{f3.GroupSurplus}}</div>
                                     <div class="copy">
                                         <div>{{f3.InviteCode}}</div>
@@ -305,30 +305,32 @@
                         this.f5 = ''
                         this.f6 = ''
                         this.f7 = ''
-                        tree.forEach((ele,index) => {
-                            // 循环给层级赋值（以后慢慢换吧）
-                            if(ele.Level==1){
-                                this.f1 = ele
-                            }
-                            if(ele.Level==2&&ele.Area=='V1'){
-                                this.f2 = ele
-                            }
-                            if(ele.Level==2&&ele.Area=='V2'){
-                                this.f3 = ele
-                            }
-                            if(ele.Level==3&&ele.Area=='V1'&&this.f2.AccountId==ele.ParentId){
-                                this.f4 = ele
-                            }
-                            if(ele.Level==3&&ele.Area=='V2'&&this.f2.AccountId==ele.ParentId){
-                                this.f5 = ele
-                            }
-                            if(ele.Level==3&&ele.Area=='V1'&&this.f3.AccountId==ele.ParentId){
-                                this.f6 = ele
-                            }
-                            if(ele.Level==3&&ele.Area=='V2'&&this.f3.AccountId==ele.ParentId){
-                                this.f7 = ele
-                            }
-                        })
+                        if(tree){
+                            tree.forEach((ele,index) => {
+                                // 循环给层级赋值（以后慢慢换吧）
+                                if(ele.Level==1){
+                                    this.f1 = ele
+                                }
+                                if(ele.Level==2&&ele.Area=='V1'){
+                                    this.f2 = ele
+                                }
+                                if(ele.Level==2&&ele.Area=='V2'){
+                                    this.f3 = ele
+                                }
+                                if(ele.Level==3&&ele.Area=='V1'&&this.f2.AccountId==ele.ParentId){
+                                    this.f4 = ele
+                                }
+                                if(ele.Level==3&&ele.Area=='V2'&&this.f2.AccountId==ele.ParentId){
+                                    this.f5 = ele
+                                }
+                                if(ele.Level==3&&ele.Area=='V1'&&this.f3.AccountId==ele.ParentId){
+                                    this.f6 = ele
+                                }
+                                if(ele.Level==3&&ele.Area=='V2'&&this.f3.AccountId==ele.ParentId){
+                                    this.f7 = ele
+                                }
+                            })
+                        }
                     }
                 })
             },

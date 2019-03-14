@@ -42,10 +42,10 @@
                 <div v-if="type<=4||type==8"><!--收入、支出、POS、消费-->
                     <div class="tb">
                         <span class="fl">{{v.BusinessType}}</span>
-                        <span class="fr">{{v.Money}}</span>
+                        <span class="fr">{{$numberComma(v.Money)}}</span>
                     </div>
                     <div class="tb">
-                        <span class="fl"><span>{{v.MoneyType}}:</span>{{v.MoneyAfter}}</span>
+                        <span class="fl"><span>{{v.MoneyType}}:</span>{{$numberComma(v.MoneyAfter)}}</span>
                         <span class="fr">{{v.CreateTime}}</span>
                     </div>
                     <div class="tb">
@@ -56,7 +56,7 @@
                 </div><!--收入、支出、POS、消费结束-->
                 <div v-if="type==5||type==6"><!--提币、购币-->
                     <div class="tb">
-                        <span>{{v.CurrencyNum}}</span>
+                        <span>{{$numberComma(v.CurrencyNum)}}</span>
                     </div>
                     <div class="tb">
                         <span class="fl">{{v.Status}}</span>
@@ -68,8 +68,8 @@
                         {{v.Area}}
                     </div>
                     <div class="tb">
-                        <span class="fl">{{$t('discovery.bill.people')}}：{{v.MemberCount}}</span>
-                        <span class="fr">{{$t('discovery.bill.money')}}：{{v.TotalCurrency }}</span>
+                        <span class="fl">{{$t('discovery.bill.people')}}：{{$numberComma(v.MemberCount)}}</span>
+                        <span class="fr">{{$t('discovery.bill.money')}}：{{$numberComma(v.TotalCurrency)}}</span>
                     </div>
                 </div>
             </div>
