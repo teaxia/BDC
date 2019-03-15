@@ -41,9 +41,15 @@
 					jm 	 : jm,
 				}).then(data => {
 					if(data){
-                        let AD = JSON.parse(data.Result);
-                        this.ADList = AD
-                        this.Swiper();
+                        //console.log(data.Result.length)
+                        if(data.Result.length>2){
+                            let AD = JSON.parse(data.Result);
+                            this.ADList = AD
+                            this.Swiper();
+                        }else{
+                            this.ADList = ['static/images/index.png']
+                        }
+                        
 					}
                 })
             },
