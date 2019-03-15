@@ -26,8 +26,6 @@
 		data() {
 			return {
                 ADList     :    [],
-                w          :    '',          //  图片宽度
-                h          :    ''           //  图片高度
 			}
         },
 		methods: {
@@ -41,11 +39,12 @@
 					jm 	 : jm,
 				}).then(data => {
 					if(data){
-                        //console.log(data.Result.length)
                         if(data.Result.length>2){
                             let AD = JSON.parse(data.Result);
                             this.ADList = AD
-                            this.Swiper();
+                            this.$nextTick(() => {
+                                this.Swiper();
+                            });
                         }else{
                             this.ADList = ['static/images/index.png']
                         }
@@ -54,8 +53,6 @@
                 })
             },
             Swiper(){
-                this.w  =   window.screen.width
-                this.h  =   window.screen.height
                 new Swiper ('.swiper-container', {
                     loop                :   true,
                     autoplay            :   true,
@@ -112,7 +109,7 @@
     line-height: 0.5rem;
     text-align: center;
     z-index: 9999999;
-    background:#3c4451;
+    background:rgba(60,68,81,0.5);
     color:#fff;
 }
 .cneter{

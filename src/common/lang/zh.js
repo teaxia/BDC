@@ -34,7 +34,7 @@ export const zh = {
         selectArea          : '您选择的矿区为',
         confirm             : '单击“确定”继续注册。单击“取消”重新选择',
         regist              : '注册',
-        enter               : '点击进入'
+        enter               : '立即进入'
     },
     message:{
         Aread               :   '已读',
