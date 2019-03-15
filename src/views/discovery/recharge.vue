@@ -19,7 +19,7 @@
                     <x-input class="tel" :title="$t('input.mobile')" mask="999 9999 9999" :max="13" v-model="mobile" :placeholder="$t('input.tips.mobile')" keyboard="number" is-type="china-mobile"></x-input>
                 </group>
                 <group>
-                    <x-input class="tel" :title="$t('user.securitypsw')" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" keyboard="number" type="password"></x-input>
+                    <x-input class="tel" :title="$t('user.securitypsw')" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" type="password"></x-input>
                 </group>
             </div>
             <div v-if="type==1" class="secrechar">
@@ -80,7 +80,7 @@
                     <x-input class="tel" :title="$t('input.oilcard')+':'" v-model="oilcard" :placeholder="$t('input.tips.oilcard')" keyboard="number"></x-input>
                 </group>
                 <group>
-                    <x-input class="tel" :title="$t('user.securitypsw')+':'" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" keyboard="number" type="password"></x-input>
+                    <x-input class="tel" :title="$t('user.securitypsw')+':'" v-model="MoneyPwd" :placeholder="$t('wallet.tips.inputcode')" type="password"></x-input>
                 </group>
                 <!-- <group>
                     <x-input class="tel" :title="$t('input.recharge')+':'" v-model="num" :placeholder="$t('input.tips.recharge')" keyboard="number"></x-input>
