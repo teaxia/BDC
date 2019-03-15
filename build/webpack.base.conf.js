@@ -27,6 +27,7 @@ let webpackConfig = {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
       'assets':path.resolve(__dirname, '../src/assets'),
+      'swiper': 'swiper/dist/js/swiper.js'                        // 解决引入了swiper打包出错
     }
   },
   module: {

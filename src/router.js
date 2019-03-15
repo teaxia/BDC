@@ -61,7 +61,7 @@ let routes = [
     {
         path: '/index',
         component: user,
-        redirect: '/user/login',
+        redirect: '/user/index',
         name: 'user',
         hidden: true,
         meta:{
@@ -73,7 +73,7 @@ let routes = [
         path: "/",
         component: user,
         name: "loginin",
-        redirect: '/user/login',
+        redirect: '/user/index',
         children: [
             { path: '/user/index', component: index, name: 'index' },
             //{ path: '/user/regist', component: regist, name: 'regist' },

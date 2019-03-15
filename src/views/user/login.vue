@@ -12,6 +12,9 @@
 				</Select>
 			</div>
 		</div>
+		<center>
+			<img src="static/images/logo.png" style="width:3rem;height:3rem;margin-top:1rem">
+		</center>
 		<div class="enterfrom">
 			<div class="v-input v-cell">
 				<input class="input" v-model="UserName" :placeholder="$t('user.tips.username')">

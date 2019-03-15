@@ -26,6 +26,7 @@ import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dr
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
+// import 'swiper/dist/css/swiper.min.css';
 Vue.use(VueRouter)
 Vue.use(VueI18n)
 Vue.use(LoadingPlugin)
@@ -57,6 +58,7 @@ Vue.component('Dropdown', Dropdown)
 Vue.component('DropdownMenu', DropdownMenu)
 Vue.component('DropdownItem', DropdownItem)
 Vue.component('Table', Table)
+
 Vue.prototype.$server       = server;                           // ajax组件
 Vue.prototype.$storage      =   storage;                        // 本地数据读取
 Vue.prototype.$md5          =   md5;                            // md5加密
