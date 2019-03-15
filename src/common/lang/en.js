@@ -33,7 +33,8 @@ export const en = {
         paste           : 'paste',
         selectArea      : 'The mining area you choose is',
         confirm         : 'Click OK to continue registration. Click Cancel to reset',
-        regist          : 'Regist'
+        regist          : 'Regist',
+        enter           : 'Enter'
     },
     messgae:{
         Aread               :   'Already read',

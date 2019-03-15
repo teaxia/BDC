@@ -28,6 +28,7 @@ import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dr
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
+// import 'swiper/dist/css/swiper.min.css';
 Vue.use(VueRouter)
 Vue.use(VueI18n)
 Vue.use(LoadingPlugin)
@@ -72,7 +73,7 @@ Vue.prototype.$jm           =   jmCode;                         // 加密字符�
 Vue.prototype.$math         =   math;                           // 精度计算
 Vue.prototype.$html2canvas  =   html2canvas;                    // 图片生成
 Vue.prototype.$currency     =   currency;                       // 有图标的币种
-Vue.prototype.$numberComma  =   numberComma;                       // 用于分割数字，默认为3位分割，一般用于格式化金额
+Vue.prototype.$numberComma  =   numberComma;                    // 用于分割数字，默认为3位分割，一般用于格式化金额
 const router = new VueRouter({
   routes
 })
