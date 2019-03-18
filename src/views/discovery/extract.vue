@@ -22,6 +22,12 @@
                 <div class="tips"><span>{{$t('discovery.extract.tax')}}：{{tax*100}}%</span></div>
                 <div class="tips"><span>{{$t('wallet.tips.actassets')}}：{{this.actAssets}}</span></div>
                 <div class="tips"><span>{{$t('discovery.extract.fee')}}：{{(bdcnum*Proportion*(1+tax)).toFixed(8)}}</span></div>
+                <div class="tips">
+                    <span>{{$t('discovery.withdrawal.money')}}：{{this.bdcnum}}</span>
+                </div>
+                <div class="tips">
+                    <span>{{$t('discovery.withdrawal.tips.reduce')}}：{{amount}}</span>
+                </div>
             </div>
             <button @click="subconfirm()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
         </div>
@@ -33,6 +39,15 @@
                 </div>
                 <div>
                     {{$t('discovery.extract.address')}}:{{addrs}}
+                </div>
+                <div>
+                    {{$t('discovery.withdrawal.money')}}：{{this.bdcnum}}
+                </div>
+                <div>
+                    {{$t('discovery.withdrawal.tips.reduce')}}：{{this.amount}}
+                </div>
+                <div>
+                    {{$t('discovery.extract.fee')}}：{{(bdcnum*Proportion*(1+tax)).toFixed(8)}}
                 </div>
             </div>
         </Modal>
@@ -54,7 +69,8 @@ export default {
             tax         :   '',          // 手续费
             fee         :   '',         // 实际到账
             //Poundage    :   '',         // 提币手续费
-            Proportion  :   ''   // USDT:BDC价格兑换比
+            Proportion  :   '',   // USDT:BDC价格兑换比
+            amount      :   ''
 		}
 	},
 	methods: {
@@ -89,7 +105,7 @@ export default {
                 })
                 return;
             }
-            if(this.num=''){
+            if(this.bdcnum==''){
                 this.$vux.toast.show({
                     text: this.$t('discovery.extract.tips.num'),
                     type: 'warn'
@@ -135,7 +151,16 @@ export default {
                 }
             });
         }
-	},
+    },
+    watch:{
+        bdcnum(){
+            if(this.bdcnum>5){
+                this.amount = this.$math.subtract(this.bdcnum,5)
+            }else{
+                this.amount = 0
+            }
+        }
+    },
 	mounted() {
         this.GetPoundage()
         this.GetAccount();
