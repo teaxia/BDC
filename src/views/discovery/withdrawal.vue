@@ -121,8 +121,8 @@
 		<Modal v-model="show" @on-ok="submit" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
 			<div slot="header"></div>
 			<div class="modal-body">
-                <div>{{$t('discovery.withdrawal.tips.thisTime')}}:{{money}}</div>
-                <div>{{$t('discovery.withdrawal.tips.bank')}}：{{cardNoshow}}{{bankName}}</div>
+                <div>{{$t('discovery.withdrawal.tips.thisTime')}}：{{money}}</div>
+                <div>{{$t('discovery.extract.address')}}：{{addrs}}</div>
                 <div>{{$t('discovery.withdrawal.tips.reduce')}}：{{amount}}</div>
             </div>
 		</Modal>
@@ -182,7 +182,7 @@
             },
             money(){
                 if(this.money>5){
-                    this.amount = this.$math.subtract(this.money,5)
+                    this.amount = (this.$math.subtract(this.money,5)).toFixed(8)
                 }else{
                     this.amount = 0
                 }
@@ -295,7 +295,7 @@
                 {
                     guid        :   this.$storage.get('guid'),
                     //Id        :   this.cardList[this.cardNo].Id,
-                    money       :   this.amount,
+                    money       :   this.money,
                     moneyPwd    :   this.moneyPwd,
                     RechargeCode:   this.addrs
                 }).then(data => {

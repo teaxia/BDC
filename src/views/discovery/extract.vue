@@ -38,7 +38,7 @@
                     {{$t('discovery.extract.tips.tip')}}
                 </div>
                 <div>
-                    {{$t('discovery.extract.address')}}:{{addrs}}
+                    {{$t('discovery.extract.address')}}：{{addrs}}
                 </div>
                 <div>
                     {{$t('discovery.withdrawal.money')}}：{{this.bdcnum}}
@@ -155,7 +155,7 @@ export default {
     watch:{
         bdcnum(){
             if(this.bdcnum>5){
-                this.amount = this.$math.subtract(this.bdcnum,5)
+                this.amount = (this.$math.subtract(this.bdcnum,5)).toFixed(8)
             }else{
                 this.amount = 0
             }
