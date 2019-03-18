@@ -77,12 +77,14 @@
             </my-scroll>
         </div>
         <div class="sell">
-            <svg class="icon-sell" aria-hidden="true">
-                <use xlink:href="#icon-paimailiang"></use>
-            </svg>
-            <span>
-                发布
-            </span>
+            <router-link to="/discovery/OTC/sell">
+                <svg class="icon-sell" aria-hidden="true">
+                    <use xlink:href="#icon-paimailiang"></use>
+                </svg>
+                <span>
+                    发布
+                </span>
+            </router-link>
         </div>
         <div>
             <vpopup leftText="取消" titleText="选择币种" rightText="确定" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
@@ -125,7 +127,6 @@
                 active      :   true,                               //头部切换索引
                 realname    :   '',                   
                 show		:	false,      		                // 跳转至强制认证界面
-                //otclist     :   ['BDC','BTC','ETH','DASH','USDT','XRP','BCH','EOS'],
                 vindex      :   '',                                 // 菜单索引
                 page:{
                     counter:1,  
@@ -141,79 +142,79 @@
                     {
                         name    :   '1是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '2是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   'Admin',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     },
                     {
                         name    :   '这是一个头像很长很长的用户',
                         price   :   '6.87',
-                        count   :   '500.00-21,862.00000000',
+                        count   :   '500.00',
                         amount  :   '3182.5254454545'
                     }
                 ],

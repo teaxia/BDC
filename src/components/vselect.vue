@@ -20,18 +20,22 @@ export default {
   },
   data () {
     return {
-      value     :   '',
-      w         :   '',                     // 输入框的宽度
+      value         :   '',
+      w             :   '',                     // 输入框的宽度
+      currency   :   '',
     }
   },
   methods:{
     onSelect(name){
         this.value = name;
-    }
+    } 
   },
   watch:{
-      data(){
-          //console.log(data)
+      value(val) {
+        this.currency = val;
+      },
+      currency(val){
+        this.$emit("input",val);
       }
   },
   mounted(){
