@@ -32,7 +32,7 @@
             getAD(){
                 let myDate = new Date();
                 let day = myDate.getDate();
-                var jm = this.$md5(this.$jm.jmCode+day).toUpperCase();
+                var jm = this.$md5(this.$jm+day).toUpperCase();
                 this.$server.post(
 				'GetADList',
 				{
