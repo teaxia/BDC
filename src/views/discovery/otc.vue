@@ -39,7 +39,7 @@
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
                             <Avatar size="small"  style="background:#f56a00">
-                                这
+                                {{$strcut(v.name,1)}}
                             </Avatar>
                             <div class="grid-username">{{v.name}}</div>
                         </div>
@@ -139,19 +139,19 @@
                 currency    :   ['ALL','BDC','BTC','ETH','DASH','USDT','XRP','BCH','EOS','GGBC'],
                 dataList    :   [
                     {
-                        name    :   '这是一个头像很长很长的用户',
+                        name    :   '1是一个头像很长很长的用户',
                         price   :   '6.87',
                         count   :   '500.00-21,862.00000000',
                         amount  :   '3182.5254454545'
                     },
                     {
-                        name    :   '这是一个头像很长很长的用户',
+                        name    :   '2是一个头像很长很长的用户',
                         price   :   '6.87',
                         count   :   '500.00-21,862.00000000',
                         amount  :   '3182.5254454545'
                     },
                     {
-                        name    :   '这是一个头像很长很长的用户',
+                        name    :   'Admin',
                         price   :   '6.87',
                         count   :   '500.00-21,862.00000000',
                         amount  :   '3182.5254454545'
