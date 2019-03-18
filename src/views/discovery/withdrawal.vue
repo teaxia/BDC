@@ -47,7 +47,7 @@
                     <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
                 </group>
                 <dir>
-                    <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.min')}}：</span>200</div>
+                    <!-- <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.min')}}：</span>200</div> -->
                     <div class="tips"><span class="space">{{$t('discovery.extract.tax')}}：</span>5</div>
                     <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.reduce')}}：</span>{{amount}}</div>
                 </dir>
@@ -181,7 +181,7 @@
                 this.bankName = this.cardList[this.cardNo].bankName         // 银行名称
             },
             money(){
-                if(this.money>=200){
+                if(this.money>5){
                     this.amount = this.$math.subtract(this.money,5)
                 }else{
                     this.amount = 0
@@ -264,9 +264,16 @@
                     return
                 }
                 // 判断最低提币是否小于200
-                if(this.money<200){
+                // if(this.money<200){
+                //     this.$vux.toast.show({
+                //         text: '提币额不能小于200',
+                //         type: 'warn'
+                //     })
+                //     return
+                // }
+                if(this.money==''){
                     this.$vux.toast.show({
-                        text: '提币额不能小于200',
+                        text: '提币数量不能为空',
                         type: 'warn'
                     })
                     return
