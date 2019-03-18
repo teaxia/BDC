@@ -121,9 +121,9 @@
 		<Modal v-model="show" @on-ok="submit" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
 			<div slot="header"></div>
 			<div class="modal-body">
-                <div>{{$t('discovery.withdrawal.tips.thisTime')}}:{{$numberComma(money)}}</div>
-                <!-- <div>{{$t('discovery.withdrawal.tips.bank')}}：{{cardNoshow}}{{bankName}}</div> -->
-                <div>{{$t('discovery.extract.address')}}:{{addrs}}</div>
+                <div>{{$t('discovery.withdrawal.tips.thisTime')}}:{{money}}</div>
+                <div>{{$t('discovery.withdrawal.tips.bank')}}：{{cardNoshow}}{{bankName}}</div>
+                <div>{{$t('discovery.withdrawal.tips.reduce')}}：{{amount}}</div>
             </div>
 		</Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
