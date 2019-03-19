@@ -73,15 +73,15 @@
                                 </div>
                                 <div class="areareg" v-else>
                                     <!-- A区传值 -->
-                                    {{$t('mine.area.invitecode')}}：{{InviteCode}}
+                                    <!-- {{$t('mine.area.invitecode')}}：{{InviteCode}}
                                     <div class="btnreg">
                                         <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('global.regist')}}</button>
                                         <button class="btn btn-auto btn-round" @click="ViewLink(InviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('mine.area.viewLink')}}</button>
-                                    </div>
-                                    {{$t('mine.area.invitecode')}}：{{MyInviteCode}}
+                                    </div> -->
+                                    <!-- {{$t('mine.area.invitecode')}}：{{MyInviteCode}} -->
                                     <div class="btnreg">
                                         <button class="btn btn-auto btn-round" @click="toRegist(MyInviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('global.regist')}}</button>
-                                        <button class="btn btn-auto btn-round" @click="ViewLink(MyInviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('mine.area.viewLink')}}</button>
+                                        <!-- <button class="btn btn-auto btn-round" @click="ViewLink(MyInviteCode,'A',f1.AccountId,f1.AccountId+'A')">{{$t('mine.area.viewLink')}}</button> -->
                                     </div>
                                     <div class="note"><button class="btn btn-red btn-auto btn-round">{{$t('mine.area.note')}}：{{f1.AccountId}}A</button></div>
                                 </div>
@@ -102,15 +102,15 @@
                                 </div>
                                 <div class="areareg" v-else>
                                     <!-- B区传值 -->
-                                    {{$t('mine.area.invitecode')}}：{{InviteCode}}
+                                    <!-- {{$t('mine.area.invitecode')}}：{{InviteCode}}
                                     <div class="btnreg">
                                         <button class="btn btn-auto btn-round" @click="toRegist(InviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('global.regist')}}</button>
                                         <button class="btn btn-auto btn-round" @click="ViewLink(InviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('mine.area.viewLink')}}</button>
-                                    </div>
-                                    {{$t('mine.area.invitecode')}}：{{MyInviteCode}}
+                                    </div> -->
+                                    <!-- {{$t('mine.area.invitecode')}}：{{MyInviteCode}} -->
                                     <div class="btnreg">
                                         <button class="btn btn-auto btn-round" @click="toRegist(MyInviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('global.regist')}}</button>
-                                        <button class="btn btn-auto btn-round" @click="ViewLink(MyInviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('mine.area.viewLink')}}</button>
+                                        <!-- <button class="btn btn-auto btn-round" @click="ViewLink(MyInviteCode,'B',f1.AccountId,f1.AccountId+'B')">{{$t('mine.area.viewLink')}}</button> -->
                                     </div>
                                     <div class="note"><button class="btn btn-red btn-auto btn-round">{{$t('mine.area.note')}}：{{f1.AccountId}}B</button></div>
                                 </div>
