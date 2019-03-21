@@ -157,7 +157,7 @@
                     let myDate = new Date();
                     let day = myDate.getDate();
                     // 图片上传
-                    let jm     = that.$md5(that.$jm.jmCode+day).toUpperCase();
+                    let jm     = that.$md5(that.$jm+day).toUpperCase();
                     var idcard = new FormData()
                     idcard.append('img', e.target.files[0])
                     idcard.append('jm', jm)
