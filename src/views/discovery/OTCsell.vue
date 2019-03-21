@@ -205,12 +205,23 @@ export default {
     },
     watch:{
         currency(){
-            let i = this.BDClist.indexOf(this.currency)
-            if("BDC" in this.BDClist){
-                console.log(123)
-            }
+            // let i = this.BDClist.indexOf(this.currency)
+            // if("BDC" in this.BDClist){
+            //     console.log(123)
+            // }
             // this.ConsultPirce = this.BDClist.BDC //['"'+this.currency+'"']
-            console.log(i)
+            // console.log(this.BDClist[0].this.currency)
+            switch (this.currency){
+                case 'BDC':
+                    this.ConsultPirce  = this.BDClist[0].BDC
+                break;
+                case 'BTC':
+                    this.ConsultPirce  = this.BDClist[1].BTC
+                break;
+                default:
+                    this.ConsultPirce  = '没有参考价'
+                break;
+            }
         }
     },
 	mounted() {
@@ -224,6 +235,8 @@ export default {
         this.GetBind()
         // 默认选择发布的币种
         this.$refs.sect.value = this.currency
+        // 默认币种参考价
+        this.ConsultPirce  = this.BDClist[0].BDC
     }
 }
 </script>
@@ -263,8 +276,9 @@ export default {
     font-size:38px;
 }
 .currency{
-    width: 200px;
+    width: 300px;
     margin:0 auto;
+    text-align: center;
     .sicon{
         width:150px;
         height: 150px;
@@ -274,6 +288,13 @@ export default {
     }
     .line-height{
         line-height: 150px;
+    }
+    .font{
+        font-size:42px;
+        font-weight: bold;
+    }
+    .price{
+        font-size:30px;
     }
 }
 </style>
