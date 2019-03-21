@@ -388,6 +388,8 @@ export const zh = {
             language        :   '语言选择',
             price           :   '货币选择',
             mycard          :   '绑定银行卡',
+            alipay          :   '绑定支付宝',
+            wechart         :   '绑定微信支付',
             oldpsw          :   '旧密码',
             newpsw          :   '新密码',
             confirmpsw      :   '确认密码',

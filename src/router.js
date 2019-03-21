@@ -52,6 +52,8 @@ import myhome from './views/mine'
         import feedback from './views/mine/feedback.vue'                // 意见反馈
         import auth from './views/mine/auth.vue'                        // 实名认证
         import mycard from './views/mine/mycard.vue'                    // 绑定银行卡
+        import alipay from './views/mine/alipay.vue'                    // 绑定支付宝
+        import wechart from './views/mine/wechart.vue'                    // 绑定微信支付
     
 // 404
 import NotFound from './views/404.vue'
@@ -167,6 +169,8 @@ let routes = [
                 { path: '/mine/language', component: language, name: 'language',meta:{isIndex: 3}},
                 { path: '/mine/price', component: price, name: 'price',meta:{isIndex: 3}},
                 { path: '/mine/mycard', component: mycard, name: 'mycard',meta:{isIndex: 3}},
+                { path: '/mine/alipay', component: alipay, name: 'alipay',meta:{isIndex: 3}},
+                { path: '/mine/wechart', component: wechart, name: 'wechart',meta:{isIndex: 3}},
         ]
     },
     // 文章

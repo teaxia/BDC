@@ -388,6 +388,8 @@ export const en = {
             language        :   'Language',
             price           :   'Currency',
             mycard          :   'Bind Credit Card',
+            alipay          :   'Bind Alipay',
+            wechart         :   'Bind Wechart Pay',
             oldpsw          :   'Old password',
             newpsw          :   'New password',
             confirmpsw      :   'Confirm the password',
