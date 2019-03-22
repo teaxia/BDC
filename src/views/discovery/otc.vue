@@ -278,7 +278,10 @@
                 }
             },
             buy(){
-                console.log('买卖')
+                this.$router.push({
+                    path:"/discovery/OTC/buy",
+                });
+                //console.log('买卖')
             },
             cancelPupop(){
                 // 取消选择

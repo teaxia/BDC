@@ -24,6 +24,7 @@ import discovery from './views/discovery.vue'
     import withdrawal from './views/discovery/withdrawal.vue'               // 收益提现
     import OTC from './views/discovery/otc.vue'                             // OTC首页
         import OTCsell from './views/discovery/OTCsell.vue'                 // OTC发布售卖
+        import OTCbuy from './views/discovery/OTCbuy.vue'                   // 购买OTC
     
         
 // 钱包
@@ -113,6 +114,8 @@ let routes = [
             { path: '/discovery/withdrawal', component: withdrawal, name: 'withdrawal',meta:{isIndex: 2}},
             { path: '/discovery/OTC', component: OTC, name: 'OTC',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/sell', component: OTCsell, name: 'OTCsell',meta:{isIndex: 2}},
+                { path: '/discovery/OTC/buy', component: OTCbuy, name: 'OTCbuy',meta:{isIndex: 2}},
+                
             
         ]
     },

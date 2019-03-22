@@ -1,0 +1,38 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.information{
+    display: flex;
+    justify-content:space-between;
+    .left{
+        .price{
+            font-size:32px;
+            color:$font-orange;
+        }
+        .payment{
+            i{
+                font-size:60px;
+            }
+            .alipay{
+                color:#1296db;
+            }
+            .cardpay{
+                color:#028BF4;
+            }
+            .wechart{
+                color:#1eb1ad;
+            }
+        }
+    }
+    .right{
+        .sicon{
+            width: 180px;
+            height: 180px;
+        }
+    }
+}
+.gobuy{
+    border:0.02rem solid $bg-border;
+    border-radius: 30px;
+    padding:20px;
+}

@@ -28,7 +28,11 @@
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" title="单价" required placeholder="单价" v-model="price">
+                    <x-input class="test" type="number" title="价格" required placeholder="售卖价格" v-model="price">
+                    </x-input>
+                </group>
+                <group>
+                    <x-input class="test" type="number" title="最低限额" required placeholder="最低购买数量" v-model="price">
                     </x-input>
                 </group>
                 <group>
