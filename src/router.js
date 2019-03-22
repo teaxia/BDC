@@ -55,6 +55,8 @@ import myhome from './views/mine'
         import mycard from './views/mine/mycard.vue'                    // 绑定银行卡
         import alipay from './views/mine/alipay.vue'                    // 绑定支付宝
         import wechart from './views/mine/wechart.vue'                    // 绑定微信支付
+        import editPhoneOld from './views/mine/editPhoneOld.vue'           // 修改手机号，验证旧手机
+        import editPhoneNew from './views/mine/editPhoneNew.vue'           // 修改手机号，绑定新手机
     
 // 404
 import NotFound from './views/404.vue'
@@ -174,6 +176,8 @@ let routes = [
                 { path: '/mine/mycard', component: mycard, name: 'mycard',meta:{isIndex: 3}},
                 { path: '/mine/alipay', component: alipay, name: 'alipay',meta:{isIndex: 3}},
                 { path: '/mine/wechart', component: wechart, name: 'wechart',meta:{isIndex: 3}},
+                { path: '/mine/editPhoneOld', component: editPhoneOld, name: 'editPhoneOld',meta:{isIndex: 3}},
+                { path: '/mine/editPhoneNew', component: editPhoneNew, name: 'editPhoneNew',meta:{isIndex: 3}},
         ]
     },
     // 文章

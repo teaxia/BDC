@@ -404,6 +404,11 @@ export const en = {
             bank            :   'Opening bank',
             name            :   'Name',
             delete          :   'Delete',
+            editPhone       :   'Edit Phone No.',
+            oldPhone        :   'Old Phone',
+            newPhone        :   'New Phone',
+            bindPhone       :   'Bind Phone No.',
+            vierPhone       :   'Verification Phone No.',
             tips:{
                 oldpsw          :   'Please enter the old password',
                 newpsw          :   'Please enter a new password',
