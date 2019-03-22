@@ -38,6 +38,8 @@
                         <cell link="/mine/wechart" is-link class="cell-hei">
                             <span slot="title">
                                 <span>{{$t('mine.setting.wechart')}}</span>
+                            </span>
+                        </cell>
                         <cell link="/mine/editPhoneOld" is-link class="cell-hei">
                             <span slot="title">
                                 <span>{{$t('mine.setting.editPhone')}}</span>
