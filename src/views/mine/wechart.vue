@@ -1,9 +1,9 @@
 <template>
 	<div class="mycard" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.wechart')"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.bindwechart')"></x-header>
         <div class="pd50">
-            <div class="enterfrom">
-                <div class="mr203">上传微信收款二维码：</div>
+            <div v-if="BindCount<AllowCount" class="enterfrom">
+                <div class="mr203">{{$t('mine.setting.tips.upWechartErcode')}}：</div>
                 <div class="upimg">
                     <div class="upload">
                         <input type="file" @change="selectimg($event)" class="file" ref="back" value="" id="add" accept="image/gif,image/jpeg,image/jpg,image/png" />
@@ -13,10 +13,10 @@
                             <i class="iconfont icon-tianjia"></i>
                         </div>
                     </div>
-                    <img v-for="(item,index) in localimgs" :key="index" :src="item" class="isimg" />
+                    <img v-if="localimgs" :src="localimgs" class="isimg" />
                 </div>
                 <group>
-                    <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="name" required :placeholder="$t('mine.setting.tips.name')">
+                    <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="thirdNickName" required :placeholder="$t('mine.setting.tips.name')">
                     </x-input>
                 </group>
             </div>
@@ -24,25 +24,27 @@
             <div class="mr50 cardlist">
                 <div class="tips">
                     <p>{{$t("mine.mycard.tip")}}:</p>
-                    <p>1、每个游戏账户最多绑定<span class="bindnum">{{AllowCount}}</span>微信账户，您已经成功绑定<span class="bindnum">{{BindCount}}</span>个</p>
-                    <p>2、一个账户只能绑定同一个开户人姓名的微信账户</p>
+                    <p>每个账户最多绑定<span class="bindnum">{{AllowCount}}</span>个微信收款账号，您已经成功绑定<span class="bindnum">{{BindCount}}</span>个</p>
+                    <!-- <p>2、一个账户只能绑定同一个开户人姓名的支付宝</p> -->
                 </div>
                 <div class="mr20">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>{{$t("mine.mycard.No")}}</th>
-                                <th>{{$t("mine.mycard.bank")}}</th>
-                                <th>{{$t("mine.mycard.cardnumber")}}</th>
+                                <!-- <th>{{$t("mine.mycard.No")}}</th> -->
+                                <th>{{$t("mine.setting.name")}}</th>
                                 <th>{{$t("mine.mycard.time")}}</th>
+                                <th>{{$t("mine.area.edit")}}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(v,index) in cardList" :key="index">
-                                <td>{{index+1}}</td>
-                                <td>{{v.bankName}}</td>
-                                <td>{{v.cardNo}}</td>
+                            <tr v-for="(v,index) in PayList" :key="index" v-if="v.thirdName == '微信'">
+                                <!-- <td>{{index+1}}</td> -->
+                                <td>{{v.thirdNickName}}</td>
                                 <td>{{v.CreateTime}}</td>
+                                <td>
+                                    <button @click ="delConfirm(v.Id,index)" class="btn btn-del btn-round">{{$t("mine.setting.delete")}}</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -56,67 +58,59 @@
 				<button class="btn btn-block btn-round" @click="goauth()">{{$t('wallet.send.auth')}}</button>
 			</div>
 		</Modal>
+        <Modal v-model="show2" :closable="false" :mask-closable="false">
+			<div slot="header">{{$t("mine.setting.tips.confirmDel")}}</div>
+			<div class="modal-body" id="payConfirm">
+                <div class="name"><span class="w">{{$t('mine.setting.name')}}：</span>{{confirmData.thirdNickName}}</div>
+                <!-- <div class="pay"><span class="w">{{$t('mine.setting.alipayAccess')}}：</span>{{confirmData.thirdAccountName}}</div> -->
+                <div class="ercode"><img :src="confirmData.ImgUrl"></div>
+            </div>
+			<div slot="footer">
+                <button class="btn btn-round" @click="cancel()">{{$t('global.cancel')}}</button>
+				<button class="btn btn-round" @click="ok(confirmData.Id)">{{$t('global.ok')}}</button>
+			</div>
+		</Modal>
     </div>
 </template>
 
 <script>
-
 import { GetAccount } from '../../common/mixins/getaccount'
 export default {
-    name: 'mycard',
+    name: 'alipay',
     mixins:[GetAccount],
 	data() {
 		return {
-            card      :  '',
-            banks     :  [],                       // 请求的开户行数据
-            bank      :  '',
-            name      :  '',
-            AllowCount:  0,                        // 允许绑卡的数据
-            BindCount :  0,                        // 已绑卡数量
-            cardList  :  [],                       // 已绑卡数据
-            show      :	 false,         		   // 跳转至强制认证界面
-            upUrl       :   '',                                 // 上传图片地址
-            imgs        :   [],                                 // 图片
-            localimgs   :   [],
+            thirdNickName           :  '',                     // 微信绑定姓名
+            AllowCount              :  3,                      // 允许绑卡的数据
+            BindCount               :  0,                      // 已绑卡数量
+            show                    :  false,            	   // 跳转至强制认证界面
+            show2                   :   false,                 // 删除二次确认
+            upUrl                   :  '',                     // 上传图片地址
+            imgs                    :  '',                     // 图片
+            localimgs               :  '',
+            PayList                 :  [],                     // 绑定数据列表
+            confirmData             :  [],                     // 确认删除的数据
+            picNum                  :  0,                      // 图片上传的计数器
 		}
 	},
 	methods: {
 		doSubmit(){
-            // 解决问题的关键方法
-            // 判断不为空
-            if(this.card==''||this.card.length<10){
-                // 判断银行卡
-                this.$vux.toast.show({
-                    text: this.$t('mine.mycard.tips.bankerror'),
-                    type: 'warn'
-                })
-                return;
-            }
-            if(this.$refs.sect.value==''){
-                // 判断开户行
-                this.$vux.toast.show({
-                    text: this.$t('mine.setting.tips.bank'),
-                    type: 'warn'
-                })
-                return;
-            }
-            if(this.name==''){
+            if(this.thirdNickName==''){
                 // 判断姓名
                 this.$vux.toast.show({
-                    text: this.$t('mine.setting.tips.name'),
+                    text: this.$t("mine.setting.tips.name"),
                     type: 'warn'
                 })
                 return;
             }
             // 提交绑定
             this.$server.post(
-            'BindBankCard',{
-                guid 	    :   this.$storage.get('guid'),
-                bankName    :   this.$refs.sect.value,
-                cardNo      :   this.card,
-                accountName :   this.name,
-                pName       :   province[this.sProvince],
-                cName       :   city[this.sProvince][this.sCity],
+            'SetThirdInfo',{
+                guid 	                :   this.$storage.get('guid'),
+                thirdName               :   '微信',
+                thirdAccountName        :   '',                                 //  
+                thirdNickName           :   this.thirdNickName,                 //  微信绑定姓名
+                ImgUrl                  :   this.imgs
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -124,32 +118,49 @@ export default {
                         type: 'success'
                     })
                     // 清空数据
-                    this.$refs.sect.value = ''
-                    this.card = ''
-                    this.name = ''
-                    this.GetBindBankCardList();
+                    this.thirdNickName      = ''
+                    this.imgs               = ''
+                    this.localimgs          = ''
+                    this.GetThirdInfo();
                 }
             })
-            
         },
-        GetBindBankCardList(){
-            // 获取已绑卡数据
+        GetThirdInfo(){
+            // 获取已微信/支付宝数据
             this.$server.post(
-            'GetBindBankCardList',{
+            'GetThirdInfo',{
                 guid 	:   this.$storage.get('guid'),
             }).then(data => {
                 if(data){
-                    this.cardList       =   data.list
-                    this.AllowCount     =   data.AllowCount
-                    this.BindCount      =   data.BindCount
+                    this.PayList = data
+                    let i = 0
+                    data.forEach(v => {
+                        if(v.thirdName=='微信'){
+                            i++;
+                        }
+                    });
+                    this.BindCount = i
                 }
             })
         },
-        ok () {
-            this.submit();
+        ok(id) {
+            // 确认删除绑定账号
+            this.$server.post(
+            'DelThirdInfo',
+            {
+                guid : this.$storage.get('guid'),
+                Id   : id
+            }).then(data => {
+                if(data){
+                    // console.log(data)
+                    this.GetThirdInfo()
+                    this.show2 = false
+                    this.confirmData = []
+                }
+            })
         },
         cancel () {
-            this.modal = false;
+            this.show2 = false
         },
         goauth () { 
             this.$router.push({
@@ -172,13 +183,6 @@ export default {
         },
         selectimg(e,file){
             // 一次只能上传1张图片
-            if(this.imgs.length>=1){
-                this.$vux.toast.show({
-                    text: '一次只能上传一张收款码',
-                    type: 'warn'
-                })
-                return
-            }
             // 选择图片并且上传
             if(e==''){
                 return;
@@ -210,7 +214,7 @@ export default {
                 var idcard = new FormData()
                 idcard.append('img', e.target.files[0])
                 idcard.append('jm', jm)
-                idcard.append('type','ProposeInfo')
+                idcard.append('type','thirdPay')
                 window.app.$vux.loading.show({
                     text: 'Loading'
                 })
@@ -225,15 +229,19 @@ export default {
                         window.app.$vux.loading.hide()
                         return
                     }
-                    that.localimgs.push(this.result)    // 把base64数据push到本地图片显示
-                    that.imgs.push(data.Data)           // 把返回的图片名字push到待上传接口
+                    that.localimgs = this.result        // 把base64数据push到本地图片显示
+                    that.imgs   = data.Data             // 把返回的图片名字push到待上传接口
                     window.app.$vux.loading.hide()
                 })
             }
         },
+        delConfirm(id,index){
+            this.show2 = true
+            this.confirmData = this.PayList[index]
+            // console.log(this.confirmData)
+        }
     },
     watch:{
-
     },
 	mounted() {
         // 更新个人中心资料
@@ -243,6 +251,7 @@ export default {
             this.show = true;
         }
         this.GetImgUpLoadUrl()
+        this.GetThirdInfo()
     }
 }
 
@@ -250,65 +259,5 @@ export default {
 
 <style scoped lang="scss">
 @import "../../scss/views/user/regist";
-.cardlist{
-    .tips{
-        .bindnum{
-            color:$font-red;
-        }
-        font-size:24px;
-    }
-    .table{
-        width: 100%;
-        border-collapse:collapse;
-        border: 0.01rem solid $border-line;
-        th{
-            border:$border-line 0.01rem solid;
-            background:$bg-border;
-        }
-        td{
-            border-bottom: 0.01rem solid $border-line;
-            padding:15px 0;
-            text-align: center;
-        }
-    }
-}
-.upimg{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    border-bottom: 0.01rem solid #eee;
-    padding-bottom: 25px;
-    .upload{
-        width: 150px;
-        height: 150px;
-        position: relative;
-        border:0.01rem solid $font-base;
-        .label{
-            position: relative;
-            z-index:11;
-            text-align: center;
-            height: 100px;
-            line-height: 100px;
-        }
-        .file{
-            display: none;
-            opacity: 0;
-        }
-        .zindex{
-            position: absolute;
-            z-index:1;
-            left: 45px;
-            top: 35px;
-            i{
-                font-size:50px;
-            }
-        }
-    }
-    .isimg{
-        width:150px;
-        height: 150px;
-        margin-bottom: 20px;
-        margin-left:20px;
-    }
-}
+@import "../../scss/views/mine/BindPay";
 </style>

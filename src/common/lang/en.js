@@ -388,8 +388,11 @@ export const en = {
             language        :   'Language',
             price           :   'Currency',
             mycard          :   'Bind Credit Card',
-            alipay          :   'Bind Alipay',
-            wechart         :   'Bind Wechart Pay',
+            bindalipay      :   'Bind Alipay',
+            bindwechart     :   'Bind Wechart Pay',
+            alipay          :   'Alipay',
+            wechart         :   'Wechart Pay',
+            alipayAccess    :   'Alipay Access',
             oldpsw          :   'Old password',
             newpsw          :   'New password',
             confirmpsw      :   'Confirm the password',
@@ -400,6 +403,7 @@ export const en = {
             card            :   'Card No.',
             bank            :   'Opening bank',
             name            :   'Name',
+            delete          :   'Delete',
             tips:{
                 oldpsw          :   'Please enter the old password',
                 newpsw          :   'Please enter a new password',
@@ -409,6 +413,11 @@ export const en = {
                 card            :   'Please enter the bank card number.',
                 bank            :   'Please enter an account bank',
                 name            :   'Please enter your name.',
+                upAlipayErcode  :   'Upload Alipay Ercode',
+                upWechartErcode :   'Upload Wechart Ercode',
+                inputalipay     :   'Please enter your Alipay',
+                confirmDel      :   'Are you sure to delete this data?',
+                alipayEnter     :   'Please enter your Alipay',
             }
         },
         feedback:{

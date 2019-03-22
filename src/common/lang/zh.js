@@ -388,8 +388,11 @@ export const zh = {
             language        :   '语言选择',
             price           :   '货币选择',
             mycard          :   '绑定银行卡',
-            alipay          :   '绑定支付宝',
-            wechart         :   '绑定微信支付',
+            bindalipay      :   '绑定支付宝',
+            bindwechart     :   '绑定微信支付',
+            alipay          :   '支付宝',
+            wechart         :   '微信支付',
+            alipayAccess    :   '支付宝账号',
             oldpsw          :   '旧密码',
             newpsw          :   '新密码',
             confirmpsw      :   '确认密码',
@@ -400,6 +403,7 @@ export const zh = {
             card            :   '银行卡号',
             bank            :   '开户行',
             name            :   '姓名',
+            delete          :   '删除',
             tips:{
                 oldpsw          :   '请输入旧密码',
                 newpsw          :   '请输入新密码',
@@ -409,6 +413,11 @@ export const zh = {
                 card            :   '请输入银行卡号',
                 bank            :   '请输入开户行',
                 name            :   '请输入姓名',
+                upAlipayErcode  :   '上传支付宝收款码',
+                upWechartErcode :   '上传微信收款码',
+                inputalipay     :   '请输入支付宝账号',
+                confirmDel      :   '是否确认删除该数据',
+                alipayEnter     :   '支付宝账号必须填写',
             }
         },
         feedback:{
