@@ -113,7 +113,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'2.7.30',				
+			version 	:	'2.8.31',				
 			messageNum	:	'',
 			ParentName	:	''
 		}
@@ -135,6 +135,7 @@ export default {
 		// @2.7.29 茶树虾	2019-03-15	修复充值页面安全密码只能输入数字的BUG；
 		// @2.7.29 茶树虾	2019-03-15	关闭启动页面LOGO；
 		// @2.7.30 茶树虾	2019-03-18	取消提币数量限制；
+		// @2.8.31 茶树虾	2019-03-18	修改错误的语言包（CTC-OTC）；增加修改手机号绑定；
 	},
 	methods: {
 		// 退出

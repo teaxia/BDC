@@ -30,6 +30,11 @@
                                 <span>{{$t('mine.setting.mycard')}}</span>
                             </span>
                         </cell>
+                        <cell link="/mine/editPhoneOld" is-link class="cell-hei">
+                            <span slot="title">
+                                <span>{{$t('mine.setting.editPhone')}}</span>
+                            </span>
+                        </cell>
                     </group>
                 </v-grid>
             </div>

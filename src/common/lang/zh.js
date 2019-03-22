@@ -110,7 +110,7 @@ export const zh = {
     discovery:{
         topmenu:{ 
             bdc         :   '兑换BDC',
-            ctc         :   'CTC',
+            ctc         :   'OTC',
             market      :   '行情',
             bill        :   '账本',
             calculator  :   '计算器',
@@ -398,6 +398,11 @@ export const zh = {
             card            :   '银行卡号',
             bank            :   '开户行',
             name            :   '姓名',
+            editPhone       :   '修改手机号',
+            oldPhone        :   '旧手机号',
+            newPhone        :   '新手机号',
+            bindPhone       :   '绑定新手机号',
+            vierPhone       :   '验证手机号',
             tips:{
                 oldpsw          :   '请输入旧密码',
                 newpsw          :   '请输入新密码',

@@ -50,6 +50,8 @@ import myhome from './views/mine'
         import feedback from './views/mine/feedback.vue'                // 意见反馈
         import auth from './views/mine/auth.vue'                        // 实名认证
         import mycard from './views/mine/mycard.vue'                    // 绑定银行卡
+        import editPhoneOld from './views/mine/editPhoneOld.vue'           // 修改手机号，验证旧手机
+        import editPhoneNew from './views/mine/editPhoneNew.vue'           // 修改手机号，绑定新手机
     
 // 404
 import NotFound from './views/404.vue'
@@ -162,6 +164,8 @@ let routes = [
                 { path: '/mine/language', component: language, name: 'language',meta:{isIndex: 3}},
                 { path: '/mine/price', component: price, name: 'price',meta:{isIndex: 3}},
                 { path: '/mine/mycard', component: mycard, name: 'mycard',meta:{isIndex: 3}},
+                { path: '/mine/editPhoneOld', component: editPhoneOld, name: 'editPhoneOld',meta:{isIndex: 3}},
+                { path: '/mine/editPhoneNew', component: editPhoneNew, name: 'editPhoneNew',meta:{isIndex: 3}},
         ]
     },
     // 文章

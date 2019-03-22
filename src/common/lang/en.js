@@ -110,7 +110,7 @@ export const en = {
     discovery:{
         topmenu:{
             bdc         :   'BDC',
-            ctc         :   'CTC',
+            ctc         :   'OTC',
             market      :   'Market',
             bill        :   'Bill',
             calculator  :   'Calculator',
@@ -398,6 +398,11 @@ export const en = {
             card            :   'Card No.',
             bank            :   'Opening bank',
             name            :   'Name',
+            editPhone       :   'Edit Phone No.',
+            oldPhone        :   'Old Phone',
+            newPhone        :   'New Phone',
+            bindPhone       :   'Bind Phone No.',
+            vierPhone       :   'Verification Phone No.',
             tips:{
                 oldpsw          :   'Please enter the old password',
                 newpsw          :   'Please enter a new password',
