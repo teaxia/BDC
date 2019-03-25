@@ -14,7 +14,7 @@
             </div>
             <flexbox>
                 <flexbox-item>
-                    <button @click="confirm()" class="btn btn-block btn-default btn-round mr50">{{$t('mine.setting.bindPhone')}}</button>
+                    <button @click="confirm()" class="btn btn-block btn-default btn-round mr50">{{$t('mine.setting.vierPhone')}}</button>
                 </flexbox-item>
             </flexbox>
         </div>
