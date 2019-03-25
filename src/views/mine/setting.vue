@@ -40,11 +40,22 @@
                                 <span>{{$t('mine.setting.wechart')}}</span>
                             </span>
                         </cell>
-                        <cell link="/mine/editPhoneOld" is-link class="cell-hei">
+                        <div @click="isPhone()" class="weui-cell cell-hei vux-tap-active weui-cell_access">
+                            <div class="weui-cell__hd"></div> 
+                            <div class="vux-cell-bd vux-cell-primary">
+                                <p>
+                                   <label class="vux-label"><span><span>{{$t('mine.setting.editPhone')}}</span></span></label> 
+                                </p>
+                                <span class="vux-label-desc"></span>
+                            </div> 
+                            <div class="weui-cell__ft">
+                            </div>
+                        </div>
+                        <!-- <cell @click="isPhone()" is-link class="cell-hei">
                             <span slot="title">
                                 <span>{{$t('mine.setting.editPhone')}}</span>
                             </span>
-                        </cell>
+                        </cell> -->
                     </group>
                 </v-grid>
             </div>
@@ -65,7 +76,17 @@ export default {
 		
 	},
 	methods: {
-		
+		isPhone(){
+            if(this.$storage.get('Mobile')){
+                this.$router.push({
+                    path:"/mine/editPhoneOld",
+                });
+            }else{
+                this.$router.push({
+                    path:"/mine/editPhoneNew",
+                });
+            }
+        }
 	},
 	mounted() {
        

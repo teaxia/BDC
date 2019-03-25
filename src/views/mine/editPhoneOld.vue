@@ -4,7 +4,7 @@
         <div class="pd50">
             <div class="enterfrom">
                 <group>
-                    <x-input class="test" :title="$t('mine.setting.oldPhone')" mask="999 9999 9999" :show-clear='false' :max="13" :placeholder="$t('user.tips.phone')" v-model="mobile">
+                    <x-input class="test" :title="$t('mine.setting.oldPhone')" :disabled="oldPhone" mask="999 9999 9999" :show-clear='false' :max="13" :placeholder="$t('user.tips.phone')" v-model="mobile">
                         <button slot="right" class="btn btn-min btn-round" @click="countDown">{{content}}</button>
                     </x-input> 
                 </group>
@@ -33,6 +33,7 @@ export default {
             totalTime   :   60,                  // 记录具体倒计时时间
 			canClick    :   true,	             // 添加canClick
             clock	    :   '',
+            oldPhone    :   false,                  // 判断是否绑定旧手机号，如果绑定了旧手机号该属性变为true禁用表单填写
 		}
 	},
 	methods: {
@@ -46,7 +47,8 @@ export default {
                 Code            :   this.code,
                 Type            :   1,                                  // 验证旧手机
                 OldPhoneGuid    :   '',                                 // 旧手机验证通过值,仅类型2使用，其余类型为空
-                lv   		    :   (this.$storage.get('lang'))?this.$storage.get('lang'):''
+                lv   		    :   (this.$storage.get('lang'))?this.$storage.get('lang'):'',
+                moneyPwd        :   ''                                  // 绑定新手机号时才使用
             }).then(data => {
                 if(data){
                     let oldGuid = data.Result.slice(5)
@@ -97,7 +99,10 @@ export default {
 		}
 	},
 	mounted() {
-
+        if(this.$storage.get('Mobile')){
+            this.mobile = this.$storage.get('Mobile')
+            this.oldPhone = true
+        }
     },
     beforeDestroy(){
         // 清除计时器
