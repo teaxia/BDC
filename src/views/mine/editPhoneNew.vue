@@ -11,6 +11,11 @@
                 <group>
                     <x-input class="test" :title="$t('user.tips.vcode')" v-model="code" required mask="999999" :max="6" :placeholder="$t('user.tips.verification')"></x-input>
                 </group>
+                <group v-if="type==3">
+                    <x-input class="test" :type="Psw?'text':'password'" :show-clear='false' :title="$t('discovery.extract.safetycode')"  v-model="security" required :placeholder="$t('wallet.tips.inputcode')">
+                        <div slot="right" ><i @click="changPsw()" :class="['iconfont',Psw?'icon-17yanjing':'icon-Close']"></i></div>
+                    </x-input>
+                </group>
             </div>
             <flexbox>
                 <flexbox-item>
@@ -34,6 +39,10 @@ export default {
 			canClick    :   true,	             // 添加canClick
             clock	    :   '',
             oldGuid     :   '',                  // 验证通过手机的GUID跟登陆GUID没有关系
+            guid        :   '',                  // 登陆的GUID
+            type        :   3,                   // 2验证手机号，3绑定新手机号
+            security    :   '',                  // 安全码
+            Psw 	    : false,		// 切换密码状态
 		}
 	},
 	methods: {
@@ -45,11 +54,13 @@ export default {
                 guid 	 		:   this.$storage.get('guid'),
                 Phone_No	    :   phoneNo, 
                 Code            :   this.code,
-                Type            :   2,                                  // 验证新手机
-                OldPhoneGuid    :   this.oldGuid,                       // 旧手机验证通过值,仅类型2使用，其余类型为空
+                Type            :   this.type,                          // 验证新手机
+                OldPhoneGuid    :   (this.oldGuid)?this.oldGuid:'',                       // 旧手机验证通过值,仅类型2使用，其余类型为空
                 lv   		    :   (this.$storage.get('lang'))?this.$storage.get('lang'):'',
+                moneyPwd        :   this.security
             }).then(data => {
                 if(data){
+                    this.$storage.set('Mobile',phoneNo)
                     this.$vux.toast.show({
                         text: this.$t("global.success"),
                         type: 'success'
@@ -68,7 +79,7 @@ export default {
             'PwdBack_SendCode',
             {
                 jm 	 		: this.$md5(this.$jm.jmCode+phoneNo).toUpperCase(),			// 加密方法Key+Phone_No加密
-                Key  		: '',              												// 注册传空
+                Key  		: (this.type==3)?this.guid:'',              							        // 旧手机号验证时传登陆GUID，绑新手机传空
                 Phone_No	: phoneNo,
                 lv   		: (this.$storage.get('lang'))?this.$storage.get('lang'):'',
             }).then(data => {
@@ -91,10 +102,18 @@ export default {
                     },1000)
                 }
             })
+        },
+        changPsw(){
+			this.Psw = !this.Psw
 		}
 	},
 	mounted() {
-        this.oldGuid = this.$route.query.code
+        this.oldGuid = this.$route.query.code           // 获取验证码的GUID
+        // 判断是否绑定旧手机号
+        if(this.$storage.get('Mobile')){
+            this.guid   =   this.$storage.get('guid')
+            this.type   =   2
+        }
     },
     beforeDestroy(){
         // 清除计时器
