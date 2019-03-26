@@ -35,4 +35,11 @@
         color:$font-white;
         border-radius: 10px;
     }
+    .select_day{
+        display: flex;
+        justify-content: space-between;
+        padding:20px 0;
+        margin-top:20px;
+        border-top:solid #cccccc 0.01rem;
+    }
 }

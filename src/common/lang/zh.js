@@ -136,7 +136,11 @@ export const zh = {
             num         :   '请输入兑换数量',
             address     :   '兑换地址',
             submit      :   '立即兑换',
-            null        :   '兑换数量不能为空'    
+            null        :   '兑换数量不能为空',
+            week        :   '周',
+            month       :   '月',
+            season      :   '季',
+            year        :   '年',    
         },
         cash:{
             title       :   '现金兑换',

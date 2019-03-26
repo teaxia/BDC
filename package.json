@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "clipboard": "^2.0.1",
+    "echarts": "^4.2.1",
     "fastclick": "^1.0.6",
     "html2canvas": "^1.0.0-alpha.12",
     "iview": "^3.2.2",

@@ -6,18 +6,16 @@
                 <v-grid v-for="(v,index) in expectinfo" :key="index" class="mr20">
                     <div class="pd-lb20">
                         <flexbox>
-                            <flexbox-item :span="6">
+                            <flexbox-item :span="7">
                                 <div class="exp-grid-center">
-                                    <div class="bd title">{{v.ExpectNo}}<span v-if="v.IsCanBuy" class="hot">{{$t('discovery.expectinfo.hot')}}</span></div>
+                                    <div class="bd title">{{v.ExpectNo}}<span v-if="v.IsCanBuy" class="hot">{{$t('discovery.expectinfo.hot')}}</span><span class="fr">{{v.Percent}}%</span></div>
                                     <!-- 隐藏进度条与百分比 -->
-                                    <!-- <div class="bd">
+                                    <div class="bd">
                                         <div class="bar_jd fl">
                                             <div class="bar_jds" :style="`width:`+v.Percent+`%`"></div>
                                         </div>
-                                        <div class="fr">
-                                            <span>{{v.Percent}}%</span>
-                                        </div>
-                                    </div> -->
+                                    </div>
+                                    <div class="bd hl" v-if="v.IsCanBuy">{{$t('discovery.expectinfo.issue')}}：{{v.BuyCurrencyNum}}</div>
                                     <div class="bd hl">{{$t('discovery.expectinfo.issue')}}：{{v.TotalCurrencyNum}}</div>
                                 </div> 
                             </flexbox-item>
