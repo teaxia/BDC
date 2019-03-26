@@ -3,14 +3,14 @@
 		<x-header :left-options="{backText:$t('global.back')}" title="发布"></x-header>
         <div class="pd50">
             <div class="currency">
-                <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(currency)>0">
-                    <use :xlink:href="`#icon-`+currency"></use>
+                <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
+                    <use :xlink:href="`#icon-`+cName"></use>
                 </svg>
                 <Avatar v-else class="sicon avatar" style="background:#f56a00;">
-                    <span class="line-height">{{currency}}</span>
+                    <span class="line-height">{{cName}}</span>
                 </Avatar>
                 <div class="font">
-                    {{currency}}
+                    {{cName}}
                 </div>
                 <div class="price">
                     参考单价：{{ConsultPirce}}
@@ -21,7 +21,10 @@
                     <div class="title wd">
                         选择币种
                     </div>
-                    <vselect ref="sect" v-model="currency" :Arr="$currency" placeholder="选择币种"></vselect>
+                    <!-- <vselect ref="sect" v-model="currency" :Arr="BDClist.key" placeholder="选择币种"></vselect> -->
+                    <Select v-model="currency">
+                        <Option v-for="(v,index) in BDClist" :value="index" :key="v.Key">{{ v.Key }}</Option>
+                    </Select>
                 </div>
                 <group>
                     <x-input class="test" type="number" title="发布数量" required placeholder="数量" v-model="num">
@@ -41,12 +44,39 @@
                 </group>
             </div>
             <div class="select-pay">
-                <i @click="select('alipay')" :class="{'iconfont':true,'icon-zhifubao':true,'alipay':alipay}"></i>
-                <i @click="select('cardpay')" :class="{'iconfont':true,'icon-yinhangqia':true,'cardpay':cardpay}"></i>
-                <i @click="select('wechart')" :class="{'iconfont':true,'icon-weixinzhifu':true,'wechart':wechart}"></i>
+                <i @click="sbankd(1)" :class="{'iconfont':true,'icon-zhifubao':true,'alipay':alipay}"></i>
+                <i @click="sbankd(2)" :class="{'iconfont':true,'icon-yinhangqia':true,'cardpay':cardpay}"></i>
+                <i @click="sbankd(0)" :class="{'iconfont':true,'icon-weixinzhifu':true,'wechart':wechart}"></i>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round">{{ $t("global.submit") }}</button>
-            
+        </div>
+        <div>
+            <vpopup leftText="取消" titleText="选择收款方式" rightText="确定" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
+                <div slot="list">
+                    <div v-if="PayType==0">
+                        <!-- 微信支付/微信二维码-昵称-时间 -->
+                        <flexbox class="cell">
+                            <flexbox-item>账户名</flexbox-item>
+                            <flexbox-item>昵称</flexbox-item>
+                            <flexbox-item>创建时间</flexbox-item>
+                        </flexbox>
+                        <flexbox class="cell" v-for="(v,index) in bankinfo" :key="index" v-if="v.thirdName=='微信'">
+                            <flexbox-item>{{v.thirdAccountName}}</flexbox-item>
+                            <flexbox-item>{{v.thirdNickName}}</flexbox-item>
+                            <flexbox-item>{{v.CreateTime}}</flexbox-item>
+                        </flexbox>
+                        
+                        
+                    </div>
+                    <div v-if="PayType==1">
+                        <!-- 微信支付/微信二维码-昵称-时间 -->
+                        
+                    </div>
+                    <div v-if="PayType==2">
+                        <!-- 银联 -->
+                    </div>
+                </div>
+            </vpopup>
         </div>
         <Modal v-model="show" :closable="false" :mask-closable="false">
 			<div slot="header"></div>
@@ -68,17 +98,21 @@ export default {
 		return {
             num       :  '',                        // 发布数量
             password  :  '',                        // 安全码
-            currency  :  'BDC',                     // 选择的币种
+            currency  :  0,                         // 选择的币种
             show      :	 false,         		    // 跳转至强制认证界面
             alipay    :  false,                     // 支付宝
             cardpay   :  false,                     // 银行卡
             wechart   :  false,                     // 微信支付
             price     :  '',                        // 单价
             ConsultPirce:   '',
-            BDClist    :   [
-                {'BDC':19522},
-                {'BTC':1522}
-            ],                 // 参考价
+            BDClist   :    [],                      // 币种以及参考价
+            cName     :  '',                        // 币种名称
+            bankinfo  : [],                         // 支付方式的信息
+            showPupop : false,                      // 支付选择弹窗
+            PayType   : 0,                          // 0微信/1支付宝/2银联
+            wechartId : '',                         // 微信支付ID
+            alipayId : '',                         // 支付宝支付ID
+            bankId : '',                         // 银联支付ID
 		}
 	},
 	methods: {
@@ -152,11 +186,15 @@ export default {
             })
         },
         GetBind(){
-            // 获取已开通收款
-            let data = ['alipay']
-            var _this = this
-            data.forEach(v=>{
-                _this.select(v,false)
+            this.$server.post(
+            'GetThirdInfo',
+            {
+                guid : this.$storage.get('guid')
+            }).then(data => {
+                if(data){
+                    this.bankinfo = data
+                    console.log(this.bankinfo)
+                }
             })
         },
         ok () {
@@ -169,6 +207,10 @@ export default {
             this.$router.push({
                 path:"/mine/myhome",
             });
+        },
+        sbankd(val){
+            this.showPupop = true
+            this.PayType   = val
         },
         select(val,hide=true){
             // 接受的支付方式'
@@ -205,27 +247,38 @@ export default {
                     }
                 break;
             }
-        }
+        },
+        OTCGetCurrenyPrice(){
+            // 获取可交易货币名称及参考价格
+            this.$server.post(
+            'OTC_GetCurrenyPrice',
+            {
+                guid : this.$storage.get('guid')
+            }).then(data => {
+                if(data){
+                    this.BDClist  = data
+                    this.cName    = data[0].Key
+                    this.ConsultPirce   =   data[0].Value
+                    // console.log(data[0].Value)
+                }
+            })
+        },
+        OTCSellOrderOn(){
+            //
+        },
+        cancelPupop(){
+            // 取消选择
+            this.showPupop = false
+        },
+        okPupop(){
+            // 确定选择
+            this.showPupop = false
+        },
     },
     watch:{
         currency(){
-            // let i = this.BDClist.indexOf(this.currency)
-            // if("BDC" in this.BDClist){
-            //     console.log(123)
-            // }
-            // this.ConsultPirce = this.BDClist.BDC //['"'+this.currency+'"']
-            // console.log(this.BDClist[0].this.currency)
-            switch (this.currency){
-                case 'BDC':
-                    this.ConsultPirce  = this.BDClist[0].BDC
-                break;
-                case 'BTC':
-                    this.ConsultPirce  = this.BDClist[1].BTC
-                break;
-                default:
-                    this.ConsultPirce  = '没有参考价'
-                break;
-            }
+            this.ConsultPirce =     this.BDClist[this.currency].Value
+            this.cName        =     this.BDClist[this.currency].Key
         }
     },
 	mounted() {
@@ -237,10 +290,9 @@ export default {
         }
         // 获取绑定的收款方式
         this.GetBind()
-        // 默认选择发布的币种
-        this.$refs.sect.value = this.currency
+        // 
         // 默认币种参考价
-        this.ConsultPirce  = this.BDClist[0].BDC
+        this.OTCGetCurrenyPrice()
     }
 }
 </script>

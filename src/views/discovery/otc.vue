@@ -92,7 +92,7 @@
                     <group gutter="0">
                         <radio :options="currency" v-model="scurrency">
                             <template slot="each-item" slot-scope="props">
-                                <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(currency[props.index])>0">
+                                <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(currency[props.index])>=0">
                                     <use :xlink:href="`#icon-`+currency[props.index]"></use>
                                 </svg>
                                 <Avatar v-else style="background:#f56a00;margin-left:0.1rem;">

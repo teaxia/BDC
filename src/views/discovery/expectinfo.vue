@@ -33,6 +33,9 @@
                         </flexbox>
                     </div>
                 </v-grid>
+                <div>
+                    <img src="http://wx3.sinaimg.cn/large/0061GFAely1g19dxl9k8lg306007r4qp.gif">
+                </div>
             </div>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
