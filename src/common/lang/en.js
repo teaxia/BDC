@@ -136,7 +136,11 @@ export const en = {
             num         :   'Please entry quantity',
             address     :   'Exchange Address',
             submit      :   'Exchange now',
-            null        :   'Quantity can not be null'    
+            null        :   'Quantity can not be null',
+            week        :   'Week',
+            month       :   'Month',
+            season      :   'season',
+            year        :   'Year',     
         },
         cash:{
             title       :   'Cash',
