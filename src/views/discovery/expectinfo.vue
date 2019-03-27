@@ -31,11 +31,6 @@
                         </flexbox>
                     </div>
                 </v-grid>
-<<<<<<< HEAD
-                <div>
-                    <img src="http://wx3.sinaimg.cn/large/0061GFAely1g19dxl9k8lg306007r4qp.gif">
-                </div>
-=======
                 <div class="pos">
                     <img :src="bgTop">
                     <div class="posg pos-2">
@@ -60,7 +55,6 @@
                     </div>
                 </div>
                 <!-- <video id="video1"  width="270" autoplay src=""></video> -->
->>>>>>> 767b600... 增加了echarts组件用于显示曲线图 增加了GIF图片
             </div>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
