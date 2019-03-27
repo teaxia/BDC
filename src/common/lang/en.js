@@ -123,11 +123,16 @@ export const en = {
             title       :   'Exchange BDC',
             hot         :   'HOT',
             issue       :   'Circulation',
+            issued      :   'Issued',
             b2b         :   'Exchange',
             cash        :   'Buy',
             salf        :   'Buy',
             notbuy      :   'Unopened',
-            success     :   'Success'
+            success     :   'Success',
+            fixedPos    :   'Fixed Pos',
+            totalPos    :   'Total Pos',
+            managePos   :   'Manage Pos',
+            spreadPos   :   'Spread Pos',
         },
         btob:{
             title       :   'Exchange',
@@ -140,7 +145,8 @@ export const en = {
             week        :   'Week',
             month       :   'Month',
             season      :   'season',
-            year        :   'Year',     
+            year        :   'Year',  
+            dataNull    :   'NO DATA',     
         },
         cash:{
             title       :   'Cash',
