@@ -1,6 +1,8 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+$space: 20px;
+$topspace:100px;
 .expectinfo{
     .exp-grid-center{
         display: flex;
@@ -38,5 +40,49 @@
                 margin-left: 10px;
             }
         }
+    }
+    .pos{
+        // width: 500px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        margin:0 auto;
+        img{
+            margin-top:5px;
+            // width: 500px;
+            width: 100%;
+            border-radius: 15px;
+        }
+        .posg{
+            position: absolute;
+            color: $font-white;
+            text-align: center;
+            font-size: 24px;
+        }
+        .pos-1{
+            left:50%;
+            top:$topspace;
+            transform: translate(-50%, 0%);
+            // color:$font-red;
+        }
+        .pos-2{
+            left: $space;
+            top:50%;
+            transform: translate(0, -50%);
+            // color:#0ffe25;
+        }
+        .pos-3{
+            left:50%;
+            bottom:$topspace;
+            transform: translate(-50%, 0%);
+            // color:#ff00ba;
+        }
+        .pos-4{
+            right:$space;
+            bottom:50%;
+            transform: translate(0, 50%);
+            // color:#fff;
+        }
+
     }
 }

@@ -86,6 +86,7 @@
                 Kdata       :   [],             // K线数据
                 TimeDay     :   [],             // y轴卓坐标
                 LeftMargin  :   55,             // 左侧间距大小
+                LastBot     :   '周',             // 上一次点击的按钮
 			}
         },
         watch:{
@@ -282,7 +283,7 @@
                     },
                 })
             },
-            GetCurrenyPrice(){
+            GetCurrenyPrice(val){
                 // 获取K线数据 
                 this.$server.post(
                 'GetCurrenyPrice_K',
@@ -292,8 +293,18 @@
                     query           :   this.Query
                 }).then(data => {
                     if(data){
-                        this.Kdata      =   data.listPrice
+                        this.Kdata      =   data.listPrice.reverse()
                         this.TimeDay    =   data.listDt.reverse()
+                        if(this.Kdata.length!=this.TimeDay.length){
+                            this.Query = this.LastBot
+                            this.$vux.toast.show({
+                                text: this.$t('discovery.btob.dataNull'),
+                                type: 'warn'
+                            })
+                            return;
+                        }
+                        //  如果有数据，更新上一次点击的按钮数据
+                        this.LastClick = val
                         this.echarts()
                     }
                 })
@@ -314,8 +325,8 @@
                         this.Query  =   '年'
                     break;
                 }
-                // 获取数据并且重新加载表
-                this.GetCurrenyPrice()
+                // 重新加载数据
+                this.GetCurrenyPrice(val)
             }
 		},
 		mounted() {

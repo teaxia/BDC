@@ -113,7 +113,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'2.8.32',				
+			version 	:	'2.9.32',				
 			messageNum	:	'',
 			ParentName	:	''
 		}
@@ -137,6 +137,7 @@ export default {
 		// @2.7.30 茶树虾	2019-03-18	取消提币数量限制；
 		// @2.8.31 茶树虾	2019-03-18	修改错误的语言包（CTC-OTC）；增加修改手机号绑定；
 		// @2.8.32 茶树虾	2019-03-19	修改错误的语言包；
+		// @2.9.32 茶树虾	2019-03-27	增加了echarts组件用于显示曲线图 增加了GIF图片
 	},
 	methods: {
 		// 退出

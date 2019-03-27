@@ -15,7 +15,7 @@
                                             <div class="bar_jds" :style="`width:`+v.Percent+`%`"></div>
                                         </div>
                                     </div>
-                                    <div class="bd hl" v-if="v.IsCanBuy">{{$t('discovery.expectinfo.issue')}}：{{v.BuyCurrencyNum}}</div>
+                                    <div class="bd hl" v-if="v.IsCanBuy">{{$t('discovery.expectinfo.issued')}}：{{v.BuyCurrencyNum}}</div>
                                     <div class="bd hl">{{$t('discovery.expectinfo.issue')}}：{{v.TotalCurrencyNum}}</div>
                                 </div> 
                             </flexbox-item>
@@ -31,9 +31,36 @@
                         </flexbox>
                     </div>
                 </v-grid>
+<<<<<<< HEAD
                 <div>
                     <img src="http://wx3.sinaimg.cn/large/0061GFAely1g19dxl9k8lg306007r4qp.gif">
                 </div>
+=======
+                <div class="pos">
+                    <img :src="bgTop">
+                    <div class="posg pos-2">
+                        <!-- 固定算力 -->
+                        <div>{{$t('discovery.expectinfo.fixedPos')}}</div>
+                        <div>{{Pos[0]}}</div>
+                    </div>
+                    <div class="posg pos-4">
+                        <!-- 管理算力 -->
+                        <div>{{$t('discovery.expectinfo.managePos')}}</div>
+                        <div>{{Pos[1]}}</div>
+                    </div>
+                    <div class="posg pos-3">
+                        <!-- 推广算力 -->
+                        <div>{{$t('discovery.expectinfo.spreadPos')}}</div>
+                        <div>{{Pos[2]}}</div>
+                    </div>
+                    <div class="posg pos-1">
+                        <!-- 总算力剩余 -->
+                        <div>{{$t('discovery.expectinfo.totalPos')}}</div>
+                        <div>{{Pos[3]}}</div>
+                    </div>
+                </div>
+                <!-- <video id="video1"  width="270" autoplay src=""></video> -->
+>>>>>>> 767b600... 增加了echarts组件用于显示曲线图 增加了GIF图片
             </div>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
@@ -45,7 +72,9 @@
         name:'expectinfo',
 		data() {
 			return {
-				expectinfo:[],
+                expectinfo  :   [],
+                Pos         :   [],             // 算力信息0:固定算力1:管理算力2:推广算力3:总算力剩余
+                bgTop       :   './static/images/BG.gif'
 			}
         },
         watch:{
@@ -56,6 +85,18 @@
                 this.$router.push({
                     path:url,
                 });
+            },
+            getPOS(){
+                // 获取算力
+                this.$server.post(
+                'GetTotalPOS',
+                {
+                    guid 	:  this.$storage.get('guid'),
+                }).then(data => {
+                    if(data){
+                        this.Pos = JSON.parse(data.Result);
+                    }
+                })
             }
 		},
 		mounted() {
@@ -68,7 +109,10 @@
 				if(data){
                     this.expectinfo = data;
 				}
-			})
+            })
+            this.getPOS()
+            // 播放视频
+            // this.videoPlay()
 		}
 	}
 
