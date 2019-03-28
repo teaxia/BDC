@@ -1,6 +1,6 @@
 <template>
 	<div class="mycard" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" title="发布"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.Selltitle')"></x-header>
         <div class="pd50">
             <div class="currency">
                 <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
@@ -13,34 +13,48 @@
                     {{cName}}
                 </div>
                 <div class="price">
-                    参考单价：{{ConsultPirce}}
+                    {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
                 </div>
             </div>
             <div class="enterfrom">
                 <div class="line-b sbank">
                     <div class="title wd">
-                        选择币种
+                        {{$t('discovery.OTC.sell.selectCurreny')}}
                     </div>
-                    <!-- <vselect ref="sect" v-model="currency" :Arr="BDClist.key" placeholder="选择币种"></vselect> -->
                     <Select v-model="currency">
                         <Option v-for="(v,index) in BDClist" :value="index" :key="v.Key">{{ v.Key }}</Option>
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="number" title="发布数量" required placeholder="数量" v-model="num">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.num')" required :placeholder="$t('discovery.OTC.sell.input.num')" v-model="num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" title="价格" required placeholder="售卖价格" v-model="price">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" title="最低限额" required placeholder="最低购买数量" v-model="price">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.minNum')" required placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="text" title="安全码" v-model="password" required placeholder="安全码">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.security')" v-model="password" required placeholder="$t('discovery.OTC.sell.security')">
                     </x-input>
+                </group>
+                <group>
+                    <div class="weui-cells vux-no-group-title">
+                        <div class="vux-x-input weui-cell test">
+                            <div class="weui-cell__hd">
+                                <label for="vux-x-input-48lhl" class="weui-label" style="width: 4em;">{{$t('discovery.OTC.sell.sale')}}</label>
+                            </div>
+                            <div class="weui-cell__bd weui-cell__primary">
+                                <i-switch size="large" v-model="isSellOn">
+                                    <span slot="open">{{$t('discovery.OTC.sell.up')}}</span>
+                                    <span slot="close">{{$t('discovery.OTC.sell.down')}}</span>
+                                </i-switch>
+                            </div>
+                        </div>
+                    </div>
                 </group>
             </div>
             <div class="select-pay">
@@ -51,29 +65,55 @@
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round">{{ $t("global.submit") }}</button>
         </div>
         <div>
-            <vpopup leftText="取消" titleText="选择收款方式" rightText="确定" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
+            <vpopup :leftText="$t('discovery.OTC.sell.close')" :titleText="$t('discovery.OTC.sell.payment')" :rightText="$t('global.ok')" @onLeftText="cancelPupop(PayType)" @onRightText="okPupop(PayType)" v-model="showPupop">
                 <div slot="list">
-                    <div v-if="PayType==0">
-                        <!-- 微信支付/微信二维码-昵称-时间 -->
-                        <flexbox class="cell">
-                            <flexbox-item>账户名</flexbox-item>
-                            <flexbox-item>昵称</flexbox-item>
-                            <flexbox-item>创建时间</flexbox-item>
-                        </flexbox>
-                        <flexbox class="cell" v-for="(v,index) in bankinfo" :key="index" v-if="v.thirdName=='微信'">
-                            <flexbox-item>{{v.thirdAccountName}}</flexbox-item>
-                            <flexbox-item>{{v.thirdNickName}}</flexbox-item>
-                            <flexbox-item>{{v.CreateTime}}</flexbox-item>
-                        </flexbox>
-                        
-                        
+                    <div v-if="PayType==0" class="selectbox">
+                        <!-- 微信二维码-昵称-时间 -->
+                        <RadioGroup v-model="wechartId" vertical class="radio">
+                            <Radio :label="v.Id" v-for="(v,index) in bankinfo" :key="index" v-if="v.thirdName=='微信'" class="radio-lable">
+                                <div class="cell" @click="pierce('wechart',v.Id)">
+                                    <div>{{v.thirdNickName}}</div>
+                                    <div>{{v.CreateTime}}</div>
+                                </div>
+                            </Radio>
+                            <div v-if="!PayNum" class="bind">
+                                <router-link to="/mine/wechart">
+                                    {{$t('discovery.OTC.sell.bindwechart')}}
+                                </router-link>
+                            </div>
+                        </RadioGroup>
                     </div>
-                    <div v-if="PayType==1">
-                        <!-- 微信支付/微信二维码-昵称-时间 -->
-                        
+                    <div v-if="PayType==1" class="selectbox">
+                        <!-- 支付宝-昵称-时间 -->
+                        <RadioGroup v-model="alipayId" vertical class="radio">
+                            <Radio :label="v.Id" v-for="(v,index) in bankinfo" :key="index" v-if="v.thirdName=='支付宝'" class="radio-lable">
+                                <div class="cell" @click="pierce('alipay',v.Id)">
+                                    <div>{{v.thirdAccountName}}</div>
+                                    <div>{{v.thirdNickName}}</div>
+                                </div>
+                            </Radio>
+                            <div v-if="!PayNum" class="bind">
+                                <router-link to="/mine/alipay">
+                                    {{$t('discovery.OTC.sell.bindalipay')}}
+                                </router-link>
+                            </div>
+                        </RadioGroup>
                     </div>
-                    <div v-if="PayType==2">
+                    <div v-if="PayType==2" class="selectbox">
                         <!-- 银联 -->
+                        <RadioGroup v-model="bankId" vertical class="radio">
+                            <Radio :label="v.Id" v-for="(v,index) in cardinfo" v-if="v.bankName" :key="index" class="radio-lable">
+                                <div class="cell" @click="pierce('cardpay',v.Id)">
+                                    <div class="text">{{v.bankName}}</div>
+                                    <div class="text">{{v.cardNo}}</div>
+                                </div>
+                            </Radio>
+                            <div v-if="!cardinfo" class="bind">
+                                <router-link to="/mine/mycard">
+                                    {{$t('discovery.OTC.sell.bindcard')}}
+                                </router-link>
+                            </div>
+                        </RadioGroup>
                     </div>
                 </div>
             </vpopup>
@@ -96,23 +136,27 @@ export default {
     mixins:[GetAccount],
 	data() {
 		return {
-            num       :  '',                        // 发布数量
-            password  :  '',                        // 安全码
-            currency  :  0,                         // 选择的币种
-            show      :	 false,         		    // 跳转至强制认证界面
-            alipay    :  false,                     // 支付宝
-            cardpay   :  false,                     // 银行卡
-            wechart   :  false,                     // 微信支付
-            price     :  '',                        // 单价
+            num         :  '',                        // 发布数量
+            password    :  '',                        // 安全码
+            currency    :  0,                         // 选择的币种
+            show        :	 false,         		  // 跳转至强制认证界面
+            alipay      :  false,                     // 支付宝
+            cardpay     :  false,                     // 银行卡
+            wechart     :  false,                     // 微信支付
+            price       :  '',                        // 单价
             ConsultPirce:   '',
-            BDClist   :    [],                      // 币种以及参考价
-            cName     :  '',                        // 币种名称
-            bankinfo  : [],                         // 支付方式的信息
-            showPupop : false,                      // 支付选择弹窗
-            PayType   : 0,                          // 0微信/1支付宝/2银联
-            wechartId : '',                         // 微信支付ID
-            alipayId : '',                         // 支付宝支付ID
-            bankId : '',                         // 银联支付ID
+            BDClist     :    [],                      // 币种以及参考价
+            cName       :  '',                        // 币种名称
+            bankinfo    : [],                         // 支付方式的信息
+            cardinfo    :   [],                       // 绑定的银行卡信息
+            showPupop   : false,                      // 支付选择弹窗
+            PayType     : 0,                          // 0微信/1支付宝/2银联
+            wechartId   : '',                         // 微信支付ID
+            alipayId    : '',                         // 支付宝支付ID
+            bankId      : '',                         // 银联支付ID
+            isSellOn    :   true,                     // 是否立即上架
+            PayNum      :   '',                       // 有多少绑定数据
+            minNum      :   '',                       // 最低限额
 		}
 	},
 	methods: {
@@ -121,15 +165,15 @@ export default {
             if(this.num==''||!pattern["Pattern.RealNo"].test(this.num)){
                 // 判断数量
                 this.$vux.toast.show({
-                    text: '数量必须填写',
+                    text: this.$t('discovery.OTC.sell.tips.num'),
                     type: 'warn'
                 })
                 return;
             }
-            if(this.currency==''){
+            if(this.cName==''){
                 // 判断选择币种
                 this.$vux.toast.show({
-                    text: '请选择您要发布的币种',
+                    text: this.$t('discovery.OTC.sell.tips.cName'),
                     type: 'warn'
                 })
                 return;
@@ -137,7 +181,24 @@ export default {
             if(this.price==''){
                 // 判断单价
                 this.$vux.toast.show({
-                    text: '单价必须填写',
+                    text: this.$t('discovery.OTC.sell.tips.price'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(this.minNum==''){
+                // 判断单价
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.tips.minNum'),
+                    type: 'warn'
+                })
+                return;
+            }
+            
+            if(this.alipayId==''&&this.bankId==''&&this.wechartId==''){
+                // 判断是否有支付方式
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.tips.payment'),
                     type: 'warn'
                 })
                 return;
@@ -145,43 +206,63 @@ export default {
             if(this.password==''){
                 // 判断单价
                 this.$vux.toast.show({
-                    text: '安全码必须填写',
+                    text: this.$t('discovery.OTC.sell.tips.security'),
                     type: 'warn'
                 })
                 return;
             }
-            // 提交绑定
-            // this.$server.post(
-            // 'BindBankCard',{
-            //     guid 	    :   this.$storage.get('guid'),
-            //     bankName    :   this.$refs.sect.value,
-            //     cardNo      :   this.card,
-            //     accountName :   this.name,
-            //     pName       :   province[this.sProvince],
-            //     cName       :   city[this.sProvince][this.sCity],
-            // }).then(data => {
-            //     if(data){
-            //         this.$vux.toast.show({
-            //             text: this.$t('global.success'),
-            //             type: 'success'
-            //         })
-            //         // 清空数据
-            //         this.$refs.sect.value = ''
-            //         this.card = ''
-            //         this.name = ''
-            //         this.GetBindBankCardList();
-            //     }
-            // })
+            // 提交发布信息
+            let dataid
+            if(this.wechartId==''){
+                if(this.alipayId==''){
+                    dataid = ''
+                }else{
+                    dataid = this.alipayId
+                }
+            }else{
+                if(this.alipayId==''){
+                    dataid = this.wechartId
+                }else{
+                    dataid = this.wechartId+','+this.alipayId
+                }
+            }
+            
+            this.$server.post(
+            'OTC_SellOrderOn',{
+                guid 	    :   this.$storage.get('guid'),
+                currenyName :   this.cName,
+                currenyNum  :   this.num,
+                price       :   this.price,
+                minBuy      :   this.minNum,
+                thirdInfoId :   dataid,
+                cardInfoId  :   this.bankId,
+                isSellOn    :   this.isSellOn
+            }).then(data => {
+                if(data){
+                    this.$vux.toast.show({
+                        text: this.$t('global.success'),
+                        type: 'success'
+                    })
+                    // 清空数据
+                    this.cName = ''
+                    this.num = ''
+                    this.price = ''
+                    this.minNum = ''
+                    this.bankId = ''
+                    this.alipayId = ''
+                    this.wechartId = ''
+                }
+            })
             
         },
         GetBindBankInfo(){
             // 请求开户银行
             this.$server.post(
-            'GetBindBankInfo',{
+            'GetBindBankCardList',{
                 guid 	:   this.$storage.get('guid'),
             }).then(data => {
                 if(data){
-                    this.banks = JSON.parse(data.Result)
+                    this.cardinfo = data.list
                 }
             })
         },
@@ -193,12 +274,8 @@ export default {
             }).then(data => {
                 if(data){
                     this.bankinfo = data
-                    console.log(this.bankinfo)
                 }
             })
-        },
-        ok () {
-            this.submit();
         },
         cancel () {
             this.modal = false;
@@ -209,38 +286,62 @@ export default {
             });
         },
         sbankd(val){
+            // 开启弹窗选择
             this.showPupop = true
+            // 给该支付方式赋值
             this.PayType   = val
+            // 判断是否绑定该支付方式
+            let _that = this
+            switch (val) {
+                case 0:
+                    //  微信支付
+                    this.bankinfo.forEach(function(item,i,arr){
+                        let p = false
+                        if(item.thirdName=='微信'){
+                            _that.PayNum = true
+                        }
+                    });
+                break;
+                case 1:
+                    // 支付宝
+                    this.bankinfo.forEach(function(item,i,arr){
+                        let p = false
+                        if(item.thirdName=='支付宝'){
+                            _that.PayNum = true
+                        }
+                    });
+                break;
+            }
         },
-        select(val,hide=true){
+        select(val,type,hide=true){
             // 接受的支付方式'
             var _this = this
             switch (val) {
                 case 'alipay':
-                    this.alipay = !this.alipay
+                    (type)?this.alipay = true:this.alipay = false
                     if(hide){
                         this.$vux.toast.show({
-                            text        :   (_this.alipay)?'开启支付宝收款':'关闭支付宝收款',
+                            text        :   (_this.alipay)?this.$t('discovery.OTC.sell.tips.openalipay'):this.$t('discovery.OTC.sell.tips.offalipay'),
                             position    :   'default',
                             type        :   'text'
                         })
                     }
                 break;
                 case 'cardpay':
-                    this.cardpay = !this.cardpay
+                    (type)?this.cardpay = true:this.cardpay = false
                     if(hide){
                         this.$vux.toast.show({
-                            text        :   (_this.cardpay)?'开启银行卡收款':'关闭银行卡收款',
+                            text        :   (_this.cardpay)?this.$t('discovery.OTC.sell.tips.opencard'):this.$t('discovery.OTC.sell.tips.offcard'),
                             position    :   'default',
                             type        :   'text'
                         })
                     }
                 break;
                 case 'wechart':
-                    this.wechart = !this.wechart
+                    (type)?this.wechart = true:this.wechart = false
                     if(hide){
                         this.$vux.toast.show({
-                            text        :   (_this.wechart)?'开启微信收款':'关闭微信收款',
+                            text        :   (_this.wechart)?this.$t('discovery.OTC.sell.tips.openwechart'):this.$t('discovery.OTC.sell.tips.offwechart'),
                             position    :   'default',
                             type        :   'text'
                         })
@@ -259,21 +360,83 @@ export default {
                     this.BDClist  = data
                     this.cName    = data[0].Key
                     this.ConsultPirce   =   data[0].Value
-                    // console.log(data[0].Value)
                 }
             })
         },
         OTCSellOrderOn(){
             //
         },
-        cancelPupop(){
-            // 取消选择
+        cancelPupop(val){
+            // 取消选择 0微信/1支付宝/2银联
+            this.showPupop = false
+            switch (val) {
+                case 0:
+                    this.wechartId  =   ''
+                    this.select('wechart')
+                break;
+                case 1:
+                    this.alipayId   =  ''
+                    this.select('alipay')
+                break;
+                case 2:
+                    this.bankId     =   ''
+                    this.select('cardpay')
+                break;
+            }
+        },
+        okPupop(val){
+            // 确定选择 0微信/1支付宝/2银联
+            switch (val) {
+                case 0:
+                    if(this.wechartId==''){
+                        this.$vux.toast.show({
+                            text        :   this.$t('discovery.OTC.sell.tips.selectbank'),
+                            position    :   'default',
+                            type        :   'warn'
+                        })
+                        return;
+                    }
+                    this.select('wechart',true)
+                break;
+                case 1:
+                    if(this.alipayId==''){
+                        this.$vux.toast.show({
+                            text        :   this.$t('discovery.OTC.sell.tips.selectbank'),
+                            position    :   'default',
+                            type        :   'warn'
+                        })
+                        return;
+                    }
+                    this.select('alipay',true)
+                break;
+                case 2:
+                    if(this.bankId==''){
+                        this.$vux.toast.show({
+                            text        :   this.$t('discovery.OTC.sell.tips.selectbank'),
+                            position    :   'default',
+                            type        :   'warn'
+                        })
+                        return;
+                    }
+                    this.select('cardpay',true)
+                break;
+            }
             this.showPupop = false
         },
-        okPupop(){
-            // 确定选择
-            this.showPupop = false
-        },
+        pierce(val,id){
+            // 选择银行卡等的事件穿透
+            switch (val) {
+                case 'alipay':
+                    this.alipayID = id
+                break;
+                case 'cardpay':
+                    this.bankId   = id
+                break;
+                case 'wechart':
+                    this.wechartId = id
+                break;
+            }
+        }
     },
     watch:{
         currency(){
@@ -290,6 +453,7 @@ export default {
         }
         // 获取绑定的收款方式
         this.GetBind()
+        this.GetBindBankInfo()
         // 
         // 默认币种参考价
         this.OTCGetCurrenyPrice()
@@ -298,59 +462,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.sbank{
-    padding: 0.133333rem 0.2rem;
-    display: flex;
-    .title{
-        width: 3rem;
-        font-size:0.45rem;
-    }
-}
-.select{
-    border: 0.02rem solid #dcdee2;
-    background:#fff;
-    border-radius: 5px;
-    height: 1rem;
-    font-size:30px;
-}
-.select-pay{
-    .iconfont {
-        font-size:60px;
-    }
-    .alipay{
-        color:#1296db;
-    }
-    .cardpay{
-        color:#028BF4;
-    }
-    .wechart{
-        color:#1eb1ad;
-    }
-}
-.btn-block{
-    height: 80px;
-    font-size:38px;
-}
-.currency{
-    width: 300px;
-    margin:0 auto;
-    text-align: center;
-    .sicon{
-        width:150px;
-        height: 150px;
-    }
-    .avatar{
-        border-radius: 50%;
-    }
-    .line-height{
-        line-height: 150px;
-    }
-    .font{
-        font-size:42px;
-        font-weight: bold;
-    }
-    .price{
-        font-size:30px;
-    }
-}
+@import "../../scss/views/discovery/otcsell";
 </style>

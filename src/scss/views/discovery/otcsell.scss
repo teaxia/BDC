@@ -1,0 +1,93 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+$height : 1.5rem;
+.sbank{
+    padding: 0.133333rem 0.2rem;
+    display: flex;
+    .title{
+        width: 3rem;
+        font-size:0.45rem;
+    }
+}
+.select{
+    border: 0.02rem solid #dcdee2;
+    background:#fff;
+    border-radius: 5px;
+    height: 1rem;
+    font-size:30px;
+}
+.select-pay{
+    .iconfont {
+        font-size:60px;
+    }
+    .alipay{
+        color:#1296db;
+    }
+    .cardpay{
+        color:#028BF4;
+    }
+    .wechart{
+        color:#1eb1ad;
+    }
+}
+.btn-block{
+    height: 80px;
+    font-size:38px;
+}
+.currency{
+    width: 300px;
+    margin:0 auto;
+    text-align: center;
+    .sicon{
+        width:150px;
+        height: 150px;
+    }
+    .avatar{
+        border-radius: 50%;
+    }
+    .line-height{
+        line-height: 150px;
+    }
+    .font{
+        font-size:42px;
+        font-weight: bold;
+    }
+    .price{
+        font-size:30px;
+    }
+}
+.selectbox{
+    height: 400px;
+    background: $bg-white;
+    .radio{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        .radio-lable{
+            display: block;
+            clear: both;
+            height: $height;
+            line-height: $height;
+            border-bottom: 0.01rem solid $border-line;
+            .cell{
+                float: left;
+                width: 90%;
+                height: $height;
+                line-height: $height;
+                display: flex;
+                padding: 0 40px 0 40px;
+                justify-content: space-between;
+                .text{
+                    width: 180px;
+                    text-align: center;
+                }
+            }
+        }
+        .bind{
+            text-align: center;
+            margin-top:150px;
+            color: #028BF4;
+        }
+    }
+}

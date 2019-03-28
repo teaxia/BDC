@@ -278,7 +278,46 @@ export const zh = {
                 min         :   '最低提币',
                 reduce      :   '实际到账',
             }
-        }
+        },
+        OTC:{
+            Selltitle       :   '发布',
+            sell:{
+                reference       :   '参考单价',
+                selectCurreny   :   '选择币种',
+                num             :   '发布数量',
+                price           :   '单价',
+                minNum          :   '最低限额',
+                security        :   '安全码',
+                sale            :   '立即上架',
+                up              :   '上架',
+                down            :   '下架',
+                close           :   '关闭支付方式',
+                payment         :   '接受的支付方式',
+                bindalipay      :   '点击马上绑定支付宝',
+                bindwechart     :   '点击马上绑定微信支付',
+                bindcard        :   '点击马上绑定银行卡',
+                tips:{
+                    num         :   '发布数量必须填写',
+                    price       :   '单价必须填写',
+                    minNum      :   '最低限额必须填写',
+                    cName       :   '请选择您要发布的币种',
+                    payment     :   '必须选择一种支付方式',
+                    security    :   '安全码必须填写',
+                    openalipay  :   '开启支付宝收款',
+                    openwechart :   '开启微信收款',
+                    opencard    :   '开启银行卡收款',
+                    offalipay   :   '关闭支付宝收款',
+                    offwechart  :   '关闭微信收款',
+                    offcard     :   '关闭银行卡收款',
+                    selectbank  :   '请选择绑定账号',
+                },
+                input:{
+                    num         :   '数量',
+                    price       :   '售卖单价',
+                    minNum      :   '最低购买数量',
+                }
+            },
+        },
     },
     // 钱包
     wallet:{
