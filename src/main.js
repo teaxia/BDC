@@ -25,7 +25,7 @@ import strcut from './common/utils/strcut'                    // 截取字符串
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma} from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
-import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Avatar,Slider,Switch} from 'iview';
+import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Avatar,Slider,Switch,Circle} from 'iview';
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
@@ -67,6 +67,8 @@ Vue.component('Avatar', Avatar)
 Vue.component('radio', NRadio)
 Vue.component('Slider', Slider)
 Vue.component('i-switch', Switch)
+Vue.component('i-circle', Circle)
+
 
 Vue.prototype.$server       =   server;                         // ajax组件
 Vue.prototype.$storage      =   storage;                        // 本地数据读取

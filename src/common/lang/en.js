@@ -278,7 +278,57 @@ export const en = {
                 min         :   'Min extract',
                 reduce      :   'Reduce',
             }
-        }
+        },
+        OTC:{
+            Selltitle       :   'Sale',
+            sell:{
+                reference       :   'Reference Price',
+                selectCurreny   :   'Select Curreny',
+                num             :   'Num',
+                price           :   'Price',
+                minNum          :   'Min',
+                security        :   'Security',
+                sale            :   'Sale Now',
+                up              :   'open',
+                down            :   'off',
+                close           :   'Close payment',
+                payment         :   'Payment',
+                bindalipay      :   'Bind Alipay',
+                bindwechart     :   'Bind wechart',
+                bindcard        :   'Bind Card',
+                tips:{
+                    num         :   'Please enter the num!',
+                    price       :   'Please enter the price!',
+                    minNum      :   'Please enter the min',
+                    cName       :   'Please select the currency',
+                    payment     :   'Please select the payment',
+                    security    :   'Please enter the security code',
+                    openalipay  :   'Alipay open',
+                    openwechart :   'Wechart open',
+                    opencard    :   'Card open',
+                    offalipay   :   'Alipay off',
+                    offwechart  :   'Wechart off',
+                    offcard     :   'Card off',
+                    selectbank  :   'Bind payment',
+                },
+                input:{
+                    num         :   'Num',
+                    price       :   'Price',
+                    minNum      :   'Min',
+                },
+                index:{
+                    record      :   'Record',
+                    buy         :   'Buy',
+                    bybuy       :   'By Buy',
+                    curreny     :   'Currency',
+                    time        :   'Time',
+                    price       :   'Price',
+                    min         :   'Min',
+                    num         :   'Num',
+                    add         :   'Sale',
+                }
+            },
+        },
     },
     // 钱包
     wallet:{

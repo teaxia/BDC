@@ -30,15 +30,16 @@
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.minNum')" required placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.minNum')" required :placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.security')" v-model="password" required placeholder="$t('discovery.OTC.sell.security')">
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" required :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group>
                 <group>
@@ -157,6 +158,7 @@ export default {
             isSellOn    :   true,                     // 是否立即上架
             PayNum      :   '',                       // 有多少绑定数据
             minNum      :   '',                       // 最低限额
+            type	    :   false,		              // 切换密码状态'
 		}
 	},
 	methods: {
@@ -363,9 +365,6 @@ export default {
                 }
             })
         },
-        OTCSellOrderOn(){
-            //
-        },
         cancelPupop(val){
             // 取消选择 0微信/1支付宝/2银联
             this.showPupop = false
@@ -436,7 +435,10 @@ export default {
                     this.wechartId = id
                 break;
             }
-        }
+        },
+        changType(){
+			this.type = !this.type
+        },
     },
     watch:{
         currency(){

@@ -2,14 +2,14 @@
 	<div class="otc" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}">
             <div slot="right">
-                <span class="right">记录</span>
+                <span class="right">{{$t('discovery.OTC.index.record')}}</span>
             </div>
             <div slot="default" class="title">
                 <div @click="change()" :class="{'select-title':true,'act-bd':active}">
-                    <span :class="{'select-act':active}">购买</span>
+                    <span :class="{'select-act':active}">{{$t('discovery.OTC.index.buy')}}</span>
                 </div>
                 <div @click="change()" :class="{'select-title':true,'act-bd':!active}">
-                    <span :class="{'select-act':!active}">求购</span>
+                    <span :class="{'select-act':!active}">{{$t('discovery.OTC.index.bybuy')}}</span>
                 </div> 
             </div>
         </x-header>
@@ -17,31 +17,32 @@
             <!-- 选择币种 -->
             <flexbox class="pb select">
                 <flexbox-item>
-                    <div @click="selectCurrency()">币种</div>
+                    <div @click="selectCurrency()">{{$t('discovery.OTC.index.curreny')}}</div>
                 </flexbox-item>
                 <flexbox-item>
-                    <div>
-                        时间
-                        <i class="iconfont icon-sanjiao_xia"></i>
+                    <div @click="changeTime()">
+                        {{$t('discovery.OTC.index.time')}}
+                        <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Tup}"></i>
                     </div>
                 </flexbox-item>
                 <flexbox-item>
-                    <div>
-                        价格
-                        <i class="iconfont icon-sanjiao_xia"></i>
+                    <div @click="changePrice()">
+                        {{$t('discovery.OTC.index.price')}}
+                        <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Pup}"></i>
                     </div>
                 </flexbox-item>
             </flexbox>
         </div>
         <div class="main-container">
             <my-scroll :page="page" :on-refresh="onRefresh" :on-pull="onPull">
-                <div slot="scrollList" class="otc-item" @click="buy()" v-for="(v,index) in dataList" :key="index">
+                <div slot="scrollList" class="otc-item" @click="buy(v.Id)" v-for="(v,index) in dataList" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
                             <Avatar size="small"  style="background:#f56a00">
-                                {{$strcut(v.name,1)}}
+                                {{$strcut(v.nickName,1)}}
                             </Avatar>
-                            <div class="grid-username">{{v.name}}</div>
+                            <div class="grid-username">{{v.nickName}}</div>
+                            <div class="grid-info">{{v.tradeInfo}}</div>
                         </div>
                         <div class="otc-grid-main">
                             <div class="v-flex">
@@ -50,19 +51,19 @@
                                         {{v.price}}CNY
                                     </div>
                                     <div class="otc-price">
-                                        <div>限额：{{v.count}} CNY</div>
-                                        <div>数量：{{v.amount}} HUSD</div>
+                                        <div>{{$t('discovery.OTC.index.min')}}：{{v.minBuy}}（{{v.currenyName}}）</div>
+                                        <div>{{$t('discovery.OTC.index.num')}}：{{v.currenyNum}} （{{v.currenyName}}）</div>
                                     </div>
                                 </div>
                                 <div class="otc-grid-pay">
                                     <div class="otc-grid-paylist">
-                                        <svg class="icon" aria-hidden="true">
+                                        <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('支')>=0">
                                             <use xlink:href="#icon-zhifubao"></use>
                                         </svg>
-                                        <svg class="icon" aria-hidden="true">
+                                        <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('银')>=0">
                                             <use xlink:href="#icon-yinhangqia"></use>
                                         </svg>
-                                        <svg class="icon" aria-hidden="true">
+                                        <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('微')>=0">
                                             <use xlink:href="#icon-weixinzhifu"></use>
                                         </svg>
                                     </div>
@@ -82,12 +83,12 @@
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
                 <span>
-                    发布
+                    {{$t('discovery.OTC.index.add')}}
                 </span>
             </router-link>
         </div>
         <div>
-            <vpopup leftText="取消" titleText="选择币种" rightText="确定" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
+            <vpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
                 <div slot="list">
                     <group gutter="0">
                         <radio :options="currency" v-model="scurrency">
@@ -128,109 +129,53 @@
                 realname    :   '',                   
                 show		:	false,      		                // 跳转至强制认证界面
                 vindex      :   '',                                 // 菜单索引
-                page:{
-                    counter:1,  
-                    pageStart:1,  
-                    pageEnd:1,  
-                    total:10
-                },
                 showPupop   :   false,                              // popup是否显示
-                scurrency   :   'ALL',                              // 当前选择的币种
+                scurrency   :   'BDC',                              // 当前选择的币种
                 deepcurrency:   '',                                 // 用于存储监听前的币种数据对象
-                currency    :   ['ALL','BDC','BTC','ETH','DASH','USDT','XRP','BCH','EOS','GGBC'],
-                dataList    :   [
-                    {
-                        name    :   '1是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '2是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   'Admin',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    },
-                    {
-                        name    :   '这是一个头像很长很长的用户',
-                        price   :   '6.87',
-                        count   :   '500.00',
-                        amount  :   '3182.5254454545'
-                    }
-                ],
+                currency    :   ['BDC'],
+                dataList    :   [],
                 page:{
-                    counter:1,              // 分页条数  
-                    pageStart:1,            // 开始页面
-                    pageEnd:1,              // 结束页面
-                    total:13                // 总共条数
-                }
-                
+                    counter     :   1,              // 当前页数索引
+                    pageStart   :   1,              // 
+                    pageEnd     :   1,              // 
+                    total       :   1,              // 总共要刷新多少次，需要计算（每页条数/总条数）
+                    pageSize    :   6,              // 每页条数
+                },
+                query           :   2,          // 排序条件-1时间降序，1时间升序，-2单价降序，2单价升序。默认传2
+                Tup             :   false,      // 时间降序
+                Pup             :   false,      // 价格降序
 			}
         },
         watch:{
             scurrency(){
-                //this.showPupop = false
-                console.log(this.scurrency);
+                //  单币种不需要
+                //  this.showPupop = false
+                //  console.log(this.scurrency);
+            },
+            query(){
+                let Refresh = true
+                switch(this.query){
+                    case -1:    // 时间降序
+                        this.Tup    =   false
+                        this.Pup    =   false
+                        this.OTCGetSellList(Refresh)
+                    break;
+                    case 1:    // 时间升序
+                        this.Tup    =   true
+                        this.Pup    =   false
+                        this.OTCGetSellList(Refresh)
+                    break;
+                    case -2:    // 价格降序
+                        this.Tup    =   false
+                        this.Pup    =   true
+                        this.OTCGetSellList(Refresh)
+                    break;
+                    case 2:    // 价格升序
+                        this.Tup    =   false
+                        this.Pup    =   false
+                        this.OTCGetSellList(Refresh)
+                    break;
+                }
             }
         },
 		methods: {
@@ -242,44 +187,30 @@
                 // 币种选择
                 this.vindex = vindex
             },
-            onRefresh(mun){ //刷新回调
+            onRefresh(){ //刷新回调
+                let Refresh = true
+                this.OTCGetSellList(Refresh)
                 setTimeout(()=>{
                     this.$root.$emit('setState',3)
                 },500)
             },
-            onPull(mun){ //加载回调
+            onPull(){ //加载回调
                 if(this.page.counter<=this.page.total){
                     setTimeout(()=>{
                         this.page.counter++
+                        this.OTCGetSellList()
                         this.$root.$emit('setState',5)
-                        // let data = [{
-                        //                 name    :   '2',
-                        //                 price   :   '6.87',
-                        //                 count   :   '500.00-21,862.00000000',
-                        //                 amount  :   '3182.5254454545'
-                        //             },
-                        //             {
-                        //                 name    :   '3',
-                        //                 price   :   '6.87',
-                        //                 count   :   '500.00-21,862.00000000',
-                        //                 amount  :   '3182.5254454545'
-                        //             },
-                        //             {
-                        //                 name    :   '4',
-                        //                 price   :   '6.87',
-                        //                 count   :   '500.00-21,862.00000000',
-                        //                 amount  :   '3182.5254454545'
-                        //             }]
-                        // this.dataList.push(data)
-                        
                     },500)
                 }else{
                     this.$root.$emit('setState',7)
                 }
             },
-            buy(){
+            buy(Id){
                 this.$router.push({
                     path:"/discovery/OTC/buy",
+                    query:{
+                        id  :  Id
+                    }
                 });
                 //console.log('买卖')
             },
@@ -296,6 +227,42 @@
                 // 币种选择
                 this.deepcurrency = this.scurrency
                 this.showPupop = true
+            },
+            OTCGetSellList(Refresh=false){
+                // Refresh判断是否为下拉刷新
+                if(Refresh){
+                    this.page.counter = 1
+                }
+                this.$server.post(
+                'OTC_GetSellList',{
+                    guid 	    :   this.$storage.get('guid'),
+                    query       :   this.query,                     // (排序：-1时间降序，1时间升序，-2单价降序，2单价升序。默认传2)
+                    pageSize    :   this.page.pageSize,             // (每页行数)
+                    pageIndex   :   this.page.counter,              // 当前页数，第一页传1
+                }).then(data => {
+                    if(data){
+                        if(Refresh){
+                            this.dataList  = data.list
+                        }else{
+                            this.dataList.push(...data.list)
+                        }
+                        console.log(this.dataList)
+                        this.page.total     =   Math.ceil(data.TotalCount/data.PageSize)    // 计算需要刷新多少次，小数点向上取证
+                    }
+                })    
+            },
+            goauth () {
+                this.$router.push({
+                    path:"/mine/myhome",
+                });
+            },
+            changeTime(){
+                // 时间筛选
+                (this.Tup)?this.query=-1:this.query=1;
+            },
+            changePrice(){
+                // 价格筛选
+                (this.Pup)?this.query=2:this.query=-2;
             }
 		},
 		mounted() {
@@ -306,6 +273,8 @@
 			if(this.realname==this.$t('global.Uncertified')){
 				this.show = false;
             }
+            // 初始化数据
+            this.OTCGetSellList()
             //this.currency = this.$currency
 		}
 	}

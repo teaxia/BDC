@@ -25,9 +25,21 @@
         }
     }
     .right{
+        width: 300px;
+        .mr{
+            width: 180px;
+            height: 180px;
+            margin:0 auto;
+            text-align: center;
+        }
         .sicon{
             width: 180px;
             height: 180px;
+        }
+        .tradeinfo{
+            margin-top:20px;
+            font-size:28px;
+            text-align: center;
         }
     }
 }
@@ -35,4 +47,9 @@
     border:0.02rem solid $bg-border;
     border-radius: 30px;
     padding:20px;
+}
+.close{
+    width: 240px;
+    margin:0 auto;
+    margin-top:40px;
 }

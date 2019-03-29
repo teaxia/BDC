@@ -317,6 +317,17 @@ export const zh = {
                     minNum      :   '最低购买数量',
                 }
             },
+            index:{
+                record      :   '记录',
+                buy         :   '购买',
+                bybuy       :   '求购',
+                curreny     :   '币种',
+                time        :   '时间',
+                price       :   '价格',
+                min         :   '最低限额',
+                num         :   '数量',
+                add         :   '发布',
+            }
         },
     },
     // 钱包

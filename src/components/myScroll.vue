@@ -21,11 +21,11 @@
         <!-- top -->
         <div class="scroll-list" :style="{ 'margin-top': + top + 'px'}">
             <slot name='scrollList'></slot>
-            <div class="scroll-bottom">
+            <!-- <div class="scroll-bottom">
                 <div v-if="state==4">加载中</div>
                 <div v-if="state==5">加载完成</div>
                 <div v-if="state==7">没有更多</div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -139,10 +139,11 @@
     }
 </script>
 <style lang="scss" scoped>
+    $height:1080px;
     .my-scroll{
         max-width: 100%;
-        max-height: 1170px;
-        height: 1170px;
+        max-height:$height;
+        height: $height;
         overflow:hidden;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;

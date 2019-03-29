@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+$time : 0.4s;
 .otc{
     .title{
         width: 250px;
@@ -39,6 +40,24 @@
             border-bottom: 0.01rem solid $font-base;
             padding-bottom: 15px;
         }
+        .iconfont{
+            &::before{
+                display: inline-block;
+                transition: All $time ease-in-out;
+                -webkit-transition: All $time ease-in-out;
+                -moz-transition: All $time ease-in-out;
+                -o-transition: All $time ease-in-out;
+            }
+        }
+        .icon-flip{
+            &::before{
+                transform: rotate(180deg);
+            }
+            // -webkit-transform: rotate(360deg);
+            // -moz-transform: rotate(360deg);
+            // -o-transform: rotate(360deg);
+            // -ms-transform: rotate(360deg);
+        }
     }
     .otc-item{
         margin-top:20px;
@@ -57,9 +76,14 @@
             border-bottom: 0.01rem solid $border-base;
             vertical-align:middle;
             .grid-username{
-                height: 45px;
-                line-height: 45px;
-                margin-left: 5px;
+                height: 55px;
+                line-height: 55px;
+                margin-left: 15px;
+                margin-right:auto;
+            }
+            .grid-info{
+                height: 55px;
+                line-height: 55px;
             }
         }
         .otc-grid-price{
