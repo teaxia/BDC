@@ -20,6 +20,7 @@ import vselect from './components/vselect.vue'                  // 自定义下�
 import vfooter from './components/vfooter.vue'                  // 自定义底部组件
 import myScroll from './components/myScroll.vue'                // 下拉刷新，上拉加载
 import vpopup from './components/popup.vue'                     // 弹出层组件
+import vfpopup from './components/vfpopup.vue'                  // 全屏弹出层
 import vgrid from './components/vgrid.vue'
 import strcut from './common/utils/strcut'                    // 截取字符串首字母，中英文适用
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma} from 'vux'
@@ -68,6 +69,7 @@ Vue.component('radio', NRadio)
 Vue.component('Slider', Slider)
 Vue.component('i-switch', Switch)
 Vue.component('i-circle', Circle)
+Vue.component('vfpopup', vfpopup)
 
 
 Vue.prototype.$server       =   server;                         // ajax组件
