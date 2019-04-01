@@ -1,0 +1,92 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.order{
+    &-line{
+        border-bottom: 0.01rem solid $border-line;
+        padding-bottom: 20px;
+    }
+    &-id{
+
+    }
+    &-info{
+        
+    }
+    &-pay{
+        font-size:28px;
+        &-price{
+            
+        }
+        &-total{
+            
+        }
+        span{
+            color:$font-red;
+        }
+    }
+    &-tips{
+        color: $font-red;
+        font-size:26px;
+    }
+    &-btn{
+        margin:0 auto;
+        margin-top:20px;
+        width: 500px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &-payment{
+        &-payment-info{
+            font-size:26px;
+        }
+        &-list{
+            .iconfont{
+                font-size:80px;
+                margin-left:15px;
+                &:first-child{
+                    margin-left:0;
+                }
+            }
+            .alipay{
+                color:#1296db;
+            }
+            .cardpay{
+                color:#028BF4;
+            }
+            .wechart{
+                color:#1eb1ad;
+            }
+        }
+    }
+    .popup{
+        .pay-info{
+            padding:20px 0;
+            height: auto;
+            overflow: hidden;
+            .ercode{
+                text-align: center;
+                .pay-img{
+                    width: 400px;
+                }
+            }
+            .card{
+                padding:0 30px;
+                .font{
+                    font-size:32px;
+                    display: flex;
+                    height: 60px;
+                    &-title{
+                        width: 180px;
+                    }
+                    &-btn{
+                        padding:10px 0;
+                        margin-left:18px;
+                    }
+                }
+            }
+            .padding-bottom{
+                margin-bottom: 400px;
+            }
+        }
+    }
+}

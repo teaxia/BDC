@@ -88,7 +88,6 @@ export default {
                 Id          :   this.id
             }).then(data => {
                 if(data){
-                    console.log(data)
                     this.$nextTick(()=>{
                         this.datalist   =   data
                         this.wechart    =   (data.payInfo.indexOf('微')>=0)?true:false;
@@ -123,6 +122,14 @@ export default {
         setBuyNum(){
             // 通过BDC计算CNY
             this.type = 2
+        },
+        doSubmit(){
+            this.$router.push({
+                path:"/discovery/OTC/order",
+                query:{
+                    id  :  1
+                }
+            });
         }
     },
     watch:{

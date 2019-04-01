@@ -48,11 +48,11 @@
                             <div class="v-flex">
                                 <div class="otc-grid-price">
                                     <div class="price">
-                                        {{v.price}}CNY
+                                        {{$numberComma(v.price)}}CNY
                                     </div>
                                     <div class="otc-price">
-                                        <div>{{$t('discovery.OTC.index.min')}}：{{v.minBuy}}（{{v.currenyName}}）</div>
-                                        <div>{{$t('discovery.OTC.index.num')}}：{{v.currenyNum}} （{{v.currenyName}}）</div>
+                                        <div>{{$t('discovery.OTC.index.min')}}：{{$numberComma(v.minBuy)}}（{{v.currenyName}}）</div>
+                                        <div>{{$t('discovery.OTC.index.num')}}：{{$numberComma(v.currenyNum)}} （{{v.currenyName}}）</div>
                                     </div>
                                 </div>
                                 <div class="otc-grid-pay">
