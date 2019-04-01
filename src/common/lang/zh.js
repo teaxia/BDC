@@ -327,7 +327,14 @@ export const zh = {
                 min         :   '最低限额',
                 num         :   '数量',
                 add         :   '发布',
-            }
+            },
+            buy:{
+                price       :   '单价',
+                num         :   '数量',
+                full        :   '全部购买',
+                min         :   '最少购买',
+                close       :   '关闭订单'
+            },
         },
     },
     // 钱包

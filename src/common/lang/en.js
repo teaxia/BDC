@@ -326,7 +326,14 @@ export const en = {
                     min         :   'Min',
                     num         :   'Num',
                     add         :   'Sale',
-                }
+                },
+                buy:{
+                    price       :   'Price',
+                    num         :   'Num',
+                    full        :   'Full',
+                    min         :   'Min',
+                    close       :   'close'
+                },
             },
         },
     },

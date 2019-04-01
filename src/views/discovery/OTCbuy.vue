@@ -1,13 +1,13 @@
 <template>
 	<div class="otcbuy" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" title="购买BDC"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.index.buy')"></x-header>
         <div class="pd50"  v-if="datalist">
             <div class="information">
                 <div class="left">
-                    <h1>购买{{datalist.currenyName}}</h1>
+                    <h1>{{$t('discovery.OTC.index.buy')}}{{datalist.currenyName}}</h1>
                     <div class="price">
-                        <div>单价：{{datalist.price}} CNY</div>
-                        <div>数量：{{datalist.currenyNum}} （{{datalist.currenyName}}）</div>
+                        <div>{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
+                        <div>{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
                     </div>
                     <div class="payment">
                         <i :class="{'iconfont':true,'icon-zhifubao':true,'alipay':true}" v-if="alipay"></i>
@@ -28,8 +28,8 @@
             </div>
             <div class="mr50 gobuy">
                 <group>
-                    <x-input class="test" :show-clear="false" type="text" @on-focus="setCNum" v-model="buyNum" :placeholder="'最低购买'+(datalist.minBuy*datalist.price).toFixed(2)">
-                        <div slot="right-full-height" class="right-btn"><span class="unit">CNY</span><span class="cut">|</span><span class="full" @click="fullBuy()">全部购买</span></div>
+                    <x-input class="test" :show-clear="false" type="text" @on-focus="setCNum" v-model="buyNum" :placeholder="$t('discovery.OTC.buy.min')+(datalist.minBuy*datalist.price).toFixed(2)">
+                        <div slot="right-full-height" class="right-btn"><span class="unit">CNY</span><span class="cut">|</span><span class="full" @click="fullBuy()">{{$t('discovery.OTC.buy.full')}}</span></div>
                     </x-input>
                 </group>
                 <group>
@@ -42,7 +42,7 @@
             <div class="close">
                 <i-circle :percent="percent">
                     <div style="font-size:24px">{{ T }}s</div>
-                    <div>后关闭订单</div>
+                    <div>{{$t('discovery.OTC.buy.close')}}</div>
                 </i-circle>
             </div>
             
@@ -130,8 +130,9 @@ export default {
             // 通过CNY计算BDC
             if(this.type==1){
                 if(this.buyNum!=''){
-                    // 判断输入值是否大于最大限额
-                   (this.buyNum>=this.datalist.currenyNum*this.datalist.price)?this.buyNum = (this.datalist.currenyNum*this.datalist.price).toFixed(2):this.CNum = (this.buyNum/this.datalist.price).toFixed(8);
+                    // 判断输入值是否大于最大限额 貌似判断有问题，暂时不管
+                //    (this.buyNum>=this.datalist.currenyNum*this.datalist.price)?this.buyNum = (this.datalist.currenyNum*this.datalist.price).toFixed(2):this.CNum = (this.buyNum/this.datalist.price).toFixed(8);
+                this.CNum = (this.buyNum/this.datalist.price).toFixed(8)
                 }else{
                     this.CNum = ''
                 }
@@ -141,8 +142,9 @@ export default {
             // 通过BDC计算CNY
             if(this.type==2){
                 if(this.CNum!=''){
-                    // 判断输入值是否大于最大限额
-                    (this.CNum>=this.datalist.currenyNum)?this.CNum = this.datalist.currenyNum:this.buyNum = (this.CNum*this.datalist.price).toFixed(2);
+                    // 判断输入值是否大于最大限额 貌似判断有问题，暂时不管
+                    // (this.CNum>=this.datalist.currenyNum)?this.CNum = this.datalist.currenyNum:this.buyNum = (this.CNum*this.datalist.price).toFixed(2);
+                    this.buyNum = (this.CNum*this.datalist.price).toFixed(2)
                 }else{
                     this.buyNum = ''
                 }
