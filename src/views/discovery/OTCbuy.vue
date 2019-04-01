@@ -28,12 +28,12 @@
             </div>
             <div class="mr50 gobuy">
                 <group>
-                    <x-input class="test" :show-clear="false" type="text" v-model="buyNum" :placeholder="'最低购买'+(datalist.minBuy*datalist.price).toFixed(2)">
-                        <div slot="right-full-height" class=""><span>CNY|</span><span>全部购买</span></div>
+                    <x-input class="test" :show-clear="false" type="text" @on-focus="setCNum" v-model="buyNum" :placeholder="'最低购买'+(datalist.minBuy*datalist.price).toFixed(2)">
+                        <div slot="right-full-height" class="right-btn"><span class="unit">CNY</span><span class="cut">|</span><span class="full" @click="fullBuy()">全部购买</span></div>
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" :show-clear="false" type="text" v-model="CNum">
+                    <x-input class="test" :show-clear="false" @on-focus="setBuyNum" type="text" v-model="CNum">
                         <div slot="right-full-height">{{datalist.currenyName}}</div>
                     </x-input>
                 </group>
@@ -59,7 +59,6 @@
 
 <script>
 import { GetAccount } from '../../common/mixins/getaccount'
-import wechartVue from '../mine/wechart.vue';
 import { setInterval } from 'timers';
 export default {
     name: 'OTCbuy',
@@ -75,9 +74,9 @@ export default {
             wechart                 :   false,
             card                    :   false,
             percent                 :   0,                      // 百分比   
-            totalTime               :   60,                     // 记录具体倒计时时间
             clock                   :   '',                     // 倒计时
             T                       :   60,                     // 秒
+            type                    :   '',                     // 1是通过CNY计算BDC 2是通过BDC计算CNY
 		}
 	},
 	methods: {
@@ -89,6 +88,7 @@ export default {
                 Id          :   this.id
             }).then(data => {
                 if(data){
+                    console.log(data)
                     this.$nextTick(()=>{
                         this.datalist   =   data
                         this.wechart    =   (data.payInfo.indexOf('微')>=0)?true:false;
@@ -101,22 +101,51 @@ export default {
         },
         mathPercent(){
             let i = 1
+            let Tmp = this.T
             this.clock = window.setInterval(() => {
                 this.T--;
                 i++;
                 if (this.T<=0) {
                     window.clearInterval(this.clock)
                 }
-                this.percent =  i/this.totalTime*100
-            },1000) 
+                this.percent =  i/Tmp*100
+            },1000)
+        },
+        fullBuy(){
+            // 全部购买
+            this.type = 1
+            this.buyNum = (this.datalist.currenyNum*this.datalist.price).toFixed(2)
+        },
+        setCNum(){
+            // 通过CNY计算BDC
+            this.type = 1
+        },
+        setBuyNum(){
+            // 通过BDC计算CNY
+            this.type = 2
         }
     },
     watch:{
         buyNum(){
-            // 输入CNY转换成币数量
-            // 币数量 = CNY/CNY单价
-            if(this.buyNum!=''){
-                this.CNum = this.buyNum*this.datalist.price
+            // 通过CNY计算BDC
+            if(this.type==1){
+                if(this.buyNum!=''){
+                    // 判断输入值是否大于最大限额
+                   (this.buyNum>=this.datalist.currenyNum*this.datalist.price)?this.buyNum = (this.datalist.currenyNum*this.datalist.price).toFixed(2):this.CNum = (this.buyNum/this.datalist.price).toFixed(8);
+                }else{
+                    this.CNum = ''
+                }
+            }
+        },
+        CNum(){
+            // 通过BDC计算CNY
+            if(this.type==2){
+                if(this.CNum!=''){
+                    // 判断输入值是否大于最大限额
+                    (this.CNum>=this.datalist.currenyNum)?this.CNum = this.datalist.currenyNum:this.buyNum = (this.CNum*this.datalist.price).toFixed(2);
+                }else{
+                    this.buyNum = ''
+                }
             }
         }
     },

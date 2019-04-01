@@ -53,3 +53,16 @@
     margin:0 auto;
     margin-top:40px;
 }
+.right-btn{
+    .unit{
+        color:#000;
+    }
+    .cut{
+        display: inline-block;
+        width: 20px;
+        text-align: center;
+    }
+    .full{
+        color:$font-blue;
+    }
+}
