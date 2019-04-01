@@ -53,13 +53,13 @@
                 })
             },
             Swiper(){
-                new Swiper ('.swiper-container', {
-                    loop                :   true,
-                    autoplay            :   true,
-                    observer            :   true,
-                    observeParents      :   true,
-                    pagination:{
-                        el: '.swiper-pagination',
+                new Swiper ('.swiper-container', {      // 绑定的dom名称，可以用#ID的方式以及.class的方式绑定
+                    loop                :   true,       // 是否重复
+                    autoplay            :   true,       // 自动播放
+                    observer            :   true,       // 非常重要，启动动态检查器(OB/观众/观看者)，当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper。
+                    observeParents      :   true,       // 非常重要，将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新。
+                    pagination:{                        
+                        el: '.swiper-pagination',       // 分页标签
                     },
                 })
             },
