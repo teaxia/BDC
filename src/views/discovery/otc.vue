@@ -1,6 +1,6 @@
 <template>
 	<div class="otc margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}">
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()">
             <div slot="right">
                 <span class="right">{{$t('discovery.OTC.index.record')}}</span>
             </div>
@@ -263,7 +263,13 @@
             changePrice(){
                 // 价格筛选
                 (this.Pup)?this.query=2:this.query=-2;
+            },
+            Goback(){
+                this.$router.push({
+                    path:"/discovery/index",
+                });
             }
+            
 		},
 		mounted() {
             // 初始化样式

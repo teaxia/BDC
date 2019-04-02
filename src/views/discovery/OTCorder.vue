@@ -1,67 +1,77 @@
 <template>
 	<div class="order margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="支付订单"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.order.title')"></x-header>
 		<div class="pd50">
 			<div class="order-id">
-				<h1>订单号：#123456789</h1>
+				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{OrderId}}</h1>
 			</div>
 			<div class="order-info order-line">
-				<h3>您向XXXX购买0.01234567 BDC</h3>
+				<h3>{{$t('discovery.OTC.order.your')}}{{nickName}}{{$t('discovery.OTC.order.buy')}}{{$numberComma(num)}} BDC</h3>
 			</div>
 			<div class="order-pay order-line mr20">
 				<div class="order-pay-price">
-					单价：<span>4 CNY/BDC</span>
+					{{$t('discovery.OTC.order.price')}}：<span>{{$numberComma(price)}}</span>
 				</div>
 				<div class="order-pay-total">
-					总价：<span>1000CNY</span>
+					{{$t('discovery.OTC.order.total')}}：<span>{{$numberComma(TotalPay)}}CNY</span>
 				</div>
 			</div>
 			<div class="order-tips mr20 order-line">
-				待支付，请于{{m}}分{{s}}秒内向XXX支付1000 CNY ，付款参考号：696342，付款成功后请到订单页面点击完成支付（非常重要！）
+				待支付，请于{{m}}分{{s}}秒内向{{nickName}}支付{{$numberComma(TotalPay)}} CNY ，付款参考号：{{RemarkCode}}，付款成功后请到订单页面点击完成支付（非常重要！）
 			</div>
 			<div class="order-payment mr10">
 				<div class="order-payment-info">
-					点击查看卖方收款方式：
+					{{$t('discovery.OTC.order.payment')}}：
 				</div>
 				<div class="order-payment-list">
-					<i @click="pay('alipay')" :class="{'iconfont':true,'icon-zhifubao':true,'alipay':true}"></i>
-					<i @click="pay('cardpay')" :class="{'iconfont':true,'icon-yinhangqia':true,'cardpay':true}"></i>
-					<i @click="pay('wechart')" :class="{'iconfont':true,'icon-weixinzhifu':true,'wechart':true}"></i>
+					<i @click="pay('alipay')" class="iconfont icon-zhifubao alipay" v-if="alipay.length>1"></i>
+					<i @click="pay('cardpay')" class="iconfont icon-yinhangqia cardpay" v-if="card.length>1"></i>
+					<i @click="pay('wechart')" class="iconfont icon-weixinzhifu wechart" v-if="wechart.length>1"></i>
 				</div>
 			</div>
 			<div class="order-btn">
-				<button class="btn btn-round btn-min btn-cancel" @click="cancelFPupop">取消订单</button>
-				<button class="btn btn-round btn-min">完成支付</button>
+				<button class="btn btn-round btn-min btn-cancel" @click="CancelOrder()">{{$t('discovery.OTC.order.cancel')}}</button>
+				<button class="btn btn-round btn-min">{{$t('discovery.OTC.order.paymentok')}}</button>
 			</div>
 		</div>
 		<div class="popup">
 			<vfpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showFPupop">
                 <div slot="list">
                     <div class="pay-info">
-						<div v-if="PayType==0||PayType==2" class="ercode">
-							<img class="pay-img" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3059434706,756007675&fm=26&gp=0.jpg">
+						<div v-if="PayType==0" class="ercode">
+							<img class="pay-img" :src="alipay[2]">
 							<div>
-								卖家昵称：XXX
+								{{$t('discovery.OTC.order.alipay')}}：{{alipay[0]}}
 							</div>
-							<button class="btn btn-round btn-min" @click="save()">存储二维码</button>
+							<div>
+								{{$t('discovery.OTC.order.name')}}：{{alipay[1]}}
+							</div>
+							<button class="btn btn-round btn-min" @click="save(alipay[2])">{{$t('discovery.OTC.order.saveErcode')}}</button>
+						</div>
+						<div v-if="PayType==2" class="ercode">
+							<img class="pay-img" :src="wechart[2]">
+							<div>
+								{{$t('discovery.OTC.order.nickname')}}：{{wechart[1]}}
+							</div>
+							<button class="btn btn-round btn-min" @click="save(wechart[2])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 						</div>
 						<div v-if="PayType==1" class="card padding-bottom">
 							<!-- 银行卡 -->
 							<div class="font">
-								<div class="font-title">开户银行：</div>广大银行
+								<div class="font-title">{{$t('discovery.OTC.order.bank')}}：</div>{{card[3]}}
 							</div>
 							<div class="font copy">
-								<div class="font-title">银行卡号：</div>
-								<div>6222022402003101718</div>
+								<div class="font-title">{{$t('discovery.OTC.order.cardNumber')}}：</div>
+								<div>{{card[2]}}</div>
 								<div class="font-btn">
-									<button class="btn btn-xs" v-clipboard:copy="'6222022402003101718'" v-clipboard:success="onCopy" v-clipboard:error="onError">复制卡号</button>
+									<button class="btn btn-xs" :v-clipboard:copy="card[2]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyCard')}}</button>
 								</div>
 							</div>
 							<div class="font copy">
-								<div class="font-title">姓名：</div>
-								<div>牛大壮</div>
+								<div class="font-title">{{$t('discovery.OTC.order.name')}}：</div>
+								<div>{{card[1]}}</div>
 								<div class="font-btn">
-									<button class="btn btn-xs" v-clipboard:copy="'牛大壮'" v-clipboard:success="onCopy" v-clipboard:error="onError">复制姓名</button>
+									<button class="btn btn-xs" :v-clipboard:copy="card[1]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyName')}}</button>
 								</div>
 							</div>
 						</div>
@@ -77,11 +87,22 @@
         name:'order',
 		data() {
 			return {	
-				m			:	9,		// 分
-				s			:	59,		// 秒
+				m			:	'',		// 分
+				s			:	'',		// 秒
 				clock		:	'',		// 倒计时对象
 				showFPupop	:	false,
 				PayType		:	'',	    // 0支付宝，1银行卡，2微信
+				buyNum		:	'',		// 购买数量
+				id			:	'',		// id
+				OrderId		:	'',		// 订单号
+				price		:	'',		// 单价
+				TotalPay	:	'',		// 总价
+				num         :	'',		// 购买数量
+				nickName	:	'',		// 卖家昵称
+				RemarkCode	:	'',		// 付款参考号
+				alipay		:	[],		// 支付宝
+				card 		:	[],		// 银行卡
+				wechart		:	[],		// 微信
 			}
         },
 		methods: {
@@ -90,8 +111,9 @@
 				// 付款倒计时
 				this.clock = setInterval(() =>{
 					if( this.m == 0 && this.s == 0 ){
-						console.log("倒计时结束");
-						window.clearInterval(this.clock)
+						// 倒计时结束
+						window.clearInterval(this.clock);
+						this.CancelOrder();
 					}else if( this.m >= 0 ){
 						if( this.s > 0 ){
 							this.s--;
@@ -134,34 +156,79 @@
 					type: 'warn'
 				})
 			},
-			save(){
+			save(imgUrl){
 				// 保存二维码到相册
 				api.saveMediaToAlbum({
-					path: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3059434706,756007675&fm=26&gp=0.jpg'
+					path: imgUrl
 				}, function(ret, err) {
 					if (ret && ret.status) {
 						this.$vux.toast.show({
-							text: '图片保存成功！',
+							text: $t('discovery.OTC.order.picSaveS'),
 							type: 'success'
 						})
 					} else {
 						this.$vux.toast.show({
-							text: '图片保存失败，请检查APP权限',
+							text: $t('discovery.OTC.order.picSaveE'),
 							type: 'wran'
 						})
 					}
 				});
-				
 			},
+			BuyOrderAndPay(){
+				// 请求数据
+				this.$server.post(
+				'OTC_BuyOrderAndPay_CK',{
+					guid 	    :   this.$storage.get('guid'),
+					Id          :   this.id,
+				}).then(data => {
+					if(data.isLocking){
+						this.m 			=	data.djs_m
+						this.s			=	data.djs_s
+						this.OrderId	=   data.orderId
+						this.price		=	data.price
+						this.TotalPay	=	data.TotalPay
+						this.num		=	data.buyNum
+						this.nickName	=	data.nickName
+						this.RemarkCode	=	data.RemarkCode
+						this.getCountDwn()
+						this.alipay 	= data.zfb.split("|");
+						this.wechart 	= data.wx.split("|");
+						this.card 		= data.card.split("|");
+					}else{
+						this.GOTC()
+					}
+				})
+			},
+			CancelOrder(){
+				// 取消订单
+				this.$server.post(
+				'OTC_BuyOrderAndPay_Cancel',{
+					guid 	    		:   this.$storage.get('guid'),
+					BuySellOrderId      :   this.OrderId,
+				}).then(data => {
+					if(data){
+						this.$vux.toast.show({
+							text: $t('discovery.OTC.order.cancelS'),
+							type: 'success'
+						})
+						this.GOTC()
+					}
+				})
+			},
+			GOTC(){
+				this.$router.push({
+					path:"/discovery/otc",
+				});
+			}
 		},
 		mounted() {
-            // 订单号：#123456789
-			// 您向XXXX购买0.01234567 BDC
-			// 单价：45028 CNY/BTC
-			// 总价：1000CNY
-			// 卖家付款方式：支付宝/微信/银行卡
-			// 待支付，请于10分钟内向XXX支付1000 CNY ，付款参考号：696342
-			this.getCountDwn()
+			// 获取购买数量以及ID
+			this.id     =   (this.$route.query.id)?this.$route.query.id:''
+			if(this.id==''){
+				this.GOTC()
+			} 
+			this.BuyOrderAndPay()
+			
 		},
 		beforeDestroy(){
 			// 清除计时器
@@ -171,6 +238,6 @@
 
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="scss"> 
 @import "../../scss/views/discovery/order";
 </style>

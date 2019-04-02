@@ -335,6 +335,28 @@ export const zh = {
                 min         :   '最少购买',
                 close       :   '关闭订单'
             },
+            order:{
+                title       :   '支付订单',
+                orderId     :   '订单号',
+                your        :   '您向',
+                buy         :   '购买',
+                price       :   '单价',
+                total       :   '总价',
+                payment     :   '点击查看付款方式',
+                cancel      :   '取消订单',
+                paymentok   :   '完成支付',
+                alipay      :   '支付宝账号',
+                name        :   '姓名',
+                nickname    :   '卖家昵称',
+                bank        :   '开户银行',
+                cardNumber  :   '银行账号',
+                picSaveS    :   '图片保存成功',
+                picSaveE    :   '图片保存失败，请检查APP权限',
+                cancelS     :   '订单已取消',
+                saveErcode  :   '保存付款码',
+                copyCard    :   '复制卡号',
+                copyName    :   '复制姓名'
+            }
         },
     },
     // 钱包

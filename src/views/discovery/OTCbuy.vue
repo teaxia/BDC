@@ -124,12 +124,35 @@ export default {
             this.type = 2
         },
         doSubmit(){
-            this.$router.push({
-                path:"/discovery/OTC/order",
-                query:{
-                    id  :  1
+            if(this.CNum==''||this.CNum<this.datalist.minBuy){
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.input.minNum')+this.datalist.minBuy+this.datalist.currenyName,
+                    type: 'warn'
+                })
+                return;
+            }
+            // this.$router.push({
+            //     path:"/discovery/OTC/order",
+            //     query:{
+            //         id      :   this.id,
+            //     }
+            // });
+            this.$server.post(
+            'OTC_BuyOrderAndPay_TJ',{
+                guid 	    :   this.$storage.get('guid'),
+                Id          :   this.id,
+                buyNum		:	this.CNum
+            }).then(data => {
+                // if(data){
+                if(data){
+                    this.$router.push({
+                        path:"/discovery/OTC/order",
+                        query:{
+                            id      :   this.id,
+                        }
+                    });
                 }
-            });
+            })
         },
         goauth(){
             this.$router.push({

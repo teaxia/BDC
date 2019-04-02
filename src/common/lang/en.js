@@ -334,6 +334,28 @@ export const en = {
                     min         :   'Min',
                     close       :   'close'
                 },
+                order:{
+                    title       :   'Pay Order',
+                    orderId     :   'Order ID',
+                    your        :   'Your',
+                    buy         :   'buy',
+                    price       :   'Price',
+                    total       :   'Total',
+                    payment     :   'Click this view payment',
+                    cancel      :   'Cancel Order',
+                    paymentok   :   'Payment completed',
+                    alipay      :   'Alipay Access',
+                    name        :   'Name',
+                    nickname    :   'Nick name',
+                    bank        :   'Bank',
+                    cardNumber  :   'Card Number',
+                    picSaveS    :   'Save success',
+                    picSaveE    :   'Save error',
+                    cancelS     :   'Order is cancel',
+                    saveErcode  :   'Save ercode',
+                    copyCard    :   'Copy card No.',
+                    copyName    :   'Copy name'
+                }
             },
         },
     },
