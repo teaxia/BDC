@@ -137,9 +137,15 @@
 					path: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3059434706,756007675&fm=26&gp=0.jpg'
 				}, function(ret, err) {
 					if (ret && ret.status) {
-						alert('保存成功');
+						this.$vux.toast.show({
+							text: '图片保存成功！',
+							type: 'success'
+						})
 					} else {
-						alert('保存失败');
+						this.$vux.toast.show({
+							text: '图片保存失败，请检查APP权限',
+							type: 'wran'
+						})
 					}
 				});
 				
