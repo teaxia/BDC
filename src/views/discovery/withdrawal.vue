@@ -1,5 +1,5 @@
 <template>
-	<div class="withdrawal padding-footer" v-cloak>
+	<div class="withdrawal padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.withdrawal.title')"></x-header>
         <div class="main-container">
             <flexbox class="line-b earning">

@@ -1,5 +1,5 @@
 <template>
-	<div class="bill padding-footer" v-cloak>
+	<div class="bill padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.bill.title')"></x-header>
         <flexbox class="pb select">
             <flexbox-item>

@@ -1,5 +1,5 @@
 <template>
-	<div class="mycard" v-cloak>
+	<div class="mycard margin-header" v-cloak>
 		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.Selltitle')"></x-header>
         <div class="pd50">
             <div class="currency">

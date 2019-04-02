@@ -1,5 +1,5 @@
 <template>
-	<div class="extension padding-footer" v-cloak>
+	<div class="extension padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.extension.tg')"></x-header>
         <div class="main-container">
             <div class="w-cont" id="extension">

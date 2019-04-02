@@ -1,5 +1,5 @@
 <template>
-	<div class="mycard" v-cloak>
+	<div class="mycard margin-header" v-cloak>
 		<x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.mycard')"></x-header>
         <div class="pd50">
             <div class="enterfrom" v-if="BindCount<AllowCount">
@@ -188,7 +188,7 @@ export default {
     },
 	mounted() {
         // 更新个人中心资料
-        this.GetAccount();
+        // this.GetAccount();
         this.realname = (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
         if(this.realname==this.$t('global.Uncertified')){
             this.show = true;

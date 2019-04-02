@@ -72,6 +72,8 @@ export default {
   position:fixed;
   bottom: 0;
   width: 100%;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
   .iconfont{
     color:#b6b6b6;
     font-size:52px;

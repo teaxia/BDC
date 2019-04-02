@@ -1,5 +1,5 @@
 <template>
-	<div class="games padding-footer" v-cloak>
+	<div class="games padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.topmenu.ent')"></x-header>
         <div class="main-container">
             <div class="select">

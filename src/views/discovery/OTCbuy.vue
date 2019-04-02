@@ -1,5 +1,5 @@
 <template>
-	<div class="otcbuy" v-cloak>
+	<div class="otcbuy margin-header" v-cloak>
 		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.index.buy')"></x-header>
         <div class="pd50"  v-if="datalist">
             <div class="information">
@@ -129,6 +129,11 @@ export default {
                 query:{
                     id  :  1
                 }
+            });
+        },
+        goauth(){
+            this.$router.push({
+                path:"/mine/myhome",
             });
         }
     },

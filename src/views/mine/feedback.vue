@@ -1,5 +1,5 @@
 <template>
-	<div class="feedback padding-footer" v-cloak>
+	<div class="feedback padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.feedback.title')"></x-header>
         <div class="main-container"> 
 			<group>

@@ -1,5 +1,5 @@
 <template>
-	<div class="walletmain receive padding-footer" v-cloak>
+	<div class="walletmain receive padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('wallet.receive.title')"></x-header>
         <div class="walletmain-top">
 			<v-grid class="walletmain-top-menu">

@@ -1,5 +1,5 @@
 <template>
-	<div class="games" v-cloak>
+	<div class="games margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" title="PT游戏"></x-header>
         <div class="main-container">
             <!-- 赌博游戏 -->

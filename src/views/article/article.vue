@@ -1,5 +1,5 @@
 <template>
-	<div class="notice padding-footer" v-cloak>
+	<div class="notice padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="name"></x-header>
         <div class="main-container">
 			<div class="title">

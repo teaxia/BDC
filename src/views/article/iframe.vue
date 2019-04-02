@@ -1,5 +1,5 @@
 <template>
-	<div class="iframe" v-cloak>
+	<div class="iframe margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}"></x-header>
         <div>
             <iframe :src="url" :width="w" :height="h" class="iframe_p" :scrolling="this.isscro" frameborder="0"></iframe>

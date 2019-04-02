@@ -1,5 +1,5 @@
 <template>
-	<div class="otc" v-cloak>
+	<div class="otc margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}">
             <div slot="right">
                 <span class="right">{{$t('discovery.OTC.index.record')}}</span>

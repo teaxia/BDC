@@ -1,5 +1,5 @@
 <template>
-	<div class="area" v-cloak>
+	<div class="area margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.area.title')">
             <div @click="query(level)" class="up" slot="right">{{$t('mine.area.levelup')}}</div>
         </x-header>

@@ -1,5 +1,5 @@
 <template>
-	<div class="mycard" v-cloak>
+	<div class="mycard margin-header" v-cloak>
 		<x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.bindalipay')"></x-header>
         <div class="pd50">
             <div v-if="BindCount<AllowCount" class="enterfrom">

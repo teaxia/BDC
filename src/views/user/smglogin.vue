@@ -1,5 +1,5 @@
 <template>
-	<div class="regist" v-cloak>
+	<div class="regist margin-header" v-cloak>
 		<x-header :left-options="{backText:$t('global.back')}" :title="$t('global.msg')"></x-header>
         <div class="pd50">
             <div class="v-flex v-flex-between">

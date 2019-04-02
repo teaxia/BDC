@@ -1,5 +1,5 @@
 <template>
-	<div class="auth padding-footer" v-cloak>
+	<div class="auth padding-footer margin-header" v-cloak>
         <x-header title="slot:overwrite-title">
             <div class="overwrite-title" slot="overwrite-title">
                 <div @click="change()" :class="{'overwrite-title-btn':true,'overwrite-title-first':true,'overwrite-title-act':active}">

@@ -1,5 +1,5 @@
 <template>
-	<div class="changeassets padding-footer" v-cloak>
+	<div class="changeassets padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('wallet.tips.change')"></x-header>
 		<div class="main-container">
             <v-grid>

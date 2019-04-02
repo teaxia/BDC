@@ -162,6 +162,14 @@ input{
 /*重写部分*/
 .vux-header{
     height: 1.3rem;
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+.margin-header{
+    margin-top:1.3rem;
 }
 .vux-header .vux-header-left{
     height: 1.3rem;
@@ -192,6 +200,7 @@ input{
 .weui-toast{
     top: 6.4rem !important;
     width: 3.5rem !important;
+    z-index: 999999;
 }
 .weui-toast__content{
     font-size:0.5rem !important;

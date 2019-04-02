@@ -1,5 +1,5 @@
 <template>
-	<div class="expectinfo padding-footer" v-cloak>
+	<div class="expectinfo padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.expectinfo.title')"></x-header>
         <div class="main-container">
             <div class="mr30">

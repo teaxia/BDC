@@ -1,5 +1,5 @@
 <template>
-	<div class="btob padding-footer" v-cloak>
+	<div class="btob padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.cash.title')"></x-header>
         <div class="main-container">
             <h3>

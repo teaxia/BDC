@@ -1,5 +1,5 @@
 <template>
-	<div class="recharge" v-cloak>
+	<div class="recharge margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.recharge.title')"></x-header>
         <flexbox class="pb select">
             <flexbox-item>

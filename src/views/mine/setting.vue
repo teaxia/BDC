@@ -1,5 +1,5 @@
 <template>
-	<div class="setting" v-cloak>
+	<div class="setting margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.settile')"></x-header>
         <div class="main-container">
             <div class="enterfrom">
