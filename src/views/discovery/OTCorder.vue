@@ -29,6 +29,10 @@
 					<i @click="pay('wechart')" :class="{'iconfont':true,'icon-weixinzhifu':true,'wechart':true}"></i>
 				</div>
 			</div>
+			<div class="order-btn">
+				<button class="btn btn-round btn-min btn-cancel" @click="cancelFPupop">取消订单</button>
+				<button class="btn btn-round btn-min">完成支付</button>
+			</div>
 		</div>
 		<div class="popup">
 			<vfpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showFPupop">
@@ -41,7 +45,7 @@
 							</div>
 							<button class="btn btn-round btn-min" @click="save()">存储二维码</button>
 						</div>
-						<div v-if="PayType==1" class="card">
+						<div v-if="PayType==1" class="card padding-bottom">
 							<!-- 银行卡 -->
 							<div class="font">
 								<div class="font-title">开户银行：</div>广大银行
@@ -53,14 +57,13 @@
 									<button class="btn btn-xs" v-clipboard:copy="'6222022402003101718'" v-clipboard:success="onCopy" v-clipboard:error="onError">复制卡号</button>
 								</div>
 							</div>
-							<div class="font">
+							<div class="font copy">
 								<div class="font-title">姓名：</div>
 								<div>牛大壮</div>
+								<div class="font-btn">
+									<button class="btn btn-xs" v-clipboard:copy="'牛大壮'" v-clipboard:success="onCopy" v-clipboard:error="onError">复制姓名</button>
+								</div>
 							</div>
-						</div>
-						<div :class="{'order-btn':true,'padding-bottom':PayType==1}">
-							<button class="btn btn-round btn-min btn-cancel" @click="cancelFPupop">取消订单</button>
-							<button class="btn btn-round btn-min">完成支付</button>
 						</div>
 					</div>
                 </div>

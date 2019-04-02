@@ -39,12 +39,12 @@
                 </group>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
-            <div class="close">
-                <i-circle :percent="percent">
+            <center>
+                <i-circle :percent="percent" class="close">
                     <div style="font-size:24px">{{ T }}s</div>
                     <div>{{$t('discovery.OTC.buy.close')}}</div>
                 </i-circle>
-            </div>
+            </center>
             
         </div>
         <Modal v-model="show" :closable="false" :mask-closable="false">

@@ -77,13 +77,15 @@
                 .font{
                     font-size:32px;
                     display: flex;
+                    flex: 1 1 2;
                     height: 60px;
                     &-title{
                         width: 180px;
                     }
                     &-btn{
                         padding:10px 0;
-                        margin-left:18px;
+                        // margin-left:18px;
+                        margin-left:auto;
                     }
                 }
             }
