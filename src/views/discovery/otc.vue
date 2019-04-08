@@ -2,7 +2,9 @@
 	<div class="otc margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()">
             <div slot="right">
-                <span class="right">{{$t('discovery.OTC.index.record')}}</span>
+                <router-link to="/discovery/OTC/list">
+                    <span class="right">{{$t('discovery.OTC.index.record')}}</span>
+                </router-link>
             </div>
             <div slot="default" class="title">
                 <div @click="change()" :class="{'select-title':true,'act-bd':active}">

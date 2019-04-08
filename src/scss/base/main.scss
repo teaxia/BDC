@@ -27,6 +27,28 @@ input{
     min-height: 1rem;
     font-size:0.426667rem;
 }
+.weui-search-bar{
+    .weui-icon-search,.weui-search-bar__cancel-btn{
+        line-height:0.7rem !important;
+        font-size:0.35rem !important;
+    }
+    .weui-icon-clear{
+        top:0.19rem !important;
+    }
+    input{
+        min-height: 0.4rem !important;
+        height: 0.6rem !important;
+        line-height: 0.4rem !important;
+        margin-left: 0.4rem !important;
+        font-size:0.35rem !important;
+    }
+    .weui-search-bar__label{
+        span{
+            font-size:0.35rem;
+        }
+        
+    }
+}
 *:focus { 
     outline: none;
 }
@@ -107,6 +129,11 @@ input{
 .padding-footer{
     padding-bottom: 2rem;
 }
+.vux-tab-container,.vux-tab{
+    height: auto !important;
+    overflow: hidden !important;
+    
+}
 /*工具类*/
 .ellipsis1{
     text-overflow:ellipsis;
@@ -165,6 +192,7 @@ input{
     position: fixed !important;
     top: 0;
     width: 100%;
+    z-index:999;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
 }

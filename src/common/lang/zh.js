@@ -333,7 +333,8 @@ export const zh = {
                 num         :   '数量',
                 full        :   '全部购买',
                 min         :   '最少购买',
-                close       :   '关闭订单'
+                close       :   '关闭订单',
+                remark      :   '备注留言',
             },
             order:{
                 title       :   '支付订单',

@@ -332,7 +332,8 @@ export const en = {
                     num         :   'Num',
                     full        :   'Full',
                     min         :   'Min',
-                    close       :   'close'
+                    close       :   'close',
+                    remark      :   'Remark',
                 },
                 order:{
                     title       :   'Pay Order',

@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="order-tips mr20 order-line">
-				待支付，请于{{m}}分{{s}}秒内向{{nickName}}支付{{$numberComma(TotalPay)}} CNY ，付款参考号：{{RemarkCode}}，付款成功后请到订单页面点击完成支付（非常重要！）
+				待支付，请于{{m}}分{{s}}秒内向{{nickName}}支付{{$numberComma(TotalPay)}} CNY ，请付款备注：{{RemarkCode}}，付款成功后请到订单页面点击完成支付（非常重要！）
 			</div>
 			<div class="order-payment mr10">
 				<div class="order-payment-info">
@@ -31,7 +31,7 @@
 			</div>
 			<div class="order-btn">
 				<button class="btn btn-round btn-min btn-cancel" @click="CancelOrder()">{{$t('discovery.OTC.order.cancel')}}</button>
-				<button class="btn btn-round btn-min">{{$t('discovery.OTC.order.paymentok')}}</button>
+				<button class="btn btn-round btn-min" @click="paymentok()">{{$t('discovery.OTC.order.paymentok')}}</button>
 			</div>
 		</div>
 		<div class="popup">
@@ -209,6 +209,22 @@
 					if(data){
 						this.$vux.toast.show({
 							text: $t('discovery.OTC.order.cancelS'),
+							type: 'success'
+						})
+						this.GOTC()
+					}
+				})
+			},
+			paymentok(){
+				// 付款成功
+				this.$server.post(
+				'OTC_BuyOrderAndPay_PayDone',{
+					guid 	    		:   this.$storage.get('guid'),
+					BuySellOrderId      :   this.OrderId,
+				}).then(data => {
+					if(data){
+						this.$vux.toast.show({
+							text: this.$t('global.wait'),
 							type: 'success'
 						})
 						this.GOTC()

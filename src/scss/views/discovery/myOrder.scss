@@ -1,0 +1,29 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.myOrder{
+    .date-line{
+        width: 250px;
+        margin:0 auto;
+    }
+    .order{
+        &-line{
+            border-bottom: 0.01rem solid $border-line;
+            padding-bottom: 20px;
+        }
+        &-pay{
+            display: flex;
+        }
+        &-information{
+            flex: 1;
+        }
+        &-svg{
+            flex: 1;
+            text-align: right;
+            .sicon{
+                width: 120px;
+                height: 120px;
+            }
+        }
+    }
+}

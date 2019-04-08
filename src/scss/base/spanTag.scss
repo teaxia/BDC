@@ -1,0 +1,29 @@
+@charset "utf-8";
+@import "./var";
+// span徽章基础样式
+.tag{
+    padding:5px 15px;
+    color:#fff;
+    background: #5b6879;
+    text-align: center;
+    display: inline-block;
+    font-size: 24px;
+    vertical-align: middle;
+    opacity: 1;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: 2px 4px 2px 0;
+    &-primary{
+        background: #2d8cf0;
+    }
+    &-success{
+        background: #19be6b;
+    }
+    &-error{
+        background: #ed4014;
+    }
+    &-wran{
+        background: #f90;
+    }
+}

@@ -91,3 +91,62 @@ $height : 1.5rem;
         }
     }
 }
+.iconfont{
+    font-size:80px;
+    margin-left:15px;
+    &:first-child{
+        margin-left:0;
+    }
+}
+.alipay{
+    color:#1296db;
+}
+.cardpay{
+    color:#028BF4;
+}
+.wechart{
+    color:#1eb1ad;
+}
+.tips{
+    line-height: 90px;
+    color:$font-red;
+    font-size:26px;
+}
+.popup{
+    .pay-info{
+        padding:20px 0;
+        height: auto;
+        overflow: hidden;
+        .ercode{
+            font-size:32px;
+            min-height: 800px;
+            text-align: center;
+            .pay-img{
+                width: 400px;
+            }
+            .btn{
+                margin:0 auto;
+            }
+        }
+        .card{
+            padding:0 30px;
+            .font{
+                font-size:32px;
+                display: flex;
+                flex: 1 1 2;
+                height: 60px;
+                &-title{
+                    width: 180px;
+                }
+                &-btn{
+                    padding:10px 0;
+                    // margin-left:18px;
+                    margin-left:auto;
+                }
+            }
+        }
+        .padding-bottom{
+            margin-bottom: 400px;
+        }
+    }
+}

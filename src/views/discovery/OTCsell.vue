@@ -246,13 +246,13 @@ export default {
                         type: 'success'
                     })
                     // 清空数据
-                    this.cName = ''
+                    // this.cName = ''
                     this.num = ''
                     this.price = ''
                     this.minNum = ''
-                    this.bankId = ''
-                    this.alipayId = ''
-                    this.wechartId = ''
+                    // this.bankId = ''
+                    // this.alipayId = ''
+                    // this.wechartId = ''
                 }
             })
             

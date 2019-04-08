@@ -23,10 +23,11 @@ import vpopup from './components/popup.vue'                     // 弹出层组�
 import vfpopup from './components/vfpopup.vue'                  // 全屏弹出层
 import vgrid from './components/vgrid.vue'
 import strcut from './common/utils/strcut'                    // 截取字符串首字母，中英文适用
-import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma} from 'vux'
+import VueTouch from 'vue-touch'                                // 左右滑动手势
+import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma,Search,Tab, TabItem} from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
-import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Avatar,Slider,Switch,Circle} from 'iview';
+import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Avatar,Slider,Switch,Circle,Affix} from 'iview';
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
@@ -37,6 +38,7 @@ Vue.use(LoadingPlugin)
 Vue.use(ToastPlugin)
 Vue.use(VueQriously)
 Vue.use(VueClipboard)
+Vue.use(VueTouch, {name: 'v-touch'})
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
 Vue.component('flexbox', Flexbox)
@@ -70,7 +72,10 @@ Vue.component('Slider', Slider)
 Vue.component('i-switch', Switch)
 Vue.component('i-circle', Circle)
 Vue.component('vfpopup', vfpopup)
-
+Vue.component('search', Search)
+Vue.component('tab', Tab)
+Vue.component('tab-item', TabItem)
+Vue.component('Affix', Affix)
 
 Vue.prototype.$server       =   server;                         // ajax组件
 Vue.prototype.$storage      =   storage;                        // 本地数据读取
@@ -81,6 +86,7 @@ Vue.prototype.$html2canvas  =   html2canvas;                    // 图片生成
 Vue.prototype.$currency     =   currency;                       // 有图标的币种
 Vue.prototype.$numberComma  =   numberComma;                    // 用于分割数字，默认为3位分割，一般用于格式化金额
 Vue.prototype.$strcut       =   strcut;                         // 截取字符串的首字母（中英文适用）
+
 const router = new VueRouter({
   routes
 })

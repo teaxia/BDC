@@ -37,6 +37,9 @@
                         <div slot="right-full-height">{{datalist.currenyName}}</div>
                     </x-input>
                 </group>
+                <group>
+                    <x-textarea class="textarea" v-model="remark" :max="200" :show-counter="true" :placeholder="$t('discovery.OTC.buy.remark')"></x-textarea>
+                </group>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
             <center>
@@ -77,6 +80,7 @@ export default {
             clock                   :   '',                     // 倒计时
             T                       :   60,                     // 秒
             type                    :   '',                     // 1是通过CNY计算BDC 2是通过BDC计算CNY
+            remark                  :   '',                     // 备注留言
 		}
 	},
 	methods: {
@@ -105,6 +109,9 @@ export default {
                 this.T--;
                 i++;
                 if (this.T<=0) {
+                    this.$router.push({
+                        path:"/discovery/otc",
+                    });
                     window.clearInterval(this.clock)
                 }
                 this.percent =  i/Tmp*100
@@ -141,7 +148,8 @@ export default {
             'OTC_BuyOrderAndPay_TJ',{
                 guid 	    :   this.$storage.get('guid'),
                 Id          :   this.id,
-                buyNum		:	this.CNum
+                buyNum		:	this.CNum,
+                Remark      :   this.remark
             }).then(data => {
                 // if(data){
                 if(data){
