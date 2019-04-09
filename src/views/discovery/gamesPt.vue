@@ -1,6 +1,6 @@
 <template>
 	<div class="games margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="PT游戏"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" title="电子游艺"></x-header>
         <div class="main-container">
             <!-- 赌博游戏 -->
             <div class="model">
@@ -72,7 +72,7 @@
                 Balance     :   '',                                 // 游戏资产
                 bdcNum      :   '',                                 // 转入BDC数量
                 upstatus    :   false,                              // 点击状态
-                imgSrc      :   './static/images/pt.png',
+                imgSrc      :   './static/images/Icon_PT.jpg',
                 PName       :   'PT',
                 GameName    :   '',                                 // 游戏名称
                 gambling    :   [

@@ -12,7 +12,10 @@
             </div>
             <div v-if="active">
                 <!-- 赌博游戏 -->
-                <v-grid v-for="(v,index) in gambling" :key="index" class="mr20">
+                <div v-for="(v,index) in gambling" :key="index" class="mr20">
+                    <img width="100%" :src="v.Img" @click="Gambling(v.code,index)">
+                </div>
+                <!-- <v-grid v-for="(v,index) in gambling" :key="index" class="mr20">
                     <div class="pd-lb20" @click="Gambling(v.code,index)">
                         <flexbox>
                             <flexbox-item :span="3">
@@ -30,7 +33,7 @@
                             </flexbox-item>
                         </flexbox>
                     </div>
-                </v-grid>
+                </v-grid> -->
             </div>
             <div v-if="!active">
                 <!-- 休闲游戏 -->
@@ -122,24 +125,28 @@
                         'Name'  :   'BD棋牌',
                         'code'  :   'BD',
                         'Img'   :   './static/images/bd.png',
+                        'Icon'  :   './static/images/icon_BD.jpg',
                         'Url'   :   true
                     },
                     {
-                        'Name'  :   '亚游',
+                        'Name'  :   '真人娱乐',
                         'code'  :   'AG',
                         'Img'   :   './static/images/ag.png',
+                        'Icon'  :   './static/images/icon_AG.jpg',
                         'Url'   :   true
                     },
                     {
-                        'Name'  :   'PT游戏',
+                        'Name'  :   '电子游艺',
                         'code'  :   'PT',
                         'Img'   :   './static/images/pt.png',
+                        'Icon'  :   './static/images/icon_PT.jpg',
                         'Url'   :   true
                     },
                     {
                         'Name'  :   '体育赛事',
                         'code'  :   'IBC',
                         'Img'   :   './static/images/sb1.png',
+                        'Icon'  :   './static/images/icon_SB.jpg',
                         'Url'   :   true
                     },
                 ]
@@ -306,7 +313,7 @@
                 // @code bd = bd棋牌
                 // 赌博游戏接入
                 this.GameName = this.gambling[index].Name           // 游戏名
-                this.imgSrc   = this.gambling[index].Img            // 游戏图标
+                this.imgSrc   = this.gambling[index].Icon            // 游戏图标
                 switch (code) {
                     case 'BD':
                         this.PName   = 'BD'
