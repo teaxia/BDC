@@ -1,9 +1,9 @@
 <template>
 	<div class="feedback padding-footer margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="投诉"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.complaiont.title')"></x-header>
         <div class="main-container"> 
 			<group>
-                <x-textarea class="textarea" v-model="remarks" :max="200" :show-counter="true" placeholder="请详细描写您的投诉内容"></x-textarea>
+                <x-textarea class="textarea" v-model="remarks" :max="200" :show-counter="true" :placeholder="$t('discovery.OTC.complaiont.describe')"></x-textarea>
             </group>
             <div class="mr203">{{$t('mine.feedback.upimg')}}：</div>
             <div class="upimg">
@@ -39,7 +39,7 @@
                 // 提交意见
                 if(this.remarks==''){
                     this.$vux.toast.show({
-                        text: '请填写您的投诉内容',
+                        text: this.$t('discovery.OTC.complaiont.remarks'),
                         type: 'warn'
                     })
                     return  ;
@@ -79,7 +79,7 @@
                 // 判断是否有5张图片
                 if(this.imgs.length>=3){
                     this.$vux.toast.show({
-                        text: '最多只能上传3张图片',
+                        text: this.$t('discovery.OTC.complaiont.error'),      //'最多只能上传3张图片',
                         type: 'warn'
                     })
                     return

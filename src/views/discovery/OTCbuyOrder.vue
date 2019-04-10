@@ -1,13 +1,19 @@
 <template>
 	<div class="otcbuy margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" title="售币"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.buy.goods.sell')"></x-header>
         <div class="pd50"  v-if="datalist">
             <div class="information">
                 <div class="left">
-                    <h1>售卖{{datalist.currenyName}}</h1>
+                    <h1>{{$t('discovery.OTC.buy.goods.sellBuy')}}{{datalist.currenyName}}</h1>
                     <div class="price">
-                        <div>售卖{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
-                        <div>售卖{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
+                        <div>{{$t('discovery.OTC.buy.goods.sellBuy')}}{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
+                        <div>{{$t('discovery.OTC.buy.goods.sellBuy')}}{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
+                    </div>
+                    <div class="fax">
+                        {{$t('discovery.extract.tax')}}：{{Poundage}}% 
+                    </div>
+                    <div class="fax">
+                    {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}
                     </div>
                     <div class="payment">
                         <i v-if="alipayPaymeny" @click="sbankd(1)" :class="{'iconfont':true,'icon-zhifubao':true,'alipay':alipay}"></i>
@@ -31,7 +37,7 @@
                     <x-textarea class="textarea" v-model="remark" :max="200" :show-counter="true" :placeholder="$t('discovery.OTC.buy.remark')"></x-textarea>
                 </group>
             </div>
-            <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">我要出售</button>
+            <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('discovery.OTC.buy.goods.Isell')}}</button>
             <center>
                 <i-circle :percent="percent" class="close">
                     <div style="font-size:24px">{{ T }}s</div>
@@ -123,6 +129,10 @@ export default {
             cardPaymeny             :   false,
             alipayPaymeny           :   false,
             wechartPaymeny          :   false,
+            Poundage                :   '',                       // 手续费
+            Key                     :   '',
+            amount                  :   0,                       // 实际到账
+            num                     :   '',                      // 售卖数量
 		}
 	},
 	methods: {
@@ -136,11 +146,10 @@ export default {
                 if(data){
                     this.$nextTick(()=>{
                         this.datalist          =   data
+                        this.num               =    data.currenyNum
                         this.wechartPaymeny    =   (data.payInfo.indexOf('微')>=0)?true:false;
                         this.alipayPaymeny     =   (data.payInfo.indexOf('支')>=0)?true:false;
                         this.cardPaymeny       =   (data.payInfo.indexOf('银')>=0)?true:false;
-                        // this.CNum        =   data.minBuy
-                        console.log(data)
                     })
                 }
             })
@@ -168,14 +177,6 @@ export default {
                 })
                 return;
             }
-            let Idlist
-            if(this.wechartId!=''&&this.alipayId!=''){
-                Idlist = this.wechartId+','+this.alipayId
-            }else if(this.wechartId!=''){
-                Idlist =this.wechartId
-            }else{
-                Idlist =this.alipayId
-            }
             this.$server.post( 
             'OTC_GoodsSell_TJ',{
                 guid 	    :   this.$storage.get('guid'),
@@ -184,8 +185,8 @@ export default {
                 zfbInfoId   :   (this.alipayId)?this.alipayId:0,
                 wxInfoId    :   (this.wechartId)?this.wechartId:0,
                 cardInfoId  :   (this.bankId)?this.bankId:0,
+                key         :   this.Key
             }).then(data => {
-                // if(data){
                 if(data){
                     this.$router.push({
                         path:"/discovery/OTC/list",
@@ -193,7 +194,6 @@ export default {
                             type      :   3,                // 前往求已购页面
                         }
                     });
-                    console.log(data)
                 }
             })
         },
@@ -202,10 +202,27 @@ export default {
                 path:"/mine/myhome",
             });
         },
+        GetPoundage(){
+            this.$server.post(
+            'OTC_GetPoundage_OTC',
+            {
+                guid : this.$storage.get('guid')
+            }).then(data => {
+                if(data){
+                    this.Poundage   =   (data.Poundage*100).toFixed(2)
+                    this.Key        =   data.key
+                    let i           =   this.$math.add(1,data.Poundage).toFixed(2)
+                    this.amount     =   (this.num*i).toFixed(2)
+                }
+            })
+        }
     },
     watch:{
-        
-    
+        num(){
+            // 计算手续费
+            let i    =   this.$math.add(1,(this.Poundage/100).toFixed(2))
+            this.amount     =   (this.num*i).toFixed(2)
+        }    
     },
 	mounted() {
         // 更新个人中心资料
@@ -218,6 +235,7 @@ export default {
         this.id     =   this.$route.query.id
         this.OTCLookBuyGoods()
         this.mathPercent()
+        this.GetPoundage()
     },
 	beforeDestroy(){
         // 清除计时器

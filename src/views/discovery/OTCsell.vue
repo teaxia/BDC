@@ -15,6 +15,12 @@
                 <div class="price">
                     {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
                 </div>
+                <div class="fax">
+                    {{$t('discovery.extract.tax')}}：{{Poundage}}% 
+                </div>
+                <div class="fax">
+                   {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}
+                </div>
             </div>
             <div class="enterfrom">
                 <div class="line-b sbank">
@@ -26,15 +32,15 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.num')" required :placeholder="$t('discovery.OTC.sell.input.num')" v-model="num">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.num')" required :placeholder="$t('discovery.OTC.sell.input.num')" v-model="num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')" required :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.minNum')" required :placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.minNum')" required :placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
                     </x-input>
                 </group>
                 <group>
@@ -159,6 +165,9 @@ export default {
             PayNum      :   '',                       // 有多少绑定数据
             minNum      :   '',                       // 最低限额
             type	    :   false,		              // 切换密码状态'
+            Poundage    :   '',                       // 手续费
+            Key         :   '',
+            amount      :   0,                       // 实际到账
 		}
 	},
 	methods: {
@@ -224,7 +233,8 @@ export default {
                 zfbInfoId   :   (this.alipayId)?this.alipayId:0,
                 wxInfoId    :   (this.wechartId)?this.wechartId:0,
                 cardInfoId  :   (this.bankId)?this.bankId:0,
-                isSellOn    :   this.isSellOn
+                isSellOn    :   this.isSellOn,
+                key         :   this.Key
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -241,7 +251,6 @@ export default {
                     // this.wechartId = ''
                 }
             })
-            
         },
         GetBindBankInfo(){
             // 请求开户银行
@@ -427,11 +436,28 @@ export default {
         changType(){
 			this.type = !this.type
         },
+        GetPoundage(){
+            this.$server.post(
+            'OTC_GetPoundage_OTC',
+            {
+                guid : this.$storage.get('guid')
+            }).then(data => {
+                if(data){
+                    this.Poundage   =   (data.Poundage*100).toFixed(2)
+                    this.Key        =   data.key
+                }
+            })
+        }
     },
     watch:{
         currency(){
             this.ConsultPirce =     this.BDClist[this.currency].Value
             this.cName        =     this.BDClist[this.currency].Key
+        },
+        num(){
+            // 计算手续费
+            let i    =   this.$math.add(1,(this.Poundage/100).toFixed(2))
+            this.amount     =   (this.num*i).toFixed(2)
         }
     },
 	mounted() {
@@ -447,6 +473,7 @@ export default {
         // 
         // 默认币种参考价
         this.OTCGetCurrenyPrice()
+        this.GetPoundage()
     }
 }
 </script>

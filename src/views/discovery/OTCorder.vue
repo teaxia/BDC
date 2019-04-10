@@ -47,7 +47,7 @@
 								{{$t('discovery.OTC.order.name')}}：{{alipay[1]}}
 							</div>
 							<button class="btn btn-round btn-min" @click="save(alipay[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
-							<button class="btn btn-round btn-min mr20" :disabled='type=="zfb"' @click="thispay('zfb')"><span v-if="type=='zfb'">当前付款方式</span><span v-else>以此方式付款</span></button>
+							<button class="btn btn-round btn-min mr20" :disabled='type=="zfb"' @click="thispay('zfb')"><span v-if="type=='zfb'">{{$t('discovery.OTC.order.thisPay')}}</span><span v-else>{{$t('discovery.OTC.order.selectpay')}}</span></button>
 						</div>
 						<div v-if="PayType==2" class="ercode">
 							<img class="pay-img" :src="wechart[4]">
@@ -55,7 +55,7 @@
 								{{$t('discovery.OTC.order.nickname')}}：{{wechart[3]}}
 							</div>
 							<button class="btn btn-round btn-min" @click="save(wechart[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
-							<button class="btn btn-round btn-min mr20" :disabled='type=="wx"' @click="thispay('wx')"><span v-if="type=='wx'">当前付款方式</span><span v-else>以此方式付款</span></button>
+							<button class="btn btn-round btn-min mr20" :disabled='type=="wx"' @click="thispay('wx')"><span v-if="type=='wx'">{{$t('discovery.OTC.order.thisPay')}}</span><span v-else>{{$t('discovery.OTC.order.selectpay')}}</span></button>
 						</div>
 						<div v-if="PayType==1" class="card padding-bottom">
 							<!-- 银行卡 -->
@@ -76,7 +76,7 @@
 									<div class="btn btn-xs" v-clipboard:copy="card[1]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyName')}}</div>
 								</div>
 							</div>
-							<button class="btn btn-round btn-min mr20" :disabled='type=="card"' @click="thispay('card')"><span v-if="type=='card'">当前付款方式</span><span v-else>以此方式付款</span></button>
+							<button class="btn btn-round btn-min mr20" :disabled='type=="card"' @click="thispay('card')"><span v-if="type=='card'">{{$t('discovery.OTC.order.thisPay')}}</span><span v-else>{{$t('discovery.OTC.order.selectpay')}}</span></button>
 						</div>
 					</div>
                 </div>
@@ -221,7 +221,7 @@
 			paymentok(){
 				if(this.type==''){
 					this.$vux.toast.show({
-						text: '请查看付款方式后选择支付方式',
+						text: this.$t('discovery.OTC.order.LookPay'),
 						type: 'warn'
 					})
 					return;
@@ -264,9 +264,9 @@
 		mounted() {
 			// 获取购买数量以及ID
 			this.id     =   (this.$route.query.id)?this.$route.query.id:''
-			// if(this.id==''){
-			// 	this.GOTC()
-			// }
+			if(this.id==''){
+				this.GOTC()
+			}
 			this.BuyOrderAndPay()
 			
 		},

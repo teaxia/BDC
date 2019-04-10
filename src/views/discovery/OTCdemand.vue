@@ -15,6 +15,12 @@
                 <div class="price">
                     {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
                 </div>
+                <div class="fax">
+                    {{$t('discovery.extract.tax')}}：{{Poundage}}% 
+                </div>
+                <div class="fax">
+                   {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}
+                </div>
             </div>
             <div class="enterfrom">
                 <div class="line-b sbank">

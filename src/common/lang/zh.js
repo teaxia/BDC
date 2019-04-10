@@ -296,6 +296,7 @@ export const zh = {
                 bindalipay      :   '点击马上绑定支付宝',
                 bindwechart     :   '点击马上绑定微信支付',
                 bindcard        :   '点击马上绑定银行卡',
+                deduction       :   '实际扣除',
                 tips:{
                     num         :   '发布数量必须填写',
                     price       :   '单价必须填写',
@@ -335,6 +336,11 @@ export const zh = {
                 min         :   '最少购买',
                 close       :   '关闭订单',
                 remark      :   '备注留言',
+                goods:{
+                    sell    :   '售币',
+                    sellBuy :   '售卖',
+                    Isell   :   '确定出售',
+                }
             },
             order:{
                 title       :   '支付订单',
@@ -356,8 +362,29 @@ export const zh = {
                 cancelS     :   '订单已取消',
                 saveErcode  :   '保存付款码',
                 copyCard    :   '复制卡号',
-                copyName    :   '复制姓名'
-            }
+                copyName    :   '复制姓名',
+                thisPay     :   '当前付款方式',
+                selectpay   :   '以此方式付款',
+                LookPay     :   '请查看付款方式后选择支付方式'
+            },
+            complaiont:{
+                title       :   '投诉',
+                describe    :   '请详细描写您的投诉内容',
+                remarks     :   '请填写您的投诉内容',
+                error       :   '最多只能上传3张图片',
+                record      :   '投诉记录',
+                order       :   '投诉订单',
+                status      :   '审核状态',
+                status0     :   '待审核',
+                status1     :   '审核成功',
+                status3     :   '拒绝',
+                details     :   '投诉详情',
+                orderId     :   '投诉订单号',
+                ctime       :   '投诉时间',
+                atime       :   '审核时间',
+                commont     :   '投诉内容',
+                recommont   :   '审核回复内容',
+            },
         },
     },
     // 钱包

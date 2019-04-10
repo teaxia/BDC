@@ -6,7 +6,7 @@ $height : 1.5rem;
     display: flex;
     justify-content:space-between;
     .left{
-        .price{
+        .price,.fax{
             font-size:32px;
             color:$font-orange;
         }

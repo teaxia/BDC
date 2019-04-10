@@ -33,12 +33,6 @@
                         <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Pup}"></i>
                     </div>
                 </flexbox-item>
-                <flexbox-item>
-                    <div @click="changePrice()">
-                        {{$t('discovery.OTC.index.price')}}
-                        <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Pup}"></i>
-                    </div>
-                </flexbox-item>
             </flexbox>
         </div>
         <div class="main-container">
@@ -99,7 +93,7 @@
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
                 <span>
-                    求购
+                    {{$t('discovery.OTC.index.bybuy')}}
                 </span>
             </router-link>
         </div>

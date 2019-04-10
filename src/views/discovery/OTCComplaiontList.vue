@@ -1,15 +1,15 @@
 <template>
 	<div class="complaiontlist padding-footer margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="投诉记录"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.complaiont.record')"></x-header>
         <div class="main-container">
-			<v-grid class="mr30" v-for="(v,index) in dataList" :key="index">
+			<v-grid class="mr30" v-for="(v,index) in dataList" :key="index" v-if="dataList.length>0">
                 <div class="systeammsg" @click="goto(v.Id)">
-                    <div>投诉订单：#{{v.OrderId}}</div>
+                    <div>{{$t('discovery.OTC.complaiont.record')}}：#{{v.OrderId}}</div>
                     <div>{{v.CreateTime}}</div>
 					<div class="isread">
-						<span v-if="v.AuditStauts==0" class="wait">待审核</span>
-						<span v-if="v.AuditStauts==1" class="success">投诉完成</span>
-						<span v-if="v.AuditStauts==3" class="wran">拒绝</span>
+						<span v-if="v.AuditStauts==0" class="wait">{{$t('discovery.OTC.complaiont.status0')}}</span>
+						<span v-if="v.AuditStauts==1" class="success">{{$t('discovery.OTC.complaiont.status1')}}</span>
+						<span v-if="v.AuditStauts==3" class="wran">{{$t('discovery.OTC.complaiont.status3')}}</span>
 					</div>
                 </div>
 			</v-grid>
@@ -32,7 +32,6 @@
                     path    :   '/discovery/OTC/Complaiont/view',
                     query   :   {'id':id}
 				});
-				// '/discovery/OTC/complaiont/view',
 			},
 			GetComplainList(){
 				this.$server.post(
@@ -41,7 +40,6 @@
 					guid    : this.$storage.get('guid'),
 				}).then(data => {
 					if(data){
-						console.log(data)
 						this.dataList = data;
 					}
 				})
