@@ -3,7 +3,7 @@
         <x-header :left-options="{backText:$t('global.back')}" title="投诉"></x-header>
         <div class="main-container"> 
 			<group>
-                <x-textarea class="textarea" v-model="value" :max="200" :show-counter="true" :placeholder="$t('mine.feedback.msg')"></x-textarea>
+                <x-textarea class="textarea" v-model="remarks" :max="200" :show-counter="true" placeholder="请详细描写您的投诉内容"></x-textarea>
             </group>
             <div class="mr203">{{$t('mine.feedback.upimg')}}：</div>
             <div class="upimg">
@@ -27,37 +27,39 @@
 	export default {
 		data() {
 			return {
-                value       :   '',
                 upUrl       :   '',                                 // 上传图片地址
                 imgs        :   [],                                 // 图片
                 localimgs   :   [],
+                remarks     :   '',                                 // 投诉说明
+                orderId     :   '',
 			}
 		},
 		methods: {
 			submit(){
                 // 提交意见
-                if(this.value==''){
+                if(this.remarks==''){
                     this.$vux.toast.show({
-                        text: this.$t('mine.feedback.tip'),
+                        text: '请填写您的投诉内容',
                         type: 'warn'
                     })
                     return  ;
                 }
                 this.$server.post(
-                'SaveProposeInfo',
+                'OTC_Complain',
                 {
                     guid 	    : this.$storage.get('guid'),
-                    remarks    	: this.value,
-                    fileNames   : this.imgs
+                    orderId    	: this.orderId,
+                    fileNames   : this.imgs,
+                    remarks     : this.remarks
                 }).then(data => {
                     if(data){
                         this.$vux.toast.show({
                             text: this.$t("global.success"),
                             type: 'success'
                         })
-                        this.value      =   ''
-                        this.imgs       =   []
-                        this.localimgs  =   []
+                        this.$router.push({
+                            path:"/discovery/OTC/complaiontList",
+                        });
                     }
                 })
             },
@@ -75,9 +77,9 @@
             },
             selectimg(e,file){
                 // 判断是否有5张图片
-                if(this.imgs.length>=5){
+                if(this.imgs.length>=3){
                     this.$vux.toast.show({
-                        text: this.$t('mine.feedback.imgerror'),
+                        text: '最多只能上传3张图片',
                         type: 'warn'
                     })
                     return
@@ -113,7 +115,7 @@
                     var idcard = new FormData()
                     idcard.append('img', e.target.files[0])
                     idcard.append('jm', jm)
-                    idcard.append('type','ProposeInfo')
+                    idcard.append('type','OTC_Complain')
                     window.app.$vux.loading.show({
                         text: 'Loading'
                     })
@@ -137,6 +139,7 @@
 		},
 		mounted() {
             this.GetImgUpLoadUrl()
+            this.orderId = this.$route.query.id
 		}
 	}
 

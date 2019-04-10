@@ -1,0 +1,34 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.complaiontlist{
+    .systeamgg,.systeammsg{
+        padding:0 30px;
+        font-size:24px;
+    }
+    .systeammsg{
+        position: relative;
+        .isread{ 
+            position: absolute;
+            right: 15px;
+            top:25px;
+            .noread{
+                color:$font-red;
+            }
+        }
+    }
+    .time{
+        color:$font-baseh2; 
+    }
+    .title{
+        color:$font-base;
+    }
+    .notice{
+        width: 4rem;
+        text-align: center;
+        float: right;
+    }
+    .content{
+        font-size:26px;
+    }
+}

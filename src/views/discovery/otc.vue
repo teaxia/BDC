@@ -16,7 +16,7 @@
             </div>
         </x-header>
         <div>
-            <!-- 选择币种 -->
+            <!-- 筛选 -->
             <flexbox class="pb select">
                 <flexbox-item>
                     <div @click="selectCurrency()">{{$t('discovery.OTC.index.curreny')}}</div>
@@ -25,6 +25,12 @@
                     <div @click="changeTime()">
                         {{$t('discovery.OTC.index.time')}}
                         <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Tup}"></i>
+                    </div>
+                </flexbox-item>
+                <flexbox-item>
+                    <div @click="changePrice()">
+                        {{$t('discovery.OTC.index.price')}}
+                        <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Pup}"></i>
                     </div>
                 </flexbox-item>
                 <flexbox-item>

@@ -1,6 +1,12 @@
 <template>
 	<div class="orderList margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="订单记录"></x-header>
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="订单记录">
+			<div slot="right">
+                <router-link to="/discovery/OTC/complaiontList">
+                    <span class="right">投诉</span>
+                </router-link>
+            </div>
+		</x-header>
 		<Affix :offset-top="50">
 			<tab class="tab">
 				<tab-item class="tab-item" :selected="orderType==0" @on-item-click="onItemClick">售币</tab-item>
