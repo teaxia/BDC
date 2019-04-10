@@ -2,6 +2,7 @@
 @import "../../base/var";
 @import "../../base/button";
 $time : 0.4s;
+$height : 1.5rem;
 .otc{
     .title{
         width: 250px;
@@ -94,6 +95,9 @@ $time : 0.4s;
                 color: $font-h2;
                 font-size:32px;
                 font-weight: bold;
+            }
+            .buyorder{
+                margin-top:14px;
             }
         }
         .otc-grid-pay{

@@ -1,6 +1,6 @@
 <template>
 	<div class="orderList margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="订单记录"></x-header>
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="订单记录"></x-header>
 		<Affix :offset-top="50">
 			<tab class="tab">
 				<tab-item class="tab-item" :selected="orderType==0" @on-item-click="onItemClick">售币</tab-item>
@@ -14,7 +14,7 @@
 			</search>
 		</div>
 		<div class="pb20">
-			<v-touch v-on:swipeleft="onSwipeLeft" v-on:swiperight="onSwipeRight">
+			<v-touch :swipe-options="{direction: 'horizontal'}" v-on:swipeleft="onSwipeRight" v-on:swiperight="onSwipeLeft">
 			<flexbox class="time" v-if="orderType>1">
 				<flexbox-item>
 					<DatePicker @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
@@ -23,7 +23,8 @@
 					<DatePicker @on-change="endtime" type="date"  v-model="enddate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
 				</flexbox-item>
 			</flexbox>
-			<div class="goods-list" v-if="orderType==0||orderType==1">
+			
+			<div class="goods-list" v-if="orderType==0">
 				<div class="otc-item" @click="edit(v.Id)" v-for="(v,index) in MySellOrder" v-if="v.Id" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
@@ -40,7 +41,7 @@
                             <div class="v-flex">
                                 <div class="otc-grid-price">
                                     <div class="price">
-                                        {{$numberComma(v.price)}}CNY
+                                        售价：{{$numberComma(v.price)}}CNY
                                     </div>
                                     <div class="otc-price">
                                         <div>出售数量：{{$numberComma(v.currenyNum)}}（{{v.currenyName}}）</div>
@@ -70,14 +71,65 @@
 				<div v-else class="nodata">
 					没有数据
 				</div>
+				<!-- 售币订单 -->
 			</div>
 
+			<div class="goods-list" v-if="orderType==1">
+				<div class="otc-item" @click="editDemand(v.Id)" v-for="(v,index) in MyBuyOrder" v-if="v.Id" :key="index">
+                    <v-grid class="otc-grid">
+                        <div class="otc-grid-title">
+							<svg class="smallicon" aria-hidden="true" v-if="$currency.indexOf(v.currenyName)>=0">
+								<use :xlink:href="`#icon-`+v.currenyName"></use>
+							</svg>
+							<Avatar size="small" v-else style="background:#f56a00;">
+								<span class="line-height">{{v.currenyName}}</span>
+							</Avatar>
+                            <div class="grid-username">{{v.currenyName}}</div>
+                            <div class="grid-info">{{v.CreateTime}}</div>
+                        </div>
+                        <div class="otc-grid-main">
+                            <div class="v-flex">
+                                <div class="otc-grid-price">
+                                    <div class="price">
+                                        单价：{{$numberComma(v.price)}}CNY
+                                    </div>
+                                    <div class="otc-price">
+                                        <div>求购数量：{{$numberComma(v.currenyNum)}}（{{v.currenyName}}）</div>
+                                        <!-- <div>已售数量：{{$numberComma(v.sellNum)}} （{{v.currenyName}}）</div> -->
+                                    </div>
+                                </div>
+                                <div class="otc-grid-pay">
+                                    <div class="otc-grid-paylist">
+                                        <div v-if="v.Status==-1" class="tag tag-error">
+                                            下架
+                                        </div>
+                                        <div v-if="v.Status==0" class="tag tag-success">
+                                            上架
+                                        </div>
+                                        <div v-if="v.Status==2" class="tag tag-wran">
+                                            锁定
+                                        </div>
+                                    </div>
+                                    <div class="otc-grid-right">
+                                        <i class="iconfont icon-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </v-grid>
+                </div>
+				<div v-else class="nodata">
+					没有数据
+				</div>
+				<!-- 求购订单 -->
+			</div>
 
 			<div class="list" v-if="orderType==2">
 				<!-- 已购订单 -->
-				<div class="order-list-content" v-for="(v,index) in BuyOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id,v.status,v.SellOrderId)">
+				<div class="order-list-content" v-for="(v,index) in BuyOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id,v.status)">
 					<flexbox>
 						<flexbox-item>订单号：{{v.Id}}</flexbox-item>
+						<flexbox-item><span v-if="v.GoodsType==0" class="tag tag-wran">售币</span><span v-if="v.GoodsType==1" class="tag tag-primary">求购</span></flexbox-item>
 						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
 					</flexbox>
 					<flexbox>
@@ -90,8 +142,13 @@
 							</Avatar>
 						</flexbox-item>
 						<flexbox-item class="order-list-info">
-							<div>数量：{{v.BuyNum}}（{{v.currenyName}}）</div>
-							<div>单价：{{v.price}} 总价：{{v.TotalPay}}（CNY）</div>
+							<div>
+								<span class="price">单价：{{v.price}}（CNY）</span>
+								<span class="buynum">数量：{{v.BuyNum}}（{{v.currenyName}}）</span>
+							</div>
+							<div>
+								<span class="total">总价：{{v.TotalPay}}（CNY）</span>
+							</div>
 						</flexbox-item>
 						<flexbox-item span='58' class="order-list-type">
 							<span class="order-list-type-waitpay" v-if="v.status==2">待支付</span>
@@ -112,6 +169,7 @@
 				<div class="order-list-content" v-for="(v,index) in SellOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id)">
 					<flexbox>
 						<flexbox-item>订单号：{{v.Id}}</flexbox-item>
+						<flexbox-item><span v-if="v.GoodsType==0" class="tag tag-wran">购买</span><span v-if="v.GoodsType==1" class="tag tag-primary">求购</span></flexbox-item>
 						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
 					</flexbox>
 					<flexbox>
@@ -124,12 +182,17 @@
 							</Avatar>
 						</flexbox-item>
 						<flexbox-item class="order-list-info">
-							<div>数量：{{v.BuyNum}}（{{v.currenyName}}）</div>
-							<div>单价：{{v.price}} 总价：{{v.TotalPay}}（CNY）</div>
+							<div>
+								<span class="price">单价：{{v.price}}（CNY）</span>
+								<span class="buynum">数量：{{v.BuyNum}}（{{v.currenyName}}）</span>
+							</div>
+							<div>
+								<span class="total">总价：{{v.TotalPay}}（CNY）</span>
+							</div>
 						</flexbox-item>
 						<flexbox-item span='58' class="order-list-type">
 							<span class="order-list-type-waitpay" v-if="v.status==2">待支付</span>
-							<span class="order-list-type-wait" v-if="v.status==3">待收款</span>
+							<span class="order-list-type-wait" v-if="v.status==3">待发币</span>
 							<!-- <span class="order-list-type-get" v-if="v.status==4">已发币</span> -->
 							<span class="order-list-type-success" v-if="v.status==5">交易完成</span>
 							<span class="order-list-type-close" v-if="v.status==6||v.status==7">取消订单</span>
@@ -160,6 +223,7 @@
 				BuyOrder	:	[],					// 已购
 				SellOrder	:	[],					// 已售
 				MySellOrder	:	[],					// 售币列表
+				MyBuyOrder	:	[],					// 求购列表
 			}
 		},
 		watch:{
@@ -169,7 +233,7 @@
 						this.GetMySellOrder()
 					break;			
 					case 1:			// 求购
-						// this.OTCGetSellList()
+						this.GetMyDemand()
 					break;
 					case 2:			// 已购			
 						this.getMyBuyOrder()
@@ -237,7 +301,7 @@
 			},
 			OTCGetSellList(){
                 this.$server.post(
-                'OTC_GetSellList',{
+                'OTC_GetSellGoodsList',{
                     guid 	    :   this.$storage.get('guid'),
                     query       :   -2,                     // (排序：-1时间降序，1时间升序，-2单价降序，2单价升序。默认传2)
                     pageSize    :   6,             			// (每页行数)
@@ -248,12 +312,12 @@
                     }
                 })    
 			},
-			myOrder(id,status,sellOrder){
+			myOrder(id,status){
 				if(status==2){
 					this.$router.push({
 						path:"/discovery/OTC/order",
 						query:{
-							id		:	sellOrder,
+							id		:	id,
 						}
 					});
 				}else{
@@ -269,7 +333,7 @@
 			getMyBuyOrder(){
 				// 已购订单
 				this.$server.post(
-                'OTC_MyOrder_Buyed',{
+                'OTC_MyOrder_Buy',{
                     guid 	    :   this.$storage.get('guid'),
                     dtStart     :   this.stardate,                     	// 开始时间
                     dtEnd    	:   this.enddate,             		  	// 结束时间
@@ -283,7 +347,7 @@
 			MyOrderSelled(){
 				// 已售订单
 				this.$server.post(
-                'OTC_MyOrder_Selled',{
+                'OTC_MyOrder_Sell',{
                     guid 	    :   this.$storage.get('guid'),
                     dtStart     :   this.stardate,                     	// 开始时间
                     dtEnd    	:   this.enddate,             		  	// 结束时间
@@ -294,14 +358,24 @@
                     }
                 }) 
 			},
-			GetMySellOrder(){
-				// 售币订单
+			GetMyDemand(){
+				// 获取求购发布列表
 				this.$server.post(
-                'OTC_GetMySellOrder',{
+                'OTC_GetMyBuyGoods',{
                     guid 	    :   this.$storage.get('guid'),
                 }).then(data => {
                     if(data){
-						console.log(data)
+						this.MyBuyOrder	=	data
+                    }
+                }) 
+			},
+			GetMySellOrder(){
+				// 售币订单
+				this.$server.post(
+                'OTC_GetMySellGoods',{
+                    guid 	    :   this.$storage.get('guid'),
+                }).then(data => {
+                    if(data){
 						this.MySellOrder = data
                     }
                 }) 
@@ -315,6 +389,15 @@
 					}
 				});
 			},
+			editDemand(id){
+				// 编辑
+				this.$router.push({
+					path:"/discovery/OTC/editDemand",
+					query:{
+						id	:	id,
+					}
+				});
+			},
 			sQuery(type){
 				// 执行查询按钮 传类型
 				switch(type){
@@ -322,7 +405,7 @@
 						this.GetMySellOrder()
 					break;			
 					case 1:			// 求购
-						// this.OTCGetSellList()
+						this.GetMyDemand()
 					break;
 					case 2:			// 已购			
 						this.getMyBuyOrder()
@@ -343,11 +426,16 @@
 				if(this.orderType!=3){
 					this.orderType++
 				}
-			}
+			},
+			Goback(){
+				this.$router.push({
+					path:"/discovery/OTC/",
+				});
+			},
 		},
 		mounted() {
 			this.getDateToday()
-			this.orderType = 0
+			this.orderType = (this.$route.query.type)?this.$route.query.type:0;
 		}
 	}
 

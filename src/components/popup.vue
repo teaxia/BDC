@@ -124,7 +124,7 @@ export default {
 }
 .show{
     opacity: 1;
-    z-index:99999;
+    z-index:999;
 }
 .hidden{
     opacity: 0;

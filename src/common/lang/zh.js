@@ -319,7 +319,7 @@ export const zh = {
             },
             index:{
                 record      :   '记录',
-                buy         :   '购买',
+                buy         :   '售币',
                 bybuy       :   '求购',
                 curreny     :   '币种',
                 time        :   '时间',
@@ -340,7 +340,7 @@ export const zh = {
                 title       :   '支付订单',
                 orderId     :   '订单号',
                 your        :   '您向',
-                buy         :   '购买',
+                buy         :   '售币',
                 price       :   '单价',
                 total       :   '总价',
                 payment     :   '点击查看付款方式',

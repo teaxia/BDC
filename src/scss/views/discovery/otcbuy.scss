@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+$height : 1.5rem;
 .information{
     display: flex;
     justify-content:space-between;
@@ -63,5 +64,85 @@
     }
     .full{
         color:$font-blue;
+    }
+}
+.popup{
+    .pay-info{
+        padding:20px 0;
+        height: auto;
+        overflow: hidden;
+        .ercode{
+            font-size:32px;
+            min-height: 800px;
+            text-align: center;
+            .pay-img{
+                width: 400px;
+            }
+            .btn{
+                margin:0 auto;
+            }
+        }
+        .card{
+            padding:0 30px;
+            .font{
+                font-size:32px;
+                display: flex;
+                flex: 1 1 2;
+                height: 60px;
+                &-title{
+                    width: 180px;
+                }
+                &-btn{
+                    padding:10px 0;
+                    // margin-left:18px;
+                    margin-left:auto;
+                }
+            }
+        }
+        .padding-bottom{
+            margin-bottom: 400px;
+        }
+    }
+}
+.sbank{
+    padding: 0.133333rem 0.2rem;
+    display: flex;
+    .title{
+        width: 3rem;
+        font-size:0.45rem;
+    }
+}
+.selectbox{
+    height: 400px;
+    background: $bg-white;
+    .radio{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        .radio-lable{
+            display: block;
+            clear: both;
+            height: $height;
+            line-height: $height;
+            border-bottom: 0.01rem solid $border-line;
+            .cell{
+                float: left;
+                width: 90%;
+                height: $height;
+                line-height: $height;
+                display: flex;
+                padding: 0 40px 0 40px;
+                justify-content: space-between;
+                .text{
+                    width: 180px;
+                    text-align: center;
+                }
+            }
+        }
+        .bind{
+            text-align: center;
+            margin-top:150px;
+            color: #028BF4;
+        }
     }
 }

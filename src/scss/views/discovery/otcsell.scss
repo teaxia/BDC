@@ -91,11 +91,14 @@ $height : 1.5rem;
         }
     }
 }
-.iconfont{
-    font-size:80px;
-    margin-left:15px;
-    &:first-child{
-        margin-left:0;
+
+.order-payment-list{
+    .iconfont{
+        font-size:60px;
+        margin-left:15px;
+        &:first-child{
+            margin-left:0;
+        }
     }
 }
 .alipay{

@@ -53,8 +53,8 @@
                                         {{$numberComma(v.price)}}CNY
                                     </div>
                                     <div class="otc-price">
-                                        <div>{{$t('discovery.OTC.index.min')}}：{{$numberComma(v.minBuy)}}（{{v.currenyName}}）</div>
-                                        <div>{{$t('discovery.OTC.index.num')}}：{{$numberComma(v.currenyNum)}} （{{v.currenyName}}）</div>
+                                        <div v-if="active">{{$t('discovery.OTC.index.min')}}：{{$numberComma(v.minBuy)}}（{{v.currenyName}}）</div>
+                                        <div :class="{'buyorder':!active}">{{$t('discovery.OTC.index.num')}}：{{$numberComma(v.currenyNum)}} （{{v.currenyName}}）</div>
                                     </div>
                                 </div>
                                 <div class="otc-grid-pay">
@@ -80,12 +80,20 @@
             </my-scroll>
         </div>
         <div class="sell">
-            <router-link to="/discovery/OTC/sell">
+            <router-link to="/discovery/OTC/sell" v-if="active">
                 <svg class="icon-sell" aria-hidden="true">
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
                 <span>
                     {{$t('discovery.OTC.index.add')}}
+                </span>
+            </router-link>
+            <router-link to="/discovery/OTC/demand" v-if="!active">
+                <svg class="icon-sell" aria-hidden="true">
+                    <use xlink:href="#icon-paimailiang"></use>
+                </svg>
+                <span>
+                    求购
                 </span>
             </router-link>
         </div>
@@ -160,22 +168,46 @@
                     case -1:    // 时间降序
                         this.Tup    =   false
                         this.Pup    =   false
-                        this.OTCGetSellList(Refresh)
+                        if(this.active){
+                            // 购买
+                            this.OTCGetSellList(Refresh)
+                        }else{
+                            // 求购
+                            this.GetBuyGoodsList(Refresh)
+                        }
                     break;
                     case 1:    // 时间升序
                         this.Tup    =   true
                         this.Pup    =   false
-                        this.OTCGetSellList(Refresh)
+                        if(this.active){
+                            // 购买
+                            this.OTCGetSellList(Refresh)
+                        }else{
+                            // 求购
+                            this.GetBuyGoodsList(Refresh)
+                        }
                     break;
                     case -2:    // 价格降序
                         this.Tup    =   false
                         this.Pup    =   true
-                        this.OTCGetSellList(Refresh)
+                        if(this.active){
+                            // 购买
+                            this.OTCGetSellList(Refresh)
+                        }else{
+                            // 求购
+                            this.GetBuyGoodsList(Refresh)
+                        }
                     break;
                     case 2:    // 价格升序
                         this.Tup    =   false
                         this.Pup    =   false
-                        this.OTCGetSellList(Refresh)
+                        if(this.active){
+                            // 购买
+                            this.OTCGetSellList(Refresh)
+                        }else{
+                            // 求购
+                            this.GetBuyGoodsList(Refresh)
+                        }
                     break;
                 }
             }
@@ -184,6 +216,14 @@
 			change(){
                 // 购买出售切换
                 this.active = !this.active;
+                let Refresh = true
+                if(this.active){
+                    // 购买
+                    this.OTCGetSellList(Refresh)
+                }else{
+                    // 求购
+                    this.GetBuyGoodsList(Refresh)
+                }
             },
             select(v,vindex){
                 // 币种选择
@@ -191,7 +231,13 @@
             },
             onRefresh(){ //刷新回调
                 let Refresh = true
-                this.OTCGetSellList(Refresh)
+                if(this.active){
+                    // 购买
+                    this.OTCGetSellList(Refresh)
+                }else{
+                    // 求购
+                    this.GetBuyGoodsList(Refresh)
+                }
                 setTimeout(()=>{
                     this.$root.$emit('setState',3)
                 },500)
@@ -200,7 +246,14 @@
                 if(this.page.counter<=this.page.total){
                     setTimeout(()=>{
                         this.page.counter++
-                        this.OTCGetSellList()
+                        let Refresh = false
+                        if(this.active){
+                            // 购买
+                            this.OTCGetSellList(Refresh)
+                        }else{
+                            // 求购
+                            this.GetBuyGoodsList(Refresh)
+                        }
                         this.$root.$emit('setState',5)
                     },500)
                 }else{
@@ -208,13 +261,21 @@
                 }
             },
             buy(Id){
-                this.$router.push({
-                    path:"/discovery/OTC/buy",
-                    query:{
-                        id  :  Id
-                    }
-                });
-                //console.log('买卖')
+                if(this.active){
+                    this.$router.push({
+                        path:"/discovery/OTC/buy",
+                        query:{
+                            id  :  Id
+                        }
+                    });
+                }else{
+                    this.$router.push({
+                        path:"/discovery/OTC/buyOrder",
+                        query:{
+                            id  :  Id
+                        }
+                    });
+                }
             },
             cancelPupop(){
                 // 取消选择
@@ -236,7 +297,7 @@
                     this.page.counter = 1
                 }
                 this.$server.post(
-                'OTC_GetSellList',{
+                'OTC_GetSellGoodsList',{
                     guid 	    :   this.$storage.get('guid'),
                     query       :   this.query,                     // (排序：-1时间降序，1时间升序，-2单价降序，2单价升序。默认传2)
                     pageSize    :   this.page.pageSize,             // (每页行数)
@@ -248,7 +309,29 @@
                         }else{
                             this.dataList.push(...data.list)
                         }
-                        console.log(this.dataList)
+                        console.log(data.list)
+                        this.page.total     =   Math.ceil(data.TotalCount/data.PageSize)    // 计算需要刷新多少次，小数点向上取证
+                    }
+                })    
+            },
+            GetBuyGoodsList(Refresh=false){
+                // Refresh判断是否为下拉刷新
+                if(Refresh){
+                    this.page.counter = 1
+                }
+                this.$server.post(
+                'OTC_GetBuyGoodsList',{
+                    guid 	    :   this.$storage.get('guid'),
+                    query       :   this.query,                     // (排序：-1时间降序，1时间升序，-2单价降序，2单价升序。默认传2)
+                    pageSize    :   this.page.pageSize,             // (每页行数)
+                    pageIndex   :   this.page.counter,              // 当前页数，第一页传1
+                }).then(data => {
+                    if(data){
+                        if(Refresh){
+                            this.dataList  = data.list
+                        }else{
+                            this.dataList.push(...data.list)
+                        }
                         this.page.total     =   Math.ceil(data.TotalCount/data.PageSize)    // 计算需要刷新多少次，小数点向上取证
                     }
                 })    

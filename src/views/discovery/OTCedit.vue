@@ -1,6 +1,6 @@
 <template>
 	<div class="mycard margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" title="编辑"></x-header>
+		<x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="编辑"></x-header>
         <div class="pd50">
             <div class="currency">
                 <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
@@ -27,6 +27,10 @@
                 </div>
                 <group>
                     <x-input class="test" type="number" disabled :title="$t('discovery.OTC.sell.num')" required :placeholder="$t('discovery.OTC.sell.input.num')" v-model="num">
+                    </x-input>
+                </group>
+                <group>
+                    <x-input class="test" type="number" title="已售数量" disabled :placeholder="$t('discovery.OTC.sell.input.price')" v-model="sellNum">
                     </x-input>
                 </group>
                 <group>
@@ -70,21 +74,21 @@
                 <div slot="list">
                     <div class="pay-info">
 						<div v-if="PayType==0" class="ercode">
-							<img class="pay-img" :src="alipay[2]">
+							<img class="pay-img" :src="alipay[4]">
 							<div>
-								{{$t('discovery.OTC.order.alipay')}}：{{alipay[0]}}
+								{{$t('discovery.OTC.order.alipay')}}：{{alipay[2]}}
 							</div>
 							<div>
-								{{$t('discovery.OTC.order.name')}}：{{alipay[1]}}
+								{{$t('discovery.OTC.order.name')}}：{{alipay[3]}}
 							</div>
 							<button class="btn btn-round btn-min" @click="save(alipay[2])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 						</div>
 						<div v-if="PayType==2" class="ercode">
-							<img class="pay-img" :src="wechart[2]">
+							<img class="pay-img" :src="wechart[4]">
 							<div>
-								{{$t('discovery.OTC.order.nickname')}}：{{wechart[1]}}
+								{{$t('discovery.OTC.order.nickname')}}：{{wechart[3]}}
 							</div>
-							<button class="btn btn-round btn-min" @click="save(wechart[2])">{{$t('discovery.OTC.order.saveErcode')}}</button>
+							<button class="btn btn-round btn-min" @click="save(wechart[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 						</div>
 						<div v-if="PayType==1" class="card padding-bottom">
 							<!-- 银行卡 -->
@@ -95,14 +99,14 @@
 								<div class="font-title">{{$t('discovery.OTC.order.cardNumber')}}：</div>
 								<div>{{card[2]}}</div>
 								<div class="font-btn">
-									<button class="btn btn-xs" :v-clipboard:copy="card[2]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyCard')}}</button>
+									<button class="btn btn-xs" v-clipboard:copy="card[2]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyCard')}}</button>
 								</div>
 							</div>
 							<div class="font copy">
 								<div class="font-title">{{$t('discovery.OTC.order.name')}}：</div>
 								<div>{{card[1]}}</div>
 								<div class="font-btn">
-									<button class="btn btn-xs" :v-clipboard:copy="card[1]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyName')}}</button>
+									<button class="btn btn-xs" v-clipboard:copy="card[1]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyName')}}</button>
 								</div>
 							</div>
 						</div>
@@ -138,6 +142,7 @@ export default {
             isSellOn    :   true,                     // 是否立即上架
             PayNum      :   '',                       // 有多少绑定数据
             minNum      :   '',                       // 最低限额
+            sellNum     :   '',                       // 已售数量
             SellOrderId :   '',                       // 订单ID
             islock      :   false,                    // 订单锁定
             m           :   '',
@@ -154,22 +159,21 @@ export default {
         GetMySellOrderById(){
             // 获取自售发布详细
             this.$server.post(
-            'OTC_GetMySellOrderById',{
+            'OTC_GetMySellGoodsById',{
                guid 	    :   this.$storage.get('guid'),
-               SellOrderId  :   this.SellOrderId
+               goodsId      :   this.SellOrderId
             }).then(data => {
                 if(data){
-                    console.log(data)
                     this.cName  =   data.currenyName
                     this.num    =   data.currenyNum
                     this.price  =   data.price
                     this.minNum =   data.minBuy
                     this.m      =   data.djs_m
                     this.s      =   data.djs_s
-                    this.alipay 	= data.zfb.split("|");
-                    this.wechart 	= data.wx.split("|");
-                    this.card 		= data.card.split("|");
-                    console.log(this.card)
+                    this.alipay 	= (data.zfb)?data.zfb.split("|"):'';
+                    this.wechart 	= (data.wx)?data.wx.split("|"):'';
+                    this.card 		= (data.card)?data.card.split("|"):'';
+                    this.sellNum    = data.sellNum
                     if(data.Status==-1){
                         this.isSellOn   =   false
                     }else if(data.Status==0){
@@ -219,12 +223,12 @@ export default {
             }
             // 提交发布信息
             this.$server.post(
-            'OTC_EditSellOrder',{
+            'OTC_EditSellGoods',{
                 guid 	    :   this.$storage.get('guid'),
                 price       :   this.price,
                 minBuy      :   this.minNum,
                 isSellOn    :   this.isSellOn,
-                SellOrderId :   this.SellOrderId
+                goodsId     :   this.SellOrderId
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -277,12 +281,12 @@ export default {
             })
         },
         delSellOrder(){
-            // 删除自售信息
+            // 删除订单
             this.$server.post(
-            'OTC_DelSellOrder',
+            'OTC_DelSellGoods',
             {
                 guid            :   this.$storage.get('guid'),
-                SellOrderId     :   this.SellOrderId
+                goodsId         :   this.SellOrderId
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -291,6 +295,9 @@ export default {
                     })
                     this.$router.push({
                         path:"/discovery/OTC/list",
+                        query:{
+                            type	:	0,
+                        }
                     });
                 }
             })
@@ -345,9 +352,14 @@ export default {
                 }
             });
         },
-    },
-    watch:{
-        
+        Goback(){
+            this.$router.push({
+                path:"/discovery/OTC/list",
+                query:{
+                    type	:	0,
+                }
+            });
+        },
     },
 	mounted() {
         // 获取售币详细信息

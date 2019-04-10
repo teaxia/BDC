@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+@import "../../base/spanTag";
 .myOrder{
     .date-line{
         width: 250px;
@@ -24,6 +25,9 @@
                 width: 120px;
                 height: 120px;
             }
+        }
+        &-remark{
+            font-size:26px;
         }
     }
 }

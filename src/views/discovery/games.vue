@@ -12,7 +12,7 @@
             </div>
             <div v-if="active">
                 <!-- 赌博游戏 -->
-                <div v-for="(v,index) in gambling" :key="index" class="mr20">
+                <div v-for="(v,index) in gambling" :key="index">
                     <img width="100%" :src="v.Img" @click="Gambling(v.code,index)">
                 </div>
                 <!-- <v-grid v-for="(v,index) in gambling" :key="index" class="mr20">

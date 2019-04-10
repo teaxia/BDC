@@ -1,6 +1,6 @@
 <template>
 	<div class="order margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.order.title')"></x-header>
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.order.title')"></x-header>
 		<div class="pd50">
 			<div class="order-id">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{OrderId}}</h1>
@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="order-tips mr20 order-line">
-				待支付，请于{{m}}分{{s}}秒内向{{nickName}}支付{{$numberComma(TotalPay)}} CNY ，请付款备注：{{RemarkCode}}，付款成功后请到订单页面点击完成支付（非常重要！）
+				待支付，请于【{{m}}分{{s}}秒】内向{{nickName}}支付{{$numberComma(TotalPay)}} CNY ，请付款备注：{{RemarkCode}}，付款成功后请到订单页面点击完成支付（非常重要！）
 			</div>
 			<div class="order-payment mr10">
 				<div class="order-payment-info">
@@ -39,21 +39,23 @@
                 <div slot="list">
                     <div class="pay-info">
 						<div v-if="PayType==0" class="ercode">
-							<img class="pay-img" :src="alipay[2]">
+							<img class="pay-img" :src="alipay[4]">
 							<div>
-								{{$t('discovery.OTC.order.alipay')}}：{{alipay[0]}}
+								{{$t('discovery.OTC.order.alipay')}}：{{alipay[2]}}
 							</div>
 							<div>
 								{{$t('discovery.OTC.order.name')}}：{{alipay[1]}}
 							</div>
-							<button class="btn btn-round btn-min" @click="save(alipay[2])">{{$t('discovery.OTC.order.saveErcode')}}</button>
+							<button class="btn btn-round btn-min" @click="save(alipay[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
+							<button class="btn btn-round btn-min mr20" :disabled='type=="zfb"' @click="thispay('zfb')"><span v-if="type=='zfb'">当前付款方式</span><span v-else>以此方式付款</span></button>
 						</div>
 						<div v-if="PayType==2" class="ercode">
-							<img class="pay-img" :src="wechart[2]">
+							<img class="pay-img" :src="wechart[4]">
 							<div>
-								{{$t('discovery.OTC.order.nickname')}}：{{wechart[1]}}
+								{{$t('discovery.OTC.order.nickname')}}：{{wechart[3]}}
 							</div>
-							<button class="btn btn-round btn-min" @click="save(wechart[2])">{{$t('discovery.OTC.order.saveErcode')}}</button>
+							<button class="btn btn-round btn-min" @click="save(wechart[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
+							<button class="btn btn-round btn-min mr20" :disabled='type=="wx"' @click="thispay('wx')"><span v-if="type=='wx'">当前付款方式</span><span v-else>以此方式付款</span></button>
 						</div>
 						<div v-if="PayType==1" class="card padding-bottom">
 							<!-- 银行卡 -->
@@ -64,16 +66,17 @@
 								<div class="font-title">{{$t('discovery.OTC.order.cardNumber')}}：</div>
 								<div>{{card[2]}}</div>
 								<div class="font-btn">
-									<button class="btn btn-xs" :v-clipboard:copy="card[2]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyCard')}}</button>
+									<div class="btn btn-xs" v-clipboard:copy="card[2]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyCard')}}</div>
 								</div>
 							</div>
 							<div class="font copy">
 								<div class="font-title">{{$t('discovery.OTC.order.name')}}：</div>
 								<div>{{card[1]}}</div>
 								<div class="font-btn">
-									<button class="btn btn-xs" :v-clipboard:copy="card[1]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyName')}}</button>
+									<div class="btn btn-xs" v-clipboard:copy="card[1]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyName')}}</div>
 								</div>
 							</div>
+							<button class="btn btn-round btn-min mr20" :disabled='type=="card"' @click="thispay('card')"><span v-if="type=='card'">当前付款方式</span><span v-else>以此方式付款</span></button>
 						</div>
 					</div>
                 </div>
@@ -103,6 +106,7 @@
 				alipay		:	[],		// 支付宝
 				card 		:	[],		// 银行卡
 				wechart		:	[],		// 微信
+				type		:	''		// 支付方式
 			}
         },
 		methods: {
@@ -163,12 +167,12 @@
 				}, function(ret, err) {
 					if (ret && ret.status) {
 						this.$vux.toast.show({
-							text: $t('discovery.OTC.order.picSaveS'),
+							text: this.$t('discovery.OTC.order.picSaveS'),
 							type: 'success'
 						})
 					} else {
 						this.$vux.toast.show({
-							text: $t('discovery.OTC.order.picSaveE'),
+							text: this.$t('discovery.OTC.order.picSaveE'),
 							type: 'wran'
 						})
 					}
@@ -177,38 +181,36 @@
 			BuyOrderAndPay(){
 				// 请求数据
 				this.$server.post(
-				'OTC_BuyOrderAndPay_CK',{
+				'OTC_GoodsBuy_CK',{
 					guid 	    :   this.$storage.get('guid'),
-					Id          :   this.id,
+					orderId     :   this.id,
 				}).then(data => {
+					this.m 			=	data.djs_m
+					this.s			=	data.djs_s
+					this.OrderId	=   data.orderId
+					this.price		=	data.price
+					this.TotalPay	=	data.TotalPay
+					this.num		=	data.buyNum
+					this.nickName	=	data.nickName
+					this.RemarkCode	=	data.RemarkCode
+					this.alipay 	=   (data.zfb)?data.zfb.split("|"):'';
+					this.wechart 	=   (data.wx)?data.wx.split("|"):'';
+					this.card 		=   (data.card)?data.card.split("|"):'';
 					if(data.isLocking){
-						this.m 			=	data.djs_m
-						this.s			=	data.djs_s
-						this.OrderId	=   data.orderId
-						this.price		=	data.price
-						this.TotalPay	=	data.TotalPay
-						this.num		=	data.buyNum
-						this.nickName	=	data.nickName
-						this.RemarkCode	=	data.RemarkCode
 						this.getCountDwn()
-						this.alipay 	= data.zfb.split("|");
-						this.wechart 	= data.wx.split("|");
-						this.card 		= data.card.split("|");
-					}else{
-						this.GOTC()
 					}
 				})
 			},
 			CancelOrder(){
 				// 取消订单
 				this.$server.post(
-				'OTC_BuyOrderAndPay_Cancel',{
+				'OTC_Order_Cancel',{
 					guid 	    		:   this.$storage.get('guid'),
-					BuySellOrderId      :   this.OrderId,
+					OrderId			    :   this.OrderId,
 				}).then(data => {
 					if(data){
 						this.$vux.toast.show({
-							text: $t('discovery.OTC.order.cancelS'),
+							text: this.$t('discovery.OTC.order.cancelS'),
 							type: 'success'
 						})
 						this.GOTC()
@@ -216,18 +218,31 @@
 				})
 			},
 			paymentok(){
+				if(this.type==''){
+					this.$vux.toast.show({
+						text: '请查看付款方式后选择支付方式',
+						type: 'warn'
+					})
+					return;
+				}
 				// 付款成功
 				this.$server.post(
-				'OTC_BuyOrderAndPay_PayDone',{
+				'OTC_Order_PayDone',{
 					guid 	    		:   this.$storage.get('guid'),
-					BuySellOrderId      :   this.OrderId,
+					OrderId			    :   this.OrderId,
+					payType				:	this.type	//(支付方式：传值card,zfb,wx)
 				}).then(data => {
 					if(data){
 						this.$vux.toast.show({
 							text: this.$t('global.wait'),
 							type: 'success'
 						})
-						this.GOTC()
+						this.$router.push({
+							path:"/discovery/OTC/list",
+							query:{
+								type:2
+							}
+						});
 					}
 				})
 			},
@@ -235,14 +250,22 @@
 				this.$router.push({
 					path:"/discovery/otc",
 				});
+			},
+			Goback(){
+				this.$router.push({
+					path:"/discovery/OTC/list",
+				});
+			},
+			thispay(type){
+				this.type = type
 			}
 		},
 		mounted() {
 			// 获取购买数量以及ID
 			this.id     =   (this.$route.query.id)?this.$route.query.id:''
-			if(this.id==''){
-				this.GOTC()
-			} 
+			// if(this.id==''){
+			// 	this.GOTC()
+			// }
 			this.BuyOrderAndPay()
 			
 		},

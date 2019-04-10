@@ -29,7 +29,13 @@ import discovery from './views/discovery.vue'
         import OTCList from './views/discovery/OTCList.vue'                 // 订单列表
         import myOrder from './views/discovery/OTCmyOrder.vue'              // 订单详情
         import OTCcomplaiont from './views/discovery/OTCcomplaiont.vue'              // 投诉
-        import OTCedit from './views/discovery/OTCedit.vue'
+        import OTCedit from './views/discovery/OTCedit.vue'                 // 编辑售币
+        import OTCdemand from './views/discovery/OTCdemand.vue'                 // 发布求购
+        import OTCeditDemand from './views/discovery/OTCeditDemand.vue'                 // 编辑求购
+        import OTCbuyOrder from './views/discovery/OTCbuyOrder.vue'                 // 供币界面
+        
+        
+        
         
         
         
@@ -130,6 +136,12 @@ let routes = [
                 { path: '/discovery/OTC/myOrder', component: myOrder, name: 'myOrder',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/complaiont', component: OTCcomplaiont, name: 'OTCcomplaiont',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/edit', component: OTCedit, name: 'OTCedit',meta:{isIndex: 2}},
+                { path: '/discovery/OTC/demand', component: OTCdemand, name: 'OTCdemand',meta:{isIndex: 2}},
+                { path: '/discovery/OTC/editDemand', component: OTCeditDemand, name: 'OTCeditDemand',meta:{isIndex: 2}},
+                { path: '/discovery/OTC/buyOrder', component: OTCbuyOrder, name: 'OTCbuyOrder',meta:{isIndex: 2}},
+
+                
+                
                 
             
         ]

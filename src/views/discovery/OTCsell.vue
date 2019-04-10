@@ -214,30 +214,16 @@ export default {
                 return;
             }
             // 提交发布信息
-            let dataid
-            if(this.wechartId==''){
-                if(this.alipayId==''){
-                    dataid = ''
-                }else{
-                    dataid = this.alipayId
-                }
-            }else{
-                if(this.alipayId==''){
-                    dataid = this.wechartId
-                }else{
-                    dataid = this.wechartId+','+this.alipayId
-                }
-            }
-            
             this.$server.post(
-            'OTC_SellOrderOn',{
+            'OTC_SellGoods',{
                 guid 	    :   this.$storage.get('guid'),
                 currenyName :   this.cName,
                 currenyNum  :   this.num,
                 price       :   this.price,
                 minBuy      :   this.minNum,
-                thirdInfoId :   dataid,
-                cardInfoId  :   this.bankId,
+                zfbInfoId   :   (this.alipayId)?this.alipayId:0,
+                wxInfoId    :   (this.wechartId)?this.wechartId:0,
+                cardInfoId  :   (this.bankId)?this.bankId:0,
                 isSellOn    :   this.isSellOn
             }).then(data => {
                 if(data){
@@ -269,6 +255,7 @@ export default {
             })
         },
         GetBind(){
+            // 请求绑定的银行卡信息
             this.$server.post(
             'GetThirdInfo',
             {
@@ -362,6 +349,7 @@ export default {
                     this.BDClist  = data
                     this.cName    = data[0].Key
                     this.ConsultPirce   =   data[0].Value
+                    this.price          =   this.ConsultPirce
                 }
             })
         },

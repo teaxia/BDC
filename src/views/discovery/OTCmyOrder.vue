@@ -1,6 +1,6 @@
 <template>
 	<div class="myOrder margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="订单详情"></x-header>
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="订单详情"></x-header>
         <div class="pd50">
 			<div class="order-id">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{data.Id}}</h1>
@@ -8,6 +8,7 @@
 			<div class="order-info order-line">
 				<h3 v-if="orderType==2">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 				<h3 v-if="orderType==3">{{data.NickName}}向您购买了{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<span v-if="data.GoodsType==0" class="tag tag-wran">售币</span><span v-if="data.GoodsType==1" class="tag tag-primary">求购</span>
 			</div>
 			<div class="order-pay order-line mr20">
 				<div class="order-information">
@@ -50,6 +51,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="order-remark mr20 order-line">
+				留言：{{data.Remark}}
+			</div>
 			<div v-if="data.Status==3&&this.orderType==3">
 				<group>
                     <x-input class="test" :type="type?'text':'password'" :title="$t('wallet.tips.safetycode')" required :placeholder="$t('wallet.tips.inputcode')" v-model="passwprd">
@@ -59,11 +63,17 @@
 			</div>
 			<div class="order-payment mr10">
 				<button class="btn btn-block btn-round" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2">申诉</button>
-				<button class="btn btn-block btn-round" v-if="data.Status==3&&this.orderType==3" @click="OrderAndPay()">确认收款</button>
+				<button class="btn btn-block btn-round" v-if="data.Status==3&&this.orderType==3" @click="confirm()">确认收款</button>
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>交易已取消</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>交易已完成</button>
 			</div>
 		</div>
+		<Modal v-model="show" @on-ok="OrderAndPay" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
+			<div slot="header"></div>
+			<div class="modal-body">
+                <div>"确认后系统将自动发币至买家账户，是否确认？</div>
+            </div>
+		</Modal>
     </div>
 </template>
 
@@ -78,6 +88,7 @@
 				data		:	[],
 				passwprd	:	'',					 // 安全密码
 				type	    : false,				// 切换密码状态
+				show		:	false,				// 二次确认状态
 			}
 		},
 		watch:{
@@ -96,7 +107,7 @@
 				// 订单详情
 				let isSeller = (this.orderType==2)?false:true;
 				this.$server.post(
-				'OTC_GetOrderById',{
+				'OTC_GetMyOrderById',{
 					guid 	    :   this.$storage.get('guid'),
 					orderId 	:   this.id,
 					isSeller  	:   isSeller,
@@ -116,9 +127,9 @@
 					return;
 				}
 				this.$server.post(
-				'OTC_BuyOrderAndPay_Send',{
+				'OTC_Order_Send',{
 					guid 	    	:   this.$storage.get('guid'),
-					BuySellOrderId 	:   this.id,
+					orderId			:   this.id,
 					moneyPwd  		:   this.passwprd,
 				}).then(data => {
 					if(data){
@@ -129,7 +140,29 @@
 			changType(){
 				this.type = !this.type
 			},
-
+			confirm(){
+				// 二次确认
+				this.show = true
+			},
+			cancel () {
+                this.show = false
+            },
+			Goback(){
+				let type
+				if(this.orderType==2){
+					// 已购
+					type  = 2
+				}else if(this.orderType==3){
+					// 已售
+					type  = 3
+				}
+				this.$router.push({
+					path:"/discovery/OTC/list",
+					query:{
+						type	:	type,
+					}
+				});
+			},
 		},
 		
 		mounted() {

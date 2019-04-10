@@ -33,6 +33,15 @@
                 .code{
                     color:$font-orange;
                 }
+                .total{
+                    color:$font-blue;
+                }
+                .buynum{
+                    color:$font-red;
+                }
+                .price{
+                    color:$font-orange;
+                }
             }
             .order-list-type{
                 text-align: right;
@@ -85,7 +94,7 @@
         }
         .otc-grid-price{
             flex: 3;
-            font-size:18px;
+            font-size:24px;
             color: $font-empty;
             .price{
                 color: $font-h2;

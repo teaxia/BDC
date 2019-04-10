@@ -87,7 +87,7 @@ export default {
         OTCLookSellOrder(){
             // 请求数据
             this.$server.post(
-            'OTC_LookSellOrder',{
+            'OTC_LookSellGoods',{
                 guid 	    :   this.$storage.get('guid'),
                 Id          :   this.id
             }).then(data => {
@@ -138,25 +138,18 @@ export default {
                 })
                 return;
             }
-            // this.$router.push({
-            //     path:"/discovery/OTC/order",
-            //     query:{
-            //         id      :   this.id,
-            //     }
-            // });
             this.$server.post(
-            'OTC_BuyOrderAndPay_TJ',{
+            'OTC_GoodsBuy_TJ',{
                 guid 	    :   this.$storage.get('guid'),
-                Id          :   this.id,
+                SellGoodsId :   this.id,
                 buyNum		:	this.CNum,
                 Remark      :   this.remark
             }).then(data => {
-                // if(data){
                 if(data){
                     this.$router.push({
                         path:"/discovery/OTC/order",
                         query:{
-                            id      :   this.id,
+                            id      :   data.orderId,
                         }
                     });
                 }
