@@ -34,11 +34,11 @@
                 </group>
                 <group>
                     <x-input class="test" :show-clear="false" @on-focus="setBuyNum" type="text" v-model="CNum">
-                        <div slot="right-full-height">{{datalist.currenyName}}</div>
+                        <div slot="right-full-height" class="font-24">{{datalist.currenyName}}</div>
                     </x-input>
                 </group>
                 <group>
-                    <x-textarea class="textarea" v-model="remark" :max="200" :show-counter="true" :placeholder="$t('discovery.OTC.buy.remark')"></x-textarea>
+                    <x-textarea class="textarea font-24" v-model="remark" :max="200" :show-counter="true" :placeholder="$t('discovery.OTC.buy.remark')"></x-textarea>
                 </group>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>

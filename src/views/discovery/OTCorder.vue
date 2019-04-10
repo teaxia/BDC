@@ -162,17 +162,18 @@
 			},
 			save(imgUrl){
 				// 保存二维码到相册
+				let _this = this
 				api.saveMediaToAlbum({
 					path: imgUrl
 				}, function(ret, err) {
 					if (ret && ret.status) {
-						this.$vux.toast.show({
-							text: this.$t('discovery.OTC.order.picSaveS'),
+						_this.$vux.toast.show({
+							text: _this.$t('discovery.OTC.order.picSaveS'),
 							type: 'success'
 						})
 					} else {
-						this.$vux.toast.show({
-							text: this.$t('discovery.OTC.order.picSaveE'),
+						_this.$vux.toast.show({
+							text: _this.$t('discovery.OTC.order.picSaveE'),
 							type: 'wran'
 						})
 					}

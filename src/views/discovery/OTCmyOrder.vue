@@ -13,7 +13,7 @@
 			<div class="order-pay order-line mr20">
 				<div class="order-information">
 					<div class="order-pay-price">
-						{{$t('discovery.OTC.order.price')}}：<span>{{data.price}}CNY</span>
+						{{$t('discovery.OTC.order.price')}}：<span>{{data.Price}}CNY</span>
 					</div>
 					<div class="order-pay-total">
 						{{$t('discovery.OTC.order.total')}}：<span>{{data.TotalPay}}CNY</span>
