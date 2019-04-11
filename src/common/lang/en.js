@@ -297,6 +297,8 @@ export const en = {
                 bindwechart     :   'Bind wechart',
                 bindcard        :   'Bind Card',
                 deduction       :   'Actual deduction',
+                tax             :   'Seller`s handling fee',
+                total           :   'Total',
                 tips:{
                     num         :   'Please enter the num!',
                     price       :   'Please enter the price!',
@@ -337,6 +339,7 @@ export const en = {
                 close       :   'close',
                 remark      :   'Remark',
                 goods:{
+                    bybuy   :   'By Buy',
                     sell    :   'Sell Currency',
                     sellBuy :   'Sell',
                     Isell   :   'sale',

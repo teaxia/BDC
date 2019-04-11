@@ -296,7 +296,9 @@ export const zh = {
                 bindalipay      :   '点击马上绑定支付宝',
                 bindwechart     :   '点击马上绑定微信支付',
                 bindcard        :   '点击马上绑定银行卡',
-                deduction       :   '实际扣除',
+                deduction       :   '卖家实际扣除',
+                tax             :   '卖家手续费',
+                total           :   '求购总额',
                 tips:{
                     num         :   '发布数量必须填写',
                     price       :   '单价必须填写',
@@ -337,6 +339,7 @@ export const zh = {
                 close       :   '关闭订单',
                 remark      :   '备注留言',
                 goods:{
+                    bybuy   :   '求购',
                     sell    :   '售币',
                     sellBuy :   '售卖',
                     Isell   :   '确定出售',

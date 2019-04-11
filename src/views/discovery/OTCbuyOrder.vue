@@ -1,19 +1,22 @@
 <template>
 	<div class="otcbuy margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.buy.goods.sell')"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.buy.goods.bybuy')"></x-header>
         <div class="pd50"  v-if="datalist">
             <div class="information">
                 <div class="left">
                     <h1>{{$t('discovery.OTC.buy.goods.sellBuy')}}{{datalist.currenyName}}</h1>
                     <div class="price">
-                        <div>{{$t('discovery.OTC.buy.goods.sellBuy')}}{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
-                        <div>{{$t('discovery.OTC.buy.goods.sellBuy')}}{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
+                        <div>{{$t('discovery.OTC.buy.goods.bybuy')}}{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
+                        <div>{{$t('discovery.OTC.buy.goods.bybuy')}}{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
                     </div>
-                    <div class="fax">
-                        {{$t('discovery.extract.tax')}}：{{Poundage}}% 
+                    <div class="tax">
+                        {{$t('discovery.OTC.sell.tax')}}：{{Poundage}}% 
                     </div>
-                    <div class="fax">
-                    {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}
+                    <div class="tax">
+                        {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}
+                    </div>
+                    <div class="tax">
+                        {{$t('discovery.OTC.sell.total')}} ：{{$numberComma((datalist.price*datalist.currenyNum).toFixed(2))}}CNY
                     </div>
                     <div class="payment">
                         <i v-if="alipayPaymeny" @click="sbankd(1)" :class="{'iconfont':true,'icon-zhifubao':true,'alipay':alipay}"></i>
@@ -234,7 +237,7 @@ export default {
         // 请求数据
         this.id     =   this.$route.query.id
         this.OTCLookBuyGoods()
-        this.mathPercent()
+        // this.mathPercent()
         this.GetPoundage()
     },
 	beforeDestroy(){

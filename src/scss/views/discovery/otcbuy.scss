@@ -6,9 +6,12 @@ $height : 1.5rem;
     display: flex;
     justify-content:space-between;
     .left{
-        .price,.fax{
+        .price,.tax{
             font-size:32px;
             color:$font-orange;
+        }
+        .tax{
+            color:$font-red;
         }
         .payment{
             i{
