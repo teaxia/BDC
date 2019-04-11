@@ -19,7 +19,7 @@
                     {{$t('discovery.extract.tax')}}：{{Poundage}}% 
                 </div>
                 <div class="fax">
-                   {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}
+                   {{$t('discovery.OTC.sell.odeduction')}} ：{{$numberComma(amount)}}
                 </div>
             </div>
             <div class="enterfrom">
@@ -32,19 +32,19 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.num')" required :placeholder="$t('discovery.OTC.sell.input.num')" v-model="num">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.num')"  :placeholder="$t('discovery.OTC.sell.input.num2')" v-model="num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')" required :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.minNum')" required :placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.minNum')"  :placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" required :placeholder="$t('discovery.OTC.sell.security')">
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password"  :placeholder="$t('discovery.OTC.sell.security')">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group>
@@ -181,6 +181,23 @@ export default {
                 })
                 return;
             }
+            if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.num)){
+                // 判断小数
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.input.num2'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.minNum)){
+                // 判断小数
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.input.num2'),
+                    type: 'warn'
+                })
+                return;
+            }
+            
             if(this.cName==''){
                 // 判断选择币种
                 this.$vux.toast.show({
@@ -457,7 +474,7 @@ export default {
         num(){
             // 计算手续费
             let i    =   this.$math.add(1,(this.Poundage/100).toFixed(2))
-            this.amount     =   (this.num*i).toFixed(2)
+            this.amount     =   (this.num*i).toFixed(8)
         }
     },
 	mounted() {

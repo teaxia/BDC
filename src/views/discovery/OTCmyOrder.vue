@@ -6,9 +6,9 @@
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{data.Id}}</h1>
 			</div>
 			<div class="order-info order-line">
-				<h3 v-if="orderType==2&&data.GoodsType==0">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==2&&data.GoodsType==0">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 				<h3 v-if="orderType==2&&data.GoodsType==1">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==3&&data.GoodsType==0">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==3&&data.GoodsType==0">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 				<h3 v-if="orderType==3&&data.GoodsType==1">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 				<span v-if="data.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span><span v-if="data.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
 			</div>
@@ -53,6 +53,15 @@
 					</div>
 				</div>
 			</div>
+			<div class="order-payment mr20 order-line" v-if="payInfo.length>1">
+				<div v-if="payInfo[1]=='支付宝'||payInfo[1]=='微信'">{{$t('discovery.OTC.myorder.payment')}}：{{payInfo[1]}}</div>
+				<div v-if="payInfo[1]=='支付宝'">{{$t('discovery.OTC.myorder.access')}}：{{payInfo[2]}}</div>
+				<div v-if="payInfo[1]=='微信'||payInfo[1]=='支付宝'">{{$t('discovery.OTC.myorder.nickname')}}：{{payInfo[3]}}</div>
+
+				<div v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.name')}}：{{payInfo[1]}}</div>
+				<div v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.bank')}}：{{payInfo[3]}}</div>
+				<div v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.cardid')}}：{{payInfo[2]}}</div>
+			</div>
 			<div class="order-remark mr20 order-line">
 				{{$t('discovery.OTC.myorder.remark')}}：{{data.Remark}}
 			</div>
@@ -89,8 +98,9 @@
 				orderType	:	'',				     // 订单类型  2是已购 3是已售
 				data		:	[],
 				passwprd	:	'',					 // 安全密码
-				type	    : false,				// 切换密码状态
+				type	    :   false,				// 切换密码状态
 				show		:	false,				// 二次确认状态
+				payInfo		:	[],					// 支付方式
 			}
 		},
 		watch:{
@@ -115,6 +125,7 @@
 					isSeller  	:   isSeller,
 				}).then(data => {
 					if(data){
+						this.payInfo 	=   (data.PayType)?data.PayType.split("|"):'';
 						this.data = data
 					}
 				})

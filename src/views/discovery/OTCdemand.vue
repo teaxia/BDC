@@ -26,11 +26,11 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.num')" required :placeholder="$t('discovery.OTC.demand.num')" v-model="num">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.num')"  :placeholder="$t('discovery.OTC.demand.num')" v-model="num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
                     </x-input>
                 </group>
                 <group>

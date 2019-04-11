@@ -31,7 +31,7 @@
 			</div>
 			<div class="order-btn">
 				<button class="btn btn-round btn-min btn-cancel" @click="CancelOrder()">{{$t('discovery.OTC.order.cancel')}}</button>
-				<button class="btn btn-round btn-min" @click="paymentok()">{{$t('discovery.OTC.order.paymentok')}}</button>
+				<button class="btn btn-round btn-min" @click="orderconfirm()">{{$t('discovery.OTC.order.paymentok')}}</button>
 			</div>
 		</div>
 		<div class="popup">
@@ -82,6 +82,14 @@
                 </div>
             </vfpopup>
 		</div>
+		<Modal v-model="Confirm" @on-ok="paymentok" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
+			<div slot="header"></div>
+			<div class="modal-body">
+                <div>
+					请确认已通过【<span v-if="type=='wx'">微信</span><span v-if="type=='zfb'">支付宝</span><span v-if="type=='card'">银行卡</span>】方式完成支付
+				</div>
+            </div>
+		</Modal>
     </div>
 </template>
 
@@ -106,7 +114,8 @@
 				alipay		:	[],		// 支付宝
 				card 		:	[],		// 银行卡
 				wechart		:	[],		// 微信
-				type		:	''		// 支付方式
+				type		:	'',		// 支付方式
+				Confirm		:	false
 			}
         },
 		methods: {
@@ -127,6 +136,9 @@
 						}
 					}
 				},1000);
+			},
+			cancel(){
+				this.Confirm = false
 			},
 			pay(val){
 				switch(val){
@@ -218,7 +230,7 @@
 					}
 				})
 			},
-			paymentok(){
+			orderconfirm(){
 				if(this.type==''){
 					this.$vux.toast.show({
 						text: this.$t('discovery.OTC.order.LookPay'),
@@ -226,6 +238,10 @@
 					})
 					return;
 				}
+				this.Confirm = true
+
+			},
+			paymentok(){
 				// 付款成功
 				this.$server.post(
 				'OTC_Order_PayDone',{

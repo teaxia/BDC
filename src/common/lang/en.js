@@ -297,6 +297,7 @@ export const en = {
                 bindwechart     :   'Bind wechart',
                 bindcard        :   'Bind Card',
                 deduction       :   'Actual deduction',
+                odeduction      :   'Deduction',
                 tax             :   'Seller`s handling fee',
                 total           :   'Total',
                 tips:{
@@ -316,6 +317,7 @@ export const en = {
                 },
                 input:{
                     num         :   'Num',
+                    num2        :   'Input up to 2 decimal digits',
                     price       :   'Price',
                     minNum      :   'Min',
                 },
@@ -350,6 +352,7 @@ export const en = {
                 orderId     :   'Order ID',
                 your        :   'Your',
                 tome        :   'Sell to you',
+                tomebuy     :   'Buy from you',
                 buy         :   'buy',
                 sell        :   'sell',
                 price       :   'Price',
@@ -430,6 +433,12 @@ export const en = {
                 cancalorder :   'The transaction has been cancelled',
                 doneorder   :   'The transaction has been completed',
                 tips        :   'After confirmation, the system will automatically send money to the buyer`s account. Do you confirm?',
+                payment     :   'Payment',
+                nickname    :   'Nick name',
+                name        :   'Name',
+                bank        :   'Bank',
+                cardid      :   'Card id',
+                access      :   'Access',
             },
             type:{
                 type01      :   'Offline',

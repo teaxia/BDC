@@ -13,7 +13,7 @@
                         {{$t('discovery.OTC.sell.tax')}}：{{Poundage}}% 
                     </div>
                     <div class="tax">
-                        {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}
+                        {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}BDC
                     </div>
                     <div class="tax">
                         {{$t('discovery.OTC.sell.total')}} ：{{$numberComma((datalist.price*datalist.currenyNum).toFixed(2))}}CNY
@@ -136,6 +136,7 @@ export default {
             Key                     :   '',
             amount                  :   0,                       // 实际到账
             num                     :   '',                      // 售卖数量
+            editCount               :   '',                      // 编辑次数
 		}
 	},
 	methods: {
@@ -153,6 +154,7 @@ export default {
                         this.wechartPaymeny    =   (data.payInfo.indexOf('微')>=0)?true:false;
                         this.alipayPaymeny     =   (data.payInfo.indexOf('支')>=0)?true:false;
                         this.cardPaymeny       =   (data.payInfo.indexOf('银')>=0)?true:false;
+                        this.editCount         =   data.editCount
                     })
                 }
             })
@@ -188,7 +190,9 @@ export default {
                 zfbInfoId   :   (this.alipayId)?this.alipayId:0,
                 wxInfoId    :   (this.wechartId)?this.wechartId:0,
                 cardInfoId  :   (this.bankId)?this.bankId:0,
-                key         :   this.Key
+                key         :   this.Key,
+                editCount   :   this.editCount
+
             }).then(data => {
                 if(data){
                     this.$router.push({
@@ -215,7 +219,7 @@ export default {
                     this.Poundage   =   (data.Poundage*100).toFixed(2)
                     this.Key        =   data.key
                     let i           =   this.$math.add(1,data.Poundage).toFixed(2)
-                    this.amount     =   (this.num*i).toFixed(2)
+                    this.amount     =   (this.num*i).toFixed(8)
                 }
             })
         }
@@ -237,7 +241,7 @@ export default {
         // 请求数据
         this.id     =   this.$route.query.id
         this.OTCLookBuyGoods()
-        // this.mathPercent()
+        this.mathPercent()
         this.GetPoundage()
     },
 	beforeDestroy(){

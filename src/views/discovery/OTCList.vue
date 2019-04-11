@@ -128,8 +128,8 @@
 				<!-- 已购订单 -->
 				<div class="order-list-content" v-for="(v,index) in BuyOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id,v.status)">
 					<flexbox>
-						<flexbox-item>{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
-						<flexbox-item><span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span><span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span></flexbox-item>
+						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
+						<flexbox-item :span="2"><span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span><span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span></flexbox-item>
 						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
 					</flexbox>
 					<flexbox>
@@ -165,8 +165,8 @@
 				<!-- 已售订单 -->
 				<div class="order-list-content" v-for="(v,index) in SellOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id)">
 					<flexbox>
-						<flexbox-item>{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
-						<flexbox-item><span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span><span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span></flexbox-item>
+						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
+						<flexbox-item :span="2"><span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span><span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span></flexbox-item>
 						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
 					</flexbox>
 					<flexbox>
@@ -191,7 +191,7 @@
 							<span class="order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
 							<span class="order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
 							<!-- <span class="order-list-type-get" v-if="v.status==4">已发币</span> -->
-							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status4')}}</span>
+							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
 							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
 						</flexbox-item>
 					</flexbox>

@@ -50,7 +50,7 @@
                             <div class="v-flex">
                                 <div class="otc-grid-price">
                                     <div class="price">
-                                        {{$numberComma(v.price)}}CNY
+                                        {{$t('discovery.OTC.sell.price')}}{{$numberComma(v.price)}}CNY
                                     </div>
                                     <div class="otc-price">
                                         <div v-if="active">{{$t('discovery.OTC.index.min')}}：{{$numberComma(v.minBuy)}}（{{v.currenyName}}）</div>
@@ -309,7 +309,6 @@
                         }else{
                             this.dataList.push(...data.list)
                         }
-                        console.log(data.list)
                         this.page.total     =   Math.ceil(data.TotalCount/data.PageSize)    // 计算需要刷新多少次，小数点向上取证
                     }
                 })    

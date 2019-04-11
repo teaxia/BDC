@@ -81,6 +81,7 @@ export default {
             T                       :   60,                     // 秒
             type                    :   '',                     // 1是通过CNY计算BDC 2是通过BDC计算CNY
             remark                  :   '',                     // 备注留言
+            editCount               :   '',                     // 编辑次数
 		}
 	},
 	methods: {
@@ -97,7 +98,8 @@ export default {
                         this.wechart    =   (data.payInfo.indexOf('微')>=0)?true:false;
                         this.alipay     =   (data.payInfo.indexOf('支')>=0)?true:false;
                         this.card       =   (data.payInfo.indexOf('银')>=0)?true:false;
-                        this.CNum        =   data.minBuy
+                        this.CNum       =   data.minBuy
+                        this.editCount  =   data.editCount
                     })
                 }
             })
@@ -143,7 +145,8 @@ export default {
                 guid 	    :   this.$storage.get('guid'),
                 SellGoodsId :   this.id,
                 buyNum		:	this.CNum,
-                Remark      :   this.remark
+                Remark      :   this.remark,
+                editCount   :   this.editCount
             }).then(data => {
                 if(data){
                     this.$router.push({
