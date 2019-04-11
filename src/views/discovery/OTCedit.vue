@@ -1,6 +1,6 @@
 <template>
 	<div class="mycard margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="编辑"></x-header>
+		<x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.edit.title')"></x-header>
         <div class="pd50">
             <div class="currency">
                 <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
@@ -30,7 +30,7 @@
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" title="已售数量" disabled :placeholder="$t('discovery.OTC.sell.input.price')" v-model="sellNum">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.edit.numed')" disabled v-model="sellNum">
                     </x-input>
                 </group>
                 <group>
@@ -62,12 +62,12 @@
 					<i @click="pay('wechart')" class="iconfont icon-weixinzhifu wechart" v-if="wechart.length>1"></i>
 				</div>
                 <div class="tips">
-                    <div v-if="islock">目前为锁定状态，不可修改。锁定倒计时{{m}}分{{s}}秒</div>
-                    <div v-else>只有下架后才可删除</div>
+                    <div v-if="islock">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
-            <button @click="doSubmit()" :disabled='islock'  class="btn btn-block btn-default btn-round">修改</button>
-            <button @click="delSellOrder()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">删除</button>
+            <button @click="doSubmit()" :disabled='islock'  class="btn btn-block btn-default btn-round">{{$t('discovery.OTC.edit.edit')}}</button>
+            <button @click="delSellOrder()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
         </div>
         <div class="popup">
 			<vfpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showFPupop">

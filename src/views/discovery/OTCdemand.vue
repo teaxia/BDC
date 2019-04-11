@@ -1,6 +1,6 @@
 <template>
 	<div class="mycard margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" title="求购"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.demand.title')"></x-header>
         <div class="pd50">
             <div class="currency">
                 <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
@@ -15,12 +15,6 @@
                 <div class="price">
                     {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
                 </div>
-                <div class="fax">
-                    {{$t('discovery.extract.tax')}}：{{Poundage}}% 
-                </div>
-                <div class="fax">
-                   {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}
-                </div>
             </div>
             <div class="enterfrom">
                 <div class="line-b sbank">
@@ -32,11 +26,11 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="number" title="货币数量" required placeholder="求购数量" v-model="num">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.num')" required :placeholder="$t('discovery.OTC.demand.num')" v-model="num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required placeholder="求购单价" v-model="price">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
                     </x-input>
                 </group>
                 <group>
@@ -173,7 +167,7 @@ export default {
                 case 1:
                     this.alipay = !this.alipay
                     this.$vux.toast.show({
-                        text        :   (_this.alipay)?'支持支付宝付款':'关闭支付宝付款支持',
+                        text        :   (_this.alipay)?_this.$t('discovery.OTC.tips.salipay'):_this.$t('discovery.OTC.tips.oalipay'),
                         position    :   'default',
                         type        :   'text'
                     })
@@ -181,7 +175,7 @@ export default {
                 case 0:
                     this.wechart = !this.wechart
                     this.$vux.toast.show({
-                        text        :   (_this.wechart)?'支持微信付款':'关闭微信付款支持',
+                        text        :   (_this.wechart)?_this.$t('discovery.OTC.tips.swechart'):_this.$t('discovery.OTC.tips.owechart'),
                         position    :   'default',
                         type        :   'text'
                     })
@@ -189,7 +183,7 @@ export default {
                 case 2:
                     this.cardpay = !this.cardpay    
                     this.$vux.toast.show({
-                        text        :   (_this.cardpay)?'支持银行卡付款支持':'关闭银行卡付款支持',
+                        text        :   (_this.cardpay)?_this.$t('discovery.OTC.tips.scard'):_this.$t('discovery.OTC.tips.ocard'),
                         position    :   'default',
                         type        :   'text'
                     })

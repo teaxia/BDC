@@ -1,22 +1,22 @@
 <template>
 	<div class="orderList margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="订单记录">
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.orderlist.title')">
 			<div slot="right">
                 <router-link to="/discovery/OTC/complaiontList">
-                    <span class="right">投诉</span>
+                    <span class="right">{{$t('discovery.OTC.complaiont.title')}}</span>
                 </router-link>
             </div>
 		</x-header>
 		<Affix :offset-top="50">
 			<tab class="tab">
-				<tab-item class="tab-item" :selected="orderType==0" @on-item-click="onItemClick">售币</tab-item>
-				<tab-item class="tab-item" :selected="orderType==1" @on-item-click="onItemClick">求购</tab-item>
-				<tab-item class="tab-item" :selected="orderType==2" @on-item-click="onItemClick">已购</tab-item>
-				<tab-item class="tab-item" :selected="orderType==3" @on-item-click="onItemClick">已售</tab-item>
+				<tab-item class="tab-item" :selected="orderType==0" @on-item-click="onItemClick">{{$t('discovery.OTC.orderlist.orderType0')}}</tab-item>
+				<tab-item class="tab-item" :selected="orderType==1" @on-item-click="onItemClick">{{$t('discovery.OTC.orderlist.orderType1')}}</tab-item>
+				<tab-item class="tab-item" :selected="orderType==2" @on-item-click="onItemClick">{{$t('discovery.OTC.orderlist.orderType2')}}</tab-item>
+				<tab-item class="tab-item" :selected="orderType==3" @on-item-click="onItemClick">{{$t('discovery.OTC.orderlist.orderType3')}}</tab-item>
 			</tab>
 		</Affix>
 		<div class="search" v-if="orderType>1">
-			<search v-model="search" ref="search" @on-blur="Query()" @on-submit="Query()" placeholder="订单号搜索" position="absolute" :auto-fixed='false'>
+			<search v-model="search" ref="search" @on-blur="Query()" @on-submit="Query()" :placeholder="$t('discovery.OTC.orderlist.SorderId')" position="absolute" :auto-fixed='false'>
 			</search>
 		</div>
 		<div class="pb20">
@@ -47,23 +47,23 @@
                             <div class="v-flex">
                                 <div class="otc-grid-price">
                                     <div class="price">
-                                        售价：{{$numberComma(v.price)}}CNY
+                                        {{$t('discovery.OTC.orderlist.price')}}：{{$numberComma(v.price)}}CNY
                                     </div>
                                     <div class="otc-price">
-                                        <div>出售数量：{{$numberComma(v.currenyNum)}}（{{v.currenyName}}）</div>
-                                        <div>已售数量：{{$numberComma(v.sellNum)}} （{{v.currenyName}}）</div>
+                                        <div>{{$t('discovery.OTC.orderlist.total')}}：{{$numberComma(v.currenyNum)}}（{{v.currenyName}}）</div>
+                                        <div>{{$t('discovery.OTC.orderlist.sellnum')}}：{{$numberComma(v.sellNum)}} （{{v.currenyName}}）</div>
                                     </div>
                                 </div>
                                 <div class="otc-grid-pay">
                                     <div class="otc-grid-paylist">
                                         <div v-if="v.Status==-1" class="tag tag-error">
-                                            下架
+                                            {{$t('discovery.OTC.type.type01')}}
                                         </div>
                                         <div v-if="v.Status==0" class="tag tag-success">
-                                            上架
+                                            {{$t('discovery.OTC.type.type0')}}
                                         </div>
                                         <div v-if="v.Status==2" class="tag tag-wran">
-                                            锁定
+                                            {{$t('discovery.OTC.type.type2')}}
                                         </div>
                                     </div>
                                     <div class="otc-grid-right">
@@ -74,9 +74,6 @@
                         </div>
                     </v-grid>
                 </div>
-				<div v-else class="nodata">
-					没有数据
-				</div>
 				<!-- 售币订单 -->
 			</div>
 
@@ -97,23 +94,23 @@
                             <div class="v-flex">
                                 <div class="otc-grid-price">
                                     <div class="price">
-                                        单价：{{$numberComma(v.price)}}CNY
+                                        {{$t('discovery.OTC.orderlist.oprice')}}：{{$numberComma(v.price)}}CNY
                                     </div>
                                     <div class="otc-price">
-                                        <div>求购数量：{{$numberComma(v.currenyNum)}}（{{v.currenyName}}）</div>
+                                        <div>{{$t('discovery.OTC.orderlist.neednum')}}：{{$numberComma(v.currenyNum)}}（{{v.currenyName}}）</div>
                                         <!-- <div>已售数量：{{$numberComma(v.sellNum)}} （{{v.currenyName}}）</div> -->
                                     </div>
                                 </div>
                                 <div class="otc-grid-pay">
                                     <div class="otc-grid-paylist">
                                         <div v-if="v.Status==-1" class="tag tag-error">
-                                            下架
+                                            {{$t('discovery.OTC.type.type01')}}
                                         </div>
                                         <div v-if="v.Status==0" class="tag tag-success">
-                                            上架
+                                            {{$t('discovery.OTC.type.type0')}}
                                         </div>
                                         <div v-if="v.Status==2" class="tag tag-wran">
-                                            锁定
+                                            {{$t('discovery.OTC.type.type2')}}
                                         </div>
                                     </div>
                                     <div class="otc-grid-right">
@@ -124,9 +121,6 @@
                         </div>
                     </v-grid>
                 </div>
-				<div v-else class="nodata">
-					没有数据
-				</div>
 				<!-- 求购订单 -->
 			</div>
 
@@ -134,8 +128,8 @@
 				<!-- 已购订单 -->
 				<div class="order-list-content" v-for="(v,index) in BuyOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id,v.status)">
 					<flexbox>
-						<flexbox-item>订单号：{{v.Id}}</flexbox-item>
-						<flexbox-item><span v-if="v.GoodsType==0" class="tag tag-wran">售币</span><span v-if="v.GoodsType==1" class="tag tag-primary">求购</span></flexbox-item>
+						<flexbox-item>{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
+						<flexbox-item><span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span><span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span></flexbox-item>
 						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
 					</flexbox>
 					<flexbox>
@@ -149,24 +143,21 @@
 						</flexbox-item>
 						<flexbox-item class="order-list-info">
 							<div>
-								<span class="price">单价：{{v.price}}（CNY）</span>
-								<span class="buynum">数量：{{v.BuyNum}}（{{v.currenyName}}）</span>
+								<span class="price">{{$t('discovery.OTC.orderlist.oprice')}}：{{v.price}}（CNY）</span>
+								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
 							</div>
 							<div>
-								<span class="total">总价：{{v.TotalPay}}（CNY）</span>
+								<span class="total">{{$t('discovery.OTC.orderlist.totalprice')}}：{{v.TotalPay}}（CNY）</span>
 							</div>
 						</flexbox-item>
 						<flexbox-item span='58' class="order-list-type">
-							<span class="order-list-type-waitpay" v-if="v.status==2">待支付</span>
-							<span class="order-list-type-wait" v-if="v.status==3">待发币</span>
+							<span class="order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
+							<span class="order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
 							<!-- <span class="order-list-type-get" v-if="v.status==4">已发币</span> -->
-							<span class="order-list-type-success" v-if="v.status==5">交易完成</span>
-							<span class="order-list-type-close" v-if="v.status==6||v.status==7">取消订单</span>
+							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
+							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
 						</flexbox-item>
 					</flexbox>
-				</div>
-				<div v-else class="nodata">
-					没有数据
 				</div>
 			</div>
 
@@ -174,8 +165,8 @@
 				<!-- 已售订单 -->
 				<div class="order-list-content" v-for="(v,index) in SellOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id)">
 					<flexbox>
-						<flexbox-item>订单号：{{v.Id}}</flexbox-item>
-						<flexbox-item><span v-if="v.GoodsType==0" class="tag tag-wran">购买</span><span v-if="v.GoodsType==1" class="tag tag-primary">求购</span></flexbox-item>
+						<flexbox-item>{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
+						<flexbox-item><span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span><span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span></flexbox-item>
 						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
 					</flexbox>
 					<flexbox>
@@ -189,24 +180,21 @@
 						</flexbox-item>
 						<flexbox-item class="order-list-info">
 							<div>
-								<span class="price">单价：{{v.price}}（CNY）</span>
-								<span class="buynum">数量：{{v.BuyNum}}（{{v.currenyName}}）</span>
+								<span class="price">{{$t('discovery.OTC.orderlist.oprice')}}：{{v.price}}（CNY）</span>
+								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
 							</div>
 							<div>
-								<span class="total">总价：{{v.TotalPay}}（CNY）</span>
+								<span class="total">{{$t('discovery.OTC.orderlist.totalprice')}}：{{v.TotalPay}}（CNY）</span>
 							</div>
 						</flexbox-item>
 						<flexbox-item span='58' class="order-list-type">
-							<span class="order-list-type-waitpay" v-if="v.status==2">待支付</span>
-							<span class="order-list-type-wait" v-if="v.status==3">待发币</span>
+							<span class="order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
+							<span class="order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
 							<!-- <span class="order-list-type-get" v-if="v.status==4">已发币</span> -->
-							<span class="order-list-type-success" v-if="v.status==5">交易完成</span>
-							<span class="order-list-type-close" v-if="v.status==6||v.status==7">取消订单</span>
+							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status4')}}</span>
+							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
 						</flexbox-item>
 					</flexbox>
-				</div>
-				<div v-else class="nodata">
-					没有数据
 				</div>
 			</div>
 			</v-touch>

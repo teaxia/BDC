@@ -1,14 +1,16 @@
 <template>
 	<div class="myOrder margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="订单详情"></x-header>
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.myorder.title')"></x-header>
         <div class="pd50">
 			<div class="order-id">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{data.Id}}</h1>
 			</div>
 			<div class="order-info order-line">
-				<h3 v-if="orderType==2">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==3">{{data.NickName}}向您购买了{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<span v-if="data.GoodsType==0" class="tag tag-wran">售币</span><span v-if="data.GoodsType==1" class="tag tag-primary">求购</span>
+				<h3 v-if="orderType==2&&data.GoodsType==0">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==2&&data.GoodsType==1">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==3&&data.GoodsType==0">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==3&&data.GoodsType==1">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<span v-if="data.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span><span v-if="data.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
 			</div>
 			<div class="order-pay order-line mr20">
 				<div class="order-information">
@@ -34,25 +36,25 @@
 			<div class="order-tips mr20 order-line">
 				<div class="order-timeline">
 					<div v-if="data.CreateTime!=null">
-						<div>订单创建时间</div>
+						<div>{{$t('discovery.OTC.myorder.ctime')}}</div>
 						<div>{{data.CreateTime}}</div>
 					</div>
 					<div v-if="data.PayTime!=null">
-						<div>订单付款时间</div>
+						<div>{{$t('discovery.OTC.myorder.ptime')}}</div>
 						<div>{{data.PayTime}}</div>
 					</div>
 					<div v-if="data.DoneTime!=null">
-						<div>订单完成时间</div>
+						<div>{{$t('discovery.OTC.myorder.dtime')}}</div>
 						<div>{{data.DoneTime}}</div>
 					</div>
 					<div v-if="data.CancelTime!=null">
-						<div>订单取消时间</div>
+						<div>{{$t('discovery.OTC.myorder.cantime')}}</div>
 						<div>{{data.CancelTime}}</div>
 					</div>
 				</div>
 			</div>
 			<div class="order-remark mr20 order-line">
-				留言：{{data.Remark}}
+				{{$t('discovery.OTC.myorder.remark')}}：{{data.Remark}}
 			</div>
 			<div v-if="data.Status==3&&this.orderType==3">
 				<group>
@@ -62,16 +64,16 @@
                 </group>
 			</div>
 			<div class="order-payment mr10">
-				<button class="btn btn-block btn-round" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2">申诉</button>
-				<button class="btn btn-block btn-round" v-if="data.Status==3&&this.orderType==3" @click="confirm()">确认收款</button>
-				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>交易已取消</button>
-				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>交易已完成</button>
+				<button class="btn btn-block btn-round" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2">{{$t('discovery.OTC.complaiont.title')}}</button>
+				<button class="btn btn-block btn-round" v-if="data.Status==3&&this.orderType==3" @click="confirm()">{{$t('discovery.OTC.myorder.confirm')}}</button>
+				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
+				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 			</div>
 		</div>
 		<Modal v-model="show" @on-ok="OrderAndPay" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
 			<div slot="header"></div>
 			<div class="modal-body">
-                <div>"确认后系统将自动发币至买家账户，是否确认？</div>
+                <div>{{$t('discovery.OTC.myorder.tips')}}</div>
             </div>
 		</Modal>
     </div>

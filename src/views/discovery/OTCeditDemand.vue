@@ -1,6 +1,6 @@
 <template>
 	<div class="mycard margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" title="编辑"></x-header>
+		<x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.edit.title')"></x-header>
         <div class="pd50">
             <div class="currency">
                 <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
@@ -26,11 +26,11 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="number" title="货币数量" required placeholder="求购数量" v-model="num">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.num')" required :placeholder="$t('discovery.OTC.demand.num')" v-model="num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required placeholder="求购单价" v-model="price">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.price')" required :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
                     </x-input>
                 </group>
                 <group>
@@ -49,8 +49,8 @@
                     </div>
                 </group>
                 <div class="tips">
-                    <div v-if="islock">目前为锁定状态，不可修改。锁定倒计时{{m}}分{{s}}秒</div>
-                    <div v-else>只有下架后才可删除</div>
+                    <div v-if="islock">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
             <div class="select-pay">
@@ -58,8 +58,8 @@
                 <i @click="sbankd(2)" :class="{'iconfont':true,'icon-yinhangqia':true,'cardpay':cardpay}"></i>
                 <i @click="sbankd(0)" :class="{'iconfont':true,'icon-weixinzhifu':true,'wechart':wechart}"></i>
             </div>
-            <button @click="doSubmit()" class="btn btn-block btn-default btn-round">{{ $t("global.submit") }}</button>
-            <button @click="DelBuyGoods()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">删除</button>
+            <button @click="doSubmit()" class="btn btn-block btn-default btn-round">{{$t('discovery.OTC.edit.edit')}}</button>
+            <button @click="DelBuyGoods()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
         </div>
     </div>
 </template>
@@ -117,7 +117,7 @@ export default {
             if(!this.alipay&&!this.cardpay&&!this.wechart){
                 // 判断是否有支付方式
                 this.$vux.toast.show({
-                    text: '必须选择一种付款方式',
+                    text:  this.$t('discovery.OTC.sell.tips.payment'),
                     type: 'warn'
                 })
                 return;
@@ -171,7 +171,7 @@ export default {
                 case 1:
                     this.alipay = !this.alipay
                     this.$vux.toast.show({
-                        text        :   (_this.alipay)?'支持支付宝付款':'关闭支付宝付款支持',
+                        text        :   (_this.alipay)?_this.$t('discovery.OTC.tips.salipay'):_this.$t('discovery.OTC.tips.oalipay'),
                         position    :   'default',
                         type        :   'text'
                     })
@@ -179,7 +179,7 @@ export default {
                 case 0:
                     this.wechart = !this.wechart
                     this.$vux.toast.show({
-                        text        :   (_this.wechart)?'支持微信付款':'关闭微信付款支持',
+                        text        :   (_this.wechart)?_this.$t('discovery.OTC.tips.swechart'):_this.$t('discovery.OTC.tips.owechart'),
                         position    :   'default',
                         type        :   'text'
                     })
@@ -187,7 +187,7 @@ export default {
                 case 2:
                     this.cardpay = !this.cardpay    
                     this.$vux.toast.show({
-                        text        :   (_this.cardpay)?'支持银行卡付款支持':'关闭银行卡付款支持',
+                        text        :   (_this.cardpay)?_this.$t('discovery.OTC.tips.scard'):_this.$t('discovery.OTC.tips.ocard'),
                         position    :   'default',
                         type        :   'text'
                     })
