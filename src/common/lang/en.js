@@ -392,6 +392,7 @@ export const en = {
                 atime       :   'Audit time',
                 commont     :   'Contents',
                 recommont   :   'ReContents',
+                minutes     :   'Please submit your complaint 30 minutes after payment',
             },
             demand:{
                 title       :   'Publish purchase',

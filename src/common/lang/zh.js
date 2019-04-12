@@ -392,6 +392,7 @@ export const zh = {
                 atime       :   '审核时间',
                 commont     :   '申述内容',
                 recommont   :   '审核回复内容',
+                minutes     :   '请于支付30分钟后再提交申诉',
             },
             demand:{
                 title       :   '发布求购',

@@ -73,7 +73,8 @@
                 </group>
 			</div>
 			<div class="order-payment mr10">
-				<button class="btn btn-block btn-round" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2">{{$t('discovery.OTC.complaiont.title')}}</button>
+				<button class="btn btn-block btn-round" disabled v-if="data.Status==3&&this.orderType==2&&this.minutes<29">{{$t('discovery.OTC.complaiont.minutes')}}</button>
+				<button class="btn btn-block btn-round" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2&&this.minutes>=30">{{$t('discovery.OTC.complaiont.title')}}</button>
 				<button class="btn btn-block btn-round" v-if="data.Status==3&&this.orderType==3" @click="confirm()">{{$t('discovery.OTC.myorder.confirm')}}</button>
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
@@ -101,6 +102,7 @@
 				type	    :   false,				// 切换密码状态
 				show		:	false,				// 二次确认状态
 				payInfo		:	[],					// 支付方式
+				minutes		:	''					// 支付时间是否大于30分钟可以申述
 			}
 		},
 		watch:{
@@ -127,6 +129,9 @@
 					if(data){
 						this.payInfo 	=   (data.PayType)?data.PayType.split("|"):'';
 						this.data = data
+						if(data.PayTime){
+							this.timeFn(data.PayTime)
+						}
 					}
 				})
 			},
@@ -176,6 +181,18 @@
 					}
 				});
 			},
+			timeFn(d1) {
+				// 计算获取的时间是否与现在的时间相差30分钟
+				let dateBegin = new Date(d1.replace(/-/g, "/"));//将-转化为/，使用new Date
+				let dateEnd = new Date();//获取当前时间
+				let dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
+				let dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000));//计算出相差天数
+				let leave1=dateDiff%(24*3600*1000)    //计算天数后剩余的毫秒数
+				let hours=Math.floor(leave1/(3600*1000))//计算出小时数
+				let leave2=leave1%(3600*1000)    //计算小时数后剩余的毫秒数
+    			let minutes=Math.floor(leave2/(60*1000))//计算相差分钟数
+				this.minutes	=	minutes
+			}
 		},
 		
 		mounted() {
