@@ -156,6 +156,7 @@
 							<!-- <span class="order-list-type-get" v-if="v.status==4">已发币</span> -->
 							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
 							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
+							<span class="order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
 						</flexbox-item>
 					</flexbox>
 				</div>
@@ -193,6 +194,7 @@
 							<!-- <span class="order-list-type-get" v-if="v.status==4">已发币</span> -->
 							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
 							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
+							<span class="order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
 						</flexbox-item>
 					</flexbox>
 				</div>

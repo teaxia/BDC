@@ -454,6 +454,7 @@ export const en = {
                 status4     :   'Issued currency',
                 status5     :   'Success',
                 status6     :   'Cancal Order',
+                status7     :   'Complan Done',
             },
             tips:{
                 salipay     :   'Support Alipay payment',
