@@ -39,7 +39,7 @@
 							<span>{{$t('mine.menus.spread')}}</span>
 						</span>
 					</cell>
-					<div @click="go()" class="line-b">
+					<div @click="go('http://www.belden-bdc.com/')" class="line-b">
 						<cell is-link  class="cell-hei">
 							<span slot="title">
 								<i class="iconfont icon-guanwang"></i>
@@ -83,6 +83,15 @@
 						</span>
 						<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
 					</cell>
+					<div @click="go('https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1135557&configID=83914&jid=4297503665&s=1')" class="line-b">
+						<cell is-link class="cell-hei">
+							<span slot="title">
+								<i class="iconfont icon-kefu"></i>
+								<span>{{$t('mine.menus.server')}}</span>
+							</span>
+							<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
+						</cell>
+					</div>
 					<cell is-link link="/mine/setting" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-shezhi"></i>
@@ -138,6 +147,7 @@ export default {
 		// @2.8.31 茶树虾	2019-03-18	修改错误的语言包（CTC-OTC）；增加修改手机号绑定；
 		// @2.8.32 茶树虾	2019-03-19	修改错误的语言包；
 		// @2.9.32 茶树虾	2019-03-27	增加了echarts组件用于显示曲线图 增加了GIF图片
+		// @2.10.33 茶树虾	2019-04-16	OTC完成，增加在线客服
 	},
 	methods: {
 		// 退出
@@ -147,17 +157,17 @@ export default {
 				path:"/user/login",
 			});
 		},
-		go(){
+		go(url){
 			// 调用第三方浏览器打开网页
 			if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  
 				//苹果设备 
 				api.openApp({
-					iosUrl: 'http://www.belden-bdc.com/', //打开微信的，其中weixin为微信的URL Scheme
+					iosUrl: url, //打开微信的，其中weixin为微信的URL Scheme
 				});
 			}else{
 				//安卓设备
 				api.openApp({
-					uri: 'http://www.belden-bdc.com/'
+					uri: url,
 				});
 			}
 		},

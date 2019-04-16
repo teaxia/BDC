@@ -182,16 +182,13 @@
 				});
 			},
 			timeFn(d1) {
+				var dateBegin = new Date(d1.replace(/-/g, "/"));//将-转化为/，使用new Date
 				// 计算获取的时间是否与现在的时间相差30分钟
-				let dateBegin = new Date(d1.replace(/-/g, "/"));//将-转化为/，使用new Date
-				let dateEnd = new Date();//获取当前时间
-				let dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
-				let dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000));//计算出相差天数
-				let leave1=dateDiff%(24*3600*1000)    //计算天数后剩余的毫秒数
-				let hours=Math.floor(leave1/(3600*1000))//计算出小时数
-				let leave2=leave1%(3600*1000)    //计算小时数后剩余的毫秒数
-    			let minutes=Math.floor(leave2/(60*1000))//计算相差分钟数
-				this.minutes	=	minutes
+				var dateEnd = new Date();//获取当前时间
+				var dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
+				this.minutes =  Math.floor((dateDiff / 60000));
+				// this.minutes = minutes
+				// console.log(minutes)
 			}
 		},
 		

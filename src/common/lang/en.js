@@ -548,6 +548,7 @@ export const en = {
             question        :   'Question',
             feedback        :   'Feedback',
             realname        :   'Authentication',
+            server          :   'Server Online',
             setting         :   'Setting',
             withdrawal      :   'Profit',
             cash            :   'Withdrawal',

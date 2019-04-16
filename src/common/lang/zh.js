@@ -548,6 +548,7 @@ export const zh = {
             question        :   '常见问题',
             feedback        :   '意见反馈',
             realname        :   '实名认证',
+            server          :   '在线客服',
             setting         :   '设置',
             withdrawal      :   '我的收益',
             cash            :   '提币',
