@@ -454,7 +454,7 @@ export const zh = {
                 status4     :   '已发币',
                 status5     :   '交易完成',
                 status6     :   '取消订单',
-                status7     :   '申述完成',
+                status7     :   '申诉完成',
             },
             tips:{
                 salipay     :   '支持支付宝付款',
