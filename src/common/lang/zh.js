@@ -146,7 +146,8 @@ export const zh = {
             month       :   '月',
             season      :   '季',
             year        :   '年',
-            dataNull    :   '没有数据',    
+            dataNull    :   '没有数据',
+            history     :   '最新提交记录',
         },
         cash:{
             title       :   '现金兑换',
@@ -205,6 +206,7 @@ export const zh = {
             fee         :   '扣除BDC',
             tip         :   "Tip:请输入Im'token地址或交易所地址",
             min         :   '最低提币数量为200',
+            auto        :   '自动填写',
             tips:{
                 safetycode  :   '安全码不能为空',
                 num         :   '提币数量不能为空',
@@ -219,7 +221,7 @@ export const zh = {
             type3       :   'POS',
             type4       :   '消费',
             type5       :   '提币',
-            type6       :   '购币',
+            type6       :   '兑换',
             type7       :   '业绩',
             type8       :   '游戏',
             begin       :   '开始时间',

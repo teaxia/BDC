@@ -20,7 +20,7 @@
                 </group>
                 <!-- <div class="tips"><span>{{$t('discovery.extract.min')}}</span></div> -->
                 <div class="tips"><span>{{$t('discovery.extract.tax')}}：{{tax*100}}%</span></div>
-                <div class="tips"><span>{{$t('wallet.tips.actassets')}}：{{this.actAssets}}</span></div>
+                <div class="tips"><span>{{$t('wallet.tips.actassets')}}：{{$numberComma(this.actAssets)}}</span></div>
                 <div class="tips"><span>{{$t('discovery.extract.fee')}}：{{(bdcnum*Proportion*(1+tax)).toFixed(8)}}</span></div>
                 <div class="tips">
                     <span>{{$t('discovery.withdrawal.money')}}：{{this.bdcnum}}</span>
@@ -30,6 +30,33 @@
                 </div>
             </div>
             <button @click="subconfirm()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
+            <div class="get-last-dt" v-if="GetDTList.OutCurrency">
+                <div class="title">{{$t('discovery.btob.history')}}</div>
+                <flexbox class="div">
+                    <flexbox-item class="div-left">
+                        {{$numberComma(GetDTList.OutCurrency)}}
+                    </flexbox-item>
+                    <flexbox-item class="div-right">
+                        {{GetDTList.CreateTime}}
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="div">
+                    <flexbox-item class="div-left">
+                        {{$numberComma(GetDTList.BDCNum)}}
+                    </flexbox-item>
+                    <flexbox-item class="div-right">
+                        {{GetDTList.Status}}
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="div">
+                    <flexbox-item class="div-left">
+                        {{GetDTList.Address}}
+                    </flexbox-item>
+                    <flexbox-item class="div-right">
+                        <button @click="path()" class="btn btn-xs btn-round">{{$t('discovery.extract.auto')}}</button>
+                    </flexbox-item>
+                </flexbox>
+            </div>
         </div>
         <Modal v-model="modal" @on-ok="ok" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
             <div>
@@ -70,7 +97,8 @@ export default {
             fee         :   '',         // 实际到账
             //Poundage    :   '',         // 提币手续费
             Proportion  :   '',   // USDT:BDC价格兑换比
-            amount      :   ''
+            amount      :   '',
+            GetDTList   :  [],
 		}
 	},
 	methods: {
@@ -141,6 +169,19 @@ export default {
                 }
             })
         },
+        GetLastDT(){
+            // 查询最后兑提记录
+            this.$server.post(
+            'GetLastDT',
+            {
+                guid 	:   this.$storage.get('guid'),
+                type    :   'T'   
+            }).then(data => {
+                if(data.Result!='null'){
+                    this.GetDTList = data
+                }
+            })
+        },
         getCli(){
             var clipBoard = api.require('clipBoard');
             var that = this
@@ -150,6 +191,9 @@ export default {
                     that.addrs = addresss.value
                 }
             });
+        },
+        path(){
+            this.addrs = this.GetDTList.Address
         }
     },
     watch:{
@@ -163,7 +207,8 @@ export default {
     },
 	mounted() {
         this.GetPoundage()
-        this.GetAccount();
+        this.GetAccount()
+        this.GetLastDT()
 	}
 }
 
@@ -177,5 +222,27 @@ export default {
     color:$font-red!important;
     font-size:20px;
     line-height: 40px;
+}
+.get-last-dt{
+    margin-top:20px;
+    border-top:0.01rem solid $border-line;
+    .title{
+        font-size:32px;
+        font-weight: bold;
+        color:$font-orange;
+    }
+    .div{
+        font-size:28px;
+        height: 60px;
+        .div-left{
+
+        }
+        .div-right{
+            text-align: right;
+            .btn{
+                float: right;
+            }
+        }
+    }
 }
 </style>

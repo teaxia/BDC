@@ -1,10 +1,8 @@
 <template>
-	<div class="iframe margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}"></x-header>
-        <div>
-            <iframe :src="url" :width="w" :height="h" class="iframe_p" :scrolling="this.isscro" frameborder="0"></iframe>
-        </div>
-        <v-footer :isIndex="$route.meta.isIndex"></v-footer>
+	<div v-cloak>
+        <x-header :left-options="{backText:$t('global.back')}" title="在线客服"></x-header>
+        <iframe class="ifraem" :src="url" :scrolling="this.isscro" frameborder="0"></iframe>        
+        <!-- <v-footer :isIndex="$route.meta.isIndex"></v-footer> -->
     </div>
 </template>
 
@@ -13,7 +11,7 @@
         name:'iframe',
 		data() {
 			return {
-                url     :   '',
+                url     :   '', 
                 w       :   '',
                 h       :   '',
                 isscro  :   'no',
@@ -23,22 +21,26 @@
             // 解决宽度兼容问题
             if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  //判断是苹果设备还是其他设备 
                 this.isscro = 'no';
-                this.h = '100%';
+                // this.h = '100%';
             }else{
                 //安卓设备允许滚动
                 this.isscro = 'yes';
-                this.h = window.screen.height-180
             }
-            
+            this.h = window.screen.height
             this.w = window.screen.width
-            this.url = this.$route.params.url
+            this.url = this.$route.query.url
 		}
 	}
 
 </script>
 
 <style scoped lang="scss">
-.iframe_p{
-    margin-bottom: 150px;
+.ifraem{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
 }
 </style>

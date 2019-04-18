@@ -146,7 +146,8 @@ export const en = {
             month       :   'Month',
             season      :   'season',
             year        :   'Year',  
-            dataNull    :   'NO DATA',     
+            dataNull    :   'NO DATA',
+            history     :   'History',
         },
         cash:{
             title       :   'Cash',
@@ -205,6 +206,7 @@ export const en = {
             tax         :   'Tax',
             fee         :   'Amount of actual balance',
             min         :   'The min extract 200',
+            tuao        :   'Auto',
             tips:{
                 safetycode  :   'Safety code number can not be null',
                 num         :   'BDC num can not be null',

@@ -83,7 +83,7 @@
 						</span>
 						<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
 					</cell>
-					<div @click="go('https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1135557&configID=83914&jid=4297503665&s=1')" class="line-b">
+					<div @click="OnToiframe('https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1135557&configID=83914&jid=4297503665&s=1')" class="line-b">
 						<cell is-link class="cell-hei">
 							<span slot="title">
 								<i class="iconfont icon-kefu"></i>
@@ -122,7 +122,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			isreal		:	'',
-			version 	:	'2.9.33',				
+			version 	:	'2.9.34',				
 			messageNum	:	'',
 			ParentName	:	''
 		}
@@ -148,7 +148,7 @@ export default {
 		// @2.8.32 茶树虾	2019-03-19	修改错误的语言包；
 		// @2.9.32 茶树虾	2019-03-27	增加了echarts组件用于显示曲线图 增加了GIF图片
 		// @2.9.33 茶树虾	2019-04-16	增加在线客服；“应用”界面优化
-		// @2.10.33 茶树虾	2019-04-16	OTC完成
+		// @2.9.34 茶树虾	2019-04-18	提币跟兑换界面增加最新交提记录
 	},
 	methods: {
 		// 退出
@@ -186,6 +186,14 @@ export default {
 					this.GetLetterMessageCount()	
 				}
 			})
+		},
+		OnToiframe(url){
+			this.$router.push({
+				path:"/iframe",
+				query:{
+					url:url
+				}
+			});
 		}
 	},
 	mounted() {

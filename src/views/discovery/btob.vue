@@ -47,6 +47,30 @@
                 </flexbox>
             </div>
             <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.btob.submit')}}</button>
+            <div class="get-last-dt" v-if="GetDTList.OutCurrency">
+                <div class="title">{{$t('discovery.btob.history')}}</div>
+                <flexbox class="div">
+                    <flexbox-item class="div-left">
+                        {{$numberComma(GetDTList.OutCurrency)}}
+                    </flexbox-item>
+                    <flexbox-item class="div-right">
+                        {{GetDTList.CreateTime}}
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="div">
+                    <flexbox-item class="div-left">
+                        {{$numberComma(GetDTList.BDCNum)}}
+                    </flexbox-item>
+                    <flexbox-item class="div-right">
+                        {{GetDTList.Status}}
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="div">
+                    <flexbox-item class="div-left">
+                        {{GetDTList.Address}}
+                    </flexbox-item>
+                </flexbox>
+            </div>
             <div class="select_day">
                 <button :class="{'btn':true,'btn-xs':true,'btn-error':Query=='周'}" @click="sQuery('week')">{{$t('discovery.btob.week')}}</button>
                 <button :class="{'btn':true,'btn-xs':true,'btn-error':Query=='月'}" @click="sQuery('month')">{{$t('discovery.btob.month')}}</button>
@@ -87,6 +111,7 @@
                 TimeDay     :   [],             // y轴卓坐标
                 LeftMargin  :   55,             // 左侧间距大小
                 LastBot     :   '周',             // 上一次点击的按钮
+                GetDTList   :  [],
 			}
         },
         watch:{
@@ -327,13 +352,27 @@
                 }
                 // 重新加载数据
                 this.GetCurrenyPrice(val)
-            }
+            },
+            GetLastDT(){
+                // 查询最后兑提记录
+                this.$server.post(
+                'GetLastDT',
+                {
+                    guid 	:   this.$storage.get('guid'),
+                    type    :   'D'   
+                }).then(data => {
+                    if(data.Result!='null'){
+                        this.GetDTList = data
+                    }
+                })
+            },
 		},
 		mounted() {
             // 获取详情
             this.GetList()
             this.bbName = (this.$route.query.bbname)?this.$route.query.bbname:'BTC'
             this.GetCurrenyPrice()
+            this.GetLastDT()
         },
 	}
 

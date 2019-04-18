@@ -335,12 +335,14 @@
                 })
             },
             onCopy: function (e) {
-				this.$vux.toast.show({
+                // alert(e.text)
+                this.$vux.toast.show({
 					text: this.$t('wallet.receive.tips.success'),
 					type: 'success'
 				})
 			},
 			onError: function (e) {
+                // alert(e.text)
 				this.$vux.toast.show({
 					text: this.$t('wallet.receive.tips.error'),
 					type: 'warn'

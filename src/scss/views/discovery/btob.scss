@@ -40,6 +40,28 @@
         justify-content: space-between;
         padding:20px 0;
         margin-top:20px;
-        border-top:solid #cccccc 0.01rem;
+        border-top:solid $border-line 0.01rem;
+    }
+    .get-last-dt{
+        margin-top:20px;
+        border-top:0.01rem solid $border-line;
+        .title{
+            font-size:32px;
+            font-weight: bold;
+            color:$font-orange;
+        }
+        .div{
+            font-size:28px;
+            height: 60px;
+            .div-left{
+    
+            }
+            .div-right{
+                text-align: right;
+                .btn{
+                    float: right;
+                }
+            }
+        }
     }
 }
