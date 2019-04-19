@@ -55,7 +55,7 @@ export default {
 					value   : this.$t("discovery.topmenu.OTC"),				// OTC
 					icon    : 'icon-CTC1',
 					url     : '/discovery/otc',
-					status	: false,
+					status	: true,
 				},
 				
 				{

@@ -155,7 +155,6 @@
                     })
                     return
                 }
-                this.isok = true;
                 this.$server.post(
                 'AddRechargeByBB',
                 {
@@ -168,6 +167,7 @@
                     RechargeAddress :   this.address
                 }).then(data => {
                     if(data){
+                        this.GetLastDT()
                         this.$vux.toast.show({
                             text: this.$t('global.wait'), 
                             type: 'success'

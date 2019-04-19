@@ -9,14 +9,16 @@
                         <div>{{$t('discovery.OTC.buy.goods.bybuy')}}{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
                         <div>{{$t('discovery.OTC.buy.goods.bybuy')}}{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
                     </div>
-                    <div class="tax">
-                        {{$t('discovery.OTC.sell.tax')}}：{{Poundage}}% 
-                    </div>
-                    <div class="tax">
-                        {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}BDC
-                    </div>
-                    <div class="tax">
-                        {{$t('discovery.OTC.sell.total')}} ：{{$numberComma((datalist.price*datalist.currenyNum).toFixed(2))}}CNY
+                    <div v-if="Poundage>0">
+                        <div class="tax">
+                            {{$t('discovery.OTC.sell.tax')}}：{{Poundage}}% 
+                        </div>
+                        <div class="tax">
+                            {{$t('discovery.OTC.sell.deduction')}} ：{{$numberComma(amount)}}BDC
+                        </div>
+                        <div class="tax">
+                            {{$t('discovery.OTC.sell.total')}} ：{{$numberComma((datalist.price*datalist.currenyNum).toFixed(2))}}CNY
+                        </div>
                     </div>
                     <div class="payment">
                         <i v-if="alipayPaymeny" @click="sbankd(1)" :class="{'iconfont':true,'icon-zhifubao':true,'alipay':alipay}"></i>

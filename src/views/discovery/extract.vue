@@ -114,6 +114,7 @@ export default {
                 key             : this.key
             }).then(data => {
                 if(data){
+                    this.GetLastDT()
                     this.$vux.toast.show({
                         text: this.$t('global.wait'),
                         type: 'success'

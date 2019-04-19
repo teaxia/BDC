@@ -12,14 +12,16 @@
                 <div class="font">
                     {{cName}}
                 </div>
-                <div class="price">
-                    {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
-                </div>
-                <div class="fax">
-                    {{$t('discovery.extract.tax')}}：{{Poundage}}% 
-                </div>
-                <div class="fax">
-                   {{$t('discovery.OTC.sell.odeduction')}} ：{{$numberComma(amount)}}
+                <div v-if="Poundage>0">
+                    <div class="price">
+                        {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
+                    </div>
+                    <div class="fax">
+                        {{$t('discovery.extract.tax')}}：{{Poundage}}% 
+                    </div>
+                    <div class="fax">
+                    {{$t('discovery.OTC.sell.odeduction')}} ：{{$numberComma(amount)}}
+                    </div>
                 </div>
             </div>
             <div class="enterfrom">
