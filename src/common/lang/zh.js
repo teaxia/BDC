@@ -2,7 +2,7 @@
 export const zh = {
     // 全局
     global:{
-        title               : 'BDC钱包',
+        title               : 'BD生态',
         next                : '下一步',
         success             : '成功',
         error               : '失败',
