@@ -20,7 +20,11 @@
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="thirdNickName" required :placeholder="$t('mine.setting.tips.name')">
+                    <x-input class="test" type="text" :title="$t('mine.setting.nickname')" v-model="thirdNickName" required :placeholder="$t('mine.setting.tips.nickname')">
+                    </x-input>
+                </group>
+                <group>
+                    <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="RealName" required :placeholder="$t('mine.setting.tips.name')">
                     </x-input>
                 </group>
             </div>
@@ -85,8 +89,8 @@ export default {
 	data() {
 		return {
             thirdAccountName        :  '',                     // 支付宝账号
-            thirdNickName           :  '',                     // 支付宝绑定姓名
-            AllowCount              :  3,                      // 允许绑卡的数据
+            thirdNickName           :  '',                     // 昵称
+            AllowCount              :  1,                      // 允许绑卡的数据
             BindCount               :  0,                      // 已绑卡数量
             show                    :  false,            	   // 跳转至强制认证界面
             show2                   :  false,                  // 删除二次确认
@@ -96,6 +100,7 @@ export default {
             PayList                 :  [],                     // 绑定数据列表
             confirmData             :  [],                     // 确认删除的数据
             picNum                  :  0,                      // 图片上传的计数器
+            RealName                :  ''                      // 真实姓名
 		}
 	},
 	methods: {
@@ -123,7 +128,8 @@ export default {
                 thirdName               :   '支付宝',
                 thirdAccountName        :   this.thirdAccountName,              //  支付宝账号
                 thirdNickName           :   this.thirdNickName,                 //  支付宝绑定姓名
-                ImgUrl                  :   this.imgs
+                ImgUrl                  :   this.imgs,
+                RealName                :   this.RealName                       //  真是姓名
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -145,7 +151,7 @@ export default {
             'GetThirdInfo',{
                 guid 	:   this.$storage.get('guid'),
             }).then(data => {
-                if(data){
+                if(data.Result!='[]'){
                     this.PayList = data
                     let i = 0
                     data.forEach(v => {

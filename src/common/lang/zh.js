@@ -147,7 +147,7 @@ export const zh = {
             season      :   '季',
             year        :   '年',
             dataNull    :   '没有数据',
-            history     :   '最新提交记录',
+            history     :   '最新提交记录', 
         },
         cash:{
             title       :   '现金兑换',
@@ -326,8 +326,8 @@ export const zh = {
             },
             index:{
                 record      :   '记录',
-                buy         :   '售币',
-                bybuy       :   '求购',
+                buy         :   '我要买',
+                bybuy       :   '我要卖',
                 curreny     :   '币种',
                 time        :   '时间',
                 price       :   '价格',
@@ -555,6 +555,7 @@ export const zh = {
             setting         :   '设置',
             withdrawal      :   '我的收益',
             cash            :   '提币',
+            security        :   '安全中心',
         },
         area:{
             title           :   '矿区',
@@ -608,6 +609,7 @@ export const zh = {
             newPhone        :   '新手机号',
             bindPhone       :   '绑定新手机号',
             vierPhone       :   '验证手机号',
+            nickname        :   '昵称',
             tips:{
                 oldpsw          :   '请输入旧密码',
                 newpsw          :   '请输入新密码',
@@ -622,6 +624,7 @@ export const zh = {
                 inputalipay     :   '请输入支付宝账号',
                 confirmDel      :   '是否确认删除该数据',
                 alipayEnter     :   '支付宝账号必须填写',
+                nickname        :   '请输入支付宝昵称',
             }
         },
         feedback:{

@@ -555,6 +555,7 @@ export const en = {
             setting         :   'Setting',
             withdrawal      :   'Profit',
             cash            :   'Withdrawal',
+            security        :   'Security',
         },
         area:{
             title           :   'Area',
@@ -608,6 +609,7 @@ export const en = {
             newPhone        :   'New Phone',
             bindPhone       :   'Bind Phone No.',
             vierPhone       :   'Verification Phone No.',
+            nickname        :   'Nick name',
             tips:{
                 oldpsw          :   'Please enter the old password',
                 newpsw          :   'Please enter a new password',
@@ -622,6 +624,7 @@ export const en = {
                 inputalipay     :   'Please enter your Alipay',
                 confirmDel      :   'Are you sure to delete this data?',
                 alipayEnter     :   'Please enter your Alipay',
+                nickname        :   'Please enter your Nick name',
             }
         },
         feedback:{

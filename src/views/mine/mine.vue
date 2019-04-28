@@ -92,6 +92,12 @@
 							<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
 						</cell>
 					</div>
+					<cell is-link link="/mine/security" class="cell-hei">
+						<span slot="title">
+							<i class="iconfont icon-artboard19copy"></i>
+							<span>{{$t('mine.menus.security')}}</span>
+						</span>
+					</cell>
 					<cell is-link link="/mine/setting" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-shezhi"></i>

@@ -5,16 +5,6 @@
             <div class="enterfrom">
                 <v-grid class="mr10">
                     <group>
-                        <cell link="/mine/editpsw" is-link class="cell-hei">
-                            <span slot="title">
-                                <span>{{$t('mine.setting.editpsw')}}</span>
-                            </span>
-                        </cell>
-                        <cell link="/mine/safepsw" is-link class="cell-hei">
-                            <span slot="title">
-                                <span>{{$t('mine.setting.safepsw')}}</span>
-                            </span>
-                        </cell>
                         <cell link="/mine/language" is-link class="cell-hei">
                             <span slot="title">
                                 <span>{{$t('mine.setting.language')}}</span>
@@ -25,37 +15,6 @@
                                 <span>{{$t('mine.setting.price')}}</span>
                             </span>
                         </cell>
-                        <cell link="/mine/mycard" is-link class="cell-hei">
-                            <span slot="title">
-                                <span>{{$t('mine.setting.mycard')}}</span>
-                            </span>
-                        </cell>
-                        <cell link="/mine/alipay" is-link class="cell-hei">
-                            <span slot="title">
-                                <span>{{$t('mine.setting.alipay')}}</span>
-                            </span>
-                        </cell>
-                        <cell link="/mine/wechart" is-link class="cell-hei">
-                            <span slot="title">
-                                <span>{{$t('mine.setting.wechart')}}</span>
-                            </span>
-                        </cell>
-                        <div @click="isPhone()" class="weui-cell cell-hei vux-tap-active weui-cell_access">
-                            <div class="weui-cell__hd"></div> 
-                            <div class="vux-cell-bd vux-cell-primary">
-                                <p>
-                                   <label class="vux-label"><span><span>{{$t('mine.setting.editPhone')}}</span></span></label> 
-                                </p>
-                                <span class="vux-label-desc"></span>
-                            </div> 
-                            <div class="weui-cell__ft">
-                            </div>
-                        </div>
-                        <!-- <cell @click="isPhone()" is-link class="cell-hei">
-                            <span slot="title">
-                                <span>{{$t('mine.setting.editPhone')}}</span>
-                            </span>
-                        </cell> -->
                     </group>
                 </v-grid>
             </div>

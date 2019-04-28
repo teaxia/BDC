@@ -30,10 +30,10 @@ export default {
             mobile      :   '',
             code        :   '',
             content	    :   this.$t("user.tips.setvcode"),      // 倒计时
-            totalTime   :   60,                  // 记录具体倒计时时间
-			canClick    :   true,	             // 添加canClick
+            totalTime   :   60,                                 // 记录具体倒计时时间
+			canClick    :   true,	                            // 添加canClick
             clock	    :   '',
-            oldPhone    :   false,                  // 判断是否绑定旧手机号，如果绑定了旧手机号该属性变为true禁用表单填写
+            oldPhone    :   false,                              // 判断是否绑定旧手机号，如果绑定了旧手机号该属性变为true禁用表单填写
 		}
 	},
 	methods: {
