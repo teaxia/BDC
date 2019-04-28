@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
                                 <!-- <th>{{$t("mine.mycard.No")}}</th> -->
-                                <th>{{$t("mine.setting.name")}}</th>
+                                <th>{{$t("mine.setting.nickname")}}</th>
                                 <th>{{$t("mine.mycard.time")}}</th>
                                 <th>{{$t("mine.area.edit")}}</th>
                             </tr>
@@ -65,7 +65,7 @@
         <Modal v-model="show2" :closable="false" :mask-closable="false">
 			<div slot="header">{{$t("mine.setting.tips.confirmDel")}}</div>
 			<div class="modal-body" id="payConfirm">
-                <div class="name"><span class="w">{{$t('mine.setting.name')}}：</span>{{confirmData.thirdNickName}}</div>
+                <div class="name"><span class="w">{{$t('mine.setting.nickname')}}：</span>{{confirmData.thirdNickName}}</div>
                 <!-- <div class="pay"><span class="w">{{$t('mine.setting.alipayAccess')}}：</span>{{confirmData.thirdAccountName}}</div> -->
                 <div class="ercode"><img :src="confirmData.ImgUrl"></div>
             </div>
@@ -103,7 +103,7 @@ export default {
             if(this.thirdNickName==''){
                 // 判断姓名
                 this.$vux.toast.show({
-                    text: this.$t("mine.setting.tips.name"),
+                    text: this.$t("mine.setting.tips.nickname"),
                     type: 'warn'
                 })
                 return;
@@ -146,6 +146,9 @@ export default {
                         }
                     });
                     this.BindCount = i
+                }else{
+                    this.PayList = []
+                    this.BindCount = 0
                 }
             })
         },

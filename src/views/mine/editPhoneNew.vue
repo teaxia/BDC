@@ -66,7 +66,7 @@ export default {
                         type: 'success'
                     })
                     this.$router.push({
-                        path:"/mine/setting",
+                        path:"/mine/security",
                     });
                 }
             })

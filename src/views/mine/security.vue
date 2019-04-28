@@ -15,6 +15,12 @@
                                 <span>{{$t('mine.setting.safepsw')}}</span>
                             </span>
                         </cell>
+                        <cell is-link link="/mine/auth" class="cell-hei">
+                            <span slot="title">
+                                <span>{{$t('mine.menus.realname')}}</span>
+                            </span>
+                            <!-- <div slot="default" v-if="!isreal" class="authrel">{{realname}}</div> -->
+                        </cell>
                         <cell link="/mine/mycard" is-link class="cell-hei">
                             <span slot="title">
                                 <span>{{$t('mine.setting.mycard')}}</span>
@@ -59,7 +65,8 @@ export default {
 	name: 'setting',
 	data() {
 		return {
-           
+           isreal		:	'',
+           realname    :   '',
 		}
 	},
 	watch:{
@@ -79,7 +86,9 @@ export default {
         }
 	},
 	mounted() {
-       
+        this.isreal	  	= (this.$storage.get('RealName'))?false:true;
+        this.realname 	= (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
+        console.log(this.isreal)
 	}
 }
 

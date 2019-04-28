@@ -618,13 +618,13 @@ export const zh = {
                 notpsw          :   '两次输入的密码不一致',
                 card            :   '请输入银行卡号',
                 bank            :   '请输入开户行',
-                name            :   '请输入姓名',
+                name            :   '请输入真实姓名',
                 upAlipayErcode  :   '上传支付宝收款码',
                 upWechartErcode :   '上传微信收款码',
                 inputalipay     :   '请输入支付宝账号',
                 confirmDel      :   '是否确认删除该数据',
                 alipayEnter     :   '支付宝账号必须填写',
-                nickname        :   '请输入支付宝昵称',
+                nickname        :   '请输入昵称',
             }
         },
         feedback:{
