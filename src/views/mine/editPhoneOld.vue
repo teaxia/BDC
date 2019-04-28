@@ -72,7 +72,7 @@ export default {
             this.$server.post(
             'PwdBack_SendCode',
             {
-                jm 	 		: this.$md5(this.$jm.jmCode+this.$storage.get('guid')+phoneNo).toUpperCase(),			// 加密方法Key+Phone_No加密
+                jm 	 		: this.$md5(this.$jm+this.$storage.get('guid')+phoneNo).toUpperCase(),			// 加密方法Key+Phone_No加密
                 Key  		: this.$storage.get('guid'),															// 注册传空
                 Phone_No	: phoneNo,
                 lv   		: (this.$storage.get('lang'))?this.$storage.get('lang'):''
