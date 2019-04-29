@@ -1,0 +1,44 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.otcRank{
+    .main-container{
+        .rabklist{
+            border:0.02rem solid $border-line;
+            .rank{
+                padding:10px;
+                display: flex;
+                justify-content:space-between;
+                border-bottom:0.02rem solid $border-line;
+                height: 100px;
+                line-height: 80px;
+                font-size:32px;
+                &:last-child{
+                    border-bottom:none;
+                }
+                .ranking{
+                    text-align: center;
+                    width: 100px;
+                }
+                .total{
+                    text-align: center;
+                    width: 200px;
+                }
+                .nickname{
+                    width: 400px;
+                    text-align: center;
+                }
+                .lv-1{
+                    color:rgb(255, 186, 0);
+                }
+                .lv-2{
+                    color:#cdcdcd;
+                }
+                .lv-3{
+                    color:rgb(232, 161, 82);;
+                }
+            }
+            
+        }
+    }
+}

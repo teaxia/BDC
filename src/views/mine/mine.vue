@@ -57,6 +57,15 @@
 			</v-grid>
 			<v-grid class="mr40">
 				<group>
+					<div @click="OnToiframe('https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1135557&configID=83914&jid=4297503665&s=1')" class="line-b">
+						<cell is-link class="cell-hei">
+							<span slot="title">
+								<i class="iconfont icon-kefu"></i>
+								<span>{{$t('mine.menus.server')}}</span>
+							</span>
+							<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
+						</cell>
+					</div>
 					<cell is-link link="/mine/question" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-changjianwenti"></i>
@@ -76,15 +85,6 @@
 						</span>
 						<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
 					</cell>
-					<div @click="OnToiframe('https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1135557&configID=83914&jid=4297503665&s=1')" class="line-b">
-						<cell is-link class="cell-hei">
-							<span slot="title">
-								<i class="iconfont icon-kefu"></i>
-								<span>{{$t('mine.menus.server')}}</span>
-							</span>
-							<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
-						</cell>
-					</div>
 					<cell is-link link="/mine/security" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-artboard19copy"></i>

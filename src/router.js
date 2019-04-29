@@ -35,6 +35,7 @@ import discovery from './views/discovery.vue'
         import OTCbuyOrder from './views/discovery/OTCbuyOrder.vue'                 // 供币界面
         import OTCcomplaiontList from './views/discovery/OTCComplaiontList.vue'                 // 投诉界面列表
         import OTCcomplaiontView from './views/discovery/OTCcomplaiontView.vue'                 // 投诉详情页
+        import OTCRank from './views/discovery/OTCRank.vue'                         // 排行榜
 // 钱包
 import wallet from './views/wallet.vue' 
     import walletindex from './views/wallet/wallet.vue'
@@ -136,6 +137,7 @@ let routes = [
                 { path: '/discovery/OTC/buyOrder', component: OTCbuyOrder, name: 'OTCbuyOrder',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/ComplaiontList', component: OTCcomplaiontList, name: 'OTCcomplaiontList',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/Complaiont/view', component: OTCcomplaiontView, name: 'OTCcomplaiontView',meta:{isIndex: 2}},
+                { path: '/discovery/OTC/OTCRank', component: OTCRank, name: 'OTCRank',meta:{isIndex: 2}},
         ]
     },
     // 钱包
