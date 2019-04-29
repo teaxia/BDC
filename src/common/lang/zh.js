@@ -416,6 +416,7 @@ export const zh = {
                 orderType1  :   '求购',
                 orderType2  :   '已购',
                 orderType3  :   '已售',
+                orderType4  :   '收益',
                 SorderId    :   '订单号搜索',
                 price       :   '售价',
                 oprice      :   '单价',
@@ -424,6 +425,7 @@ export const zh = {
                 sellnum     :   '已售数量',
                 neednum     :   '求购数量',
                 num         :   '数量',
+                Profit      :   '总收益',
             },
             myorder:{
                 title       :   '订单详情',

@@ -200,6 +200,31 @@
 					</flexbox>
 				</div>
 			</div>
+
+			<div class="list" v-if="orderType==4">
+				<!-- 收益明细 -->
+				<div class="total-profit">
+					{{$t('discovery.OTC.orderlist.Profit')}}：{{TotalProfit}}（BDC）
+				</div>
+				<div class="order-list-content" v-for="(v,index) in ProfitList" v-if="v.OrderId" :key="index" @click="myOrder(v.OrderId)">
+					<flexbox>
+						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.OrderId}}</flexbox-item>
+						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
+					</flexbox>
+					<flexbox>
+						<flexbox-item class="order-list-info">
+							<div>
+								<span class="price">{{$t('discovery.OTC.orderlist.orderType4')}}：{{v.Profit}}（BDC）</span>
+								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（BDC）</span>
+							</div>
+						</flexbox-item>
+						<flexbox-item :span="2">
+							<span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
+							<span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
+						</flexbox-item>
+					</flexbox>
+				</div>
+			</div>
 			</v-touch>
 		</div>
     </div>
@@ -221,6 +246,8 @@
 				SellOrder	:	[],					// 已售
 				MySellOrder	:	[],					// 售币列表
 				MyBuyOrder	:	[],					// 求购列表
+				ProfitList	:	[],					// 收益明细
+				TotalProfit	:	'',					// 总收益
 			}
 		},
 		watch:{
@@ -237,6 +264,8 @@
 					break;
 					case 3:			// 已售
 						this.MyOrderSelled()
+					case 4:			// 已售
+						this.Myprofit()
 					break;
 				}
 			}
@@ -293,7 +322,7 @@
 				this.sQuery(this.orderType)
 			},
 			onItemClick (index) {
-				// 索引0：售币 1：求购 2：已购 3：已售
+				// 索引0：售币 1：求购 2：已购 3：已售 4：收益明细
 				this.orderType = index
 			},
 			OTCGetSellList(){
@@ -377,6 +406,21 @@
                     }
                 }) 
 			},
+			Myprofit(){
+				// 收益明细
+				this.$server.post(
+                'GetPoundageProfitList',{
+                    guid 	    :   this.$storage.get('guid'),
+                    dtStart     :   this.stardate,                     	// 开始时间
+                    dtEnd    	:   this.enddate,             		  	// 结束时间
+                    orderId     :   this.search,            	  		// 订单号
+                }).then(data => {
+                    if(data){
+						this.TotalProfit	=	data.TotalProfit		// 总收益
+						this.ProfitList		=	data.list				// 收益明细
+                    }
+                }) 
+			},
 			edit(id){
 				// 编辑在售订单
 				this.$router.push({
@@ -409,6 +453,9 @@
 					break;
 					case 3:			// 已售
 						this.MyOrderSelled()
+					break;
+					case 4:			// 收益
+						this.Myprofit()
 					break;
 				}
 			},

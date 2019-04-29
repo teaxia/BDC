@@ -416,6 +416,7 @@ export const en = {
                 orderType1  :   'purchase',
                 orderType2  :   'Buy',
                 orderType3  :   'Sale',
+                orderType4  :   'Profit',
                 SorderId    :   'Order Number Search',
                 price       :   'Sell Price',
                 oprice      :   'Price',
@@ -424,6 +425,7 @@ export const en = {
                 sellnum     :   'Sale num',
                 neednum     :   'Buy num',
                 num         :   'num',
+                Profit      :   'Profit',
             },
             myorder:{
                 title       :   'Order details',

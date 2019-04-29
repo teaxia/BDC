@@ -17,11 +17,18 @@
             height: 79px;
             line-height: 79px;
             font-size:28px;
+            flex: 0 0 20% !important;
         }
-    }
+    } 
     .list{
+        .total-profit{
+            margin-top:10px;
+            font-size:28px;
+            padding:10px 0;
+            color:$font-orange;
+            border-bottom: 0.01rem solid $border-line;
+        }
         .order-list-content{
-            margin-top:20px;
             border-bottom: 0.01rem solid $border-line;
             padding:10px 0;
             .right{
