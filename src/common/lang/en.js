@@ -467,6 +467,11 @@ export const en = {
                 owechart    :   'Turn off Wechat Payment Support',
                 scard       :   'Supporting bank card payment',
                 ocard       :   'Closing Bank Card Payment Support',
+            },
+            rank:{
+                title       :   'Ranking',
+                nickname    :   'Nick name（rank）',
+                num         :   'Num'
             }
         },
     },

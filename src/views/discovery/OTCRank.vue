@@ -1,12 +1,12 @@
 <template>
 	<div class="otcRank margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="排行榜"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.rank.title')"></x-header>
         <div class="main-container">
             <div class="rabklist">
                 <div class="rank">
                     <div class="ranking"></div>
-                    <div class="nickname">昵称（等级）</div>
-                    <div class="total">接单数</div>
+                    <div class="nickname">{{$t('discovery.OTC.rank.title')}}</div>
+                    <div class="total">{{$t('discovery.OTC.rank.num')}}</div>
                 </div>
                 <div class="rank" v-for="(v,index) in rankList" :key="index">
                     <div class="ranking">
@@ -52,7 +52,6 @@
                     guid 	    :   this.$storage.get('guid'),
                 }).then(data => {
                     if(data){
-                        console.log(data)
                         this.rankList = data
                     }
                 }) 

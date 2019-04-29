@@ -467,6 +467,11 @@ export const zh = {
                 owechart    :   '关闭微信付款支持',
                 scard       :   '支持银行卡付款',
                 ocard       :   '关闭银行卡付款支持',
+            },
+            rank:{
+                title       :   '排行榜',
+                nickname    :   '昵称（等级）',
+                num         :   '接单数'
             }
         },
     },
