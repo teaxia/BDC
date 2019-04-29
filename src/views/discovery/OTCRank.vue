@@ -4,19 +4,18 @@
         <div class="main-container">
             <div class="rabklist">
                 <div class="rank">
-                    <div class="ranking">等级</div>
+                    <div class="ranking"></div>
                     <div class="nickname">昵称（等级）</div>
-                    <div class="total">接单BDC总数</div>
+                    <div class="total">接单数</div>
                 </div>
                 <div class="rank" v-for="(v,index) in rankList" :key="index">
                     <div class="ranking">
                         <svg class="sicon" aria-hidden="true" v-if="index<=2">
                             <use :xlink:href="`#icon-`+rank[index]"></use>
                         </svg>
-                        <span v-else>{{index}}</span>
                     </div>
                     <div :class="{nickname:true,'lv-1':index==0,'lv-2':index==1,'lv-3':index==2}">
-                        {{v.NickName}}
+                        <span class="rank-nickname">{{v.NickName}}</span>
                         <span class="lv">{{v.Lv}}</span>
                     </div>
                     <div :class="{total:true,'lv-1':index==0,'lv-2':index==1,'lv-3':index==2}">

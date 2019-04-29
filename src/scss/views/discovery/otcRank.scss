@@ -16,26 +16,30 @@
                 &:last-child{
                     border-bottom:none;
                 }
-                .ranking{
-                    text-align: center;
-                    width: 100px;
-                }
                 .total{
                     text-align: center;
                     width: 200px;
                 }
                 .nickname{
                     width: 400px;
-                    text-align: center;
+                    text-align: left;
                 }
                 .lv-1{
                     color:rgb(255, 186, 0);
                 }
                 .lv-2{
-                    color:#cdcdcd;
+                    color:rgb(169, 172, 175);
                 }
                 .lv-3{
                     color:rgb(232, 161, 82);;
+                }
+                .ranking{
+                    width: 50px;
+                    .sicon{
+                        width:50px;
+                        height:50px;
+                        margin-bottom: 15px;
+                    }
                 }
             }
             

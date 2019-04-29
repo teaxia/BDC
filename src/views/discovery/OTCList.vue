@@ -13,6 +13,7 @@
 				<tab-item class="tab-item" :selected="orderType==1" @on-item-click="onItemClick">{{$t('discovery.OTC.orderlist.orderType1')}}</tab-item>
 				<tab-item class="tab-item" :selected="orderType==2" @on-item-click="onItemClick">{{$t('discovery.OTC.orderlist.orderType2')}}</tab-item>
 				<tab-item class="tab-item" :selected="orderType==3" @on-item-click="onItemClick">{{$t('discovery.OTC.orderlist.orderType3')}}</tab-item>
+				<tab-item class="tab-item" :selected="orderType==4" @on-item-click="onItemClick">{{$t('discovery.OTC.orderlist.orderType4')}}</tab-item>
 			</tab>
 		</Affix>
 		<div class="search" v-if="orderType>1">
