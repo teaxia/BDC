@@ -66,14 +66,14 @@
 								<div class="font-title">{{$t('discovery.OTC.order.cardNumber')}}：</div>
 								<div>{{card[2]}}</div>
 								<div class="font-btn">
-									<div class="btn btn-xs" v-clipboard:copy="card[2]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyCard')}}</div>
+									<div class="btn btn-xs" @click="CopyClip(card[2])">{{$t('discovery.OTC.order.copyCard')}}</div>
 								</div>
 							</div>
 							<div class="font copy">
 								<div class="font-title">{{$t('discovery.OTC.order.name')}}：</div>
 								<div>{{card[1]}}</div>
 								<div class="font-btn">
-									<div class="btn btn-xs" v-clipboard:copy="card[1]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyName')}}</div>
+									<div class="btn btn-xs" @click="CopyClip(card[1])" v-clipboard:copy="card[1]">{{$t('discovery.OTC.order.copyName')}}</div>
 								</div>
 							</div>
 							<button class="btn btn-round btn-min mr20" :disabled='type=="card"' @click="thispay('card')"><span v-if="type=='card'">{{$t('discovery.OTC.order.thisPay')}}</span><span v-else>{{$t('discovery.OTC.order.selectpay')}}</span></button>
@@ -94,7 +94,9 @@
 </template>
 
 <script>
+	import { clipBoard } from '../../common/mixins/clipBoard'
 	export default {
+		mixins:[clipBoard],
         name:'order',
 		data() {
 			return {	
@@ -159,18 +161,6 @@
 			cancelFPupop(){
                 // 取消选择
                 this.showFPupop = false
-			},
-			onCopy: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.success'),
-					type: 'success'
-				})
-			},
-			onError: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.error'),
-					type: 'warn'
-				})
 			},
 			save(imgUrl){
 				// 保存二维码到相册

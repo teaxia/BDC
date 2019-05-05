@@ -51,7 +51,7 @@
                     <div class="tb">
                         <div v-if="v.Remakes" class="RechargeCode">{{v.Remakes}}</div>
                         <div class="RechargeCode">{{v.RechargeCode}}</div>
-                        <div v-if="v.RechargeCode"><span class="btn btn-xs" v-clipboard:copy="v.RechargeCode.substring(0,32)" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copyaddress')}}</span></div>
+                        <div v-if="v.RechargeCode"><span class="btn btn-xs" @click="CopyClip(v.RechargeCode.substring(0,32))">{{$t('global.copyaddress')}}</span></div>
                     </div>
                 </div><!--收入、支出、POS、消费结束-->
                 <div v-if="type==5||type==6"><!--提币、购币-->
@@ -79,7 +79,9 @@
 </template>
 
 <script>
+	import { clipBoard } from '../../common/mixins/clipBoard'
 	export default {
+		mixins:[clipBoard],
         name:'bill',
 		data() {
 			return {
@@ -238,18 +240,6 @@
                         this.dataList = []
                     }
                 })
-            },
-            onCopy: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.success'),
-					type: 'success'
-				})
-			},
-			onError: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.error'),
-					type: 'warn'
-				})
             },
 		},
 		mounted() {

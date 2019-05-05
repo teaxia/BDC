@@ -16,7 +16,7 @@
                 </div>
                 <div class="InviteCode">
                     <span v-text="`http://belden-bdc.net/register/index.html?InviteCode=`+InviteCode"></span>
-                    <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="`http://belden-bdc.net/register/index.html?InviteCode=`+InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                    <button type="button" class="btn btn-xs btn-round" @click="CopyClip('http://belden-bdc.net/register/index.html?InviteCode='+InviteCode)">{{$t('wallet.receive.copy')}}</button>
                 </div>
             </div>
 			<div class="center mr20">
@@ -36,18 +36,6 @@
 			}
 		},
 		methods: {
-			onCopy: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.success'),
-					type: 'success'
-				})
-			},
-			onError: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.error'),
-					type: 'warn'
-				})
-			},
 			save(){
 				//首先先截取base64图片
 				let ref = document.getElementById('extension') // 截图区域				

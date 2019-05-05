@@ -52,7 +52,7 @@
                                 <div class="v-dottedline" @click="query(f1.AccountId)">{{f1.GroupSurplus}}</div>
                                 <div class="copy">
                                     <div>{{f1.InviteCode}}</div>
-                                    <div><button class="btn btn-xs btn-round" v-clipboard:copy="f1.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                                    <div><button class="btn btn-xs btn-round" @click="CopyClip(f1.InviteCode)">{{$t('global.copy')}}</button></div>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                     <div class="v-dottedline" @click="query(f2.AccountId)">{{f2.GroupSurplus}}</div>
                                     <div class="copy">
                                         <div>{{f2.InviteCode}}</div>
-                                        <div><button class="btn btn-xs btn-round" v-clipboard:copy="f2.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                                        <div><button class="btn btn-xs btn-round" @click="CopyClip(f2.InviteCode)">{{$t('global.copy')}}</button></div>
                                     </div>
                                 </div>
                                 <div class="areareg" v-else>
@@ -97,7 +97,7 @@
                                     <div class="v-dottedline" @click="query(f3.AccountId)">{{f3.GroupSurplus}}</div>
                                     <div class="copy">
                                         <div>{{f3.InviteCode}}</div>
-                                        <div><button class="btn btn-xs btn-round" v-clipboard:copy="f3.InviteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('global.copy')}}</button></div>
+                                        <div><button class="btn btn-xs btn-round" @click="CopyClip(f3.InviteCode)">{{$t('global.copy')}}</button></div>
                                     </div>
                                 </div>
                                 <div class="areareg" v-else>
@@ -196,7 +196,7 @@
                 </div>
                 <div class="InviteCode">
                     <span v-text="`http://belden-bdc.net/register/index.html?InviteCode=`+VInviteCode+`&NoteCode=`+VNoteCode"></span>
-                    <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="`http://belden-bdc.net/register/index.html?InviteCode=`+InviteCode+`&NoteCode=`+VNoteCode" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                    <button type="button" class="btn btn-xs btn-round" @click="CopyClip('http://belden-bdc.net/register/index.html?InviteCode='+InviteCode+'&NoteCode='+VNoteCode)">{{$t('wallet.receive.copy')}}</button>
                 </div>
             </div>
             <div class="center mr20">
@@ -208,11 +208,12 @@
 </template>
 
 <script>
+    import { clipBoard } from '../../common/mixins/clipBoard'
 	export default {
+		mixins:[clipBoard],
 		data() {
 			return {
-                th: [
-                    {
+                th: [{
                         title: this.$t('mine.area.area'),
                     },
                     {
@@ -226,8 +227,7 @@
                     },
                     {
                         title: this.$t('mine.area.edit'),
-                    }
-                ],
+                    }],
                 coltitle:[
                     {
                         title: this.$t('mine.area.nickname'),       // 用户名
@@ -333,20 +333,6 @@
                         }
                     }
                 })
-            },
-            onCopy: function (e) {
-                // alert(e.text)
-                this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.success'),
-					type: 'success'
-				})
-			},
-			onError: function (e) {
-                // alert(e.text)
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.error'),
-					type: 'warn'
-				})
             },
             toRegist(InviteCode,area,pid,NoteCode){
                 // InviteCode 邀请码 Area矿区  pid为顶级用户ID NoteCode矿区节点码

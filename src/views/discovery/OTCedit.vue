@@ -99,14 +99,14 @@
 								<div class="font-title">{{$t('discovery.OTC.order.cardNumber')}}：</div>
 								<div>{{card[2]}}</div>
 								<div class="font-btn">
-									<button class="btn btn-xs" v-clipboard:copy="card[2]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyCard')}}</button>
+									<button class="btn btn-xs" @click="CopyClip(card[2])">{{$t('discovery.OTC.order.copyCard')}}</button>
 								</div>
 							</div>
 							<div class="font copy">
 								<div class="font-title">{{$t('discovery.OTC.order.name')}}：</div>
 								<div>{{card[1]}}</div>
 								<div class="font-btn">
-									<button class="btn btn-xs" v-clipboard:copy="card[1]" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('discovery.OTC.order.copyName')}}</button>
+									<button class="btn btn-xs" @click="CopyClip(card[1])">{{$t('discovery.OTC.order.copyName')}}</button>
 								</div>
 							</div>
 						</div>
@@ -127,9 +127,10 @@
 <script>
 import { GetAccount } from '../../common/mixins/getaccount'
 import pattern from '../../common/utils/pattern'
+import { clipBoard } from '../../common/mixins/clipBoard'
 export default {
     name: 'otcsell',
-    mixins:[GetAccount],
+    mixins:[GetAccount,clipBoard],
 	data() {
 		return {
             num         :  '',                        // 发布数量
@@ -321,18 +322,6 @@ export default {
         cancelFPupop(){
             // 取消选择
             this.showFPupop = false
-        },
-        onCopy: function (e) {
-            this.$vux.toast.show({
-                text: this.$t('wallet.receive.tips.success'),
-                type: 'success'
-            })
-        },
-        onError: function (e) {
-            this.$vux.toast.show({
-                text: this.$t('wallet.receive.tips.error'),
-                type: 'warn'
-            })
         },
         save(imgUrl){
             // 保存二维码到相册

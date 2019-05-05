@@ -39,7 +39,7 @@
                                 {{cardname}}
                             </flexbox-item>
                             <flexbox-item>
-                                <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="cardname" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                                <button type="button" class="btn btn-xs btn-round" @click="CopyClip(cardname)">{{$t('wallet.receive.copy')}}</button>
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb vux-1px-b">
@@ -50,7 +50,7 @@
                                 {{cardnumber}}
                             </flexbox-item>
                             <flexbox-item>
-                                <button type="button" class="btn btn-xs btn-round" v-clipboard:copy="cardnumber" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</button>
+                                <button type="button" class="btn btn-xs btn-round" @click="CopyClip(cardnumber)">{{$t('wallet.receive.copy')}}</button>
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="mr20 pb">
@@ -71,7 +71,9 @@
 </template>
 
 <script>
+	import { clipBoard } from '../../common/mixins/clipBoard'
 	export default {
+		mixins:[clipBoard],
         name:'btob',
 		data() {
 			return {
@@ -100,18 +102,6 @@
             }
         },
 		methods: {
-            onCopy: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.success'),
-					type: 'success'
-				})
-			},
-			onError: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.error'),
-					type: 'warn'
-				})
-            },
             submit(){
                 // 获取详情
                 if(this.isok){

@@ -23,7 +23,7 @@
 					</div>
 				</div>
 				<div class="center mr20">
-    				<div class="copy" v-clipboard:copy="code" v-clipboard:success="onCopy" v-clipboard:error="onError"><i class="iconfont icon-fuzhi"></i>&nbsp;{{$t('wallet.receive.copy')}}</div>
+    				<div class="copy" @click="CopyClip(code)"><i class="iconfont icon-fuzhi"></i>&nbsp;{{$t('wallet.receive.copy')}}</div>
 				</div>
 				<div class="center mr20">
 					<input v-model="num" type="number" :placeholder="$t('wallet.receive.tips.num')">
@@ -43,7 +43,9 @@
 </template>
 
 <script>
+	import { clipBoard } from '../../common/mixins/clipBoard'
 	export default {
+		mixins:[clipBoard],
 		data() {
 			return {
 				nickname	:	'',
@@ -55,18 +57,6 @@
 			}
 		},
 		methods: {
-			onCopy: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.success'),
-					type: 'success'
-				})
-			},
-			onError: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.error'),
-					type: 'warn'
-				})
-			},
 			save(){
 				//首先先截取base64图片
 				let ref = document.getElementById('screenshot') // 截图区域				

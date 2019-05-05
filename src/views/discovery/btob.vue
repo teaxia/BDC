@@ -42,7 +42,7 @@
                         <div class="text">{{this.address}}</div>
                     </flexbox-item>
                     <flexbox-item>
-                        <div class="copy" v-clipboard:copy="address" v-clipboard:success="onCopy" v-clipboard:error="onError">{{$t('wallet.receive.copy')}}</div>
+                        <div class="copy" @click="CopyClip(address)">{{$t('wallet.receive.copy')}}</div>
                     </flexbox-item>
                 </flexbox>
             </div>
@@ -90,7 +90,9 @@
     // 引入提示框和标题组件
     require('echarts/lib/component/tooltip');
     require('echarts/lib/component/title');
+	import { clipBoard } from '../../common/mixins/clipBoard'
 	export default {
+		mixins:[clipBoard],
         name:'btob',
 		data() {
 			return {
@@ -131,18 +133,6 @@
             },
         },
 		methods: {
-            onCopy: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.success'),
-					type: 'success'
-				})
-			},
-			onError: function (e) {
-				this.$vux.toast.show({
-					text: this.$t('wallet.receive.tips.error'),
-					type: 'warn'
-				})
-            },
             submit(){
                 // 获取详情
                 // if(this.isok){
