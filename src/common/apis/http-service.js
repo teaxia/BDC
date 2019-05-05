@@ -1,6 +1,6 @@
 import axios from 'axios';
 axios.defaults.timeout = 15000;
-axios.defaults.baseURL ='http://107.150.127.54:50011/WebService1.asmx';     //  测试地址
+axios.defaults.baseURL ='http://107.150.127.54:50006/WebService2.asmx';     //  测试地址
 // axios.defaults.baseURL ='http://107.150.127.54:50004/WebService1.asmx';   //  正式地址
 
 //http request 拦截器

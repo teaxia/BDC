@@ -5,8 +5,7 @@
 				<flexbox>
 					<flexbox-item :span="3">
 						<div class="dis-grid-img">
-							<img v-if="avatar&&avatar!='null'" class="avatar" :src="avatar" />
-							<i v-else class="avatar iconfont icon-touxiang"></i>
+							<i class="avatar iconfont icon-touxiang"></i>
 							<div class="nickname">{{nickname}}</div>
 						</div>
 					</flexbox-item>
@@ -17,14 +16,14 @@
 						</div>
 					</flexbox-item>
 					<flexbox-item :span="6">
-						<div class="mine-grid-content">
+						<!-- <div class="mine-grid-content">
 							<div class="earnings earning">{{$t('mine.menus.withdrawal')}}：{{$numberComma(MyEarnings)}}（USDT）</div>
 							<div class="withdrawal earning">
 								<router-link to="/discovery/withdrawal">
 									<button class="btn btn-xs btn-round">{{$t('mine.menus.cash')}}</button>
 								</router-link>
 							</div>
-						</div>
+						</div> -->
 					</flexbox-item>
 				</flexbox>
 				
@@ -117,7 +116,6 @@ export default {
 	data() {
 		return {
 			nickname	:	'',
-			avatar		:	'',
 			realname    :   '',
 			golink		:	'',
 			version 	:	'2.9.36',				
@@ -204,7 +202,6 @@ export default {
 		// 消息行数
 		this.GetLetterMessageCount()
 		this.nickname 	= this.$storage.get('NickName');
-		this.avatar   	= this.$storage.get('HeadImg');
 		this.isreal	  	= (this.$storage.get('RealName'))?false:true;
 		this.realname 	= (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
 		this.ParentName	= this.$storage.get('ParentName');

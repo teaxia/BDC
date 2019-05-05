@@ -471,7 +471,8 @@ export const zh = {
             rank:{
                 title       :   '排行榜',
                 nickname    :   '昵称（等级）',
-                num         :   '接单数'
+                num         :   '接单数',
+                lossnum     :   '亏损总数',
             }
         },
     },
@@ -554,7 +555,7 @@ export const zh = {
         menus:{
             spread          :   '推广APP',
             website         :   '进入官网',
-            members         :   '矿区成员',
+            members         :   '我的团队',
             question        :   '常见问题',
             feedback        :   '意见反馈',
             realname        :   '实名认证',
@@ -565,15 +566,11 @@ export const zh = {
             security        :   '安全中心',
         },
         area:{
-            title           :   '矿区',
+            title           :   '我的团队',
             levelup         :   '上一级',
-            enter           :   '输入矿区成员',
+            enter           :   '输入会员名称',
             nickname        :   '用户名',
             invitecode      :   '邀请码',
-            v1count         :   'V1矿区人数',
-            v1bdc           :   'V1矿区BDC',
-            v2count         :   'V2矿区人数',
-            v2bdc           :   'V2矿区BDC',
             groupcount      :   '团队总人数',
             groupbdc        :   '团队BDC',
             edit            :   '操作',

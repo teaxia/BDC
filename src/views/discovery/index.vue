@@ -17,21 +17,21 @@
 				</v-grid>
 			</div>
 			<div class="panel">
-				<div @click="goto(v.Id)" class="dis-grid" v-for="(v,index) in news" :key="index">
-					<flexbox>
-						<flexbox-item :span="3">
-							<div class="dis-grid-img">
-								<img v-if="v.ImgUrl" :src="v.ImgUrl" />
-								<img v-else src="../../assets/nopic.png" />
-							</div>
-						</flexbox-item>
-						<flexbox-item>
-							<div class="dis-grid-content line-b">
-								<div class="title ellipsis1">{{v.Title}}</div>
-								<div class="content ellipsis2">{{(v.Sendtime).substring(0,10)}}</div>
-							</div>
-						</flexbox-item>
-					</flexbox>
+				<div class="rabklist">
+					<div class="rank">
+						<div class="ranking"></div>
+						<div class="nickname">{{$t('discovery.OTC.rank.title')}}</div>
+						<div class="total">{{$t('discovery.OTC.rank.lossnum')}}</div>
+					</div>
+					<div class="rank" v-for="(v,index) in rankList" :key="index">
+						<div :class="{nickname:true,'lv-1':index<=2}">
+							<span class="rank-nickname">{{v.NickName}}</span>
+							<span class="lv">{{v.Lv}}</span>
+						</div>
+						<div :class="{total:true,'lv-1':index==0,'lv-2':index==1,'lv-3':index==2}">
+							{{$numberComma(v.Total)}}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -45,12 +45,12 @@ export default {
 		return {
 			lang	 : 'zh',		// 默认语言
 			dataList:[
-				{
-					value   : this.$t("discovery.topmenu.bdc"),				// 兑换BDC
-					icon    : 'icon-duihuanBDC',	
-					url     : '/discovery/expectinfo',
-					status	: true,
-				},
+				// {
+				// 	value   : this.$t("discovery.topmenu.bdc"),				// 兑换BDC
+				// 	icon    : 'icon-duihuanBDC',	
+				// 	url     : '/discovery/expectinfo',
+				// 	status	: true,
+				// },
 				{
 					value   : this.$t("discovery.topmenu.OTC"),				// OTC
 					icon    : 'icon-CTC1',
@@ -71,18 +71,18 @@ export default {
 				// 	status	: true,
 				// },
 				// 2019-02-25 移动至应用界面
-				{
-					value   : this.$t("discovery.topmenu.recharge"),		// 充值
-					icon    : 'icon-chongzhi',
-					url     : '/discovery/recharge',
-					status	: false,
-				},
-				{
-					value   : this.$t("discovery.topmenu.credit"),			// 信用卡
-					icon    : 'icon-banxinyongqia',
-					url     : '/discovery/credit',
-					status	: true,
-				},
+				// {
+				// 	value   : this.$t("discovery.topmenu.recharge"),		// 充值
+				// 	icon    : 'icon-chongzhi',
+				// 	url     : '/discovery/recharge',
+				// 	status	: false,
+				// },
+				// {
+				// 	value   : this.$t("discovery.topmenu.credit"),			// 信用卡
+				// 	icon    : 'icon-banxinyongqia',
+				// 	url     : '/discovery/credit',
+				// 	status	: true,
+				// },
 				{
 					value   : this.$t("discovery.topmenu.extract"),			// 提币
 					icon    : 'icon-Fixedassets',
@@ -90,23 +90,20 @@ export default {
 					status	: false,
 				}
 			],
-			news	:	[],
+			rankList    :   [],         // 排行榜数据
 		}
 	},
 	methods: {
-		getNews(){
-			let jm     = this.$md5(this.$jm+'0').toUpperCase();						// 这里只调用新闻，所以只加密类型1
+		GetLoseRanking(){
 			this.$server.post(
-			'GetNewsbulletinList',
+			'GetLoseRanking',
 			{
-				jm 	 : jm,
-				Type : 0,				
-				lv   : this.lang
+				guid 	    :   this.$storage.get('guid'),
 			}).then(data => {
 				if(data){
-					this.news = data;
+					this.rankList = data
 				}
-			})
+			}) 
 		},
 		goto(id){
 			this.$router.push({
@@ -149,7 +146,7 @@ export default {
 	},
 	mounted() {
 		this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
-		this.getNews();
+		this.GetLoseRanking();
 		this.GetBlackShow();
 	}
 }

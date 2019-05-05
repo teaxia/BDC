@@ -471,7 +471,8 @@ export const en = {
             rank:{
                 title       :   'Ranking',
                 nickname    :   'Nick name（rank）',
-                num         :   'Num'
+                num         :   'Num',
+                lossnum     :   'Loss',
             }
         },
     },

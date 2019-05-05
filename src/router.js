@@ -11,13 +11,13 @@ import user from './views/user.vue'
 // 发现
 import discovery from './views/discovery.vue'
     import discoveryindex from './views/discovery/index.vue'                // 发现首页
-    import expectinfo from  './views/discovery/expectinfo.vue'              // 兑换BDC
-        import btob from  './views/discovery/btob.vue'                      // 币币兑换
-        import cash from  './views/discovery/cash.vue'                      // 现金购买
-        import self from  './views/discovery/self.vue'                      // 现金购买
-        import recharge from  './views/discovery/recharge.vue'              // 充值
+    // import expectinfo from  './views/discovery/expectinfo.vue'              // 兑换BDC
+        // import btob from  './views/discovery/btob.vue'                      // 币币兑换
+        // import cash from  './views/discovery/cash.vue'                      // 现金购买
+        // import self from  './views/discovery/self.vue'                      // 现金购买
+        // import recharge from  './views/discovery/recharge.vue'              // 充值
     import bill from  './views/discovery/bill.vue'                          // 兑换BDC
-    import credit from  './views/discovery/credit.vue'                      // 办理信用卡
+    // import credit from  './views/discovery/credit.vue'                      // 办理信用卡
     import extract from  './views/discovery/extract.vue'                    // 提币
     import games from  './views/discovery/games.vue'                        // 游戏
     import gamesPt from  './views/discovery/gamesPt.vue'                    // PT平台单独页面
@@ -113,13 +113,13 @@ let routes = [
         },
         children: [
             { path: '/discovery/index', component: discoveryindex, name: 'discoveryindex',meta:{isIndex: 2}},
-            { path: '/discovery/expectinfo', component: expectinfo, name: 'expectinfo',meta:{isIndex: 2}},
-                { path: '/discovery/expectinfo/btob', component: btob, name: 'btob',meta:{isIndex: 2}},
-                { path: '/discovery/expectinfo/cash', component: cash, name: 'cash',meta:{isIndex: 2}},
-                { path: '/discovery/expectinfo/self', component: self, name: 'self',meta:{isIndex: 2}},
-            { path: '/discovery/recharge', component: recharge, name: 'recharge',meta:{isIndex: 2}},
+            // { path: '/discovery/expectinfo', component: expectinfo, name: 'expectinfo',meta:{isIndex: 2}},
+            //     { path: '/discovery/expectinfo/btob', component: btob, name: 'btob',meta:{isIndex: 2}},
+            //     { path: '/discovery/expectinfo/cash', component: cash, name: 'cash',meta:{isIndex: 2}},
+            //     { path: '/discovery/expectinfo/self', component: self, name: 'self',meta:{isIndex: 2}},
+            // { path: '/discovery/recharge', component: recharge, name: 'recharge',meta:{isIndex: 2}},
             { path: '/discovery/bill', component: bill, name: 'bill',meta:{isIndex: 2}},
-            { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
+            // { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
             { path: '/discovery/extract', component: extract, name: 'extract',meta:{isIndex: 2}},
             { path: '/discovery/games', component: games, name: 'games',meta:{isIndex: 1}},
             { path: '/discovery/gamespt', component: gamesPt, name: 'gamesPt',meta:{isIndex: 2}},

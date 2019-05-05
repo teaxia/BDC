@@ -8,7 +8,7 @@
             <flexbox-item>
                 <div @click="active('2')" class="menu"><span :class="{'active':type==2}">{{$t('discovery.bill.type2')}}</span></div>
             </flexbox-item>
-            <flexbox-item>
+            <!-- <flexbox-item>
                 <div @click="active('3')" class="menu"><span :class="{'active':type==3}">{{$t('discovery.bill.type3')}}</span></div>
             </flexbox-item>
             <flexbox-item>
@@ -19,13 +19,13 @@
             </flexbox-item>
             <flexbox-item>
                 <div @click="active('6')" class="menu"><span :class="{'active':type==6}">{{$t('discovery.bill.type6')}}</span></div>
-            </flexbox-item>
+            </flexbox-item> -->
             <flexbox-item>
                 <div @click="active('7')" class="menu"><span :class="{'active':type==7}">{{$t('discovery.bill.type7')}}</span></div>
             </flexbox-item>
-            <flexbox-item>
+            <!-- <flexbox-item>
                 <div @click="active('8')" class="menu"><span :class="{'active':type==8}">{{$t('discovery.bill.type8')}}</span></div>
-            </flexbox-item>
+            </flexbox-item> -->
         </flexbox>
         <div class="mr30">
             <flexbox class="pb time">
