@@ -28,7 +28,9 @@
 </template>
 
 <script>
+	import { clipBoard } from '../../common/mixins/clipBoard'
 	export default {
+	mixins:[clipBoard],
 		data() {
 			return {
                 avatar      :   '',
