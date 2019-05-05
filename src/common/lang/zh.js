@@ -23,7 +23,7 @@ export const zh = {
         msg                 : '短信登录',
         unopened            : '暂未开放',
         wait                : '等待确认',
-        authentication      : '该操作需要先通过实名认证',
+        authentication      : '该操作需要先通过[安全中心]->[实名认证]',
         bindbank            : '该操作需要先绑定银行卡',
         off                 : '限时优惠',
         message             : '消息中心',
@@ -147,7 +147,7 @@ export const zh = {
             season      :   '季',
             year        :   '年',
             dataNull    :   '没有数据',
-            history     :   '最新提交记录',
+            history     :   '最新提交记录', 
         },
         cash:{
             title       :   '现金兑换',
@@ -416,6 +416,7 @@ export const zh = {
                 orderType1  :   '求购',
                 orderType2  :   '已购',
                 orderType3  :   '已售',
+                orderType4  :   '收益',
                 SorderId    :   '订单号搜索',
                 price       :   '售价',
                 oprice      :   '单价',
@@ -424,6 +425,7 @@ export const zh = {
                 sellnum     :   '已售数量',
                 neednum     :   '求购数量',
                 num         :   '数量',
+                Profit      :   '总收益',
             },
             myorder:{
                 title       :   '订单详情',
@@ -465,6 +467,11 @@ export const zh = {
                 owechart    :   '关闭微信付款支持',
                 scard       :   '支持银行卡付款',
                 ocard       :   '关闭银行卡付款支持',
+            },
+            rank:{
+                title       :   '排行榜',
+                nickname    :   '昵称（等级）',
+                num         :   '接单数'
             }
         },
     },
@@ -555,6 +562,7 @@ export const zh = {
             setting         :   '设置',
             withdrawal      :   '我的收益',
             cash            :   '提币',
+            security        :   '安全中心',
         },
         area:{
             title           :   '矿区',
@@ -608,6 +616,7 @@ export const zh = {
             newPhone        :   '新手机号',
             bindPhone       :   '绑定新手机号',
             vierPhone       :   '验证手机号',
+            nickname        :   '昵称',
             tips:{
                 oldpsw          :   '请输入旧密码',
                 newpsw          :   '请输入新密码',
@@ -616,12 +625,13 @@ export const zh = {
                 notpsw          :   '两次输入的密码不一致',
                 card            :   '请输入银行卡号',
                 bank            :   '请输入开户行',
-                name            :   '请输入姓名',
+                name            :   '请输入真实姓名',
                 upAlipayErcode  :   '上传支付宝收款码',
                 upWechartErcode :   '上传微信收款码',
                 inputalipay     :   '请输入支付宝账号',
                 confirmDel      :   '是否确认删除该数据',
                 alipayEnter     :   '支付宝账号必须填写',
+                nickname        :   '请输入昵称',
             }
         },
         feedback:{

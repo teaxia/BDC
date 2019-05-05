@@ -66,7 +66,7 @@ export default {
                         type: 'success'
                     })
                     this.$router.push({
-                        path:"/mine/setting",
+                        path:"/mine/security",
                     });
                 }
             })
@@ -78,7 +78,7 @@ export default {
             this.$server.post(
             'PwdBack_SendCode',
             {
-                jm 	 		: this.$md5(this.$jm.jmCode+phoneNo).toUpperCase(),			// 加密方法Key+Phone_No加密
+                jm 	 		: this.$md5(this.$jm+phoneNo).toUpperCase(),			// 加密方法Key+Phone_No加密
                 Key  		: (this.type==3)?this.guid:'',              							        // 旧手机号验证时传登陆GUID，绑新手机传空
                 Phone_No	: phoneNo,
                 lv   		: (this.$storage.get('lang'))?this.$storage.get('lang'):'',

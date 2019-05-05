@@ -57,6 +57,15 @@
 			</v-grid>
 			<v-grid class="mr40">
 				<group>
+					<div @click="OnToiframe('https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1135557&configID=83914&jid=4297503665&s=1')" class="line-b">
+						<cell is-link class="cell-hei">
+							<span slot="title">
+								<i class="iconfont icon-kefu"></i>
+								<span>{{$t('mine.menus.server')}}</span>
+							</span>
+							<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
+						</cell>
+					</div>
 					<cell is-link link="/mine/question" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-changjianwenti"></i>
@@ -69,13 +78,6 @@
 							<span>{{$t('mine.menus.feedback')}}</span>
 						</span>
 					</cell>
-					<cell is-link link="/mine/auth" class="cell-hei">
-						<span slot="title">
-							<i class="iconfont icon-shimingrenzheng"></i>
-							<span>{{$t('mine.menus.realname')}}</span>
-						</span>
-						<div slot="default" v-if="isreal" class="authrel">{{realname}}</div>
-					</cell>
 					<cell is-link link="/wallet/notice?index=3&type=1" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-xiaoxi1"></i>
@@ -83,15 +85,12 @@
 						</span>
 						<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
 					</cell>
-					<div @click="OnToiframe('https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1135557&configID=83914&jid=4297503665&s=1')" class="line-b">
-						<cell is-link class="cell-hei">
-							<span slot="title">
-								<i class="iconfont icon-kefu"></i>
-								<span>{{$t('mine.menus.server')}}</span>
-							</span>
-							<div slot="default" v-if="messageNum>0" class="message">{{messageNum}}</div>
-						</cell>
-					</div>
+					<cell is-link link="/mine/security" class="cell-hei">
+						<span slot="title">
+							<i class="iconfont icon-artboard19copy"></i>
+							<span>{{$t('mine.menus.security')}}</span>
+						</span>
+					</cell>
 					<cell is-link link="/mine/setting" class="cell-hei">
 						<span slot="title">
 							<i class="iconfont icon-shezhi"></i>
@@ -121,8 +120,7 @@ export default {
 			avatar		:	'',
 			realname    :   '',
 			golink		:	'',
-			isreal		:	'',
-			version 	:	'2.9.34',				
+			version 	:	'2.9.36',				
 			messageNum	:	'',
 			ParentName	:	''
 		}
@@ -149,6 +147,8 @@ export default {
 		// @2.9.32 茶树虾	2019-03-27	增加了echarts组件用于显示曲线图 增加了GIF图片
 		// @2.9.33 茶树虾	2019-04-16	增加在线客服；“应用”界面优化
 		// @2.9.34 茶树虾	2019-04-18	提币跟兑换界面增加最新交提记录
+		// @2.9.35 茶树虾	2019-04-28	修复修改手机号无法发送短信的BUG；把修改密码，实名认证，绑定银行卡支付宝微信，修改手机号移动到安全中心
+		// @2.9.36 茶树虾	2019-05-05	修复IOS无法复制的BUG,修改未进行实名认证的安全提示
 	},
 	methods: {
 		// 退出

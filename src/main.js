@@ -14,7 +14,7 @@ import {server} from './common/apis/http-service'               // 定义ajax全
 import storage from './common/storage/storage'                  // 本地数据读取
 import {jmCode,currency} from './common/config/config'          // 加密串
 import VueQriously from 'vue-qriously'                          // 二维码生成
-import VueClipboard from 'vue-clipboard2'                       // 复制内容到剪切板
+// import VueClipboard from 'vue-clipboard2'                       // 复制内容到剪切板
 import html2canvas from 'html2canvas'                           // dom转换图片
 import vselect from './components/vselect.vue'                  // 自定义下拉框搜索组件
 import vfooter from './components/vfooter.vue'                  // 自定义底部组件
@@ -37,7 +37,7 @@ Vue.use(VueI18n)
 Vue.use(LoadingPlugin)
 Vue.use(ToastPlugin)
 Vue.use(VueQriously)
-Vue.use(VueClipboard)
+// Vue.use(VueClipboard)
 Vue.use(VueTouch, {name: 'v-touch'})
 Vue.component('group', Group)
 Vue.component('x-input', XInput)
@@ -92,6 +92,7 @@ const router = new VueRouter({
 })
 
 
+// 在IOS端会有300ms延迟的BUG，然后可能会产生键盘调用不灵敏的问题
 FastClick.attach(document.body)
 FastClick.prototype.onTouchEnd = function(event) {
   if(event.target.hasAttribute("type") && event.target.getAttribute("type") == "text") {

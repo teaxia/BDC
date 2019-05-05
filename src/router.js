@@ -35,15 +35,7 @@ import discovery from './views/discovery.vue'
         import OTCbuyOrder from './views/discovery/OTCbuyOrder.vue'                 // 供币界面
         import OTCcomplaiontList from './views/discovery/OTCComplaiontList.vue'                 // 投诉界面列表
         import OTCcomplaiontView from './views/discovery/OTCcomplaiontView.vue'                 // 投诉详情页
-        
-        
-        
-        
-        
-        
-        
-    
-        
+        import OTCRank from './views/discovery/OTCRank.vue'                         // 排行榜
 // 钱包
 import wallet from './views/wallet.vue' 
     import walletindex from './views/wallet/wallet.vue'
@@ -62,18 +54,19 @@ import myhome from './views/mine'
     import extension from './views/mine/extension.vue'
     import area from './views/mine/area.vue'                            // 矿区成员
     import question from './views/mine/question.vue'                    // 常见问题
-    import setting from './views/mine/setting.vue'                      // 设置
+    import security from './views/mine/security.vue'                      // 安全中心
         import editpsw from './views/mine/editpsw.vue'                  // 密码
         import safepsw from './views/mine/safepsw.vue'                  // 安全密码
-        import language from './views/mine/language.vue'                // 语言
-        import price from './views/mine/price.vue'                      // 货币
-        import feedback from './views/mine/feedback.vue'                // 意见反馈
         import auth from './views/mine/auth.vue'                        // 实名认证
         import mycard from './views/mine/mycard.vue'                    // 绑定银行卡
         import alipay from './views/mine/alipay.vue'                    // 绑定支付宝
         import wechart from './views/mine/wechart.vue'                    // 绑定微信支付
         import editPhoneOld from './views/mine/editPhoneOld.vue'           // 修改手机号，验证旧手机
         import editPhoneNew from './views/mine/editPhoneNew.vue'           // 修改手机号，绑定新手机
+    import setting from './views/mine/setting.vue'                      // 设置
+        import language from './views/mine/language.vue'                // 语言
+        import price from './views/mine/price.vue'                      // 货币
+    import feedback from './views/mine/feedback.vue'                // 意见反馈
     
 // 404
 import NotFound from './views/404.vue'
@@ -144,11 +137,7 @@ let routes = [
                 { path: '/discovery/OTC/buyOrder', component: OTCbuyOrder, name: 'OTCbuyOrder',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/ComplaiontList', component: OTCcomplaiontList, name: 'OTCcomplaiontList',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/Complaiont/view', component: OTCcomplaiontView, name: 'OTCcomplaiontView',meta:{isIndex: 2}},
-
-                
-                
-                
-            
+                { path: '/discovery/OTC/OTCRank', component: OTCRank, name: 'OTCRank',meta:{isIndex: 2}},
         ]
     },
     // 钱包
@@ -199,6 +188,7 @@ let routes = [
             { path: '/mine/feedback', component: feedback, name: 'feedback',meta:{isIndex: 3}},
             { path: '/mine/setting', component: setting, name: 'setting',meta:{isIndex: 3}},
             { path: '/mine/auth', component: auth, name: 'auth',meta:{isIndex: 3}},
+            { path: '/mine/security', component: security, name: 'security',meta:{isIndex: 3}},
                 { path: '/mine/editpsw', component: editpsw, name: 'editpsw',meta:{isIndex: 3}},
                 { path: '/mine/safepsw', component: safepsw, name: 'safepsw',meta:{isIndex: 3}},
                 { path: '/mine/language', component: language, name: 'language',meta:{isIndex: 3}},

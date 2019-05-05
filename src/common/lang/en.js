@@ -416,6 +416,7 @@ export const en = {
                 orderType1  :   'purchase',
                 orderType2  :   'Buy',
                 orderType3  :   'Sale',
+                orderType4  :   'Profit',
                 SorderId    :   'Order Number Search',
                 price       :   'Sell Price',
                 oprice      :   'Price',
@@ -424,6 +425,7 @@ export const en = {
                 sellnum     :   'Sale num',
                 neednum     :   'Buy num',
                 num         :   'num',
+                Profit      :   'Profit',
             },
             myorder:{
                 title       :   'Order details',
@@ -465,6 +467,11 @@ export const en = {
                 owechart    :   'Turn off Wechat Payment Support',
                 scard       :   'Supporting bank card payment',
                 ocard       :   'Closing Bank Card Payment Support',
+            },
+            rank:{
+                title       :   'Ranking',
+                nickname    :   'Nick name（rank）',
+                num         :   'Num'
             }
         },
     },
@@ -555,6 +562,7 @@ export const en = {
             setting         :   'Setting',
             withdrawal      :   'Profit',
             cash            :   'Withdrawal',
+            security        :   'Security',
         },
         area:{
             title           :   'Area',
@@ -608,6 +616,7 @@ export const en = {
             newPhone        :   'New Phone',
             bindPhone       :   'Bind Phone No.',
             vierPhone       :   'Verification Phone No.',
+            nickname        :   'Nick name',
             tips:{
                 oldpsw          :   'Please enter the old password',
                 newpsw          :   'Please enter a new password',
@@ -622,6 +631,7 @@ export const en = {
                 inputalipay     :   'Please enter your Alipay',
                 confirmDel      :   'Are you sure to delete this data?',
                 alipayEnter     :   'Please enter your Alipay',
+                nickname        :   'Please enter your Nick name',
             }
         },
         feedback:{

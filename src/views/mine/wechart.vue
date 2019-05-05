@@ -16,7 +16,11 @@
                     <img v-if="localimgs" :src="localimgs" class="isimg" />
                 </div>
                 <group>
-                    <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="thirdNickName" required :placeholder="$t('mine.setting.tips.name')">
+                    <x-input class="test" type="text" :title="$t('mine.setting.nickname')" v-model="thirdNickName" required :placeholder="$t('mine.setting.tips.nickname')">
+                    </x-input>
+                </group>
+                <group>
+                    <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="RealName" required :placeholder="$t('mine.setting.tips.name')">
                     </x-input>
                 </group>
             </div>
@@ -32,7 +36,7 @@
                         <thead>
                             <tr>
                                 <!-- <th>{{$t("mine.mycard.No")}}</th> -->
-                                <th>{{$t("mine.setting.name")}}</th>
+                                <th>{{$t("mine.setting.nickname")}}</th>
                                 <th>{{$t("mine.mycard.time")}}</th>
                                 <th>{{$t("mine.area.edit")}}</th>
                             </tr>
@@ -61,7 +65,7 @@
         <Modal v-model="show2" :closable="false" :mask-closable="false">
 			<div slot="header">{{$t("mine.setting.tips.confirmDel")}}</div>
 			<div class="modal-body" id="payConfirm">
-                <div class="name"><span class="w">{{$t('mine.setting.name')}}：</span>{{confirmData.thirdNickName}}</div>
+                <div class="name"><span class="w">{{$t('mine.setting.nickname')}}：</span>{{confirmData.thirdNickName}}</div>
                 <!-- <div class="pay"><span class="w">{{$t('mine.setting.alipayAccess')}}：</span>{{confirmData.thirdAccountName}}</div> -->
                 <div class="ercode"><img :src="confirmData.ImgUrl"></div>
             </div>
@@ -81,7 +85,7 @@ export default {
 	data() {
 		return {
             thirdNickName           :  '',                     // 微信绑定姓名
-            AllowCount              :  3,                      // 允许绑卡的数据
+            AllowCount              :  1,                      // 允许绑卡的数据
             BindCount               :  0,                      // 已绑卡数量
             show                    :  false,            	   // 跳转至强制认证界面
             show2                   :   false,                 // 删除二次确认
@@ -91,6 +95,7 @@ export default {
             PayList                 :  [],                     // 绑定数据列表
             confirmData             :  [],                     // 确认删除的数据
             picNum                  :  0,                      // 图片上传的计数器
+            RealName                :  ''                      // 真实姓名
 		}
 	},
 	methods: {
@@ -98,7 +103,7 @@ export default {
             if(this.thirdNickName==''){
                 // 判断姓名
                 this.$vux.toast.show({
-                    text: this.$t("mine.setting.tips.name"),
+                    text: this.$t("mine.setting.tips.nickname"),
                     type: 'warn'
                 })
                 return;
@@ -109,8 +114,9 @@ export default {
                 guid 	                :   this.$storage.get('guid'),
                 thirdName               :   '微信',
                 thirdAccountName        :   '',                                 //  
-                thirdNickName           :   this.thirdNickName,                 //  微信绑定姓名
-                ImgUrl                  :   this.imgs
+                thirdNickName           :   this.thirdNickName,                 //  微信绑定昵称
+                ImgUrl                  :   this.imgs,
+                RealName                :   this.RealName                       //  真实姓名
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -131,7 +137,7 @@ export default {
             'GetThirdInfo',{
                 guid 	:   this.$storage.get('guid'),
             }).then(data => {
-                if(data){
+                if(data.Result!='[]'){
                     this.PayList = data
                     let i = 0
                     data.forEach(v => {
@@ -140,6 +146,9 @@ export default {
                         }
                     });
                     this.BindCount = i
+                }else{
+                    this.PayList = []
+                    this.BindCount = 0
                 }
             })
         },
