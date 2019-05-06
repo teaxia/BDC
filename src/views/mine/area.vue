@@ -1,7 +1,6 @@
 <template>
 	<div class="area margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.area.title')">
-            <!-- <div @click="query(level)" class="up" slot="right">{{$t('mine.area.levelup')}}</div> -->
         </x-header>
         <div class="main-container">
             <flexbox class="line-b earning">
@@ -62,6 +61,7 @@
                             <td>{{v.FixedAssets}}</td>
                             <td>{{v.ActAssets}}</td>
                             <td>{{v.GameAssets}}</td>
+                            <td>{{v.CreateTime}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,6 +94,9 @@
                     {
                         title: '游戏资产',
                     },
+                    {
+                        title: '注册时间',
+                    },
                 ],
                 dataList    :   [],
                 NickName    :   '',         // 昵称
@@ -119,7 +122,6 @@
                     type          :  0,                            //(类型：直推0，全部1)
                 }).then(data => {
                     if(data){
-                        console.log(data)
                         this.tGame      =       data.tGame
                         this.tAct       =       data.tAct
                         this.tfix       =       data.tfix

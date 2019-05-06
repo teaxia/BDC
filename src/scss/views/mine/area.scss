@@ -33,15 +33,24 @@
             justify-content: center;
         }
     }
+    .earning{
+        height: auto;
+        overflow: hidden;
+    }
     .center{
-        height: 100px;
         text-align: center;
-        .earning{
-            border-right: 0.01rem solid $border-line;
-            margin-left: 0 !important;
-            &:last-child{
-                border-right: none;
-            }
+        height: 120px;
+        .myearnings{
+            text-align: center;
+            text-justify: newspaper;
+            word-break: break-all;
         }
+    }
+    .foot-botton{
+        position: absolute;
+        width: 96%;
+        bottom: 0;
+        left: 2%;
+        right: 2%;
     }
 }

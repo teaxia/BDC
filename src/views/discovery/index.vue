@@ -29,7 +29,7 @@
 							<span class="lv">{{v.Lv}}</span>
 						</div>
 						<div :class="{total:true,'lv-1':index==0,'lv-2':index==1,'lv-3':index==2}">
-							{{$numberComma(v.Total)}}
+							{{$numberComma(v.Total)}} 
 						</div>
 					</div>
 				</div>
@@ -132,8 +132,8 @@ export default {
 				guid 	    :   this.$storage.get('guid'),
 			}).then(data => {
 				if(data){
-					this.dataList[3].status = data.isShow_CZ		//	充值
-					this.dataList[5].status = data.isShow_TB		//	充值
+					// this.dataList[3].status = data.isShow_CZ		//	充值
+					this.dataList[2].status = data.isShow_TB		//	充值
 				}
 			})
 		},
