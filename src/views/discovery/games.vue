@@ -3,39 +3,38 @@
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.topmenu.ent')"></x-header>
         <div class="main-container">
             <div class="select">
-                <div @click="change()" :class="{'select-title':true}">
-                    <span :class="{'select-act':active}">{{$t('discovery.games.gambling')}}</span>
+                <div @click="change('gambling')" :class="{'select-title':true}">
+                    <span :class="{'select-act':active=='gambling'}">{{$t('discovery.games.gambling')}}</span>
                 </div>
-                <div @click="change()" :class="{'select-title':true}">
-                    <span :class="{'select-act':!active}">{{$t('discovery.games.relax')}}</span>
+                <div @click="change('bd')" :class="{'select-title':true}">
+                    <span :class="{'select-act':active=='bd'}">区块链游戏</span>
+                </div>
+                <div @click="change('relax')" :class="{'select-title':true}">
+                    <span :class="{'select-act':active=='relax'}">{{$t('discovery.games.relax')}}</span>
+                </div>
+                <div @click="change('lsc')" :class="{'select-title':true}">
+                    <span :class="{'select-act':active=='lsc'}">流水池</span>
                 </div>
             </div>
-            <div v-if="active">
+            <div v-if="active=='gambling'" class="mr20">
                 <!-- 赌博游戏 -->
                 <div v-for="(v,index) in gambling" :key="index">
                     <img width="100%" :src="v.Img" @click="Gambling(v.code,index)">
                 </div>
-                <!-- <v-grid v-for="(v,index) in gambling" :key="index" class="mr20">
-                    <div class="pd-lb20" @click="Gambling(v.code,index)">
-                        <flexbox>
-                            <flexbox-item :span="3">
-                                <div class="dis-grid-img">
-                                    <img :src="v.Img">
-                                </div>
-                            </flexbox-item>
-                            <flexbox-item :span="6">
-                                <div class="dis-grid-content">
-                                    <div :class="{title:true,ellipsis1:true,link:v.Url}">{{v.Name}}</div>
-                                </div>
-                            </flexbox-item>
-                            <flexbox-item>
-                                <button class="btn btn-xs btn-round btn-success">{{$t('global.stargame')}}</button>
-                            </flexbox-item>
-                        </flexbox>
-                    </div>
-                </v-grid> -->
             </div>
-            <div v-if="!active">
+            <div v-if="active=='bd'">
+                <!-- 区块链游戏 -->
+                <div v-for="(v,index) in bd" :key="index">
+                    <img width="100%" :src="v.Img" @click="Gambling(v.code,index)">
+                </div>
+            </div>
+            <div v-if="active=='lsc'">
+                <!-- 区块链游戏 -->
+                <div v-for="(v,index) in bd" :key="index">
+                    <img width="100%" :src="v.Img" @click="Gambling(v.code,index)">
+                </div>
+            </div>
+            <div v-if="active=='relax'">
                 <!-- 休闲游戏 -->
                 <v-grid v-for="(v,index) in dataList" :key="index" class="mr20">
                     <div class="pd-lb20" @click="go(v.Url)">
@@ -108,7 +107,7 @@
 	export default {
 		data() {
 			return {
-                active      :   true,                               // 头部切换索引
+                active      :   'gambling',                               // 头部切换索引
                 dataList	:	[],
                 modal       :   false,                              // 弹出框
                 GameName    :   '',                                 // 弹出框游戏名字
@@ -121,13 +120,6 @@
                 upstatus    :   false,                              // 点击状态
                 PName       :   '',                                 // 游戏平台 PT AG BD IBC
                 gambling    :   [
-                    {
-                        'Name'  :   'BD棋牌',
-                        'code'  :   'BD',
-                        'Img'   :   './static/images/bd.png',
-                        'Icon'  :   './static/images/icon_BD.jpg',
-                        'Url'   :   true
-                    },
                     {
                         'Name'  :   '真人娱乐',
                         'code'  :   'AG',
@@ -149,7 +141,16 @@
                         'Icon'  :   './static/images/icon_SB.jpg',
                         'Url'   :   true
                     },
-                ]
+                ],
+                bd       :   [
+                    {
+                        'Name'  :   'BD棋牌',
+                        'code'  :   'BD',
+                        'Img'   :   './static/images/bd.png',
+                        'Icon'  :   './static/images/icon_BD.jpg',
+                        'Url'   :   true
+                    },
+                ],
 			}
 		},
 		methods: {
@@ -167,9 +168,9 @@
                     });
                 }
             },
-            change(){
+            change(ele){
                 // 切换游戏类型
-                this.active = !this.active;
+                this.active = ele;
             },
             GetGameList(){
                 // 获取休闲游戏列表
@@ -213,7 +214,7 @@
                         if(navigator.userAgent.match(/(iPod|iPhone|iPad)/)){  
                             //苹果设备 
                             api.openApp({
-                                iosUrl: data.Result, //打开微信的，其中weixin为微信的URL Scheme
+                                iosUrl: data.Result, // 打开微信的，其中weixin为微信的URL Scheme
                             });
                         }else{
                             //安卓设备
