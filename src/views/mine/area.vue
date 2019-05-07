@@ -35,9 +35,17 @@
                     </div>
                 </flexbox-item>
             </flexbox>
-            <div class="mr20">
-                <Input search @on-search="query(keyword)" v-model="keyword" enter-button :placeholder="$t('mine.area.enter')" />
-            </div>
+            <flexbox class="mr20">
+                <flexbox-item>
+                    <Input search @on-search="query(keyword)" v-model="keyword" enter-button :placeholder="$t('mine.area.enter')" />
+                </flexbox-item>
+                <flexbox-item>
+                    <flexbox>
+                        <flexbox-item><button @click="query('',1)" class="btn btn-query btn-round">查看所有</button></flexbox-item>
+                        <flexbox-item><button @click="query('',0)" class="btn btn-query btn-round">我的直推</button></flexbox-item>
+                    </flexbox>
+                </flexbox-item>
+            </flexbox>
             <div class="mr20">
                 <flexbox class="time">
                     <flexbox-item>
@@ -111,7 +119,7 @@
 			}
 		},
 		methods: {
-            query(Info){
+            query(Info,type=0){
                 this.$server.post(
                 'GetMyGroup',
                 {
@@ -119,7 +127,7 @@
                     accountInfo   :  (Info)?Info:'',
                     dtStart       :  this.stardate,
                     dtEnd         :  this.enddate,
-                    type          :  0,                            //(类型：直推0，全部1)
+                    type          :  type,                            //(类型：直推0，全部1)
                 }).then(data => {
                     if(data){
                         this.tGame      =       data.tGame
