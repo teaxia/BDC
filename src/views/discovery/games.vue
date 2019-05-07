@@ -13,7 +13,7 @@
                     <span :class="{'select-act':active=='relax'}">{{$t('discovery.games.relax')}}</span>
                 </div>
                 <div @click="change('lsc')" :class="{'select-title':true}">
-                    <span :class="{'select-act':active=='lsc'}">{{$t('discovery.games.pool')}}</span>
+                    <span :class="{'select-act':active=='lsc'}">{{$t('discovery.games.Pool')}}</span>
                 </div>
             </div>
             <div v-if="active=='gambling'" class="mr20">
@@ -29,10 +29,17 @@
                 </div>
             </div>
             <div v-if="active=='lsc'">
-                <!-- 区块链游戏 -->
-                <div v-for="(v,index) in bd" :key="index">
-                    <img width="100%" :src="v.Img" @click="Gambling(v.code,index)">
-                </div>
+                <!-- 流水池-->
+                <center>
+                    <i-circle class="circle" stroke-color="#43a3fb" :stroke-width="5" :trail-width="4" :percent="100" v-for="(v,index) in pool" :key="index">
+                        <div class="Circle-custom">
+                            <h1>{{v.Total}}</h1>
+                            <span>
+                                {{v.TypeName}}
+                            </span>
+                        </div>
+                    </i-circle>
+                </center>
             </div>
             <div v-if="active=='relax'">
                 <!-- 休闲游戏 -->
@@ -119,6 +126,7 @@
                 bdcNum      :   '',                                 // 转入BDC数量
                 upstatus    :   false,                              // 点击状态
                 PName       :   '',                                 // 游戏平台 PT AG BD IBC
+                pool        :   [],                                 // 流水池数据
                 gambling    :   [
                     {
                         'Name'  :   '真人娱乐',
@@ -152,7 +160,14 @@
                     },
                 ],
 			}
-		},
+        },
+        watch:{
+            active(){
+                if(this.active=='lsc'){
+                    this.getpool();
+                }
+            },
+        },
 		methods: {
 			go(link){
                 // 调用第三方浏览器打开网页
@@ -184,6 +199,16 @@
                     }else{
                         this.GetGameList()
                     }
+                })
+            },
+            getpool(){
+                // 获取流水池数据
+                this.$server.post(
+                'GetMoneyPool',
+                {
+                    guid 	:  this.$storage.get('guid'),
+                }).then(data => {
+                    this.pool = data
                 })
             },
             GetAccount(){

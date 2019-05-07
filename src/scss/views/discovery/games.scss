@@ -30,6 +30,38 @@
         border-bottom:0.01rem solid $font-base;
     }
 }
+.circle{
+    margin-top:60px;
+    width: 400px !important;
+    height: 400px !important;
+    .Circle-custom{
+        h1{
+            color: #3f414d;
+            font-size: 32px;
+            font-weight: normal;
+        }
+        span{
+            display: block;
+            padding-top: 15px;
+            color: #657180;
+            font-size: 28px;
+            &:before{
+                content: '';
+                display: block;
+                width: 250px;
+                height: 0.02rem;
+                margin: 0 auto;
+                background: #e0e3e6;
+                position: relative;
+                top: -13px;
+            };
+        }
+        span i{
+            font-style: normal;
+            color: #3f414d;
+        }
+    }
+}
 .model{
     .gameimg{
         height: auto;
