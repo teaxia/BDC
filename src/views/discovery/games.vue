@@ -7,13 +7,13 @@
                     <span :class="{'select-act':active=='gambling'}">{{$t('discovery.games.gambling')}}</span>
                 </div>
                 <div @click="change('bd')" :class="{'select-title':true}">
-                    <span :class="{'select-act':active=='bd'}">区块链游戏</span>
+                    <span :class="{'select-act':active=='bd'}">{{$t('discovery.games.Blockchain')}}</span>
                 </div>
                 <div @click="change('relax')" :class="{'select-title':true}">
                     <span :class="{'select-act':active=='relax'}">{{$t('discovery.games.relax')}}</span>
                 </div>
                 <div @click="change('lsc')" :class="{'select-title':true}">
-                    <span :class="{'select-act':active=='lsc'}">流水池</span>
+                    <span :class="{'select-act':active=='lsc'}">{{$t('discovery.games.pool')}}</span>
                 </div>
             </div>
             <div v-if="active=='gambling'" class="mr20">

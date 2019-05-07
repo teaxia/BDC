@@ -6,31 +6,31 @@
             <flexbox class="line-b earning">
                 <flexbox-item>
                     <div class="center">
-                        <div>所有会员</div>
+                        <div>{{$t('mine.area.all')}}</div>
                         <div class="myearnings">{{$numberComma(allCount)}}</div>
                     </div>
                 </flexbox-item>
                 <flexbox-item>
                     <div class="center">
-                        <div>直推会员</div>
+                        <div>{{$t('mine.area.mychild')}}</div>
                         <div class="myearnings">{{$numberComma(ztCount)}}</div>
                     </div>
                 </flexbox-item>
                 <flexbox-item>
                     <div class="center">
-                        <div>总固定资产</div>
+                        <div>{{$t('mine.area.tfix')}}</div>
                         <div class="myearnings">{{$numberComma(tfix)}}</div>
                     </div>
                 </flexbox-item>
                 <flexbox-item>
                     <div class="center">
-                        <div>总通证资产</div>
+                        <div>{{$t('mine.area.tAct')}}</div>
                         <div class="myearnings">{{$numberComma(tAct)}}</div>
                     </div>
                 </flexbox-item>
                 <flexbox-item>
                     <div class="center">
-                        <div>总游戏资产</div>
+                        <div>{{$t('mine.area.tGame')}}</div>
                         <div class="myearnings">{{$numberComma(tGame)}}</div>
                     </div>
                 </flexbox-item>
@@ -41,8 +41,8 @@
                 </flexbox-item>
                 <flexbox-item>
                     <flexbox>
-                        <flexbox-item><button @click="query('',1)" class="btn btn-query btn-round">查看所有</button></flexbox-item>
-                        <flexbox-item><button @click="query('',0)" class="btn btn-query btn-round">我的直推</button></flexbox-item>
+                        <flexbox-item><button @click="query('',1)" class="btn btn-query btn-round">{{$t('mine.area.vall')}}</button></flexbox-item>
+                        <flexbox-item><button @click="query('',0)" class="btn btn-query btn-round">{{$t('mine.area.vchild')}}</button></flexbox-item>
                     </flexbox>
                 </flexbox-item>
             </flexbox>
@@ -91,19 +91,19 @@
 		data() {
 			return {
                 th: [{
-                        title: '用户名',
+                        title: this.$t('mine.area.nickname'),
                     },
                     {
-                        title: '固定资产',
+                        title: this.$t('mine.area.fix'),
                     },
                     {
-                        title: '通证资产',
+                        title: this.$t('mine.area.Act'),
                     },
                     {
-                        title: '游戏资产',
+                        title: this.$t('mine.area.Game'),
                     },
                     {
-                        title: '注册时间',
+                        title: this.$t('mine.area.date'),
                     },
                 ],
                 dataList    :   [],
