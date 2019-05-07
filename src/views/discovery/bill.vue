@@ -20,9 +20,9 @@
             <flexbox-item>
                 <div @click="active('6')" class="menu"><span :class="{'active':type==6}">{{$t('discovery.bill.type6')}}</span></div>
             </flexbox-item> -->
-            <flexbox-item>
+            <!-- <flexbox-item>
                 <div @click="active('7')" class="menu"><span :class="{'active':type==7}">{{$t('discovery.bill.type7')}}</span></div>
-            </flexbox-item>
+            </flexbox-item> -->
             <!-- <flexbox-item>
                 <div @click="active('8')" class="menu"><span :class="{'active':type==8}">{{$t('discovery.bill.type8')}}</span></div>
             </flexbox-item> -->
@@ -63,7 +63,7 @@
                         <span class="fr" v-if="v.CreateTime">{{v.CreateTime}}</span>
                     </div>
                 </div><!--收入、支出、POS、消费结束-->
-                <div v-if="type==7">
+                <!-- <div v-if="type==7">
                     <div class="tb">
                         {{v.Area}}
                     </div>
@@ -71,7 +71,7 @@
                         <span class="fl">{{$t('discovery.bill.people')}}：{{$numberComma(v.MemberCount)}}</span>
                         <span class="fr">{{$t('discovery.bill.money')}}：{{$numberComma(v.TotalCurrency)}}</span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>

@@ -16,14 +16,14 @@
 						</div>
 					</flexbox-item>
 					<flexbox-item :span="6">
-						<!-- <div class="mine-grid-content">
-							<div class="earnings earning">{{$t('mine.menus.withdrawal')}}：{{$numberComma(MyEarnings)}}（USDT）</div>
+						<div class="mine-grid-content">
+							<div class="earnings earning">{{$t('mine.menus.withdrawal')}}：{{$numberComma(MyEarnings)}}（BDC）</div>
 							<div class="withdrawal earning">
 								<router-link to="/discovery/withdrawal">
-									<button class="btn btn-xs btn-round">{{$t('mine.menus.cash')}}</button>
+									<button class="btn btn-xs btn-round">{{$t('mine.menus.withdrawal')}}</button>
 								</router-link>
 							</div>
-						</div> -->
+						</div>
 					</flexbox-item>
 				</flexbox>
 				

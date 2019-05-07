@@ -32,7 +32,7 @@
                     </div>
                 </flexbox-item>
             </flexbox>
-            <div class="mr20 line-b">
+            <!-- <div class="mr20 line-b">
                 <group>
                     <x-input class="test" :title="$t('discovery.extract.address')" :show-clear='false' :placeholder="$t('discovery.extract.addresstip')" v-model="addrs">
                         <button slot="right" @click="getCli()" class="btn btn-xs btn-round">{{$t('global.paste')}}</button>
@@ -47,20 +47,20 @@
                     <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
                 </group>
                 <dir>
-                    <!-- <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.min')}}：</span>200</div> -->
+                    <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.min')}}：</span>200</div>
                     <div class="tips"><span class="space">{{$t('discovery.extract.tax')}}：</span>5</div>
                     <div class="tips"><span class="space">{{$t('discovery.withdrawal.tips.reduce')}}：</span>{{$numberComma(amount)}}</div>
                 </dir>
-                <!-- <div class="line-b sbank">
+                <div class="line-b sbank">
                     <div class="bank wd">
                         {{$t('discovery.withdrawal.bank')}}
                     </div>
                     <Select v-model="cardNo"> 
                         <Option v-for="(item,index) in cardList" :value="index" :key="index">{{ item.cardNo }}{{item.bankName}}</Option>
                     </Select>
-                </div> -->
+                </div>
                 <button class="btn btn-block btn-round" @click="confirm()">{{$t('discovery.withdrawal.confirm')}}</button>
-            </div>
+            </div> -->
             <flexbox class="mr20 sreach">
                 <flexbox-item>
                     <DatePicker @on-change="startTime" type="date" v-model="startDate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
@@ -71,8 +71,9 @@
             </flexbox>
             <div class="mr20">
                 <div class="query">
-                    <div class="select" :class="type==1?'act':''" @click="select(1)">{{$t('discovery.withdrawal.querywtih')}}</div>
-                    <div class="select" :class="type==0?'act':''" @click="select(0)">{{$t('discovery.withdrawal.queryProfit')}}</div>
+                    <div class="select" :class="type==1?'act':''" @click="select(1)">返佣明细</div>
+                    <div class="select" :class="type==0?'act':''" @click="select(0)">返水明细</div>
+                    <div class="select" :class="type==2?'act':''" @click="select(2)">会员盈亏</div>
                 </div>
                 <div class="mr20">
                     <div v-if="type==0">{{$t('discovery.withdrawal.datewith')}}：{{$numberComma(totalIn)}}</div>
@@ -118,14 +119,14 @@
 			</div>
 		</Modal> -->
         <!-- 二次确认框 -->
-		<Modal v-model="show" @on-ok="submit" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
+		<!-- <Modal v-model="show" @on-ok="submit" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
 			<div slot="header"></div>
 			<div class="modal-body">
                 <div>{{$t('discovery.withdrawal.tips.thisTime')}}：{{money}}</div>
                 <div>{{$t('discovery.extract.address')}}：{{addrs}}</div>
                 <div>{{$t('discovery.withdrawal.tips.reduce')}}：{{amount}}</div>
             </div>
-		</Modal>
+		</Modal> -->
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -154,13 +155,13 @@
                 listIn              :   '',         // 获取的收益数据
                 listOut             :   '',         // 获取的提现数据
                 // bindcard            :   false,         // 是否跳转到绑定银行卡
-                show        :   false,
+                // show        :   false,
                 // cardNoshow  :   '',                 // 显示的卡号
                 // bankName    :   '',                 // 显示的银行
-                moneyPwd    :   '',                 // 安全密码
-                showtype    :   false,		// 切换密码状态
-                addrs       :  '',              // 提币地址
-                amount      :   0,             // 扣除余额
+                // moneyPwd    :   '',                 // 安全密码
+                // showtype    :   false,		// 切换密码状态
+                // addrs       :  '',              // 提币地址
+                // amount      :   0,             // 扣除余额
 			}
         },
         watch:{
@@ -176,17 +177,17 @@
                     this.dataList = this.listOut
                 }
             },
-            cardNo(){
-                this.cardNoshow = this.cardList[this.cardNo].cardNo         // 卡号
-                this.bankName = this.cardList[this.cardNo].bankName         // 银行名称
-            },
-            money(){
-                if(this.money>5){
-                    this.amount = (this.$math.subtract(this.money,5)).toFixed(8)
-                }else{
-                    this.amount = 0
-                }
-            }
+            // cardNo(){
+            //     this.cardNoshow = this.cardList[this.cardNo].cardNo         // 卡号
+            //     this.bankName = this.cardList[this.cardNo].bankName         // 银行名称
+            // },
+            // money(){
+            //     if(this.money>5){
+            //         this.amount = (this.$math.subtract(this.money,5)).toFixed(8)
+            //     }else{
+            //         this.amount = 0
+            //     }
+            // }
         },
 		methods: {
             startTime(e){
@@ -222,30 +223,30 @@
                 }
                 this.MyEarningsList()
             },
-            GetInfoMyEarnings(){
-                this.$server.post(
-                'GetInfo_MyEarnings',
-                {
-                    guid     :   this.$storage.get('guid'),
-                }).then(data => {
-                    if(data){
-                        // 判断是否绑定银行卡
-                        // if(data.cardList.length>0){
-                        //     this.cardNoshow = data.cardList[0].cardNo         // 卡号
-                        //     this.bankName = data.cardList[0].bankName         // 银行名称
-                        // }else{
-                        //     this.bindcard = true
-                        // }
-                        // this.cardList   =   data.cardList           // 银行卡数据
-                        this.myEarnings             =   data. myEarnings        // 
-                        this.myEarningsByHistory    =   data. myEarningsByHistory      // 历史总收益
-                        this.myEarningsByMonth      =   data. myEarningsByMonth        // 月收益
-                        this.myEarningsByWeek       =   data. myEarningsByWeek         // 周收益
-                    }else{
-                        this.GetInfoMyEarnings()
-                    }
-                })
-            },
+            // GetInfoMyEarnings(){
+            //     this.$server.post(
+            //     'GetInfo_MyEarnings',
+            //     {
+            //         guid     :   this.$storage.get('guid'),
+            //     }).then(data => {
+            //         if(data){
+            //             // 判断是否绑定银行卡
+            //             // if(data.cardList.length>0){
+            //             //     this.cardNoshow = data.cardList[0].cardNo         // 卡号
+            //             //     this.bankName = data.cardList[0].bankName         // 银行名称
+            //             // }else{
+            //             //     this.bindcard = true
+            //             // }
+            //             // this.cardList   =   data.cardList           // 银行卡数据
+            //             this.myEarnings             =   data. myEarnings        // 
+            //             this.myEarningsByHistory    =   data. myEarningsByHistory      // 历史总收益
+            //             this.myEarningsByMonth      =   data. myEarningsByMonth        // 月收益
+            //             this.myEarningsByWeek       =   data. myEarningsByWeek         // 周收益
+            //         }else{
+            //             // this.GetInfoMyEarnings()
+            //         }
+            //     })
+            // },
             confirm(){
                 // 效验操作
                 if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.money)){
@@ -288,29 +289,29 @@
                 }
                 this.show = true
             },
-            submit(){
-                // 提现操作
-                this.$server.post(
-                'Withdraw_MyEarnings',
-                {
-                    guid        :   this.$storage.get('guid'),
-                    //Id        :   this.cardList[this.cardNo].Id,
-                    money       :   this.money,
-                    moneyPwd    :   this.moneyPwd,
-                    RechargeCode:   this.addrs
-                }).then(data => {
-                    if(data){
-                        this.$vux.toast.show({
-							text: this.$t('global.wait'),
-							type: 'success'
-                        })
-                        // 清空输入数据
-                        this.money = ''
-                        this.GetInfoMyEarnings()
-                        this.MyEarningsList()
-                    }
-                })
-            },
+            // submit(){
+            //     // 提现操作
+            //     this.$server.post(
+            //     'Withdraw_MyEarnings',
+            //     {
+            //         guid        :   this.$storage.get('guid'),
+            //         //Id        :   this.cardList[this.cardNo].Id,
+            //         money       :   this.money,
+            //         moneyPwd    :   this.moneyPwd,
+            //         RechargeCode:   this.addrs
+            //     }).then(data => {
+            //         if(data){
+            //             this.$vux.toast.show({
+			// 				text: this.$t('global.wait'),
+			// 				type: 'success'
+            //             })
+            //             // 清空输入数据
+            //             this.money = ''
+            //             this.GetInfoMyEarnings()
+            //             this.MyEarningsList()
+            //         }
+            //     })
+            // },
             MyEarningsList(){
                 // 查询收益账目信息
                 this.$server.post(
@@ -381,7 +382,7 @@
 		mounted() {
             // 初始化数据
             this.type = 1;
-            this.GetInfoMyEarnings()
+            // this.GetInfoMyEarnings()
             this.getToday()
 		}
 	}
