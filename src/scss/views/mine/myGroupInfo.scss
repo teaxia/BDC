@@ -1,0 +1,43 @@
+@charset "utf-8";
+@import "../../base/var";
+.tj{
+    font-size:32px;
+}
+.card{
+    border:0.02rem solid $border-line;
+    padding: 10px;
+    border-radius: 15px;
+    &-head,&-footer{
+        height: 80px;
+        line-height: 80px;
+        font-size:28px;
+    }
+    &-flex {
+        display: flex;
+    }
+    &-content {
+        padding: 30px 0;
+        border-bottom: 0.01rem solid $border-line;
+        border-top: 0.01rem solid $border-line;
+    }
+    &-padding {
+        padding: 15px;
+    }
+    &-flex > div {
+        flex: 1;
+        text-align: center;
+        font-size: 18px;
+    }
+    &-flex span {
+        color: #f74c31;
+    }
+    &-border{
+        border-right:0.01rem solid $border-line;
+    }
+    .border-none{
+        border-bottom:none;
+    }
+    .font i{
+        font-size:60px;
+    }
+}

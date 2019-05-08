@@ -255,7 +255,7 @@ export const zh = {
             num             :   '请输入正整数'
         },
         withdrawal:{
-            title           :   '收益提现',
+            title           :   '我的收益',
             week            :   '本周收益',
             month           :   '本月收益',
             total           :   '总计收益',

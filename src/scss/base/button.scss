@@ -57,6 +57,10 @@ button[disabled]
         //margin:20px  auto;
         display: block;
     }
+    // 居中显示
+    &-center{
+        margin:0 auto;
+    }
     // 默认按钮样式
     &-default
     {

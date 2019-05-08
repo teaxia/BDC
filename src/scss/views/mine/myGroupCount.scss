@@ -1,0 +1,41 @@
+@charset "utf-8";
+@import "../../base/var";
+.query{
+    height: 60px;
+    .btn{
+        height: 60px;
+        line-height: 60px;
+        font-size:32px;
+        padding: 0 64px;
+    }
+}
+.table{
+    width: 100%;
+    border-collapse:collapse;
+    border: 0.01rem solid $border-line;
+    th{
+        border:$border-line 0.01rem solid;
+        background:$bg-border;
+    }
+    td{
+        border-bottom: 0.01rem solid $border-line;
+        padding:15px 0;
+        text-align: center;
+    }
+    .w-0{
+
+    }
+    .w-1{
+        
+    }
+    .w-2{
+        width: 150px;
+    }
+    .w-3{
+        width: 240px;
+    }
+    .edit{
+        display: flex;
+        justify-content: space-between;
+    }
+}

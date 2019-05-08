@@ -60,26 +60,29 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th v-for="(v,index) in th" :key="index">{{v.title}}</th>
+                            <th v-for="(v,index) in th" :key="index" :class="`w-`+index">{{v.title}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(v,index) in dataList" :key="index">
-                            <td>{{v.Name}}</td>
-                            <td>{{v.FixedAssets}}</td>
-                            <td>{{v.ActAssets}}</td>
-                            <td>{{v.GameAssets}}</td>
-                            <td>{{v.CreateTime}}</td>
+                            <td class="w-0">{{v.Name}}</td>
+                            <td class="w-1">{{v.InviteName}}</td>
+                            <td class="w-2">{{v.CreateTime}}</td>
+                            <td class="edit w-3">
+                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,2)">详细</button>
+                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,0)">流水</button>
+                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,1)">盈亏</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <!-- 三个按钮 -->
-            <div class="foot-botton mr10">
-                <!-- <router-link :to="{ path: '/discovery/bill', query: { type: '7' }}"><button class="btn  btn-block btn-round">{{$t("mine.area.achievement")}}</button></router-link> -->
-                <router-link to="/discovery/withdrawal"><button class="btn  btn-block btn-round">{{$t("mine.menus.withdrawal")}}</button></router-link>
+            <!-- <div class="foot-botton mr10">
+                <router-link :to="{ path: '/discovery/bill', query: { type: '7' }}"><button class="btn  btn-block btn-round">{{$t("mine.area.achievement")}}</button></router-link> -->
+                <!-- <router-link to="/discovery/withdrawal"><button class="btn  btn-block btn-round">{{$t("mine.menus.withdrawal")}}</button></router-link> -->
                 <!-- <div><button @click="GetMyChildList" class="btn  btn-block btn-round">{{$t("mine.area.mychild")}}</button></div> -->
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 </template>
@@ -94,16 +97,13 @@
                         title: this.$t('mine.area.nickname'),
                     },
                     {
-                        title: this.$t('mine.area.fix'),
-                    },
-                    {
-                        title: this.$t('mine.area.Act'),
-                    },
-                    {
-                        title: this.$t('mine.area.Game'),
+                        title: '推荐人',
                     },
                     {
                         title: this.$t('mine.area.date'),
+                    },
+                    {
+                        title: '操作',
                     },
                 ],
                 dataList    :   [],
@@ -119,7 +119,7 @@
 			}
 		},
 		methods: {
-            query(Info,type=0){
+            query(Info,type=1){
                 this.$server.post(
                 'GetMyGroup',
                 {
@@ -153,6 +153,26 @@
                 this.enddate = e;
                 this.query();
             },
+            GetMyGroup_MX(accountId,type){
+                // 跳转到明细页面 /mine/area/group
+                // type 2 详细 0明细 1盈亏
+                if(type==2){
+                    this.$router.push({
+                        path:"/mine/area/group",
+                        query:{
+                            aid      :   accountId,
+                        }
+                    });
+                }else{
+                    this.$router.push({
+                        path:"/mine/area/GroupCount",
+                        query:{
+                            aid      :   accountId,
+                            type     :   type
+                        }
+                    });
+                }
+            }
 		},
 		mounted() {
             // 获取今天日期

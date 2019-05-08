@@ -52,7 +52,9 @@ import myhome from './views/mine'
     import mine from './views/mine/mine.vue'
     import center from './views/mine/center.vue'
     import extension from './views/mine/extension.vue'
-    import area from './views/mine/area.vue'                            // 矿区成员
+    import area from './views/mine/area.vue'                            // 我的团队
+        import myGroupInfo from './views/mine/myGroupInfo.vue'                            // 团队明细
+        import myGroupCount from './views/mine/myGroupCount.vue'                          // 流水盈亏
     import question from './views/mine/question.vue'                    // 常见问题
     import security from './views/mine/security.vue'                      // 安全中心
         import editpsw from './views/mine/editpsw.vue'                  // 密码
@@ -183,6 +185,8 @@ let routes = [
             { path: '/mine/myhome', component: mine, name: 'mineindex',meta:{isIndex: 3}},
             { path: '/mine/center', component: center, name: 'center',meta:{isIndex: 3}},
             { path: '/mine/area', component: area, name: 'area',meta:{isIndex: 3}},
+                { path: '/mine/area/group', component: myGroupInfo, name: 'myGroupInfo',meta:{isIndex: 3}},
+                { path: '/mine/area/GroupCount', component: myGroupCount, name: 'myGroupCount',meta:{isIndex: 3}},
             { path: '/mine/extension', component: extension, name: 'extension',meta:{isIndex: 3}},
             { path: '/mine/question', component: question, name: 'question',meta:{isIndex: 3}},
             { path: '/mine/feedback', component: feedback, name: 'feedback',meta:{isIndex: 3}},

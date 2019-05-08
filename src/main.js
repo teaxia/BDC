@@ -24,7 +24,7 @@ import vfpopup from './components/vfpopup.vue'                  // 全屏弹出�
 import vgrid from './components/vgrid.vue'
 import strcut from './common/utils/strcut'                    // 截取字符串首字母，中英文适用
 import VueTouch from 'vue-touch'                                // 左右滑动手势
-import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma,Search,Tab, TabItem} from 'vux'
+import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma,Search,Tab, TabItem,Divider} from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
 import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Avatar,Slider,Switch,Circle,Affix} from 'iview';
@@ -76,7 +76,7 @@ Vue.component('search', Search)
 Vue.component('tab', Tab)
 Vue.component('tab-item', TabItem)
 Vue.component('Affix', Affix)
-
+Vue.component('divider', Divider)
 Vue.prototype.$server       =   server;                         // ajax组件
 Vue.prototype.$storage      =   storage;                        // 本地数据读取
 Vue.prototype.$md5          =   md5;                            // md5加密
