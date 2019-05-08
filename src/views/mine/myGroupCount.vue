@@ -10,8 +10,10 @@
                     <flexbox-item>
                         <DatePicker type="date" v-model="dtEnd" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
                     </flexbox-item>
+                    <flexbox-item :span="1">
+                        <div class="search" @click="GetMyGroupLSYK()"><i class="ivu-icon ivu-icon-ios-search"></i></div>
+                    </flexbox-item>
                 </flexbox>
-                <div class="mr20 query"><button @click="GetMyGroupLSYK()" class="btn btn-auto btn-round btn-center ">查询</button></div>
             </div>
             <div class="mr30">
                 <divider class="tj">个人流水统计：{{self}}</divider>

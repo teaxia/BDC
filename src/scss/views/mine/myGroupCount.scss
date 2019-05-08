@@ -1,13 +1,15 @@
 @charset "utf-8";
 @import "../../base/var";
-.query{
-    height: 60px;
-    .btn{
-        height: 60px;
-        line-height: 60px;
-        font-size:32px;
-        padding: 0 64px;
-    }
+.search{
+    height: 70px;
+    line-height: 70px;
+    font-size: 35px;
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+    background-color: #515a6e;
+    border: 1px solid #515a6e;
+    border-radius: 10px;
 }
 .table{
     width: 100%;
