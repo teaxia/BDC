@@ -283,6 +283,7 @@ export const zh = {
         },
         OTC:{
             Selltitle       :   '发布',
+            ranking         :   '排行榜',
             sell:{
                 reference       :   '参考单价',
                 selectCurreny   :   '选择币种',
@@ -326,8 +327,8 @@ export const zh = {
             },
             index:{
                 record      :   '记录',
-                buy         :   '售币',
-                bybuy       :   '求购',
+                buy         :   '我要买',
+                bybuy       :   '我要卖',
                 curreny     :   '币种',
                 time        :   '时间',
                 price       :   '价格',

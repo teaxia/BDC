@@ -1,14 +1,12 @@
 <template>
 	<div class="otc margin-header" v-cloak>
-        <x-header :left-options="{backText:'',preventGoBack:true}">
-            <div slot="overwrite-left">
-                <router-link to="/discovery/OTC/OTCRank">
-                    <span class="right">排行榜</span>
-                </router-link>
-            </div>
+        <x-header :left-options="{backText:this.$t('global.back'),preventGoBack:false}">
             <div slot="right">
                 <router-link to="/discovery/OTC/list">
                     <span class="right">{{$t('discovery.OTC.index.record')}}</span>
+                </router-link>
+                <router-link to="/discovery/OTC/OTCRank">
+                    <span class="right">{{$t('discovery.OTC.ranking')}}</span>
                 </router-link>
             </div>
             <div slot="default" class="title">
