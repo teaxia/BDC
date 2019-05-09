@@ -1,6 +1,6 @@
 <template>
 	<div class="withdrawal padding-footer margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="明细"></x-header>
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="back()" title="明细"></x-header>
         <div class="main-container">
             <div>
                 <divider class="tj">推荐人：{{InviteName}}</divider>
@@ -70,6 +70,10 @@
 		data() {
 			return {
                 aid         :   '',                 // 传值过来的用户ID
+                dtStart     :   '',                 // 传过来的开始时间
+                dtEnd       :   '',                 // 传过来的结束时间
+                accountInfo :   '',                 // 传过来的用户名
+                atype       :   '',                 // 传过来的(类型：直推0，全部1)
                 // 团队数据
                 allCount    :   '',                 // 团队人数
                 ztCount     :   '',                 // 直推人数
@@ -111,12 +115,27 @@
                     }
                 })
             },
-           
+            back(){
+                this.$router.push({
+                    path:"/mine/area",
+                    query:{
+                        aid           :   this.aid,
+                        accountInfo   :   this.accountInfo,            // 用户名
+                        dtStart       :   this.dtStart,                // 开始时间
+                        dtEnd         :   this.dtEnd,                  // 结束时间
+                        atype         :   this.atype
+                    }
+                });
+            }
             
 		},
 		mounted() {
             // 初始化数据
-            this.aid    =   this.$route.query.aid
+            this.aid            =   this.$route.query.aid
+            this.atype          =   this.$route.query.atype           // (类型：直推0，全部1)
+            this.accountInfo    =   this.$route.query.keyword         // 用户名
+            this.dtStart        =   this.$route.query.dtStart         // 开始时间
+            this.dtEnd          =   this.$route.query.dtEnd           // 结束时间
             this.GetMyGroupMX()
 		}
 	}

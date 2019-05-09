@@ -1,6 +1,6 @@
 <template>
 	<div class="area margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.area.title')">
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="back()" :title="$t('mine.area.title')">
         </x-header>
         <div class="main-container">
             <flexbox class="line-b earning">
@@ -49,10 +49,10 @@
             <div class="mr20">
                 <flexbox class="time">
                     <flexbox-item>
-                        <DatePicker @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
+                        <DatePicker type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
                     </flexbox-item>
                     <flexbox-item>
-                        <DatePicker @on-change="endtime" type="date"  v-model="enddate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
+                        <DatePicker v-model="enddate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
                     </flexbox-item>
                 </flexbox>
             </div>
@@ -116,18 +116,20 @@
                 allCount    :   '',         // 团队人数
                 stardate    :   '',         // 开始时间
                 enddate     :   '',         // 结束时间
+                type        :   1,
 			}
 		},
 		methods: {
             query(Info,type=1){
+                this.type = type
                 this.$server.post(
                 'GetMyGroup',
                 {
                     guid 	      :  this.$storage.get('guid'),
-                    accountInfo   :  (Info)?Info:'',
+                    accountInfo   :  this.keyword,
                     dtStart       :  this.stardate,
                     dtEnd         :  this.enddate,
-                    type          :  type,                            //(类型：直推0，全部1)
+                    type          :  this.type,                            //(类型：直推0，全部1)
                 }).then(data => {
                     if(data){
                         this.tGame      =       data.tGame
@@ -139,39 +141,51 @@
                     }
                 })
             },
-            startime(e){
-                if(this.stardate==''||this.enddate==''){
-                    return;
-                }
-                this.stardate = e;
-                this.query();
-            },
-            endtime(e){
-                if(this.stardate==''||this.enddate==''){
-                    return;
-                }
-                this.enddate = e;
-                this.query();
-            },
             GetMyGroup_MX(accountId,type){
                 // 跳转到明细页面 /mine/area/group
                 // type 2 详细 0明细 1盈亏
+                // 格式化开始时间
+                let startdate = this.stardate
+                let startyear = startdate.getFullYear();
+                let startmonth = startdate.getMonth() + 1;
+                let startday = startdate.getDate();
+                let start = (startyear+'/'+startmonth+'/'+startday);
+                // 格式化结束时间
+                let endtdate = this.enddate
+                let endyear = endtdate.getFullYear();
+                let endmonth = endtdate.getMonth() + 1;
+                let endday = endtdate.getDate();
+                let end = (endyear+'/'+endmonth+'/'+endday);
                 if(type==2){
                     this.$router.push({
                         path:"/mine/area/group",
                         query:{
-                            aid      :   accountId,
+                            aid           :   accountId,
+                            type          :   this.type,
+                            accountInfo   :   this.keyword,         // 用户名
+                            dtStart       :   start,                // 开始时间
+                            dtEnd         :   end,                  // 结束时间
                         }
                     });
                 }else{
                     this.$router.push({
                         path:"/mine/area/GroupCount",
                         query:{
-                            aid      :   accountId,
-                            type     :   type
+                            aid           :   accountId,
+                            type          :   type,
+                            atype         :   this.type,            // (类型：直推0，全部1)
+                            accountInfo   :   this.keyword,         // 用户名
+                            dtStart       :   start,                // 开始时间
+                            dtEnd         :   end,                  // 结束时间
                         }
                     });
                 }
+            },
+            back(){
+                // 返回至个人中心
+                this.$router.push({
+                    path:"/mine/myhome",
+                });
             }
 		},
 		mounted() {
@@ -180,9 +194,11 @@
             let year = date.getFullYear();
             let month = date.getMonth() + 1;
             let day = date.getDate();
-            this.stardate = (year+'/'+month+'/'+day);
-            this.enddate = (year+'/'+month+'/'+day);
             // 获取数据
+            this.stardate   =   (this.$route.query.dtStart)?this.$route.query.dtStart:year+'/'+month+'/'+day;
+            this.enddate    =   (this.$route.query.dtEnd)?this.$route.query.dtEnd:year+'/'+month+'/'+day;
+            this.keyword    =   (this.$route.query.keyword)?this.$route.query.keyword:'';
+            this.type       =   (this.$route.query.atype)?this.$route.query.atype:1;
             this.query();
         }
 	}

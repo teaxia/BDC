@@ -24,6 +24,7 @@
 						<div class="total">{{$t('discovery.OTC.rank.lossnum')}}</div>
 					</div>
 					<div class="rank" v-for="(v,index) in rankList" :key="index">
+						<div class="ranking"></div>
 						<div :class="{nickname:true,'lv-1':index<=2}">
 							<span class="rank-nickname">{{v.NickName}}</span>
 							<span class="lv">{{v.Lv}}</span>

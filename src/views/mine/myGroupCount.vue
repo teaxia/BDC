@@ -1,6 +1,6 @@
 <template>
 	<div class="withdrawal padding-footer margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back')}" title="流水盈亏"></x-header>
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="back()" title="流水盈亏"></x-header>
         <div class="main-container">
             <div class="mr20">
                 <flexbox class="time">
@@ -67,6 +67,10 @@
 		data() {
 			return {
                 aid         :   '',                 // 传值过来的用户ID
+                adtStart    :   '',                 // 传过来的开始时间
+                adtEnd      :   '',                 // 传过来的结束时间
+                accountInfo :   '',                 // 传过来的用户名
+                atype       :   '',                 // 传过来的(类型：直推0，全部1)
                 type        :   '',                 // 1流水 2盈亏
                 dtStart     :   '',                 // 开始时间
                 dtEnd       :   '',                 // 结束时间
@@ -99,11 +103,27 @@
                     }
                 })
             },
+            back(){
+                this.$router.push({
+                    path:"/mine/area",
+                    query:{
+                        aid           :   this.aid,
+                        accountInfo   :   this.accountInfo,            // 用户名
+                        dtStart       :   this.adtStart,                // 开始时间
+                        dtEnd         :   this.adtEnd,                  // 结束时间
+                        atype         :   this.atype
+                    }
+                });
+            }
 		},
 		mounted() {
             // 初始化数据
-            this.aid    =   this.$route.query.aid
-            this.type   =   this.$route.query.type
+            this.aid            =   this.$route.query.aid
+            this.type           =   this.$route.query.type
+            this.atype          =   this.$route.query.atype           // (类型：直推0，全部1)
+            this.accountInfo    =   this.$route.query.keyword         // 用户名
+            this.adtStart       =   this.$route.query.dtStart         // 开始时间
+            this.adtEnd         =   this.$route.query.dtEnd           // 结束时间
             // 获取今天日期
             let date = new Date();
             this.dtEnd  =   date                    // 今天默认日期
