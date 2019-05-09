@@ -398,7 +398,7 @@ export const zh = {
                 minutes     :   '请于支付30分钟后再提交申诉',
             },
             demand:{
-                title       :   '发布求购',
+                title       :   '我要买',
                 num         :   '货币数量',
                 price       :   '求购单价',
             },

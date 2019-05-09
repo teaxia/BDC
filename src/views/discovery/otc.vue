@@ -1,6 +1,6 @@
 <template>
 	<div class="otc margin-header" v-cloak>
-        <x-header :left-options="{backText:this.$t('global.back'),preventGoBack:false}">
+        <x-header :left-options="{backText:this.$t('global.back'),preventGoBack:true}" @on-click-back="Goback()">
             <div slot="right">
                 <router-link to="/discovery/OTC/list">
                     <span class="right">{{$t('discovery.OTC.index.record')}}</span>
@@ -88,7 +88,7 @@
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
                 <span>
-                    {{$t('discovery.OTC.index.add')}}
+                    {{$t('discovery.OTC.index.bybuy')}}
                 </span>
             </router-link>
             <router-link to="/discovery/OTC/demand" v-if="!active">
@@ -96,7 +96,7 @@
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
                 <span>
-                    {{$t('discovery.OTC.index.bybuy')}}
+                    {{$t('discovery.OTC.index.buy')}}
                 </span>
             </router-link>
         </div>
