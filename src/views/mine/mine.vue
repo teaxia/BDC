@@ -56,7 +56,7 @@
 			</v-grid>
 			<v-grid class="mr40">
 				<group>
-					<div @click="OnToiframe('https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=1135557&configID=83914&jid=4297503665&s=1')" class="line-b">
+					<div @click="OnToiframe()" class="line-b">
 						<cell is-link class="cell-hei">
 							<span slot="title">
 								<i class="iconfont icon-kefu"></i>
@@ -120,7 +120,8 @@ export default {
 			golink		:	'',
 			version 	:	'2.9.36',				
 			messageNum	:	'',
-			ParentName	:	''
+			ParentName	:	'',
+			kfurl		:	'',
 		}
 		// 版本更新说明 
 		// @版本号 @更新人 @更新时间 @更新内容
@@ -189,9 +190,22 @@ export default {
 			this.$router.push({
 				path:"/iframe",
 				query:{
-					url:url
+					url:this.kfurl
 				}
 			});
+		},
+		GetKFUrl(){
+			// 获取客服链接
+			this.$server.post(
+			'GetKFUrl',
+			{
+				guid    : this.$storage.get('guid'),
+			}).then(data => {
+				if(data){
+					this.kfurl = data.Result.substring(0, data.Result.length - 1);
+					this.kfurl = this.kfurl.substring(1, this.kfurl.length - 1);
+				}
+			})
 		}
 	},
 	mounted() {
@@ -199,6 +213,7 @@ export default {
 		this.islogin();
 		// 更新个人中心资料
 		this.GetAccount();
+		this.GetKFUrl();
 		// 消息行数
 		this.GetLetterMessageCount()
 		this.nickname 	= this.$storage.get('NickName');
