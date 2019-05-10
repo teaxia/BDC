@@ -12,11 +12,11 @@
                     <p>{{InviteCode}}</p>
                 </div>
                 <div class="ercode">
-                    <qriously class="ercode" :value="`http://belden-bdc.net/register/index.html?InviteCode=`+InviteCode" :size="138"/>
+                    <qriously class="ercode" :value="`http://belden-bdc.net/register_3.0/index.html?InviteCode=`+InviteCode" :size="138"/>
                 </div>
                 <div class="InviteCode">
-                    <span v-text="`http://belden-bdc.net/register/index.html?InviteCode=`+InviteCode"></span>
-                    <button type="button" class="btn btn-xs btn-round" @click="CopyClip('http://belden-bdc.net/register/index.html?InviteCode='+InviteCode)">{{$t('wallet.receive.copy')}}</button>
+                    <span v-text="`http://belden-bdc.net/register_3.0/index.html?InviteCode=`+InviteCode"></span>
+                    <button type="button" class="btn btn-xs btn-round" @click="CopyClip('http://belden-bdc.net/register_3.0/index.html?InviteCode='+InviteCode)">{{$t('wallet.receive.copy')}}</button>
                 </div>
             </div>
 			<div class="center mr20">
