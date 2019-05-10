@@ -24,12 +24,10 @@ export default {
           index   : 0
         },
         {
-          value   : this.$t("menu.application"),
-          icon    : 'icon-yingyongxianxing',
-          acicon  : 'icon-yingyongmianxing',
-          //url     : '/app/index',
-          url     : '/discovery/games',
-          //url     : 'false',
+          value   : this.$t("discovery.topmenu.OTC"),
+          icon    : 'icon-otc',                                     // icon-CTC1
+          acicon  : 'icon-otc1',
+          url     : false,
           index : 1
         },
         {
@@ -51,11 +49,11 @@ export default {
   },
   methods:{
     onUrl(url){
-      if(url=='false'){
-				// this.$vux.toast.show({
-				// 	text: this.$t('global.unopened'),
-				// 	type: 'warn'
-				// })
+      if(!url){
+				this.$vux.toast.show({
+					text: this.$t('global.unopened'),
+					type: 'warn'
+				})
         //window.location.href = 'http://bdcmalls.com/';
 			}else{
 				this.$router.push({
