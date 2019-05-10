@@ -329,6 +329,7 @@ export const zh = {
                 record      :   '记录',
                 buy         :   '我要买',
                 bybuy       :   '我要卖',
+                send        :   '发布',
                 curreny     :   '币种',
                 time        :   '时间',
                 price       :   '价格',

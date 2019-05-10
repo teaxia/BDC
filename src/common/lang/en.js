@@ -328,6 +328,7 @@ export const en = {
                 record      :   'Record',
                 buy         :   'Buy',
                 bybuy       :   'By Buy',
+                send        :   'Buy',
                 curreny     :   'Currency',
                 time        :   'Time',
                 price       :   'Price',

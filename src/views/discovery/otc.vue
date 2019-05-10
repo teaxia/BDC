@@ -88,7 +88,7 @@
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
                 <span>
-                    {{$t('discovery.OTC.index.bybuy')}}
+                    {{$t('discovery.OTC.index.send')}}
                 </span>
             </router-link>
             <router-link to="/discovery/OTC/demand" v-if="!active">
@@ -96,7 +96,7 @@
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
                 <span>
-                    {{$t('discovery.OTC.index.buy')}}
+                    {{$t('discovery.OTC.index.send')}}
                 </span>
             </router-link>
         </div>
