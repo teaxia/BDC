@@ -57,7 +57,7 @@
 			</v-grid>
 			<v-grid class="mr40">
 				<group>
-					<div @click="OnToiframe()" class="line-b">
+					<div @click="GetKFUrl()" class="line-b">
 						<cell is-link class="cell-hei">
 							<span slot="title">
 								<i class="iconfont icon-kefu"></i>
@@ -189,14 +189,6 @@ export default {
 				}
 			})
 		},
-		OnToiframe(url){
-			this.$router.push({
-				path:"/iframe",
-				query:{
-					url:this.kfurl
-				}
-			});
-		},
 		GetKFUrl(){
 			// 获取客服链接
 			this.$server.post(
@@ -207,6 +199,12 @@ export default {
 				if(data){
 					this.kfurl = data.Result.substring(0, data.Result.length - 1);
 					this.kfurl = this.kfurl.substring(1, this.kfurl.length - 1);
+					this.$router.push({
+						path:"/iframe",
+						query:{
+							url:this.kfurl
+						}
+					});
 				}
 			})
 		}
@@ -216,7 +214,6 @@ export default {
 		this.islogin();
 		// 更新个人中心资料
 		this.GetAccount();
-		this.GetKFUrl();
 		// 消息行数
 		this.GetLetterMessageCount()
 		this.nickname 	= this.$storage.get('NickName');
