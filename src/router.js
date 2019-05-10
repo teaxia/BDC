@@ -23,14 +23,14 @@ import discovery from './views/discovery.vue'
     import gamesPt from  './views/discovery/gamesPt.vue'                    // PT平台单独页面
     import withdrawal from './views/discovery/withdrawal.vue'               // 收益提现
     import OTC from './views/discovery/OTC.vue'                             // OTC首页
-        import OTCsell from './views/discovery/OTCsell.vue'                 // OTC发布售卖
+        // import OTCsell from './views/discovery/OTCsell.vue'                 // OTC发布售卖
         import OTCbuy from './views/discovery/OTCbuy.vue'                   // 购买OTC
         import OTCorder from './views/discovery/OTCorder.vue'               // 支付订单
         import OTCList from './views/discovery/OTCList.vue'                 // 订单列表
         import OTCmyOrder from './views/discovery/OTCmyOrder.vue'              // 订单详情
         import OTCcomplaiont from './views/discovery/OTCcomplaiont.vue'              // 投诉
         import OTCedit from './views/discovery/OTCedit.vue'                 // 编辑售币
-        import OTCdemand from './views/discovery/OTCdemand.vue'                 // 发布求购
+        // import OTCdemand from './views/discovery/OTCdemand.vue'                 // 发布求购
         import OTCeditDemand from './views/discovery/OTCeditDemand.vue'                 // 编辑求购
         import OTCbuyOrder from './views/discovery/OTCbuyOrder.vue'                 // 供币界面
         import OTCcomplaiontList from './views/discovery/OTCComplaiontList.vue'                 // 投诉界面列表
@@ -127,14 +127,14 @@ let routes = [
             { path: '/discovery/gamespt', component: gamesPt, name: 'gamesPt',meta:{isIndex: 2}},
             { path: '/discovery/withdrawal', component: withdrawal, name: 'withdrawal',meta:{isIndex: 2}},
             { path: '/discovery/OTC', component: OTC, name: 'OTC',meta:{isIndex: 2}},
-                { path: '/discovery/OTC/sell', component: OTCsell, name: 'OTCsell',meta:{isIndex: 2}},
+                // { path: '/discovery/OTC/sell', component: OTCsell, name: 'OTCsell',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/buy', component: OTCbuy, name: 'OTCbuy',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/order', component: OTCorder, name: 'OTCorder',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/list', component: OTCList, name: 'OTCList',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/myOrder', component: OTCmyOrder, name: 'OTCmyOrder',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/complaiont', component: OTCcomplaiont, name: 'OTCcomplaiont',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/edit', component: OTCedit, name: 'OTCedit',meta:{isIndex: 2}},
-                { path: '/discovery/OTC/demand', component: OTCdemand, name: 'OTCdemand',meta:{isIndex: 2}},
+                // { path: '/discovery/OTC/demand', component: OTCdemand, name: 'OTCdemand',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/editDemand', component: OTCeditDemand, name: 'OTCeditDemand',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/buyOrder', component: OTCbuyOrder, name: 'OTCbuyOrder',meta:{isIndex: 2}},
                 { path: '/discovery/OTC/ComplaiontList', component: OTCcomplaiontList, name: 'OTCcomplaiontList',meta:{isIndex: 2}},

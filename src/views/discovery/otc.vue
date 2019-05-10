@@ -82,7 +82,7 @@
                 </div>
             </my-scroll>
         </div>
-        <div class="sell">
+        <!-- <div class="sell">
             <router-link to="/discovery/OTC/sell" v-if="active">
                 <svg class="icon-sell" aria-hidden="true">
                     <use xlink:href="#icon-paimailiang"></use>
@@ -99,7 +99,7 @@
                     {{$t('discovery.OTC.index.buy')}}
                 </span>
             </router-link>
-        </div>
+        </div> -->
         <div>
             <vpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
                 <div slot="list">
