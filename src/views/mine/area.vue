@@ -69,9 +69,9 @@
                             <td class="w-1">{{v.InviteName}}</td>
                             <td class="w-2">{{v.CreateTime}}</td>
                             <td class="edit w-3">
-                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,2)">详细</button>
-                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,0)">流水</button>
-                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,1)">盈亏</button>
+                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,2)">{{$t('mine.area.detailed')}}</button>
+                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,0)">{{$t('mine.area.account')}}</button>
+                                <button class="btn btn-auto btn-round" @click="GetMyGroup_MX(v.Id,1)">{{$t('mine.area.PL')}}</button>
                             </td>
                         </tr>
                     </tbody>
@@ -97,13 +97,13 @@
                         title: this.$t('mine.area.nickname'),
                     },
                     {
-                        title: '推荐人',
+                        title: this.$t('mine.area.recommend'),
                     },
                     {
                         title: this.$t('mine.area.date'),
                     },
                     {
-                        title: '操作',
+                        title: this.$t('mine.area.operation'),
                     },
                 ],
                 dataList    :   [],

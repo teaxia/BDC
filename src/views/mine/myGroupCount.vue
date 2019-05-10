@@ -1,6 +1,6 @@
 <template>
 	<div class="withdrawal padding-footer margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="back()" title="流水盈亏"></x-header>
+        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="back()" :title="$t('mine.area.lsyk')"></x-header>
         <div class="main-container">
             <div class="mr20">
                 <flexbox class="time">
@@ -16,15 +16,15 @@
                 </flexbox>
             </div>
             <div class="mr30">
-                <divider class="tj">个人流水统计：{{self}}</divider>
+                <divider class="tj">{{$t('mine.area.personal')}}：{{self}}</divider>
             </div>
             <div class="mr20">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>日期</th>
-                            <th>区块链游戏</th>
-                            <th>棋牌游戏</th>
+                            <th>{{$t('mine.area.datea')}}</th>
+                            <th>{{$t('mine.area.chain')}}</th>
+                            <th>{{$t('mine.area.game')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,15 +37,15 @@
                 </table>
             </div>
             <div class="mr30">
-                <divider class="tj">团队流水统计：{{group}}</divider>
+                <divider class="tj">{{$t('mine.area.groupcount')}}：{{group}}</divider>
             </div>
             <div class="mr20">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>日期</th>
-                            <th>区块链游戏</th>
-                            <th>棋牌游戏</th>
+                            <th>{{$t('mine.area.datea')}}</th>
+                            <th>{{$t('mine.area.chain')}}</th>
+                            <th>{{$t('mine.area.game')}}</th>
                         </tr>
                     </thead>
                     <tbody>
