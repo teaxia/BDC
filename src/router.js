@@ -20,7 +20,7 @@ import discovery from './views/discovery.vue'
     // import credit from  './views/discovery/credit.vue'                      // 办理信用卡
     import extract from  './views/discovery/extract.vue'                    // 提币
     import games from  './views/discovery/games.vue'                        // 游戏
-    import gamesPt from  './views/discovery/gamesPt.vue'                    // PT平台单独页面
+    // import gamesPt from  './views/discovery/gamesPt.vue'                    // PT平台单独页面
     import withdrawal from './views/discovery/withdrawal.vue'               // 收益提现
     import OTC from './views/discovery/OTC.vue'                             // OTC首页
         // import OTCsell from './views/discovery/OTCsell.vue'                 // OTC发布售卖
@@ -124,7 +124,7 @@ let routes = [
             // { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
             { path: '/discovery/extract', component: extract, name: 'extract',meta:{isIndex: 2}},
             { path: '/discovery/games', component: games, name: 'games',meta:{isIndex: 1}},
-            { path: '/discovery/gamespt', component: gamesPt, name: 'gamesPt',meta:{isIndex: 2}},
+            // { path: '/discovery/gamespt', component: gamesPt, name: 'gamesPt',meta:{isIndex: 2}},
             { path: '/discovery/withdrawal', component: withdrawal, name: 'withdrawal',meta:{isIndex: 2}},
             { path: '/discovery/OTC', component: OTC, name: 'OTC',meta:{isIndex: 2}},
                 // { path: '/discovery/OTC/sell', component: OTCsell, name: 'OTCsell',meta:{isIndex: 2}},

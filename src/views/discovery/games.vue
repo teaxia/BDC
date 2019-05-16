@@ -25,7 +25,8 @@
             <div v-if="active=='bd'">
                 <!-- 区块链游戏 -->
                 <div v-for="(v,index) in bd" :key="index">
-                    <img width="100%" :src="v.Img" @click="Gambling(v.code,index)">
+                    <img width="100%" :src="v.Img" v-if="v.Url" @click="Gambling(v.code,index)">
+                    <div class="wait" v-else>敬请期待</div>
                 </div>
             </div>
             <div v-if="active=='lsc'">
@@ -152,11 +153,11 @@
                 ],
                 bd       :   [
                     {
-                        'Name'  :   'BD棋牌',
+                        'Name'  :   '敬请期待',
                         'code'  :   'BD',
                         'Img'   :   './static/images/bd.png',
                         'Icon'  :   './static/images/icon_BD.jpg',
-                        'Url'   :   true
+                        'Url'   :   false
                     },
                 ],
 			}

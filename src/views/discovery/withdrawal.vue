@@ -41,7 +41,7 @@
             </flexbox>
             <div class="mr20">
                 <div class="query">
-                    <div class="select" :class="type==0?'act':''" @click="select(0)">{{$t('discovery.withdrawal.commission')}}</div>
+                    <!-- <div class="select" :class="type==0?'act':''" @click="select(0)">{{$t('discovery.withdrawal.commission')}}</div> -->
                     <div class="select" :class="type==1?'act':''" @click="select(1)">{{$t('discovery.withdrawal.remuneration')}}</div>
                 </div>
                 <div class="mr20">
@@ -89,7 +89,7 @@
         name:'withdrawal',
 		data() {
 			return {
-                type        :   0,                  // 0为返佣查询 1为反水查询
+                type        :   1,                  // 0为返佣查询 1为反水查询
                 dataList    :   [],                 // 列表数据
                 startDate   :   '',
                 endDate     :   '',
