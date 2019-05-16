@@ -3,10 +3,10 @@
         <x-header :left-options="{backText:this.$t('global.back'),preventGoBack:true}" @on-click-back="Goback()">
             <div slot="right">
                 <router-link to="/discovery/OTC/list">
-                    <span class="right">{{$t('discovery.OTC.index.record')}}</span>
+                    <div class="btn btn-auto btn-success right">{{$t('discovery.OTC.index.record')}}</div>
                 </router-link>
                 <router-link to="/discovery/OTC/OTCRank">
-                    <span class="right">{{$t('discovery.OTC.ranking')}}</span>
+                    <span class="btn btn-auto btn-error right">{{$t('discovery.OTC.ranking')}}</span>
                 </router-link>
             </div>
             <div slot="default" class="title">

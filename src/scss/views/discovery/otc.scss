@@ -32,7 +32,11 @@ $height : 1.5rem;
     }
     .right{
         font-size: 0.4rem;
-        line-height: 1rem;
+        margin-top:15px;
+        &:first-child{
+            margin-right: 10px;
+        }
+        // line-height: 1rem;
     }
     .select{
         text-align: center;
