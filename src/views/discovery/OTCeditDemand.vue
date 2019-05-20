@@ -49,7 +49,8 @@
                     </div>
                 </group>
                 <div class="tips">
-                    <div v-if="islock">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-if="islock||!Block">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-if="Block">{{$t('discovery.OTC.edit.sellout')}}</div>
                     <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
@@ -82,6 +83,7 @@ export default {
             isSellOn    :   true,                     // 是否立即上架
             id          :   '',                       // 订单ID
             islock      :   false,                    // 订单锁定
+            Block       :   false,                    // 订单售罄状态
             m           :   '',
             s           :   '',
             clock       :   '',                       // 锁定
@@ -215,6 +217,9 @@ export default {
                         this.isSellOn   =   false
                     }else if(data.Status==0){
                         this.isSellOn   =   true
+                    }else if(data.Status==-2){
+                        this.islock    =   false
+                        this.Block    =   false
                     }else{
                         this.islock    =   true
                         this.getCountDwn()

@@ -376,7 +376,8 @@ export const en = {
                 copyName    :   'Copy name',
                 thisPay     :   'Current payment',
                 selectpay   :   'Payment in this',
-                LookPay     :   'Please check the mode of payment and choose the mode of payment'
+                LookPay     :   'Please check the mode of payment and choose the mode of payment',
+                ConfirmCancel:  'Do you confirm the cancellation of this order?',
             },
             complaiont:{
                 title       :   'Complaiont',
@@ -406,6 +407,7 @@ export const en = {
                 title       :   'Edit',
                 numed       :   'Sell num',
                 islock      :   'At present, it is locked and cannot be modified. Lock-in countdown',
+                sellout     :   'Current orders are sold out and cannot be edited',
                 downdel     :   'Delete only after removal',
                 edit        :   'Edit',
                 del         :   'Delete',
@@ -450,6 +452,7 @@ export const en = {
                 type01      :   'Offline',
                 type0       :   'Online',
                 type2       :   'locking',
+                type_2      :   'sell out',
                 GoodsType0  :   'Sale',
                 GoodsType1  :   'Buy',
             },

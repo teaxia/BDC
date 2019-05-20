@@ -66,6 +66,9 @@
                                         <div v-if="v.Status==2" class="tag tag-wran">
                                             {{$t('discovery.OTC.type.type2')}}
                                         </div>
+										<div v-if="v.Status==-2" class="tag tag-wran">
+                                            {{$t('discovery.OTC.type.type_2')}}
+                                        </div>
                                     </div>
                                     <div class="otc-grid-right">
                                         <i class="iconfont icon-arrow-right"></i>
@@ -112,6 +115,9 @@
                                         </div>
                                         <div v-if="v.Status==2" class="tag tag-wran">
                                             {{$t('discovery.OTC.type.type2')}}
+                                        </div>
+										<div v-if="v.Status==-2" class="tag tag-wran">
+                                            {{$t('discovery.OTC.type.type_2')}}
                                         </div>
                                     </div>
                                     <div class="otc-grid-right">

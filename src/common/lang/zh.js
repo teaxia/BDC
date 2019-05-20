@@ -282,7 +282,7 @@ export const zh = {
             }
         },
         OTC:{
-            Selltitle       :   '发布',
+            Selltitle       :   '发布售币',
             ranking         :   '排行榜',
             sell:{
                 reference       :   '参考单价',
@@ -377,7 +377,8 @@ export const zh = {
                 copyName    :   '复制姓名',
                 thisPay     :   '当前付款方式',
                 selectpay   :   '以此方式付款',
-                LookPay     :   '请查看付款方式后选择支付方式'
+                LookPay     :   '请查看付款方式后选择支付方式',
+                ConfirmCancel:  '是否确认取消该笔订单？',
             },
             complaiont:{
                 title       :   '申诉',
@@ -399,7 +400,7 @@ export const zh = {
                 minutes     :   '请于支付30分钟后再提交申诉',
             },
             demand:{
-                title       :   '我要买',
+                title       :   '发布求购',
                 num         :   '货币数量',
                 price       :   '求购单价',
             },
@@ -407,6 +408,7 @@ export const zh = {
                 title       :   '编辑',
                 numed       :   '已售数量',
                 islock      :   '目前为锁定状态，不可修改。锁定倒计时',
+                sellout     :   '当前订单已经售罄，不可编辑',
                 downdel     :   '只有下架后才可删除',
                 edit        :   '编辑',
                 del         :   '删除',
@@ -451,6 +453,7 @@ export const zh = {
                 type01      :   '下架',
                 type0       :   '上架',
                 type2       :   '锁定',
+                type_2      :   '售罄',
                 GoodsType0  :   '售币',
                 GoodsType1  :   '求购',
             },

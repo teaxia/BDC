@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<div class="order-btn">
-				<button class="btn btn-round btn-min btn-cancel" @click="CancelOrder()">{{$t('discovery.OTC.order.cancel')}}</button>
+				<button class="btn btn-round btn-min btn-cancel" @click="ConfirmCancelOrder()">{{$t('discovery.OTC.order.cancel')}}</button>
 				<button class="btn btn-round btn-min" @click="orderconfirm()">{{$t('discovery.OTC.order.paymentok')}}</button>
 			</div>
 		</div>
@@ -90,6 +90,13 @@
 				</div>
             </div>
 		</Modal>
+		<Modal v-model="ConfirmCancel" @on-ok="CancelOrder()" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
+			<div class="modal-body">
+                <div>
+					{{$t('discovery.OTC.order.ConfirmCancel')}}
+				</div>
+            </div>
+		</Modal>
     </div>
 </template>
 
@@ -117,7 +124,8 @@
 				card 		:	[],		// 银行卡
 				wechart		:	[],		// 微信
 				type		:	'',		// 支付方式
-				Confirm		:	false
+				Confirm		:	false,
+				ConfirmCancel:	false,	// 确认取消弹框
 			}
         },
 		methods: {
@@ -203,6 +211,10 @@
 						this.getCountDwn()
 					}
 				})
+			},
+			ConfirmCancelOrder(){
+				// 取消订单确认
+				this.ConfirmCancel = true
 			},
 			CancelOrder(){
 				// 取消订单

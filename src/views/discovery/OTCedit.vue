@@ -62,7 +62,8 @@
 					<i @click="pay('wechart')" class="iconfont icon-weixinzhifu wechart" v-if="wechart.length>1"></i>
 				</div>
                 <div class="tips">
-                    <div v-if="islock">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-if="islock&&!Block">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-if="Block">{{$t('discovery.OTC.edit.sellout')}}</div>
                     <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
@@ -146,14 +147,15 @@ export default {
             sellNum     :   '',                       // 已售数量
             SellOrderId :   '',                       // 订单ID
             islock      :   false,                    // 订单锁定
+            Block       :   false,                    // 订单为售罄状态
             m           :   '',
             s           :   '',
             clock       :   '',                       // 锁定
-            alipay		:	[],		                // 支付宝
-            card 		:	[],		                // 银行卡
-            wechart		:	[],		                // 微信
+            alipay		:	[],		                  // 支付宝
+            card 		:	[],		                  // 银行卡
+            wechart		:	[],		                  // 微信
             showFPupop	:	false,
-            PayType		:	'',	    // 0支付宝，1银行卡，2微信
+            PayType		:	'',	                      // 0支付宝，1银行卡，2微信
 		}
 	},
 	methods: {
@@ -179,6 +181,9 @@ export default {
                         this.isSellOn   =   false
                     }else if(data.Status==0){
                         this.isSellOn   =   true
+                    }else if(data.Status==-2){
+                        this.islock    =   true
+                        this.Block     =   true
                     }else{
                         this.islock    =   true
                         this.getCountDwn()
