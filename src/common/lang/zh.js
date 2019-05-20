@@ -345,7 +345,7 @@ export const zh = {
                 close       :   '关闭订单',
                 remark      :   '备注留言',
                 goods:{
-                    bybuy   :   '求购',
+                    bybuy   :   '我要卖',
                     sell    :   '售币',
                     sellBuy :   '售卖',
                     Isell   :   '确定出售',

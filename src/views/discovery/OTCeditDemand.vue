@@ -49,7 +49,7 @@
                     </div>
                 </group>
                 <div class="tips">
-                    <div v-if="islock||!Block">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-if="islock&&!Block">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
                     <div v-if="Block">{{$t('discovery.OTC.edit.sellout')}}</div>
                     <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
@@ -59,8 +59,8 @@
                 <i @click="sbankd(2)" :class="{'iconfont':true,'icon-yinhangqia':true,'cardpay':cardpay}"></i>
                 <i @click="sbankd(0)" :class="{'iconfont':true,'icon-weixinzhifu':true,'wechart':wechart}"></i>
             </div>
-            <button @click="doSubmit()" class="btn btn-block btn-default btn-round">{{$t('discovery.OTC.edit.edit')}}</button>
-            <button @click="DelBuyGoods()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
+            <button v-if="!Block" @click="doSubmit()" :disabled='islock' class="btn btn-block btn-default btn-round">{{$t('discovery.OTC.edit.edit')}}</button>
+            <button v-if="!Block" @click="DelBuyGoods()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
         </div>
     </div>
 </template>
@@ -218,8 +218,8 @@ export default {
                     }else if(data.Status==0){
                         this.isSellOn   =   true
                     }else if(data.Status==-2){
-                        this.islock    =   false
-                        this.Block    =   false
+                        this.islock    =   true
+                        this.Block     =   true
                     }else{
                         this.islock    =   true
                         this.getCountDwn()

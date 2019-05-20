@@ -67,8 +67,8 @@
                     <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
-            <button @click="doSubmit()" :disabled='islock'  class="btn btn-block btn-default btn-round">{{$t('discovery.OTC.edit.edit')}}</button>
-            <button @click="delSellOrder()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
+            <button @click="doSubmit()" v-if="!Block" :disabled='islock'  class="btn btn-block btn-default btn-round">{{$t('discovery.OTC.edit.edit')}}</button>
+            <button @click="delSellOrder()" v-if="!Block" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
         </div>
         <div class="popup">
 			<vfpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showFPupop">
