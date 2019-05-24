@@ -22,11 +22,19 @@
                         <div @click="ShowPSW()">
                             <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
                         </div>
-                        <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                        <!-- <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i> -->
                     </div>
                     <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input> -->
+                </div>
+                <div class="line-b sbank">
+                    <div class="wd" style="width:3rem;font-size:0.45rem">
+                        提币类型
+                    </div>
+                    <Select v-model="curreny">
+                        <Option v-for="(v,index) in BDClist" :value="v" :key="index">{{ v }}</Option>
+                    </Select>
                 </div>
                 <group>
                     <x-input class="test" :title="$t('discovery.extract.bdc')" v-model="bdcnum" required :placeholder="$t('discovery.extract.bdcnum')">
@@ -126,8 +134,10 @@ export default {
             amount      :   '',
             GetDTList   :  [],
             showPSwed   :   false,
+            curreny     :   'BDC',
+            BDClist     :   ['USDT','BDC']
 		}
-	},
+    },
 	methods: {
 		doSubmit(){
 			this.$server.post(
@@ -137,7 +147,7 @@ export default {
                 Money    	    : this.bdcnum,
                 MoneyPwd        : this.safecode,
                 RechargeCode   	: this.addrs,
-                //Poundage        : this.tax
+                currenyName     : this.curreny,
                 key             : this.key
             }).then(data => {
                 if(data){
@@ -188,7 +198,8 @@ export default {
             this.$server.post(
             'GetPoundage_TB',
             {
-                guid 	        : this.$storage.get('guid'),
+                guid 	        :   this.$storage.get('guid'),
+                currenyName     :   this.curreny
             }).then(data => {
                 if(data){
                     this.key        =   data.key            // 加密串
@@ -234,6 +245,9 @@ export default {
             }else{
                 this.amount = 0
             }
+        },
+        curreny(){
+            this.GetPoundage()
         }
     },
 	mounted() {

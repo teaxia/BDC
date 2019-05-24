@@ -2,11 +2,19 @@
 	<div class="btob padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.btob.title')"></x-header>
         <div class="main-container">
-            <div class="title">
-                {{$t('discovery.btob.changtype')}}：
-                <Select v-model="act" class="select">
-                    <Option v-for="(item,index) in blist" :value="index" :key="index">{{ item.Name }}</Option>
-                </Select>
+            <div class="selectad">
+                <div class="title">
+                    <span>{{$t('discovery.btob.changtype')}}：</span>
+                    <Select v-model="act" class="select">
+                        <Option v-for="(item,index) in blist" :value="index" :key="index">{{ item.Name }}</Option>
+                    </Select>
+                </div>
+                <div class="title">
+                    <span>资产类型：</span>
+                    <Select v-model="AssetType" class="select">
+                        <Option v-for="(v,index) in AssetList" :value="index" :key="v.key">{{ v.val }}</Option>
+                    </Select>
+                </div>
             </div>
             <div class="mr50">
                 <v-grid>
@@ -114,6 +122,17 @@
                 LeftMargin  :   55,             // 左侧间距大小
                 LastBot     :   '周',             // 上一次点击的按钮
                 GetDTList   :  [],
+                AssetType   :   0,
+                AssetList   :   [
+                    {
+                        val     :   '固定资产',
+                        key     :   0
+                    },
+                    {
+                        val     :   '通证资产',
+                        key     :   1
+                    }
+                ]
 			}
         },
         watch:{
@@ -154,7 +173,8 @@
                     key             :   this.key,
                     OutCurrencyNum  :   this.num,
                     CurrencyName    :   this.blist[this.act].Name,
-                    RechargeAddress :   this.address
+                    RechargeAddress :   this.address,
+                    AssetType       :   this.AssetType
                 }).then(data => {
                     if(data){
                         this.GetLastDT()
