@@ -45,11 +45,20 @@
                     <x-input class="test" type="text" :title="$t('discovery.OTC.sell.minNum')"  :placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
                     </x-input>
                 </group>
-                <group>
-                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password"  :placeholder="$t('discovery.OTC.sell.security')">
+                <div class="line-b sbank">
+                    <div class="title-psw wd">
+                        {{$t('discovery.OTC.sell.security')}}
+                    </div>
+                    <div class="psw">
+                        <div @click="ShowPSW()">
+                            <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
+                        </div>
+                        <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </div>
+                    <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
-                    </x-input>
-                </group>
+                    </x-input> -->
+                </div>
                 <group>
                     <div class="weui-cells vux-no-group-title">
                         <div class="vux-x-input weui-cell test">
@@ -134,6 +143,18 @@
 				<button class="btn btn-block btn-round" @click="goauth()">{{$t('wallet.send.auth')}}</button>
 			</div>
 		</Modal>
+        <Modal v-model="showPSwed" :mask-closable="false">
+			<div slot="header">
+                请输入安全码
+            </div>
+			<div class="modal-body">
+                <group>
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
+            </div>
+		</Modal>
     </div>
 </template>
 
@@ -170,6 +191,7 @@ export default {
             Poundage    :   '',                       // 手续费
             Key         :   '',
             amount      :   0,                       // 实际到账
+            showPSwed   :   false,                    // 显示安全密码弹窗 
 		}
 	},
 	methods: {
@@ -466,6 +488,9 @@ export default {
                     this.Key        =   data.key
                 }
             })
+        },
+        ShowPSW(){
+            this.showPSwed = true
         }
     },
     watch:{

@@ -481,7 +481,7 @@ export const en = {
     },
     // 钱包
     wallet:{
-        title           :   'BDC wallet',
+        title           :   'BDC Wallet',
         tips:{
             change          :   'Asset conversion',
             count           :   'Asset count',

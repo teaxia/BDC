@@ -71,18 +71,18 @@ export default {
 				// 	status	: true,
 				// },
 				// 2019-02-25 移动至应用界面
-				{
-					value   : this.$t("discovery.topmenu.recharge"),		// 充值
-					icon    : 'icon-chongzhi',
-					url     : '/discovery/recharge',
-					status	: false,
-				},
-				{
-					value   : this.$t("discovery.topmenu.credit"),			// 信用卡
-					icon    : 'icon-banxinyongqia',
-					url     : '/discovery/credit',
-					status	: true,
-				},
+				// {
+				// 	value   : this.$t("discovery.topmenu.recharge"),		// 充值
+				// 	icon    : 'icon-chongzhi',
+				// 	url     : '/discovery/recharge',
+				// 	status	: false,
+				// },
+				// {
+				// 	value   : this.$t("discovery.topmenu.credit"),			// 信用卡
+				// 	icon    : 'icon-banxinyongqia',
+				// 	url     : '/discovery/credit',
+				// 	status	: true,
+				// },
 				{
 					value   : this.$t("discovery.topmenu.extract"),			// 提币
 					icon    : 'icon-Fixedassets',
@@ -135,8 +135,8 @@ export default {
 				guid 	    :   this.$storage.get('guid'),
 			}).then(data => {
 				if(data){
-					this.dataList[2].status = data.isShow_CZ		//	充值
-					this.dataList[4].status = data.isShow_TB		//	充值
+					// this.dataList[2].status = data.isShow_CZ		//	充值
+					this.dataList[2].status = data.isShow_TB		//	提币
 				}
 			})
 		},

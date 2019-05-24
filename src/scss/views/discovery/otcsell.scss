@@ -5,9 +5,22 @@ $height : 1.5rem;
 .sbank{
     padding: 0.133333rem 0.2rem;
     display: flex;
+    position: relative;
     .title{
         width: 3rem;
         font-size:0.45rem;
+    }
+    .title-psw{
+        width: 2.2rem;
+        font-size:0.45rem;
+    }
+    .psw{
+        display: flex;
+        font-size:0.45rem;
+        .iconfont{
+            position: absolute;
+            right:0;
+        }
     }
 }
 .select{

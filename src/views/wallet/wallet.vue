@@ -18,12 +18,12 @@
                             <div class="wallet-band-rmb">
                                 ≈<span>{{cny}}{{CurrencyCode}}</span>
                             </div>
-                            <div class="changeassets">
+                            <!-- <div class="changeassets">
                                 <router-link to="/wallet/changeassets">
                                     <i class="iconfont icon-Conversion"></i>
                                     <span>{{$t("wallet.tips.change")}}</span>
                                 </router-link>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="wallet-band-r fr">
                             <div class="wallet-assets">
@@ -32,12 +32,12 @@
                             <div class="wallet-assets">
                                 <span class="assets-h1">{{$t("wallet.tips.actassets")}}</span><br/><span class="wallet_bdc">{{$numberComma(actAssets)}}</span>（BDC）<br/>{{$numberComma((actAssets/PriceToBDC).toFixed(8))}}（{{CurrencyCode}}）
                             </div>
-                            <div class="wallet-assets game">
-                                <!-- <span class="wallet_bdc">{{(gameAssets*PriceToBDC).toFixed(8)}}</span>（BDC）<br/> -->
+                            <!-- <div class="wallet-assets game">
+                                <span class="wallet_bdc">{{(gameAssets*PriceToBDC).toFixed(8)}}</span>（BDC）<br/>
                                 <router-link to="/discovery/games">
                                     <span class="assets-h1"> {{$t("wallet.tips.gameassets")}}</span><br/>{{$numberComma(gameAssets)}}（CNY）
                                 </router-link>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </v-grid>

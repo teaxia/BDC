@@ -9,11 +9,25 @@
                     </x-input>
                 </group>
                 <div class="tips">{{$t('discovery.extract.tip')}}</div>
-                <group>
+                <!-- <group>
                     <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.extract.safetycode')" v-model="safecode" required :placeholder="$t('discovery.extract.safetycode')">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
-                </group>
+                </group> -->
+                <div class="line-b sbank">
+                    <div class="title-psw wd">
+                        {{$t('discovery.OTC.sell.security')}}
+                    </div>
+                    <div class="psw">
+                        <div @click="ShowPSW()">
+                            <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
+                        </div>
+                        <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </div>
+                    <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input> -->
+                </div>
                 <group>
                     <x-input class="test" :title="$t('discovery.extract.bdc')" v-model="bdcnum" required :placeholder="$t('discovery.extract.bdcnum')">
                     </x-input>
@@ -78,6 +92,18 @@
                 </div>
             </div>
         </Modal>
+        <Modal v-model="showPSwed" :mask-closable="false">
+			<div slot="header">
+                请输入安全码
+            </div>
+			<div class="modal-body">
+                <group>
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="safecode" :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
+            </div>
+		</Modal>
     </div>
 </template>
 
@@ -88,7 +114,7 @@ export default {
 	name: 'extract',
 	data() {
 		return {
-			safecode    :   '',
+			safecode    :   '',         // 安全码
             bdcnum	    :   '',
             addrs       :   '',
             type	    :   false,		// 切换密码状态'
@@ -99,6 +125,7 @@ export default {
             Proportion  :   '',   // USDT:BDC价格兑换比
             amount      :   '',
             GetDTList   :  [],
+            showPSwed   :   false,
 		}
 	},
 	methods: {
@@ -195,6 +222,9 @@ export default {
         },
         path(){
             this.addrs = this.GetDTList.Address
+        },
+        ShowPSW(){
+            this.showPSwed = true
         }
     },
     watch:{

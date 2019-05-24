@@ -482,7 +482,7 @@ export const zh = {
     },
     // 钱包
     wallet:{
-        title           :   'BDC wallet',
+        title           :   'BDC Wallet',
         tips:{
             change          :   '资产转换',
             count           :   '资产总和',
