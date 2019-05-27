@@ -9,11 +9,33 @@
                     </x-input>
                 </group>
                 <div class="tips">{{$t('discovery.extract.tip')}}</div>
-                <group>
+                <!-- <group>
                     <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.extract.safetycode')" v-model="safecode" required :placeholder="$t('discovery.extract.safetycode')">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
-                </group>
+                </group> -->
+                <div class="line-b sbank">
+                    <div class="title-psw wd">
+                        {{$t('discovery.OTC.sell.security')}}
+                    </div>
+                    <div class="psw">
+                        <div @click="ShowPSW()">
+                            <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
+                        </div>
+                        <!-- <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i> -->
+                    </div>
+                    <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input> -->
+                </div>
+                <div class="line-b sbank">
+                    <div class="wd" style="width:3rem;font-size:0.45rem">
+                        提币类型
+                    </div>
+                    <Select v-model="curreny">
+                        <Option v-for="(v,index) in BDClist" :value="v" :key="index">{{ v }}</Option>
+                    </Select>
+                </div>
                 <group>
                     <x-input class="test" :title="$t('discovery.extract.bdc')" v-model="bdcnum" required :placeholder="$t('discovery.extract.bdcnum')">
                     </x-input>
@@ -62,7 +84,7 @@
             <div>
                 <!-- 二次确认 -->
                 <div>
-                    {{$t('discovery.extract.tips.tip')}}
+                    {{$t('discovery.extract.tips.tip')}}<span class="currency">{{curreny}}</span>
                 </div>
                 <div>
                     {{$t('discovery.extract.address')}}：{{addrs}}
@@ -78,6 +100,18 @@
                 </div>
             </div>
         </Modal>
+        <Modal v-model="showPSwed" :mask-closable="false">
+			<div slot="header">
+                请输入安全码
+            </div>
+			<div class="modal-body">
+                <group>
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="safecode" :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
+            </div>
+		</Modal>
     </div>
 </template>
 
@@ -88,7 +122,7 @@ export default {
 	name: 'extract',
 	data() {
 		return {
-			safecode    :   '',
+			safecode    :   '',         // 安全码
             bdcnum	    :   '',
             addrs       :   '',
             type	    :   false,		// 切换密码状态'
@@ -99,8 +133,11 @@ export default {
             Proportion  :   '',   // USDT:BDC价格兑换比
             amount      :   '',
             GetDTList   :  [],
+            showPSwed   :   false,
+            curreny     :   'USDT',
+            BDClist     :   ['USDT','BDC']
 		}
-	},
+    },
 	methods: {
 		doSubmit(){
 			this.$server.post(
@@ -110,11 +147,12 @@ export default {
                 Money    	    : this.bdcnum,
                 MoneyPwd        : this.safecode,
                 RechargeCode   	: this.addrs,
-                //Poundage        : this.tax
+                currenyName     : this.curreny,
                 key             : this.key
             }).then(data => {
                 if(data){
                     this.GetLastDT()
+                    this.GetAccount()
                     this.$vux.toast.show({
                         text: this.$t('global.wait'),
                         type: 'success'
@@ -161,7 +199,8 @@ export default {
             this.$server.post(
             'GetPoundage_TB',
             {
-                guid 	        : this.$storage.get('guid'),
+                guid 	        :   this.$storage.get('guid'),
+                currenyName     :   this.curreny
             }).then(data => {
                 if(data){
                     this.key        =   data.key            // 加密串
@@ -195,6 +234,9 @@ export default {
         },
         path(){
             this.addrs = this.GetDTList.Address
+        },
+        ShowPSW(){
+            this.showPSwed = true
         }
     },
     watch:{
@@ -204,6 +246,9 @@ export default {
             }else{
                 this.amount = 0
             }
+        },
+        curreny(){
+            this.GetPoundage()
         }
     },
 	mounted() {
@@ -223,6 +268,10 @@ export default {
     color:$font-red!important;
     font-size:20px;
     line-height: 40px;
+}
+.currency{
+    color:$font-red;
+    font-weight: bold;
 }
 .get-last-dt{
     margin-top:20px;
