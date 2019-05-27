@@ -60,7 +60,7 @@
                     <flexbox>
                         <flexbox-item :span="11">
                             <ul class="pd-lb20">
-                                <li v-for="(v,index) in news" class="ellipsis1" @click="onTourl('/wallet/notice')" :key="index">
+                                <li v-for="(v,index) in news" v-if="v.Title" class="ellipsis1" @click="onTourl('/wallet/notice')" :key="index">
                                     <span class="ellipsis1 title fl">{{v.Title}}</span>
                                     <span class="ellipsis1 time fr">{{(v.Sendtime).substring(0,10)}}</span>
                                 </li>

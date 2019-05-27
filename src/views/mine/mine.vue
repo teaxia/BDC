@@ -121,7 +121,7 @@ export default {
 			realname    :   '',
 			golink		:	'',
 			// version 	:	'2.9.39',					// 记得把OTC关掉
-			version 	:	'测试版本：2.9.42',					// 测试版本号
+			version 	:	'测试版本：2.9.43',					// 测试版本号
 			messageNum	:	'',
 			ParentName	:	'',
 			kfurl		:	'',
