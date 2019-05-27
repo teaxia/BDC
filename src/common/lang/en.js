@@ -139,6 +139,7 @@ export const en = {
             changtype   :   'Exchange Type',
             proportion  :   'Proportion',
             num         :   'Please entry quantity',
+            InputNum    :   'Exchange num',
             address     :   'Exchange Address',
             submit      :   'Exchange now',
             null        :   'Quantity can not be null',
@@ -148,6 +149,8 @@ export const en = {
             year        :   'Year',  
             dataNull    :   'NO DATA',
             history     :   'History',
+            confirm     :   'Please confirm the exchange information.',
+            AssetType   :   'Asset Type',
         },
         cash:{
             title       :   'Cash',
@@ -211,7 +214,7 @@ export const en = {
                 safetycode  :   'Safety code number can not be null',
                 num         :   'BDC num can not be null',
                 address     :   'Extract address can not be null',
-                tips        :   'Please check your withdrawal address carefully. If the withdrawal address is incorrect, you will not be able to return your USDT if the withdrawal fails'
+                tips        :   'Please check your withdrawal address carefully. If the withdrawal address is incorrect, you will not be able to return your Currency if the withdrawal fails'
             }
         },
         bill:{

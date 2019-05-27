@@ -10,7 +10,7 @@
                     </Select>
                 </div>
                 <div class="title">
-                    <span>资产类型：</span>
+                    <span>{{$t('discovery.btob.AssetType')}}：</span>
                     <Select v-model="AssetType" class="select">
                         <Option v-for="(v,index) in AssetList" :value="index" :key="v.key">{{ v.val }}</Option>
                     </Select>
@@ -47,14 +47,14 @@
                         {{$t('discovery.btob.address')}}:
                     </flexbox-item>
                     <flexbox-item :span="8">
-                        <div class="text">{{this.address}}</div>
+                        <div class="text">{{address}}</div>
                     </flexbox-item>
                     <flexbox-item>
                         <div class="copy" @click="CopyClip(address)">{{$t('wallet.receive.copy')}}</div>
                     </flexbox-item>
                 </flexbox>
             </div>
-            <button @click="submit()" class="btn btn-block btn-round mr40">{{$t('discovery.btob.submit')}}</button>
+            <button @click="confirm()" class="btn btn-block btn-round mr40">{{$t('discovery.btob.submit')}}</button>
             <div class="get-last-dt" v-if="GetDTList.OutCurrency">
                 <div class="title">{{$t('discovery.btob.history')}}</div>
                 <flexbox class="div">
@@ -87,6 +87,64 @@
             </div>
             <div id="main" :style="{width:'100%',height:'5.7rem',margin:'0 auto'}"></div>
         </div>
+        <Modal v-model="ShowConfirm" :mask-closable="false" :ok-text="'确认兑换'" @on-ok="submit()">
+			<div slot="header" style="font-size:0.47rem;">
+                {{$t('discovery.btob.confirm')}}
+            </div>
+			<div class="modal-body">
+                <flexbox class="mr20 pb">
+                    <flexbox-item :span="4">
+                        {{$t('discovery.btob.AssetType')}}：
+                    </flexbox-item>
+                    <flexbox-item>
+                        {{AssetList[AssetType].val}}
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="mr20 pb">
+                    <flexbox-item :span="4">
+                        {{$t('discovery.btob.changtype')}}:
+                    </flexbox-item>
+                    <flexbox-item>
+                        <svg class="sicon" aria-hidden="true">
+                            <use :xlink:href="`#icon-`+actBB"></use>
+                        </svg>
+                        <span class="bdc">{{actBB}}</span>
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="mr20 pb">
+                    <flexbox-item :span="4">
+                        {{$t('discovery.btob.proportion')}}：
+                    </flexbox-item>
+                    <flexbox-item class="bdc">
+                        1:{{$numberComma(proportion)}}
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="mr20 pb">
+                    <flexbox-item :span="4">
+                        {{actBB}}：
+                    </flexbox-item>
+                    <flexbox-item>
+                        <div class="price">{{$numberComma(num)}}({{actBB}})</div>
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="mr20 pb">
+                    <flexbox-item :span="4">
+                        {{$t('discovery.btob.InputNum')}}：
+                    </flexbox-item>
+                    <flexbox-item>
+                        <div class="price">{{$numberComma(price)}}(BDC)</div>
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="mr20 pb">
+                    <flexbox-item :span="4">
+                        {{$t('discovery.btob.address')}}:
+                    </flexbox-item>
+                    <flexbox-item>
+                        {{address}}
+                    </flexbox-item>
+                </flexbox>
+            </div>
+		</Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -111,7 +169,7 @@
                 address     :   '',
                 proportion  :   '',
                 price       :   '',
-                // isok        :   false,
+                ShowConfirm :   false,
                 currency    :   [],
                 bbName      :   '',
                 key         :   '',
@@ -147,16 +205,12 @@
             },
             num(){
                 let i           =   this.act
-                this.num = (this.num<0)?0:this.num;
-                this.price = (this.num*this.blist[i].Proportion).toFixed(8);
+                this.num        =   (this.num<0)?0:this.num;
+                this.price      =   (this.num*this.blist[i].Proportion).toFixed(8);
             },
         },
 		methods: {
-            submit(){
-                // 获取详情
-                // if(this.isok){
-                //     return
-                // }
+            confirm(){
                 if(this.num==''){
                     this.$vux.toast.show({
                         text: this.$t('discovery.btob.null'),
@@ -164,6 +218,13 @@
                     })
                     return
                 }
+                this.ShowConfirm = true;
+            },
+            submit(){
+                // 获取详情
+                // if(this.isok){
+                //     return
+                // }
                 this.$server.post(
                 'AddRechargeByBB',
                 {

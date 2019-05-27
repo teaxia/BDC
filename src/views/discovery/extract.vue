@@ -84,7 +84,7 @@
             <div>
                 <!-- 二次确认 -->
                 <div>
-                    {{$t('discovery.extract.tips.tip')}}
+                    {{$t('discovery.extract.tips.tip')}}<span class="currency">{{curreny}}</span>
                 </div>
                 <div>
                     {{$t('discovery.extract.address')}}：{{addrs}}
@@ -134,7 +134,7 @@ export default {
             amount      :   '',
             GetDTList   :  [],
             showPSwed   :   false,
-            curreny     :   'BDC',
+            curreny     :   'USDT',
             BDClist     :   ['USDT','BDC']
 		}
     },
@@ -152,6 +152,7 @@ export default {
             }).then(data => {
                 if(data){
                     this.GetLastDT()
+                    this.GetAccount()
                     this.$vux.toast.show({
                         text: this.$t('global.wait'),
                         type: 'success'
@@ -267,6 +268,10 @@ export default {
     color:$font-red!important;
     font-size:20px;
     line-height: 40px;
+}
+.currency{
+    color:$font-red;
+    font-weight: bold;
 }
 .get-last-dt{
     margin-top:20px;

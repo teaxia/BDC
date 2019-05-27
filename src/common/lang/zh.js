@@ -139,6 +139,7 @@ export const zh = {
             changtype   :   '兑换类型',
             proportion  :   '兑换比例',
             num         :   '请输入兑换数量',
+            InputNum    :   '兑换数量',
             address     :   '兑换地址',
             submit      :   '立即兑换',
             null        :   '兑换数量不能为空',
@@ -148,6 +149,8 @@ export const zh = {
             year        :   '年',
             dataNull    :   '没有数据',
             history     :   '最新提交记录', 
+            confirm     :   '请确认兑换信息',
+            AssetType   :   '资产类型',
         },
         cash:{
             title       :   '现金兑换',
@@ -211,7 +214,7 @@ export const zh = {
                 safetycode  :   '安全码不能为空',
                 num         :   '提币数量不能为空',
                 address     :   '提币地址不能为空',
-                tip         :   '请仔细核对您的提币地址无误，提币地址错误提币失败将无法退还您的USDT',
+                tip         :   '请仔细核对您的提币地址无误，提币地址错误提币失败将无法退还您的',
             }
         },
         bill:{
