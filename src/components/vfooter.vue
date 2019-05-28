@@ -27,8 +27,8 @@ export default {
           value   : this.$t("discovery.topmenu.OTC"),
           icon    : 'icon-otc',                                    
           acicon  : 'icon-otc1',
-          // url     : false, 
-          url     : '/discovery/otc',
+          url     : false, 
+          // url     : '/discovery/otc',
           index : 1
         },
         {
