@@ -1,0 +1,41 @@
+@charset "utf-8";
+@import "../../base/var";
+@import "../../base/button";
+.ahtuenticator{
+    .w-cont{
+        border:0.02rem solid $border-line;
+        padding:20px 0;
+        border-radius: 20px; 
+        .ercode{
+            width: 280px;
+            margin:0 auto;
+        }
+        .auth-cell{
+            text-align: center;
+            font-size:32px;
+            border-bottom: 0.02rem solid $border-line;
+            padding-bottom: 30px;
+            &:last-child{
+                border:none;
+            }
+            .btn{
+                margin:0 auto;
+            }
+        }
+    }
+    .footer{
+        margin-top:40px;
+        display: flex;
+        justify-content: space-between;
+        .auth{
+            width: 350px;
+        }
+    }
+}
+.isopen{
+    display: flex;
+    justify-content: space-between;
+}
+.tips{
+    color:$font-red;
+}

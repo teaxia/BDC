@@ -634,6 +634,7 @@ export const en = {
             bindPhone       :   'Bind Phone No.',
             vierPhone       :   'Verification Phone No.',
             nickname        :   'Nick name',
+            google          :   'Google Authenticator',
             tips:{
                 oldpsw          :   'Please enter the old password',
                 newpsw          :   'Please enter a new password',
@@ -700,6 +701,24 @@ export const en = {
                 p6      :   '4、一个账户只能帮顶同一个开户人姓名的银行卡',
                 bankerror   :   'Please enter the correct bank card.',
             }
+        },
+        ahtuenticator:{
+            username        :   'User Name',
+            key             :   'Token',
+            veri            :   'Verification',
+            cancel          :   'Cancel',
+            google          :   'Please enter Google Security Code',
+            security        :   'Security Code',
+            googlesecurity  :   'Please enter the security code of the authenticator',
+            success         :   'Success',
+            error           :   'Fail',
+            openAuth        :   'Open Google Certification',
+            open            :   'Open',
+            close           :   'Close',
+            tips            :   'Tip: After scanning or manual binding, click Verify Binding to maintain the binding status with the account, otherwise the binding is invalid.',
+            cancelAuth      :   'Cancel Google Verification',
+            cancelsuccess   :   'Unbinding Successful',
+            cancelerror     :   'Failure to unbind',
         }
     }
 }
