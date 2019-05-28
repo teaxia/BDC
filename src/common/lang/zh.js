@@ -199,7 +199,7 @@ export const zh = {
             },
         },
         extract:{
-            title       :   '提币',
+            title       :   '提币', 
             address     :   '提币地址',
             bdc         :   '提币数量',
             safetycode  :   '安全码',
@@ -625,6 +625,7 @@ export const zh = {
             bindPhone       :   '绑定新手机号',
             vierPhone       :   '验证手机号',
             nickname        :   '昵称',
+            google          :   '谷歌认证',
             tips:{
                 oldpsw          :   '请输入旧密码',
                 newpsw          :   '请输入新密码',
@@ -691,6 +692,24 @@ export const zh = {
                 p6          :   '4、一个账户只能帮顶同一个开户人姓名的银行卡',
                 bankerror   :   '请输入正确的银行卡',
             }
+        },
+        ahtuenticator:{
+            username        :   '用户名',
+            key             :   '密钥',
+            veri            :   '验证绑定',
+            cancel          :   '取消绑定',
+            google          :   '请输入谷歌安全码',
+            security        :   '安全码',
+            googlesecurity  :   '请输入身份验证器的安全码',
+            success         :   '验证成功',
+            error           :   '验证失败',
+            openAuth        :   '开启谷歌认证',
+            open            :   '开',
+            close           :   '关',
+            tips            :   '提示：扫码或手动绑定后请点击验证绑定来与该账号保持绑定状态，否则绑定无效',
+            cancelAuth      :   '取消谷歌验证',
+            cancelsuccess   :   '取消绑定成功',
+            cancelerror     :   '取消绑定失败',
         }
     }
 };

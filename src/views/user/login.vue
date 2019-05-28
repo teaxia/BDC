@@ -34,7 +34,16 @@
 				{{ $t("user.regist") }}
 			</button>
 		</router-link>
-    </div>
+		<Modal v-model="show" :mask-closable="false" @on-ok="GoogleValidate">
+			<div slot="header">
+					{{$t('mine.ahtuenticator.google')}}
+			</div>
+			<div class="modal-body">
+					<x-input class="test" :title="$t('mine.ahtuenticator.security')" v-model="safecode" :placeholder="$t('mine.ahtuenticator.googlesecurity')">
+					</x-input>
+			</div>
+		</Modal>
+	</div>
 </template>
 
 <script>
@@ -48,6 +57,9 @@ export default {
 			PassWord : '',
 			lang	 : 'zh',		// 默认语言
 			type	 : false,		// 切换密码状态
+			show	 :	false,		// 是否显示谷歌认证
+			safecode	:	'',	  // 谷歌验证码
+			token		:	'',			// 临时用的token
 		}
 	},
 	watch:{
@@ -76,20 +88,64 @@ export default {
 					lv   : this.lang
 				}).then(data => {
 					if(data){
-						this.$vux.toast.show({
-							text: this.$t("user.tips.success"),
-							type: 'success'
-						})
-						this.$storage.set('guid',data.Result);
-						this.$router.push({
-							path:"/wallet/wallet",
-						});
+						// console.log(data.Result.split("|"))
+						let res = data.Result.split("|")
+						this.token  = res[0]
+						// 判断是否开启谷歌验证
+						if(res[1]=='true'){
+							// 开启
+							this.show = true
+						}else if(res[1]=='false'){
+							// 未开启
+							this.$vux.toast.show({
+								text: this.$t("user.tips.success"),
+								type: 'success'
+							})
+							this.$storage.set('guid',res[0]);
+							this.$router.push({
+								path:"/wallet/wallet",
+							});
+						}
 					}
 				})
 			}
 		},
 		changType(){
 			this.type = !this.type
+		},
+		GoogleValidate(){
+				// 判断是否输入安全码
+				if(this.safecode==''){
+						this.$vux.toast.show({
+								text: this.$t('mine.ahtuenticator.googlesecurity'),
+								type: 'warn'
+						})
+						return;
+				}
+				this.$server.post(
+				'GoogleValidate',
+				{
+						guid 	      :  this.token,
+						vCode       :  this.safecode
+				}).then(data => {
+						if(data){
+								if(data.Result=='true'){
+										this.$vux.toast.show({
+											text: this.$t("user.tips.success"),
+											type: 'success'
+										})
+										this.$storage.set('guid',this.token);
+										this.$router.push({
+											path:"/wallet/wallet",
+										});
+								}else{
+										this.$vux.toast.show({
+												text: this.$t('mine.ahtuenticator.error'),
+												type: 'warn'
+										})
+								}
+						}
+				})
 		}
 	},
 	mounted() {

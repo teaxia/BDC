@@ -63,6 +63,7 @@ import myhome from './views/mine'
         import wechart from './views/mine/wechart.vue'                    // 绑定微信支付
         import editPhoneOld from './views/mine/editPhoneOld.vue'           // 修改手机号，验证旧手机
         import editPhoneNew from './views/mine/editPhoneNew.vue'           // 修改手机号，绑定新手机
+        import ahtuenticator from './views/mine/ahtuenticator.vue'           // 谷歌认证
     import setting from './views/mine/setting.vue'                      // 设置
         import language from './views/mine/language.vue'                // 语言
         import price from './views/mine/price.vue'                      // 货币
@@ -198,6 +199,7 @@ let routes = [
                 { path: '/mine/wechart', component: wechart, name: 'wechart',meta:{isIndex: 3}},
                 { path: '/mine/editPhoneOld', component: editPhoneOld, name: 'editPhoneOld',meta:{isIndex: 3}},
                 { path: '/mine/editPhoneNew', component: editPhoneNew, name: 'editPhoneNew',meta:{isIndex: 3}},
+                { path: '/mine/ahtuenticator', component: ahtuenticator, name: 'ahtuenticator',meta:{isIndex: 3}},
         ]
     },
     // 文章

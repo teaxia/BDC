@@ -47,6 +47,11 @@
                             <div class="weui-cell__ft">
                             </div>
                         </div>
+                        <cell link="/mine/ahtuenticator" is-link class="cell-hei">
+                            <span slot="title">
+                                <span>{{$t('mine.setting.google')}}</span>
+                            </span>
+                        </cell>
                         <!-- <cell @click="isPhone()" is-link class="cell-hei">
                             <span slot="title">
                                 <span>{{$t('mine.setting.editPhone')}}</span>
@@ -88,7 +93,6 @@ export default {
 	mounted() {
         this.isreal	  	= (this.$storage.get('RealName'))?false:true;
         this.realname 	= (this.$storage.get('RealName'))?this.$storage.get('RealName'):this.$t('global.Uncertified');
-        console.log(this.isreal)
 	}
 }
 
