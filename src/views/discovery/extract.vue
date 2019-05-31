@@ -102,7 +102,7 @@
         </Modal>
         <Modal v-model="showPSwed" :mask-closable="false">
 			<div slot="header">
-                请输入安全码
+                {{$t('wallet.tips.inputcode')}}
             </div>
 			<div class="modal-body">
                 <group>

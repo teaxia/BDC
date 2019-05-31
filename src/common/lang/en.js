@@ -504,7 +504,14 @@ export const en = {
             income          :   'Income',
             balance         :   'Balance',
             date            :   'Date',
-            release         :   'Release'
+            release         :   'Release',
+            orderId         :   'Order Id',
+            price           :   'Money',
+            BDCnum          :   'Pay BDC',
+            confirm         :   'Confirm Order',
+            ok              :   'OK',
+            cancel          :   'Cancel',
+            success         :   'Pay Successfully',
         },
         transfor:{
             type1           :   'Capital To Act',

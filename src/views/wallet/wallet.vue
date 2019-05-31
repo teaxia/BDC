@@ -1,7 +1,12 @@
 <template>
 	<div class="wallet padding-footer" v-cloak>
 		<div class="main-container">
-			<h1>{{$t("wallet.title")}}</h1>
+            <div class="wallet-title">
+                <h1>{{$t("wallet.title")}}</h1>
+                <div class="iconscan">
+                    <div class="scan" @click="startscan()">BDPay<i class="iconfont icon-scanning"></i></div>
+                </div>
+            </div>
             <div class="assets">
                 <v-grid>
                     <div class="wallet-change pd-lb20">
@@ -89,6 +94,47 @@
                 </v-grid>
             </div>
 		</div>
+        <div>
+             <vpopup :leftText="$t('discovery.OTC.sell.close')" :titleText="$t('wallet.tips.confirm')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
+                <div slot="list" class="payinfo">
+                    <div class="payinfo-order">
+                        <div class="infoleft">{{$t('wallet.tips.orderId')}}:</div>
+                        <div class="inforight">{{OrderNo}}</div>
+                    </div>
+                    <div class="payinfo-order">
+                        <div class="infoleft">{{$t('wallet.tips.price')}}:</div>
+                        <div class="inforight">{{Money}}</div>
+                    </div>
+                    <div class="payinfo-order">
+                        <div class="infoleft">{{$t('wallet.tips.BDCnum')}}:</div>
+                        <div class="inforight">{{BDCNum}}</div>
+                    </div>
+                    <div class="payinfo-input">
+                        <div @click="ShowPSW()">
+                            <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
+                        </div>
+                    </div>
+                    <div class="success">
+                        <button class="btn btn-raound btn-block" @click="BDPayDone">{{$t('wallet.tips.ok')}}</button>
+                        <button @click="cancelPupop" class="btn btn-raound btn-cancel btn-block">{{$t('wallet.tips.cancel')}}</button>
+                    </div>
+                </div>
+            </vpopup>
+        </div>
+
+        <Modal v-model="safecodeshow" :mask-closable="false">
+			<div slot="header">
+                {{$t('wallet.tips.inputcode')}}
+            </div>
+			<div class="modal-body">
+                <group>
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="safecode" :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
+            </div>
+		</Modal>
+
         <Modal v-model="showbox" cancel-text="" class-name="vertical-center-modal" :ok-text="$t('global.ok')" title="">
             <h2>{{$t("wallet.tips.lock")}}</h2>
             <div>{{$t("wallet.tips.lastdate")}}：<span class="fr">{{clockdata.LastDate}}</span></div>
@@ -133,7 +179,15 @@ export default {
             news        :   [],                                                         // 系统公告
             showbox     :   false,
             clockdata   :   '',
-            send        :   false                                                       // 发送功能，默认关闭
+            send        :   false,                                                      // 发送功能，默认关闭
+            showPupop   :   false,                                                      // 扫码弹出层
+            safecodeshow:   false,                                                      // 安全码弹出层
+            safecode    :   '',                                                         // 输入的安全码
+            type        :   false,
+            BDCNum      :   '',                                                         // BD支付的BDC数量
+            Money      :   '',                                                          // BD支付的money数量
+            OrderNo      :   '',                                                        // BD支付的订单号
+            jmm         :   ''                                                          // BD支付加密码
 		}
 	},
 	methods: {
@@ -260,7 +314,7 @@ export default {
 			})
         },
         statusFalse(){
-            // 权限提示
+            // 权限提示 
             this.$vux.toast.show({
 				text: this.$t('global.authority'),
 				type: 'warn'
@@ -272,6 +326,79 @@ export default {
                 path:"/discovery/expectinfo/btob",
                 query:{bbname:name}
             });
+        },
+        BDPayDone(){
+            // 完成支付
+            if(this.safecode==''){
+                this.$vux.toast.show({
+                    text: this.$t('wallet.tips.inputcode'),
+                    type: 'warn'
+                })
+                return;
+            }
+            this.$server.post(
+			'BDPay_Done',
+			{
+                guid 	    :   this.$storage.get('guid'),
+                jmm         :   this.jmm,
+                pwdMoney    :   this.$md5(this.$jm+this.safecode).toUpperCase(),
+			}).then(data => {
+				if(data){
+                    this.$vux.toast.show({
+                        text: this.$t('wallet.tips.success'),
+                        type: 'success'
+                    })
+                    this.cancelPupop()
+				}else{
+                    this.cancelPupop()
+                }
+			})
+        },
+        BDPaySM(){
+            // 获取BD支付信息
+            this.$server.post(
+			'BDPay_SM',
+			{
+                guid 	    :   this.$storage.get('guid'),
+                jmm         :   this.jmm,
+			}).then(data => {
+				if(data){
+                    this.BDCNum     =   data.BDCNum
+                    this.Money      =   data.Money
+                    this.OrderNo    =   data.OrderNo
+				}
+			})
+        },
+        startscan(){
+            // 扫码后获取充值信息
+            var that = this;
+            var FNScanner = api.require('FNScanner');
+            FNScanner.open({
+                autorotation: true,
+                hintText	: that.$t('wallet.send.tips.scan')
+            }, function(ret, err) {
+                if (ret) {
+                    that.jmm = ret.content
+                    if(ret.content){
+                        that.showPupop = true
+                        that.BDPaySM()
+                    }
+                    
+                }
+            });
+        },
+        cancelPupop(){
+            // 取消选择
+            this.safecode  = ''
+            this.showPupop = false
+        },
+        okPupop(val){
+            // 确定选择
+            this.showPupop = false
+        },
+        ShowPSW(){
+            // 输入安全码
+            this.safecodeshow = true
         }
 	},
 	mounted() {

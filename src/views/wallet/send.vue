@@ -32,16 +32,25 @@
 							<div class="scan" @click="startscan()"><i class="iconfont icon-scanning"></i></div>
 						</div>
 					</div>
-					
                 </div>
                 <group>
                     <x-input class="test" :title="$t('wallet.send.num')" :show-clear="false" v-model="num" :placeholder="$t('wallet.send.tips.min')">
 					</x-input>
                 </group>
-				<group>
-                    <x-input class="test" type="password" :title="$t('wallet.tips.safetycode')" :show-clear="false" v-model="psw" :placeholder="$t('user.securitypsw')">
-					</x-input>
-                </group>
+				<div class="line-b sbank">
+                    <div class="title-psw wd">
+                        {{$t('discovery.OTC.sell.security')}}
+                    </div>
+                    <div class="psw">
+                        <div @click="ShowPSW()">
+                            <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
+                        </div>
+                        <!-- <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i> -->
+                    </div>
+                    <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input> -->
+                </div>
 				<div class="send_label">
                     <div class="label">{{$t('wallet.send.class')}}</div>
                     <div class="radio">
@@ -58,6 +67,19 @@
 				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
             </div>
 		</div>
+		<!-- 输入安全密码 -->
+		<Modal v-model="showPSwed" :mask-closable="false">
+			<div slot="header">
+                {{$t('wallet.tips.inputcode')}}
+            </div>
+			<div class="modal-body">
+                <group>
+                    <x-input class="test" :type="typeed?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="psw" :placeholder="$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',typeed?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
+            </div>
+		</Modal>
 		<!-- 实名认证 -->
 		<Modal v-model="show" :closable="false" :mask-closable="false">
 			<div slot="header"></div>
@@ -83,6 +105,8 @@
 				type		:	'2',
 				psw			:	'',
 				show		:	false,				// 跳转至强制认证界面
+				typeed		:	false,
+				showPSwed	:	false
 			}
 		},
 		methods: {
@@ -153,6 +177,14 @@
 						that.bdcaddress = addresss.value
 					}
 				});
+			},
+			ShowPSW(){
+				// 安全码弹出层
+				this.showPSwed = true
+			},
+			changType(){
+				// 安全码切换
+				this.typeed = !this.typeed
 			}
 		},
 		mounted() {

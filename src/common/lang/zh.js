@@ -505,7 +505,14 @@ export const zh = {
             income          :   '收入',
             balance         :   '余额',
             date            :   '时间',
-            release         :   '正在释放'            
+            release         :   '正在释放',
+            orderId         :   '充值订单号',
+            price           :   '充值金额',
+            BDCnum          :   '支付BDC数量',
+            confirm         :   '确认支付订单',
+            ok              :   '确认支付',
+            cancel          :   '取消支付',
+            success         :   '支付成功',
         },
         transfor:{
             type1           :   '通证转固定',
