@@ -182,7 +182,7 @@ export default {
             BDCNum      :   '',                                                         // BD支付的BDC数量
             Money       :   '',                                                          // BD支付的money数量
             OrderNo     :   '',                                                        // BD支付的订单号
-            jmm         :   'EBbf5RLdt7i5wfu9XPR5uQ=='                                                          // BD支付加密码
+            jmm         :   ''                                                          // BD支付加密码
 		}
 	},
 	methods: {
@@ -361,6 +361,7 @@ export default {
                     this.BDCNum     =   data.BDCNum
                     this.Money      =   data.Money
                     this.OrderNo    =   data.OrderNo
+                    this.showPupop = true
 				}
 			})
         },
@@ -377,7 +378,6 @@ export default {
                 if (ret) {
                     that.jmm = ret.content
                     if(ret.content){
-                        that.showPupop = true
                         that.BDPaySM()
                     }
                     
