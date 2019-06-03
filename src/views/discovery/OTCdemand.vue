@@ -26,11 +26,11 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.num')"  :placeholder="$t('discovery.OTC.demand.num')" v-model="num">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.demand.num')"  :placeholder="$t('discovery.OTC.demand.num')" v-model="Num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
                     </x-input>
                 </group>
                 <div class="line-b sbank">
@@ -89,7 +89,7 @@ export default {
     mixins:[GetAccount],
 	data() {
 		return {
-            num         :  '',                        // 发布数量
+            Num         :  '',                        // 发布数量
             password    :  '',                        // 安全码
             currency    :  0,                         // 选择的币种
             show        :  false,         		      // 跳转至强制认证界面
@@ -108,7 +108,7 @@ export default {
 	methods: {
 		doSubmit(){
             // 判断不为空
-            if(this.num==''||!pattern["Pattern.RealNo"].test(this.num)){
+            if(this.Num==''){
                 // 判断数量
                 this.$vux.toast.show({
                     text: this.$t('discovery.OTC.sell.tips.num'),
@@ -152,7 +152,7 @@ export default {
             'OTC_BuyGoods',{
                 guid 	    :   this.$storage.get('guid'),
                 currenyName :   this.cName,
-                currenyNum  :   this.num,
+                currenyNum  :   this.Num,
                 price       :   this.price,
                 isSellOn    :   this.isSellOn,
                 supportZFB  :   this.alipay,
@@ -166,7 +166,7 @@ export default {
                         type: 'success'
                     })
                     // 清空数据
-                    this.num = ''
+                    this.Num = ''
                 }
             })
             
