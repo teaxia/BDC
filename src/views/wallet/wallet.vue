@@ -365,24 +365,24 @@ export default {
 			})
         },
         startscan(){
-            this.showPupop = true
-            this.BDPaySM()
+            // this.showPupop = true
+            // this.BDPaySM()
             // 扫码后获取充值信息
-            // var that = this;
-            // var FNScanner = api.require('FNScanner');
-            // FNScanner.open({
-            //     autorotation: true,
-            //     hintText	: that.$t('wallet.send.tips.scan')
-            // }, function(ret, err) {
-            //     if (ret) {
-            //         that.jmm = ret.content
-            //         if(ret.content){
-            //             // that.showPupop = true
-            //             // that.BDPaySM()
-            //         }
+            var that = this;
+            var FNScanner = api.require('FNScanner');
+            FNScanner.open({
+                autorotation: true,
+                hintText	: that.$t('wallet.send.tips.scan')
+            }, function(ret, err) {
+                if (ret) {
+                    that.jmm = ret.content
+                    if(ret.content){
+                        that.showPupop = true
+                        that.BDPaySM()
+                    }
                     
-            //     }
-            // });
+                }
+            });
         },
         cancelPupop(){
             // 取消选择

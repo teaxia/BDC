@@ -54,9 +54,6 @@
                             <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
                         </div>
                     </div>
-                    <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
-                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
-                    </x-input> -->
                 </div>
                 <group>
                     <div class="weui-cells vux-no-group-title">
@@ -255,7 +252,7 @@ export default {
                 return;
             }
             if(this.password==''){
-                // 判断单价
+                // 判断安全码
                 this.$vux.toast.show({
                     text: this.$t('discovery.OTC.sell.tips.security'),
                     type: 'warn'
@@ -274,7 +271,8 @@ export default {
                 wxInfoId    :   (this.wechartId)?this.wechartId:0,
                 cardInfoId  :   (this.bankId)?this.bankId:0,
                 isSellOn    :   this.isSellOn,
-                key         :   this.Key
+                key         :   this.Key,
+                moneyPwd    :   this.password
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({

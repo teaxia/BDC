@@ -33,6 +33,16 @@
                     <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
                     </x-input>
                 </group>
+                <div class="line-b sbank">
+                    <div class="title-psw wd">
+                        {{$t('discovery.OTC.sell.security')}}
+                    </div>
+                    <div class="psw">
+                        <div @click="ShowPSW()">
+                            <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
+                        </div>
+                    </div>
+                </div>
                 <group>
                     <div class="weui-cells vux-no-group-title">
                         <div class="vux-x-input weui-cell test">
@@ -49,6 +59,18 @@
                     </div>
                 </group>
             </div>
+            <Modal v-model="showPSwed" :mask-closable="false">
+                <div slot="header">
+                    {{$t('wallet.tips.inputcode')}}
+                </div>
+                <div class="modal-body security">
+                    <group>
+                        <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
+                            <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                        </x-input>
+                    </group>
+                </div>
+            </Modal>
             <div class="select-pay">
                 <i @click="sbankd(1)" :class="{'iconfont':true,'icon-zhifubao':true,'alipay':alipay}"></i>
                 <i @click="sbankd(2)" :class="{'iconfont':true,'icon-yinhangqia':true,'cardpay':cardpay}"></i>
@@ -79,6 +101,8 @@ export default {
             BDClist     :    [],                      // 币种以及参考价
             cName       :  '',                        // 币种名称
             isSellOn    :   true,                     // 是否立即上架
+            showPSwed   :   false,                    // 显示安全密码弹窗
+            type        :   false,
 		}
 	},
 	methods: {
@@ -108,6 +132,14 @@ export default {
                 })
                 return;
             }
+            if(this.password==''){
+                // 判断安全码
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.tips.security'),
+                    type: 'warn'
+                })
+                return;
+            }
             if(!this.alipay&&!this.cardpay&&!this.wechart){
                 // 判断是否有支付方式
                 this.$vux.toast.show({
@@ -125,7 +157,8 @@ export default {
                 isSellOn    :   this.isSellOn,
                 supportZFB  :   this.alipay,
                 supportWX   :   this.wechart,
-                supportCard :   this.cardpay
+                supportCard :   this.cardpay,
+                moneyPwd    :   this.password
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -191,6 +224,9 @@ export default {
                 
             }
         },
+        ShowPSW(){
+            this.showPSwed = true
+        }
     },
     watch:{
         currency(){
