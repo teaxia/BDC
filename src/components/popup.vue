@@ -5,7 +5,7 @@
         </div>
         <div :class="[ showPupop ? 'bottom-in-active' : 'bottom-out-active','margin-top' ]">
             <div class="title">
-                <div @click="$emit('onLeftText')" class="flex text left">{{leftText}}</div>
+                <div @click="$emit('onLeftText')" :class="{'flex text left':true,'text-left':leftText =='x'}"><span v-if="leftText !='x'">{{leftText}}</span><span><i class="ivu-icon ivu-icon-ios-close"></i></span></div>
                 <div class="fx3 text">
                     {{titleText}}
                     <slot name='title'></slot>
@@ -101,6 +101,9 @@ export default {
                 //padding-bottom: 10px;
                 font-size: 28px;
             }
+            .text-left{
+                text-align: left;
+            }
             .left{
                 color: #828282;
             }
@@ -135,5 +138,8 @@ export default {
 }
 .bottom-in-active {
     transform: translate3d(0, 0, 0);
+}
+.ivu-icon-ios-close{
+    font-size:48px;
 }
 </style>
