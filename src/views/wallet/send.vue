@@ -43,7 +43,7 @@
                     </div>
                     <div class="psw">
                         <div @click="ShowPSW()">
-                            <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
+                            <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
                         </div>
                         <!-- <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i> -->
                     </div>
@@ -72,9 +72,9 @@
 			<div slot="header">
                 {{$t('wallet.tips.inputcode')}}
             </div>
-			<div class="modal-body">
+			<div class="modal-body security">
                 <group>
-                    <x-input class="test" :type="typeed?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="psw" :placeholder="$t('discovery.OTC.sell.security')">
+                    <x-input class="test" :type="typeed?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="psw" :placeholder="$t('global.input')+$t('discovery.OTC.sell.security')">
                         <i slot="right" @click="changType()" :class="['iconfont',typeed?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group>

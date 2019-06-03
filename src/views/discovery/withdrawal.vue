@@ -38,11 +38,21 @@
                         <button slot="right" @click="getCli()" class="btn btn-xs btn-round">{{$t('global.paste')}}</button>
                     </x-input>
                 </group>
-                <group>
+                <!-- <group>
                     <x-input :type="showtype?'text':'password'" class="test" :title="$t('wallet.tips.safetycode')" v-model="moneyPwd" :placeholder="$t('wallet.tips.inputcode')">
                          <i slot="right" @click="changType()" :class="['iconfont',showtype?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
-                </group>
+                </group> -->
+                <div class="line-b sbank">
+                    <div class="title-psw wd">
+                        {{$t('discovery.OTC.sell.security')}}
+                    </div>
+                    <div class="psw">
+                        <div @click="ShowPSW()">
+                            <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
+                        </div>
+                    </div>
+                </div>
                 <group>
                     <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
                 </group>
@@ -117,6 +127,19 @@
 				<button class="btn btn-block btn-round" @click="ok()">{{$t('discovery.withdrawal.tips.bind')}}</button>
 			</div>
 		</Modal> -->
+        <!-- 输入安全密码 -->
+		<Modal v-model="showPSwed" :mask-closable="false">
+			<div slot="header">
+                {{$t('wallet.tips.inputcode')}}
+            </div>
+			<div class="modal-body security">
+                <group>
+                    <x-input class="test" :type="showtype?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="moneyPwd" :placeholder="$t('global.input')+$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',showtype?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
+            </div>
+		</Modal>
         <!-- 二次确认框 -->
 		<Modal v-model="show" @on-ok="submit" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
 			<div slot="header"></div>
@@ -161,6 +184,8 @@
                 showtype    :   false,		// 切换密码状态
                 addrs       :  '',              // 提币地址
                 amount      :   0,             // 扣除余额
+                showPSwed   :   false,          // 安全码弹出层
+                typeed      :   false,          // 安全码眼睛开关
 			}
         },
         watch:{
@@ -186,7 +211,8 @@
                 }else{
                     this.amount = 0
                 }
-            }
+            },
+            
         },
 		methods: {
             startTime(e){
@@ -247,10 +273,20 @@
                 })
             },
             confirm(){
+                // 去除空格
+                this.addrs   =   this.addrs.replace(/\s+/g,"");
                 // 效验操作
                 if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.money)){
                     this.$vux.toast.show({
                         text: this.$t('discovery.withdrawal.tips.money'),
+                        type: 'warn'
+                    })
+                    return
+                }
+                // 提币地址非空验证
+                if(this.addrs==''){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.withdrawal.tips.address'),       // 投票地址不能为空
                         type: 'warn'
                     })
                     return
@@ -273,7 +309,7 @@
                 // }
                 if(this.money==''){
                     this.$vux.toast.show({
-                        text: '提币数量不能为空',
+                        text: this.$t('discovery.withdrawal.tips.money'),
                         type: 'warn'
                     })
                     return
@@ -281,7 +317,7 @@
                 // 判断提现额是否大于收益余额
                 if(this.money>this.myEarnings){
                     this.$vux.toast.show({
-                        text: '您的收益额度不足',
+                        text: this.$t('discovery.withdrawal.tips.wawal'),
                         type: 'warn'
                     })
                     return
@@ -366,6 +402,10 @@
                 // 切换密码状态
                 this.showtype = !this.showtype
             },
+            ShowPSW(){
+				// 安全码弹出层
+				this.showPSwed = true
+			},
             getCli(){
                 // 粘贴
                 var clipBoard = api.require('clipBoard');

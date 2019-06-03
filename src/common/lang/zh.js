@@ -34,7 +34,9 @@ export const zh = {
         selectArea          : '您选择的矿区为',
         confirm             : '单击“确定”继续注册。单击“取消”重新选择',
         regist              : '注册',
-        enter               : '立即进入'
+        enter               : '立即进入',
+        input               : '请输入',
+        clickinput          : '点击输入',
     },
     message:{
         Aread               :   '已读',
@@ -282,6 +284,8 @@ export const zh = {
                 bank        :   '提现银行卡',
                 min         :   '最低提币',
                 reduce      :   '实际到账',
+                address     :   '提币地址不能为空',
+                wawal       :   '您的收益额度不足',
             }
         },
         OTC:{
@@ -506,11 +510,11 @@ export const zh = {
             balance         :   '余额',
             date            :   '时间',
             release         :   '正在释放',
-            orderId         :   '充值订单号',
+            orderId         :   '订单号',
             price           :   '充值金额',
             BDCnum          :   '支付BDC数量',
-            confirm         :   '确认支付订单',
-            ok              :   '确认支付',
+            confirm         :   '确认付款',
+            ok              :   '立即支付',
             cancel          :   '取消支付',
             success         :   '支付成功',
         },

@@ -338,3 +338,12 @@ input{
     color:$font-red;
     font-weight: bold;
 }
+/* 安全码输入框 */
+.security{
+    .weui-cell__primary{
+        background:rgba(121,121,121,.2);
+        input{
+            padding:14px;
+        }
+    }
+}

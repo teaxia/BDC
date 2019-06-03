@@ -4,7 +4,7 @@
             <div class="wallet-title">
                 <h1>{{$t("wallet.title")}}</h1>
                 <div class="iconscan">
-                    <div class="scan" @click="startscan()">BDPay<i class="iconfont icon-scanning"></i></div>
+                    <div class="scan" @click="startscan()"><i class="iconfont icon-scanning"></i>BDPay</div>
                 </div>
             </div>
             <div class="assets">
@@ -95,40 +95,35 @@
             </div>
 		</div>
         <div>
-             <vpopup :leftText="$t('discovery.OTC.sell.close')" :titleText="$t('wallet.tips.confirm')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
+             <vpopup :leftText="'x'" :titleText="$t('wallet.tips.confirm')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
                 <div slot="list" class="payinfo">
+                    <div class="payinfo-title">
+                        <div class="bdcnum">{{BDCNum}}（BDC）</div>
+                    </div>
                     <div class="payinfo-order">
-                        <div class="infoleft">{{$t('wallet.tips.orderId')}}:</div>
+                        <div class="infoleft">{{$t('wallet.tips.orderId')}}</div>
                         <div class="inforight">{{OrderNo}}</div>
                     </div>
                     <div class="payinfo-order">
-                        <div class="infoleft">{{$t('wallet.tips.price')}}:</div>
-                        <div class="inforight">{{Money}}</div>
-                    </div>
-                    <div class="payinfo-order">
-                        <div class="infoleft">{{$t('wallet.tips.BDCnum')}}:</div>
-                        <div class="inforight">{{BDCNum}}</div>
-                    </div>
-                    <div class="payinfo-input">
-                        <div @click="ShowPSW()">
-                            <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
-                        </div>
+                        <div class="infoleft">{{$t('wallet.tips.price')}}</div>
+                        <div class="inforight">{{Money}}（CNY）</div>
                     </div>
                     <div class="success">
-                        <button class="btn btn-raound btn-block" @click="BDPayDone">{{$t('wallet.tips.ok')}}</button>
-                        <button @click="cancelPupop" class="btn btn-raound btn-cancel btn-block">{{$t('wallet.tips.cancel')}}</button>
+                        <!-- @click="BDPayDone" -->
+                        <button class="btn btn-raound btn-block" @click="ShowPSW()">{{$t('wallet.tips.ok')}}</button>
+                        <!-- <button @click="cancelPupop" class="btn btn-raound btn-cancel btn-block">{{$t('wallet.tips.cancel')}}</button> -->
                     </div>
                 </div>
             </vpopup>
         </div>
 
-        <Modal v-model="safecodeshow" :mask-closable="false">
+        <Modal v-model="safecodeshow" :mask-closable="false" @on-ok="BDPayDone">
 			<div slot="header">
                 {{$t('wallet.tips.inputcode')}}
             </div>
-			<div class="modal-body">
+			<div class="modal-body security">
                 <group>
-                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="safecode" :placeholder="$t('discovery.OTC.sell.security')">
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="safecode" :placeholder="$t('global.input')+$t('discovery.OTC.sell.security')">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group>
@@ -185,9 +180,9 @@ export default {
             safecode    :   '',                                                         // 输入的安全码
             type        :   false,
             BDCNum      :   '',                                                         // BD支付的BDC数量
-            Money      :   '',                                                          // BD支付的money数量
-            OrderNo      :   '',                                                        // BD支付的订单号
-            jmm         :   ''                                                          // BD支付加密码
+            Money       :   '',                                                          // BD支付的money数量
+            OrderNo     :   '',                                                        // BD支付的订单号
+            jmm         :   'EBbf5RLdt7i5wfu9XPR5uQ=='                                                          // BD支付加密码
 		}
 	},
 	methods: {
@@ -370,22 +365,24 @@ export default {
 			})
         },
         startscan(){
+            this.showPupop = true
+            this.BDPaySM()
             // 扫码后获取充值信息
-            var that = this;
-            var FNScanner = api.require('FNScanner');
-            FNScanner.open({
-                autorotation: true,
-                hintText	: that.$t('wallet.send.tips.scan')
-            }, function(ret, err) {
-                if (ret) {
-                    that.jmm = ret.content
-                    if(ret.content){
-                        that.showPupop = true
-                        that.BDPaySM()
-                    }
+            // var that = this;
+            // var FNScanner = api.require('FNScanner');
+            // FNScanner.open({
+            //     autorotation: true,
+            //     hintText	: that.$t('wallet.send.tips.scan')
+            // }, function(ret, err) {
+            //     if (ret) {
+            //         that.jmm = ret.content
+            //         if(ret.content){
+            //             // that.showPupop = true
+            //             // that.BDPaySM()
+            //         }
                     
-                }
-            });
+            //     }
+            // });
         },
         cancelPupop(){
             // 取消选择
@@ -399,6 +396,9 @@ export default {
         ShowPSW(){
             // 输入安全码
             this.safecodeshow = true
+        },
+        changType(){
+            this.type = !this.type
         }
 	},
 	mounted() {

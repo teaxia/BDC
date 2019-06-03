@@ -16,7 +16,12 @@
         .iconscan{
             font-size:32px;
             font-weight: bold;
-            margin-top:15px;
+            // margin-top:15px;
+            border: 0.02rem solid $border-line;
+            border-radius: 15px;
+            box-shadow: 0 0.026667rem 0.16rem #dadbde;
+            padding:5px 10px;
+            margin-bottom: 20px;
         }
     }
     .title{
@@ -165,22 +170,34 @@ h2{
 .payinfo{
     min-height: 550px;
     padding:20px;
-    font-size:32px;
+    font-size:28px;
+    background:#fff;
     &-order{
         display: flex;
         height: 60px;
+        padding:40px 0;
     }
     &-input{
         color:$font-red;
         text-align: center;
     }
+    &-title{
+        text-align: center;
+        font-size: 50px;
+        height: 100px;
+        line-height: 100px;
+    }
     .infoleft{
-        width: 210px;
+        width: 250px;
+        text-align: left;
+        margin-right: 43px;
+    }
+    .inforight{
         text-align: right;
-        margin-right: 40px;
+        width: 100%;
     }
     .success{
-        margin-top:40px;
+        margin-top:200px;
         .btn{
             margin-top:30px;
         }

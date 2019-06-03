@@ -34,7 +34,9 @@ export const en = {
         selectArea      : 'The mining area you choose is',
         confirm         : 'Click OK to continue registration. Click Cancel to reset',
         regist          : 'Regist',
-        enter           : 'Enter'
+        enter           : 'Enter',
+        input           : 'Input',
+        clickinput      : 'Click input ',
     },
     messgae:{
         Aread               :   'Already read',
@@ -282,6 +284,8 @@ export const en = {
                 bank        :   'Bank Information',
                 min         :   'Min extract',
                 reduce      :   'Reduce',
+                address     :   'Address is can’t null' ,
+                wawal       :   'Your profit margin is insufficient',
             }
         },
         OTC:{
