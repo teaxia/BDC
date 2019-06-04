@@ -66,11 +66,21 @@
 				{{$t('discovery.OTC.myorder.remark')}}：{{data.Remark}}
 			</div>
 			<div v-if="data.Status==3&&this.orderType==3">
-				<group>
+				<!-- <group>
                     <x-input class="test" :type="type?'text':'password'" :title="$t('wallet.tips.safetycode')" required :placeholder="$t('wallet.tips.inputcode')" v-model="passwprd">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
-                </group>
+                </group> -->
+				<div class="line-b sbank">
+                    <div class="title-psw wd">
+                        {{$t('discovery.OTC.sell.security')}}
+                    </div>
+                    <div class="psw">
+                        <div @click="ShowPSW()">
+                            <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
+                        </div>
+                    </div>
+                </div>
 			</div>
 			<div class="order-payment mr10">
 				<button class="btn btn-block btn-round" disabled v-if="data.Status==3&&this.orderType==2&&this.minutes<29">{{$t('discovery.OTC.complaiont.minutes')}}</button>
@@ -80,6 +90,19 @@
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 			</div>
 		</div>
+		<Modal v-model="showPSwed" :mask-closable="false">
+			<div slot="header">
+                {{$t('wallet.tips.inputcode')}}
+            </div>
+			<div class="modal-body security">
+                <group>
+                    <x-input class="test" :type="typeed?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="passwprd" :placeholder="$t('global.input')+$t('discovery.OTC.sell.security')">
+                        <i slot="right" @click="changType()" :class="['iconfont',typeed?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
+            </div>
+		</Modal>
+
 		<Modal v-model="show" @on-ok="OrderAndPay" :closable="false" :ok-text="$t('global.ok')" :cancel-text="$t('global.cancel')" @on-cancel="cancel">
 			<div slot="header"></div>
 			<div class="modal-body">
@@ -90,6 +113,7 @@
 </template>
 
 <script>
+import { fail } from 'assert';
     
 	export default {
         name:'myOrder',
@@ -102,9 +126,11 @@
 				type	    :   false,				// 切换密码状态
 				show		:	false,				// 二次确认状态
 				payInfo		:	[],					// 支付方式
-				minutes		:	''					// 支付时间是否大于30分钟可以申述
+				minutes		:	'',					// 支付时间是否大于30分钟可以申述
+				showPSwed	:	false,
+				typeed		:	false,
 			}
-		},
+		}, 
 		watch:{
 			
 		},
@@ -187,8 +213,14 @@
 				var dateEnd = new Date();//获取当前时间
 				var dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
 				this.minutes =  Math.floor((dateDiff / 60000));
-				// this.minutes = minutes
-				// console.log(minutes)
+			},
+			ShowPSW(){
+				// 安全码弹出层
+				this.showPSwed = true
+			},
+			changType(){
+				// 安全码切换
+				this.typeed = !this.typeed
 			}
 		},
 		
