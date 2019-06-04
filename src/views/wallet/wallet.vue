@@ -380,7 +380,6 @@ export default {
                     if(ret.content){
                         that.BDPaySM()
                     }
-                    
                 }
             });
         },

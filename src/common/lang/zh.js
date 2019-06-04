@@ -502,7 +502,7 @@ export const zh = {
             inputcode       :   '请输入安全码',
             btntransfor     :   '立即转换',
             lock            :   '锁仓情况',
-            lastdate        :   '最后存入时间',
+            lastdate        :   '最初存入时间',
             lockenddate     :   '锁仓结束时间',
             lockdays        :   '锁仓倒计时',
             assetsview      :   '固定资产详情',
