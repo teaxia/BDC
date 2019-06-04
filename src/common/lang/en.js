@@ -211,7 +211,8 @@ export const en = {
             tax         :   'Tax',
             fee         :   'Amount of actual balance',
             min         :   'The min extract 200',
-            tuao        :   'Auto',
+            auto        :   'Auto',
+            extractType :   'Type',
             tips:{
                 safetycode  :   'Safety code number can not be null',
                 num         :   'BDC num can not be null',

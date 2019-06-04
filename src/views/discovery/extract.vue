@@ -20,8 +20,8 @@
                     </div>
                     <div class="psw">
                         <div @click="ShowPSW()">
-                            <span>点击输入{{$t('discovery.OTC.sell.security')}}</span>
-                        </div>
+                            <span>{{$t('global.input')}}{{$t('discovery.OTC.sell.security')}}</span>
+                        </div> 
                         <!-- <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i> -->
                     </div>
                     <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="line-b sbank">
                     <div class="wd" style="width:3rem;font-size:0.45rem">
-                        提币类型
+                        {{$t('discovery.extract.extractType')}}
                     </div>
                     <Select v-model="curreny">
                         <Option v-for="(v,index) in BDClist" :value="v" :key="index">{{ v }}</Option>
@@ -104,9 +104,9 @@
 			<div slot="header">
                 {{$t('wallet.tips.inputcode')}}
             </div>
-			<div class="modal-body">
+			<div class="modal-body security">
                 <group>
-                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="safecode" :placeholder="$t('discovery.OTC.sell.security')">
+                    <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="safecode" :placeholder="$t('global.input')+$t('discovery.OTC.sell.security')">
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group>
@@ -164,6 +164,8 @@ export default {
 			this.type = !this.type
         },
         subconfirm(){
+            // 去除空格
+            this.addrs   =   this.addrs.replace(/\s+/g,"");
             // 判断密码不为空
             if(this.safecode==''){
                 this.$vux.toast.show({
@@ -179,7 +181,7 @@ export default {
                 })
                 return;
             }
-            if(this.address=''){
+            if(this.addrs==''){
                 this.$vux.toast.show({
                     text: this.$t('discovery.extract.tips.address'),
                     type: 'warn'

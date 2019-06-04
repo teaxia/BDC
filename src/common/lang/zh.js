@@ -212,6 +212,7 @@ export const zh = {
             tip         :   "Tip:请输入Im'token地址或交易所地址",
             min         :   '最低提币数量为200',
             auto        :   '自动填写',
+            extractType :   '提币类型',
             tips:{
                 safetycode  :   '安全码不能为空',
                 num         :   '提币数量不能为空',
