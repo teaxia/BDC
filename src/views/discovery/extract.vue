@@ -239,18 +239,32 @@ export default {
         },
         ShowPSW(){
             this.showPSwed = true
+        },
+        math(){
+            if(this.bdcnum>5&&this.curreny!='BDC'){
+                this.amount = (this.$math.subtract(this.bdcnum,5)).toFixed(8)
+            }else if(this.curreny!='BDC'){
+                this.amount = 0
+            }else{
+                this.amount = this.bdcnum
+            }
         }
     },
     watch:{
         bdcnum(){
-            if(this.bdcnum>5){
-                this.amount = (this.$math.subtract(this.bdcnum,5)).toFixed(8)
-            }else{
-                this.amount = 0
-            }
+            // 提币数量有变化时重新计算
+            this.math()
+        },
+        tax(){
+            // 监听手续费有变化时重新计算
+            this.math()
         },
         curreny(){
             this.GetPoundage()
+            // 货币类型变化时重新计算
+            this.$nextTick(()=>{
+                this.math()
+            })
         }
     },
 	mounted() {
