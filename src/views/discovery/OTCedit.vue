@@ -292,7 +292,8 @@ export default {
             'OTC_DelSellGoods',
             {
                 guid            :   this.$storage.get('guid'),
-                goodsId         :   this.SellOrderId
+                goodsId         :   this.SellOrderId,
+                isTurnOn        :   this.isSellOn
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -305,6 +306,8 @@ export default {
                             type	:	0,
                         }
                     });
+                }else{
+                    this.GetMySellOrderById()
                 }
             })
         },

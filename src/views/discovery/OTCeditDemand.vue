@@ -26,11 +26,12 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.num')" required :placeholder="$t('discovery.OTC.demand.num')" v-model="num">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.num')" :placeholder="$t('discovery.OTC.demand.num')" v-model="num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.price')" required :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
+                    <x-input class="test" type="number" :title="$t('discovery.OTC.demand.price')" :show-clear="false" :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
+                        <div slot="right" style="font-size:0.35rem;">CNY</div>
                     </x-input>
                 </group>
                 <group>
@@ -253,7 +254,8 @@ export default {
             'OTC_DelBuyGoods',
             {
                 guid            :   this.$storage.get('guid'),
-                goodsId         :   this.id
+                goodsId         :   this.id,
+                isTurnOn        :   this.isSellOn
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -266,6 +268,8 @@ export default {
                             type	:	1,
                         }
                     });
+                }else{
+                    this.GetMyBuyOrderById()
                 }
             })
         },

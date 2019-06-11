@@ -89,6 +89,9 @@
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 			</div>
+			<div class="tips" v-if="this.minutes<=30">
+				{{$t('discovery.OTC.myorder.wait')}}{{m}}{{$t('discovery.OTC.myorder.minute')}}{{s}}{{$t('discovery.OTC.myorder.second')}}
+			</div>
 		</div>
 		<Modal v-model="showPSwed" :mask-closable="false">
 			<div slot="header">
@@ -112,23 +115,24 @@
     </div>
 </template>
 
-<script>
-import { fail } from 'assert';
-    
+<script>    
 	export default {
         name:'myOrder',
 		data() {
 			return {	
-				id      	:   '',                  // 订单ID
-				orderType	:	'',				     // 订单类型  2是已购 3是已售
+				id      	:   '',                 // 订单ID
+				orderType	:	'',				    // 订单类型  2是已购 3是已售
 				data		:	[],
-				passwprd	:	'',					 // 安全密码
+				passwprd	:	'',					// 安全密码
 				type	    :   false,				// 切换密码状态
 				show		:	false,				// 二次确认状态
 				payInfo		:	[],					// 支付方式
 				minutes		:	'',					// 支付时间是否大于30分钟可以申述
 				showPSwed	:	false,
 				typeed		:	false,
+				m			:	'',
+				s			:	'',
+				clock		:	'',
 			}
 		}, 
 		watch:{
@@ -210,10 +214,25 @@ import { fail } from 'assert';
 			timeFn(d1) {
 				var dateBegin = new Date(d1.replace(/-/g, "/"));//将-转化为/，使用new Date
 				// 计算获取的时间是否与现在的时间相差30分钟
-				var dateEnd = new Date();//获取当前时间
-				var dateDiff = dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
-				this.minutes =  Math.floor((dateDiff / 60000));
-			},
+				var dateEnd  =  new Date();//获取当前时间
+				var dateDiff =  dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
+				this.minutes =  Math.floor((dateDiff / 60000)); 
+				this.s	     =  60-dateBegin.getSeconds()
+				if(this.m==30){
+					this.m--;
+				}else{
+					this.m		 =	30-this.minutes
+				}
+				if(this.m=1){
+					this.m		 =	0
+				}
+				if(this.m>=0){
+					this.$nextTick(()=>{
+						this.getCountDwn()
+					});
+				}
+				
+			}, 
 			ShowPSW(){
 				// 安全码弹出层
 				this.showPSwed = true
@@ -221,13 +240,33 @@ import { fail } from 'assert';
 			changType(){
 				// 安全码切换
 				this.typeed = !this.typeed
-			}
+			},
+			getCountDwn(){
+				// 锁单倒计时
+				this.clock = setInterval(() =>{
+					if( this.m == 0 && this.s == 0 ){
+						// 倒计时结束
+						this.minutes  =  31;
+						window.clearInterval(this.clock);
+					}else if( this.m >= 0 ){
+						if( this.s > 0 ){
+							this.s--;
+						}else if( this.s == 0 ){
+							this.m--;
+							this.s = 59;
+						}
+					}
+				},1000);
+			},
 		},
-		
 		mounted() {
 			this.id     	=   this.$route.query.id
 			this.orderType	=	this.$route.query.status
             this.GetOrderById();
+		},
+		beforeDestroy(){
+			// 清除计时器
+			window.clearInterval(this.clock);
 		}
 	}
 

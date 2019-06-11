@@ -34,15 +34,17 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.num')"  :placeholder="$t('discovery.OTC.sell.input.num2')" v-model="num">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.num')" :show-clear="false"  :placeholder="$t('discovery.OTC.sell.input.num2')" v-model="num">
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')" :show-clear="false"  :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
+                        <div slot="right" style="font-size:0.35rem;">CNY</div>
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.minNum')"  :placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.minNum')" :show-clear="false" :placeholder="$t('discovery.OTC.sell.input.minNum')" v-model="minNum">
+                        <div slot="right" style="font-size:0.35rem;">CNY</div>
                     </x-input>
                 </group>
                 <div class="line-b sbank">
@@ -209,10 +211,10 @@ export default {
                 })
                 return;
             }
-            if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.minNum)){
-                // 判断小数
+            if(this.minNum<100){
+                // 判断最低限额是否小于100
                 this.$vux.toast.show({
-                    text: this.$t('discovery.OTC.sell.input.num2'),
+                    text: this.$t('discovery.OTC.sell.input.minNum')+'CNY',
                     type: 'warn'
                 })
                 return;
@@ -230,14 +232,6 @@ export default {
                 // 判断单价
                 this.$vux.toast.show({
                     text: this.$t('discovery.OTC.sell.tips.price'),
-                    type: 'warn'
-                })
-                return;
-            }
-            if(this.minNum==''){
-                // 判断单价
-                this.$vux.toast.show({
-                    text: this.$t('discovery.OTC.sell.tips.minNum'),
                     type: 'warn'
                 })
                 return;

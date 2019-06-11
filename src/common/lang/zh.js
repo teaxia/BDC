@@ -293,10 +293,10 @@ export const zh = {
             Selltitle       :   '发布售币',
             ranking         :   '排行榜',
             sell:{
-                reference       :   '参考单价',
+                reference       :   '参考发布价格',
                 selectCurreny   :   '选择币种',
                 num             :   '发布数量',
-                price           :   '单价',
+                price           :   '发布价格',
                 minNum          :   '最低限额',
                 security        :   '安全码',
                 sale            :   '立即上架',
@@ -325,12 +325,13 @@ export const zh = {
                     offwechart  :   '关闭微信收款',
                     offcard     :   '关闭银行卡收款',
                     selectbank  :   '请选择绑定账号',
+                    hightprice  :   '发布价格不能高于系统参考发布价',
                 },
                 input:{
                     num         :   '数量',
                     num2        :   '最多输入2位小数',
                     price       :   '售卖单价',
-                    minNum      :   '最低购买数量',
+                    minNum      :   '不能低于100',
                 }
             },
             index:{
@@ -367,7 +368,7 @@ export const zh = {
                 tomebuy     :   '向您购买',
                 buy         :   '购买',
                 sell        :   '出售',
-                price       :   '单价',
+                price       :   '发布价格',
                 total       :   '总价',
                 payment     :   '点击查看付款方式',
                 cancel      :   '取消订单',
@@ -410,7 +411,7 @@ export const zh = {
             demand:{
                 title       :   '发布求购',
                 num         :   '货币数量',
-                price       :   '求购单价',
+                price       :   '求购价格',
             },
             edit:{
                 title       :   '编辑',
@@ -418,7 +419,7 @@ export const zh = {
                 islock      :   '目前为锁定状态，不可修改。锁定倒计时',
                 sellout     :   '当前订单已经售罄，不可编辑',
                 downdel     :   '只有下架后才可删除',
-                edit        :   '编辑',
+                edit        :   '保存修改',
                 del         :   '删除',
             },
             orderlist:{
@@ -431,7 +432,7 @@ export const zh = {
                 orderType4  :   '收益',
                 SorderId    :   '订单号搜索',
                 price       :   '售价',
-                oprice      :   '单价',
+                oprice      :   '发布价格',
                 totalprice  :   '总价',
                 total       :   '出售数量',
                 sellnum     :   '已售数量',
@@ -456,6 +457,9 @@ export const zh = {
                 bank        :   '收款银行',
                 cardid      :   '收款卡号',
                 access      :   '收款账号',
+                wait        :   '还需等待',
+                minute      :   '分',
+                second      :   '秒后才可申述'
             },
             type:{
                 type01      :   '下架',

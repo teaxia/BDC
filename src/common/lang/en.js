@@ -455,6 +455,9 @@ export const en = {
                 bank        :   'Bank',
                 cardid      :   'Card id',
                 access      :   'Access',
+                wait        :   'Wait',
+                minute      :   'minute',
+                second      :   'second'
             },
             type:{
                 type01      :   'Offline',

@@ -17,7 +17,7 @@
 				</v-grid>
 			</div>
 			<div class="panel">
-				<div @click="goto(v.Id)" class="dis-grid" v-for="(v,index) in news" :key="index">
+				<div @click="goto(v.Id)" class="dis-grid" v-for="(v,index) in news" :key="index" v-if="v.Title">
 					<flexbox>
 						<flexbox-item :span="3">
 							<div class="dis-grid-img">

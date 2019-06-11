@@ -44,6 +44,7 @@
                                 <th>{{$t("mine.mycard.bank")}}</th>
                                 <th>{{$t("mine.mycard.cardnumber")}}</th>
                                 <th>{{$t("mine.mycard.time")}}</th>
+                                <th>{{$t("mine.area.edit")}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,7 @@
                                 <td>{{v.bankName}}</td>
                                 <td>{{v.cardNo}}</td>
                                 <td>{{v.CreateTime}}</td>
+                                <td><span @click="confirmdel(index)">{{$t("mine.setting.delete")}}</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -64,6 +66,15 @@
 			<div slot="footer">
 				<button class="btn btn-block btn-round" @click="goauth()">{{$t('wallet.send.auth')}}</button>
 			</div>
+		</Modal>
+
+        <Modal v-model="cofirmdel" :closable="false" :mask-closable="false" @on-ok='deleteCard()'>
+			<div slot="header">是否确认删除？</div>
+			<div class="modal-body text-left">
+                <div>银行名称：{{delbankname}}</div>
+                <div>银行卡号：{{delbankNo}}</div>
+                <div>绑定时间：{{delbankTime}}</div>
+            </div>
 		</Modal>
     </div>
 </template>
@@ -89,6 +100,11 @@ export default {
             cardList  :  [],                       // 已绑卡数据
             orderbank :  '',                       // 其他银行
             show      :	 false,         		   // 跳转至强制认证界面
+            cofirmdel : false,                     // 确认是否删除
+            delbankname  :  '',                    // 删除的银行名称
+            delbankNo    :  '',                    // 删除的银行卡号
+            delbankTime  :  '',                    // 删除的银行卡绑定时间
+            delID       :   '',                    // 删除的卡号ID
 		}
 	},
 	methods: {
@@ -173,11 +189,34 @@ export default {
         cancel () {
             this.modal = false;
         },
+        confirmdel(index){
+            // 确认是否删除
+            this.cofirmdel      =   true
+            this.delbankname    =   this.cardList[index].bankName
+            this.delbankNo      =   this.cardList[index].cardNo
+            this.delbankTime    =   this.cardList[index].CreateTime
+            this.delID          =   this.cardList[index].Id
+        },
         goauth () { 
             this.$router.push({
                 path:"/mine/myhome",
             });
         },
+        deleteCard(){
+            this.$server.post(
+            'DelBankCard',{
+                guid 	:   this.$storage.get('guid'),
+                cardId  :   this.delID
+            }).then(data => {
+                if(data.Result=="true"){
+                    this.$vux.toast.show({
+                        text: '删除成功！',
+                        type: 'success'
+                    })
+                    this.GetBindBankCardList()
+                }
+            })
+        }
     },
     watch:{
         sProvince(){
@@ -218,6 +257,9 @@ export default {
         width: 3rem;
         font-size:0.45rem;
     }
+}
+.text-left{
+    text-align: left !important;
 }
 .cardlist{
     .tips{
