@@ -89,7 +89,7 @@
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 			</div>
-			<div class="tips" v-if="this.minutes<=30">
+			<div class="tips" v-if="this.minutes<=30&&this.orderType==2">
 				{{$t('discovery.OTC.myorder.wait')}}{{m}}{{$t('discovery.OTC.myorder.minute')}}{{s}}{{$t('discovery.OTC.myorder.second')}}
 			</div>
 		</div>
@@ -223,7 +223,7 @@
 				}else{
 					this.m		 =	30-this.minutes
 				}
-				if(this.m=1){
+				if(this.m==1){
 					this.m		 =	0
 				}
 				if(this.m>=0){
