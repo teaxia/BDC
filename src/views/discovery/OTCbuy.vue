@@ -62,7 +62,6 @@
 
 <script>
 import { GetAccount } from '../../common/mixins/getaccount'
-import { setInterval } from 'timers';
 export default {
     name: 'OTCbuy',
     mixins:[GetAccount],
@@ -133,9 +132,9 @@ export default {
             this.type = 2
         },
         doSubmit(){
-            if(this.CNum==''||this.CNum<this.datalist.minBuy){
+            if(this.CNum==''){
                 this.$vux.toast.show({
-                    text: this.$t('discovery.OTC.sell.input.minNum')+this.datalist.minBuy+this.datalist.currenyName,
+                    text: '购买BDC数量不能为空',
                     type: 'warn'
                 })
                 return;

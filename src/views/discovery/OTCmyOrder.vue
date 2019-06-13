@@ -89,7 +89,7 @@
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 			</div>
-			<div class="tips" v-if="this.minutes<=30&&this.orderType==2">
+			<div class="tips" v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
 				{{$t('discovery.OTC.myorder.wait')}}{{m}}{{$t('discovery.OTC.myorder.minute')}}{{s}}{{$t('discovery.OTC.myorder.second')}}
 			</div>
 		</div>
@@ -217,14 +217,18 @@
 				var dateEnd  =  new Date();//获取当前时间
 				var dateDiff =  dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
 				this.minutes =  Math.floor((dateDiff / 60000)); 
-				this.s	     =  60-dateBegin.getSeconds()
-				if(this.m==30){
-					this.m--;
+				this.s	     =  60-(60-dateBegin.getSeconds())-(dateEnd.getSeconds())    //60秒减去（60秒减去发布时间减去当前时间秒数）= 当前剩余秒
+				this.m 		 =  30-this.minutes
+				if(this.s <0){
+					this.s = 60+this.s
+				}
+				if(this.minutes==30){
+					this.m		 =   29;
 				}else{
-					this.m		 =	30-this.minutes
+					this.m		 =	 30-this.minutes
 				}
 				if(this.m==1){
-					this.m		 =	0
+					this.m		 =	 0
 				}
 				if(this.m>=0){
 					this.$nextTick(()=>{
@@ -251,7 +255,7 @@
 					}else if( this.m >= 0 ){
 						if( this.s > 0 ){
 							this.s--;
-						}else if( this.s == 0 ){
+						}else if( this.s <= 0 ){
 							this.m--;
 							this.s = 59;
 						}

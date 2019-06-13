@@ -278,6 +278,11 @@ input{
 .weui-toast.weui-toast_text{
     padding:0.2rem;
 }
+.gobuy{
+    .weui-textarea,.weui-textarea-counter{
+        font-size:16px !important;
+    }
+}
 /*flex*/
 .flex-table{
     display: flex;

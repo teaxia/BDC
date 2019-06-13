@@ -117,7 +117,6 @@
 <script>
 import { GetAccount } from '../../common/mixins/getaccount'         // 获取认证信息
 import { BindPayment } from '../../common/mixins/BindPayment'       // 获取绑定银行卡信息
-import { setInterval } from 'timers';
 export default {
     name: 'OTCbuy',
     mixins:[GetAccount,BindPayment],
