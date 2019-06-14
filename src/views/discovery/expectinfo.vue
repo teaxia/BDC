@@ -68,7 +68,7 @@
 			return {
                 expectinfo  :   [],
                 Pos         :   [],             // 算力信息0:固定算力1:管理算力2:推广算力3:总算力剩余
-                bgTop       :   './static/images/BG.gif'
+                bgTop       :   './static/images/BG.jpg'
 			}
         },
         watch:{

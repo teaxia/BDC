@@ -2,7 +2,7 @@
 	<div class="mycard margin-header" v-cloak>
 		<x-header :left-options="{backText:$t('global.back')}" :title="$t('mine.setting.bindwechart')"></x-header>
         <div class="pd50">
-            <div v-if="BindCount<AllowCount" class="enterfrom">
+            <div class="enterfrom">
                 <div class="mr203">{{$t('mine.setting.tips.upWechartErcode')}}：</div>
                 <div class="upimg">
                     <div class="upload">
@@ -24,9 +24,9 @@
                     </x-input>
                 </group>
             </div>
-            <button v-if="BindCount<AllowCount" @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
+            <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
             <div class="mr50 cardlist">
-                <div class="tips">
+                <div class="tips" v-if="AllowCount">
                     <p>{{$t("mine.mycard.tip")}}:</p>
                     <p>每个账户最多绑定<span class="bindnum">{{AllowCount}}</span>个微信收款账号，您已经成功绑定<span class="bindnum">{{BindCount}}</span>个</p>
                     <!-- <p>2、一个账户只能绑定同一个开户人姓名的支付宝</p> -->
@@ -85,7 +85,7 @@ export default {
 	data() {
 		return {
             thirdNickName           :  '',                     // 微信绑定姓名
-            AllowCount              :  1,                      // 允许绑卡的数据
+            AllowCount              :  '',                      // 允许绑卡的数据
             BindCount               :  0,                      // 已绑卡数量
             show                    :  false,            	   // 跳转至强制认证界面
             show2                   :   false,                 // 删除二次确认
