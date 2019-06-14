@@ -46,7 +46,9 @@
                                 this.Swiper();
                             });
                         }else{
-                            this.ADList = ['static/images/index.png']
+                            this.$router.push({
+                                path:"/user/login",
+                            });
                         }
                         
 					}
