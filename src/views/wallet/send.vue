@@ -55,9 +55,9 @@
                     <div class="label">{{$t('wallet.send.class')}}</div>
                     <div class="radio">
                         <RadioGroup v-model="type">
-                            <Radio label="2" class="sedn-radio">
+                            <!-- <Radio label="2" class="sedn-radio">
                                 <span>{{$t('wallet.tips.capitalassets')}}</span>
-                            </Radio>
+                            </Radio> -->
                             <Radio label="4" class="sedn-radio">
                                 <span>{{$t('wallet.tips.actassets')}}</span>
                             </Radio>
@@ -102,7 +102,7 @@
 				bdcaddress  :   '',
 				num			:	'',
 				mathnum		:	'',
-				type		:	'2',
+				type		:	'4',
 				psw			:	'',
 				show		:	false,				// 跳转至强制认证界面
 				typeed		:	false,

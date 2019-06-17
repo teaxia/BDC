@@ -27,8 +27,8 @@ export default {
           value   : this.$t("discovery.topmenu.OTC"),
           icon    : 'icon-otc',                                    
           acicon  : 'icon-otc1',
-          // url     : false, 
-          url     : '/discovery/otc', 
+          url     : false, 
+          // url     : '/discovery/otc', 
           index : 1
         },
         {
@@ -51,17 +51,30 @@ export default {
   methods:{
     onUrl(url){
       if(!url){
-				this.$vux.toast.show({
-					text: this.$t('global.unopened'),
-					type: 'warn'
-				})
-        //window.location.href = 'http://bdcmalls.com/';
+        this.getrouter()
+				// this.$vux.toast.show({
+				// 	text: this.$t('global.unopened'),
+				// 	type: 'warn'
+				// })
 			}else{
 				this.$router.push({
 					path    :   url,
 				});
 			}
-    }
+    },
+    getrouter(){
+      this.$server.post(
+      'GetBlackShow_OTC',
+      {
+        guid 	 : this.$storage.get('guid'),
+      },{showLoading:false}).then(data => {
+        if(data){
+          this.$router.push({
+            path    :   '/discovery/otc',
+          });
+        }
+      })
+    },
   }
 }
 </script>

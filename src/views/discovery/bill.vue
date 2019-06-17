@@ -23,9 +23,9 @@
             <flexbox-item>
                 <div @click="active('7')" class="menu"><span :class="{'active':type==7}">{{$t('discovery.bill.type7')}}</span></div>
             </flexbox-item>
-            <flexbox-item>
+            <!-- <flexbox-item>
                 <div @click="active('8')" class="menu"><span :class="{'active':type==8}">{{$t('discovery.bill.type8')}}</span></div>
-            </flexbox-item>
+            </flexbox-item> -->
         </flexbox>
         <div class="mr30">
             <flexbox class="pb time">
@@ -135,12 +135,12 @@
                         this.class = ""
                         this.dataList = []
                         this.getyj();
-                    case '8':
-                        // 游戏
-                        this.class = "游戏"
-                        this.dataList = []
-                        this.query();
-                    break;
+                    // case '8':
+                    //     // 游戏
+                    //     this.class = "游戏"
+                    //     this.dataList = []
+                    //     this.query();
+                    // break;
                 }
             }
         
