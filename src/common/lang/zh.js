@@ -311,6 +311,10 @@ export const zh = {
                 odeduction      :   '实际扣除',
                 tax             :   '卖家手续费',
                 total           :   '求购总额',
+                Range           :   '发布范围',
+                all             :   '全部',
+                cn              :   '场内',
+                cw              :   '场外',
                 tips:{
                     num         :   '发布数量必须填写',
                     price       :   '单价必须填写',
@@ -388,6 +392,8 @@ export const zh = {
                 selectpay   :   '以此方式付款',
                 LookPay     :   '请查看付款方式后选择支付方式',
                 ConfirmCancel:  '是否确认取消该笔订单？',
+                up          :   '上架',
+                down        :   '下架',
             },
             complaiont:{
                 title       :   '申诉',

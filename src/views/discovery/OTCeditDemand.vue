@@ -41,7 +41,7 @@
                                 <label for="vux-x-input-48lhl" class="weui-label" style="width: 4em;">{{$t('discovery.OTC.sell.sale')}}</label>
                             </div>
                             <div class="weui-cell__bd weui-cell__primary">
-                                <i-switch size="large" v-model="isSellOn">
+                                <i-switch size="large" v-model="isSellOn" @on-change="change">
                                     <span slot="open">{{$t('discovery.OTC.sell.up')}}</span>
                                     <span slot="close">{{$t('discovery.OTC.sell.down')}}</span>
                                 </i-switch>
@@ -281,6 +281,26 @@ export default {
                 }
             });
         },
+        change(){
+            // 一键上下架开关
+            this.$server.post(
+            'EditStatusOnOff',{
+                guid 	    :   this.$storage.get('guid'),
+                isSellOn    :   this.isSellOn,
+                goodsId     :   this.id
+            }).then(data => {
+                if(data){
+                    // 上架成功提示
+                    this.$vux.toast.show({
+                        text: (this.isSellOn)?this.$t('discovery.OTC.order.up')+this.$t('global.success'):this.$t('discovery.OTC.order.down')+this.$t('global.success'),
+                        type: 'success'
+                    })
+                    
+                }else{
+                    this.isSellOn   =   !this.isSellOn
+                }
+            })
+        }
     },
     watch:{
         currency(){

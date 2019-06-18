@@ -310,6 +310,10 @@ export const en = {
                 odeduction      :   'Deduction',
                 tax             :   'Seller`s handling fee',
                 total           :   'Total',
+                Range           :   'Range',
+                all             :   'All',
+                cn              :   'Infield',
+                cw              :   'Outfield',
                 tips:{
                     num         :   'Please enter the num!',
                     price       :   'Please enter the price!',
@@ -386,6 +390,8 @@ export const en = {
                 selectpay   :   'Payment in this',
                 LookPay     :   'Please check the mode of payment and choose the mode of payment',
                 ConfirmCancel:  'Do you confirm the cancellation of this order?',
+                up          :   'Online',
+                down        :   'Offline',
             },
             complaiont:{
                 title       :   'Complaiont',

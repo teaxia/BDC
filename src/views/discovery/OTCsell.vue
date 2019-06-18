@@ -47,16 +47,18 @@
                         <div slot="right" style="font-size:0.35rem;">CNY</div>
                     </x-input>
                 </group>
-                <!-- <div class="line-b sbank">
+                <div class="line-b sbank">
                     <div class="title-psw wd">
-                        {{$t('discovery.OTC.sell.security')}}
+                        {{$t('discovery.OTC.sell.Range')}}
                     </div>
                     <div class="psw">
-                        <div @click="ShowPSW()">
-                            <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
-                        </div>
+                        <RadioGroup v-model="animal">
+                            <Radio label="all"><span class="label-info">{{$t('discovery.OTC.sell.all')}}</span></Radio>
+                            <Radio label="cn"><span class="label-info">{{$t('discovery.OTC.sell.cn')}}</span></Radio>
+                            <Radio label="cw"><span class="label-info">{{$t('discovery.OTC.sell.cw')}}</span></Radio>
+                        </RadioGroup>
                     </div>
-                </div> -->
+                </div>
                 <group>
                     <div class="weui-cells vux-no-group-title">
                         <div class="vux-x-input weui-cell test">
@@ -188,8 +190,10 @@ export default {
             type	    :   false,		              // 切换密码状态'
             Poundage    :   '',                       // 手续费
             Key         :   '',
-            amount      :   0,                       // 实际到账
+            amount      :   0,                        // 实际到账
             showPSwed   :   false,                    // 显示安全密码弹窗 
+            animal      :   'all',
+            showVersion :   '',
 		}
 	},
 	methods: {
@@ -201,6 +205,11 @@ export default {
                     type: 'warn'
                 })
                 return;
+            }
+            if(this.animal=='all'){
+                this.showVersion    =   ''
+            }else{
+                this.showVersion    =   this.animal
             }
             // 提交发布信息
             this.$server.post(
@@ -215,7 +224,8 @@ export default {
                 cardInfoId  :   (this.bankId)?this.bankId:0,
                 isSellOn    :   this.isSellOn,
                 key         :   this.Key,
-                moneyPwd    :   this.password
+                moneyPwd    :   this.password,
+                showVersion :   this.showVersion,
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
