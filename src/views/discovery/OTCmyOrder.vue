@@ -65,12 +65,7 @@
 			<div class="order-remark mr20 order-line">
 				{{$t('discovery.OTC.myorder.remark')}}：{{data.Remark}}
 			</div>
-			<div v-if="data.Status==3&&this.orderType==3">
-				<!-- <group>
-                    <x-input class="test" :type="type?'text':'password'" :title="$t('wallet.tips.safetycode')" required :placeholder="$t('wallet.tips.inputcode')" v-model="passwprd">
-                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
-                    </x-input>
-                </group> -->
+			<!-- <div v-if="data.Status==3&&this.orderType==3">
 				<div class="line-b sbank">
                     <div class="title-psw wd">
                         {{$t('discovery.OTC.sell.security')}}
@@ -81,11 +76,11 @@
                         </div>
                     </div>
                 </div>
-			</div>
+			</div> -->
 			<div class="order-payment mr10">
 				<button class="btn btn-block btn-round" disabled v-if="data.Status==3&&this.orderType==2&&this.minutes<29">{{$t('discovery.OTC.complaiont.minutes')}}</button>
 				<button class="btn btn-block btn-round" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2&&this.minutes>=30">{{$t('discovery.OTC.complaiont.title')}}</button>
-				<button class="btn btn-block btn-round" v-if="data.Status==3&&this.orderType==3" @click="confirm()">{{$t('discovery.OTC.myorder.confirm')}}</button>
+				<button class="btn btn-block btn-round" v-if="data.Status==3&&this.orderType==3" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 			</div>
@@ -93,7 +88,7 @@
 				{{$t('discovery.OTC.myorder.wait')}}{{m}}{{$t('discovery.OTC.myorder.minute')}}{{s}}{{$t('discovery.OTC.myorder.second')}}
 			</div>
 		</div>
-		<Modal v-model="showPSwed" :mask-closable="false">
+		<Modal v-model="showPSwed" :mask-closable="false" @on-ok="confirm">
 			<div slot="header">
                 {{$t('wallet.tips.inputcode')}}
             </div>
