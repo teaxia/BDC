@@ -33,16 +33,18 @@
                     <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
                     </x-input>
                 </group>
-                <!-- <div class="line-b sbank">
+                <div class="line-b sbank">
                     <div class="title-psw wd">
-                        {{$t('discovery.OTC.sell.security')}}
+                        {{$t('discovery.OTC.sell.Range')}}
                     </div>
                     <div class="psw">
-                        <div @click="ShowPSW()">
-                            <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
-                        </div>
+                        <RadioGroup v-model="animal">
+                            <Radio label="all"><span class="label-info">{{$t('discovery.OTC.sell.all')}}</span></Radio>
+                            <Radio label="cn"><span class="label-info">{{$t('discovery.OTC.sell.cn')}}</span></Radio>
+                            <Radio label="cw"><span class="label-info">{{$t('discovery.OTC.sell.cw')}}</span></Radio>
+                        </RadioGroup>
                     </div>
-                </div> -->
+                </div>
                 <group>
                     <div class="weui-cells vux-no-group-title">
                         <div class="vux-x-input weui-cell test">
@@ -103,6 +105,8 @@ export default {
             isSellOn    :   true,                     // 是否立即上架
             showPSwed   :   false,                    // 显示安全密码弹窗
             type        :   false,
+            animal      :   'all',
+            showVersion :   '',
 		}
 	},
 	methods: {
@@ -115,6 +119,11 @@ export default {
                 })
                 return;
             }
+            if(this.animal=='all'){
+                this.showVersion    =   ''
+            }else{
+                this.showVersion    =   this.animal
+            }
             this.$server.post(
             'OTC_BuyGoods',{
                 guid 	    :   this.$storage.get('guid'),
@@ -125,7 +134,8 @@ export default {
                 supportZFB  :   this.alipay,
                 supportWX   :   this.wechart,
                 supportCard :   this.cardpay,
-                moneyPwd    :   this.password
+                moneyPwd    :   this.password,
+                showVersion :   this.showVersion,
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
