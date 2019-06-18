@@ -33,7 +33,7 @@
                     <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
                     </x-input>
                 </group>
-                <div class="line-b sbank">
+                <!-- <div class="line-b sbank">
                     <div class="title-psw wd">
                         {{$t('discovery.OTC.sell.security')}}
                     </div>
@@ -42,7 +42,7 @@
                             <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <group>
                     <div class="weui-cells vux-no-group-title">
                         <div class="vux-x-input weui-cell test">
@@ -59,7 +59,7 @@
                     </div>
                 </group>
             </div>
-            <Modal v-model="showPSwed" :mask-closable="false">
+            <Modal v-model="showPSwed" :mask-closable="false" @on-ok="doSubmit()">
                 <div slot="header">
                     {{$t('wallet.tips.inputcode')}}
                 </div>
@@ -76,7 +76,7 @@
                 <i @click="sbankd(2)" :class="{'iconfont':true,'icon-yinhangqia':true,'cardpay':cardpay}"></i>
                 <i @click="sbankd(0)" :class="{'iconfont':true,'icon-weixinzhifu':true,'wechart':wechart}"></i>
             </div>
-            <button @click="doSubmit()" class="btn btn-block btn-default btn-round">{{ $t("global.submit") }}</button>
+            <button @click="ShowPSW()" class="btn btn-block btn-default btn-round">{{ $t("global.submit") }}</button>
         </div>
     </div>
 </template>
@@ -107,43 +107,10 @@ export default {
 	},
 	methods: {
 		doSubmit(){
-            // 判断不为空
-            if(this.Num==''){
-                // 判断数量
-                this.$vux.toast.show({
-                    text: this.$t('discovery.OTC.sell.tips.num'),
-                    type: 'warn'
-                })
-                return;
-            }
-            if(this.cName==''){
-                // 判断选择币种
-                this.$vux.toast.show({
-                    text: this.$t('discovery.OTC.sell.tips.cName'),
-                    type: 'warn'
-                })
-                return;
-            }
-            if(this.price==''){
-                // 判断单价
-                this.$vux.toast.show({
-                    text: this.$t('discovery.OTC.sell.tips.price'),
-                    type: 'warn'
-                })
-                return;
-            }
             if(this.password==''){
                 // 判断安全码
                 this.$vux.toast.show({
                     text: this.$t('discovery.OTC.sell.tips.security'),
-                    type: 'warn'
-                })
-                return;
-            }
-            if(!this.alipay&&!this.cardpay&&!this.wechart){
-                // 判断是否有支付方式
-                this.$vux.toast.show({
-                    text: '必须选择一种付款方式',
                     type: 'warn'
                 })
                 return;
@@ -165,8 +132,13 @@ export default {
                         text: this.$t('global.success'),
                         type: 'success'
                     })
-                    // 清空数据
-                    this.Num = ''
+                    // 成功返回列表
+                    this.$router.push({
+                        path:"/discovery/otc",
+                        query:{
+                            active : true,
+                        }
+                    });
                 }
             })
             
@@ -225,6 +197,39 @@ export default {
             }
         },
         ShowPSW(){
+            // 判断不为空
+            if(this.Num==''){
+                // 判断数量
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.tips.num'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(this.cName==''){
+                // 判断选择币种
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.tips.cName'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(this.price==''){
+                // 判断单价
+                this.$vux.toast.show({
+                    text: this.$t('discovery.OTC.sell.tips.price'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(!this.alipay&&!this.cardpay&&!this.wechart){
+                // 判断是否有支付方式
+                this.$vux.toast.show({
+                    text: '必须选择一种付款方式',
+                    type: 'warn'
+                })
+                return;
+            }
             this.showPSwed = true
         }
     },

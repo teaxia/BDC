@@ -368,7 +368,8 @@
             }
             // 初始化数据
             this.OTCGetSellList()
-            //this.currency = this.$currency
+            // 判断返回跳转
+            this.active     =   (this.$route.query.active)?false:true;
 		}
 	}
 

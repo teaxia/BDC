@@ -37,7 +37,7 @@
                     <x-input class="test" :title="$t('wallet.send.num')" :show-clear="false" v-model="num" :placeholder="$t('wallet.send.tips.min')">
 					</x-input>
                 </group>
-				<div class="line-b sbank">
+				<!-- <div class="line-b sbank">
                     <div class="title-psw wd">
                         {{$t('discovery.OTC.sell.security')}}
                     </div>
@@ -45,12 +45,8 @@
                         <div @click="ShowPSW()">
                             <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
                         </div>
-                        <!-- <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i> -->
                     </div>
-                    <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
-                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
-                    </x-input> -->
-                </div>
+                </div> -->
 				<div class="send_label">
                     <div class="label">{{$t('wallet.send.class')}}</div>
                     <div class="radio">
@@ -64,11 +60,11 @@
                         </RadioGroup>
                     </div>
                 </div>
-				<button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
+				<button @click="ShowPSW()" class="btn btn-block btn-default btn-round mr50">{{$t('wallet.btn.send')}}</button>
             </div>
 		</div>
 		<!-- 输入安全密码 -->
-		<Modal v-model="showPSwed" :mask-closable="false">
+		<Modal v-model="showPSwed" :mask-closable="false" @on-ok="doSubmit()">
 			<div slot="header">
                 {{$t('wallet.tips.inputcode')}}
             </div>
@@ -111,21 +107,6 @@
 		},
 		methods: {
 			doSubmit(){
-				//
-				if(this.num<0.0001){
-					this.$vux.toast.show({
-                        text: this.$t('wallet.send.tips.min'),
-                        type: 'warn'
-					})
-					return;
-				}
-				if(this.bdcaddress==''||this.num==''||this.psw==''){
-					this.$vux.toast.show({
-						text: this.$t('discovery.recharge.error.full'),
-						type: 'warn'
-					})
-					return ;
-				}
 				this.$server.post(
 				'TransferAccount',
 				{
@@ -179,6 +160,21 @@
 				});
 			},
 			ShowPSW(){
+				// 判断
+				if(this.num<0.0001){
+					this.$vux.toast.show({
+                        text: this.$t('wallet.send.tips.min'),
+                        type: 'warn'
+					})
+					return;
+				}
+				if(this.bdcaddress==''||this.num==''){
+					this.$vux.toast.show({
+						text: this.$t('discovery.recharge.error.full'),
+						type: 'warn'
+					})
+					return ;
+				}
 				// 安全码弹出层
 				this.showPSwed = true
 			},

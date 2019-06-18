@@ -14,7 +14,7 @@
                         <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group> -->
-                <div class="line-b sbank">
+                <!-- <div class="line-b sbank">
                     <div class="title-psw wd">
                         {{$t('discovery.OTC.sell.security')}}
                     </div>
@@ -22,12 +22,8 @@
                         <div @click="ShowPSW()">
                             <span>{{$t('global.input')}}{{$t('discovery.OTC.sell.security')}}</span>
                         </div> 
-                        <!-- <i @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i> -->
                     </div>
-                    <!-- <x-input class="test" :type="type?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('discovery.OTC.sell.security')">
-                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
-                    </x-input> -->
-                </div>
+                </div> -->
                 <div class="line-b sbank">
                     <div class="wd" style="width:3rem;font-size:0.45rem">
                         {{$t('discovery.extract.extractType')}}
@@ -51,7 +47,7 @@
                     <span>{{$t('discovery.withdrawal.tips.reduce')}}：{{amount}}</span>
                 </div>
             </div>
-            <button @click="subconfirm()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
+            <button @click="ShowPSW()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
             <div class="get-last-dt" v-if="GetDTList.OutCurrency">
                 <div class="title">{{$t('discovery.btob.history')}}</div>
                 <flexbox class="div">
@@ -100,7 +96,7 @@
                 </div>
             </div>
         </Modal>
-        <Modal v-model="showPSwed" :mask-closable="false">
+        <Modal v-model="showPSwed" :mask-closable="false" @on-ok="subconfirm()">
 			<div slot="header">
                 {{$t('wallet.tips.inputcode')}}
             </div>
@@ -174,20 +170,6 @@ export default {
                 })
                 return;
             }
-            if(this.bdcnum==''){
-                this.$vux.toast.show({
-                    text: this.$t('discovery.extract.tips.num'),
-                    type: 'warn'
-                })
-                return;
-            }
-            if(this.addrs==''){
-                this.$vux.toast.show({
-                    text: this.$t('discovery.extract.tips.address'),
-                    type: 'warn'
-                })
-                return;
-            }
             this.modal = true;
         },
         ok () {
@@ -238,6 +220,20 @@ export default {
             this.addrs = this.GetDTList.Address
         },
         ShowPSW(){
+            if(this.bdcnum==''){
+                this.$vux.toast.show({
+                    text: this.$t('discovery.extract.tips.num'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(this.addrs==''){
+                this.$vux.toast.show({
+                    text: this.$t('discovery.extract.tips.address'),
+                    type: 'warn'
+                })
+                return;
+            }
             this.showPSwed = true
         },
         math(){

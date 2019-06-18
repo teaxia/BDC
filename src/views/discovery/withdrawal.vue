@@ -43,7 +43,7 @@
                          <i slot="right" @click="changType()" :class="['iconfont',showtype?'icon-17yanjing':'icon-Close']"></i>
                     </x-input>
                 </group> -->
-                <div class="line-b sbank">
+                <!-- <div class="line-b sbank">
                     <div class="title-psw wd">
                         {{$t('discovery.OTC.sell.security')}}
                     </div>
@@ -52,7 +52,7 @@
                             <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <group>
                     <x-input type="text" class="test" :title="$t('discovery.withdrawal.money')" v-model="money" :placeholder="$t('discovery.withdrawal.tips.input')"></x-input>
                 </group>
@@ -69,7 +69,7 @@
                         <Option v-for="(item,index) in cardList" :value="index" :key="index">{{ item.cardNo }}{{item.bankName}}</Option>
                     </Select>
                 </div> -->
-                <button class="btn btn-block btn-round" @click="confirm()">{{$t('discovery.withdrawal.confirm')}}</button>
+                <button class="btn btn-block btn-round" @click="ShowPSW()">{{$t('discovery.withdrawal.confirm')}}</button>
             </div>
             <flexbox class="mr20 sreach">
                 <flexbox-item>
@@ -128,7 +128,7 @@
 			</div>
 		</Modal> -->
         <!-- 输入安全密码 -->
-		<Modal v-model="showPSwed" :mask-closable="false">
+		<Modal v-model="showPSwed" :mask-closable="false" @on-ok="confirm()">
 			<div slot="header">
                 {{$t('wallet.tips.inputcode')}}
             </div>
@@ -275,49 +275,10 @@
             confirm(){
                 // 去除空格
                 this.addrs   =   this.addrs.replace(/\s+/g,"");
-                // 效验操作
-                if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.money)){
-                    this.$vux.toast.show({
-                        text: this.$t('discovery.withdrawal.tips.money'),
-                        type: 'warn'
-                    })
-                    return
-                }
-                // 提币地址非空验证
-                if(this.addrs==''){
-                    this.$vux.toast.show({
-                        text: this.$t('discovery.withdrawal.tips.address'),       // 投票地址不能为空
-                        type: 'warn'
-                    })
-                    return
-                }
                 // 判断安全码
                 if(this.moneyPwd==''){
                     this.$vux.toast.show({
                         text: this.$t('wallet.tips.inputcode'),
-                        type: 'warn'
-                    })
-                    return
-                }
-                // 判断最低提币是否小于200
-                // if(this.money<200){
-                //     this.$vux.toast.show({
-                //         text: '提币额不能小于200',
-                //         type: 'warn'
-                //     })
-                //     return
-                // }
-                if(this.money==''){
-                    this.$vux.toast.show({
-                        text: this.$t('discovery.withdrawal.tips.money'),
-                        type: 'warn'
-                    })
-                    return
-                }
-                // 判断提现额是否大于收益余额
-                if(this.money>this.myEarnings){
-                    this.$vux.toast.show({
-                        text: this.$t('discovery.withdrawal.tips.wawal'),
                         type: 'warn'
                     })
                     return
@@ -403,6 +364,45 @@
                 this.showtype = !this.showtype
             },
             ShowPSW(){
+                // 效验操作
+                if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.money)){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.withdrawal.tips.money'),
+                        type: 'warn'
+                    })
+                    return
+                }
+                // 提币地址非空验证
+                if(this.addrs==''){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.withdrawal.tips.address'),       // 投票地址不能为空
+                        type: 'warn'
+                    })
+                    return
+                }
+                // 判断最低提币是否小于200
+                // if(this.money<200){
+                //     this.$vux.toast.show({
+                //         text: '提币额不能小于200',
+                //         type: 'warn'
+                //     })
+                //     return
+                // }
+                if(this.money==''){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.withdrawal.tips.money'),
+                        type: 'warn'
+                    })
+                    return
+                }
+                // 判断提现额是否大于收益余额
+                if(this.money>this.myEarnings){
+                    this.$vux.toast.show({
+                        text: this.$t('discovery.withdrawal.tips.wawal'),
+                        type: 'warn'
+                    })
+                    return
+                }
 				// 安全码弹出层
 				this.showPSwed = true
 			},
