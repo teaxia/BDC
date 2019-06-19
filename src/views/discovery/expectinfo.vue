@@ -34,9 +34,9 @@
                 <div class="pos">
                     <img :src="bgTop">
                     <div class="posg pos-2">
-                        <!-- 固定算力 -->
-                        <div>{{$t('discovery.expectinfo.fixedPos')}}</div>
-                        <div>{{Pos[0]}}</div>
+                        <!-- 总算力剩余 -->
+                        <div>{{$t('discovery.expectinfo.totalPos')}}</div>
+                        <div>{{Pos[3]}}</div>
                     </div>
                     <div class="posg pos-4">
                         <!-- 管理算力 -->
@@ -49,9 +49,9 @@
                         <div>{{Pos[2]}}</div>
                     </div>
                     <div class="posg pos-1">
-                        <!-- 总算力剩余 -->
-                        <div>{{$t('discovery.expectinfo.totalPos')}}</div>
-                        <div>{{Pos[3]}}</div>
+                        <!-- 固定算力 -->
+                        <div>{{$t('discovery.expectinfo.fixedPos')}}</div>
+                        <div>{{Pos[0]}}</div>
                     </div>
                 </div>
                 <!-- <video id="video1"  width="270" autoplay src=""></video> -->
@@ -68,7 +68,7 @@
 			return {
                 expectinfo  :   [],
                 Pos         :   [],             // 算力信息0:固定算力1:管理算力2:推广算力3:总算力剩余
-                bgTop       :   './static/images/BG.jpg'
+                bgTop       :   './static/images/bg.gif'
 			}
         },
         watch:{

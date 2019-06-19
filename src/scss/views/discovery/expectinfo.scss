@@ -1,8 +1,8 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
-$space: 20px;
-$topspace:100px;
+$space: 0.26667rem;
+$topspace:1.3333rem;
 .expectinfo{
     .exp-grid-center{
         display: flex;
@@ -60,26 +60,26 @@ $topspace:100px;
             font-size: 24px;
         }
         .pos-1{
-            left:50%;
+            left:78%;
             top:$topspace;
             transform: translate(-50%, 0%);
             // color:$font-red;
         }
         .pos-2{
             left: $space;
-            top:50%;
+            top:23%;
             transform: translate(0, -50%);
             // color:#0ffe25;
         }
         .pos-3{
-            left:50%;
+            left:18%;
             bottom:$topspace;
             transform: translate(-50%, 0%);
             // color:#ff00ba;
         }
         .pos-4{
             right:$space;
-            bottom:50%;
+            bottom:18%;
             transform: translate(0, 50%);
             // color:#fff;
         }
