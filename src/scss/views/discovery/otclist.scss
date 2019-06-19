@@ -3,6 +3,8 @@
 @import "../../base/button";
 @import "../../base/spanTag";
 .orderList{
+    background: #f2f2f2f2;
+    height: 100%;
     .pb20{
         padding:20px;
     }
@@ -10,9 +12,10 @@
         position: relative;
         height: 70px;
         overflow: hidden;
+        margin-top:20px;
     }
     .tab{
-        height: 80px;
+        height: 80px; 
         &-item{
             height: 79px;
             line-height: 79px;
@@ -21,18 +24,42 @@
         }
     } 
     .list{
+        .list-profit{
+            margin-top:0 !important;
+            border-radius: 0 !important;
+            position: relative;
+            .tag{
+                position: absolute;
+                top:34px;
+            }
+        }
+        .profit-bg{
+            background:transparent !important;
+        }
         .total-profit{
-            margin-top:10px;
-            font-size:28px;
+            padding-top:10px;
+            font-size:34px;
             padding:10px 0;
             color:$font-orange;
-            border-bottom: 0.01rem solid $border-line;
+            text-align: center;
+            background:#fff;
+        }
+        .order-list-profit-title{
+            font-size:20px !important;
         }
         .order-list-content{
-            border-bottom: 0.01rem solid $border-line;
-            padding:10px 0;
+            background:#fff;
+            margin-top:20px;
+            border-radius: 8px;
+            padding:18px;
             .right{
                 text-align: right;
+            }
+            .order-list-profit{
+                margin-left: 0px !important;
+            }
+            .ml30{
+                margin-left: 30px !important;
             }
             .order-list-info{
                 margin-top:15px;
@@ -41,14 +68,23 @@
                     color:$font-orange;
                 }
                 .total{
-                    color:$font-blue;
+                    color:#333;
+                    font-size:30px;
                 }
                 .buynum{
                     color:$font-red;
+                    font-size:22px;
                 }
                 .price{
                     color:$font-orange;
+                    font-size:22px;
                 }
+                .price-important{
+                    font-size:28px;
+                }
+            }
+            .grid-username{
+                text-align: center;
             }
             .order-list-type{
                 text-align: right;
@@ -77,43 +113,51 @@
     }
     .otc-item{
         margin-top:20px;
+        background: #fff;
+        border-radius: 8px;
         &:last-child{
             margin-bottom: 50px;
         }
         .otc-grid{
-            padding: 5px 20px;
+            padding: 30px 20px;
         }
         .otc-grid-title{
             display: flex;
-            padding-bottom: 10px;
-            border-bottom: 0.01rem solid $border-base;
+            justify-content: space-between;
+            padding-bottom: 20px;
             vertical-align:middle;
-            .grid-username{
-                height: 55px;
-                line-height: 55px;
-                margin-left: 15px;
-                margin-right:auto;
-            }
             .grid-info{
                 height: 55px;
                 line-height: 55px;
+                color: #999;
             }
-            .smallicon{
-                width: 50px;
-                height: 50px;
+            .otc-grid-right{
+                margin-top: 8px;
+                text-align: right;
+                color: #999;
+                i{
+                    font-size:18px;
+                    line-height: 1;
+                }
             }
+        }
+        .otc-grid-curreny{
+            .grid-username{
+                font-size:20px;
+                text-align: center;
+            }
+            margin-right: 30px;
         }
         .otc-grid-price{
             flex: 3;
-            font-size:24px;
-            color: $font-empty;
             .price{
                 color: $font-h2;
-                font-size:32px;
+                font-size:30px;
                 font-weight: bold;
             }
             .otc-price{
-                font-size:24px;
+                font-size:22px;
+                color:#666;
             }
         }
         .otc-grid-pay{
@@ -121,16 +165,24 @@
             .otc-grid-paylist{
                 margin-top:10px;
                 text-align: right;
-                .icon{
-                    width: 40px;
-                    height: 40px;
-                }
             }
-            .otc-grid-right{
-                margin-top: 5px;
-                text-align: right;
-                color: $font-empty;
-            }
+        }
+    }
+    .tag{
+        width: 90px;
+        height: 50px;
+        border-radius: 8px;
+        margin:0;
+        font-size:22px;
+    }
+    .time{
+        padding-top:10px;
+        justify-content: space-between;
+        background:#fff;
+        .center{
+            display: block !important;
+            width: 300px;
+            margin:0 auto;
         }
     }
 }

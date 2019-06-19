@@ -20,14 +20,14 @@
 			<search v-model="search" ref="search" @on-blur="Query()" @on-submit="Query()" :placeholder="$t('discovery.OTC.orderlist.SorderId')" position="absolute" :auto-fixed='false'>
 			</search>
 		</div>
-		<div class="pb20">
+		<div :class="{'pb20':orderType!=4,'pb0':orderType==4}">
 			<v-touch :swipe-options="{direction: 'horizontal'}" v-on:swipeleft="onSwipeRight" v-on:swiperight="onSwipeLeft">
 			<flexbox class="time" v-if="orderType>1">
 				<flexbox-item>
-					<DatePicker @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
+					<DatePicker class="center" @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
 				</flexbox-item>
 				<flexbox-item>
-					<DatePicker @on-change="endtime" type="date"  v-model="enddate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
+					<DatePicker class="center" @on-change="endtime" type="date"  v-model="enddate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
 				</flexbox-item>
 			</flexbox>
 			
@@ -35,20 +35,25 @@
 				<div class="otc-item" @click="edit(v.Id)" v-for="(v,index) in MySellOrder" v-if="v.Id" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
-							<svg class="smallicon" aria-hidden="true" v-if="$currency.indexOf(v.currenyName)>=0">
-								<use :xlink:href="`#icon-`+v.currenyName"></use>
-							</svg>
-							<Avatar size="small" v-else style="background:#f56a00;">
-								<span class="line-height">{{v.currenyName}}</span>
-							</Avatar>
-                            <div class="grid-username">{{v.currenyName}}</div>
-                            <div class="grid-info">{{v.CreateTime}}</div>
+							<div class="grid-info">{{v.CreateTime}}</div>
+							<div class="otc-grid-right">
+								<i class="iconfont icon-arrow-right"></i>
+							</div>
                         </div>
                         <div class="otc-grid-main">
                             <div class="v-flex">
+								<div class="otc-grid-curreny">
+									<svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(v.currenyName)>=0">
+										<use :xlink:href="`#icon-`+v.currenyName"></use>
+									</svg>
+									<Avatar size="small" v-else style="background:#f56a00;">
+										<span class="line-height">{{v.currenyName}}</span>
+									</Avatar>
+									<div class="grid-username">{{v.currenyName}}</div>
+								</div>
                                 <div class="otc-grid-price">
                                     <div class="price">
-                                        {{$t('discovery.OTC.orderlist.price')}}：{{$numberComma(v.price)}}CNY
+                                        {{$t('discovery.OTC.orderlist.price')}}：{{$numberComma(v.price)}}（CNY）
                                     </div>
                                     <div class="otc-price">
                                         <div>{{$t('discovery.OTC.orderlist.total')}}：{{$numberComma(v.currenyNum)}}（{{v.currenyName}}）</div>
@@ -70,9 +75,7 @@
                                             {{$t('discovery.OTC.type.type_2')}}
                                         </div>
                                     </div>
-                                    <div class="otc-grid-right">
-                                        <i class="iconfont icon-arrow-right"></i>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -82,27 +85,31 @@
 			</div>
 
 			<div class="goods-list" v-if="orderType==1">
-				<div class="otc-item" @click="editDemand(v.Id)" v-for="(v,index) in MyBuyOrder" v-if="v.Id" :key="index">
+				<div class="otc-item" @click="edit(v.Id)" v-for="(v,index) in MyBuyOrder" v-if="v.Id" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
-							<svg class="smallicon" aria-hidden="true" v-if="$currency.indexOf(v.currenyName)>=0">
-								<use :xlink:href="`#icon-`+v.currenyName"></use>
-							</svg>
-							<Avatar size="small" v-else style="background:#f56a00;">
-								<span class="line-height">{{v.currenyName}}</span>
-							</Avatar>
-                            <div class="grid-username">{{v.currenyName}}</div>
-                            <div class="grid-info">{{v.CreateTime}}</div>
+							<div class="grid-info">{{v.CreateTime}}</div>
+							<div class="otc-grid-right">
+								<i class="iconfont icon-arrow-right"></i>
+							</div>
                         </div>
                         <div class="otc-grid-main">
                             <div class="v-flex">
+								<div class="otc-grid-curreny">
+									<svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(v.currenyName)>=0">
+										<use :xlink:href="`#icon-`+v.currenyName"></use>
+									</svg>
+									<Avatar size="small" v-else style="background:#f56a00;">
+										<span class="line-height">{{v.currenyName}}</span>
+									</Avatar>
+									<div class="grid-username">{{v.currenyName}}</div>
+								</div>
                                 <div class="otc-grid-price">
                                     <div class="price">
-                                        {{$t('discovery.OTC.orderlist.oprice')}}：{{$numberComma(v.price)}}CNY
+                                        {{$t('discovery.OTC.orderlist.oprice')}}：{{$numberComma(v.price)}}（CNY）
                                     </div>
                                     <div class="otc-price">
                                         <div>{{$t('discovery.OTC.orderlist.neednum')}}：{{$numberComma(v.currenyNum)}}（{{v.currenyName}}）</div>
-                                        <!-- <div>已售数量：{{$numberComma(v.sellNum)}} （{{v.currenyName}}）</div> -->
                                     </div>
                                 </div>
                                 <div class="otc-grid-pay">
@@ -120,9 +127,7 @@
                                             {{$t('discovery.OTC.type.type_2')}}
                                         </div>
                                     </div>
-                                    <div class="otc-grid-right">
-                                        <i class="iconfont icon-arrow-right"></i>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -136,34 +141,39 @@
 				<div class="order-list-content" v-for="(v,index) in BuyOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id,v.status)">
 					<flexbox>
 						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
-						<flexbox-item :span="2"><span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span><span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span></flexbox-item>
-						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
+						<flexbox-item :span="5">{{v.CreateTime}}</flexbox-item>
+						<flexbox-item class="right">
+							<span class="order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
+							<span class="order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
+							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
+							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
+							<span class="order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
+						</flexbox-item>
 					</flexbox>
 					<flexbox>
-						<flexbox-item span='38'>
+						<flexbox-item span='42'>
 							<svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(v.currenyName)>=0">
 								<use :xlink:href="`#icon-`+v.currenyName"></use>
 							</svg>
 							<Avatar v-else class="sicon avatar" style="background:#f56a00;">
 								<span class="line-height">{{v.currenyName}}</span>
 							</Avatar>
+							<div class="grid-username">{{v.currenyName}}</div>
 						</flexbox-item>
 						<flexbox-item class="order-list-info">
 							<div>
-								<span class="price">{{$t('discovery.OTC.orderlist.oprice')}}：{{v.price}}（CNY）</span>
-								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
+								<span class="total">{{$t('discovery.OTC.orderlist.totalprice')}}：{{v.TotalPay}}（CNY）</span>
 							</div>
 							<div>
-								<span class="total">{{$t('discovery.OTC.orderlist.totalprice')}}：{{v.TotalPay}}（CNY）</span>
+								<span class="price">{{$t('discovery.OTC.orderlist.oprice')}}：{{v.price}}（CNY）</span>
+							</div>
+							<div>
+								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
 							</div>
 						</flexbox-item>
 						<flexbox-item span='58' class="order-list-type">
-							<span class="order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
-							<span class="order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
-							<!-- <span class="order-list-type-get" v-if="v.status==4">已发币</span> -->
-							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
-							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
-							<span class="order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
+							<span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
+							<span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
 						</flexbox-item>
 					</flexbox>
 				</div>
@@ -174,34 +184,39 @@
 				<div class="order-list-content" v-for="(v,index) in SellOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id)">
 					<flexbox>
 						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
-						<flexbox-item :span="2"><span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span><span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span></flexbox-item>
-						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
+						<flexbox-item :span="5">{{v.CreateTime}}</flexbox-item>
+						<flexbox-item class="right">
+							<span class="order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
+							<span class="order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
+							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
+							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
+							<span class="order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
+						</flexbox-item>
 					</flexbox>
 					<flexbox>
-						<flexbox-item span='38'>
+						<flexbox-item span='42'>
 							<svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(v.currenyName)>=0">
 								<use :xlink:href="`#icon-`+v.currenyName"></use>
 							</svg>
 							<Avatar v-else class="sicon avatar" style="background:#f56a00;">
 								<span class="line-height">{{v.currenyName}}</span>
 							</Avatar>
+							<div class="grid-username">{{v.currenyName}}</div>
 						</flexbox-item>
-						<flexbox-item class="order-list-info">
-							<div>
-								<span class="price">{{$t('discovery.OTC.orderlist.oprice')}}：{{v.price}}（CNY）</span>
-								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
-							</div>
+						<flexbox-item class="order-list-info ml30">
 							<div>
 								<span class="total">{{$t('discovery.OTC.orderlist.totalprice')}}：{{v.TotalPay}}（CNY）</span>
 							</div>
+							<div>
+								<span class="price">{{$t('discovery.OTC.orderlist.oprice')}}：{{v.price}}（CNY）</span>
+							</div>
+							<div>
+								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
+							</div>
 						</flexbox-item>
 						<flexbox-item span='58' class="order-list-type">
-							<span class="order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
-							<span class="order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
-							<!-- <span class="order-list-type-get" v-if="v.status==4">已发币</span> -->
-							<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
-							<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
-							<span class="order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
+							<span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
+							<span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
 						</flexbox-item>
 					</flexbox>
 				</div>
@@ -212,16 +227,16 @@
 				<div class="total-profit">
 					{{$t('discovery.OTC.orderlist.Profit')}}：{{TotalProfit}}（BDC）
 				</div>
-				<div class="order-list-content" v-for="(v,index) in ProfitList" v-if="v.OrderId" :key="index" @click="myOrder(v.OrderId)">
-					<flexbox>
+				<div :class="{'order-list-content':true,'list-profit':true,'profit-bg':(index+1)%2!=0}" v-for="(v,index) in ProfitList" v-if="v.OrderId" :key="index" @click="myOrder(v.OrderId)">
+					<flexbox class="order-list-profit-title">
 						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.OrderId}}</flexbox-item>
-						<flexbox-item class="right">{{v.CreateTime}}</flexbox-item>
+						<flexbox-item>{{v.CreateTime}}</flexbox-item>
 					</flexbox>
 					<flexbox>
-						<flexbox-item class="order-list-info">
+						<flexbox-item class="order-list-info order-list-profit">
 							<div>
-								<span class="price">{{$t('discovery.OTC.orderlist.orderType4')}}：{{v.Profit}}（BDC）</span>
-								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（BDC）</span>
+								<span class="price">{{$t('discovery.OTC.orderlist.orderType4')}}：<span class="price-important">{{v.Profit}}（BDC）</span></span>
+								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：<span class="price-important">{{v.BuyNum}}（BDC）</span></span>
 							</div>
 						</flexbox-item>
 						<flexbox-item :span="2">
