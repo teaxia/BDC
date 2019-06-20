@@ -68,7 +68,7 @@
                 </div>
             </div>
             <button @click="doSubmit()" v-if="!Block" :disabled='islock'  class="btn btn-block btn-default btn-round">{{$t('discovery.OTC.edit.edit')}}</button>
-            <button @click="delSellOrder()" v-if="!Block" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
+            <button @click="confirm()" v-if="!Block" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
         </div>
         <div class="popup">
 			<vfpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showFPupop">
@@ -122,6 +122,10 @@
 				<button class="btn btn-block btn-round" @click="goauth()">{{$t('wallet.send.auth')}}</button>
 			</div>
 		</Modal>
+        <Modal v-model="delshow" :closable="false" :mask-closable="false" @on-ok="delSellOrder()">
+			<div slot="header">{{$t('discovery.OTC.edit.ok')}}</div>
+			<div class="modal-body">{{$t('discovery.OTC.edit.delconfirm')}}</div>
+		</Modal>
     </div>
 </template>
 
@@ -156,6 +160,7 @@ export default {
             wechart		:	[],		                  // 微信
             showFPupop	:	false,
             PayType		:	'',	                      // 0支付宝，1银行卡，2微信
+            delshow     :   false,                    // 是否确认删除
 		}
     },
 	methods: {
@@ -377,6 +382,10 @@ export default {
                     this.isSellOn   =   !this.isSellOn
                 }
             })
+        },
+        confirm(){
+            // 是否确认删除
+            this.delshow = true
         }
     },
 	mounted() {

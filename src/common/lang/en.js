@@ -425,6 +425,8 @@ export const en = {
                 downdel     :   'Delete only after removal',
                 edit        :   'Edit',
                 del         :   'Delete',
+                delconfirm  :   'Are deletions confirmed?',
+                ok          :   'Operational confirmation',
             },
             orderlist:{
                 title       :   'Record',

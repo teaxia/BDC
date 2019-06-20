@@ -427,6 +427,8 @@ export const zh = {
                 downdel     :   '只有下架后才可删除',
                 edit        :   '保存修改',
                 del         :   '删除',
+                delconfirm  :   '是否确认删除？',
+                ok          :   '操作确认',
             },
             orderlist:{
                 title       :   '订单记录',
