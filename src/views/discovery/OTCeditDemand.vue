@@ -61,8 +61,12 @@
                 <i @click="sbankd(0)" :class="{'iconfont':true,'icon-weixinzhifu':true,'wechart':wechart}"></i>
             </div>
             <button v-if="!Block" @click="doSubmit()" :disabled='islock' class="btn btn-block btn-default btn-round">{{$t('discovery.OTC.edit.edit')}}</button>
-            <button v-if="!Block" @click="DelBuyGoods()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
+            <button v-if="!Block" @click="confirm()" :disabled='islock'  class="btn btn-block btn-error btn-round mr20">{{$t('discovery.OTC.edit.del')}}</button>
         </div>
+        <Modal v-model="delshow" :closable="false" :mask-closable="false" @on-ok="DelBuyGoods()">
+			<div slot="header">{{$t('discovery.OTC.edit.ok')}}</div>
+			<div class="modal-body">{{$t('discovery.OTC.edit.delconfirm')}}</div>
+		</Modal>
     </div>
 </template>
 
@@ -88,6 +92,7 @@ export default {
             m           :   '',
             s           :   '',
             clock       :   '',                       // 锁定
+            delshow     :   false,                    // 是否确认删除
 		}
 	},
 	methods: {
@@ -300,6 +305,10 @@ export default {
                     this.isSellOn   =   !this.isSellOn
                 }
             })
+        },
+        confirm(){
+            // 是否确认删除
+            this.delshow = true
         }
     },
     watch:{

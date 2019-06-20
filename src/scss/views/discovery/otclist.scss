@@ -150,6 +150,7 @@
         }
         .otc-grid-price{
             flex: 3;
+            position: relative;
             .price{
                 color: $font-h2;
                 font-size:30px;
@@ -158,6 +159,20 @@
             .otc-price{
                 font-size:22px;
                 color:#666;
+            }
+            .sv{
+                position: absolute;
+                right: 0px;
+                top:12px;
+                color:$font-green;
+                font-size:28px;
+                font-weight: bold;
+            }
+            .c-primary{
+                color:$font-yellow;
+            }
+            .c-all{
+                color:$font-blue;
             }
         }
         .otc-grid-pay{
@@ -176,7 +191,7 @@
         font-size:22px;
     }
     .time{
-        padding-top:10px;
+        padding:10px 0;
         justify-content: space-between;
         background:#fff;
         .center{

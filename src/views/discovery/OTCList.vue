@@ -52,6 +52,7 @@
 									<div class="grid-username">{{v.currenyName}}</div>
 								</div>
                                 <div class="otc-grid-price">
+									<div :class="{'sv':true,'c-primary':v.sv=='场内','c-all':v.sv=='全部'}">{{v.sv}}</div>
                                     <div class="price">
                                         {{$t('discovery.OTC.orderlist.price')}}：{{$numberComma(v.price)}}（CNY）
                                     </div>
@@ -85,7 +86,7 @@
 			</div>
 
 			<div class="goods-list" v-if="orderType==1">
-				<div class="otc-item" @click="edit(v.Id)" v-for="(v,index) in MyBuyOrder" v-if="v.Id" :key="index">
+				<div class="otc-item" @click="editDemand(v.Id)" v-for="(v,index) in MyBuyOrder" v-if="v.Id" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
 							<div class="grid-info">{{v.CreateTime}}</div>
@@ -105,6 +106,7 @@
 									<div class="grid-username">{{v.currenyName}}</div>
 								</div>
                                 <div class="otc-grid-price">
+									<div :class="{'sv':true,'c-primary':v.sv=='场内','c-all':v.sv=='全部'}">{{v.sv}}</div>
                                     <div class="price">
                                         {{$t('discovery.OTC.orderlist.oprice')}}：{{$numberComma(v.price)}}（CNY）
                                     </div>
@@ -437,6 +439,7 @@
                     orderId     :   this.search,            	  		// 订单号
                 }).then(data => {
                     if(data){
+						
 						this.TotalProfit	=	data.TotalProfit		// 总收益
 						this.ProfitList		=	data.list				// 收益明细
                     }
