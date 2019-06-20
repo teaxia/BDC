@@ -164,7 +164,7 @@
 			return {
                 act         :   0,
                 blist       :   [],
-                actBB       :   'BTC',
+                actBB       :   'USDT',
                 num         :   '',
                 address     :   '',
                 proportion  :   '',
@@ -279,8 +279,8 @@
                     this.actBB = name
                 }else{
                     // 没有该币种，默认BTC
-                    this.act = 0
-                    this.actBB = 'BTC'
+                    this.act = 3
+                    this.actBB = 'USDT'
                 }
                 
             },
@@ -441,7 +441,7 @@
 		mounted() {
             // 获取详情
             this.GetList()
-            this.bbName = (this.$route.query.bbname)?this.$route.query.bbname:'BTC'
+            this.bbName = (this.$route.query.bbname)?this.$route.query.bbname:'USDT'
             this.GetCurrenyPrice()
             this.GetLastDT()
         },
