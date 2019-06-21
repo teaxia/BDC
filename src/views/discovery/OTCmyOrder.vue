@@ -280,23 +280,18 @@
 				}
 				// 如果时间为负数，则不执行下面的倒计时操作
 				if(m<0){
-					console.log(m);
 					return
 				}
 				// 通过剩余时间计算出剩余秒数
 				let Tmp  =  this.$math.add(m*60,sm)
 				// 判断读秒是否大于1800
 				if(Tmp>1800){
-					console.log('运算之前'+Tmp)
 					Tmp = 1800+(1800-Tmp)
-					console.log('运算过后'+Tmp)
 				}
 				let s    =  1800-Tmp
 				if(s<0){
 					s    =  1800-(1800-s)
 				}
-				console.log('分钟'+m);
-				console.log('秒'+sm);
 				
 				// 1800秒是半小时
 				this.percentclock = window.setInterval(() => {
@@ -305,7 +300,6 @@
 						window.clearInterval(this.percentclock)
 					}
 					this.percent =  Math.round(s/1800*100)
-					console.log(this.percent)
 				},1000)
 			},
 		},
