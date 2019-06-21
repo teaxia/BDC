@@ -168,7 +168,7 @@ export default {
                 i++;
                 if (this.T<=0) {
                     this.$router.push({
-                        path:"/OTC/index",
+                        path:"/OTC/OTCSellBuy",
                     });
                     window.clearInterval(this.clock)
                 }

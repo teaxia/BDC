@@ -144,7 +144,7 @@ export default {
                     })
                     // 成功返回列表
                     this.$router.push({
-                        path:"/OTC/index",
+                        path:"/OTC/OTCSellBuy",
                         query:{
                             active : true,
                         }

@@ -267,7 +267,7 @@
 			},
 			GOTC(){
 				this.$router.push({
-					path:"/OTC/index",
+					path:"/OTC/OTCSellBuy",
 				});
 			},
 			Goback(){

@@ -70,7 +70,7 @@ export default {
       },{showLoading:false}).then(data => {
         if(data){
           this.$router.push({
-            path    :   '/OTC/index',
+            path    :   '/OTC/OTCSellBuy',
           });
         }
       })
