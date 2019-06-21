@@ -168,7 +168,7 @@ export default {
                 i++;
                 if (this.T<=0) {
                     this.$router.push({
-                        path:"/discovery/otc",
+                        path:"/OTC/index",
                     });
                     window.clearInterval(this.clock)
                 }
@@ -197,7 +197,7 @@ export default {
             }).then(data => {
                 if(data){
                     this.$router.push({
-                        path:"/discovery/OTC/list",
+                        path:"/OTC/list",
                         query:{
                             type      :   3,                // 前往求已购页面
                         }
@@ -254,5 +254,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otcbuy";
+@import "../../scss/views/otc/otcbuy";
 </style>

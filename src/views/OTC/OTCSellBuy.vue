@@ -2,10 +2,10 @@
 	<div class="otc margin-header" v-cloak>
         <x-header :left-options="{backText:this.$t('global.back'),preventGoBack:true}" @on-click-back="Goback()">
             <div slot="right">
-                <router-link to="/discovery/OTC/list">
+                <router-link to="/OTC/list">
                     <div class="btn btn-auto btn-success right">{{$t('discovery.OTC.index.record')}}</div>
                 </router-link>
-                <router-link to="/discovery/OTC/OTCRank">
+                <router-link to="/OTC/OTCRank">
                     <span class="btn btn-auto btn-error right">{{$t('discovery.OTC.ranking')}}</span>
                 </router-link>
             </div>
@@ -83,7 +83,7 @@
             </my-scroll>
         </div>
         <div class="sell">
-            <router-link to="/discovery/OTC/sell" v-if="active">
+            <router-link to="/OTC/sell" v-if="active">
                 <svg class="icon-sell" aria-hidden="true">
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
@@ -91,7 +91,7 @@
                     {{$t('discovery.OTC.index.send')}}
                 </span>
             </router-link>
-            <router-link to="/discovery/OTC/demand" v-if="!active">
+            <router-link to="/OTC/demand" v-if="!active">
                 <svg class="icon-sell" aria-hidden="true">
                     <use xlink:href="#icon-paimailiang"></use>
                 </svg>
@@ -266,14 +266,14 @@
             buy(Id){
                 if(this.active){
                     this.$router.push({
-                        path:"/discovery/OTC/buy",
+                        path:"/OTC/buy",
                         query:{
                             id  :  Id
                         }
                     });
                 }else{
                     this.$router.push({
-                        path:"/discovery/OTC/buyOrder",
+                        path:"/OTC/buyOrder",
                         query:{
                             id  :  Id
                         }
@@ -376,5 +376,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otc";
+@import "../../scss/views/otc/otc";
 </style>

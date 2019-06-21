@@ -85,5 +85,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otccoomplaiontview";
+@import "../../scss/views/otc/otccoomplaiontview";
 </style>

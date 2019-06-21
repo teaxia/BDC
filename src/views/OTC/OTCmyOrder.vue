@@ -132,7 +132,7 @@
 		methods: {
 			ToComplaint(){
 				this.$router.push({
-					path:"/discovery/OTC/complaiont",
+					path:"/OTC/complaiont",
 					query:{
 						id	:	this.id
 					}
@@ -196,7 +196,7 @@
 					type  = 3
 				}
 				this.$router.push({
-					path:"/discovery/OTC/list",
+					path:"/OTC/list",
 					query:{
 						type	:	type,
 					}
@@ -318,5 +318,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/myOrder";
+@import "../../scss/views/otc/myOrder";
 </style>

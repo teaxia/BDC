@@ -2,7 +2,7 @@
 	<div class="orderList margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.orderlist.title')">
 			<div slot="right">
-                <router-link to="/discovery/OTC/complaiontList">
+                <router-link to="/OTC/complaiontList">
                     <span class="right">{{$t('discovery.OTC.complaiont.title')}}</span>
                 </router-link>
             </div>
@@ -364,14 +364,14 @@
 			myOrder(id,status){
 				if(status==2){
 					this.$router.push({
-						path:"/discovery/OTC/order",
+						path:"/OTC/order",
 						query:{
 							id		:	id,
 						}
 					});
 				}else{
 					this.$router.push({
-						path:"/discovery/OTC/myOrder",
+						path:"/OTC/myOrder",
 						query:{
 							id	:	id,
 							status	:	this.orderType
@@ -448,7 +448,7 @@
 			edit(id){
 				// 编辑在售订单
 				this.$router.push({
-					path:"/discovery/OTC/edit",
+					path:"/OTC/edit",
 					query:{
 						id	:	id,
 					}
@@ -457,7 +457,7 @@
 			editDemand(id){
 				// 编辑
 				this.$router.push({
-					path:"/discovery/OTC/editDemand",
+					path:"/OTC/editDemand",
 					query:{
 						id	:	id,
 					}
@@ -497,7 +497,7 @@
 			},
 			Goback(){
 				this.$router.push({
-					path:"/discovery/OTC/",
+					path:"/OTC/",
 				});
 			},
 		},
@@ -510,5 +510,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otclist";
+@import "../../scss/views/otc/otclist";
 </style>

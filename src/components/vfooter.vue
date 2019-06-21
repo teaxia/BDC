@@ -28,7 +28,7 @@ export default {
           icon    : 'icon-otc',                                    
           acicon  : 'icon-otc1',
           url     : false, 
-          // url     : '/discovery/otc', 
+          // url     : '/OTC/index', 
           index : 1
         },
         {
@@ -70,7 +70,7 @@ export default {
       },{showLoading:false}).then(data => {
         if(data){
           this.$router.push({
-            path    :   '/discovery/otc',
+            path    :   '/OTC/index',
           });
         }
       })

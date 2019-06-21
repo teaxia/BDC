@@ -111,7 +111,7 @@ export default {
                 i++;
                 if (this.T<=0) {
                     this.$router.push({
-                        path:"/discovery/otc",
+                        path:"/OTC/index",
                     });
                     window.clearInterval(this.clock)
                 }
@@ -149,7 +149,7 @@ export default {
             }).then(data => {
                 if(data){
                     this.$router.push({
-                        path:"/discovery/OTC/order",
+                        path:"/OTC/order",
                         query:{
                             id      :   data.orderId,
                         }
@@ -210,5 +210,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otcbuy";
+@import "../../scss/views/otc/otcbuy";
 </style>

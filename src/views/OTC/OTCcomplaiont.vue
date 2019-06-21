@@ -58,7 +58,7 @@
                             type: 'success'
                         })
                         this.$router.push({
-                            path:"/discovery/OTC/complaiontList",
+                            path:"/OTC/complaiontList",
                         });
                     }
                 })

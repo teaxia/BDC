@@ -29,7 +29,7 @@
 		methods: {
 			goto(id){
                 this.$router.push({
-                    path    :   '/discovery/OTC/Complaiont/view',
+                    path    :   '/OTC/Complaiont/view',
                     query   :   {'id':id}
 				});
 			},
@@ -53,5 +53,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otccomplaiont";
+@import "../../scss/views/otc/otccomplaiont";
 </style>

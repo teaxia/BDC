@@ -268,7 +268,7 @@ export default {
                         type: 'success'
                     })
                     this.$router.push({
-                        path:"/discovery/OTC/list",
+                        path:"/OTC/list",
                         query:{
                             type	:	1,
                         }
@@ -280,7 +280,7 @@ export default {
         },
         Goback(){
             this.$router.push({
-                path:"/discovery/OTC/list",
+                path:"/OTC/list",
                 query:{
                     type	:	1,
                 }
@@ -321,7 +321,7 @@ export default {
         this.id = this.$route.query.id
         if(this.id==''){
             this.$router.push({
-                path:"/discovery/OTC/list",
+                path:"/OTC/list",
             });
         }
         this.GetMyBuyOrderById()
@@ -336,5 +336,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otcsell";
+@import "../../scss/views/otc/otcsell";
 </style>

@@ -65,5 +65,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otcRank";
+@import "../../scss/views/otc/otcRank";
 </style>

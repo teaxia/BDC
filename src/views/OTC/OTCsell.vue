@@ -234,7 +234,7 @@ export default {
                     })
                     // 成功返回列表
                     this.$router.push({
-                        path:"/discovery/otc",
+                        path:"/OTC/index",
                         query:{
                             active : false,
                         }
@@ -523,5 +523,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/discovery/otcsell";
+@import "../../scss/views/otc/otcsell";
 </style>

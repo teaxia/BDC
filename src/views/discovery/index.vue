@@ -51,13 +51,6 @@ export default {
 					url     : '/discovery/expectinfo',
 					status	: true,
 				},
-				// {
-				// 	value   : this.$t("discovery.topmenu.OTC"),				// OTC
-				// 	icon    : 'icon-CTC1',
-				// 	url     : '/discovery/otc',
-				// 	status	: true,
-				// },
-				
 				{
 					value   : this.$t("discovery.topmenu.bill"),			// 账本
 					icon    : 'icon-zhangben2',

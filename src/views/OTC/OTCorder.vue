@@ -257,7 +257,7 @@
 							type: 'success'
 						})
 						this.$router.push({
-							path:"/discovery/OTC/list",
+							path:"/OTC/list",
 							query:{
 								type:2
 							}
@@ -267,12 +267,12 @@
 			},
 			GOTC(){
 				this.$router.push({
-					path:"/discovery/otc",
+					path:"/OTC/index",
 				});
 			},
 			Goback(){
 				this.$router.push({
-					path:"/discovery/OTC/list",
+					path:"/OTC/list",
 				});
 			},
 			thispay(type){
@@ -297,5 +297,5 @@
 </script>
 
 <style scoped lang="scss"> 
-@import "../../scss/views/discovery/order";
+@import "../../scss/views/otc/order";
 </style>
