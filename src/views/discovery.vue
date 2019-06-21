@@ -1,9 +1,9 @@
 <template>
-	<div>
+	<div class="nfull">
 		<transition name="fade" mode="out-in">
         	<router-view></router-view>
 		</transition>
-  </div>
+  	</div>
 </template>
 
 <script>
@@ -24,5 +24,7 @@
 </script>
 
 <style scoped lang="scss">
-	
+.nfull{
+    height: 100%;
+}
 </style>

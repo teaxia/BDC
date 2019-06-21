@@ -1,18 +1,18 @@
 <template>
 	<div class="myOrder margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.myorder.title')"></x-header>
-        <div class="pd50">
-			<div class="order-id">
+        <div class="pd0">
+			<div class="order-id bgpd">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{data.Id}}</h1>
+				<span v-if="data.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span><span v-if="data.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
 			</div>
-			<div class="order-info order-line">
+			<!-- <div class="order-info order-line">
 				<h3 v-if="orderType==2&&data.GoodsType==0">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 				<h3 v-if="orderType==2&&data.GoodsType==1">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 				<h3 v-if="orderType==3&&data.GoodsType==0">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 				<h3 v-if="orderType==3&&data.GoodsType==1">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<span v-if="data.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span><span v-if="data.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
-			</div>
-			<div class="order-pay order-line mr20">
+			</div> -->
+			<div class="order-pay order-line mr20 bgpd">
 				<div class="order-information">
 					<div class="order-pay-price">
 						{{$t('discovery.OTC.order.price')}}：<span>{{data.Price}}CNY</span>
@@ -31,62 +31,56 @@
 					<Avatar v-else class="sicon avatar" style="background:#f56a00;">
 						<span class="line-height">{{data.CurrenyName}}</span>
 					</Avatar>
+					<div class="sicon-currency">{{data.CurrenyName}}</div>
 				</div>
 			</div>
-			<div class="order-tips mr20 order-line">
-				<div class="order-timeline">
-					<div v-if="data.CreateTime!=null">
-						<div>{{$t('discovery.OTC.myorder.ctime')}}</div>
-						<div>{{data.CreateTime}}</div>
+			<div class="order-tips mr20 order-line bgpd">
+				<div :class="{'order-timeline':true,'gray':data.Status==7||data.Status==6,'green':data.Status==5}">
+					<div v-if="data.CreateTime!=null" class="order-timeline-tag">
+						<div class="order-timeline-tag-title">{{$t('discovery.OTC.myorder.ctime')}}：</div>
+						<div class="order-timeline-tag-info">{{data.CreateTime}}</div>
 					</div>
-					<div v-if="data.PayTime!=null">
-						<div>{{$t('discovery.OTC.myorder.ptime')}}</div>
-						<div>{{data.PayTime}}</div>
+					<div v-if="data.PayTime!=null" class="order-timeline-tag">
+						<div class="order-timeline-tag-title">{{$t('discovery.OTC.myorder.ptime')}}：</div>
+						<div class="order-timeline-tag-info">{{data.PayTime}}</div>
 					</div>
-					<div v-if="data.DoneTime!=null">
-						<div>{{$t('discovery.OTC.myorder.dtime')}}</div>
-						<div>{{data.DoneTime}}</div>
+					<div v-if="data.DoneTime!=null" class="order-timeline-tag">
+						<div class="order-timeline-tag-title">{{$t('discovery.OTC.myorder.dtime')}}：</div>
+						<div class="order-timeline-tag-info">{{data.DoneTime}}</div>
 					</div>
-					<div v-if="data.CancelTime!=null">
-						<div>{{$t('discovery.OTC.myorder.cantime')}}</div>
-						<div>{{data.CancelTime}}</div>
+					<div v-if="data.CancelTime!=null" class="order-timeline-tag">
+						<div class="order-timeline-tag-title">{{$t('discovery.OTC.myorder.cantime')}}：</div>
+						<div class="order-timeline-tag-info">{{data.CancelTime}}</div>
 					</div>
 				</div>
 			</div>
-			<div class="order-payment mr20 order-line" v-if="payInfo.length>1">
-				<div v-if="payInfo[1]=='支付宝'||payInfo[1]=='微信'">{{$t('discovery.OTC.myorder.payment')}}：{{payInfo[1]}}</div>
-				<div v-if="payInfo[1]=='支付宝'">{{$t('discovery.OTC.myorder.access')}}：{{payInfo[2]}}</div>
-				<div v-if="payInfo[1]=='微信'||payInfo[1]=='支付宝'">{{$t('discovery.OTC.myorder.nickname')}}：{{payInfo[3]}}</div>
+			<div class="order-payment mr20 order-line bgpd" v-if="payInfo.length>1">
+				<div class="order-payment-info" v-if="payInfo[1]=='支付宝'||payInfo[1]=='微信'">{{$t('discovery.OTC.myorder.payment')}}：{{payInfo[1]}}</div>
+				<div class="order-payment-info" v-if="payInfo[1]=='支付宝'">{{$t('discovery.OTC.myorder.access')}}：{{payInfo[2]}}</div>
+				<div class="order-payment-info" v-if="payInfo[1]=='微信'||payInfo[1]=='支付宝'">{{$t('discovery.OTC.myorder.nickname')}}：{{payInfo[3]}}</div>
 
-				<div v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.name')}}：{{payInfo[1]}}</div>
-				<div v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.bank')}}：{{payInfo[3]}}</div>
-				<div v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.cardid')}}：{{payInfo[2]}}</div>
+				<div class="order-payment-info" v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.name')}}：{{payInfo[1]}}</div>
+				<div class="order-payment-info" v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.bank')}}：{{payInfo[3]}}</div>
+				<div class="order-payment-info" v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.cardid')}}：{{payInfo[2]}}</div>
 			</div>
-			<div class="order-remark mr20 order-line">
+			<div class="order-remark mr20 order-line bgpd">
 				{{$t('discovery.OTC.myorder.remark')}}：{{data.Remark}}
 			</div>
-			<!-- <div v-if="data.Status==3&&this.orderType==3">
-				<div class="line-b sbank">
-                    <div class="title-psw wd">
-                        {{$t('discovery.OTC.sell.security')}}
-                    </div>
-                    <div class="psw">
-                        <div @click="ShowPSW()">
-                            <span>{{$t('global.clickinput')}}{{$t('discovery.OTC.sell.security')}}</span>
-                        </div>
-                    </div>
-                </div>
-			</div> -->
-			<div class="order-payment mr10">
-				<button class="btn btn-block btn-round" disabled v-if="data.Status==3&&this.orderType==2&&this.minutes<29">{{$t('discovery.OTC.complaiont.minutes')}}</button>
-				<button class="btn btn-block btn-round" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2&&this.minutes>=30">{{$t('discovery.OTC.complaiont.title')}}</button>
-				<button class="btn btn-block btn-round" v-if="data.Status==3&&this.orderType==3" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
-				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
-				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
+			<div class="order-done mr10">
+				<button class="btn btn-block btn-round-mx" disabled v-if="data.Status==3&&this.orderType==2&&this.minutes<29">{{$t('discovery.OTC.complaiont.minutes')}}</button>
+				<button class="btn btn-block btn-round-mx" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2&&this.minutes>=30">{{$t('discovery.OTC.complaiont.title')}}</button>
+				<button class="btn btn-block btn-round-mx" v-if="data.Status==3&&this.orderType==3" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
+				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round-mx btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
+				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round-mx btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 			</div>
-			<div class="tips" v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
+			<!-- <div class="tips" v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
 				{{$t('discovery.OTC.myorder.wait')}}{{m}}{{$t('discovery.OTC.myorder.minute')}}{{s}}{{$t('discovery.OTC.myorder.second')}}
-			</div>
+			</div> -->
+			<center v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
+				<i-circle :percent="percent" class="close" v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
+					<div style="font-size:24px">{{m}}m{{s}}s</div>
+				</i-circle>
+			</center>
 		</div>
 		<Modal v-model="showPSwed" :mask-closable="false" @on-ok="confirm">
 			<div slot="header">
@@ -128,6 +122,8 @@
 				m			:	'',
 				s			:	'',
 				clock		:	'',
+				percent		:	0,				     // 倒计时百分比
+				percentclock:	'',					 // 倒计时的实例
 			}
 		}, 
 		watch:{
@@ -207,21 +203,28 @@
 				});
 			},
 			timeFn(d1) {
+				// 判断是否需要进行倒计时操作
+				if(this.data.Status!=3&&this.orderType!=2){
+					return
+				}
 				var dateBegin = new Date(d1.replace(/-/g, "/"));//将-转化为/，使用new Date
 				// 计算获取的时间是否与现在的时间相差30分钟
 				var dateEnd  =  new Date();//获取当前时间
 				var dateDiff =  dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
 				this.minutes =  Math.floor((dateDiff / 60000)); 
 				this.s	     =  60-(60-dateBegin.getSeconds())-(dateEnd.getSeconds())    //60秒减去（60秒减去发布时间减去当前时间秒数）= 当前剩余秒
-				this.m 		 =  30-this.minutes
+				// 开始倒计时
 				if(this.s <0){
 					this.s = 60+this.s
 				}
-				if(this.minutes==30){
+				if(30-this.minutes>=30){
 					this.m		 =   29;
 				}else{
 					this.m		 =	 30-this.minutes
 				}
+				// 开始转圈
+				this.mathPercent()
+				// 倒计时开始
 				if(this.m==1){
 					this.m		 =	 0
 				}
@@ -257,6 +260,54 @@
 					}
 				},1000);
 			},
+			mathPercent(){
+				// 计算百分比
+				// 计算已经过去的时间百分比
+				let m			//  计算剩余时间分钟
+				let sm			//  已经过去的秒
+				// let Tmp
+				if(this.minutes>=30){
+					// 如果时间正好30分钟，这里要减去已经过去的秒数
+					m    = 29
+					sm   = this.$math.add(this.s,60)
+					// Tmp  =  this.$math.subtract(m*60,sm)
+					// console.log('减法秒'+Tmp);
+				}else{
+					m    =  30-this.minutes
+					sm   =  this.s
+					// Tmp  =  this.$math.add(m*60,sm)
+					// console.log('加法秒'+Tmp);
+				}
+				// 如果时间为负数，则不执行下面的倒计时操作
+				if(m<0){
+					console.log(m);
+					return
+				}
+				// 通过剩余时间计算出剩余秒数
+				let Tmp  =  this.$math.add(m*60,sm)
+				// 判断读秒是否大于1800
+				if(Tmp>1800){
+					console.log('运算之前'+Tmp)
+					Tmp = 1800+(1800-Tmp)
+					console.log('运算过后'+Tmp)
+				}
+				let s    =  1800-Tmp
+				if(s<0){
+					s    =  1800-(1800-s)
+				}
+				console.log('分钟'+m);
+				console.log('秒'+sm);
+				
+				// 1800秒是半小时
+				this.percentclock = window.setInterval(() => {
+					s++;
+					if (s>=1800||s<0) {
+						window.clearInterval(this.percentclock)
+					}
+					this.percent =  Math.round(s/1800*100)
+					console.log(this.percent)
+				},1000)
+			},
 		},
 		mounted() {
 			this.id     	=   this.$route.query.id
@@ -266,6 +317,7 @@
 		beforeDestroy(){
 			// 清除计时器
 			window.clearInterval(this.clock);
+			window.clearInterval(this.percentclock);
 		}
 	}
 

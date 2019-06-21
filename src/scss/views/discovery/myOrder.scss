@@ -2,53 +2,94 @@
 @import "../../base/var";
 @import "../../base/button";
 @import "../../base/spanTag";
-.sbank{
-    padding: 0.133333rem 0.2rem;
-    display: flex;
-    position: relative;
-    .title{
-        width: 3rem;
-        font-size:0.45rem;
-    }
-    .title-psw{
-        width: 2.2rem;
-        font-size:0.45rem;
-    }
-    .psw{
-        display: flex;
-        font-size:0.45rem;
-        .iconfont{
-            position: absolute;
-            right:0;
-        }
-    }
-}
 .myOrder{
+    background:#f2f2f2;
+    height: 100%;
     .date-line{
         width: 250px;
         margin:0 auto;
     }
+    .bgpd{
+        background: $bg-white;
+        padding: 30px 20px;
+    }
     .order{
+        // 订单号
+        &-id{
+            display: flex;
+            justify-content: space-between;
+            h1{
+                font-size:30px;
+                color:#333;
+            }
+            .tag{
+                display: block;
+            }
+        }
         &-line{
-            border-bottom: 0.01rem solid $border-line;
             padding-bottom: 20px;
         }
+        // 发布内容
         &-pay{
             display: flex;
+            &-total{
+                margin-top:20px;
+            }
         }
         &-information{
             flex: 1;
+            font-size: 26px;
+            font-weight: bold;
         }
         &-svg{
-            flex: 1;
             text-align: right;
             .sicon{
                 width: 120px;
                 height: 120px;
+                &-currency{
+                    width: 120px;
+                    text-align: center;
+                    font-size:20px;
+                }
+            }
+        }
+        // 订单时间
+        &-tips{
+            .green{
+                color:#7ec4b4 !important;
+            }
+            .gray{
+                color:#cccfd3 !important;
+            }
+            .order-timeline{
+                color:$color-base;
+                &-tag{
+                    display: flex;
+                    margin-top:20px;
+                    font-size:20px;
+                    &:first-child{
+                        margin-top:0;
+                    }
+                }
+            }
+        }
+        // 支付方式
+        &-payment{
+            &-info{
+                margin-top:20px;
+                &:first-child{
+                    margin-top:0px;
+                    font-size:20px;
+                }
             }
         }
         &-remark{
-            font-size:26px;
+            font-size:24px;
+            font-weight: bold;
+        }
+        // 操作按钮
+        &-done{
+            padding:30px 20px;
         }
     }
     .tips{
