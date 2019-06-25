@@ -32,8 +32,8 @@
 							</div>
 						</flexbox-item>
 						<flexbox-item :span="2">
-							<span v-if="v.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
-							<span v-if="v.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
+							<span v-if="v.GoodsType==0" class="font font-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
+							<span v-if="v.GoodsType==1" class="font font-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
 						</flexbox-item>
 					</flexbox>
 				</div>

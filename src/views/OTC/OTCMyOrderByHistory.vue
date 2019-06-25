@@ -32,11 +32,8 @@
 							</Avatar>
 							<div class="grid-username">{{v.currenyName}}</div>
 							<div class="grid-username">
-								<span class="order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
-								<span class="order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
-								<span class="order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
-								<span class="order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
-								<span class="order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
+								<span v-if="v.GoodsType==0" class="font font-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
+								<span v-if="v.GoodsType==1" class="font font-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
 							</div>
 						</flexbox-item>
 						<flexbox-item class="order-list-info">
@@ -51,8 +48,11 @@
 							</div>
 							<div class="status">
 								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
-								<span v-if="v.GoodsType==0" class="font font-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
-								<span v-if="v.GoodsType==1" class="font font-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
+								<span class="font order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
+								<span class="font order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
+								<span class="font order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
+								<span class="font order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
+								<span class="font order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
 							</div>
 						</flexbox-item>
 					</flexbox>
