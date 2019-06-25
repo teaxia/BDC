@@ -18,6 +18,7 @@
         &-id{
             display: flex;
             justify-content: space-between;
+            padding: 20px 20px 0 20px;
             h1{
                 font-size:30px;
                 color:#333;
@@ -28,6 +29,10 @@
         }
         &-line{
             padding-bottom: 20px;
+        }
+        &-info{
+            background:$bg-white;
+            padding: 0px 20px;
         }
         // 发布内容
         &-pay{

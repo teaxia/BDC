@@ -52,10 +52,6 @@ export default {
     onUrl(url){
       if(!url){
         this.getrouter()
-				// this.$vux.toast.show({
-				// 	text: this.$t('global.unopened'),
-				// 	type: 'warn'
-				// })
 			}else{
 				this.$router.push({
 					path    :   url,
