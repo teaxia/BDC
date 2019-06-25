@@ -84,6 +84,7 @@ export default {
   position:fixed;
   bottom: 0;
   width: 100%;
+  z-index: 99;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   .iconfont{

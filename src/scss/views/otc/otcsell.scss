@@ -36,6 +36,8 @@ $height : 1.5rem;
     overflow: scroll;
     height: 100%;
     -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index:1;
     .title-tool{
         display: flex;
         justify-content: space-between;

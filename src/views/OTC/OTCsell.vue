@@ -12,15 +12,6 @@
                 </DropdownMenu>
             </Dropdown>
             <div class="currency" v-if="Poundage>0">
-                <!-- <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
-                    <use :xlink:href="`#icon-`+cName"></use>
-                </svg>
-                <Avatar v-else class="sicon avatar" style="background:#f56a00;">
-                    <span class="line-height">{{cName}}</span>
-                </Avatar>
-                <div class="font">
-                    {{cName}}
-                </div> -->
                 <div>
                     <div class="price">
                         {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
