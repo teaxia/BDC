@@ -1,6 +1,6 @@
 <template>
 	<div class="myOrder margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.myorder.title')"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.myorder.title')"></x-header>
         <div class="pd0">
 			<div class="order-id bgpd">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{data.Id}}</h1>
@@ -186,22 +186,6 @@
 			cancel () {
                 this.show = false
             },
-			Goback(){
-				let type
-				if(this.orderType==2){
-					// 已购
-					type  = 2
-				}else if(this.orderType==3){
-					// 已售
-					type  = 3
-				}
-				this.$router.push({
-					path:"/OTC/list",
-					query:{
-						type	:	type,
-					}
-				});
-			},
 			timeFn(d1) {
 				// 判断是否需要进行倒计时操作
 				if(this.data.Status!=3&&this.orderType!=2){

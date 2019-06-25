@@ -8,6 +8,7 @@
                     <div class="price">
                         <div>{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
                         <div>{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
+                        <div>限额：{{$numberComma(datalist.canBuy)}}</div>
                     </div>
                     <div class="payment">
                         <i :class="{'iconfont':true,'icon-zhifubao':true,'alipay':true}" v-if="alipay"></i>

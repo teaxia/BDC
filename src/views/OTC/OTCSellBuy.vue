@@ -1,40 +1,38 @@
 <template>
-	<div class="otc margin-header" v-cloak>
-        <x-header :left-options="{backText:this.$t('global.back'),preventGoBack:true}" @on-click-back="Goback()">
-            <div slot="right">
-                <router-link to="/OTC/list">
-                    <div class="btn btn-auto btn-success right">{{$t('discovery.OTC.index.record')}}</div>
-                </router-link>
-                <router-link to="/OTC/OTCRank">
-                    <span class="btn btn-auto btn-error right">{{$t('discovery.OTC.ranking')}}</span>
-                </router-link>
-            </div>
-            <div slot="default" class="title">
-                <div @click="change()" :class="{'select-title':true,'act-bd':active}">
-                    <span :class="{'select-act':active}">{{$t('discovery.OTC.index.buy')}}</span>
-                </div>
-                <div @click="change()" :class="{'select-title':true,'act-bd':!active}">
-                    <span :class="{'select-act':!active}">{{$t('discovery.OTC.index.bybuy')}}</span>
-                </div> 
-            </div>
-        </x-header>
+	<div class="OTCSellBuy" v-cloak>
         <div>
             <!-- 筛选 -->
-            <flexbox class="pb select">
+            <flexbox>
                 <flexbox-item>
-                    <div @click="selectCurrency()">{{$t('discovery.OTC.index.curreny')}}</div>
+                    <Dropdown trigger="click" @on-click="change" class="OTCSellBuy-drop">
+                        <div class="btn btn-min-x btn-round">
+                            {{thisAct}}
+                            <i class="iconfont icon-sanjiao_xia"></i>
+                        </div>
+                        <DropdownMenu slot="list">
+                            <DropdownItem :name="'buy'">{{$t('discovery.OTC.index.buy')}}</DropdownItem>
+                            <DropdownItem :name="'bybuy'">{{$t('discovery.OTC.index.bybuy')}}</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </flexbox-item>
                 <flexbox-item>
-                    <div @click="changeTime()">
-                        {{$t('discovery.OTC.index.time')}}
-                        <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Tup}"></i>
-                    </div>
-                </flexbox-item>
-                <flexbox-item>
-                    <div @click="changePrice()">
-                        {{$t('discovery.OTC.index.price')}}
-                        <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Pup}"></i>
-                    </div>
+                    <flexbox class="pb select">
+                        <flexbox-item>
+                            <div @click="selectCurrency()">{{$t('discovery.OTC.index.curreny')}}</div>
+                        </flexbox-item>
+                        <flexbox-item>
+                            <div @click="changeTime()">
+                                {{$t('discovery.OTC.index.time')}}
+                                <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Tup}"></i>
+                            </div>
+                        </flexbox-item>
+                        <flexbox-item>
+                            <div @click="changePrice()">
+                                {{$t('discovery.OTC.index.price')}}
+                                <i :class="{'iconfont':true,'icon-sanjiao_xia':true,'icon-flip':Pup}"></i>
+                            </div>
+                        </flexbox-item>
+                    </flexbox>
                 </flexbox-item>
             </flexbox>
         </div>
@@ -43,37 +41,44 @@
                 <div slot="scrollList" class="otc-item" @click="buy(v.Id)" v-for="(v,index) in dataList" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
-                            <Avatar size="small"  style="background:#f56a00">
-                                {{$strcut(v.nickName,1)}}
-                            </Avatar>
-                            <div class="grid-username">{{v.nickName}}</div>
-                            <div class="grid-info">{{v.tradeInfo}}</div>
+                            <div class="otc-grid-bld">
+                                <div :class="{'otc-grid-avatar':true,'sell':active}">
+                                    {{$strcut(v.nickName,1)}}
+                                </div>
+                                <div>
+                                    <div class="grid-username">{{v.nickName}}</div>
+                                    <div class="grid-info">{{v.tradeInfo}}</div>
+                                </div>
+                            </div>
+                            <div class="otc-grid-pay">
+                                <div class="otc-grid-paylist">
+                                    <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('支')>=0">
+                                        <use xlink:href="#icon-zhifubao"></use>
+                                    </svg>
+                                    <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('银')>=0">
+                                        <use xlink:href="#icon-yinhangqia"></use>
+                                    </svg>
+                                    <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('微')>=0">
+                                        <use xlink:href="#icon-weixinzhifu"></use>
+                                    </svg>
+                                    <i class="iconfont icon-arrow-right"></i>
+                                </div>
+                            </div>
                         </div>
                         <div class="otc-grid-main">
                             <div class="v-flex">
                                 <div class="otc-grid-price">
                                     <div class="price">
-                                        {{$t('discovery.OTC.sell.price')}}{{$numberComma(v.price)}}CNY
+                                        <div>{{$t('discovery.OTC.sell.price')}}</div>
+                                        <div class="price-info">￥{{$numberComma(v.price)}}</div>
                                     </div>
                                     <div class="otc-price">
-                                        <div v-if="active">{{$t('discovery.OTC.index.min')}}：{{$numberComma(v.minBuy)}}（{{v.currenyName}}）</div>
+                                        <div>{{$t('discovery.OTC.index.min')}}：{{$numberComma(v.canBuy)}}</div>
                                         <div :class="{'buyorder':!active}">{{$t('discovery.OTC.index.num')}}：{{$numberComma(v.currenyNum)}} （{{v.currenyName}}）</div>
-                                    </div>
-                                </div>
-                                <div class="otc-grid-pay">
-                                    <div class="otc-grid-paylist">
-                                        <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('支')>=0">
-                                            <use xlink:href="#icon-zhifubao"></use>
-                                        </svg>
-                                        <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('银')>=0">
-                                            <use xlink:href="#icon-yinhangqia"></use>
-                                        </svg>
-                                        <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('微')>=0">
-                                            <use xlink:href="#icon-weixinzhifu"></use>
-                                        </svg>
-                                    </div>
-                                    <div class="otc-grid-right">
-                                        <i class="iconfont icon-arrow-right"></i>
+                                        <div class="otc-badge">
+                                            <span v-if="active" class="tag tag-success">购买</span>
+                                            <span v-if="!active" class="tag tag-wran">出售</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -81,24 +86,6 @@
                     </v-grid>
                 </div>
             </my-scroll>
-        </div>
-        <div class="sell">
-            <router-link to="/OTC/sell" v-if="active">
-                <svg class="icon-sell" aria-hidden="true">
-                    <use xlink:href="#icon-paimailiang"></use>
-                </svg>
-                <span>
-                    {{$t('discovery.OTC.index.send')}}
-                </span>
-            </router-link>
-            <router-link to="/OTC/demand" v-if="!active">
-                <svg class="icon-sell" aria-hidden="true">
-                    <use xlink:href="#icon-paimailiang"></use>
-                </svg>
-                <span>
-                    {{$t('discovery.OTC.index.send')}}
-                </span>
-            </router-link>
         </div>
         <div>
             <vpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showPupop">
@@ -129,16 +116,16 @@
 				<button class="btn btn-block btn-round" @click="ok()">{{$t('wallet.send.auth')}}</button>
 			</div>
 		</Modal>
-        <!-- <v-footer :isIndex="$route.meta.isIndex"></v-footer> -->
     </div>
 </template>
 
 <script>
 	export default {
-        name:'otc',
+        name:'OTCSellBuy',
 		data() {
 			return {
-                active      :   true,                               //头部切换索引
+                active      :   true,                               // 我要买，我要卖切换
+                thisAct     :   this.$t('discovery.OTC.index.buy'),
                 realname    :   '',                   
                 show		:	false,      		                // 跳转至强制认证界面
                 vindex      :   '',                                 // 菜单索引
@@ -160,11 +147,11 @@
 			}
         },
         watch:{
-            scurrency(){
-                //  单币种不需要
-                //  this.showPupop = false
-                //  console.log(this.scurrency);
-            },
+            // scurrency(){
+            //     //  单币种不需要
+            //     //  this.showPupop = false
+            //     //  console.log(this.scurrency);
+            // },
             query(){
                 let Refresh = true
                 switch(this.query){
@@ -216,9 +203,10 @@
             }
         },
 		methods: {
-			change(){
+			change(name){
                 // 购买出售切换
-                this.active = !this.active;
+                this.active  =  (name=='buy')?true:false
+                this.thisAct =  (this.active)?this.$t('discovery.OTC.index.buy'):this.$t('discovery.OTC.index.bybuy')
                 let Refresh = true
                 if(this.active){
                     // 购买
@@ -351,12 +339,6 @@
                 // 价格筛选
                 (this.Pup)?this.query=2:this.query=-2;
             },
-            Goback(){
-                this.$router.push({
-                    path:"/discovery/index",
-                });
-            }
-            
 		},
 		mounted() {
             // 初始化样式
@@ -366,10 +348,16 @@
 			if(this.realname==this.$t('global.Uncertified')){
 				this.show = false;
             }
-            // 初始化数据
-            this.OTCGetSellList()
             // 判断返回跳转
-            this.active     =   (this.$route.query.active)?false:true;
+            // 初始化数据
+            if(this.$route.query.active=='true'){
+                this.change('buy')
+            }else if(this.$route.query.active=='false'){
+                this.change('bybuy')
+            }else{
+                this.change('buy')
+            }
+            
 		}
 	}
 

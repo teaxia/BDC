@@ -1,6 +1,6 @@
 <template>
 	<div class="mycard margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.edit.title')"></x-header>
+		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.edit.title')"></x-header>
         <div class="pd50">
             <div class="currency">
                 <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
@@ -268,23 +268,12 @@ export default {
                         type: 'success'
                     })
                     this.$router.push({
-                        path:"/OTC/list",
-                        query:{
-                            type	:	1,
-                        }
+                        path:"/OTC/MyOrderNow",
                     });
                 }else{
                     this.GetMyBuyOrderById()
                 }
             })
-        },
-        Goback(){
-            this.$router.push({
-                path:"/OTC/list",
-                query:{
-                    type	:	1,
-                }
-            });
         },
         change(){
             // 一键上下架开关
@@ -321,7 +310,7 @@ export default {
         this.id = this.$route.query.id
         if(this.id==''){
             this.$router.push({
-                path:"/OTC/list",
+                path:"/OTC/MyGoods",
             });
         }
         this.GetMyBuyOrderById()

@@ -1,33 +1,24 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+@import "../../base/spanTag";
 $time : 0.4s;
 $height : 1.5rem;
-.otc{
-    .title{
-        width: 250px;
-        display: flex;
-        margin:0 auto;
-        margin-top:25px;
-        .select-title{
-            &:first-child{
-                border-right: 0;
-                border-radius:15px 0 0 15px;
-            }
-            &:last-child{
-                border-radius:0 15px 15px 0;
-            }
-            border: 0.02rem solid $border-base;
-            border-radius: 15px;
-            flex:1;
-            font-size: 0.4rem;
-            line-height: 0.6rem;
+.OTCSellBuy{
+    // padding-top:310px;
+    height: 980px;
+    overflow: hidden;
+    &-drop{
+        margin:30px 0 0 20px;
+        .btn{
+            font-size: 28px;
+            letter-spacing: 5.2px;
         }
-        .act-bd{
-            background: $bg-white;
-            .select-act{
-                color:$font-base;
-            }
+        .btn-min-x{
+            border-radius: 12px;
+            width: 200px;
+            height: 48px;
+            line-height: 38px;
         }
     }
     .right{
@@ -36,7 +27,6 @@ $height : 1.5rem;
         &:first-child{
             margin-right: 10px;
         }
-        // line-height: 1rem;
     }
     .select{
         text-align: center;
@@ -73,32 +63,70 @@ $height : 1.5rem;
             margin-bottom: 50px;
         }
         .otc-grid{
-            padding: 5px 20px;
+            padding:30px;
+            &-avatar{
+                background:#f56a00;
+                width:80px;
+                height:80px;
+                border-radius: 50%;
+                font-size:28px;
+                line-height:80px;
+                text-align: center;
+                color:$font-white;
+            }
         }
         .otc-grid-title{
             display: flex;
             padding-bottom: 10px;
-            border-bottom: 0.01rem solid $border-base;
             vertical-align:middle;
+            .otc-grid-bld{
+                display: flex;
+                .sell{
+                    background-color: $color-green;
+                }
+            }
             .grid-username{
-                height: 55px;
-                line-height: 55px;
-                margin-left: 15px;
+                margin-left: 20px;
                 margin-right:auto;
+                font-size: 28px;
             }
             .grid-info{
-                height: 55px;
-                line-height: 55px;
+                margin-left: 20px;
+                letter-spacing: 0.4px;
+                color: #999999;
+                font-size: 20px;
             }
         }
         .otc-grid-price{
             flex: 3;
             font-size:24px;
-            color: $font-empty;
+            color: #666;
+            margin-top:10px;
             .price{
                 color: $font-h2;
-                font-size:32px;
+                font-size:26px;
                 font-weight: bold;
+                letter-spacing: 0.6px;
+            }
+            .price-info{
+                color: $font-h2;
+                font-size:30px;
+                font-weight: bold;
+                letter-spacing: 0.6px;
+            }
+            .otc-price{
+                position: relative;
+                margin-top:10px;
+                .tag{
+                    position: absolute;
+                    bottom: 5px;
+                    right:0px;
+                    width: 200px;
+                    height: 60px;
+                    font-size: 24px;
+                    line-height: 50px;
+                    letter-spacing: 4.8px;
+                }
             }
             .buyorder{
                 margin-top:14px;
@@ -107,40 +135,22 @@ $height : 1.5rem;
         .otc-grid-pay{
             flex: 1;
             .otc-grid-paylist{
-                margin-top:10px;
+                position: relative;
+                margin-right: 30px;
+                margin-top:35px;
                 text-align: right;
                 .icon{
-                    width: 40px;
-                    height: 40px;
+                    width: 50px;
+                    height: 50px;
+                    margin-right:10px;
                 }
             }
-            .otc-grid-right{
-                margin-top: 5px;
+            .icon-arrow-right{
+                position: absolute;
+                top:0px;
                 text-align: right;
                 color: $font-empty;
             }
-        }
-    }
-    .sell{
-        position: fixed;
-        bottom: 20px;
-        left: 255px;
-        width:250px;
-        padding: 10px 40px;
-        border:2px solid #dadbde;
-        border-radius:80px;
-        background:$bg-white;
-        font-size:32px;
-        box-shadow:  0px 2px 12px #858585;
-        span{
-            font-size:32px;
-            position: absolute;
-            top:25px;
-            right:40px;
-        }
-        .icon-sell{
-            width: 80px;
-            height: 80px;
         }
     }
 }

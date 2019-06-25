@@ -1,9 +1,18 @@
 <template>
-	<div class="mycard margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.Selltitle')"></x-header>
-        <div class="pd50">
-            <div class="currency">
-                <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
+	<div class="OTCSell" v-cloak>
+        <div class="pb">
+            <Dropdown trigger="click" @on-click="change" class="OTCSellBuy-drop">
+                <div class="btn btn-min-x btn-round">
+                    {{$t('discovery.OTC.Selltitle')}}
+                    <i class="iconfont icon-sanjiao_xia"></i>
+                </div>
+                <DropdownMenu slot="list">
+                    <DropdownItem :name="'/OTC/sell'">{{$t('discovery.OTC.Selltitle')}}</DropdownItem>
+                    <DropdownItem :name="'/OTC/demand'">{{$t('discovery.OTC.demand.title')}}</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
+            <div class="currency" v-if="Poundage>0">
+                <!-- <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
                     <use :xlink:href="`#icon-`+cName"></use>
                 </svg>
                 <Avatar v-else class="sicon avatar" style="background:#f56a00;">
@@ -11,8 +20,8 @@
                 </Avatar>
                 <div class="font">
                     {{cName}}
-                </div>
-                <div v-if="Poundage>0">
+                </div> -->
+                <div>
                     <div class="price">
                         {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
                     </div>
@@ -25,11 +34,11 @@
                 </div>
             </div>
             <div class="enterfrom">
-                <div class="line-b sbank">
+                <div class="line-b sbank hide-item">
                     <div class="title wd">
                         {{$t('discovery.OTC.sell.selectCurreny')}}
                     </div>
-                    <Select v-model="currency">
+                    <Select v-model="currency" class="cselect">
                         <Option v-for="(v,index) in BDClist" :value="index" :key="v.Key">{{ v.Key }}</Option>
                     </Select>
                 </div>
@@ -425,6 +434,12 @@ export default {
         },
         changType(){
 			this.type = !this.type
+        },
+        change(name){
+            // 发布售币、发布求购切换
+            this.$router.push({
+                path:name,
+            });
         },
         GetPoundage(){
             this.$server.post(

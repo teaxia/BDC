@@ -18,12 +18,32 @@
         background: #2d8cf0;
     }
     &-success{
-        background: #19be6b;
+        background: #299e83;
     }
     &-error{
         background: #ed4014;
     }
     &-wran{
-        background: #f90;
+        background: #f56a00;
+    }
+    &-gray{
+        background: #999999;
+    }
+}
+.font{
+    &-primary{
+        color: #2d8cf0;
+    }
+    &-success{
+        color: #299e83;
+    }
+    &-error{
+        color: #ed4014;
+    }
+    &-wran{
+        color: #f56a00;
+    }
+    &-gray{
+        color: #999999;
     }
 }

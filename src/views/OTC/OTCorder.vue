@@ -1,6 +1,6 @@
 <template>
 	<div class="order margin-header" v-cloak>
-        <x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.order.title')"></x-header>
+        <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.order.title')"></x-header>
 		<div class="pd50">
 			<div class="order-id">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{OrderId}}</h1>
@@ -257,10 +257,7 @@
 							type: 'success'
 						})
 						this.$router.push({
-							path:"/OTC/list",
-							query:{
-								type:2
-							}
+							path:"/OTC/MyOrderNow",
 						});
 					}
 				})
@@ -268,11 +265,6 @@
 			GOTC(){
 				this.$router.push({
 					path:"/OTC/OTCSellBuy",
-				});
-			},
-			Goback(){
-				this.$router.push({
-					path:"/OTC/list",
 				});
 			},
 			thispay(type){

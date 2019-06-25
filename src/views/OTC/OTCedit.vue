@@ -306,10 +306,7 @@ export default {
                         type: 'success'
                     })
                     this.$router.push({
-                        path:"/OTC/list",
-                        query:{
-                            type	:	0,
-                        }
+                        path:"/OTC/MyGoods",
                     });
                 }else{
                     this.GetMySellOrderById()
@@ -357,10 +354,7 @@ export default {
         },
         Goback(){
             this.$router.push({
-                path:"/OTC/list",
-                query:{
-                    type	:	0,
-                }
+                path:"/OTC/MyGoods",
             });
         },
         change(){

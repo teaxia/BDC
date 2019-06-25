@@ -139,11 +139,11 @@
     }
 </script>
 <style lang="scss" scoped>
-    $height:1080px;
+    $height:100%;
     .my-scroll{
+        // padding-bottom: 200px;
         max-width: 100%;
-        max-height:$height;
-        height: $height;
+        height: 900px;
         overflow:hidden;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;

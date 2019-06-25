@@ -6,8 +6,9 @@
                 <div class="left">
                     <h1>{{$t('discovery.OTC.buy.goods.sellBuy')}}{{datalist.currenyName}}</h1>
                     <div class="price">
-                        <div>{{$t('discovery.OTC.buy.goods.bybuy')}}{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
-                        <div>{{$t('discovery.OTC.buy.goods.bybuy')}}{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
+                        <div>{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
+                        <div>{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
+                        <div>限额：{{$numberComma(datalist.canBuy)}}</div>
                     </div>
                     <div v-if="Poundage>0">
                         <div class="tax">
@@ -38,6 +39,11 @@
                 </div>
             </div>
             <div class="mr50 gobuy">
+                <group>
+                    <x-input class="test" type="text" title="出售数量" :show-clear="false" v-model="buyNum">
+                        <div slot="right" style="font-size:0.35rem;">{{datalist.currenyName}}</div>
+                    </x-input>
+                </group>
                 <group>
                     <x-textarea class="textarea" v-model="remark" :max="200" :show-counter="true" :placeholder="$t('discovery.OTC.buy.remark')"></x-textarea>
                 </group>
@@ -138,6 +144,7 @@ export default {
             amount                  :   0,                       // 实际到账
             num                     :   '',                      // 售卖数量
             editCount               :   '',                      // 编辑次数
+            buyNum                  :   '',
 		}
 	},
 	methods: {
@@ -151,7 +158,8 @@ export default {
                 if(data){
                     this.$nextTick(()=>{
                         this.datalist          =   data
-                        this.num               =    data.currenyNum
+                        this.num               =   data.currenyNum
+                        this.buyNum            =   data.currenyNum
                         this.wechartPaymeny    =   (data.payInfo.indexOf('微')>=0)?true:false;
                         this.alipayPaymeny     =   (data.payInfo.indexOf('支')>=0)?true:false;
                         this.cardPaymeny       =   (data.payInfo.indexOf('银')>=0)?true:false;
@@ -183,6 +191,20 @@ export default {
                 })
                 return;
             }
+            if(this.buyNum>this.num){
+                this.$vux.toast.show({
+                    text: '出售数量不能大于数量',
+                    type: 'warn'
+                })
+                return;
+            }
+            if(this.buyNum==''){
+                this.$vux.toast.show({
+                    text: '出售数量不能为空',
+                    type: 'warn'
+                })
+                return;
+            }
             this.$server.post( 
             'OTC_GoodsSell_TJ',{
                 guid 	    :   this.$storage.get('guid'),
@@ -192,15 +214,13 @@ export default {
                 wxInfoId    :   (this.wechartId)?this.wechartId:0,
                 cardInfoId  :   (this.bankId)?this.bankId:0,
                 key         :   this.Key,
-                editCount   :   this.editCount
+                editCount   :   this.editCount,
+                buyNum      :   this.buyNum
 
             }).then(data => {
                 if(data){
                     this.$router.push({
-                        path:"/OTC/list",
-                        query:{
-                            type      :   3,                // 前往求已购页面
-                        }
+                        path:"/OTC/MyOrderNow",
                     });
                 }
             })

@@ -1,17 +1,17 @@
 <template>
-	<div class="mycard margin-header" v-cloak>
-		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.demand.title')"></x-header>
-        <div class="pd50">
-            <div class="currency">
-                <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
-                    <use :xlink:href="`#icon-`+cName"></use>
-                </svg>
-                <Avatar v-else class="sicon avatar" style="background:#f56a00;">
-                    <span class="line-height">{{cName}}</span>
-                </Avatar>
-                <div class="font">
-                    {{cName}}
-                </div>
+	<div class="OTCSell" v-cloak>
+        <div class="pb">
+            <div class="title-tool">
+                <Dropdown trigger="click" @on-click="change" class="OTCSellBuy-drop">
+                    <div class="btn btn-min-x btn-round">
+                        {{$t('discovery.OTC.demand.title')}}
+                        <i class="iconfont icon-sanjiao_xia"></i>
+                    </div>
+                    <DropdownMenu slot="list">
+                        <DropdownItem :name="'/OTC/sell'">{{$t('discovery.OTC.Selltitle')}}</DropdownItem>
+                        <DropdownItem :name="'/OTC/demand'">{{$t('discovery.OTC.demand.title')}}</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
                 <div class="price">
                     {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
                 </div>
@@ -31,6 +31,11 @@
                 </group>
                 <group>
                     <x-input class="test" type="text" :title="$t('discovery.OTC.sell.price')"  :placeholder="$t('discovery.OTC.demand.price')" v-model="price">
+                    </x-input>
+                </group>
+                <group>
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.minNum')" :show-clear="false" v-model="minBuy">
+                        <div slot="right" style="font-size:0.35rem;">CNY</div>
                     </x-input>
                 </group>
                 <div class="line-b sbank">
@@ -107,6 +112,7 @@ export default {
             type        :   false,
             animal      :   'all',
             showVersion :   '',
+            minBuy      :   '',                         // 最低购买额
 		}
 	},
 	methods: {
@@ -115,6 +121,14 @@ export default {
                 // 判断安全码
                 this.$vux.toast.show({
                     text: this.$t('discovery.OTC.sell.tips.security'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(this.minBuy==''){
+                // 判断最低限额
+                this.$vux.toast.show({
+                    text: '最低限额不能为空',
                     type: 'warn'
                 })
                 return;
@@ -136,6 +150,7 @@ export default {
                 supportCard :   this.cardpay,
                 moneyPwd    :   this.password,
                 showVersion :   this.showVersion,
+                minBuy      :   this.minBuy
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -159,6 +174,12 @@ export default {
         goauth () {
             this.$router.push({
                 path:"/mine/myhome",
+            });
+        },
+        change(name){
+            // 发布售币、发布求购切换
+            this.$router.push({
+                path:name,
             });
         },
         OTCGetCurrenyPrice(){

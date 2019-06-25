@@ -7,7 +7,6 @@ import user from './views/user.vue'
     import registinfo from './views/user/registinfo.vue'                    //  注册信息填写
     import smglogin from './views/user/smglogin.vue'                        //  短信登陆
     import forget from './views/user/forget.vue'                            //  忘记密码
-
 // 发现
 import discovery from './views/discovery.vue'
     import discoveryindex from './views/discovery/index.vue'                // 发现首页
@@ -40,8 +39,11 @@ import wallet from './views/wallet.vue'
         import OTCsell from './views/OTC/OTCsell.vue'                 // OTC发布售卖
         import OTCbuy from './views/OTC/OTCbuy.vue'                   // 购买OTC
         import OTCorder from './views/OTC/OTCorder.vue'               // 支付订单
-        import OTCList from './views/OTC/OTCList.vue'                 // 订单列表
+        import OTCMyGoods from './views/OTC/OTCMyGoods.vue'           // 我的发布
+        import OTCMyOrderByNow from './views/OTC/OTCMyOrderByNow.vue'           // 当前订单
+        import OTCMyOrderByHistory from './views/OTC/OTCMyOrderByHistory.vue'   // 历史订单
         import OTCmyOrder from './views/OTC/OTCmyOrder.vue'              // 订单详情
+        import OTCMyProfit from './views/OTC/OTCMyProfit.vue'              // 收益订单
         import OTCcomplaiont from './views/OTC/OTCcomplaiont.vue'              // 投诉
         import OTCedit from './views/OTC/OTCedit.vue'                 // 编辑售币
         import OTCdemand from './views/OTC/OTCdemand.vue'                 // 发布求购
@@ -176,22 +178,24 @@ let routes = [
                 component: OTCindex, 
                 name: 'OTCSellBuy',
                 meta:{isIndex: 1},
-                children: [
-                    { path: '/OTC/OTCSellBuy', component: OTCSellBuy, name: 'OTCSellBuy',meta:{isIndex: 1}},
+                children: [                                 // bindex 是OTC首页的交易菜单导航使用的
+                    { path: '/OTC/OTCSellBuy', component: OTCSellBuy, name: 'OTCSellBuy',meta:{isIndex: 1,bindex:0}},
+                    { path: '/OTC/sell', component: OTCsell, name: 'OTCsell',meta:{isIndex: 1,bindex:1}},
+                    { path: '/OTC/demand', component: OTCdemand, name: 'OTCdemand',meta:{isIndex: 1,bindex:1}},
+                    { path: '/OTC/MyGoods', component: OTCMyGoods, name: 'OTCMyGoods',meta:{isIndex: 1,bindex:2}},
+                    { path: '/OTC/MyOrderNow', component: OTCMyOrderByNow, name: 'OTCMyOrderByNow',meta:{isIndex: 1,bindex:3}},
+                    { path: '/OTC/MyOrderHistory', component: OTCMyOrderByHistory, name: 'OTCMyOrderByHistory',meta:{isIndex: 1,bindex:4}},
+                    { path: '/OTC/ComplaiontList', component: OTCcomplaiontList, name: 'OTCcomplaiontList',meta:{isIndex: 1,bindex:5}},
+                    { path: '/OTC/Profit', component: OTCMyProfit, name: 'OTCMyProfit',meta:{isIndex: 1,bindex:6}},
                 ]
             },
-            { path: '/OTC/OTCSellBuy', component: OTCSellBuy, name: 'OTCSellBuy',meta:{isIndex: 1}},
-            { path: '/OTC/sell', component: OTCsell, name: 'OTCsell',meta:{isIndex: 1}},
             { path: '/OTC/buy', component: OTCbuy, name: 'OTCbuy',meta:{isIndex: 1}},
             { path: '/OTC/order', component: OTCorder, name: 'OTCorder',meta:{isIndex: 1}},
-            { path: '/OTC/list', component: OTCList, name: 'OTCList',meta:{isIndex: 1}},
             { path: '/OTC/myOrder', component: OTCmyOrder, name: 'OTCmyOrder',meta:{isIndex: 1}},
             { path: '/OTC/complaiont', component: OTCcomplaiont, name: 'OTCcomplaiont',meta:{isIndex: 1}},
             { path: '/OTC/edit', component: OTCedit, name: 'OTCedit',meta:{isIndex: 1}},
-            { path: '/OTC/demand', component: OTCdemand, name: 'OTCdemand',meta:{isIndex: 1}},
             { path: '/OTC/editDemand', component: OTCeditDemand, name: 'OTCeditDemand',meta:{isIndex: 1}},
             { path: '/OTC/buyOrder', component: OTCbuyOrder, name: 'OTCbuyOrder',meta:{isIndex: 1}},
-            { path: '/OTC/ComplaiontList', component: OTCcomplaiontList, name: 'OTCcomplaiontList',meta:{isIndex: 1}},
             { path: '/OTC/Complaiont/view', component: OTCcomplaiontView, name: 'OTCcomplaiontView',meta:{isIndex: 1}},
             { path: '/OTC/OTCRank', component: OTCRank, name: 'OTCRank',meta:{isIndex: 1}},
         ]

@@ -4,7 +4,10 @@
 @import "../../base/spanTag";
 .orderList{
     background: #f2f2f2f2;
+    overflow: scroll;
     height: 100%;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 340px;
     .pb20{
         padding:20px;
     }
@@ -23,6 +26,20 @@
             flex: 0 0 20% !important;
         }
     } 
+    .total{
+        color:#333;
+        font-size:26px;
+        font-weight: bold;
+    }
+    .price-info{
+        color: $font-h2;
+        font-size:30px;
+        font-weight: bold;
+        letter-spacing: 0.6px;
+    }
+    .grid-username{
+        text-align: center;
+    }
     .list{
         .list-profit{
             margin-top:0 !important;
@@ -55,6 +72,9 @@
             .right{
                 text-align: right;
             }
+            .mr-cent{
+                margin-left: 17px;
+            }
             .order-list-profit{
                 margin-left: 0px !important;
             }
@@ -66,10 +86,6 @@
                 text-align: left;
                 .code{
                     color:$font-orange;
-                }
-                .total{
-                    color:#333;
-                    font-size:30px;
                 }
                 .buynum{
                     color:$font-red;
@@ -83,8 +99,13 @@
                     font-size:28px;
                 }
             }
-            .grid-username{
-                text-align: center;
+            .status{
+                position: relative;
+                .font{
+                    position: absolute;
+                    right: 0;
+                    bottom: 0px;
+                }
             }
             .order-list-type{
                 text-align: right;
@@ -111,10 +132,22 @@
         font-size: 24px;
         line-height: 1rem;
     }
+    .font{
+        font-size:28px;
+        margin-top:14px;
+        text-align: center;
+    }
     .otc-item{
         margin-top:20px;
         background: #fff;
-        border-radius: 8px;
+        border-radius: 8px; 
+        position: relative;
+        .tag-p{
+            position: absolute;
+            top:0;
+            left:400px;
+            border-radius: 0px 0px 8px 8px;
+        }
         &:last-child{
             margin-bottom: 50px;
         }
@@ -140,6 +173,17 @@
                     line-height: 1;
                 }
             }
+            .c-primary{
+                color:$font-yellow;
+            }
+            .sv{
+                color:$font-green;
+                font-size:28px;
+                font-weight: bold;
+            }
+            .c-all{
+                color:$font-blue;
+            }
         }
         .otc-grid-curreny{
             .grid-username{
@@ -160,26 +204,18 @@
                 font-size:22px;
                 color:#666;
             }
-            .sv{
-                position: absolute;
-                right: 0px;
-                top:12px;
-                color:$font-green;
-                font-size:28px;
-                font-weight: bold;
-            }
-            .c-primary{
-                color:$font-yellow;
-            }
-            .c-all{
-                color:$font-blue;
-            }
         }
         .otc-grid-pay{
             flex: 1;
+            position: relative;
             .otc-grid-paylist{
-                margin-top:10px;
-                text-align: right;
+                .font{
+                    text-align: right !important;
+                    position: absolute;
+                    bottom: 0px;
+                    right: 25px;
+                    font-size:30px;
+                }
             }
         }
     }

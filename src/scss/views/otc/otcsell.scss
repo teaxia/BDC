@@ -2,25 +2,27 @@
 @import "../../base/var";
 @import "../../base/button";
 $height : 1.5rem;
-.sbank{
-    padding: 0.133333rem 0.2rem;
-    display: flex;
-    position: relative;
-    .title{
-        width: 3rem;
-        font-size:0.45rem;
+.enterfrom{
+    margin-top:20px;
+    .sbank{
+        padding: 0.133333rem 0.2rem;
+        display: flex;
+        .title{
+            width: 3rem;
+            font-size:0.45rem;
+            line-height: 80px;
+        }
+        .cselect{
+            margin-top:10px;
+        }
     }
     .title-psw{
         width: 2.2rem;
         font-size:0.45rem;
+        line-height: 80px;
     }
     .psw{
-        display: flex;
-        font-size:0.45rem;
-        .iconfont{
-            position: absolute;
-            right:0;
-        }
+        margin-top:10px;
     }
 }
 .select{
@@ -29,6 +31,20 @@ $height : 1.5rem;
     border-radius: 5px;
     height: 1rem;
     font-size:30px;
+}
+.OTCSell{
+    overflow: scroll;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+    .title-tool{
+        display: flex;
+        justify-content: space-between;
+        .price{
+            font-size:28px;
+            line-height: 65px;
+            padding-right: 20px;
+        }
+    }
 }
 .select-pay{
     .iconfont {
@@ -132,6 +148,21 @@ $height : 1.5rem;
     line-height: 90px;
     color:$font-red;
     font-size:26px;
+}
+.pb{
+    padding-bottom: 500px;
+    margin:20px 20px;
+}
+.OTCSellBuy-drop{
+    .btn{
+        font-size: 28px;
+    }
+    .btn-min-x{
+        border-radius: 12px;
+        width: 200px;
+        height: 48px;
+        line-height: 38px;
+    }
 }
 .popup{
     .pay-info{

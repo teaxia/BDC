@@ -72,8 +72,8 @@
 				stardate    :   '',
 				enddate     :   '',
 				search		:	'',					// 搜索订单号
-				MyOrder		:	[],					// 申诉订单
-				type		:	'ss',			    // 当前订单"dq"，历史订单"ls"，申诉订单"ss"
+				MyOrder		:	[],					// 当前订单、历史订单
+				type		:	'dq',					// 当前订单"dq"，历史订单"ls"，申诉订单"ss"
 			}
 		},
 		watch:{
@@ -131,17 +131,31 @@
 				this.MyOrderByType()
 			},
 			myOrder(id,status,type){
-				// 申诉订单跳转
-				this.$router.push({
-					path:"/OTC/Complaiont/view",
-					query:{
-						id		:	id,
-					}
-				});
-				
+				// 订单页跳转
+				if(status==2){
+					// 待支付状态
+					this.$router.push({
+						path:"/OTC/order",
+						query:{
+							id		:	id,
+						}
+					});
+				}else{
+					// 其他状态
+					// status传参 2是已购 3是已售
+					// "buy"对应“已购”列表,"sell"对应”已售”
+					let status = (type=='buy')?2:3;
+					this.$router.push({
+						path:"/OTC/myOrder",
+						query:{
+							id		:	id,
+							status	:	status
+						}
+					});
+				}
 			},
 			MyOrderByType(){
-				// 申诉订单
+				// 当前订单、历史订单
 				this.$server.post(
                 'OTC_MyOrderByType',{
                     guid 	    :   this.$storage.get('guid'),
@@ -156,6 +170,28 @@
                 }) 
 			},
 			
+			edit(id){
+				// 编辑在售订单
+				this.$router.push({
+					path:"/OTC/edit",
+					query:{
+						id	:	id,
+					}
+				});
+			},
+			editDemand(id){
+				// 编辑
+				this.$router.push({
+					path:"/OTC/editDemand",
+					query:{
+						id	:	id,
+					}
+				});
+			},
+			sQuery(type){
+				// 执行查询按钮 传类型
+				this.MyOrderByType()
+			},
 		},
 		mounted() {
 			this.getDateToday()

@@ -132,11 +132,7 @@ input{
 .padding-footer{
     padding-bottom: 2rem;
 }
-.vux-tab-container,.vux-tab{
-    height: auto !important;
-    overflow: hidden !important;
-    
-}
+
 /*工具类*/
 .ellipsis1{
     text-overflow:ellipsis;
@@ -284,6 +280,37 @@ input{
 .gobuy{
     .weui-textarea,.weui-textarea-counter{
         font-size:16px !important;
+    }
+}
+.otc{
+    // OTC的专属横拉
+    .vux-tab-container,.vux-tab{
+        height: auto !important;
+        background: transparent !important;
+    }
+    .vux-tab-item{
+        background: transparent !important;
+    }
+    .vux-tab .vux-tab-item.vux-tab-selected{
+        color: #f90 !important;
+    }
+    .scrollable .vux-tab-ink-bar{
+        bottom: 0px !important;
+    }
+    // OTC的专属下拉菜单
+    .ivu-select-dropdown{
+        width: 2.666667rem!important;
+        left: 0.3rem !important;
+    }
+    .ivu-dropdown-item{
+        font-size: 0.373333!important;
+        letter-spacing: 0.06933!important;
+    }
+    // 售卖币页面的专属下拉选择币种
+    .hide-item{
+        .ivu-select-dropdown{
+            left: 102px !important;
+        }
     }
 }
 /*flex*/
