@@ -130,29 +130,71 @@
 			Query(){
 				this.MyOrderByType()
 			},
-			myOrder(id,status,type){
+			myOrder(id,status,cType){
 				// 订单页跳转
+				// 先判断订单状态,订单状态为2是待支付状态3是待发币状态
 				if(status==2){
-					// 待支付状态
-					this.$router.push({
-						path:"/OTC/order",
-						query:{
-							id		:	id,
-						}
-					});
+					if(cType=='sell'){
+						// 我卖给别人,我查看订单状态
+						this.$router.push({
+							path:"/OTC/myOrder",
+							query:{
+								id		:	id,
+								status	:	status
+							}
+						});
+					}else if(cType=='buy'){
+						// 我买别人的币,我要支付
+						this.$router.push({
+							path:"/OTC/order",
+							query:{
+								id		:	id,
+							}
+						});
+					}
 				}else{
-					// 其他状态
-					// status传参 2是已购 3是已售
-					// "buy"对应“已购”列表,"sell"对应”已售”
-					let status = (type=='buy')?2:3;
-					this.$router.push({
-						path:"/OTC/myOrder",
-						query:{
-							id		:	id,
-							status	:	status
-						}
-					});
+					if(cType=='sell'){
+						// 我卖给别人,我查看订单状态
+						this.$router.push({
+							path:"/OTC/myOrder",
+							query:{
+								id		:	id,
+								status	:	3
+							}
+						});
+					}else if(cType=='buy'){
+						// 我买别人的币,我要支付
+						this.$router.push({
+							path:"/OTC/myOrder",
+							query:{
+								id		:	id,
+								status	:	2
+							}
+						});
+					}
 				}
+				
+				// if(status==2){
+				// 	// 待支付状态
+					// this.$router.push({
+					// 	path:"/OTC/order",
+					// 	query:{
+					// 		id		:	id,
+					// 	}
+					// });
+				// }else{
+				// 	// 其他状态
+				// 	// status传参 2是已购 3是已售
+				// 	// "buy"对应“已购”列表,"sell"对应”已售”
+				// 	let status = (type=='buy')?2:3;
+				// 	this.$router.push({
+				// 		path:"/OTC/myOrder",
+				// 		query:{
+				// 			id		:	id,
+				// 			status	:	status
+				// 		}
+				// 	});
+				
 			},
 			MyOrderByType(){
 				// 当前订单、历史订单
@@ -166,6 +208,7 @@
                 }).then(data => {
                     if(data){
 						this.MyOrder	=	data
+						console.log(data)
                     }
                 }) 
 			},

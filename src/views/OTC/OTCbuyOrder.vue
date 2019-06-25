@@ -191,7 +191,7 @@ export default {
                 })
                 return;
             }
-            if(this.buyNum>this.num){
+            if(parseFloat(this.buyNum)>parseFloat(this.num)){
                 this.$vux.toast.show({
                     text: '出售数量不能大于数量',
                     type: 'warn'

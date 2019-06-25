@@ -2,7 +2,7 @@
 	<div class="orderList" v-cloak>
 		<div class="pb20">
 			<div class="goods-list">
-				<div class="otc-item" @click="edit(v.Id)" v-for="(v,index) in MyGoods" v-if="v.Id" :key="index">
+				<div class="otc-item" @click="edit(v.Id,v.GoodsType)" v-for="(v,index) in MyGoods" v-if="v.Id" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
 							<div class="grid-info">{{v.CreateTime}}</div>
@@ -91,14 +91,24 @@
                 }) 
 			},
 			
-			edit(id){
-				// 编辑在售订单
-				this.$router.push({
-					path:"/OTC/edit",
-					query:{
-						id	:	id,
-					}
-				});
+			edit(id,type){
+				if(type==0){
+					// 编辑售币订单
+					this.$router.push({
+						path:"/OTC/edit",
+						query:{
+							id	:	id,
+						}
+					});
+				}else{
+					this.$router.push({
+					path:"/OTC/editDemand",
+						query:{
+							id	:	id,
+						}
+					});
+				}
+				
 			},
 			editDemand(id){
 				// 编辑

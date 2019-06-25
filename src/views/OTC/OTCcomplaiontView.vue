@@ -22,13 +22,13 @@
             <div class="sh-status mr30">
                 <div class="sh-sh">{{$t('discovery.OTC.complaiont.atime')}}：{{AuditTime}}</div>
                     {{$t('discovery.OTC.complaiont.status')}}：
-                <span v-if="AuditStauts==3" class="tag tag-error">
+                <span v-if="AuditStatus==3" class="tag tag-error">
                     {{$t('discovery.OTC.complaiont.status3')}}
                 </span>
-                <span v-if="AuditStauts==1" class="tag tag-success">
+                <span v-if="AuditStatus==1" class="tag tag-success">
                     {{$t('discovery.OTC.complaiont.status1')}}
                 </span>
-                <span v-if="AuditStauts==0" class="tag tag-wran">
+                <span v-if="AuditStatus==0" class="tag tag-wran">
                     {{$t('discovery.OTC.complaiont.status0')}}
                 </span>
                 <div class="auditremarks">
@@ -52,7 +52,7 @@
                 CreateTime  :   '',
                 AuditRemarks:   '',         //  审核回复内容
                 AuditTime   :   '',         //  审核时间
-                AuditStauts :   '',         //  审核状态：0待审核，1成功，3拒绝
+                AuditStatus :   '',         //  审核状态：0待审核，1成功，3拒绝
             }
             
         },
@@ -70,7 +70,7 @@
                         this.img            =   data.fileNames
                         this.AuditRemarks   =   data.AuditRemarks
                         this.AuditTime      =   data.AuditTime
-                        this.AuditStauts    =   data.AuditStauts
+                        this.AuditStatus    =   data.AuditStatus
                         this.CreateTime     =   data.CreateTime
                     }
                 })

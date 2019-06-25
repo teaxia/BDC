@@ -129,7 +129,6 @@
 			}
         },
 		methods: {
-			// $numberComma()
 			getCountDwn(){
 				// 付款倒计时
 				this.clock = setInterval(() =>{
