@@ -198,7 +198,7 @@
                         </div>
                         <div class="pop-content-btn">
                             <div class="pop-content-btn-space">
-                                <button class="btn btn-block btn-cancel">{{ T }}s{{$t('discovery.OTC.buy.close')}}</button>
+                                <button class="btn btn-block btn-cancel" @click="cacnelorder()">{{ T }}s{{$t('discovery.OTC.buy.close')}}</button>
                             </div>
                             <div class="pop-content-btn-space">
                                 <button class="btn btn-block" @click="doSubmit(orderInfo.Id)">{{ $t("global.submit") }}</button>
@@ -646,6 +646,11 @@
                         this.sellbuy = false
                     }
                 },1000)
+            },
+            cacnelorder(){
+                // 取消订单
+                window.clearInterval(this.clock)
+                this.sellbuy = false
             },
             GetPoundage(){
                 // 获取卖币手续费
