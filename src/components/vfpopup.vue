@@ -59,6 +59,7 @@ export default {
     bottom:0;
     background:rgba(0,0,0,0.5);
     overflow: hidden;
+    z-index: 9999;
     .margin-top{
         position: fixed;
         left: 0;
@@ -95,7 +96,7 @@ export default {
 }
 .show{
     opacity: 1;
-    z-index:99999;
+    z-index:99;
 }
 .hidden{
     opacity: 0;

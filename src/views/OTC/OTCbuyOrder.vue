@@ -162,7 +162,7 @@ export default {
                         this.buyNum            =   data.currenyNum
                         this.wechartPaymeny    =   (data.payInfo.indexOf('微')>=0)?true:false;
                         this.alipayPaymeny     =   (data.payInfo.indexOf('支')>=0)?true:false;
-                        this.cardPaymeny       =   (data.payInfo.indexOf('银')>=0)?true:false;
+                        this.cardPaymeny       =   (data.payInfo.indexOf('银')>=0)?true:false; 
                         this.editCount         =   data.editCount
                     })
                 }

@@ -4,7 +4,7 @@
 
         </div>
         <div :class="[ showPupop ? 'bottom-in-active' : 'bottom-out-active','margin-top' ]">
-            <div class="title">
+            <div class="title" v-if="tshow">
                 <div @click="$emit('onLeftText')" :class="{'flex text left':true,'text-left':leftText =='x'}"><span v-if="leftText !='x'">{{leftText}}</span><span><i class="ivu-icon ivu-icon-ios-close"></i></span></div>
                 <div class="fx3 text">
                     {{titleText}}
@@ -29,6 +29,10 @@ export default {
         value: {
             type: Boolean,
             default:false
+        },
+        tshow: {                                      //  是否显示标题
+            type: Boolean,
+            default:true
         },
   },
   data () {
@@ -89,7 +93,7 @@ export default {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
         height: auto;
-        max-height: 50%;
+        max-height: 70%;
 //        padding: 20px;
         .title{
             background: #ffffff;

@@ -153,4 +153,146 @@ $height : 1.5rem;
             }
         }
     }
+    .pop{
+        &-title{
+            padding:20px 40px;
+            display: flex;
+            justify-content: space-between;
+            &-h2{
+                letter-spacing: 0.8px;
+                font-size: 38px;
+                color:$color-base;
+                font-weight: bold;
+            }
+            &-price{
+                font-size:32px;
+                letter-spacing: 0.5px;
+                span{
+                    margin-left: 15px;
+                    color:#ff9600;
+                }
+            }
+            &-payment{
+                i{
+                    font-size: 48px;
+                }
+                .alipay{
+                    color:#1296db;
+                }
+                .cardpay{
+                    color:#028BF4;
+                }
+                .wechart{
+                    color:#1eb1ad;
+                }
+            }
+            
+            .icon{
+                width: 114px;
+                height: 114px;
+            }
+            .tradeinfo{
+                text-align: center;
+                font-size: 24px;
+            }
+        }
+        &-content{
+            background:$bg-white;
+            padding:40px;
+            height: auto;
+            overflow: hidden;
+            &-div{
+                clear: both;
+                height: auto;
+                overflow: hidden;
+                padding: 10px 0;
+                font-size:22px;
+            }
+            &-btn{
+                margin-top:20px;
+                clear: both;
+                display: flex;
+                justify-content: space-between;
+                &-space{
+                    padding: 0 20px;
+                    width: 100%;
+                }
+            }
+            .text-right{
+                text-align: right;
+            }
+            .text-fl{
+                float: left;
+            }
+            .text-fr{
+                float: right;
+            }
+            &-nav{
+                float: left;
+                font-size:26px;
+                font-weight: bold;
+                color:#999;
+                &:first-child{
+                    margin-right: 40px;
+                }
+            }
+            .right-btn{
+                line-height: 40px;
+            }
+            .active{
+                color:$color-base;
+                border-bottom: 6px solid $color-base;
+                padding-bottom: 6px;
+            }
+            &-input{
+                margin-top:10px;
+                border: 0.02rem solid #edf1f2 !important;
+                border-radius: 8px;
+                padding-right: 15px;
+                span{
+                    font-size:22px;
+                }
+                .cut{
+                    padding: 0 15px;
+                }
+                .full{
+                    color: #4c7ac5;
+                }
+            }
+        }
+    }
+    .selectbox{
+        height: 400px;
+        background: $bg-white;
+        .radio{
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            .radio-lable{
+                display: block;
+                clear: both;
+                height: $height;
+                line-height: $height;
+                border-bottom: 0.01rem solid $border-line;
+                .cell{
+                    float: left;
+                    width: 90%;
+                    height: $height;
+                    line-height: $height;
+                    display: flex;
+                    padding: 0 40px 0 40px;
+                    justify-content: space-between;
+                    .text{
+                        width: 180px;
+                        text-align: center;
+                    }
+                }
+            }
+            .bind{
+                text-align: center;
+                margin-top:150px;
+                color: #028BF4;
+            }
+        }
+    }
 }

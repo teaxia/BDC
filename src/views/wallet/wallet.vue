@@ -361,7 +361,7 @@ export default {
                     this.BDCNum     =   data.BDCNum
                     this.Money      =   data.Money
                     this.OrderNo    =   data.OrderNo
-                    this.showPupop = true
+                    this.showPupop  =   true
 				}
 			})
         },

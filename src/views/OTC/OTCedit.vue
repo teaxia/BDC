@@ -1,5 +1,5 @@
 <template>
-	<div class="mycard margin-header" v-cloak>
+	<div class="OTCSell margin-header" v-cloak>
 		<x-header :left-options="{backText:$t('global.back'),preventGoBack:true}" @on-click-back="Goback()" :title="$t('discovery.OTC.edit.title')"></x-header>
         <div class="pd50">
             <div class="currency">
