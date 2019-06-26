@@ -48,9 +48,25 @@
 							</div>
 							<div class="status">
 								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
-								<span class="font order-list-type-waitpay" v-if="v.status==2">{{$t('discovery.OTC.status.status2')}}</span>
-								<span class="font order-list-type-wait" v-if="v.status==3">{{$t('discovery.OTC.status.status3')}}</span>
-								<span class="font order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
+								<span class="font order-list-type-waitpay" v-if="v.status==2">
+									<template if v-if="v.cType=='sell'">
+										待收款
+									</template>
+									<template v-if="v.cType=='buy'">
+										{{$t('discovery.OTC.status.status2')}}
+									</template>
+								</span>
+								<span class="font order-list-type-wait" v-if="v.status==3">
+									<template if v-if="v.cType=='sell'">
+										待发币
+									</template>
+									<template v-if="v.cType=='buy'">
+										{{$t('discovery.OTC.status.status3')}}
+									</template>
+								</span>
+								<span class="font order-list-type-success" v-if="v.status==5">
+										{{$t('discovery.OTC.status.status5')}}
+								</span>
 								<span class="font order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
 								<span class="font order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
 							</div>
@@ -134,13 +150,15 @@
 				// 订单页跳转
 				// 先判断订单状态,订单状态为2是待支付状态3是待发币状态
 				if(status==2){
+					// 待支付状态要跳转至支付页面
 					if(cType=='sell'){
 						// 我卖给别人,我查看订单状态
 						this.$router.push({
 							path:"/OTC/myOrder",
 							query:{
 								id		:	id,
-								status	:	status
+								status	:	status,
+								type	:	cType
 							}
 						});
 					}else if(cType=='buy'){
@@ -149,6 +167,8 @@
 							path:"/OTC/order",
 							query:{
 								id		:	id,
+								status	:	status,
+								type	:	cType
 							}
 						});
 					}
@@ -187,6 +207,7 @@
                 }).then(data => {
                     if(data){
 						this.MyOrder	=	data
+						console.log(data)
                     }
                 }) 
 			},

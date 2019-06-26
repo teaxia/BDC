@@ -6,7 +6,8 @@
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{OrderId}}</h1>
 			</div>
 			<div class="order-info order-line">
-				<h3>{{$t('discovery.OTC.order.your')}}{{nickName}}{{$t('discovery.OTC.order.buy')}}{{$numberComma(num)}} BDC</h3>
+				<h3 v-if="cType=='buy'">{{nickName}}{{$t('discovery.OTC.order.tome')}}{{$numberComma(num)}} BDC</h3>
+				<h3 v-if="cType=='null'||cType=='sell'">{{$t('discovery.OTC.order.your')}}{{nickName}}{{$t('discovery.OTC.order.buy')}}{{$numberComma(num)}} BDC</h3>
 			</div>
 			<div class="order-pay order-line mr20">
 				<div class="order-pay-price">
@@ -126,6 +127,7 @@
 				type		:	'',		// 支付方式
 				Confirm		:	false,
 				ConfirmCancel:	false,	// 确认取消弹框
+				cType		:	'',		// 类型
 			}
         },
 		methods: {
@@ -272,7 +274,8 @@
 		},
 		mounted() {
 			// 获取购买数量以及ID
-			this.id     =   (this.$route.query.id)?this.$route.query.id:''
+			this.id     	=   (this.$route.query.id)?this.$route.query.id:''
+			this.cType		=   (this.$route.query.type)?this.$route.query.type:'null';
 			if(this.id==''){
 				this.GOTC()
 			}

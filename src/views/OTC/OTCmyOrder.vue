@@ -7,10 +7,12 @@
 				<span v-if="data.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span><span v-if="data.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
 			</div>
 			<div class="order-info order-line">
-				<h3 v-if="orderType==2&&data.GoodsType==0">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==2&&data.GoodsType==1">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==3&&data.GoodsType==0">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==3&&data.GoodsType==1">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==2&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==2&&data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==2&&data.GoodsType==0&&cType=='null'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==2&&data.GoodsType==1&&cType=='null'">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==3&&data.GoodsType==0&&cType=='null'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 v-if="orderType==3&&data.GoodsType==1&&cType=='null'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 			</div>
 			<div class="order-pay order-line mr20 bgpd">
 				<div class="order-information">
@@ -124,6 +126,7 @@
 				clock		:	'',
 				percent		:	0,				     // 倒计时百分比
 				percentclock:	'',					 // 倒计时的实例
+				cType		:	'',					 // 买房、卖方
 			}
 		}, 
 		watch:{
@@ -140,16 +143,17 @@
 			},
 			GetOrderById(){
 				// 订单详情
-				let isSeller = (this.orderType==2)?false:true;
+				// let isSeller = (this.orderType==2)?false:true;
 				this.$server.post(
 				'OTC_GetMyOrderById',{
 					guid 	    :   this.$storage.get('guid'),
 					orderId 	:   this.id,
-					isSeller  	:   isSeller,
+					// isSeller  	:   isSeller,
 				}).then(data => {
 					if(data){
 						this.payInfo 	=   (data.PayType)?data.PayType.split("|"):'';
 						this.data = data
+						console.log(data)
 						if(data.PayTime){
 							this.timeFn(data.PayTime)
 						}
@@ -290,6 +294,7 @@
 		mounted() {
 			this.id     	=   this.$route.query.id
 			this.orderType	=	this.$route.query.status
+			this.cType		=   (this.$route.query.type)?this.$route.query.type:'null';
             this.GetOrderById();
 		},
 		beforeDestroy(){

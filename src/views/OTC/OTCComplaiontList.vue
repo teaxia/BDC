@@ -1,55 +1,100 @@
 <template>
-	<div class="complaiontlist padding-footer" v-cloak>
-        <div class="main-container">
-			<v-grid class="mr30" v-for="(v,index) in dataList" :key="index" v-if="dataList.length>0">
-                <div class="systeammsg" @click="goto(v.Id)">
-                    <div>{{$t('discovery.OTC.complaiont.record')}}：#{{v.OrderId}}</div>
-                    <div>{{v.CreateTime}}</div>
-					<div class="isread">
-						<span v-if="v.AuditStauts==0" class="wait">{{$t('discovery.OTC.complaiont.status0')}}</span>
-						<span v-if="v.AuditStauts==1" class="success">{{$t('discovery.OTC.complaiont.status1')}}</span>
-						<span v-if="v.AuditStauts==3" class="wran">{{$t('discovery.OTC.complaiont.status3')}}</span>
-					</div>
-                </div>
-			</v-grid>
+	<div class="orderList" v-cloak>
+		<div class="pb20">
+			<div class="list">
+				<!-- 当前订单 -->
+				<div class="order-list-content" v-for="(v,index) in CorderList" v-if="v.Id" :key="index" @click="Toview(v.Id)">
+					<flexbox>
+						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.OrderId}}</flexbox-item>
+						<flexbox-item class="right">
+							{{v.CreateTime}}
+						</flexbox-item>
+					</flexbox>
+					<flexbox>
+						<flexbox-item span='60'>
+							<svg class="sicon mr-cent" aria-hidden="true" v-if="$currency.indexOf(v.CurrenyName)>=0">
+								<use :xlink:href="`#icon-`+v.CurrenyName"></use>
+							</svg>
+							<Avatar v-else class="sicon avatar" style="background:#f56a00;">
+								<span class="line-height">{{v.CurrenyName}}</span>
+							</Avatar>
+							<div class="grid-username">{{v.CurrenyName}}</div>
+							<div class="grid-username">
+								<span v-if="v.GoodsType==0" class="font font-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
+								<span v-if="v.GoodsType==1" class="font font-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
+								
+							</div>
+						</flexbox-item>
+						<flexbox-item class="order-list-info">
+							<div class="total">
+								{{$t('discovery.OTC.orderlist.totalprice')}}
+							</div>
+							<div class="price-info">
+								￥{{v.TotalPay}}
+							</div>
+							<div>
+								<span class="price">{{$t('discovery.OTC.orderlist.oprice')}}：￥{{v.Price}}</span>
+							</div>
+							<div class="status">
+								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.CurrenyName}}）</span>
+								<span :class="{'font':true,'order-list-type-waitpay':v.sType=='申诉','order-list-type-wait':v.sType=='被申诉'}">{{v.sType}}</span>
+							</div>
+						</flexbox-item>
+					</flexbox>
+				</div>
+			</div>
 		</div>
     </div>
 </template>
 
 <script>
 	export default {
+		name:'OTCList',
 		data() {
 			return {
-				dataList	:	[],
-				title		:	'',
-				type		:	''
+				start		:	'',
+				end			:	'',
+				stardate    :   '',
+				enddate     :   '',
+				search		:	'',					// 搜索订单号
+				CorderList	:	[],					// 申诉订单
+				type		:	'ss',			    // 当前订单"dq"，历史订单"ls"，申诉订单"ss"
 			}
+		},
+		watch:{
+			
 		},
 		methods: {
-			goto(id){
-                this.$router.push({
-                    path    :   '/OTC/Complaiont/view',
-                    query   :   {'id':id}
-				});
-			},
-			GetComplainList(){
-				this.$server.post(
-				'OTC_GetComplainList',
-				{
-					guid    : this.$storage.get('guid'),
-				}).then(data => {
-					if(data){
-						this.dataList = data;
+			Toview(id){
+				// 申诉订单跳转
+				this.$router.push({
+					path:"/OTC/Complaiont/view",
+					query:{
+						id		:	id,
 					}
-				})
-			}
+				});
+				
+			},
+			GetCorderList(){
+				// 申诉订单
+				this.$server.post(
+                'OTC_GetComplainList',{
+                    guid 	    :   this.$storage.get('guid'),
+                }).then(data => {
+                    if(data){
+						this.CorderList	=	data
+                    }
+                }) 
+			},
+			
 		},
 		mounted() {
-			this.GetComplainList()	
+			this.GetCorderList()
 		}
 	}
+
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/otc/otccomplaiont";
+@import "../../scss/views/otc/otclist";
 </style>
