@@ -1,26 +1,35 @@
 <template>
 	<div class="otcRank margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.rank.title')"></x-header>
+        <div class="podium">
+            <div :class="{'podium-prize':true,'podium-0':index==1,'podium-1':index==0,'podium-2':index==2}" v-for="(v,index) in rankList" :key="index" v-if="index<3">
+                <div class="ranking">
+                    <svg class="sicon" aria-hidden="true" v-if="index<=2">
+                        <use :xlink:href="`#icon-`+rank[index]"></use>
+                    </svg>
+                </div>
+                <div class="podium-info">
+                    <div class="rank-nickname">{{v.NickName}}</div>
+                    <div class="lv">{{v.Lv}}</div>
+                    <div class="total">
+                        交易数量<br/>{{$numberComma(v.Total)}}
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="main-container">
             <div class="rabklist">
-                <div class="rank">
-                    <div class="ranking"></div>
-                    <div class="nickname">{{$t('discovery.OTC.rank.title')}}</div>
-                    <div class="total">{{$t('discovery.OTC.rank.num')}}</div>
-                </div>
                 <div class="rank" v-for="(v,index) in rankList" :key="index">
-                    <div class="ranking">
-                        <svg class="sicon" aria-hidden="true" v-if="index<=2">
-                            <use :xlink:href="`#icon-`+rank[index]"></use>
-                        </svg>
+                    <div :class="{'ranking':true,'lv-ng':index%2==0}">
+                        {{index+4}}
                     </div>
-                    <div :class="{nickname:true,'lv-1':index==0,'lv-2':index==1,'lv-3':index==2}">
+                    <div :class="{nickname:true,'lv-ng':index%2==0}">
                         <span class="rank-nickname">{{v.NickName}}</span>
                         <span class="lv">{{v.Lv}}</span>
                     </div>
-                    <div :class="{total:true,'lv-1':index==0,'lv-2':index==1,'lv-3':index==2}">
-                        {{$numberComma(v.Total)}}
-                    </div>
+                    <div :class="{total:true,'lv-ng':index%2==0}">
+                        交易数量:{{$numberComma(v.Total)}}
+                    </div> 
                 </div>
             </div>
         </div>

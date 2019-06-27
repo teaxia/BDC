@@ -2,36 +2,108 @@
 @import "../../base/var";
 @import "../../base/button";
 .otcRank{
+    background:#f2f2f2;
+    height: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    // 领奖台
+    .podium{
+        background: #35495e;
+        height: 400px;
+        overflow: hidden;
+        width: 100%;
+        padding: 30px 10px 20px 10px;
+        position: relative;
+        &-prize{
+            background:$bg-white;
+            width: 240px;
+            position: absolute;
+        }
+        &-0{
+            // 亚军
+            height: 280px;
+            margin-top:62px;
+            z-index:2;
+            border-radius: 8px;
+            border-radius: 8px 0 0 8px;
+            color:rgb(169, 172, 175);
+            left: 15px;
+        }
+        &-1{
+            // 冠军
+            height: 342px;
+            color:rgb(255, 186, 0);
+            z-index:3;
+            border-radius: 8px 8px 0px 0px;
+            border: solid 0.01rem #f2f2f2;
+            box-shadow: 0px 0px 0px 0px rgba(53, 73, 94, 0.35),   /*上边阴影  */
+                        -10px 0px 17px 0px rgba(53, 73, 94, 0.35),   /*左边阴影  */
+                        10px 0px 17px 0px rgba(53, 73, 94, 0.35),    /*右边阴影  */
+                        0px 00px 0px 0px rgba(53, 73, 94, 0.35);    /*下边阴影  */
+            .podium-info{
+                margin-top:20px;
+            }
+            .total{
+                margin-top:50px;
+            }
+            left: 50%;
+            transform: translate(-50%, 0%); 
+        }
+        &-2{
+            // 季军
+            height: 280px;
+            margin-top:62px;
+            z-index:2;
+            border-radius: 0 8px 8px 0;
+            color:rgb(232, 161, 82);
+            right: 15px;
+        }
+        .ranking{
+            .sicon{
+                display: block;
+                margin: 0 auto;
+            }
+
+        }
+        &-info{
+            text-align: center;
+            margin-top:10px;
+            font-weight: bold;
+            font-size: 26px;
+        }
+    }
     .main-container{
         .rabklist{
-            border:0.02rem solid $border-line;
             .rank{
                 padding:10px;
                 display: flex;
                 justify-content:space-between;
-                border-bottom:0.02rem solid $border-line;
                 height: 100px;
                 line-height: 80px;
                 font-size:32px;
+                text-align: center;
+                background:$bg-white;
+                margin-top:20px;
+                border-radius: 8px;
                 &:last-child{
                     border-bottom:none;
                 }
                 .total{
-                    text-align: center;
-                    width: 200px;
+                    text-align: right;
+                    width: 400px;
                 }
                 .nickname{
-                    width: 400px;
+                    width: 200px; 
                     text-align: left;
                 }
-                .lv-1{
+                .lv-ng{
                     color:rgb(255, 186, 0);
                 }
                 .lv-2{
                     color:rgb(169, 172, 175);
                 }
                 .lv-3{
-                    color:rgb(232, 161, 82);;
+                    color:rgb(232, 161, 82);
                 }
                 .ranking{
                     width: 50px;
