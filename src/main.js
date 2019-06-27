@@ -27,7 +27,7 @@ import VueTouch from 'vue-touch'                                // 左右滑动�
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma,Search,Tab, TabItem} from 'vux'
 import { ToastPlugin } from 'vux'
 import  { LoadingPlugin } from 'vux'
-import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Avatar,Slider,Switch,Circle,Affix} from 'iview';
+import { DatePicker,Select,Option,Radio,RadioGroup,Input,Modal,Panel,Collapse,Dropdown,DropdownMenu,DropdownItem,Table,Avatar,Slider,Switch,Circle,Affix,Checkbox} from 'iview';
 import 'iview/dist/styles/iview.css';
 import './scss/base/iviewthem.less';
 import './scss/base/main.scss'
@@ -76,6 +76,7 @@ Vue.component('search', Search)
 Vue.component('tab', Tab)
 Vue.component('tab-item', TabItem)
 Vue.component('Affix', Affix)
+Vue.component('Checkbox', Checkbox)
 
 Vue.prototype.$server       =   server;                         // ajax组件
 Vue.prototype.$storage      =   storage;                        // 本地数据读取

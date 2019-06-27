@@ -1,15 +1,15 @@
 <template>
 	<div class="order margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.order.title')"></x-header>
-		<div class="pd50">
-			<div class="order-id">
+		<div>
+			<div class="pd10 order-id">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{OrderId}}</h1>
 			</div>
-			<div class="order-info order-line">
+			<div class="pd10 order-info order-line">
 				<h3 v-if="cType=='buy'">{{nickName}}{{$t('discovery.OTC.order.tome')}}{{$numberComma(num)}} BDC</h3>
 				<h3 v-if="cType=='null'||cType=='sell'">{{$t('discovery.OTC.order.your')}}{{nickName}}{{$t('discovery.OTC.order.buy')}}{{$numberComma(num)}} BDC</h3>
 			</div>
-			<div class="order-pay order-line mr20">
+			<div class="pd10 order-pay order-line mr20">
 				<div class="order-pay-price">
 					{{$t('discovery.OTC.order.price')}}：<span>{{$numberComma(price)}}</span>
 				</div>
@@ -17,10 +17,7 @@
 					{{$t('discovery.OTC.order.total')}}：<span>{{$numberComma(TotalPay)}}CNY</span>
 				</div>
 			</div>
-			<div class="order-tips mr20 order-line">
-				待支付，请于【{{m}}分{{s}}秒】内向{{nickName}}支付{{$numberComma(TotalPay)}} CNY ，请付款备注：{{RemarkCode}}，付款成功后请到订单页面点击完成支付（非常重要！）
-			</div>
-			<div class="order-payment mr10">
+			<div class="pd10 order-payment mr20">
 				<div class="order-payment-info">
 					{{$t('discovery.OTC.order.payment')}}：
 				</div>
@@ -30,54 +27,94 @@
 					<i @click="pay('wechart')" class="iconfont icon-weixinzhifu wechart" v-if="wechart.length>1"></i>
 				</div>
 			</div>
-			<div class="order-btn">
-				<button class="btn btn-round btn-min btn-cancel" @click="ConfirmCancelOrder()">{{$t('discovery.OTC.order.cancel')}}</button>
-				<button class="btn btn-round btn-min" @click="orderconfirm()">{{$t('discovery.OTC.order.paymentok')}}</button>
+			<div class="pd10 order-tips mr20 order-line">
+				待支付，请于【{{m}}分{{s}}秒】内向{{nickName}}支付{{$numberComma(TotalPay)}} CNY ，请付款备注：{{RemarkCode}}，付款成功后请到订单页面点击完成支付（非常重要！）
+			</div>
+			<div class="pd10 order-btn">
+				<div class="order-btn-ot">
+					<button class="btn btn-round btn-block btn-cancel" @click="ConfirmCancelOrder()">{{$t('discovery.OTC.order.cancel')}}</button>
+				</div>
+				<div class="order-btn-ot">
+					<button class="btn btn-round btn-block" @click="orderconfirm()">{{$t('discovery.OTC.order.paymentok')}}</button>
+				</div>
 			</div>
 		</div>
+		<center>
+			<i-circle :percent="percent" class="close mr20">
+				<div style="font-size:24px">{{m}}m{{s}}s</div>
+				<div>{{$t('discovery.OTC.buy.close')}}</div>
+			</i-circle>
+		</center>
 		<div class="popup">
 			<vfpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showFPupop">
                 <div slot="list">
                     <div class="pay-info">
-						<div v-if="PayType==0" class="ercode">
-							<img class="pay-img" :src="alipay[4]">
-							<div>
-								{{$t('discovery.OTC.order.alipay')}}：{{alipay[2]}}
+						<div v-if="PayType==0" class="card padding-bottom">
+							<i class="iconfont icon-zhifubao alipay"></i>
+							<!-- 支付宝 -->
+							<div class="pay-info-div">
+								<img class="pay-img" :src="alipay[4]">
+								<div class="name">
+									{{$t('discovery.OTC.order.alipay')}}：{{alipay[2]}}
+								</div>
+								<div class="name">
+									{{$t('discovery.OTC.order.name')}}：{{alipay[1]}}
+								</div>
+								<button class="btn btn-round btn-min" @click="save(alipay[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 							</div>
-							<div>
-								{{$t('discovery.OTC.order.name')}}：{{alipay[1]}}
+
+							<div class="btn btn-round btn-min btn-this" :disabled='type=="zfb"' @click="thispay('zfb')">
+								<Checkbox v-model="Ttype" class="label">
+									<span v-if="type=='zfb'">{{$t('discovery.OTC.order.thisPay')}}</span>
+									<span v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+								</Checkbox>
 							</div>
-							<button class="btn btn-round btn-min" @click="save(alipay[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
-							<button class="btn btn-round btn-min mr20" :disabled='type=="zfb"' @click="thispay('zfb')"><span v-if="type=='zfb'">{{$t('discovery.OTC.order.thisPay')}}</span><span v-else>{{$t('discovery.OTC.order.selectpay')}}</span></button>
 						</div>
-						<div v-if="PayType==2" class="ercode">
-							<img class="pay-img" :src="wechart[4]">
-							<div>
-								{{$t('discovery.OTC.order.nickname')}}：{{wechart[3]}}
+						<div v-if="PayType==2" class="card padding-bottom">
+							<i class="iconfont icon-weixinzhifu wechart"></i>
+							<!-- 微信 -->
+							<div class="pay-info-div">
+								<img class="pay-img" :src="wechart[4]">
+								<div class="name">
+									{{$t('discovery.OTC.order.nickname')}}：{{wechart[3]}}
+								</div>
+								<button class="btn btn-round btn-min" @click="save(wechart[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 							</div>
-							<button class="btn btn-round btn-min" @click="save(wechart[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
-							<button class="btn btn-round btn-min mr20" :disabled='type=="wx"' @click="thispay('wx')"><span v-if="type=='wx'">{{$t('discovery.OTC.order.thisPay')}}</span><span v-else>{{$t('discovery.OTC.order.selectpay')}}</span></button>
+							<div class="btn btn-round btn-min btn-this" :disabled='type=="wx"' @click="thispay('wx')">
+								<Checkbox v-model="Ttype" class="label">
+									<span v-if="type=='wx'">{{$t('discovery.OTC.order.thisPay')}}</span>
+									<span v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+								</Checkbox>
+							</div>
 						</div>
 						<div v-if="PayType==1" class="card padding-bottom">
+							<i class="iconfont icon-yinhangqia cardpay"></i>
 							<!-- 银行卡 -->
-							<div class="font">
-								<div class="font-title">{{$t('discovery.OTC.order.bank')}}：</div>{{card[3]}}
-							</div>
-							<div class="font copy">
-								<div class="font-title">{{$t('discovery.OTC.order.cardNumber')}}：</div>
-								<div>{{card[2]}}</div>
-								<div class="font-btn">
-									<div class="btn btn-xs" @click="CopyClip(card[2])">{{$t('discovery.OTC.order.copyCard')}}</div>
+							<div class="pay-info-div">
+								<div class="font">
+									<div class="font-title">{{$t('discovery.OTC.order.bank')}}：</div>{{card[3]}}
+								</div>
+								<div class="font copy">
+									<div class="font-title">{{$t('discovery.OTC.order.cardNumber')}}：</div>
+									<div>{{card[2]}}</div>
+									<div class="font-btn">
+										<div class="btn btn-xs" @click="CopyClip(card[2])">{{$t('discovery.OTC.order.copyCard')}}</div>
+									</div>
+								</div>
+								<div class="font copy">
+									<div class="font-title">{{$t('discovery.OTC.order.name')}}：</div>
+									<div>{{card[1]}}</div>
+									<div class="font-btn">
+										<div class="btn btn-xs" @click="CopyClip(card[1])" v-clipboard:copy="card[1]">{{$t('discovery.OTC.order.copyName')}}</div>
+									</div>
 								</div>
 							</div>
-							<div class="font copy">
-								<div class="font-title">{{$t('discovery.OTC.order.name')}}：</div>
-								<div>{{card[1]}}</div>
-								<div class="font-btn">
-									<div class="btn btn-xs" @click="CopyClip(card[1])" v-clipboard:copy="card[1]">{{$t('discovery.OTC.order.copyName')}}</div>
-								</div>
+							<div class="btn btn-round btn-min btn-this" :disabled='type=="card"' @click="thispay('card')">
+								<Checkbox v-model="Ttype" class="label">
+									<span v-if="type=='card'">{{$t('discovery.OTC.order.thisPay')}}</span>
+									<span v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+								</Checkbox>
 							</div>
-							<button class="btn btn-round btn-min mr20" :disabled='type=="card"' @click="thispay('card')"><span v-if="type=='card'">{{$t('discovery.OTC.order.thisPay')}}</span><span v-else>{{$t('discovery.OTC.order.selectpay')}}</span></button>
 						</div>
 					</div>
                 </div>
@@ -128,12 +165,17 @@
 				Confirm		:	false,
 				ConfirmCancel:	false,	// 确认取消弹框
 				cType		:	'',		// 类型
+				percent		:	0,      // 百分比
+				Ttype		:	false,	// 选择的付款方式(用于绑定选择支付的选择框)
 			}
         },
 		methods: {
 			getCountDwn(){
 				// 付款倒计时
+				let i = 1
+				let Tmp = this.$math.add(this.m*60,this.s)
 				this.clock = setInterval(() =>{
+					i++;
 					if( this.m == 0 && this.s == 0 ){
 						// 倒计时结束
 						window.clearInterval(this.clock);
@@ -145,6 +187,7 @@
 							this.m--;
 							this.s = 59;
 						}
+						this.percent =  i/Tmp*100
 					}
 				},1000);
 			},
@@ -235,7 +278,7 @@
 			},
 			orderconfirm(){
 				if(this.type==''){
-					this.$vux.toast.show({
+					this.$vux.toast.show({ 
 						text: this.$t('discovery.OTC.order.LookPay'),
 						type: 'warn'
 					})
@@ -270,6 +313,10 @@
 			},
 			thispay(type){
 				this.type = type
+				this.Ttype = !this.Ttype
+				if(!this.Ttype){
+					this.type = ''
+				}
 			}
 		},
 		mounted() {
