@@ -167,7 +167,6 @@
                 }).then(data => {
                     if(data){
 						this.MyOrder	=	data
-						console.log(data)
                     }
                 }) 
 			},
