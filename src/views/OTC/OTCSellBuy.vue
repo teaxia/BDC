@@ -460,7 +460,6 @@
                                 this.sellbuy    =   true
                                 this.T          =   60
                                 this.mathPercent()
-                                console.log(data)
                             })
                         }
                     })
@@ -484,9 +483,6 @@
                                 this.T          =   60
                                 this.mathPercent()
                                 this.GetPoundage()
-                                this.GetBind()
-                                this.GetBindBankInfo()
-                                console.log(data)
                             })
                         }
                     })
@@ -566,8 +562,24 @@
             },
             // 购买出售
             changeBuyType(type){
+                // true 按价格 false 按数量
                 // 切换按数量购买还是CNY
                 this.buyType = type
+                if(this.active){
+                    // 我要买 出售
+                    if(type){
+                        this.placeholder    =   '请输入欲购买法币总额'
+                    }else{
+                        this.placeholder    =   '请输入欲购买数量'
+                    }
+                }else{
+                    // 我要卖 求购
+                    if(type){
+                        this.placeholder    =   '请输入欲出售法币总额'
+                    }else{
+                        this.placeholder    =   '请输入欲出售数量'
+                    }
+                }
             },
             doSubmit(Id){
                 if(this.active){
@@ -606,6 +618,7 @@
                         })
                         return;
                     }
+                    let num = (this.buyType)?(this.CNum/this.orderInfo.price).toFixed(8):this.CNum
                     this.$server.post( 
                     'OTC_GoodsSell_TJ',{
                         guid 	    :   this.$storage.get('guid'),
@@ -616,7 +629,7 @@
                         cardInfoId  :   (this.bankId)?this.bankId:0,
                         key         :   this.Key,
                         editCount   :   this.editCount,
-                        buyNum      :   this.CNum
+                        buyNum      :   num
 
                     }).then(data => {
                         if(data){
@@ -685,6 +698,10 @@
             }else{
                 this.change('buy')
             }
+        },
+        beforeDestroy(){
+			// 清除计时器
+			window.clearInterval(this.clock);
 		}
 	}
 
