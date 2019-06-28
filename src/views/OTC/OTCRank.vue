@@ -19,9 +19,9 @@
         </div>
         <div class="main-container">
             <div class="rabklist">
-                <div class="rank" v-for="(v,index) in rankList" :key="index">
+                <div class="rank" v-for="(v,index) in rankList" :key="index" v-if="index>2">
                     <div :class="{'ranking':true,'lv-ng':index%2==0}">
-                        {{index+4}}
+                        {{index+1}}
                     </div>
                     <div :class="{nickname:true,'lv-ng':index%2==0}">
                         <span class="rank-nickname">{{v.NickName}}</span>
@@ -62,6 +62,7 @@
                 }).then(data => {
                     if(data){
                         this.rankList = data
+                        console.log(data)
                     }
                 }) 
             }
