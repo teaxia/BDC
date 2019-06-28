@@ -143,7 +143,7 @@
     .my-scroll{
         // padding-bottom: 200px;
         max-width: 100%;
-        height: 900px;
+        height: 100%;
         overflow:hidden;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
@@ -180,8 +180,8 @@
             }
         }
         .scroll-list{
-            overflow:hidden;
             padding:5px;
+            margin-bottom: 400px;
         }
         .scroll-bottom{
             text-align: center;
