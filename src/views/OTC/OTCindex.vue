@@ -76,7 +76,6 @@
 		},
 		mounted() {
 			this.OTCrouter = this.$storage.get('OTCrouter');
-			console.log(this.OTCrouter)
 			if(this.OTCrouter=='false'){
 				this.brand[1].status = false
 				this.brand[2].status = false

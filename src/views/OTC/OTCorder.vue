@@ -24,9 +24,9 @@
 					{{$t('discovery.OTC.order.payment')}}：
 				</div>
 				<div class="order-payment-list">
-					<i @click="pay('alipay')" class="iconfont icon-zhifubao alipay" v-if="alipay.length>1"></i>
-					<i @click="pay('cardpay')" class="iconfont icon-yinhangqia cardpay" v-if="card.length>1"></i>
-					<i @click="pay('wechart')" class="iconfont icon-weixinzhifu wechart" v-if="wechart.length>1"></i>
+					<i @click="pay('alipay')" :class="{'iconfont icon-zhifubao':true,'alipay':type=='zfb'}" v-if="alipay.length>1"></i>
+					<i @click="pay('cardpay')" :class="{'iconfont icon-yinhangqia':true, 'cardpay':type=='card'}" v-if="card.length>1"></i>
+					<i @click="pay('wechart')" :class="{'iconfont icon-weixinzhifu':true, 'wechart':type=='wx'}" v-if="wechart.length>1"></i>
 				</div>
 			</div>
 			<div class="pd10 order-tips mr20 order-line">
@@ -48,11 +48,11 @@
 			</i-circle>
 		</center>
 		<div class="popup">
-			<vfpopup :leftText="$t('global.cancel')" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showFPupop">
+			<vfpopup :leftText="$t('global.cancel')" :hidetitle="true" :titleText="$t('discovery.OTC.index.curreny')" :rightText="$t('global.ok')" @onLeftText="cancelPupop()" @onRightText="okPupop()" v-model="showFPupop">
                 <div slot="list">
                     <div class="pay-info">
 						<div v-if="PayType==0" class="card padding-bottom">
-							<i class="iconfont icon-zhifubao alipay"></i>
+							<!-- <i class="iconfont icon-zhifubao alipay"></i> -->
 							<!-- 支付宝 -->
 							<div class="pay-info-div">
 								<img class="pay-img" :src="alipay[4]">
@@ -65,15 +65,25 @@
 								<button class="btn btn-round btn-min" @click="save(alipay[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 							</div>
 
-							<div class="btn btn-round btn-min btn-this" :disabled='type=="zfb"' @click="thispay('zfb')">
-								<Checkbox v-model="Ttype" class="label">
-									<span v-if="type=='zfb'">{{$t('discovery.OTC.order.thisPay')}}</span>
-									<span v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
-								</Checkbox>
+							<div class="btn-payment">
+								<div class="btn btn-round btn-min btn-this" :disabled='type=="zfb"' @click="thispay('zfb')">
+									<Checkbox v-model="Ttype" class="label">
+										<span @click="thispay('zfb')" v-if="type=='zfb'">{{$t('discovery.OTC.order.thisPay')}}</span>
+										<span @click="thispay('zfb')" v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+									</Checkbox>
+								</div>
+								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
+									<template v-if="Ttype">
+										确认支付
+									</template>
+									<template v-if="!Ttype">
+										查看其他方式
+									</template>
+								</div>
 							</div>
 						</div>
 						<div v-if="PayType==2" class="card padding-bottom">
-							<i class="iconfont icon-weixinzhifu wechart"></i>
+							<!-- <i class="iconfont icon-weixinzhifu wechart"></i> -->
 							<!-- 微信 -->
 							<div class="pay-info-div">
 								<img class="pay-img" :src="wechart[4]">
@@ -82,15 +92,25 @@
 								</div>
 								<button class="btn btn-round btn-min" @click="save(wechart[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 							</div>
-							<div class="btn btn-round btn-min btn-this" :disabled='type=="wx"' @click="thispay('wx')">
-								<Checkbox v-model="Ttype" class="label">
-									<span v-if="type=='wx'">{{$t('discovery.OTC.order.thisPay')}}</span>
-									<span v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
-								</Checkbox>
+							<div class="btn-payment">
+								<div class="btn btn-round btn-min btn-this" :disabled='type=="wx"' @click="thispay('wx')">
+									<Checkbox v-model="Ttype" class="label">
+										<span  @click="thispay('wx')" v-if="type=='wx'">{{$t('discovery.OTC.order.thisPay')}}</span>
+										<span  @click="thispay('wx')" v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+									</Checkbox>
+								</div>
+								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
+									<template v-if="Ttype">
+										确认支付
+									</template>
+									<template v-if="!Ttype">
+										查看其他方式
+									</template>
+								</div>
 							</div>
 						</div>
 						<div v-if="PayType==1" class="card padding-bottom">
-							<i class="iconfont icon-yinhangqia cardpay"></i>
+							<!-- <i class="iconfont icon-yinhangqia cardpay"></i> -->
 							<!-- 银行卡 -->
 							<div class="pay-info-div">
 								<div class="font">
@@ -111,11 +131,21 @@
 									</div>
 								</div>
 							</div>
-							<div class="btn btn-round btn-min btn-this" :disabled='type=="card"' @click="thispay('card')">
-								<Checkbox v-model="Ttype" class="label">
-									<span v-if="type=='card'">{{$t('discovery.OTC.order.thisPay')}}</span>
-									<span v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
-								</Checkbox>
+							<div class="btn-payment">
+								<div class="btn btn-round btn-min btn-this" :disabled='type=="card"' @click="thispay('card')">
+									<Checkbox v-model="Ttype" class="label">
+										<span @click="thispay('card')" v-if="type=='card'">{{$t('discovery.OTC.order.thisPay')}}</span>
+										<span @click="thispay('card')" v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+									</Checkbox>
+								</div>
+								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
+									<template v-if="Ttype">
+										确认支付
+									</template>
+									<template v-if="!Ttype">
+										查看其他方式
+									</template>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -316,7 +346,8 @@
 			thispay(type){
 				this.type = type
 				this.Ttype = !this.Ttype
-				if(!this.Ttype){
+				let sTtype = this.Ttype
+				if(!sTtype){
 					this.type = ''
 				}
 			}

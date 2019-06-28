@@ -2,7 +2,7 @@
     <div :value="value" :class="[ showFPupop ? 'show' : 'hidden','mask' ]">
         <div class="close" @click="close"></div>
         <div :class="[ showFPupop ? 'bottom-in-active' : 'bottom-out-active','margin-top' ]">
-            <div class="title">
+            <div class="title" v-if="!hidetitle">
                 <i @click="close" class="iconfont icon-tianjia"></i>
             </div>
             <div class="content">
@@ -20,6 +20,10 @@ export default {
             type: Boolean,
             default:false
         },
+        hidetitle:{
+            type: Boolean,
+            default:false
+        }
   },
   data () {
     return {
@@ -42,7 +46,7 @@ export default {
   },
   mounted(){
     if (this.value) {
-        this.showFPupop = true;
+        this.showFPupop = true; 
     }
   }
 }
@@ -77,6 +81,7 @@ export default {
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
         height: auto;
+        max-height: 70%;
         .title{
             padding:10px 5px;
             border-bottom: 0.01rem solid #e7e7e7;

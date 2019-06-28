@@ -1,7 +1,6 @@
 <template>
     <div :value="value" :class="[ showPupop ? 'show' : 'hidden','mask' ]">
         <div class="close" @click="close">
-
         </div>
         <div :class="[ showPupop ? 'bottom-in-active' : 'bottom-out-active','margin-top' ]">
             <div class="title" v-if="tshow">

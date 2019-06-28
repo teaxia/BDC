@@ -110,7 +110,7 @@
             </vpopup>
             <!-- 币种结束 -->
             <!-- 我要买\卖开始 -->
-            <vpopup :tshow="false" v-model="sellbuy">
+            <vpopup :tshow="false" v-model="sellbuy"> 
                 <div slot="list" class="pop">
                     <div class="pop-title">
                         <div class="pop-title-left">
@@ -292,7 +292,7 @@
                 deepcurrency:   '',                                 // 用于存储监听前的币种数据对象
                 currency    :   ['BDC'],
                 dataList    :   [],
-                sellbuy     :   false,
+                sellbuy     :   false,                              // 我要买，我要卖弹出层
                 page:{
                     counter     :   1,              // 当前页数索引
                     pageStart   :   1,              // 
@@ -327,11 +327,10 @@
 			}
         },
         watch:{
-            // scurrency(){
-            //     //  单币种不需要
-            //     //  this.showPupop = false
-            //     //  console.log(this.scurrency);
-            // },
+            sellbuy(){
+                //  清空币种数量
+                this.CNum = ''
+            },
             query(){
                 let Refresh = true
                 switch(this.query){
