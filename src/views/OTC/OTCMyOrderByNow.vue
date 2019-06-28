@@ -15,7 +15,7 @@
 		<div class="pb20">
 			<div class="list">
 				<!-- 当前订单 -->
-				<div class="order-list-content" v-for="(v,index) in MyOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id,v.status,v.cType)">
+				<div class="order-list-content" v-for="(v,index) in MyOrder" v-if="v.Id" :key="index" @click="myOrder(v.Id,v.status,v.cType,v.GoodsType)">
 					<flexbox>
 						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.Id}}</flexbox-item>
 						<flexbox-item class="right">
@@ -146,9 +146,11 @@
 			Query(){
 				this.MyOrderByType()
 			},
-			myOrder(id,status,cType){
+			myOrder(id,status,cType,GoodsType){
 				// 订单页跳转
 				// 先判断订单状态,订单状态为2是待支付状态3是待发币状态
+				// GoodsType==0 售币 1求购
+				let gtype = (GoodsType==0)?'buy':'sell'
 				if(status==2){
 					// 待支付状态要跳转至支付页面
 					if(cType=='sell'){
@@ -168,7 +170,7 @@
 							query:{
 								id		:	id,
 								status	:	status,
-								type	:	cType
+								type	:	gtype
 							}
 						});
 					}

@@ -4,10 +4,12 @@
 		<div>
 			<div class="pd10 order-id">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{OrderId}}</h1>
+				<span v-if="cType=='sell'" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
+				<span v-if="cType=='null'||cType=='buy'" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span>
 			</div>
 			<div class="pd10 order-info order-line">
-				<h3 v-if="cType=='buy'">{{nickName}}{{$t('discovery.OTC.order.tome')}}{{$numberComma(num)}} BDC</h3>
-				<h3 v-if="cType=='null'||cType=='sell'">{{$t('discovery.OTC.order.your')}}{{nickName}}{{$t('discovery.OTC.order.buy')}}{{$numberComma(num)}} BDC</h3>
+				<h3 v-if="cType=='sell'">{{nickName}}{{$t('discovery.OTC.order.tome')}}{{$numberComma(num)}} BDC</h3>
+				<h3 v-if="cType=='null'||cType=='buy'">{{$t('discovery.OTC.order.your')}}{{nickName}}{{$t('discovery.OTC.order.buy')}}{{$numberComma(num)}} BDC</h3>
 			</div>
 			<div class="pd10 order-pay order-line mr20">
 				<div class="order-pay-price">
@@ -179,7 +181,7 @@
 					if( this.m == 0 && this.s == 0 ){
 						// 倒计时结束
 						window.clearInterval(this.clock);
-						this.CancelOrder();
+						this.GOTC()
 					}else if( this.m >= 0 ){
 						if( this.s > 0 ){
 							this.s--;
