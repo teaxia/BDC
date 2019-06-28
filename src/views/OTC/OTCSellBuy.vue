@@ -109,7 +109,7 @@
                 </div>
             </vpopup>
             <!-- 币种结束 -->
-            <!-- 我要买开始 -->
+            <!-- 我要买\卖开始 -->
             <vpopup :tshow="false" v-model="sellbuy">
                 <div slot="list" class="pop">
                     <div class="pop-title">
@@ -118,7 +118,7 @@
                                 <span v-if="active">购买</span><span v-if="!active">出售</span>{{orderInfo.currenyName}}
                             </div>
                             <div class="pop-title-price">
-                                单价<span>￥4.00</span>
+                                单价<span>￥{{orderInfo.price}}</span>
                             </div>
                             <div class="pop-title-payment" v-if="active"><!-- 我要买支持的支付方式 -->
                                 <i :class="{'iconfont':true,'icon-zhifubao':true,'alipay':true}" v-if="alipays"></i>
@@ -185,11 +185,11 @@
                         <div class="pop-content-div">
                             <span class="text-fl">交易总额</span>
                             <span class="text-fr" v-if="buyType">
-                                ￥<template v-if="CNum==''">
-                                    0.00
+                                <template v-if="CNum==''">
+                                    ￥0.00
                                 </template>
                                 <template v-if="CNum">
-                                    {{(CNum*1).toFixed(2)}}
+                                    ￥{{(CNum*1).toFixed(2)}}
                                 </template>
                             </span>
                             <span class="text-fr" v-if="!buyType">
@@ -207,7 +207,7 @@
                     </div>
                 </div>
             </vpopup>
-            <!-- 我要买结束 -->
+            <!-- 我要买\卖结束 -->
             <!-- 银行卡弹出层 -->
             <vpopup :leftText="$t('discovery.OTC.sell.close')" :titleText="$t('discovery.OTC.sell.payment')" :rightText="$t('global.ok')" @onLeftText="cancelPupop(PayType)" @onRightText="okPupop(PayType)" v-model="showPupop">
                 <div slot="list">

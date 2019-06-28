@@ -114,38 +114,38 @@ export default {
 			this.type = !this.type
 		},
 		GoogleValidate(){
-				// 判断是否输入安全码
-				if(this.safecode==''){
+			// 判断是否输入安全码
+			if(this.safecode==''){
+				this.$vux.toast.show({
+						text: this.$t('mine.ahtuenticator.googlesecurity'),
+						type: 'warn'
+				})
+				return;
+			}
+			this.$server.post(
+			'GoogleValidate',
+			{
+				guid 	      :  this.token,
+				vCode       :  this.safecode
+			}).then(data => {
+				if(data){
+					if(data.Result=='true'){
 						this.$vux.toast.show({
-								text: this.$t('mine.ahtuenticator.googlesecurity'),
+							text: this.$t("user.tips.success"),
+							type: 'success'
+						})
+						this.$storage.set('guid',this.token);
+						this.$router.push({
+							path:"/wallet/wallet",
+						});
+					}else{
+						this.$vux.toast.show({
+								text: this.$t('mine.ahtuenticator.error'),
 								type: 'warn'
 						})
-						return;
+					}
 				}
-				this.$server.post(
-				'GoogleValidate',
-				{
-						guid 	      :  this.token,
-						vCode       :  this.safecode
-				}).then(data => {
-						if(data){
-								if(data.Result=='true'){
-										this.$vux.toast.show({
-											text: this.$t("user.tips.success"),
-											type: 'success'
-										})
-										this.$storage.set('guid',this.token);
-										this.$router.push({
-											path:"/wallet/wallet",
-										});
-								}else{
-										this.$vux.toast.show({
-												text: this.$t('mine.ahtuenticator.error'),
-												type: 'warn'
-										})
-								}
-						}
-				})
+			})
 		}
 	},
 	mounted() {
