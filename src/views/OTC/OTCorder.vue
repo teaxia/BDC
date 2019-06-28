@@ -67,16 +67,16 @@
 
 							<div class="btn-payment">
 								<div class="btn btn-round btn-min btn-this" :disabled='type=="zfb"' @click="thispay('zfb')">
-									<Checkbox v-model="Ttype" class="label">
-										<span @click="thispay('zfb')" v-if="type=='zfb'">{{$t('discovery.OTC.order.thisPay')}}</span>
-										<span @click="thispay('zfb')" v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+									<Checkbox v-model="alitype" class="label">
+										<template v-if="type=='zfb'">{{$t('discovery.OTC.order.thisPay')}}</template>
+										<template v-else>{{$t('discovery.OTC.order.selectpay')}}</template>
 									</Checkbox>
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
-									<template v-if="Ttype">
+									<template v-if="alitype">
 										确认支付
 									</template>
-									<template v-if="!Ttype">
+									<template v-if="!alitype">
 										查看其他方式
 									</template>
 								</div>
@@ -94,16 +94,16 @@
 							</div>
 							<div class="btn-payment">
 								<div class="btn btn-round btn-min btn-this" :disabled='type=="wx"' @click="thispay('wx')">
-									<Checkbox v-model="Ttype" class="label">
-										<span  @click="thispay('wx')" v-if="type=='wx'">{{$t('discovery.OTC.order.thisPay')}}</span>
-										<span  @click="thispay('wx')" v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+									<Checkbox v-model="wxtype" class="label">
+										<template v-if="type=='wx'">{{$t('discovery.OTC.order.thisPay')}}</template>
+										<template v-else>{{$t('discovery.OTC.order.selectpay')}}</template>
 									</Checkbox>
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
-									<template v-if="Ttype">
+									<template v-if="wxtype">
 										确认支付
 									</template>
-									<template v-if="!Ttype">
+									<template v-if="!wxtype">
 										查看其他方式
 									</template>
 								</div>
@@ -133,16 +133,16 @@
 							</div>
 							<div class="btn-payment">
 								<div class="btn btn-round btn-min btn-this" :disabled='type=="card"' @click="thispay('card')">
-									<Checkbox v-model="Ttype" class="label">
-										<span @click="thispay('card')" v-if="type=='card'">{{$t('discovery.OTC.order.thisPay')}}</span>
-										<span @click="thispay('card')" v-else>{{$t('discovery.OTC.order.selectpay')}}</span>
+									<Checkbox v-model="cardtype" class="label">
+										<template v-if="type=='card'">{{$t('discovery.OTC.order.thisPay')}}</template>
+										<template v-else>{{$t('discovery.OTC.order.selectpay')}}</template>
 									</Checkbox>
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
-									<template v-if="Ttype">
+									<template v-if="cardtype">
 										确认支付
 									</template>
-									<template v-if="!Ttype">
+									<template v-if="!cardtype">
 										查看其他方式
 									</template>
 								</div>
@@ -198,7 +198,9 @@
 				ConfirmCancel:	false,	// 确认取消弹框
 				cType		:	'',		// 类型
 				percent		:	0,      // 百分比
-				Ttype		:	false,	// 选择的付款方式(用于绑定选择支付的选择框)
+				wxtype		:	false,
+				alitype		:	false,
+				cardtype	:	false,
 			}
         },
 		methods: {
@@ -345,10 +347,34 @@
 			},
 			thispay(type){
 				this.type = type
-				this.Ttype = !this.Ttype
-				let sTtype = this.Ttype
-				if(!sTtype){
-					this.type = ''
+				switch(type){
+					case 'alipay':
+						this.alitype  = true
+						this.cardtype = false
+						this.wxtype   = false
+						// let sTtype = this.alitype
+						if(!this.alitype){
+							this.type = ''
+						}
+					break;
+					case 'cardpay':
+						this.cardtype = true
+						this.alitype  = false
+						this.wxtype   = false
+						// let sTtype = this.cardtype
+						if(!this.cardtype){
+							this.type = ''
+						}
+					break;
+					case 'wechart':
+						this.wxtype   = true
+						this.alitype  = false
+						this.cardtype = false
+						// let sTtype = this.wxtype
+						if(!this.wxtype){
+							this.type = ''
+						}
+					break;
 				}
 			}
 		},

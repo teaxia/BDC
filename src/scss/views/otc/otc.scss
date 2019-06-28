@@ -6,8 +6,11 @@ $time : 0.4s;
 $height : 1.5rem;
 .OTCSellBuy{
     // padding-top:310px;
-    height: 980px;
+    height: 100%;
     overflow: hidden;
+    .main-container{
+        height: 100%;
+    }
     &-drop{
         margin:30px 0 0 20px;
         .btn{
