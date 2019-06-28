@@ -65,9 +65,20 @@ export default {
         guid 	 : this.$storage.get('guid'),
       },{showLoading:false}).then(data => {
         if(data){
-          this.$router.push({
-            path    :   '/OTC/OTCSellBuy',
-          });
+          if(data.canShow){
+            // 设置OTC商家发布以及我的发布权限
+            this.$storage.set('OTCrouter',data.canFB);
+            this.$router.push({
+              path    :   '/OTC/OTCSellBuy',
+            });  
+          }else{
+            // 提示暂未开放
+            this.$vux.toast.show({
+                text: this.$t('global.unopened'),
+                type: 'warn'
+            })
+          }
+          console.log(data)
         }
       })
     },
