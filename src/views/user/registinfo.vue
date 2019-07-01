@@ -127,6 +127,14 @@ export default {
 				})
 				return
             }
+            // 验证密码是否为空
+            if(this.password==''){
+                this.$vux.toast.show({
+					text: this.$t("user.tips.password"),
+					type: 'warn'
+				})
+				return
+            }
             let phoneNo = this.mobile.replace(/\s+/g,"")
             let straccount = {
                 Name    : this.userName,

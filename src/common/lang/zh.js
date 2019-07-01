@@ -81,7 +81,7 @@ export const zh = {
             nickname        : '请输入用户昵称',
             security        : '请输入安全码',
             invitationcode  : '请输入邀请码',
-            notecode        : '请输入节点码'
+            notecode        : '请输入节点码',
         },
         login           : '登 录',
         regist          : '注 册',
