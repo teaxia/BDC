@@ -500,6 +500,44 @@ export const zh = {
             }
         },
     },
+    // OTC的部分语言包
+    OTC:{
+        sellBuy:{
+            pricebuy        :   '按价格购买',
+            pricesell       :   '按价格出售',
+            numbuy          :   '按数量购买',
+            numsell         :   '按数量出售',
+            full            :   '全部出售',
+            ordernum        :   '交易数量',
+            total           :   '交易总额',
+            InputBuyNum     :   '请输入欲购买法币总额',
+            InputsellNum    :   '请输入欲出售法币总额',
+            InputsellBDC    :   '请输入欲购买数量',
+            tips:{
+                isBuyNull   :   '购买数量不能为空',
+                isSellNull  :   '出售数量不能为空',
+            }
+        },
+        buy:{
+            limit           :   '限额',
+            num             :   '出售数量',
+            tips:{
+                bdcnum      :   '购买数量不能为空',
+                sellnum     :   '出售数量不能为空',
+            }
+        },
+        order:{
+            ok              :   '确认支付',
+            other           :   '查看其他方式',
+            type:{
+                WaitPrice   :   '待收款',
+                WaitSend    :   '待发币'
+            },
+        },
+        rank:{
+            num             :   '交易数量'
+        }
+    },
     // 钱包
     wallet:{
         title           :   'BDC Wallet',

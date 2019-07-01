@@ -498,6 +498,44 @@ export const en = {
             }
         },
     },
+    // OTC的部分语言包
+    OTC:{
+        sellBuy:{
+            pricebuy        :   'Purchase at price',
+            pricesell       :   'Sell at a price',
+            numbuy          :   'Buy by num',
+            numsell         :   'Sell by nun',
+            full            :   'All',
+            ordernum        :   'Quantity',
+            total           :   'Total',
+            InputBuyNum     :   'Please enter the total amount of French currency you want to purchase.',
+            InputsellNum    :   'Please enter the total amount of French currency you want to sell.',
+            InputsellBDC    :   'Please enter the quantity you want to buy.',
+            tips:{
+                isBuyNull   :   'Buying quantity cannot be empty',
+                isSellNull  :   'Sales cannot be empty',
+            }
+        },
+        buy:{
+            limit           :   'Limit',
+            num             :   'Sell num',
+            tips:{
+                bdcnum      :   'Buying quantity cannot be empty',
+                sellnum     :   'Sales cannot be empty',
+            }
+        },
+        order:{
+            ok              :   'Pay',
+            other           :   'View other ways',
+            type:{
+                WaitPrice   :   'Waiting for collection',
+                WaitSend    :   'Waiting for Send'
+            },
+        },
+        rank:{
+            num             :   'Quantity'
+        }
+    },
     // 钱包
     wallet:{
         title           :   'BDC Wallet',

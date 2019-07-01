@@ -12,7 +12,7 @@
                     <div class="rank-nickname">{{v.NickName}}</div>
                     <div class="lv">{{v.Lv}}</div>
                     <div class="total">
-                        交易数量<br/>{{$numberComma(v.Total)}}
+                        {{$t('OTC.rank.num')}}<br/>{{$numberComma(v.Total)}}
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         <span class="lv">{{v.Lv}}</span>
                     </div>
                     <div :class="{total:true,'lv-ng':index%2==0}">
-                        交易数量:{{$numberComma(v.Total)}}
+                        {{$t('OTC.rank.num')}}:{{$numberComma(v.Total)}}
                     </div> 
                 </div>
             </div>
@@ -62,7 +62,6 @@
                 }).then(data => {
                     if(data){
                         this.rankList = data
-                        console.log(data)
                     }
                 }) 
             }

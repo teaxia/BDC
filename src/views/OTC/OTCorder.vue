@@ -74,10 +74,10 @@
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
 									<template v-if="alitype">
-										确认支付
+										{{this.$t('OTC.order.ok')}}
 									</template>
 									<template v-if="!alitype">
-										查看其他方式
+										{{this.$t('OTC.order.other')}}
 									</template>
 								</div>
 							</div>
@@ -101,10 +101,10 @@
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
 									<template v-if="wxtype">
-										确认支付
+										{{this.$t('OTC.order.ok')}}
 									</template>
 									<template v-if="!wxtype">
-										查看其他方式
+										{{this.$t('OTC.order.other')}}
 									</template>
 								</div>
 							</div>
@@ -140,10 +140,10 @@
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
 									<template v-if="cardtype">
-										确认支付
+										{{this.$t('OTC.order.ok')}}
 									</template>
 									<template v-if="!cardtype">
-										查看其他方式
+										{{this.$t('OTC.order.other')}}
 									</template>
 								</div>
 							</div>

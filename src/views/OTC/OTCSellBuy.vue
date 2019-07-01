@@ -76,8 +76,8 @@
                                         <div>{{$t('discovery.OTC.index.min')}}：{{$numberComma(v.canBuy)}}</div>
                                         <div :class="{'buyorder':!active}">{{$t('discovery.OTC.index.num')}}：{{$numberComma(v.currenyNum)}} （{{v.currenyName}}）</div>
                                         <div class="otc-badge">
-                                            <span v-if="active" class="tag tag-success" @click="buy(v.Id)">购买</span>
-                                            <span v-if="!active" class="tag tag-wran" @click="buy(v.Id)">出售</span>
+                                            <span v-if="active" class="tag tag-success" @click="buy(v.Id)">{{$t('discovery.OTC.order.buy')}}</span>
+                                            <span v-if="!active" class="tag tag-wran" @click="buy(v.Id)">{{$t('discovery.OTC.order.sell')}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -115,10 +115,10 @@
                     <div class="pop-title">
                         <div class="pop-title-left">
                             <div class="pop-title-h2">
-                                <span v-if="active">购买</span><span v-if="!active">出售</span>{{orderInfo.currenyName}}
+                                <span v-if="active">{{$t('discovery.OTC.order.buy')}}</span><span v-if="!active">{{$t('discovery.OTC.order.sell')}}</span>{{orderInfo.currenyName}}
                             </div>
                             <div class="pop-title-price">
-                                单价<span>￥{{orderInfo.price}}</span>
+                                {{$t('discovery.OTC.buy.price')}}<span>￥{{orderInfo.price}}</span>
                             </div>
                             <div class="pop-title-payment" v-if="active"><!-- 我要买支持的支付方式 -->
                                 <i :class="{'iconfont':true,'icon-zhifubao':true,'alipay':true}" v-if="alipays"></i>
@@ -145,12 +145,12 @@
                     <div class="pop-content">
                         <div class="pop-content-div">
                             <div @click="changeBuyType(true)" :class="{'pop-content-nav':true,'active':buyType}">
-                                <span v-if="active">按价格购买</span>
-                                <span v-if="!active">按价格出售</span>
+                                <span v-if="active">{{$t('OTC.sellBuy.pricebuy')}}</span>
+                                <span v-if="!active">{{$t('OTC.sellBuy.pricesell')}}</span>
                             </div>
                             <div @click="changeBuyType(false)" :class="{'pop-content-nav':true,'active':!buyType}">
-                                <span v-if="active">按数量购买</span>
-                                <span v-if="!active">按数量出售</span>
+                                <span v-if="active">{{$t('OTC.sellBuy.numbuy')}}</span>
+                                <span v-if="!active">{{$t('OTC.sellBuy.numsell')}}</span>
                             </div>
                         </div>
                         <div class="pop-content-div">
@@ -161,16 +161,16 @@
                                         <span class="unit" v-if="!buyType">{{orderInfo.currenyName}}</span>
                                         <span class="cut">|</span>
                                         <span @click="full()" class="full" v-if="active">{{$t('discovery.OTC.buy.full')}}</span>
-                                        <span @click="full()" class="full" v-if="!active">全部出售</span>
+                                        <span @click="full()" class="full" v-if="!active">{{$t('OTC.sellBuy.full')}}</span>
                                     </div>
                                 </x-input>
                             </group>
                         </div>
                         <div class="pop-content-div">
-                            限额：{{orderInfo.canBuy}}
+                            {{$t('OTC.buy.limit')}}：{{orderInfo.canBuy}}
                         </div>
                         <div class="pop-content-div text-right">
-                            交易数量：{{(CNum/orderInfo.price).toFixed(8)}}（{{orderInfo.currenyName}}）
+                            {{$t('OTC.sellBuy.ordernum')}}：{{(CNum/orderInfo.price).toFixed(8)}}（{{orderInfo.currenyName}}）
                         </div>
                         <div class="pop-content-div" v-if="Poundage>0">
                             <div class="tax">
@@ -183,7 +183,7 @@
                             </div>
                         </div>
                         <div class="pop-content-div">
-                            <span class="text-fl">交易总额</span>
+                            <span class="text-fl">{{$t('OTC.sellBuy.total')}}</span>
                             <span class="text-fr" v-if="buyType">
                                 <template v-if="CNum==''">
                                     ￥0.00
@@ -319,7 +319,7 @@
                 minnum          :   '',                     // 最小数量
                 clock           :   '',                     // 倒计时
                 T               :   60,                     // 秒
-                placeholder     :   '请输入欲购买法币总额',   // 描述
+                placeholder     :   this.$t('OTC.sellBuy.InputBuyNum'),   // 描述
                 showFPupop      :   false,                  // 银行卡弹出层
                 Poundage        :   '',                     // 手续费
                 Key             :   '',
@@ -396,11 +396,11 @@
                 let Refresh = true
                 if(this.active){
                     // 购买
-                    this.placeholder    =   '请输入欲购买法币总额'
+                    this.placeholder    =   this.$t('OTC.sellBuy.InputBuyNum')
                     this.OTCGetSellList(Refresh)
                 }else{
                     // 求购
-                    this.placeholder    =   '请输入欲出售法币总额'
+                    this.placeholder    =   this.$t('OTC.sellBuy.InputsellNum')
                     this.GetBuyGoodsList(Refresh)
                 }
             },
@@ -567,16 +567,16 @@
                 if(this.active){
                     // 我要买 出售
                     if(type){
-                        this.placeholder    =   '请输入欲购买法币总额'
+                        this.placeholder    =   this.$t('OTC.sellBuy.InputBuyNum')
                     }else{
-                        this.placeholder    =   '请输入欲购买数量'
+                        this.placeholder    =   this.$t('OTC.sellBuy.InputsellBDC')
                     }
                 }else{
                     // 我要卖 求购
                     if(type){
-                        this.placeholder    =   '请输入欲出售法币总额'
+                        this.placeholder    =   this.$t('OTC.sellBuy.InputsellNum')
                     }else{
-                        this.placeholder    =   '请输入欲出售数量'
+                        this.placeholder    =   this.$t('OTC.sellBuy.InputsellBDC')
                     }
                 }
             },
@@ -585,7 +585,7 @@
                     // 我要买
                     if(this.CNum==''){
                         this.$vux.toast.show({
-                            text: '购买数量不能为空',
+                            text: this.$t('OTC.sellBuy.tips.isBuyNull'),
                             type: 'warn'
                         })
                         return;
@@ -612,7 +612,7 @@
                     // 我要卖
                     if(this.CNum==''){
                         this.$vux.toast.show({
-                            text: '出售数量不能为空',
+                            text: this.$t('OTC.sellBuy.tips.isSellNull'),
                             type: 'warn'
                         })
                         return;

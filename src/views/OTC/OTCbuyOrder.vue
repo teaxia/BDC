@@ -8,7 +8,7 @@
                     <div class="price">
                         <div>{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
                         <div>{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
-                        <div>限额：{{$numberComma(datalist.canBuy)}}</div>
+                        <div>{{$t('OTC.buy.limit')}}：{{$numberComma(datalist.canBuy)}}</div>
                     </div>
                     <div v-if="Poundage>0">
                         <div class="tax">
@@ -40,7 +40,7 @@
             </div>
             <div class="mr50 gobuy">
                 <group>
-                    <x-input class="test" type="text" title="出售数量" :show-clear="false" v-model="buyNum">
+                    <x-input class="test" type="text" :title="$t('OTC.buy.num')" :show-clear="false" v-model="buyNum">
                         <div slot="right" style="font-size:0.35rem;">{{datalist.currenyName}}</div>
                     </x-input>
                 </group>
@@ -200,7 +200,7 @@ export default {
             }
             if(this.buyNum==''){
                 this.$vux.toast.show({
-                    text: '出售数量不能为空',
+                    text: $t('OTC.buy.tips.sellnum'),
                     type: 'warn'
                 })
                 return;

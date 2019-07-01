@@ -8,7 +8,7 @@
                     <div class="price">
                         <div>{{$t('discovery.OTC.buy.price')}}：{{$numberComma(datalist.price)}} CNY</div>
                         <div>{{$t('discovery.OTC.buy.num')}}：{{$numberComma(datalist.currenyNum)}} （{{datalist.currenyName}}）</div>
-                        <div>限额：{{$numberComma(datalist.canBuy)}}</div>
+                        <div>{{$t('OTC.buy.limit')}}：{{$numberComma(datalist.canBuy)}}</div>
                     </div>
                     <div class="payment">
                         <i :class="{'iconfont':true,'icon-zhifubao':true,'alipay':true}" v-if="alipay"></i>
@@ -135,7 +135,7 @@ export default {
         doSubmit(){
             if(this.CNum==''){
                 this.$vux.toast.show({
-                    text: '购买BDC数量不能为空',
+                    text:  $t('OTC.buy.tips.bdcnum'),
                     type: 'warn'
                 })
                 return;

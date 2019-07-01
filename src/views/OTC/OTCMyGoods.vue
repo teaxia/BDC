@@ -22,10 +22,10 @@
 									</Avatar>
 									<div class="grid-username">{{v.currenyName}}</div>
 									<div v-if="v.GoodsType==0" class="font font-wran">
-										售币
+										{{$t('discovery.OTC.orderlist.orderType0')}}
 									</div>
 									<div v-if="v.GoodsType==1" class="font font-success">
-										求购
+										{{$t('discovery.OTC.orderlist.orderType1')}}
 									</div>
 								</div>
                                 <div class="otc-grid-price">
