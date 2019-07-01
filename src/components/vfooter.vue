@@ -78,7 +78,6 @@ export default {
                 type: 'warn'
             })
           }
-          console.log(data)
         }
       })
     },
