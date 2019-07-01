@@ -1,16 +1,21 @@
 <template>
 	<div class="OTCSell" v-cloak>
         <div class="pb">
-            <Dropdown trigger="click" @on-click="change" class="OTCSellBuy-drop">
-                <div class="btn btn-min-x btn-round">
-                    {{$t('discovery.OTC.Selltitle')}}
-                    <i class="iconfont icon-sanjiao_xia"></i>
+            <div class="title-tool">
+                <Dropdown trigger="click" @on-click="change" class="OTCSellBuy-drop">
+                    <div class="btn btn-min-x btn-round">
+                        {{$t('discovery.OTC.Selltitle')}}
+                        <i class="iconfont icon-sanjiao_xia"></i>
+                    </div>
+                    <DropdownMenu slot="list">
+                        <DropdownItem :name="'/OTC/sell'">{{$t('discovery.OTC.Selltitle')}}</DropdownItem>
+                        <DropdownItem :name="'/OTC/demand'">{{$t('discovery.OTC.demand.title')}}</DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
+                <div class="price">
+                    {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
                 </div>
-                <DropdownMenu slot="list">
-                    <DropdownItem :name="'/OTC/sell'">{{$t('discovery.OTC.Selltitle')}}</DropdownItem>
-                    <DropdownItem :name="'/OTC/demand'">{{$t('discovery.OTC.demand.title')}}</DropdownItem>
-                </DropdownMenu>
-            </Dropdown>
+            </div>
             <div class="currency" v-if="Poundage>0">
                 <div>
                     <div class="price">
