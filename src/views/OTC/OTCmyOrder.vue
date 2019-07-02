@@ -7,12 +7,12 @@
 				<span v-if="data.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span><span v-if="data.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
 			</div>
 			<div class="order-info order-line">
-				<h3 v-if="orderType==2&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==2&&data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==2&&data.GoodsType==0&&cType=='null'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==2&&data.GoodsType==1&&cType=='null'">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==3&&data.GoodsType==0&&cType=='null'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 v-if="orderType==3&&data.GoodsType==1&&cType=='null'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==0&&cType=='null'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==1&&cType=='null'">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="orderType==3&&data.GoodsType==0&&cType=='null'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="orderType==3&&data.GoodsType==1&&cType=='null'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 			</div>
 			<div class="order-pay order-line mr20 bgpd">
 				<div class="order-information">
@@ -66,20 +66,23 @@
 				<div class="order-payment-info" v-if="payInfo[1]!='支付宝'&&payInfo[1]!='微信'">{{$t('discovery.OTC.myorder.cardid')}}：{{payInfo[2]}}</div>
 			</div>
 			<div class="order-remark mr20 order-line bgpd">
+				{{$t('OTC.order.tel')}}：{{data.PhoneNo}}
+			</div>
+			<div class="order-remark mr20 order-line bgpd">
 				{{$t('discovery.OTC.myorder.remark')}}：{{data.Remark}}
 			</div>
 			<div class="order-done mr10">
-				<button class="btn btn-block btn-round-mx" disabled v-if="data.Status==3&&this.orderType==2&&this.minutes<29">{{$t('discovery.OTC.complaiont.minutes')}}</button>
-				<button class="btn btn-block btn-round-mx" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2&&this.minutes>=30">{{$t('discovery.OTC.complaiont.title')}}</button>
-				<button class="btn btn-block btn-round-mx" v-if="data.Status==3&&this.orderType==3" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
-				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round-mx btn-disabled" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
-				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round-mx btn-disabled" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
+				<button class="btn btn-block btn-round-mx mr20" disabled v-if="data.Status==3&&this.orderType==2&&this.minutes<29||this.orderType==3&&data.Status==3&&this.minutes<29">{{$t('discovery.OTC.complaiont.minutes')}}</button>
+				<button class="btn btn-block btn-round-mx mr20" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2&&this.minutes>=30||this.orderType==3&&data.Status==3&&this.minutes>=30">{{$t('discovery.OTC.complaiont.title')}}</button>
+				<button class="btn btn-block btn-round-mx mr20" v-if="data.Status==3&&this.orderType==3" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
+				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
+				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 			</div>
 			<!-- <div class="tips" v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
 				{{$t('discovery.OTC.myorder.wait')}}{{m}}{{$t('discovery.OTC.myorder.minute')}}{{s}}{{$t('discovery.OTC.myorder.second')}}
 			</div> -->
-			<center v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
-				<i-circle :percent="percent" class="close" v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
+			<center v-if="data.Status==3&&this.orderType==2&&this.minutes<30||this.orderType==3&&data.Status==3&&this.minutes<30">
+				<i-circle :percent="percent" class="close" v-if="data.Status==3&&this.orderType==2&&this.minutes<30||this.orderType==3&&data.Status==3&&this.minutes<30">
 					<div style="font-size:24px">{{m}}m{{s}}s</div>
 				</i-circle>
 			</center>
@@ -153,7 +156,7 @@
 					if(data){
 						this.payInfo 	=   (data.PayType)?data.PayType.split("|"):'';
 						this.data = data
-						console.log(data)
+						// 待发币状态申诉是以支付时间计算
 						if(data.PayTime){
 							this.timeFn(data.PayTime)
 						}
@@ -192,7 +195,7 @@
             },
 			timeFn(d1) {
 				// 判断是否需要进行倒计时操作
-				if(this.data.Status!=3&&this.orderType!=2){
+				if(this.data.Status!=3&&this.orderType!=2||this.orderType!=3&&this.data.Status!=3){
 					return
 				}
 				var dateBegin = new Date(d1.replace(/-/g, "/"));//将-转化为/，使用new Date

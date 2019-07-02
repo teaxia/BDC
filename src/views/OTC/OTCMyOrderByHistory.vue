@@ -53,6 +53,7 @@
 								<span class="font order-list-type-success" v-if="v.status==5">{{$t('discovery.OTC.status.status5')}}</span>
 								<span class="font order-list-type-close" v-if="v.status==6||v.status==7">{{$t('discovery.OTC.status.status6')}}</span>
 								<span class="font order-list-type-success" v-if="v.status==8">{{$t('discovery.OTC.status.status7')}}</span>
+								<span class="font order-list-type-close" v-if="v.status==9">{{$t('discovery.OTC.status.status8')}}</span>
 							</div>
 						</flexbox-item>
 					</flexbox>

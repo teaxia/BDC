@@ -484,6 +484,7 @@ export const zh = {
                 status5     :   '交易完成',
                 status6     :   '取消订单',
                 status7     :   '申诉完成',
+                status8     :   '系统撤销',
             },
             tips:{
                 salipay     :   '支持支付宝付款',
@@ -529,6 +530,7 @@ export const zh = {
         order:{
             ok              :   '确认支付',
             other           :   '查看其他方式',
+            tel             :   '联系电话',
             type:{
                 WaitPrice   :   '待收款',
                 WaitSend    :   '待发币'

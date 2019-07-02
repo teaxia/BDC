@@ -5,6 +5,8 @@
 .myOrder{
     background:#f2f2f2;
     height: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     .date-line{
         width: 250px;
         margin:0 auto;
@@ -29,6 +31,9 @@
         }
         &-line{
             padding-bottom: 20px;
+        }
+        &-tips{
+            color:$font-red;
         }
         &-info{
             background:$bg-white;

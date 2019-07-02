@@ -482,6 +482,7 @@ export const en = {
                 status5     :   'Success',
                 status6     :   'Cancal Order',
                 status7     :   'Complan Done',
+                status8     :   'System revocation',
             },
             tips:{
                 salipay     :   'Support Alipay payment',
@@ -527,6 +528,7 @@ export const en = {
         order:{
             ok              :   'Pay',
             other           :   'View other ways',
+            tel             :   'Tel',
             type:{
                 WaitPrice   :   'Waiting for collection',
                 WaitSend    :   'Waiting for Send'
