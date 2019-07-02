@@ -27,37 +27,37 @@
 			return {
 				brand	:	[
 					{
-						name	:	'交易市场',
+						name	:	this.$t('OTC.menu.Trade'),
 						url		:	'/OTC/OTCSellBuy',
 						status	:	true
 					},
 					{
-						name	:	'商家发布',
+						name	:	this.$t('OTC.menu.Release'),
 						url		:	'/OTC/sell',
 						status	:	true
 					},
 					{
-						name	:	'我的发布',
+						name	:	this.$t('OTC.menu.My'),
 						url		:	'/OTC/MyGoods',
 						status	:	true
 					},
 					{
-						name	:	'当前订单',
+						name	:	this.$t('OTC.menu.Current'),
 						url		:	'/OTC/MyOrderNow',
 						status	:	true
 					},
 					{
-						name	:	'历史订单',
+						name	:	this.$t('OTC.menu.History'),
 						url		:	'/OTC/MyOrderHistory', 
 						status	:	true
 					},
 					{
-						name	:	'申述订单',
+						name	:	this.$t('OTC.menu.Complaint'),
 						url		:	'/OTC/complaiontList',
 						status	:	true
 					},
 					{
-						name	:	'收益',
+						name	:	this.$t('OTC.menu.Profit'),
 						url		:	'/OTC/Profit',
 						status	:	true
 					}

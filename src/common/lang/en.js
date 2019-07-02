@@ -474,6 +474,8 @@ export const en = {
                 type_2      :   'sell out',
                 GoodsType0  :   'Sale',
                 GoodsType1  :   'Buy',
+                buy         :   'Buy',
+                sell        :   'Sale',
             },
             status:{
                 status2     :   'Waiting for payment',
@@ -501,6 +503,15 @@ export const en = {
     },
     // OTC的部分语言包
     OTC:{
+        menu:{
+            Trade           :   'Trade',
+            Release         :   'Release',
+            My              :   'My',
+            Current         :   'Current',
+            History         :   'History',
+            Complaint       :   'Complaint',
+            Profit          :   'Profit',
+        },
         sellBuy:{
             pricebuy        :   'Purchase at price',
             pricesell       :   'Sell at a price',

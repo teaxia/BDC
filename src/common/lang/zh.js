@@ -426,8 +426,8 @@ export const zh = {
                 sellout     :   '当前订单已经售罄，不可编辑',
                 downdel     :   '只有下架后才可删除',
                 edit        :   '保存修改',
-                del         :   '删除',
-                delconfirm  :   '是否确认删除？',
+                del         :   '撤销发布',
+                delconfirm  :   '确认撤销发布？[撤销后将返回未售卖数量]',
                 ok          :   '操作确认',
             },
             orderlist:{
@@ -467,7 +467,7 @@ export const zh = {
                 access      :   '收款账号',
                 wait        :   '还需等待',
                 minute      :   '分',
-                second      :   '秒后才可申述'
+                second      :   '秒后才可申诉'
             },
             type:{
                 type01      :   '下架',
@@ -476,6 +476,8 @@ export const zh = {
                 type_2      :   '售罄',
                 GoodsType0  :   '售币',
                 GoodsType1  :   '求购',
+                buy         :   '我要买',
+                sell        :   '我要卖',
             },
             status:{
                 status2     :   '待支付',
@@ -503,6 +505,15 @@ export const zh = {
     },
     // OTC的部分语言包
     OTC:{
+        menu:{
+            Trade           :   '交易市场',
+            Release         :   '商家发布',
+            My              :   '我的发布',
+            Current         :   '当前订单',
+            History         :   '历史订单',
+            Complaint       :   '申诉订单',
+            Profit          :   '收益',
+        },
         sellBuy:{
             pricebuy        :   '按价格购买',
             pricesell       :   '按价格出售',

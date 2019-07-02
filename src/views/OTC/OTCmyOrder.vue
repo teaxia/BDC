@@ -4,7 +4,8 @@
         <div class="pd0">
 			<div class="order-id bgpd">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{data.Id}}</h1>
-				<span v-if="data.GoodsType==0" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span><span v-if="data.GoodsType==1" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
+				<span v-if="cType=='buy'" class="tag tag-wran">{{$t('discovery.OTC.type.buy')}}</span>
+				<span v-if="cType=='sell'" class="tag tag-primary">{{$t('discovery.OTC.type.sell')}}</span>
 			</div>
 			<div class="order-info order-line">
 				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>

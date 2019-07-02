@@ -22,7 +22,7 @@
             font-size:38px;
         }
         .tag{
-            width: 90px;
+            width: 120px;
             height: 50px;
         }
     }
@@ -114,6 +114,9 @@
                     margin-top:20px;
                     text-align: center;
                     font-size:32px;
+                    .btn{
+                        display: inline-block;
+                    }
                 }
                 .btn-min{
                     margin: 20px auto 0 auto;

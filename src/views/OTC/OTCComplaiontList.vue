@@ -20,9 +20,8 @@
 							</Avatar>
 							<div class="grid-username">{{v.CurrenyName}}</div>
 							<div class="grid-username">
-								<span v-if="v.GoodsType==0" class="font font-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
-								<span v-if="v.GoodsType==1" class="font font-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
-								
+								<span v-if="v.cType=='buy'" class="font font-wran">{{$t('discovery.OTC.type.buy')}}</span>
+								<span v-if="v.cType=='sell'" class="font font-primary">{{$t('discovery.OTC.type.sell')}}</span>
 							</div>
 						</flexbox-item>
 						<flexbox-item class="order-list-info">

@@ -4,8 +4,9 @@
 		<div>
 			<div class="pd10 order-id">
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{OrderId}}</h1>
-				<span v-if="cType=='sell'" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span>
-				<span v-if="cType=='null'||cType=='buy'" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span>
+				<span class="tag tag-wran">{{$t('discovery.OTC.type.buy')}}</span>
+				<!-- <span v-if="cType=='sell'" class="tag tag-primary">{{$t('discovery.OTC.orderlist.orderType1')}}</span> -->
+				<!-- <span v-if="cType=='null'||cType=='buy'" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span> -->
 			</div>
 			<div class="pd10 order-info order-line">
 				<h3 v-if="cType=='sell'">{{nickName}}{{$t('discovery.OTC.order.tome')}}{{$numberComma(num)}} BDC</h3>
@@ -58,9 +59,11 @@
 								<img class="pay-img" :src="alipay[4]">
 								<div class="name">
 									{{$t('discovery.OTC.order.alipay')}}：{{alipay[2]}}
+									<span class="btn btn-xs" @click="CopyClip(alipay[2])">{{$t('global.copy')}}</span>
 								</div>
 								<div class="name">
 									{{$t('discovery.OTC.order.name')}}：{{alipay[1]}}
+									<span class="btn btn-xs" @click="CopyClip(alipay[1])">{{$t('global.copy')}}</span>
 								</div>
 								<button class="btn btn-round btn-min" @click="save(alipay[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 							</div>
@@ -89,6 +92,7 @@
 								<img class="pay-img" :src="wechart[4]">
 								<div class="name">
 									{{$t('discovery.OTC.order.nickname')}}：{{wechart[3]}}
+									<span class="btn btn-xs" @click="CopyClip(wechart[3])">{{$t('global.copy')}}</span>
 								</div>
 								<button class="btn btn-round btn-min" @click="save(wechart[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 							</div>
