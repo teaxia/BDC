@@ -6,14 +6,15 @@
 				<h1>{{$t('discovery.OTC.order.orderId')}}：#{{data.Id}}</h1>
 				<span v-if="cType=='buy'" class="tag tag-wran">{{$t('discovery.OTC.type.buy')}}</span>
 				<span v-if="cType=='sell'" class="tag tag-primary">{{$t('discovery.OTC.type.sell')}}</span>
+
 			</div>
 			<div class="order-info order-line">
-				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==0&&cType=='null'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="orderType==2&&data.GoodsType==1&&cType=='null'">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="orderType==3&&data.GoodsType==0&&cType=='null'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="orderType==3&&data.GoodsType==1&&cType=='null'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="this.orderType==2&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="this.orderType==2&&data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="this.orderType==2&&data.GoodsType==0&&cType=='buy'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="this.orderType==2&&data.GoodsType==1&&cType=='buy'">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="this.orderType==3&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="this.orderType==3&&data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
 			</div>
 			<div class="order-pay order-line mr20 bgpd">
 				<div class="order-information">

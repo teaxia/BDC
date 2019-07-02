@@ -9,8 +9,8 @@
 				<!-- <span v-if="cType=='null'||cType=='buy'" class="tag tag-wran">{{$t('discovery.OTC.orderlist.orderType0')}}</span> -->
 			</div>
 			<div class="pd10 order-info order-line">
-				<h3 v-if="cType=='sell'">{{nickName}}{{$t('discovery.OTC.order.tome')}}{{$numberComma(num)}} BDC</h3>
-				<h3 v-if="cType=='null'||cType=='buy'">{{$t('discovery.OTC.order.your')}}{{nickName}}{{$t('discovery.OTC.order.buy')}}{{$numberComma(num)}} BDC</h3>
+				<h3 class="order-tips" v-if="cType=='sell'">{{nickName}}{{$t('discovery.OTC.order.tome')}}{{$numberComma(num)}} BDC</h3>
+				<h3 class="order-tips" v-if="cType=='null'||cType=='buy'">{{$t('discovery.OTC.order.your')}}{{nickName}}{{$t('discovery.OTC.order.buy')}}{{$numberComma(num)}} BDC</h3>
 			</div>
 			<div class="pd10 order-pay order-line mr20">
 				<div class="order-pay-price">
