@@ -74,10 +74,10 @@
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
 									<template v-if="alitype">
-										{{this.$t('OTC.order.ok')}}
+										{{$t('OTC.order.ok')}}
 									</template>
 									<template v-if="!alitype">
-										{{this.$t('OTC.order.other')}}
+										{{$t('OTC.order.other')}}
 									</template>
 								</div>
 							</div>
@@ -101,10 +101,10 @@
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
 									<template v-if="wxtype">
-										{{this.$t('OTC.order.ok')}}
+										{{$t('OTC.order.ok')}}
 									</template>
 									<template v-if="!wxtype">
-										{{this.$t('OTC.order.other')}}
+										{{$t('OTC.order.other')}}
 									</template>
 								</div>
 							</div>
@@ -140,10 +140,10 @@
 								</div>
 								<div class="btn btn-round btn-min btn-close" @click="cancelFPupop()">
 									<template v-if="cardtype">
-										{{this.$t('OTC.order.ok')}}
+										{{$t('OTC.order.ok')}}
 									</template>
 									<template v-if="!cardtype">
-										{{this.$t('OTC.order.other')}}
+										{{$t('OTC.order.other')}}
 									</template>
 								</div>
 							</div>
@@ -202,7 +202,24 @@
 				alitype		:	false,
 				cardtype	:	false,
 			}
-        },
+		},
+		watch:{
+			wxtype(){
+				if(!this.wxtype){
+					this.type = ''
+				}
+			},
+			alitype(){
+				if(!this.alitype){
+					this.type = ''
+				}
+			},
+			cardtype(){
+				if(!this.cardtype){
+					this.type = ''
+				}
+			}
+		},
 		methods: {
 			getCountDwn(){
 				// 付款倒计时

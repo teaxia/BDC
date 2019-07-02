@@ -50,7 +50,7 @@
 								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：{{v.BuyNum}}（{{v.currenyName}}）</span>
 								<span class="font order-list-type-waitpay" v-if="v.status==2">
 									<template if v-if="v.cType=='sell'">
-										{{this.$t('OTC.order.type.WaitPrice')}}
+										{{$t('OTC.order.type.WaitPrice')}}
 									</template>
 									<template v-if="v.cType=='buy'">
 										{{$t('discovery.OTC.status.status2')}}
@@ -58,7 +58,7 @@
 								</span>
 								<span class="font order-list-type-wait" v-if="v.status==3">
 									<template if v-if="v.cType=='sell'">
-										{{this.$t('OTC.order.type.WaitSend')}}
+										{{$t('OTC.order.type.WaitSend')}}
 									</template>
 									<template v-if="v.cType=='buy'">
 										{{$t('discovery.OTC.status.status3')}}

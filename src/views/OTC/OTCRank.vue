@@ -20,14 +20,14 @@
         <div class="main-container">
             <div class="rabklist">
                 <div class="rank" v-for="(v,index) in rankList" :key="index" v-if="index>2">
-                    <div :class="{'ranking':true,'lv-ng':index%2==0}">
+                    <div :class="{'ranking':true}">
                         {{index+1}}
                     </div>
-                    <div :class="{nickname:true,'lv-ng':index%2==0}">
+                    <div :class="{'nickname':true}">
                         <span class="rank-nickname">{{v.NickName}}</span>
                         <span class="lv">{{v.Lv}}</span>
                     </div>
-                    <div :class="{total:true,'lv-ng':index%2==0}">
+                    <div :class="{'total':true}">
                         {{$t('OTC.rank.num')}}:{{$numberComma(v.Total)}}
                     </div> 
                 </div>
