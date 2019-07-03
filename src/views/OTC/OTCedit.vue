@@ -34,7 +34,8 @@
                     </x-input>
                 </group>
                 <group>
-                    <x-input class="test" type="number" :title="$t('discovery.OTC.sell.price')" required :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
+                    <x-input class="test" type="number" :show-clear="false" :title="$t('discovery.OTC.sell.price')" :placeholder="$t('discovery.OTC.sell.input.price')" v-model="price">
+                        <div slot="right" style="font-size:0.35rem;">CNY</div>
                     </x-input>
                 </group>
                 <group>
@@ -211,6 +212,14 @@ export default {
                 // 判断单价
                 this.$vux.toast.show({
                     text: this.$t('discovery.OTC.sell.tips.price'),
+                    type: 'warn'
+                })
+                return;
+            }
+            if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.price)){
+                // 判断小数
+                this.$vux.toast.show({
+                    text: '单价'+this.$t('discovery.OTC.sell.input.num2'),
                     type: 'warn'
                 })
                 return;
