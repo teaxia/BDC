@@ -15,8 +15,13 @@
                 </div>
             </div>
             
-            <div class="img-list line" v-if="img">
-                <img v-for="(v,index) in img" :key="index" :src="v" class="img">
+            <div class="line" v-if="img">
+                <div class="sstp">
+                    申诉图片:
+                </div>
+                <div class="img-list">
+                    <img v-for="(v,index) in img" :key="index" :src="v" class="img">
+                </div>
             </div>
 
             <div class="sh-status mr30">
@@ -85,5 +90,5 @@
 </script>
 
 <style scoped lang="scss">
-@import "../../scss/views/otc/otccoomplaiontview";
+@import "../../scss/views/otc/otccoomplaiontview"; 
 </style>

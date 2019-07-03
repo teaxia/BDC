@@ -13,20 +13,23 @@
     }
     .ts{
         font-size:32px;
-        color:$font-blue;
-        // &-time{
-        //     color:$font-blue;
-        // }
-        // &-sh{
-        //     color:$font-blue;
-        // }
-        // &-status{
-        //     color:$font-blue;
-        // }
+        // color:$font-blue;
+        &-time{
+            color:#666;
+        }
+        &-sh{
+            color:#333;
+        }
+        &-status{
+            color:#333;
+        }
+    }
+    .sstp{
+        font-size:32px;
     }
     .sh-status{
         font-size:32px;
-        color:$font-orange;
+        color:#333;
     }
     .remarks,.auditremarks{
         font-size:32px;
