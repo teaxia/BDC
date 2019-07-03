@@ -57,7 +57,7 @@
 						status	:	true
 					},
 					{
-						name	:	this.$t('OTC.menu.Profit'),
+						name	:	'OTC'+this.$t('OTC.menu.Profit'),
 						url		:	'/OTC/Profit',
 						status	:	true
 					}
