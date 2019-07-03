@@ -39,7 +39,7 @@
                     </Select>
                 </div>
                 <group>
-                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.num')" :show-clear="false"  :placeholder="$t('discovery.OTC.sell.input.num2')" v-model="num">
+                    <x-input class="test" type="text" :title="$t('discovery.OTC.sell.num')" :show-clear="false"  :placeholder="'请输入发布'+$t('discovery.OTC.sell.input.num')" v-model="num">
                     </x-input>
                 </group>
                 <group>
@@ -459,10 +459,10 @@ export default {
                 })
                 return;
             }
-            if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.num)){
+            if(!pattern["Pattern.Positive.Integer.Two.Point"].test(this.price)){
                 // 判断小数
                 this.$vux.toast.show({
-                    text: this.$t('discovery.OTC.sell.input.num2'),
+                    text: '单价'+this.$t('discovery.OTC.sell.input.num2'),
                     type: 'warn'
                 })
                 return;
