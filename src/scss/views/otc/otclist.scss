@@ -40,6 +40,14 @@
     .grid-username{
         text-align: center;
     }
+    .total-profit{
+        padding-top:10px;
+        font-size:34px;
+        padding:10px 0;
+        color:$font-orange;
+        text-align: center;
+        background:#fff;
+    }
     .list{
         .list-profit{
             margin-top:0 !important;
@@ -52,14 +60,6 @@
         }
         .profit-bg{
             background:transparent !important;
-        }
-        .total-profit{
-            padding-top:10px;
-            font-size:34px;
-            padding:10px 0;
-            color:$font-orange;
-            text-align: center;
-            background:#fff;
         }
         .order-list-profit-title{
             font-size:20px !important;

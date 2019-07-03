@@ -1,5 +1,5 @@
 <template>
-	<div class="orderList" v-cloak>
+	<div class="orderList profit" v-cloak>
 		<div class="search">
 			<search v-model="search" ref="search" @on-blur="Query()" @on-submit="Query()" :placeholder="$t('discovery.OTC.orderlist.SorderId')" position="absolute" :auto-fixed='false'>
 			</search>
@@ -13,32 +13,35 @@
 					<DatePicker class="center" @on-change="endtime" type="date"  v-model="enddate" format="yyyy/MM/dd" placement="bottom-end" :placeholder="$t('discovery.bill.end')"></DatePicker>
 				</flexbox-item>
 			</flexbox>
-			
-			<div class="list">
-				<!-- 收益明细 -->
-				<div class="total-profit">
-					{{$t('discovery.OTC.orderlist.Profit')}}：{{TotalProfit}}（BDC）
-				</div>
-				<div :class="{'order-list-content':true,'list-profit':true,'profit-bg':(index+1)%2!=0}" v-for="(v,index) in ProfitList" v-if="v.OrderId" :key="index" @click="myOrder(v.OrderId)">
-					<flexbox class="order-list-profit-title">
+			<!-- 收益明细 -->
+			<div class="total-profit">
+				OTC{{$t('discovery.OTC.orderlist.Profit')}}：{{TotalProfit}}（BDC）
+			</div>
+			<div class="list pb20">
+				<!-- 收益明细列比奥 -->
+				<div class="order-list-content Profit-list" v-for="(v,index) in ProfitList" v-if="v.OrderId" :key="index"  @click="myOrder(v.OrderId)">
+					<flexbox>
 						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.OrderId}}</flexbox-item>
-						<flexbox-item>{{v.CreateTime}}</flexbox-item>
+						<flexbox-item class="right">
+							{{v.CreateTime}}
+						</flexbox-item>
 					</flexbox>
 					<flexbox>
-						<flexbox-item class="order-list-info order-list-profit">
-							<div>
-								<span class="price">{{$t('discovery.OTC.orderlist.orderType4')}}：<span class="price-important">{{v.Profit}}（BDC）</span></span>
+						<flexbox-item class="order-list-info">
+							<div class="total">
+								<span class="price">OTC{{$t('discovery.OTC.orderlist.orderType4')}}：<span class="price-important">{{v.Profit}}（BDC）</span></span>
+							</div>
+							<div class="price-info">
 								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：<span class="price-important">{{v.BuyNum}}（BDC）</span></span>
 							</div>
-						</flexbox-item>
-						<flexbox-item :span="2">
-							<span v-if="v.GoodsType==0" class="font font-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
-							<span v-if="v.GoodsType==1" class="font font-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
+							<div class="status">
+								<span v-if="v.GoodsType==0" class="font font-wran">{{$t('discovery.OTC.type.GoodsType0')}}</span>
+								<span v-if="v.GoodsType==1" class="font font-primary">{{$t('discovery.OTC.type.GoodsType1')}}</span>
+							</div>
 						</flexbox-item>
 					</flexbox>
 				</div>
 			</div>
-			
 		</div>
     </div>
 </template>
@@ -158,4 +161,17 @@
 
 <style scoped lang="scss">
 @import "../../scss/views/otc/otclist";
+.profit{
+	.list{
+		background:#fff;
+	}
+	.Profit-list{
+		box-shadow: 0px 0px 7px 0px
+		rgba(47, 58, 82, 0.2);
+		.price,.buynum{
+			color:#333333 !important;
+		}
+	}
+}
+
 </style>
