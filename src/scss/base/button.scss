@@ -168,4 +168,37 @@ button[disabled]
         }
     }
     
+    &-demand{
+        background-color: #f56a00;
+        color: $font-white;
+    
+        &.outline
+        {
+            color: #b0b1b1;
+            background-color: #fff;
+            border: 1px solid #b0b1b1;
+        }
+
+        &:active
+        {
+            background: #b0b1b1;
+        }
+    }
+
+    &-buy{
+        background-color: #299e83;
+        color: $font-white;
+    
+        &.outline
+        {
+            color: #b0b1b1;
+            background-color: #fff;
+            border: 1px solid #b0b1b1;
+        }
+
+        &:active
+        {
+            background: #b0b1b1;
+        }
+    }
 }

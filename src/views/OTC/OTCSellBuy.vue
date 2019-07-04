@@ -5,7 +5,7 @@
             <flexbox>
                 <flexbox-item>
                     <Dropdown trigger="click" @on-click="change" class="OTCSellBuy-drop">
-                        <div class="btn btn-min-x btn-round">
+                        <div :class="{'btn btn-min-x btn-round':true,'btn-demand':!this.active,'btn-buy':this.active}">
                             {{thisAct}}
                             <i class="iconfont icon-sanjiao_xia"></i>
                         </div>
