@@ -112,7 +112,7 @@ export default {
             type        :   false,
             animal      :   'all',
             showVersion :   '',
-            minBuy      :   '',                         // 最低购买额
+            minBuy      :   100,                         // 最低购买额
 		}
 	},
 	methods: {

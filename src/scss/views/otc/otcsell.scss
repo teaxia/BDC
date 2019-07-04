@@ -66,25 +66,24 @@ $height : 1.5rem;
     font-size:38px;
 }
 .currency{
-    width: 300px;
-    margin:0 auto;
-    text-align: center;
-    .sicon{
-        width:150px;
-        height: 150px;
-    }
-    .avatar{
-        border-radius: 50%;
-    }
-    .line-height{
-        line-height: 150px; 
-    }
-    .font{
-        font-size:42px;
-        font-weight: bold;
-    }
+    display: flex;
+    justify-content: space-between;
+    // .sicon{
+    //     width:150px;
+    //     height: 150px;
+    // }
+    // .avatar{
+    //     border-radius: 50%;
+    // }
+    // .line-height{
+    //     line-height: 150px; 
+    // }
+    // .font{
+    //     font-size:42px;
+    //     font-weight: bold;
+    // }
     .price,.fax{
-        font-size:30px;
+        font-size:28px;
     }
     .fax{
         color:$font-red;

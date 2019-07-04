@@ -17,16 +17,11 @@
                 </div>
             </div>
             <div class="currency" v-if="Poundage>0">
-                <div>
-                    <div class="price">
-                        {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
-                    </div>
-                    <div class="fax">
-                        {{$t('discovery.extract.tax')}}：{{Poundage}}% 
-                    </div>
-                    <div class="fax">
+                <div class="fax">
+                    {{$t('discovery.extract.tax')}}：{{Poundage}}% 
+                </div>
+                <div class="fax">
                     {{$t('discovery.OTC.sell.odeduction')}} ：{{$numberComma(amount)}}
-                    </div>
                 </div>
             </div>
             <div class="enterfrom">
@@ -191,7 +186,7 @@ export default {
             bankId      : '',                         // 银联支付ID
             isSellOn    :   true,                     // 是否立即上架
             PayNum      :   '',                       // 有多少绑定数据
-            minNum      :   '',                       // 最低限额
+            minNum      :   100,                       // 最低限额
             type	    :   false,		              // 切换密码状态'
             Poundage    :   '',                       // 手续费
             Key         :   '',
