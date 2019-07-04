@@ -3,7 +3,7 @@
         <div class="pb">
             <div class="title-tool">
                 <Dropdown trigger="click" @on-click="change" class="OTCSellBuy-drop">
-                    <div class="btn btn-min-x btn-round btn-demand">
+                    <div class="btn btn-min-x btn-round btn-buy">
                         {{$t('discovery.OTC.demand.title')}}
                         <i class="iconfont icon-sanjiao_xia"></i>
                     </div>

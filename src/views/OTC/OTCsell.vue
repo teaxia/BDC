@@ -3,9 +3,9 @@
         <div class="pb">
             <div class="title-tool">
                 <Dropdown trigger="click" @on-click="change" class="OTCSellBuy-drop">
-                    <div class="btn btn-min-x btn-round btn-buy">
+                    <div class="btn btn-min-x btn-round btn-demand">
                         {{$t('discovery.OTC.Selltitle')}}
-                        <i class="iconfont icon-sanjiao_xia"></i>
+                        <i class="iconfont icon-sanjiao_xia"></i> 
                     </div>
                     <DropdownMenu slot="list">
                         <DropdownItem :name="'/OTC/sell'">{{$t('discovery.OTC.Selltitle')}}</DropdownItem>

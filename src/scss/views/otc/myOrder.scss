@@ -2,6 +2,13 @@
 @import "../../base/var";
 @import "../../base/button";
 @import "../../base/spanTag";
+.sbank{
+    padding: 0.133333rem 0.2rem;
+    display: flex;
+    .title-psw{
+        margin-right: 30px;
+    }
+}
 .myOrder{
     background:#f2f2f2;
     height: 100%;
