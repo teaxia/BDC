@@ -5,6 +5,7 @@
 				<div class="otc-item" @click="edit(v.Id,v.GoodsType)" v-for="(v,index) in MyGoods" v-if="v.Id" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
+							<div class="grid-info">发布ID：{{v.Id}}</div>
 							<div class="grid-info">{{v.CreateTime}}</div>
 							<div class="otc-grid-right">
 								<span :class="{'sv':true,'c-primary':v.sv=='场内','c-all':v.sv=='全部'}">{{v.sv}}</span>
