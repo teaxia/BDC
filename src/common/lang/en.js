@@ -472,6 +472,7 @@ export const en = {
                 type0       :   'Online',
                 type2       :   'locking',
                 type_2      :   'sell out',
+                type_3      :   'Revoke',
                 GoodsType0  :   'Sale',
                 GoodsType1  :   'Buy',
                 buy         :   'Buy',
@@ -540,6 +541,7 @@ export const en = {
             ok              :   'Pay',
             other           :   'View other ways',
             tel             :   'Tel',
+            GoodsId         :   'Goods ID',
             type:{
                 WaitPrice   :   'Waiting for collection',
                 WaitSend    :   'Waiting for Send'

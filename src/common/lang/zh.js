@@ -474,6 +474,7 @@ export const zh = {
                 type0       :   '上架',
                 type2       :   '锁定',
                 type_2      :   '售罄',
+                type_3      :   '撤销',
                 GoodsType0  :   '售币',
                 GoodsType1  :   '求购',
                 buy         :   '我要买',
@@ -542,6 +543,7 @@ export const zh = {
             ok              :   '确认支付',
             other           :   '查看其他方式',
             tel             :   '联系电话',
+            GoodsId         :   '发布ID',
             type:{
                 WaitPrice   :   '待收款',
                 WaitSend    :   '待发币'
