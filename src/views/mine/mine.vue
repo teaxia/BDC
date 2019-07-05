@@ -120,7 +120,7 @@ export default {
 			avatar		:	'',
 			realname    :   '',
 			golink		:	'',
-			version 	:	'2.14.46',					// 记得把OTC关掉
+			version 	:	'2.14.47',					// 记得把OTC关掉
 			// version 	:	'测试版本：2.9.45',					// 测试版本号
 			messageNum	:	'',
 			ParentName	:	'',
