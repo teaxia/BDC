@@ -18,6 +18,9 @@
 			<div class="order-pay order-line mr20 bgpd">
 				<div class="order-information">
 					<div class="order-pay-price">
+						{{$t('OTC.order.GoodsId')}}：<span>{{data.GoodsId}}</span>
+					</div>
+					<div class="order-pay-total">
 						{{$t('discovery.OTC.order.price')}}：<span>{{data.Price}}CNY</span>
 					</div>
 					<div class="order-pay-total">
@@ -199,7 +202,8 @@ import { dateFormat } from 'vux'
 					if(data){
 						this.payInfo 	=   (data.PayType)?data.PayType.split("|"):'';
 						this.data 		= 	data
-						this.showF		=	 data.showF
+						this.showF		=	data.showF
+						console.log(data)
 						// 直接发币状态显示倒计时
 						if(this.showF){
 							this.timeFn(data.CreateTime)
