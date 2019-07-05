@@ -30,7 +30,7 @@
                 <span v-if="AuditStatus==3" class="tag tag-error">
                     {{$t('discovery.OTC.complaiont.status3')}}
                 </span>
-                <span v-if="AuditStatus==1" class="tag tag-success">
+                <span v-if="AuditStatus==1||AuditStatus==2" class="tag tag-success">
                     {{$t('discovery.OTC.complaiont.status1')}}
                 </span>
                 <span v-if="AuditStatus==0" class="tag tag-wran">

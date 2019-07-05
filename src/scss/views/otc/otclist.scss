@@ -32,11 +32,16 @@
         font-size:26px;
         font-weight: bold;
     }
+    .total-status{
+        min-width:130px; 
+    }
     .price-info{
         color: $font-h2;
         font-size:30px;
         font-weight: bold;
         letter-spacing: 0.6px;
+        display:flex;
+        justify-content: space-between;
     }
     .grid-username{
         text-align: center;

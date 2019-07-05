@@ -29,7 +29,16 @@
 								{{$t('discovery.OTC.orderlist.totalprice')}}
 							</div>
 							<div class="price-info">
-								￥{{v.TotalPay}}
+								<span class="price-info">￥{{v.TotalPay}}</span>
+								<span v-if="v.AuditStatus==3" class="total-status tag tag-error">
+									{{$t('discovery.OTC.complaiont.status3')}}
+								</span>
+								<span v-if="v.AuditStatus==1||v.AuditStatus==2" class="total-status tag tag-success">
+									{{$t('discovery.OTC.complaiont.status1')}}
+								</span>
+								<span v-if="v.AuditStatus==0" class="total-status tag tag-wran">
+									{{$t('discovery.OTC.complaiont.status0')}}
+								</span>
 							</div>
 							<div>
 								<span class="price">{{$t('discovery.OTC.orderlist.oprice')}}：￥{{v.Price}}</span>
@@ -82,6 +91,7 @@
                 }).then(data => {
                     if(data){
 						this.CorderList	=	data
+						console.log(data)
                     }
                 }) 
 			},

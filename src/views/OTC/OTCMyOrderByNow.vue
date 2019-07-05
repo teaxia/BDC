@@ -61,7 +61,7 @@
 										{{$t('OTC.order.type.WaitSend')}}
 									</template>
 									<template v-if="v.cType=='buy'">
-										{{$t('discovery.OTC.status.status3')}}
+										{{$t('discovery.OTC.status.status3')}} 
 									</template>
 								</span>
 								<span class="font order-list-type-success" v-if="v.status==5">
