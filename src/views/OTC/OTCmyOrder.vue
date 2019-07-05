@@ -17,7 +17,7 @@
 			</div>
 			<div class="order-pay order-line mr20 bgpd">
 				<div class="order-information">
-					<div class="order-pay-price">
+					<div class="order-pay-price font-primary">
 						{{$t('OTC.order.GoodsId')}}：<span>{{data.GoodsId}}</span>
 					</div>
 					<div class="order-pay-total">
