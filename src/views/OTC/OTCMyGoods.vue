@@ -57,6 +57,9 @@
 										<div v-if="v.Status==-2" class="font font-gray">
 											{{$t('discovery.OTC.type.type_2')}}
 										</div>
+										<div v-if="v.Status==-3" class="font font-gray">
+											{{$t('discovery.OTC.type.type_3')}}
+										</div>
                                     </div>
                                 </div>
                             </div>
