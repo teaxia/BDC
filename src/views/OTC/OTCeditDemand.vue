@@ -51,7 +51,7 @@
                 </group>
                 <div class="tips">
                     <div v-if="islock&&!Block&&!Ocancel">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
-                    <div v-if="Block">{{$t('discovery.OTC.edit.sellout')}}</div>
+                    <div v-if="Block||Ocancel">{{$t('discovery.OTC.edit.sellout')}}</div>
                     <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
@@ -256,11 +256,13 @@ export default {
             this.clock = setInterval(() =>{
                 if( this.m == 0 && this.s == 0 ){
                     // 倒计时结束
-                    this.GetMySellOrderById();
-                    this.isSellOn = !this.isSellOn
-                    this.islock = !this.islock
-                    window.clearInterval(this.clock);
-                    
+                    // this.isSellOn = !this.isSellOn
+                    // this.islock = !this.islock
+                    // window.clearInterval(this.clock);
+                    // this.GetMySellOrderById();
+                    this.$router.push({
+                        path:"/OTC/MyGoods",
+                    });
                 }else if( this.m >= 0 ){
                     if( this.s > 0 ){
                         this.s--;

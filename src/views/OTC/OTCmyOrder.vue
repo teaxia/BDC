@@ -76,20 +76,23 @@
 				{{$t('discovery.OTC.myorder.remark')}}：{{data.Remark}}
 			</div>
 			<div class="order-done mr10">
-				<button class="btn btn-block btn-round-mx mr20" disabled v-if="data.Status==3&&this.orderType==2&&this.minutes<29||this.orderType==3&&data.Status==3&&this.minutes<29">{{$t('discovery.OTC.complaiont.minutes')}}</button>
-				<button class="btn btn-block btn-round-mx mr20" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2&&this.minutes>=30||this.orderType==3&&data.Status==3&&this.minutes>=30">{{$t('discovery.OTC.complaiont.title')}}</button>
+				<!-- {{$t('discovery.OTC.complaiont.minutes')}} -->
+				<div v-if="showF" class="tips">未收到转账请勿放币，{{lm}}分{{ls}}秒后订单自动取消</div>
+				<button class="btn btn-block btn-round-mx mr20" disabled v-if="data.Status==3&&orderType==2||this.orderType==3&&data.Status==3&&!isSS">请于支付{{m}}分{{s}}秒后再提交申诉</button>
+				<button class="btn btn-block btn-round-mx mr20" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2||this.orderType==3&&data.Status==3&&isSS">{{$t('discovery.OTC.complaiont.title')}}</button>
 				<button class="btn btn-block btn-round-mx mr20" v-if="data.Status==3&&this.orderType==3" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 				<!-- showF -->
-				<button v-if="showF&&this.minutes<3" class="btn btn-block btn-round-mx mr20" disabled>{{m}}分{{s}}秒后可强制发币</button>
-				<button v-if="showF&&this.minutes>3" class="btn btn-block btn-round-mx mr20" @click="directOk()">已收到款，直接发币</button>
+				
+				<button v-if="showF&&!isFb" class="btn btn-block btn-round-mx mr20" disabled>{{m}}分{{s}}秒后可强制发币</button>
+				<button v-if="showF&&isFb" class="btn btn-block btn-round-mx mr20" @click="directOk()">已收到款，直接发币</button>
 			</div>
 			<!-- <div class="tips" v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
 				{{$t('discovery.OTC.myorder.wait')}}{{m}}{{$t('discovery.OTC.myorder.minute')}}{{s}}{{$t('discovery.OTC.myorder.second')}}
 			</div> -->
-			<center v-if="data.Status==3&&this.orderType==2&&this.minutes<30||this.orderType==3&&data.Status==3&&this.minutes<30">
-				<i-circle :percent="percent" class="close" v-if="data.Status==3&&this.orderType==2&&this.minutes<30||this.orderType==3&&data.Status==3&&this.minutes<30">
+			<center v-if="data.Status==3&&orderType==2||this.orderType==3&&data.Status==3&&!isSS">
+				<i-circle :percent="percent" class="close" v-if="data.Status==3&&orderType==2||this.orderType==3&&data.Status==3&&!isSS">
 					<div style="font-size:24px">{{m}}m{{s}}s</div>
 				</i-circle>
 			</center>
@@ -176,6 +179,11 @@ import { dateFormat } from 'vux'
 				mode		:	'',					 // 转账方式
 				modeOk		:	false,				 // 这个用来判断是否是直接付款，如果是的话，不弹出二次确认框，并且提交到直接付款的接口
 				showF		:	'',					 // 是否显示直接发币，同时也兼顾发币倒计时
+				lm			:	0,					 // 超时取消订单倒计时分
+				ls			:	0,					 // 超时取消订单倒计时秒
+				isFb		:	false,				 // 是否可发币
+				cancelclock	:	'',				     // 取消订单倒计时实例
+				isSS		:	false,				 // 是否可申诉
 			}
 		}, 
 		watch:{
@@ -205,11 +213,22 @@ import { dateFormat } from 'vux'
 						this.showF		=	data.showF
 						// 直接发币状态显示倒计时
 						if(this.showF){
-							this.timeFn(data.CreateTime)
+							this.m	=	data.djs_m
+							this.s	=	data.djs_s
+							this.lm =   data.Lockdjs_m
+							this.ls =   data.Lockdjs_s
+							this.getCountDwn()
+							// this.timeFn(data.CreateTime)
+							//
 						}
-						// 待发币状态申诉是以支付时间计算
+						// 待发币状态申诉是已支付时间计算
 						if(data.PayTime){
-							this.timeFn(data.PayTime)
+							// this.timeFn(data.PayTime)
+							// this.getCountDwn()
+							this.m = data.djs_m
+							this.s = data.djs_s
+							this.mathPercent()
+							this.getCountDwn()
 						}
 					}
 				})
@@ -262,59 +281,6 @@ import { dateFormat } from 'vux'
 			cancel () {
                 this.show = false
             },
-			timeFn(d1) {
-				if(!this.showF){
-					// 判断是否需要进行倒计时操作
-					if(this.data.Status!=3&&this.orderType!=2||this.orderType!=3&&this.data.Status!=3){
-						return
-					}
-				}
-				var dateBegin = new Date(d1.replace(/-/g, "/"));//将-转化为/，使用new Date
-				// 计算获取的时间是否与现在的时间相差30分钟
-				var dateEnd  =  new Date();//获取当前时间
-				var dateDiff =  dateEnd.getTime() - dateBegin.getTime();//时间差的毫秒数
-				// console.log('毫秒'+dateDiff)
-				this.minutes =  Math.floor((dateDiff / 60000)); 
-				this.s	     =  60-(60-dateBegin.getSeconds())-(dateEnd.getSeconds())    //60秒减去（60秒减去发布时间减去当前时间秒数）= 当前剩余秒
-				if(this.showF){
-					// 直接发币
-					// 开始倒计时
-					if(this.s <0){
-						this.s = 60+this.s
-					}
-					if(this.minutes<=0){
-						this.m		 =   2;
-					}else{
-						this.m		 =	 3-this.minutes
-					}
-					
-				}else{
-					// 非直接发币
-					// 开始倒计时
-					if(this.s <0){
-						this.s = 60+this.s
-					
-					}
-					if(30-this.minutes>=30){
-						this.m		 =   29;
-					}else{
-						this.m		 =	 30-this.minutes
-					}
-				}
-				
-				// 开始转圈
-				this.mathPercent()
-				// 倒计时开始
-				if(this.m==1){
-					this.m		 =	 0
-				}
-				if(this.m>=0){
-					this.$nextTick(()=>{
-						this.getCountDwn()
-					});
-				}
-				
-			}, 
 			ShowPSW(){
 				// 安全码弹出层
 				this.showPSwed = true
@@ -329,7 +295,7 @@ import { dateFormat } from 'vux'
 					this.clock = setInterval(() =>{
 						if( this.m == 0 && this.s == 0 ){
 							// 倒计时结束
-							this.minutes  =  31;
+							this.isFb  =  true;
 							window.clearInterval(this.clock);
 						}else if( this.m >= 0 ){
 							if( this.s > 0 ){
@@ -340,13 +306,28 @@ import { dateFormat } from 'vux'
 							}
 						}
 					},1000);
+					// 取消订单倒计时
+					this.cancelclock = setInterval(() =>{
+						if( this.lm == 0 && this.ls == 0 ){
+							// 倒计时结束
+							window.clearInterval(this.cancelclock);
+							this.GetOrderById()
+						}else if( this.lm >= 0 ){
+							if( this.ls > 0 ){
+								this.ls--;
+							}else if( this.ls <= 0 ){
+								this.lm--;
+								this.ls = 59;
+							}
+						}
+					},1000);
 				}else{
-					// 非直接发币
+					// 非直接发币  申诉
 					// 锁单倒计时
 					this.clock = setInterval(() =>{
 						if( this.m == 0 && this.s == 0 ){
 							// 倒计时结束
-							this.minutes  =  31;
+							this.isSS	=	true
 							window.clearInterval(this.clock);
 						}else if( this.m >= 0 ){
 							if( this.s > 0 ){
@@ -360,64 +341,16 @@ import { dateFormat } from 'vux'
 				}
 			},
 			mathPercent(){
-				// 计算百分比
-				// 计算已经过去的时间百分比
-				let m			//  计算剩余时间分钟
-				let sm			//  已经过去的秒
-				// 判断是否直接发币
-				if(this.showF){
-					
-					// // 直接发币
-					// let s = this.$math.add(this.m*60,this.s)
-					// // 180秒是3分钟
-					// this.percentclock = window.setInterval(() => {
-					// 	s++;
-					// 	if (s>=180||s<0) {
-					// 		window.clearInterval(this.percentclock)
-					// 	}
-					// 	this.percent =  Math.round(s/180*100)
-					// 	// alert('计算出来的百分比'+this.percent)    // 31
-					// 	// console.log(this.percent)
-					// },1000)
-				}else{
-					// 其他发币
-					// let Tmp
-					if(this.minutes>=30){
-						// 如果时间正好30分钟，这里要减去已经过去的秒数
-						m    = 29
-						sm   = this.$math.add(this.s,60)
-						// Tmp  =  this.$math.subtract(m*60,sm)
-						// console.log('减法秒'+Tmp);
-					}else{
-						m    =  30-this.minutes
-						sm   =  this.s
-						// Tmp  =  this.$math.add(m*60,sm)
-						// console.log('加法秒'+Tmp);
+				let i = 1
+				let Tmp = this.$math.add(this.m*60,this.s)		// 秒
+				this.clock = window.setInterval(() => {
+					this.T--;
+					i++;
+					if (this.T<=0) {
+						window.clearInterval(this.clock)
 					}
-					// 如果时间为负数，则不执行下面的倒计时操作
-					if(m<0){
-						return
-					}
-					// 通过剩余时间计算出剩余秒数
-					let Tmp  =  this.$math.add(m*60,sm)
-					// 判断读秒是否大于1800
-					if(Tmp>1800){
-						Tmp = 1800+(1800-Tmp)
-					}
-					let s    =  1800-Tmp
-					if(s<0){
-						s    =  1800-(1800-s)
-					}
-					
-					// 1800秒是半小时
-					this.percentclock = window.setInterval(() => {
-						s++;
-						if (s>=1800||s<0) {
-							window.clearInterval(this.percentclock)
-						}
-						this.percent =  Math.round(s/1800*100)
-					},1000)
-				}
+					this.percent =  i/Tmp*100
+				},1000)
 				
 			},
 			directOk(){
@@ -441,8 +374,10 @@ import { dateFormat } from 'vux'
 			// 清除计时器
 			window.clearInterval(this.clock);
 			window.clearInterval(this.percentclock);
+			window.clearInterval(this.cancelclock);
 			this.clock = null;
 			this.percentclock = null;
+			this.cancelclock	=	null;
 		}
 	}
 

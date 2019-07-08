@@ -10,7 +10,8 @@
                     <span class="line-height">{{cName}}</span>
                 </Avatar>
                 <div class="font">
-                    {{cName}}
+                    {{cName}}<br/>
+                    发布ID：{{id}}
                 </div>
                 <div class="price">
                     {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
@@ -63,9 +64,8 @@
 					<i @click="pay('wechart')" class="iconfont icon-weixinzhifu wechart" v-if="wechart.length>1"></i>
 				</div>
                 <div class="tips">
-                    <div v-if="islock&&!Block">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
-                    <div v-if="Block">{{$t('discovery.OTC.edit.sellout')}}</div>
-                    <div v-if="Ocancel">当前状态不可编辑</div>
+                    <div v-if="islock&&!Block&&!Ocancel">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-if="Block||Ocancel">{{$t('discovery.OTC.edit.sellout')}}</div>
                     <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
@@ -140,6 +140,7 @@ export default {
     mixins:[GetAccount,clipBoard],
 	data() {
 		return {
+            id          :  '',                        // 发布ID
             num         :  '',                        // 发布数量
             currency    :  0,                         // 选择的币种
             show        :	 false,         		  // 跳转至强制认证界面
@@ -185,6 +186,7 @@ export default {
                     this.wechart 	= (data.wx)?data.wx.split("|"):'';
                     this.card 		= (data.card)?data.card.split("|"):'';
                     this.sellNum    = data.sellNum
+                    this.id         =   data.Id
                     if(data.Status==-1){
                         // 下架
                         this.isSellOn   =   false
@@ -282,11 +284,13 @@ export default {
             this.clock = setInterval(() =>{
                 if( this.m == 0 && this.s == 0 ){
                     // 倒计时结束
-                    this.GetMySellOrderById();
-                    this.isSellOn = !this.isSellOn
-                    this.islock = !this.islock
-                    window.clearInterval(this.clock);
-                    
+                    // this.isSellOn = !this.isSellOn
+                    // this.islock = !this.islock
+                    // window.clearInterval(this.clock);
+                    // this.GetMySellOrderById();
+                    this.$router.push({
+                        path:"/OTC/MyGoods",
+                    });
                 }else if( this.m >= 0 ){
                     if( this.s > 0 ){
                         this.s--;

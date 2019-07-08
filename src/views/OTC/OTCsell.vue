@@ -16,6 +16,9 @@
                     {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
                 </div>
             </div>
+            <div class="total">
+                当前可用发布额度：{{total}}
+            </div>
             <div class="currency" v-if="Poundage>0">
                 <div class="fax">
                     {{$t('discovery.extract.tax')}}：{{Poundage}}% 
@@ -194,6 +197,7 @@ export default {
             showPSwed   :   false,                    // 显示安全密码弹窗 
             animal      :   'all',
             showVersion :   '',
+            total       :   '',                         // 当前可用发布额度
 		}
 	},
 	methods: {
@@ -349,6 +353,18 @@ export default {
                     this.cName    = data[0].Key
                     this.ConsultPirce   =   data[0].Value
                     this.price          =   this.ConsultPirce
+                }
+            })
+        },
+        GetOutLimit(){
+            // 发布额度
+            this.$server.post(
+            'OTC_GetOutLimit',
+            {
+                guid : this.$storage.get('guid')
+            }).then(data => {
+                if(data){
+                    this.total  =   data.Result
                 }
             })
         },
@@ -524,6 +540,8 @@ export default {
         // 默认币种参考价
         this.OTCGetCurrenyPrice()
         this.GetPoundage()
+        // 发布额度
+        this.GetOutLimit()
     }
 }
 </script>
