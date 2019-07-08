@@ -50,7 +50,7 @@
                     </div>
                 </group>
                 <div class="tips">
-                    <div v-if="islock&&!Block">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
+                    <div v-if="islock&&!Block&&!Ocancel">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
                     <div v-if="Block">{{$t('discovery.OTC.edit.sellout')}}</div>
                     <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
@@ -89,6 +89,7 @@ export default {
             id          :   '',                       // 订单ID
             islock      :   false,                    // 订单锁定
             Block       :   false,                    // 订单售罄状态
+            Ocancel     :   false,                    // 订单撤销状态
             m           :   '',
             s           :   '',
             clock       :   '',                       // 锁定
@@ -228,15 +229,24 @@ export default {
                     this.cardpay=   data.supportCard
                     this.wechart  =   data.supportWX
                     if(data.Status==-1){
+                        // 下架
                         this.isSellOn   =   false
                     }else if(data.Status==0){
+                        // 上架
                         this.isSellOn   =   true
                     }else if(data.Status==-2){
+                        // 售罄
                         this.islock    =   true
                         this.Block     =   true
-                    }else{
+                    }else if(data.Status==2){
+                        // 锁定 才有倒计时
                         this.islock    =   true
                         this.getCountDwn()
+                    }else if(data.Status==-3){
+                        // 撤销
+                        // this.islock    =   true
+                        this.Ocancel    =   true
+                        this.Block     =   true
                     }
                 }
             })

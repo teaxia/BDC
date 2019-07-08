@@ -91,7 +91,6 @@
                 }).then(data => {
                     if(data){
 						this.CorderList	=	data
-						console.log(data)
                     }
                 }) 
 			},

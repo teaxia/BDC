@@ -203,7 +203,6 @@ import { dateFormat } from 'vux'
 						this.payInfo 	=   (data.PayType)?data.PayType.split("|"):'';
 						this.data 		= 	data
 						this.showF		=	data.showF
-						console.log(data)
 						// 直接发币状态显示倒计时
 						if(this.showF){
 							this.timeFn(data.CreateTime)

@@ -423,7 +423,7 @@ export const zh = {
                 title       :   '编辑',
                 numed       :   '已售数量',
                 islock      :   '目前为锁定状态，不可修改。锁定倒计时',
-                sellout     :   '当前订单已经售罄，不可编辑',
+                sellout     :   '当前状态不可编辑',
                 downdel     :   '只有下架后才可删除',
                 edit        :   '保存修改',
                 del         :   '撤销发布',

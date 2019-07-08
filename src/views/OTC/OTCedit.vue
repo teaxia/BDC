@@ -65,6 +65,7 @@
                 <div class="tips">
                     <div v-if="islock&&!Block">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
                     <div v-if="Block">{{$t('discovery.OTC.edit.sellout')}}</div>
+                    <div v-if="Ocancel">当前状态不可编辑</div>
                     <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
@@ -153,6 +154,7 @@ export default {
             SellOrderId :   '',                       // 订单ID
             islock      :   false,                    // 订单锁定
             Block       :   false,                    // 订单为售罄状态
+            Ocancel     :   false,                    // 订单撤销状态
             m           :   '',
             s           :   '',
             clock       :   '',                       // 锁定
@@ -184,15 +186,24 @@ export default {
                     this.card 		= (data.card)?data.card.split("|"):'';
                     this.sellNum    = data.sellNum
                     if(data.Status==-1){
+                        // 下架
                         this.isSellOn   =   false
                     }else if(data.Status==0){
+                        // 上架
                         this.isSellOn   =   true
                     }else if(data.Status==-2){
+                        // 售罄
                         this.islock    =   true
                         this.Block     =   true
-                    }else{
+                    }else if(data.Status==2){
+                        // 锁定 才有倒计时
                         this.islock    =   true
                         this.getCountDwn()
+                    }else if(data.Status==-3){
+                        // 撤销
+                        // this.islock    =   true
+                        this.Ocancel   =   true
+                        this.Block     =   true
                     }
                     
                 }
