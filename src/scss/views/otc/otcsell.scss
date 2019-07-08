@@ -82,15 +82,18 @@ $height : 1.5rem;
     // .line-height{
     //     line-height: 150px; 
     // }
-    // .font{
-    //     font-size:42px;
-    //     font-weight: bold;
-    // }
+    .font{
+        font-size:28px;
+        color: #028BF4;
+    }
     .price,.fax{
         font-size:28px;
     }
     .fax{
         color:$font-red;
+    }
+    &-font{
+        text-align: center;
     }
 }
 .selectbox{

@@ -1,20 +1,25 @@
 <template>
-	<div class="mycard margin-header" v-cloak>
+	<div class="OTCSell margin-header" v-cloak>
 		<x-header :left-options="{backText:$t('global.back')}" :title="$t('discovery.OTC.edit.title')"></x-header>
         <div class="pd50">
             <div class="currency">
-                <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
-                    <use :xlink:href="`#icon-`+cName"></use>
-                </svg>
-                <Avatar v-else class="sicon avatar" style="background:#f56a00;">
-                    <span class="line-height">{{cName}}</span>
-                </Avatar>
+                <div class="currency-icon">
+                    <svg class="sicon" aria-hidden="true" v-if="$currency.indexOf(cName)>=0">
+                        <use :xlink:href="`#icon-`+cName"></use>
+                    </svg>
+                    <Avatar v-else class="sicon avatar" style="background:#f56a00;">
+                        <span class="line-height">{{cName}}</span>
+                    </Avatar>
+                    <div class="currency-font">
+                        {{cName}}
+                    </div>
+                </div>
                 <div class="font">
-                    {{cName}}
+                    <span class="blue"><b>发布ID：{{id}}</b></span>
                 </div>
-                <div class="price">
+                <!-- <div class="price">
                     {{$t('discovery.OTC.sell.reference')}}：{{ConsultPirce}}
-                </div>
+                </div> -->
             </div>
             <div class="enterfrom">
                 <div class="line-b sbank">
@@ -34,7 +39,7 @@
                         <div slot="right" style="font-size:0.35rem;">CNY</div>
                     </x-input>
                 </group>
-                <group>
+                <group v-if="showStatus">
                     <div class="weui-cells vux-no-group-title">
                         <div class="vux-x-input weui-cell test">
                             <div class="weui-cell__hd">
@@ -52,7 +57,7 @@
                 <div class="tips">
                     <div v-if="islock&&!Block&&!Ocancel">{{$t('discovery.OTC.edit.islock')}}{{m}}:{{s}}</div>
                     <div v-if="Block||Ocancel">{{$t('discovery.OTC.edit.sellout')}}</div>
-                    <div v-else>{{$t('discovery.OTC.edit.downdel')}}</div>
+                    <div v-if="showStatus">{{$t('discovery.OTC.edit.downdel')}}</div>
                 </div>
             </div>
             <div class="select-pay">
@@ -94,6 +99,8 @@ export default {
             s           :   '',
             clock       :   '',                       // 锁定
             delshow     :   false,                    // 是否确认删除
+            Status      :   '',                       // 状态 -1 下架、0上架、-2售罄、2锁定、-3撤销
+            showStatus  :   false,                    // -1 下架、0上架 true||-2售罄、2锁定、-3撤销 false
 		}
 	},
 	methods: {
@@ -228,24 +235,29 @@ export default {
                     this.alipay =   data.supportZFB
                     this.cardpay=   data.supportCard
                     this.wechart  =   data.supportWX
+                    this.Status     =   data.Status
                     if(data.Status==-1){
                         // 下架
+                        this.showStatus =   true
                         this.isSellOn   =   false
                     }else if(data.Status==0){
                         // 上架
+                        this.showStatus =   true
                         this.isSellOn   =   true
                     }else if(data.Status==-2){
                         // 售罄
+                        this.showStatus =   false
                         this.islock    =   true
                         this.Block     =   true
                     }else if(data.Status==2){
                         // 锁定 才有倒计时
+                        this.showStatus =   false
                         this.islock    =   true
                         this.getCountDwn()
                     }else if(data.Status==-3){
                         // 撤销
-                        // this.islock    =   true
-                        this.Ocancel    =   true
+                        this.showStatus =   false
+                        this.Ocancel   =   true
                         this.Block     =   true
                     }
                 }
