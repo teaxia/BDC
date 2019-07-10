@@ -324,6 +324,9 @@
                 Poundage        :   '',                     // 手续费
                 Key             :   '',
                 amount          :   0,                      // 实际到账
+                wechartId       :   0,                      // 微信支付ID
+                alipayId        :   0,                      // 支付宝ID
+                bankId          :   0,                      // 银行卡ID
 			}
         },
         watch:{
@@ -613,6 +616,13 @@
                     if(this.CNum==''){
                         this.$vux.toast.show({
                             text: this.$t('OTC.sellBuy.tips.isSellNull'),
+                            type: 'warn'
+                        })
+                        return;
+                    }
+                    if(this.alipayId==0&&this.wechartId==0&&this.bankId==0){
+                        this.$vux.toast.show({
+                            text: '请选择一种支付方式',
                             type: 'warn'
                         })
                         return;
