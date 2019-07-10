@@ -81,13 +81,13 @@
 			<div class="order-done mr10">
 				<!-- {{$t('discovery.OTC.complaiont.minutes')}} -->
 				<div v-if="showF" class="tips">未收到转账请勿放币，{{lm}}分{{ls}}秒后订单自动取消</div>
-				<button class="btn btn-block btn-round-mx mr20" disabled v-if="data.Status==3&&!isSS||data.Status==3&&!isSS">请于支付{{m}}分{{s}}秒后再提交申诉</button>
+				<button class="btn btn-block btn-round-mx mr20" disabled v-if="data.Status==3&&!isSS">请于支付{{m}}分{{s}}秒后再提交申诉</button>
 				<button class="btn btn-block btn-round-mx mr20" @click="ToComplaint()" v-if="data.Status==3&&isSS">{{$t('discovery.OTC.complaiont.title')}}</button>
 				<button class="btn btn-block btn-round-mx mr20" v-if="data.Status==3&&cType=='sell'" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 				<!-- showF -->
-				
+				<div class="order-done-tips" v-if="data.Status==2&&!isSS&&this.cType=='sell'">等待买家付款，剩余{{m}}分{{s}}秒超时自动取消</div>
 				<button v-if="showF&&!isFb" class="btn btn-block btn-round-mx mr20" disabled>{{m}}分{{s}}秒后可强制发币</button>
 				<button v-if="showF&&isFb" class="btn btn-block btn-round-mx mr20" @click="directOk()">已收到款，直接发币</button>
 			</div>
@@ -224,13 +224,19 @@ import { dateFormat } from 'vux'
 							// this.timeFn(data.CreateTime)
 							//
 						}
-						// 待发币状态申诉是已支付时间计算
+						// 待发币状态申诉
 						if(data.PayTime){
 							// this.timeFn(data.PayTime)
 							// this.getCountDwn()
 							this.m = data.djs_m
 							this.s = data.djs_s
 							this.mathPercent()
+							this.getCountDwn()
+						}
+						// 购币等待卖家付款
+						if(data.Status==2&&this.cType=='sell'){
+							this.m = data.Lockdjs_m
+							this.s = data.Lockdjs_s
 							this.getCountDwn()
 						}
 					}
@@ -276,7 +282,6 @@ import { dateFormat } from 'vux'
 							this.GetOrderById()
 						}
 					})
-					// console.log(this.DzTime+this.remark+this.mode)
 				}else{
 					this.show = true
 				}
@@ -313,6 +318,7 @@ import { dateFormat } from 'vux'
 					this.cancelclock = setInterval(() =>{
 						if( this.lm == 0 && this.ls == 0 ){
 							// 倒计时结束
+							
 							window.clearInterval(this.cancelclock);
 							this.GetOrderById()
 						}else if( this.lm >= 0 ){
@@ -332,6 +338,7 @@ import { dateFormat } from 'vux'
 							// 倒计时结束
 							this.isSS	=	true
 							window.clearInterval(this.clock);
+							this.GetOrderById()
 						}else if( this.m >= 0 ){
 							if( this.s > 0 ){
 								this.s--;

@@ -107,6 +107,11 @@
         // 操作按钮
         &-done{
             padding:30px 20px;
+            &-tips{
+                text-align: center;
+                color:$font-red;
+                font-size:32px;
+            }
         }
     }
     .tips{
