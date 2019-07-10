@@ -144,15 +144,11 @@ import { types } from 'util';
 					});
 				}else{
 					// 其他状态
-					// status传参 2是已购 3是已售
 					// "buy"对应“已购”列表,"sell"对应”已售”
-					let status = (type=='buy')?2:3;
-					// console.log(type)
 					this.$router.push({
 						path:"/OTC/myOrder",
 						query:{
 							id		:	id,
-							status	:	status,
 							type	:	type
 						}
 					});
