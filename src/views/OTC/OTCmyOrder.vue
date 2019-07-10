@@ -8,12 +8,15 @@
 				<span v-if="cType=='sell'" class="tag tag-primary">{{$t('discovery.OTC.type.sell')}}</span>
 			</div>
 			<div class="order-info order-line">
-				<h3 class="order-tips" v-if="this.orderType==2&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="this.orderType==2&&data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="this.orderType==2&&data.GoodsType==0&&cType=='buy'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="this.orderType==2&&data.GoodsType==1&&cType=='buy'">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="this.orderType==3&&data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
-				<h3 class="order-tips" v-if="this.orderType==3&&data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<!-- <h3 class="order-tips" v-if="data.GoodsType==0&&cType=='sell'">{{data.NickName}}{{$t('discovery.OTC.order.tomebuy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="data.GoodsType==1&&cType=='sell'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.sell')}}{{data.BuyNum}}({{data.CurrenyName}})</h3> -->
+
+				<h3 class="order-tips" v-if="data.GoodsType==0&&cType=='buy'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="data.GoodsType==1&&cType=='buy'">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<!-- <h3 class="order-tips" v-if="data.GoodsType==0&&cType=='buy'">{{$t('discovery.OTC.order.your')}}{{data.NickName}}{{$t('discovery.OTC.order.buy')}}{{data.BuyNum}}({{data.CurrenyName}})</h3>
+				<h3 class="order-tips" v-if="data.GoodsType==1&&cType=='buy'">{{data.NickName}}{{$t('discovery.OTC.order.tome')}}{{data.BuyNum}}({{data.CurrenyName}})</h3> -->
 			</div>
 			<div class="order-pay order-line mr20 bgpd">
 				<div class="order-information">
@@ -78,9 +81,9 @@
 			<div class="order-done mr10">
 				<!-- {{$t('discovery.OTC.complaiont.minutes')}} -->
 				<div v-if="showF" class="tips">未收到转账请勿放币，{{lm}}分{{ls}}秒后订单自动取消</div>
-				<button class="btn btn-block btn-round-mx mr20" disabled v-if="data.Status==3&&orderType==2||this.orderType==3&&data.Status==3&&!isSS">请于支付{{m}}分{{s}}秒后再提交申诉</button>
-				<button class="btn btn-block btn-round-mx mr20" @click="ToComplaint()" v-if="data.Status==3&&this.orderType==2||this.orderType==3&&data.Status==3&&isSS">{{$t('discovery.OTC.complaiont.title')}}</button>
-				<button class="btn btn-block btn-round-mx mr20" v-if="data.Status==3&&this.orderType==3" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
+				<button class="btn btn-block btn-round-mx mr20" disabled v-if="data.Status==3&&!isSS||data.Status==3&&!isSS">请于支付{{m}}分{{s}}秒后再提交申诉</button>
+				<button class="btn btn-block btn-round-mx mr20" @click="ToComplaint()" v-if="data.Status==3&&isSS">{{$t('discovery.OTC.complaiont.title')}}</button>
+				<button class="btn btn-block btn-round-mx mr20" v-if="data.Status==3&&cType=='sell'" @click="ShowPSW()">{{$t('discovery.OTC.myorder.confirm')}}</button>
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 				<!-- showF -->
@@ -91,8 +94,8 @@
 			<!-- <div class="tips" v-if="data.Status==3&&this.orderType==2&&this.minutes<30">
 				{{$t('discovery.OTC.myorder.wait')}}{{m}}{{$t('discovery.OTC.myorder.minute')}}{{s}}{{$t('discovery.OTC.myorder.second')}}
 			</div> -->
-			<center v-if="data.Status==3&&orderType==2||this.orderType==3&&data.Status==3&&!isSS">
-				<i-circle :percent="percent" class="close" v-if="data.Status==3&&orderType==2||this.orderType==3&&data.Status==3&&!isSS">
+			<center v-if="data.Status==3&&!isSS">
+				<i-circle :percent="percent" class="close" v-if="data.Status==3&&!isSS">
 					<div style="font-size:24px">{{m}}m{{s}}s</div>
 				</i-circle>
 			</center>
@@ -158,7 +161,6 @@ import { dateFormat } from 'vux'
 		data() {
 			return {	
 				id      	:   '',                 // 订单ID
-				orderType	:	'',				    // 订单类型  2是已购 3是已售
 				data		:	[],
 				passwprd	:	'',					// 安全密码
 				type	    :   false,				// 切换密码状态
@@ -200,7 +202,6 @@ import { dateFormat } from 'vux'
 			},
 			GetOrderById(){
 				// 订单详情
-				// let isSeller = (this.orderType==2)?false:true;
 				this.$server.post(
 				'OTC_GetMyOrderById',{
 					guid 	    :   this.$storage.get('guid'),
@@ -211,6 +212,8 @@ import { dateFormat } from 'vux'
 						this.payInfo 	=   (data.PayType)?data.PayType.split("|"):'';
 						this.data 		= 	data
 						this.showF		=	data.showF
+						console.log(data)
+
 						// 直接发币状态显示倒计时
 						if(this.showF){
 							this.m	=	data.djs_m
@@ -358,6 +361,13 @@ import { dateFormat } from 'vux'
 				this.direct = true
 			},
 			directFB(){
+				if(this.mode==''){
+					this.$vux.toast.show({
+						text: '请选择转账方式',
+						type: 'warn'
+					})
+					return;
+				}
 				// 直接发币
 				this.showPSwed = true
 				this.modeOk	   = true
@@ -365,7 +375,6 @@ import { dateFormat } from 'vux'
 		},
 		mounted() {
 			this.id     	=   this.$route.query.id
-			this.orderType	=	this.$route.query.status
 			this.cType		=   (this.$route.query.type)?this.$route.query.type:'null';
 			this.DzTime 	=	dateFormat(new Date(), 'YYYY-MM-DD HH:mm:ss')
             this.GetOrderById();

@@ -159,7 +159,6 @@
 							path:"/OTC/myOrder",
 							query:{
 								id		:	id,
-								status	:	status,
 								type	:	cType
 							}
 						});
@@ -169,7 +168,6 @@
 							path:"/OTC/order",
 							query:{
 								id		:	id,
-								status	:	status,
 								type	:	gtype
 							}
 						});
@@ -181,7 +179,6 @@
 							path:"/OTC/myOrder",
 							query:{
 								id		:	id,
-								status	:	3,
 								type	:	cType
 							}
 						});
@@ -191,7 +188,6 @@
 							path:"/OTC/myOrder",
 							query:{
 								id		:	id,
-								status	:	2,
 								type	:	cType
 							}
 						});
