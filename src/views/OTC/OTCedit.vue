@@ -369,19 +369,43 @@ export default {
             this.showFPupop = false
         },
         save(imgUrl){
+            this.$vux.loading.show({
+                text: 'Loading'
+            })
             // 保存二维码到相册
             let _this = this
-            api.saveMediaToAlbum({
-                path: imgUrl
+            let time = new Date();// 时间戳	
+            // 先下载图片（不下载图片直接保存某些安卓机型保存会存在问题）
+            api.download({
+                url: imgUrl,
+                savePath: 'fs://'+time.getTime()+Math.floor((Math.random() * 100) + 1) + "BDPay.jpg",
+                report: false,
+                cache: true,
+                allowResume: false
             }, function(ret, err) {
-                if (ret && ret.status) {
-                    _this.$vux.toast.show({
-                        text: _this.$t('discovery.OTC.order.picSaveS'),
-                        type: 'success'
-                    })
+                if (ret.state == 1) {
+                    //下载成功
+                    // 保存二维码到相册
+                    api.saveMediaToAlbum({
+                        path: ret.savePath
+                    }, function(aret, err) {
+                        _this.$vux.loading.hide()
+                        if (aret && aret.status) {
+                            _this.$vux.toast.show({
+                                text: _this.$t('discovery.OTC.order.picSaveS'),
+                                type: 'success'
+                            })
+                        } else {
+                            _this.$vux.toast.show({
+                                text: _this.$t('discovery.OTC.order.picSaveE'),
+                                type: 'wran'
+                            })
+                        }
+                    });
                 } else {
+                    _this.$vux.loading.hide()
                     _this.$vux.toast.show({
-                        text: _this.$t('discovery.OTC.order.picSaveE'),
+                        text: '图片下载失败，请检查网络设置',
                         type: 'wran'
                     })
                 }
