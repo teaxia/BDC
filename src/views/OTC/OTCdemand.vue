@@ -44,9 +44,9 @@
                     </div>
                     <div class="psw">
                         <RadioGroup v-model="animal">
-                            <Radio label="all"><span class="label-info">{{$t('discovery.OTC.sell.all')}}</span></Radio>
+                            <!-- <Radio label="all"><span class="label-info">{{$t('discovery.OTC.sell.all')}}</span></Radio> -->
                             <Radio label="cn"><span class="label-info">{{$t('discovery.OTC.sell.cn')}}</span></Radio>
-                            <Radio label="cw"><span class="label-info">{{$t('discovery.OTC.sell.cw')}}</span></Radio>
+                            <!-- <Radio label="cw"><span class="label-info">{{$t('discovery.OTC.sell.cw')}}</span></Radio> -->
                         </RadioGroup>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ export default {
             isSellOn    :   true,                     // 是否立即上架
             showPSwed   :   false,                    // 显示安全密码弹窗
             type        :   false,
-            animal      :   'all',
+            animal      :   'cn',
             showVersion :   '',
             minBuy      :   100,                         // 最低购买额
 		}

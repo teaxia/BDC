@@ -56,9 +56,9 @@
                     </div>
                     <div class="psw">
                         <RadioGroup v-model="animal">
-                            <Radio label="all"><span class="label-info">{{$t('discovery.OTC.sell.all')}}</span></Radio>
+                            <!-- <Radio label="all"><span class="label-info">{{$t('discovery.OTC.sell.all')}}</span></Radio> -->
                             <Radio label="cn"><span class="label-info">{{$t('discovery.OTC.sell.cn')}}</span></Radio>
-                            <Radio label="cw"><span class="label-info">{{$t('discovery.OTC.sell.cw')}}</span></Radio>
+                            <Radio label="cw" v-if="cwAllow"><span class="label-info">{{$t('discovery.OTC.sell.cw')}}</span></Radio>
                         </RadioGroup>
                     </div>
                 </div>
@@ -189,15 +189,16 @@ export default {
             bankId      : '',                         // 银联支付ID
             isSellOn    :   true,                     // 是否立即上架
             PayNum      :   '',                       // 有多少绑定数据
-            minNum      :   100,                       // 最低限额
+            minNum      :   100,                      // 最低限额
             type	    :   false,		              // 切换密码状态'
             Poundage    :   '',                       // 手续费
             Key         :   '',
             amount      :   0,                        // 实际到账
             showPSwed   :   false,                    // 显示安全密码弹窗 
-            animal      :   'all',
+            animal      :   'cn',
             showVersion :   '',
-            total       :   '',                         // 当前可用发布额度
+            total       :   '',                       // 当前可用发布额度
+            cwAllow     :   false,                    // 是否显示场外
 		}
 	},
 	methods: {
@@ -341,30 +342,20 @@ export default {
                 break;
             }
         },
-        OTCGetCurrenyPrice(){
-            // 获取可交易货币名称及参考价格
+        GetGoodsSellInfoAll(){
+            // 商家售币发布相关信息
             this.$server.post(
-            'OTC_GetCurrenyPrice',
+            'GetGoodsSellInfoAll',
             {
                 guid : this.$storage.get('guid')
             }).then(data => {
                 if(data){
-                    this.BDClist  = data
-                    this.cName    = data[0].Key
-                    this.ConsultPirce   =   data[0].Value
+                    this.total          =   data.ssed
+                    this.BDClist        =   data.list
+                    this.cName          =   data.list[0].Key
+                    this.ConsultPirce   =   data.list[0].Value
                     this.price          =   this.ConsultPirce
-                }
-            })
-        },
-        GetOutLimit(){
-            // 发布额度
-            this.$server.post(
-            'OTC_GetOutLimit',
-            {
-                guid : this.$storage.get('guid')
-            }).then(data => {
-                if(data){
-                    this.total  =   data.Result
+                    this.cwAllow        =   data.cwAllow            // 是否显示场外
                 }
             })
         },
@@ -536,12 +527,9 @@ export default {
         // 获取绑定的收款方式
         this.GetBind()
         this.GetBindBankInfo()
-        // 
-        // 默认币种参考价
-        this.OTCGetCurrenyPrice()
+        this.GetGoodsSellInfoAll()
+        // 商家售币发布相关信息
         this.GetPoundage()
-        // 发布额度
-        this.GetOutLimit()
     }
 }
 </script>
