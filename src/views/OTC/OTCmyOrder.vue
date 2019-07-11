@@ -87,7 +87,7 @@
 				<button v-if="data.Status==7||data.Status==6" class="btn btn-block btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.cancalorder')}}</button>
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 				<!-- showF -->
-				<div class="order-done-tips" v-if="data.Status==2&&!isSS&&this.cType=='sell'">等待买家付款，剩余{{m}}分{{s}}秒超时自动取消</div>
+				<div class="order-done-tips" v-if="data.Status==2&&!isSS&&this.cType=='sell'&&!showF">等待买家付款，剩余{{m}}分{{s}}秒超时自动取消</div>
 				<button v-if="showF&&!isFb" class="btn btn-block btn-round-mx mr20" disabled>{{m}}分{{s}}秒后可强制发币</button>
 				<button v-if="showF&&isFb" class="btn btn-block btn-round-mx mr20" @click="directOk()">已收到款，直接发币</button>
 			</div>
@@ -212,7 +212,6 @@ import { dateFormat } from 'vux'
 						this.payInfo 	=   (data.PayType)?data.PayType.split("|"):'';
 						this.data 		= 	data
 						this.showF		=	data.showF
-						console.log(data)
 						// 直接发币状态显示倒计时
 						if(this.showF){
 							this.m	=	data.djs_m
@@ -233,7 +232,7 @@ import { dateFormat } from 'vux'
 							this.getCountDwn()
 						}
 						// 购币等待卖家付款
-						if(data.Status==2&&this.cType=='sell'){
+						if(data.Status==2&&this.cType=='sell'&&!this.showF){
 							this.m = data.Lockdjs_m
 							this.s = data.Lockdjs_s
 							this.getCountDwn()
@@ -317,9 +316,12 @@ import { dateFormat } from 'vux'
 					this.cancelclock = setInterval(() =>{
 						if( this.lm == 0 && this.ls == 0 ){
 							// 倒计时结束
-							
 							window.clearInterval(this.cancelclock);
-							this.GetOrderById()
+							if(this.data.Status==2&&this.cType=='sell'){
+								this.$router.push({
+									path:"/OTC/MyOrderNow",
+								});
+							}
 						}else if( this.lm >= 0 ){
 							if( this.ls > 0 ){
 								this.ls--;
