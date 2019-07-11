@@ -170,11 +170,16 @@
                             {{$t('OTC.buy.limit')}}：{{orderInfo.canBuy}}
                         </div>
                         <div class="pop-content-div text-right">
-                            {{$t('OTC.sellBuy.ordernum')}}：{{(CNum/orderInfo.price).toFixed(8)}}（{{orderInfo.currenyName}}）
+                            <template v-if="buyType">
+                                {{$t('OTC.sellBuy.ordernum')}}：{{(CNum/orderInfo.price).toFixed(8)}}（{{orderInfo.currenyName}}）
+                            </template>
+                            <template v-if="!buyType">
+                                {{$t('OTC.sellBuy.ordernum')}}：{{CNum}}（{{orderInfo.currenyName}}）
+                            </template>
                         </div>
                         <div class="pop-content-div" v-if="Poundage>0">
                             <div class="tax">
-                                {{$t('discovery.OTC.sell.tax')}}：{{Poundage}}% 
+                                {{$t('discovery.OTC.sell.tax')}}：{{Poundage}}%
                             </div>
                         </div>
                         <div class="pop-content-div text-right"  v-if="Poundage>0">
@@ -460,7 +465,7 @@
                                 this.maxnum     =   data.currenyNum
                                 this.editCount  =   data.editCount
                                 this.sellbuy    =   true
-                                this.T          =   60
+                                this.T          =   260
                                 this.mathPercent()
                             })
                         }
@@ -482,7 +487,7 @@
                                 this.maxnum     =   data.currenyNum
                                 this.editCount  =   data.editCount
                                 this.sellbuy    =   true
-                                this.T          =   60
+                                this.T          =   260
                                 this.mathPercent()
                                 this.GetPoundage()
                             })
