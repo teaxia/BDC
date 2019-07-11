@@ -65,6 +65,9 @@
 									{{$t('discovery.OTC.order.name')}}：{{alipay[1]}}
 									<span class="btn btn-xs" @click="CopyClip(alipay[1])">{{$t('global.copy')}}</span>
 								</div>
+								<div class="tips mr20">
+									如果无法保存二维码请用系统自带截图工具截取
+								</div>
 								<button class="btn btn-round btn-min" @click="save(alipay[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 							</div>
 
@@ -93,6 +96,9 @@
 								<div class="name">
 									{{$t('discovery.OTC.order.nickname')}}：{{wechart[3]}}
 									<span class="btn btn-xs" @click="CopyClip(wechart[3])">{{$t('global.copy')}}</span>
+								</div>
+								<div class="tips mr20">
+									如果无法保存二维码请用系统自带截图工具截取
 								</div>
 								<button class="btn btn-round btn-min" @click="save(wechart[4])">{{$t('discovery.OTC.order.saveErcode')}}</button>
 							</div>
