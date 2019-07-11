@@ -3,12 +3,12 @@
 		<div class="pb20">
 			<div class="sell-info">
 				<div class="sell-info-pick">
-					<span class="text-left">{{$t('OTC.order.selltotal')}}：</span>
-					<span class="text-right">{{sellNum}}</span>
+					<span class="font font-error">{{$t('OTC.order.selltotal')}}：</span>
+					<span class="font font-error">{{sellNum}}</span>
 				</div>
 				<div class="sell-info-pick">
-					<span class="text-left">{{$t('OTC.order.OnSellNum')}}：</span>
-					<span class="text-right">{{stillOnSellNum}}</span>
+					<span class="font font-success">{{$t('OTC.order.OnSellNum')}}：</span>
+					<span class="font font-success">{{stillOnSellNum}}</span>
 				</div>
 			</div>
 			<div class="goods-list">
@@ -148,21 +148,12 @@
 <style scoped lang="scss">
 @import "../../scss/views/otc/otclist";
 .sell-info{
-	width: 100;
+	background:#fff;
+	padding:20px;
+	margin-bottom: 20px;
+	border-radius: 8px;
 	&-pick{
-		display: flex;
-		justify-content: space-between;
-		color:$font-red;
-		
-	font-size:28px;
-		.text-left,.text-right{
-			display: inline-block;
-			width: 50%;
-		}
-		.text-left{
-			text-align: right;
-		}
+		font-size:28px;
 	}
-	
 }
 </style>
