@@ -544,6 +544,8 @@ export const zh = {
             other           :   '查看其他方式',
             tel             :   '联系电话',
             GoodsId         :   '发布ID',
+            selltotal       :   '已售数量',
+            OnSellNum       :   '上/下架中的数量',
             type:{
                 WaitPrice   :   '待收款',
                 WaitSend    :   '待发币'

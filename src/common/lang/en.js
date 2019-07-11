@@ -542,6 +542,8 @@ export const en = {
             other           :   'View other ways',
             tel             :   'Tel',
             GoodsId         :   'Goods ID',
+            selltotal       :   'Sell Total',
+            OnSellNum       :   'On Sell Num',
             type:{
                 WaitPrice   :   'Waiting for collection',
                 WaitSend    :   'Waiting for Send'

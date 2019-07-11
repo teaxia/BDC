@@ -1,11 +1,21 @@
 <template>
 	<div class="orderList" v-cloak>
 		<div class="pb20">
+			<div class="sell-info">
+				<div class="sell-info-pick">
+					<span class="text-left">{{$t('OTC.order.selltotal')}}：</span>
+					<span class="text-right">{{sellNum}}</span>
+				</div>
+				<div class="sell-info-pick">
+					<span class="text-left">{{$t('OTC.order.OnSellNum')}}：</span>
+					<span class="text-right">{{stillOnSellNum}}</span>
+				</div>
+			</div>
 			<div class="goods-list">
 				<div class="otc-item" @click="edit(v.Id,v.GoodsType)" v-for="(v,index) in MyGoods" v-if="v.Id" :key="index">
                     <v-grid class="otc-grid">
                         <div class="otc-grid-title">
-							<div class="grid-info">发布ID：{{v.Id}}</div>
+							<div class="grid-info">{{$t('OTC.order.GoodsId')}}：{{v.Id}}</div>
 							<div class="grid-info">{{v.CreateTime}}</div>
 							<div class="otc-grid-right">
 								<span :class="{'sv':true,'c-primary':v.sv=='场内','c-all':v.sv=='全部'}">{{v.sv}}</span>
@@ -77,7 +87,9 @@
 		name:'OTCList',
 		data() {
 			return {
-				MyGoods		:	[],					// 当前订单
+				MyGoods			:	[],					// 当前订单
+				sellNum			:	'',					// (已售数量)
+				stillOnSellNum	:	'',					// (上/下架中的数量)
 			}
 		},
 		watch:{
@@ -90,7 +102,9 @@
                     guid 	    :   this.$storage.get('guid'),
                 }).then(data => {
                     if(data){
-						this.MyGoods = data
+						this.sellNum		=	data.sellNum
+						this.stillOnSellNum	=	data.stillOnSellNum
+						this.MyGoods 		= 	data.list
                     }
                 }) 
 			},
@@ -133,4 +147,22 @@
 
 <style scoped lang="scss">
 @import "../../scss/views/otc/otclist";
+.sell-info{
+	width: 100;
+	&-pick{
+		display: flex;
+		justify-content: space-between;
+		color:$font-red;
+		
+	font-size:28px;
+		.text-left,.text-right{
+			display: inline-block;
+			width: 50%;
+		}
+		.text-left{
+			text-align: right;
+		}
+	}
+	
+}
 </style>
