@@ -29,7 +29,13 @@
 					<flexbox>
 						<flexbox-item class="order-list-info">
 							<div class="total">
-								<span class="price">OTC{{$t('discovery.OTC.orderlist.orderType4')}}：<span class="price-important">{{v.Profit}}（BDC）</span></span>
+								<div>
+									<span class="price">OTC{{$t('discovery.OTC.orderlist.orderType4')}}：<span class="price-important">{{v.Profit}}（BDC）</span></span>
+								</div>
+								<div class="profittype">
+									<span v-if="v.ProfitType==0" class="font font-violet">我的订单</span>
+									<span v-if="v.ProfitType==1" class="font font-base">下级订单</span>
+								</div>
 							</div>
 							<div class="price-info">
 								<span class="buynum">{{$t('discovery.OTC.orderlist.num')}}：<span class="price-important">{{v.BuyNum}}（BDC）</span></span>
@@ -144,9 +150,9 @@
                     orderId     :   this.search,            	  		// 订单号
                 }).then(data => {
                     if(data){
-						
 						this.TotalProfit	=	data.TotalProfit		// 总收益
 						this.ProfitList		=	data.list				// 收益明细
+						console.log(data)
                     }
                 }) 
 			},
@@ -171,6 +177,10 @@
 		.price,.buynum{
 			color:#333333 !important;
 		}
+	}
+	.total{
+		display: flex;
+		justify-content:space-between;
 	}
 }
 
