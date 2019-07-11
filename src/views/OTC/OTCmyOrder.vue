@@ -213,7 +213,6 @@ import { dateFormat } from 'vux'
 						this.data 		= 	data
 						this.showF		=	data.showF
 						console.log(data)
-
 						// 直接发币状态显示倒计时
 						if(this.showF){
 							this.m	=	data.djs_m
@@ -338,7 +337,11 @@ import { dateFormat } from 'vux'
 							// 倒计时结束
 							this.isSS	=	true
 							window.clearInterval(this.clock);
-							this.GetOrderById()
+							if(this.data.Status==2&&this.cType=='sell'){
+								this.$router.push({
+									path:"/OTC/MyOrderNow",
+								});
+							}
 						}else if( this.m >= 0 ){
 							if( this.s > 0 ){
 								this.s--;
