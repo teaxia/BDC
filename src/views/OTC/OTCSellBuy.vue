@@ -51,6 +51,9 @@
                                 </div>
                             </div>
                             <div class="otc-grid-pay">
+                                <div class="otc-grid-createtime">
+                                    发布时间：{{v.CreateTime}}
+                                </div>
                                 <div class="otc-grid-paylist">
                                     <svg class="icon" aria-hidden="true" v-if="v.payInfo.indexOf('支')>=0">
                                         <use xlink:href="#icon-zhifubao"></use>

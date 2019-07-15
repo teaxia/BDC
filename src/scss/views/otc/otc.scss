@@ -137,10 +137,12 @@ $height : 1.5rem;
         }
         .otc-grid-pay{
             flex: 1;
+            .otc-grid-createtime{
+                text-align: right;
+            }
             .otc-grid-paylist{
                 position: relative;
                 margin-right: 30px;
-                margin-top:35px;
                 text-align: right;
                 .icon{
                     width: 50px;
