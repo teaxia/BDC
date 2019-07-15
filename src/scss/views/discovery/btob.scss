@@ -1,6 +1,12 @@
 @charset "utf-8";
 @import "../../base/var";
 @import "../../base/button";
+.gd-access{
+    color:$font-red;
+}
+.tz-access{
+    color:$font-blue;
+}
 .btob{
     .pb{
         padding:10px 0;
@@ -46,7 +52,6 @@
         margin-top:20px;
         border-top:solid $border-line 0.01rem;
     }
-    
     .get-last-dt{
         margin-top:20px;
         border-top:0.01rem solid $border-line;

@@ -97,7 +97,7 @@
                         {{$t('discovery.btob.AssetType')}}：
                     </flexbox-item>
                     <flexbox-item>
-                        {{AssetList[AssetType].val}}
+                        <span :class="{'gd-access':AssetType==0,'tz-access':AssetType==1}">{{AssetList[AssetType].val}}</span>
                     </flexbox-item>
                 </flexbox>
                 <flexbox class="mr20 pb">
