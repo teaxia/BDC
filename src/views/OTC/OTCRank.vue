@@ -28,7 +28,12 @@
                         <span class="lv">{{v.Lv}}</span>
                     </div>
                     <div :class="{'total':true}">
-                        {{$t('OTC.rank.num')}}:{{$numberComma(v.Total)}}
+                        <div>
+                            {{$t('OTC.rank.num')}}
+                        </div>
+                        <div>
+                            {{$numberComma(v.Total)}}
+                        </div>
                     </div> 
                 </div>
             </div>
