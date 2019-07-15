@@ -49,6 +49,16 @@ $height : 1.5rem;
         text-align: center;
         font-size:28px;
         color:$font-red;
+        display: flex;
+        justify-content: space-between;
+        .text-right{
+            width:50%;
+            text-align: right;
+        }
+        .text-left{
+            width:50%;
+            text-align: left;
+        }
     }
 }
 .select-pay{

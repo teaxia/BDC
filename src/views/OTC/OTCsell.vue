@@ -17,7 +17,20 @@
                 </div>
             </div>
             <div class="total">
-                当前可用发布额度：{{total}}
+                <div class="text-right">
+                    当前可用发布额度：
+                </div>
+                <div class="text-left">
+                    {{total}}
+                </div>
+            </div>
+            <div class="total">
+                <div class="text-right">
+                    当前信誉度：
+                </div>
+                <div class="text-left">
+                    {{reputation}}
+                </div>
             </div>
             <div class="currency" v-if="Poundage>0">
                 <div class="fax">
@@ -198,6 +211,7 @@ export default {
             animal      :   'cn',
             showVersion :   '',
             total       :   '',                       // 当前可用发布额度
+            reputation  :   '',                       // 当前信誉度
             cwAllow     :   false,                    // 是否显示场外
 		}
 	},
@@ -356,6 +370,7 @@ export default {
                     this.ConsultPirce   =   data.list[0].Value
                     this.price          =   this.ConsultPirce
                     this.cwAllow        =   data.cwAllow            // 是否显示场外
+                    this.reputation     =   data.xyd
                 }
             })
         },
