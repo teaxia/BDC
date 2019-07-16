@@ -2,21 +2,27 @@
 @import "../../base/var";
 @import "../../base/button";
 .bill{
+    background:#efefef;
     .select{
         height: 120px;
-        background:$color-base;
-        color:$font-white;
+        background:$font-white;
+        color:$color-base;
         .menu{
             text-align: center;
             padding:7px 0;
         }
         .active{
             padding-bottom: 10px;
-            border-bottom: 0.01rem solid $color-active;
+            color:#fb9c04;
+            border-bottom: 0.1rem solid #fb9c04;
         }
     }
+    .main-container{
+        background: #fff;
+    }
     .time{
-        padding:0 20px !important;
+        padding:20px 20px !important;
+        background: #fff;
     }
     .relist{
         border-bottom:0.01rem solid $border-line;
@@ -31,10 +37,15 @@
     .table{
         height: auto;
         overflow: hidden;
-        padding:10px 0;
+        padding:20px 0;
         .tb{
             height: auto;
             overflow: hidden;
+            font-size:24px;
+        }
+        .bool{
+            font-weight: bold;
+            font-size:32px;
         }
         .RechargeCode{
             height: auto;

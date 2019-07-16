@@ -27,7 +27,7 @@
                 <div @click="active('8')" class="menu"><span :class="{'active':type==8}">{{$t('discovery.bill.type8')}}</span></div>
             </flexbox-item> -->
         </flexbox>
-        <div class="mr30">
+        <div class="mr10">
             <flexbox class="pb time">
                 <flexbox-item>
                     <DatePicker @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
@@ -41,30 +41,36 @@
             <div class="table line-b" v-for="(v,index) in dataList" :key="index">
                 <div v-if="type<=4||type==8"><!--收入、支出、POS、消费-->
                     <div class="tb">
-                        <span class="fl">{{v.BusinessType}}</span>
+                        <span class="fl">{{v.CreateTime}}</span>
+                        
+                    </div>
+                    <div class="tb bool">
                         <span class="fr">{{$numberComma(v.Money)}}</span>
+                        <span class="fl">{{v.BusinessType}}</span>
                     </div>
                     <div class="tb">
-                        <span class="fl"><span>{{v.MoneyType}}:</span>{{$numberComma(v.MoneyAfter)}}</span>
-                        <span class="fr">{{v.CreateTime}}</span>
+                        <span>{{v.MoneyType}}:</span>{{$numberComma(v.MoneyAfter)}}
                     </div>
                     <div class="tb">
                         <div v-if="v.Remakes" class="RechargeCode">{{v.Remakes}}</div>
-                        <div class="RechargeCode">{{v.RechargeCode}}</div>
-                        <div v-if="v.RechargeCode"><span class="btn btn-xs" @click="CopyClip(v.RechargeCode.substring(0,32))">{{$t('global.copyaddress')}}</span></div>
+                        <div v-if="v.RechargeCode" class="RechargeCode">
+                            <span class="fl">{{v.RechargeCode}}</span>
+                            <span class="btn btn-xs fr" @click="CopyClip(v.RechargeCode.substring(0,32))">{{$t('global.copyaddress')}}</span>
+                        </div>
                     </div>
                 </div><!--收入、支出、POS、消费结束-->
                 <div v-if="type==5||type==6"><!--提币、购币-->
                     <div class="tb">
-                        <span>{{$numberComma(v.CurrencyNum)}}</span>
+                        <span v-if="v.CreateTime">{{v.CreateTime}}</span>
+                        
                     </div>
-                    <div class="tb">
-                        <span class="fl">{{v.Status}}</span>
-                        <span class="fr" v-if="v.CreateTime">{{v.CreateTime}}</span>
+                    <div class="tb bool">
+                        <span class="fl">{{$numberComma(v.CurrencyNum)}}</span>
+                        <span class="fr">{{v.Status}}</span>
                     </div>
                 </div><!--收入、支出、POS、消费结束-->
                 <div v-if="type==7">
-                    <div class="tb">
+                    <div class="tb bool">
                         {{v.Area}}
                     </div>
                     <div class="tb">
@@ -73,7 +79,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
