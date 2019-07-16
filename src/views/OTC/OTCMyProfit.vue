@@ -15,7 +15,14 @@
 			</flexbox>
 			<!-- 收益明细 -->
 			<div class="total-profit">
-				OTC{{$t('discovery.OTC.orderlist.Profit')}}：{{TotalProfit}}（BDC）
+				<div class="total-profit-tt">
+					<span class="text-right">{{$t('discovery.OTC.orderlist.Profit')}}：</span>
+					<span class="text-left">{{TotalProfitAll}}（BDC）</span>
+				</div>
+				<div class="total-profit-tt blue">
+					<span class="text-right">查询时间内收益：</span>
+					<span class="text-left">{{TotalProfit}}（BDC）</span>
+				</div>
 			</div>
 			<div class="list pb20">
 				<!-- 收益明细列比奥 -->
@@ -63,7 +70,8 @@
 				enddate     :   '',
 				search		:	'',					// 搜索订单号
 				ProfitList	:	[],					// 收益明细
-				TotalProfit	:	'',					// 总收益
+				TotalProfit	:	'',					// 查询时间内收益
+				TotalProfitAll:	'',					// 总收益
 			}
 		},
 		watch:{
@@ -152,7 +160,8 @@
                     orderId     :   this.search,            	  		// 订单号
                 }).then(data => {
                     if(data){
-						this.TotalProfit	=	data.TotalProfit		// 总收益
+						this.TotalProfit	=	data.TotalProfit		// 查询时间内收益
+						this.TotalProfitAll	=	data.TotalProfitAll		// 总收益
 						this.ProfitList		=	data.list				// 收益明细
                     }
                 }) 
@@ -182,6 +191,26 @@
 	.total{
 		display: flex;
 		justify-content:space-between;
+	}
+	.total-profit{
+		font-size:28px;
+		.total-profit-tt{
+			display: flex;
+			justify-content:space-between;
+		}
+		.blue{
+			color:#0e6d9d !important;
+		}
+		.text-right{
+			text-align: right;
+			width:50%;
+			display: block;
+		}
+		.text-left{
+			text-align: left;
+			width:50%;
+			display: block;
+		}
 	}
 }
 

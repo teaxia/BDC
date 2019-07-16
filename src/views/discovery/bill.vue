@@ -27,7 +27,7 @@
                 <div @click="active('8')" class="menu"><span :class="{'active':type==8}">{{$t('discovery.bill.type8')}}</span></div>
             </flexbox-item> -->
         </flexbox>
-        <div class="mr10">
+        <div class="mr20">
             <flexbox class="pb time">
                 <flexbox-item>
                     <DatePicker @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
@@ -42,7 +42,6 @@
                 <div v-if="type<=4||type==8"><!--收入、支出、POS、消费-->
                     <div class="tb">
                         <span class="fl">{{v.CreateTime}}</span>
-                        
                     </div>
                     <div class="tb bool">
                         <span class="fr">{{$numberComma(v.Money)}}</span>
@@ -52,7 +51,7 @@
                         <span>{{v.MoneyType}}:</span>{{$numberComma(v.MoneyAfter)}}
                     </div>
                     <div class="tb">
-                        <div v-if="v.Remakes" class="RechargeCode">{{v.Remakes}}</div>
+                        <div v-if="v.Remakes" class="RechargeCode remarks">{{v.Remakes}}</div>
                         <div v-if="v.RechargeCode" class="RechargeCode">
                             <span class="fl">{{v.RechargeCode}}</span>
                             <span class="btn btn-xs fr" @click="CopyClip(v.RechargeCode.substring(0,32))">{{$t('global.copyaddress')}}</span>
