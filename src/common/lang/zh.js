@@ -225,7 +225,7 @@ export const zh = {
             type1       :   '支出',
             type2       :   '收入',
             type3       :   'POS',
-            type4       :   '消费',
+            type4       :   'OTC',
             type5       :   '提币',
             type6       :   '兑换',
             type7       :   '业绩',

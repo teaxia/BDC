@@ -2,7 +2,6 @@
 @import "../../base/var";
 @import "../../base/button";
 .bill{
-    background:#efefef;
     .select{
         height: 120px;
         background:$font-white;
@@ -16,6 +15,13 @@
             color:#fb9c04;
             border-bottom: 0.1rem solid #fb9c04;
         }
+    }
+    .gray{
+        height: 20px;
+        background:#efefef;
+    }
+    .red{
+        color:$font-red;
     }
     .main-container{
         background: #fff;

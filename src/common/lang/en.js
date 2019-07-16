@@ -225,7 +225,7 @@ export const en = {
             type1       :   'Exp',
             type2       :   'Income',
             type3       :   'POS',
-            type4       :   'Consume',
+            type4       :   'OTC',
             type5       :   'Withdraw BDC',
             type6       :   'Buy BDC',
             type7       :   'ACHV',

@@ -27,6 +27,7 @@
                 <div @click="active('8')" class="menu"><span :class="{'active':type==8}">{{$t('discovery.bill.type8')}}</span></div>
             </flexbox-item> -->
         </flexbox>
+        <div class="gray"></div>
         <div class="mr20">
             <flexbox class="pb time">
                 <flexbox-item>
@@ -39,12 +40,12 @@
         </div>
         <div class="main-container">
             <div class="table line-b" v-for="(v,index) in dataList" :key="index">
-                <div v-if="type<=4||type==8"><!--收入、支出、POS、消费-->
+                <div v-if="type<=4||type==8"><!--收入、支出、POS、OTC-->
                     <div class="tb">
                         <span class="fl">{{v.CreateTime}}</span>
                     </div>
                     <div class="tb bool">
-                        <span class="fr">{{$numberComma(v.Money)}}</span>
+                        <span :class="{'fr':true,'red':v.Money<0&&type==4}">{{$numberComma(v.Money)}}</span>
                         <span class="fl">{{v.BusinessType}}</span>
                     </div>
                     <div class="tb">
@@ -57,7 +58,7 @@
                             <span class="btn btn-xs fr" @click="CopyClip(v.RechargeCode.substring(0,32))">{{$t('global.copyaddress')}}</span>
                         </div>
                     </div>
-                </div><!--收入、支出、POS、消费结束-->
+                </div><!--收入、支出、POS、OTC结束-->
                 <div v-if="type==5||type==6"><!--提币、购币-->
                     <div class="tb">
                         <span v-if="v.CreateTime">{{v.CreateTime}}</span>
@@ -119,7 +120,7 @@
                         this.query();
                     break;
                     case '4':
-                        this.class = "消费"
+                        this.class = "OTC"
                         this.dataList = []
                         this.query();
                     break;
