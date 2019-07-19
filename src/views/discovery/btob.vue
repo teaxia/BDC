@@ -38,6 +38,8 @@
                                 <div class="price">{{$numberComma(price)}}(BDC)</div>
                             </flexbox-item>
                         </flexbox>
+                        <div class="tips" v-html="tipshtml">
+                        </div>
                     </div>
                 </v-grid>
             </div>
@@ -181,6 +183,7 @@
                 LastBot     :   '周',             // 上一次点击的按钮
                 GetDTList   :  [],
                 AssetType   :   0,
+                tipshtml    :   '',
                 AssetList   :   [
                     {
                         val     :   '固定资产',
@@ -259,8 +262,8 @@
                         this.address    = data.list[0].RechargeAddress;            // 兑换地址
                         this.proportion = data.list[0].Proportion;                 // 兑换比例
                         this.key        = data.key
+                        this.tipshtml   = data.Tips
                         this.bTb(this.bbName)
-                        
                     }
                 })
             },

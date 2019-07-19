@@ -268,7 +268,11 @@ $height : 1.5rem;
     }
     .selectbox{
         height: auto;
+        min-height: 400px;
+        padding-bottom: 200px;
         background: $bg-white;
+        overflow: scroll;
+        -webkit-overflow-scrolling: touch;
         .radio{
             width: 100%;
             height: auto;

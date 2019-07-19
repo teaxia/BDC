@@ -11,6 +11,13 @@
     .pb{
         padding:10px 0;
     }
+    .tips{
+        border-top:0.01rem solid $border-line;
+        padding-top:10px;
+        color:$font-red;
+        font-weight: bold;
+        font-size:24px;
+    }
     .selectad{
         display: flex;
         justify-content: space-between;

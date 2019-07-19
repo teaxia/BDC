@@ -74,7 +74,7 @@ export default {
     background:rgba(0,0,0,0.5);
     overflow: hidden;
     .close{
-        height: 450px;
+        max-height: 450px;
     }
     .margin-top{
         position: fixed;
