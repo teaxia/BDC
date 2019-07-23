@@ -100,7 +100,8 @@ export default {
             PayList                 :  [],                     // 绑定数据列表
             confirmData             :  [],                     // 确认删除的数据
             picNum                  :  0,                      // 图片上传的计数器
-            RealName                :  ''                      // 真实姓名
+            RealName                :  '',                     // 真实姓名
+            jmday                   :  '',                     // 加密天验证
 		}
 	},
 	methods: {
@@ -230,15 +231,13 @@ export default {
             let reader = new FileReader()
             reader.readAsDataURL(files)
             reader.onloadend = function () {
-                let myDate = new Date();
-                let day = myDate.getDate();
                 // 图片上传
-                let jm     = that.$md5(that.$jm+day).toUpperCase();
+                let jm     = that.$md5(that.$jm+that.jmday).toUpperCase();
                 var idcard = new FormData()
                 idcard.append('img', e.target.files[0])
                 idcard.append('jm', jm)
                 idcard.append('type','thirdPay')
-                window.app.$vux.loading.show({
+                that.$vux.loading.show({
                     text: 'Loading'
                 })
                 let upUrl = that.upUrl
@@ -262,6 +261,26 @@ export default {
             this.show2 = true
             this.confirmData = this.PayList[index]
             // console.log(this.confirmData)
+        },
+        getDateServer(){
+            // 获取jm的日期
+            this.$vux.loading.show({
+                    text: 'Loading'
+            })
+            let upUrl = 'http://107.150.127.10:50004/webservice1.asmx/GetDateDay'
+            this.$server.post(upUrl,{upload:false}).then(data => {
+                // 拦截器
+                if(data.Code == '-1'){
+                    this.$vux.toast.show({
+                        text: data.Msg,
+                        type: 'warn'
+                    })
+                    this.$vux.loading.hide()
+                    return
+                }
+                this.jmday = data
+                this.$vux.loading.hide()
+            })
         }
     },
     watch:{
@@ -275,6 +294,7 @@ export default {
         }
         this.GetImgUpLoadUrl()
         this.GetThirdInfo()
+        this.getDateServer()
     }
 }
 

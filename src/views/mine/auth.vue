@@ -64,6 +64,7 @@
                 idNo        :   '',
                 cardbg      :   './static/images/card.jpg',
                 upUrl       :   '',                                 // 上传图片地址
+                jmday       :   '',                                 // 加密时间
 			}
         },
         watch:{
@@ -154,10 +155,8 @@
                 let reader = new FileReader()
                 reader.readAsDataURL(files)
                 reader.onloadend = function () {
-                    let myDate = new Date();
-                    let day = myDate.getDate();
                     // 图片上传
-                    let jm     = that.$md5(that.$jm+day).toUpperCase();
+                    let jm     = that.$md5(that.$jm+that.jmday).toUpperCase();
                     var idcard = new FormData()
                     idcard.append('img', e.target.files[0])
                     idcard.append('jm', jm)
@@ -203,10 +202,31 @@
             },
             change(){
                 this.active = !this.active;
+            },
+            getDateServer(){
+                // 获取jm的日期
+                this.$vux.loading.show({
+                        text: 'Loading'
+                })
+                let upUrl = 'http://107.150.127.10:50004/webservice1.asmx/GetDateDay'
+                this.$server.post(upUrl,{upload:false}).then(data => {
+                    // 拦截器
+                    if(data.Code == '-1'){
+                        this.$vux.toast.show({
+                            text: data.Msg,
+                            type: 'warn'
+                        })
+                        this.$vux.loading.hide()
+                        return
+                    }
+                    this.jmday = data
+                    this.$vux.loading.hide()
+                })
             }
 		},
 		mounted() {
-            this.GetImgUpLoadUrl();
+            this.GetImgUpLoadUrl()
+            this.getDateServer()
             if(this.$storage.get('RealName')!=''){
                 this.$vux.toast.show({
                     text: this.$t('mine.auth.tips.success'),
