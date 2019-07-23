@@ -149,6 +149,24 @@ button[disabled]
             background: #e83a37;
         }
     }
+    // 白色按钮样式
+    &-white
+    {
+        background-color: #fff;
+        color: #aaaaaa;
+        border:0.03rem solid #aaa;
+        &.outline
+        {
+            color: #aaaaaa;
+            background-color: #fff;
+            border: 1px solid #aaaaaa;
+        }
+
+        &:active
+        {
+            background: #fff;
+        }
+    }
     // 取消按钮样式
     &-cancel
     {

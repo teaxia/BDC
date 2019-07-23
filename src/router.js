@@ -124,7 +124,7 @@ let routes = [
                 { path: '/discovery/expectinfo/btob', component: btob, name: 'btob',meta:{isIndex: 2}},
                 // { path: '/discovery/expectinfo/cash', component: cash, name: 'cash',meta:{isIndex: 2}},
                 // { path: '/discovery/expectinfo/self', component: self, name: 'self',meta:{isIndex: 2}},
-            { path: '/discovery/recharge', component: recharge, name: 'recharge',meta:{isIndex: 2}},
+            // { path: '/discovery/recharge', component: recharge, name: 'recharge',meta:{isIndex: 2}},
             { path: '/discovery/bill', component: bill, name: 'bill',meta:{isIndex: 2}},
             // { path: '/discovery/credit', component: credit, name: 'credit',meta:{isIndex: 2}},
             { path: '/discovery/extract', component: extract, name: 'extract',meta:{isIndex: 2}},

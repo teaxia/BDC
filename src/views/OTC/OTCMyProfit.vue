@@ -23,10 +23,18 @@
 					<span class="text-right">查询时间内收益：</span>
 					<span class="text-left">{{TotalProfit}}（BDC）</span>
 				</div>
+				<div class="total-profit-tt blue">
+					<div class="text-right total-btn">
+						<button :class="{'btn btn-block btn-ground':true,'btn-white':!ProfitType}" @click="change(true)">我的收益</button>
+					</div>
+					<div class="text-left total-btn">
+						<button :class="{'btn btn-block btn-ground':true,'btn-white':ProfitType}" @click="change(false)">推广收益</button>
+					</div>
+				</div>
 			</div>
 			<div class="list pb20">
-				<!-- 收益明细列比奥 -->
-				<div class="order-list-content Profit-list" v-for="(v,index) in ProfitList" v-if="v.OrderId" :key="index"  @click="myOrder(v.OrderId)">
+				<!-- 收益明细列表 -->
+				<div class="order-list-content Profit-list" v-for="(v,index) in ProfitList" v-if="v.ProfitType==0&&ProfitType" :key="index" @click="myOrder(v.OrderId)">
 					<flexbox>
 						<flexbox-item :span="4">{{$t('discovery.OTC.orderlist.orderId')}}：{{v.OrderId}}</flexbox-item>
 						<flexbox-item class="right">
@@ -54,6 +62,24 @@
 						</flexbox-item>
 					</flexbox>
 				</div>
+				<!-- 推广收益 -->
+				<div class="order-list-content Profit-list" v-for="(v,index) in ProfitList" v-if="v.ProfitType==1&&!ProfitType" :key="index">
+					<flexbox>
+						<flexbox-item :span="6">{{v.CreateTime}}</flexbox-item>
+					</flexbox>
+					<flexbox>
+						<flexbox-item class="order-list-info">
+							<div class="total">
+								<div>
+									<span class="price">OTC{{$t('discovery.OTC.orderlist.orderType4')}}：<span class="price-important">{{v.Profit}}（BDC）</span></span>
+								</div>
+								<div class="profittype">
+									{{$preDate(v.CreateTime)}}
+								</div>
+							</div>
+						</flexbox-item>
+					</flexbox>
+				</div>
 			</div>
 		</div>
     </div>
@@ -70,8 +96,10 @@
 				enddate     :   '',
 				search		:	'',					// 搜索订单号
 				ProfitList	:	[],					// 收益明细
+				tgList		:	[],					// 推广收益
 				TotalProfit	:	'',					// 查询时间内收益
 				TotalProfitAll:	'',					// 总收益
+				ProfitType	:	true,				// 我的收益false推广收益
 			}
 		},
 		watch:{
@@ -130,7 +158,9 @@
 			Query(){
 				this.Myprofit()
 			},
-			
+			change(type){
+				this.ProfitType = type
+			},
 			myOrder(id,status){
 				if(status==2){
 					this.$router.push({
@@ -211,6 +241,9 @@
 			width:50%;
 			display: block;
 		}
+	}
+	.total-btn{
+		padding:0 40px;
 	}
 }
 

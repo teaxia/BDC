@@ -22,7 +22,8 @@ import myScroll from './components/myScroll.vue'                // 下拉刷新�
 import vpopup from './components/popup.vue'                     // 弹出层组件
 import vfpopup from './components/vfpopup.vue'                  // 全屏弹出层
 import vgrid from './components/vgrid.vue'
-import strcut from './common/utils/strcut'                    // 截取字符串首字母，中英文适用
+import strcut from './common/utils/strcut'                      // 截取字符串首字母，中英文适用
+import preDate from './common/utils/preDate'                    // 字符串日期减一天
 import VueTouch from 'vue-touch'                                // 左右滑动手势
 import { Group,Flexbox,FlexboxItem,XInput,XHeader,Grid,GridItem,Cell,XTextarea,Radio as NRadio,numberComma,Search,Tab, TabItem} from 'vux'
 import { ToastPlugin } from 'vux'
@@ -87,6 +88,7 @@ Vue.prototype.$html2canvas  =   html2canvas;                    // 图片生成
 Vue.prototype.$currency     =   currency;                       // 有图标的币种
 Vue.prototype.$numberComma  =   numberComma;                    // 用于分割数字，默认为3位分割，一般用于格式化金额
 Vue.prototype.$strcut       =   strcut;                         // 截取字符串的首字母（中英文适用）
+Vue.prototype.$preDate      =   preDate;                        // 字符串日期减一天
 
 const router = new VueRouter({
   routes
