@@ -439,6 +439,7 @@ export const zh = {
                 orderType3  :   '已售',
                 orderType4  :   '收益',
                 SorderId    :   '订单号搜索',
+                SorderIdorId:   '订单号或发布ID搜索',
                 price       :   '单价',
                 oprice      :   '单价',
                 totalprice  :   '总价',

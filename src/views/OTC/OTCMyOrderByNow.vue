@@ -1,7 +1,7 @@
 <template>
 	<div class="orderList" v-cloak>
 		<div class="search">
-			<search v-model="search" ref="search" @on-blur="Query()" @on-submit="Query()" :placeholder="$t('discovery.OTC.orderlist.SorderId')" position="absolute" :auto-fixed='false'>
+			<search v-model="search" ref="search" @on-blur="Query()" @on-submit="Query()" :placeholder="$t('discovery.OTC.orderlist.SorderIdorId')" position="absolute" :auto-fixed='false'>
 			</search>
 		</div>
         <flexbox class="time">
