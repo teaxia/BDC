@@ -66,15 +66,13 @@
 				<div class="order-list-content Profit-list" v-for="(v,index) in ProfitList" v-if="v.ProfitType==1&&!ProfitType" :key="index">
 					<flexbox>
 						<flexbox-item :span="6">{{v.CreateTime}}</flexbox-item>
+						<flexbox-item class="rt">统计日期：{{$preDate(v.CreateTime)}}</flexbox-item>
 					</flexbox>
 					<flexbox>
 						<flexbox-item class="order-list-info">
 							<div class="total">
 								<div>
 									<span class="price">OTC{{$t('discovery.OTC.orderlist.orderType4')}}：<span class="price-important">{{v.Profit}}（BDC）</span></span>
-								</div>
-								<div class="profittype">
-									{{$preDate(v.CreateTime)}}
 								</div>
 							</div>
 						</flexbox-item>
@@ -241,6 +239,9 @@
 			width:50%;
 			display: block;
 		}
+	}
+	.rt{
+		text-align: right;
 	}
 	.total-btn{
 		padding:0 40px;
