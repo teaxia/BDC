@@ -175,15 +175,16 @@
                             window.app.$vux.loading.hide()
                             return
                         }
-                        if(file=="a"){
-                            that.filea = this.result
-                            that.dataa = data.Data;
-                        }else{
-                            that.fileb = this.result
-                            that.datab = data.Data;
+                        if(data){
+                            if(file=="a"){
+                                that.filea = this.result
+                                that.dataa = data.Data;
+                            }else{
+                                that.fileb = this.result
+                                that.datab = data.Data;
+                            }
                         }
                         window.app.$vux.loading.hide()
-                        
                     })
                 }
             },

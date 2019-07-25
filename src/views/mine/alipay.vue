@@ -283,8 +283,10 @@ export default {
                         window.app.$vux.loading.hide()
                         return
                     }
-                    that.localimgs = this.result        // 把base64数据push到本地图片显示
-                    that.imgs   = data.Data             // 把返回的图片名字push到待上传接口
+                    if(data){
+                        that.localimgs = this.result        // 把base64数据push到本地图片显示
+                        that.imgs   = (data.Data)?data.Data:''             // 把返回的图片名字push到待上传接口
+                    }
                     window.app.$vux.loading.hide()
                 })
             }

@@ -129,8 +129,10 @@
                             window.app.$vux.loading.hide()
                             return
                         }
-                        that.localimgs.push(this.result)    // 把base64数据push到本地图片显示
-                        that.imgs.push(data.Data)           // 把返回的图片名字push到待上传接口
+                        if(data){
+                            that.localimgs.push(this.result)    // 把base64数据push到本地图片显示
+                            that.imgs.push(data.Data)           // 把返回的图片名字push到待上传接口
+                        }
                         window.app.$vux.loading.hide()
                     })
                 }
