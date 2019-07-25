@@ -27,6 +27,9 @@
                     <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="RealName" required :placeholder="$t('mine.setting.tips.name')">
                     </x-input>
                 </group>
+                <div class="citytips">
+                    请选择支付宝绑定银行卡所在城市
+                </div>
                 <div class="province mr30">
                     <select v-model="sProvince" class="wd select">
                         <option v-for="(item,index) in province" :value="index" :key="index">{{ item }}</option>
