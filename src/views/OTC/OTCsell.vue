@@ -32,6 +32,14 @@
                     {{reputation}}
                 </div>
             </div>
+            <div class="total" v-if="LV">
+                <div class="text-right">
+                    当前等级及固定最低发布：
+                </div>
+                <div class="text-left">
+                    {{LV}}
+                </div>
+            </div>
             <div class="currency" v-if="Poundage>0">
                 <div class="fax">
                     {{$t('discovery.extract.tax')}}：{{Poundage}}% 
@@ -202,7 +210,7 @@ export default {
             bankId      : '',                         // 银联支付ID
             isSellOn    :   true,                     // 是否立即上架
             PayNum      :   '',                       // 有多少绑定数据
-            minNum      :   100,                      // 最低限额
+            minNum      :   '',                      // 最低限额
             type	    :   false,		              // 切换密码状态'
             Poundage    :   '',                       // 手续费
             Key         :   '',
@@ -213,6 +221,7 @@ export default {
             total       :   '',                       // 当前可用发布额度
             reputation  :   '',                       // 当前信誉度
             cwAllow     :   false,                    // 是否显示场外
+            LV          :   '',
 		}
 	},
 	methods: {
@@ -371,6 +380,8 @@ export default {
                     this.price          =   this.ConsultPirce
                     this.cwAllow        =   data.cwAllow            // 是否显示场外
                     this.reputation     =   data.xyd
+                    this.LV             =   data.lv
+                    this.minNum         =   data.minBuy
                 }
             })
         },
@@ -484,14 +495,14 @@ export default {
                 })
                 return;
             }
-            if(this.minNum<100){
-                // 判断最低限额是否小于100
-                this.$vux.toast.show({
-                    text: this.$t('discovery.OTC.sell.input.minNum')+'CNY',
-                    type: 'warn'
-                })
-                return;
-            }
+            // if(this.minNum<100){
+            //     // 判断最低限额是否小于100
+            //     this.$vux.toast.show({
+            //         text: this.$t('discovery.OTC.sell.input.minNum')+'CNY',
+            //         type: 'warn'
+            //     })
+            //     return;
+            // }
             
             if(this.cName==''){
                 // 判断选择币种
