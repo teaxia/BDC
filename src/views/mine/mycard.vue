@@ -110,6 +110,14 @@ export default {
 	methods: {
 		doSubmit(){
             // 解决问题的关键方法
+            if(this.sProvince==0){
+                // 判断是否选择省市
+                this.$vux.toast.show({
+                    text: '请选择银行卡所在城市',
+                    type: 'warn'
+                })
+                return;
+            }
             // 判断不为空
             if(this.card==''||this.card.length<10){
                 // 判断银行卡

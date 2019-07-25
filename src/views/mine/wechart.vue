@@ -124,6 +124,14 @@ export default {
     },
 	methods: {
 		doSubmit(){
+            if(this.sProvince==0){
+                // 判断是否选择省市
+                this.$vux.toast.show({
+                    text: '请选择微信绑定银行卡所在城市',
+                    type: 'warn'
+                })
+                return;
+            }
             if(this.thirdNickName==''){
                 // 判断姓名
                 this.$vux.toast.show({
