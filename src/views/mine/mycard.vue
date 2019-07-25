@@ -221,8 +221,8 @@ export default {
     watch:{
         sProvince(){
             // 省市联动
-            this.city = city[this.sProvince]
-            this.sCity = 0
+            this.city   =   city[this.sProvince]
+            this.sCity  =   0
         }
     },
 	mounted() {
@@ -243,51 +243,5 @@ export default {
 
 <style scoped lang="scss">
 @import "../../scss/views/user/regist";
-.province{
-    display: flex;
-    justify-content: space-between;
-    .wd{
-        width: 300px;
-    }
-}
-.sbank{
-    padding: 0.133333rem 0.2rem;
-    display: flex;
-    .title{
-        width: 3rem;
-        font-size:0.45rem;
-    }
-}
-.text-left{
-    text-align: left !important;
-}
-.cardlist{
-    .tips{
-        .bindnum{
-            color:$font-red;
-        }
-        font-size:24px;
-    }
-    .table{
-        width: 100%;
-        border-collapse:collapse;
-        border: 0.01rem solid $border-line;
-        th{
-            border:$border-line 0.01rem solid;
-            background:$bg-border;
-        }
-        td{
-            border-bottom: 0.01rem solid $border-line;
-            padding:15px 0;
-            text-align: center;
-        }
-    }
-}
-.select{
-    border: 0.02rem solid #dcdee2;
-    background:#fff;
-    border-radius: 5px;
-    height: 1rem;
-    font-size:30px;
-}
+@import "../../scss/views/mine/BindPay";
 </style>

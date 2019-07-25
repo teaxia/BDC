@@ -27,6 +27,14 @@
                     <x-input class="test" type="text" :title="$t('mine.setting.name')" v-model="RealName" required :placeholder="$t('mine.setting.tips.name')">
                     </x-input>
                 </group>
+                <div class="province mr30">
+                    <select v-model="sProvince" class="wd select">
+                        <option v-for="(item,index) in province" :value="index" :key="index">{{ item }}</option>
+                    </select>
+                    <select v-model="sCity" class="wd select">
+                        <option v-for="(item,index) in city" :value="index" :key="index">{{ item }}</option>
+                    </select>
+                </div>
             </div>
             <button @click="doSubmit()" class="btn btn-block btn-default btn-round mr50">{{ $t("global.submit") }}</button>
             <div class="mr50 cardlist">
@@ -82,6 +90,7 @@
 </template>
 
 <script>
+import {province,city} from '../../common/utils/city'
 import { GetAccount } from '../../common/mixins/getaccount'
 export default {
     name: 'alipay',
@@ -90,7 +99,7 @@ export default {
 		return {
             thirdAccountName        :  '',                     // 支付宝账号
             thirdNickName           :  '',                     // 昵称
-            AllowCount              :  '',                      // 允许绑卡的数据
+            AllowCount              :  '',                     // 允许绑卡的数据
             BindCount               :  0,                      // 已绑卡数量
             show                    :  false,            	   // 跳转至强制认证界面
             show2                   :  false,                  // 删除二次确认
@@ -102,8 +111,19 @@ export default {
             picNum                  :  0,                      // 图片上传的计数器
             RealName                :  '',                     // 真实姓名
             jmday                   :  '',                     // 加密天验证
+            province                :  '',                     // 省
+            city                    :  '',                     // 市
+            sProvince               :  0,                      // 选择的省
+            sCity                   :  0,                      // 选择的市
 		}
-	},
+    },
+    watch:{
+        sProvince(){
+            // 省市联动
+            this.city = city[this.sProvince]
+            this.sCity = 0
+        }
+    },
 	methods: {
 		doSubmit(){
             if(this.thirdAccountName==''){
@@ -130,7 +150,8 @@ export default {
                 thirdAccountName        :   this.thirdAccountName,              //  支付宝账号
                 thirdNickName           :   this.thirdNickName,                 //  支付宝绑定姓名
                 ImgUrl                  :   this.imgs,
-                RealName                :   this.RealName                       //  真是姓名
+                RealName                :   this.RealName,                      //  真实姓名
+                CityInfo                :   province[this.sProvince]+city[this.sProvince][this.sCity],
             }).then(data => {
                 if(data){
                     this.$vux.toast.show({
@@ -283,8 +304,6 @@ export default {
             })
         }
     },
-    watch:{
-    },
 	mounted() {
         // 更新个人中心资料
         this.GetAccount();
@@ -292,6 +311,8 @@ export default {
         if(this.realname==this.$t('global.Uncertified')){
             this.show = true;
         }
+        this.province = province
+        this.city     = city[0]
         this.GetImgUpLoadUrl()
         this.GetThirdInfo()
         this.getDateServer()
