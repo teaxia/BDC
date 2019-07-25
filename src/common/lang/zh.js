@@ -335,7 +335,7 @@ export const zh = {
                     num         :   '数量',
                     num2        :   '最多输入2位小数',
                     price       :   '售卖单价',
-                    minNum      :   '不能低于100',
+                    minNum      :   '最低限额',
                 }
             },
             index:{
