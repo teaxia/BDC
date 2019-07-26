@@ -153,6 +153,14 @@ export default {
                 })
                 return;
             }
+            if(this.imgs==''||this.imgs==null){
+                // 判断图片是否上传
+                this.$vux.toast.show({
+                    text: '请上传二维码',
+                    type: 'warn'
+                })
+                return;
+            }
             // 提交绑定
             this.$server.post(
             'SetThirdInfo',{

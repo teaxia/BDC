@@ -86,7 +86,7 @@
                     })
                     return
                 }
-                if(this.filea==''){
+                if(this.dataa==''||this.dataa==null){
                     // 验证是否上传正面
                     this.$vux.toast.show({
                         text: this.$t('mine.auth.tips.front'),
@@ -94,7 +94,7 @@
                     })
                     return
                 }
-                if(this.fileb==''){
+                if(this.datab==''||this.dataa==null){
                     // 验证是否上传背面
                     this.$vux.toast.show({
                         text: this.$t('mine.auth.tips.back'),
@@ -179,10 +179,10 @@
                         if(data.Data){
                             if(file=="a"){
                                 that.filea = this.result
-                                that.dataa = data.Data;
+                                that.dataa = (data.Data)?data.Data:'';
                             }else{
                                 that.fileb = this.result
-                                that.datab = data.Data;
+                                that.datab = (data.Data)?data.Data:'';
                             }
                         }else{
                             // 清空表单上传内容
