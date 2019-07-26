@@ -78,8 +78,8 @@
                     <div class="psw">
                         <RadioGroup v-model="animal">
                             <!-- <Radio label="all"><span class="label-info">{{$t('discovery.OTC.sell.all')}}</span></Radio> -->
-                            <Radio label="cn"><span class="label-info">{{$t('discovery.OTC.sell.cn')}}</span></Radio>
-                            <Radio label="cw" v-if="cwAllow"><span class="label-info">{{$t('discovery.OTC.sell.cw')}}</span></Radio>
+                            <Radio label="cn"><span @click="sellcn('cn')" class="label-info">{{$t('discovery.OTC.sell.cn')}}</span></Radio>
+                            <Radio label="cw" v-if="cwAllow"><span @click="sellcn('cw')" class="label-info">{{$t('discovery.OTC.sell.cw')}}</span></Radio>
                         </RadioGroup>
                     </div>
                 </div>
@@ -362,6 +362,10 @@ export default {
                 return;
             }
             this.showPSwed = true
+        },
+        sellcn(val){
+            //场内场外按钮穿透
+            this.animal = val
         }
     },
     watch:{
