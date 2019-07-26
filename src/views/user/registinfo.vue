@@ -24,10 +24,10 @@
                     <div class="radio">
                         <RadioGroup v-model="gender">
                             <Radio label="0">
-                                <span>{{$t('user.type.man')}}</span>
+                                <span @click="pierce(0)">{{$t('user.type.man')}}</span>
                             </Radio>
                             <Radio label="1">
-                                <span>{{$t('user.type.woman')}}</span>
+                                <span @click="pierce(1)">{{$t('user.type.woman')}}</span>
                             </Radio>
                         </RadioGroup>
                     </div>
@@ -217,37 +217,40 @@ export default {
 		// 	})
 		// },
 		countDown() {
-			    if (!this.canClick){return}   														// 禁止多次点击 
-                // 发送短信接口
-                let phoneNo = this.mobile.replace(/\s+/g,"")
-				this.$server.post(
-				'PwdBack_SendCode',
-				{
-					jm 	 		: this.$md5(this.$jm+phoneNo).toUpperCase(),			// 加密方法Key+Phone_No加密
-					Key  		: '',															// 注册传空
-					Phone_No	: phoneNo,
-					lv   		: this.lang
-				}).then(data => {
-					if(data){
-						this.$vux.toast.show({
-							text: this.$t("global.success"),
-							type: 'success'
-                        })
-                        this.canClick = false                                               // 禁止多次点击
-				        this.content = this.totalTime + 's'+this.$t("user.tips.send")       // 改变按钮
-                        this.clock = window.setInterval(() => {                             // 增加计时器  
-                            this.totalTime--
-                            this.content = this.totalTime + 's'+this.$t("user.tips.send")
-                            if (this.totalTime < 0) {
-                                window.clearInterval(this.clock)
-                                this.content = this.$t("user.tips.setvcode");
-                                this.totalTime = 60
-                                this.canClick = true  //这里重新开启
-                            }
-                        },1000)
-					}
-				})
-		}
+            if (!this.canClick){return}   														// 禁止多次点击 
+            // 发送短信接口
+            let phoneNo = this.mobile.replace(/\s+/g,"")
+            this.$server.post(
+            'PwdBack_SendCode',
+            {
+                jm 	 		: this.$md5(this.$jm+phoneNo).toUpperCase(),			// 加密方法Key+Phone_No加密
+                Key  		: '',															// 注册传空
+                Phone_No	: phoneNo,
+                lv   		: this.lang
+            }).then(data => {
+                if(data){
+                    this.$vux.toast.show({
+                        text: this.$t("global.success"),
+                        type: 'success'
+                    })
+                    this.canClick = false                                               // 禁止多次点击
+                    this.content = this.totalTime + 's'+this.$t("user.tips.send")       // 改变按钮
+                    this.clock = window.setInterval(() => {                             // 增加计时器  
+                        this.totalTime--
+                        this.content = this.totalTime + 's'+this.$t("user.tips.send")
+                        if (this.totalTime < 0) {
+                            window.clearInterval(this.clock)
+                            this.content = this.$t("user.tips.setvcode");
+                            this.totalTime = 60
+                            this.canClick = true  //这里重新开启
+                        }
+                    },1000)
+                }
+            })
+        },
+        pierce(val){
+            this.gender = val
+        }
 	},
 	mounted() {
         this.lang           =   (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';

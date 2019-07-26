@@ -7,10 +7,10 @@
                 <div class="radio">
                     <RadioGroup v-model="lang">
                         <Radio label="en">
-                            <span>{{$t('mine.setting.english')}}</span>
+                            <span @click="pierce('en')">{{$t('mine.setting.english')}}</span>
                         </Radio>
                         <Radio label="zh">
-                            <span>{{$t('mine.setting.chinaese')}}</span>
+                            <span @click="pierce('zh')">{{$t('mine.setting.chinaese')}}</span>
                         </Radio>
                     </RadioGroup>
                 </div>
@@ -45,7 +45,10 @@ export default {
                     })
 				}
 			})
-		}
+        },
+        pierce(val){
+            this.lang = val
+        }
 	},
 	mounted() {
         this.lang = (this.$storage.get('lang'))?this.$storage.get('lang'):'zh';
