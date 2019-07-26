@@ -60,6 +60,8 @@
                         this.imgs       =   []
                         this.localimgs  =   []
                     }
+                    this.$refs.back.value = null;
+
                 })
             },
             GetImgUpLoadUrl(){

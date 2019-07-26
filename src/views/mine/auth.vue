@@ -129,6 +129,7 @@
                             path:'/mine/myhome',
                         });
                     }
+                    this.$refs.back.value = null;
                 })
             },
             selectimg(e,file){

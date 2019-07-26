@@ -176,6 +176,7 @@ export default {
                 this.thirdNickName      = ''
                 this.imgs               = ''
                 this.localimgs          = ''
+                this.$refs.back.value = null;
             })
         },
         GetThirdInfo(){

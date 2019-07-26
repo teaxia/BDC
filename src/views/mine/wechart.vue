@@ -162,6 +162,8 @@ export default {
                     this.localimgs          = ''
                     this.GetThirdInfo();
                 }
+                    this.$refs.back.value = null;
+
             })
         },
         GetThirdInfo(){
