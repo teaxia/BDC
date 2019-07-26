@@ -63,7 +63,7 @@ export default {
       'GetBlackShow_OTC',
       {
         guid 	 : this.$storage.get('guid'),
-      },{showLoading:false}).then(data => {
+      }).then(data => {
         if(data){
           if(data.canShow){
             // 设置OTC商家发布以及我的发布权限
