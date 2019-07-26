@@ -129,8 +129,15 @@
                             window.app.$vux.loading.hide()
                             return
                         }
-                        that.localimgs.push(this.result)    // 把base64数据push到本地图片显示
-                        that.imgs.push(data.Data)           // 把返回的图片名字push到待上传接口
+                        if(data.Data){
+                            that.localimgs.push(this.result)    // 把base64数据push到本地图片显示
+                            that.imgs.push(data.Data)           // 把返回的图片名字push到待上传接口
+                        }else{
+                            // 清空表单上传内容
+                            that.localimgs        = null
+                            that.imgs             = null
+                            that.$refs.back.value = null
+                        }
                         window.app.$vux.loading.hide()
                     })
                 }

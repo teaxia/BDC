@@ -269,9 +269,13 @@ export default {
                         window.app.$vux.loading.hide()
                         return
                     }
-                    if(data){
+                    if(data.Data){
                         that.localimgs = this.result        // 把base64数据push到本地图片显示
                         that.imgs   = (data.Data)?data.Data:''             // 把返回的图片名字push到待上传接口
+                    }else{
+                        // 清空表单上传内容
+                        that.localimgs = null
+                        that.$refs.back.value = null;
                     }
                     window.app.$vux.loading.hide()
                 })

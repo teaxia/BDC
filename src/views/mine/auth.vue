@@ -175,7 +175,7 @@
                             window.app.$vux.loading.hide()
                             return
                         }
-                        if(data){
+                        if(data.Data){
                             if(file=="a"){
                                 that.filea = this.result
                                 that.dataa = data.Data;
@@ -183,6 +183,13 @@
                                 that.fileb = this.result
                                 that.datab = data.Data;
                             }
+                        }else{
+                            // 清空表单上传内容
+                            that.filea              =   null
+                            that.dataa              =   null
+                            that.fileb              =   null
+                            that.datab              =   null
+                            that.$refs.back.value   =   null
                         }
                         window.app.$vux.loading.hide()
                     })
