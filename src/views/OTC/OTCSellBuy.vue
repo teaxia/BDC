@@ -283,7 +283,7 @@
 </template>
 
 <script>
-    import { BindPayment } from '../../common/mixins/BindPayment'       // 获取绑定银行卡信息
+    import { BindPayment } from '../../common/mixins/BindPayment'       // 绑定银行卡等信息的弹窗选择支付方式
 	export default {
         name:'OTCSellBuy',
         mixins:[BindPayment],

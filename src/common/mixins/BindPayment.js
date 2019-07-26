@@ -142,7 +142,7 @@ export const BindPayment = {
             // 选择银行卡等的事件穿透
             switch (val) {
                 case 'alipay':
-                    this.alipayID = id
+                    this.alipayId = id
                 break;
                 case 'cardpay':
                     this.bankId   = id
