@@ -13,6 +13,9 @@
                     <div class="currency-font">
                         {{cName}}
                     </div>
+                    <div class="showtime" v-if="ShowTime">
+                        <b>于{{ShowTime}}后在场内显示</b>
+                    </div>
                 </div>
                 <div class="font">
                     <span class="blue"><b>发布ID：{{id}}</b></span>
@@ -171,6 +174,7 @@ export default {
             delshow     :   false,                    // 是否确认删除
             Status      :   '',                       // 状态 -1 下架、0上架、-2售罄、2锁定、-3撤销
             showStatus  :   false,                    // -1 下架、0上架 true||-2售罄、2锁定、-3撤销 false
+            ShowTime    :   '',                       // 内场显示时间
 		}
     },
 	methods: {
@@ -194,6 +198,7 @@ export default {
                     this.sellNum    = data.sellNum
                     this.id         =   data.Id
                     this.Status     =   data.Status
+                    this.ShowTime   =   data.ShowTime
                     if(data.Status==-1){
                         // 下架
                         this.showStatus =   true
