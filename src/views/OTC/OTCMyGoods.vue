@@ -18,7 +18,7 @@
 							<div class="grid-info">{{$t('OTC.order.GoodsId')}}：{{v.Id}}</div>
 							<div class="grid-info">{{v.CreateTime}}</div>
 							<div class="otc-grid-right">
-								<span :class="{'sv':true,'c-primary':v.sv=='场内','c-all':v.sv=='全部'}">{{v.sv}}</span>
+								<span :class="{'sv':v.sv=='场内','cw':v.sv=='场外','c-all':v.sv=='全部'}">{{v.sv}}</span>
 								<i class="iconfont icon-arrow-right"></i>
 							</div>
                         </div>
