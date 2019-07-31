@@ -262,7 +262,10 @@ export default {
                 return;
             }
             this.showPSwed = true
-        }
+        },
+        changType(){
+			this.type = !this.type
+        },
     },
     watch:{
         currency(){
