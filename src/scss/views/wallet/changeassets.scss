@@ -2,20 +2,54 @@
 @import "../../base/var";
 @import "../../base/button";
 .changeassets{
-    .assets{
-        padding:0 15px;
-        ul{
-            li{
-                height: 80px;
-                font-size:28px;
-                line-height: 80px;
-                i{
-                    height: 80px;
-                    font-size:38px;
-                    margin-right:20px;
-                }
+    background:#f2f2f2;
+    height: 100%;
+    .chagngeshow{
+        .grid{
+            background:#fff;
+            text-align: center;
+            border-radius: 8px 8px 8px 8px;
+            .i i{
+                font-size:80px;
+            }
+            .t{
+                font-size: 24px;
+                color: #333333;
+            }
+            .n{
+                font-size: 28px;
+                font-weight: bold;
+                color: #333;
             }
         }
+        .center{
+            i{
+                font-size:60px;
+            }
+            text-align: center;
+        }
+    }
+    .mr20{
+        background:#fff;
+    }
+    .title{
+        text-align: center;
+        font-size:18px;
+        color: #666666;
+    }
+    .vip{
+        &-icon{
+            text-align: right;
+            .sicon{
+                margin-right: 20px;
+            }
+        }
+        span{
+            font-size:28px;
+        }
+    }
+    .assets{
+        padding:15px;
         .changelist{
             height: 80px;
             .changename{

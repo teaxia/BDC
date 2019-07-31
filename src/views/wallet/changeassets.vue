@@ -2,30 +2,86 @@
 	<div class="changeassets padding-footer margin-header" v-cloak>
         <x-header :left-options="{backText:$t('global.back')}" :title="$t('wallet.tips.change')"></x-header>
 		<div class="main-container">
-            <v-grid>
-                <div class="assets">
-                    <ul>
-                        <li><i class="iconfont icon-Passingassets"></i>{{$t("wallet.tips.capitalassets")}}：<span>{{$numberComma(fixedAssets)}}</span><span class="fr">BDC</span></li>
-                        <li><i class="iconfont icon-xiaohongqi01"></i>{{$t("wallet.tips.actassets")}}：<span>{{$numberComma(actAssets)}}</span><span class="fr">BDC</span></li>
-                        <!-- <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{$numberComma(gameAssets)}}</span><span class="fr">CNY</span></li>    -->
-                    </ul>
-                </div>
+            <flexbox class="chagngeshow">
+                <flexbox-item class="grid">
+                    <div class="i">
+                        <i class="iconfont icon-Passingassets"></i>
+                    </div>
+                    <div class="t">
+                        {{$t("wallet.tips.capitalassets")}}
+                    </div>
+                    <div class="n">
+                        {{$numberComma(fixedAssets)}}
+                    </div>
+                    <div>BDC</div>
+                </flexbox-item>
+                <flexbox-item :span="1" class="center">
+                    <i class="iconfont icon-Conversion"></i>
+                </flexbox-item>
+                <flexbox-item class="grid">
+                    <div class="i">
+                        <i class="iconfont icon-xiaohongqi01"></i>
+                    </div>
+                    <div class="t">
+                        {{$t("wallet.tips.actassets")}}
+                    </div>
+                    <div class="n">
+                        {{$numberComma(actAssets)}}
+                    </div>
+                    <div>BDC</div>
+                </flexbox-item>
+            </flexbox>
+            <v-grid class="mr20">
+                <div class="title">等级说明</div>
+                <flexbox class="vip">
+                    <flexbox-item class="vip-icon">
+                        <svg class="sicon" aria-hidden="true">
+                            <use xlink:href="#icon-VIP1"></use>
+                        </svg>
+                        <span>(VIP3)：</span>
+                    </flexbox-item>
+                    <flexbox-item class="vip-access">
+                        <span>固定资产>=10000</span>
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="vip">
+                    <flexbox-item class="vip-icon">
+                        <svg class="sicon" aria-hidden="true">
+                            <use xlink:href="#icon-VIP2"></use>
+                        </svg>
+                        <span>(VIP2)：</span>
+                    </flexbox-item>
+                    <flexbox-item class="vip-access">
+                        <span>固定资产>=3000</span>
+                    </flexbox-item>
+                </flexbox>
+                <flexbox class="vip">
+                    <flexbox-item class="vip-icon">
+                        <svg class="sicon" aria-hidden="true">
+                            <use xlink:href="#icon-VIP"></use>
+                        </svg>
+                        <span>(VIP1)：</span>
+                    </flexbox-item>
+                    <flexbox-item class="vip-access">
+                        <span>固定资产>=300</span>
+                    </flexbox-item>
+                </flexbox>
             </v-grid>
             <v-grid class="mr20">
             <div class="assets">
-                <flexbox class="changelist line-b">
+                <flexbox class="changelist">
                     <flexbox-item :span="3">
                         <div class="changename">
                             {{$t("wallet.tips.changetype")}}:
                         </div>
                     </flexbox-item>
                     <flexbox-item :span="5">
-                        <Select v-model="type">
+                        <Select v-model="type" :disabled="true">
                             <Option v-for="(v,index) in dlist" :key="index" :value="v.value">{{v.label}}</Option>
                         </Select>
                     </flexbox-item>
                 </flexbox>
-                <flexbox class="changelist line-b">
+                <flexbox class="changelist">
                     <flexbox-item :span="3">
                         <div class="changename">
                             {{$t("wallet.tips.transfor")}}{{feus[type]}}：
