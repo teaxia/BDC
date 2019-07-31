@@ -23,12 +23,12 @@
                             <div class="wallet-band-rmb">
                                 ≈<span>{{cny}}{{CurrencyCode}}</span>
                             </div>
-                            <!-- <div class="changeassets">
+                            <div class="changeassets">
                                 <router-link to="/wallet/changeassets">
                                     <i class="iconfont icon-Conversion"></i>
                                     <span>{{$t("wallet.tips.change")}}</span>
                                 </router-link>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="wallet-band-r fr">
                             <div class="wallet-assets">

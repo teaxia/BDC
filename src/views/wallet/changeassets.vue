@@ -7,7 +7,7 @@
                     <ul>
                         <li><i class="iconfont icon-Passingassets"></i>{{$t("wallet.tips.capitalassets")}}：<span>{{$numberComma(fixedAssets)}}</span><span class="fr">BDC</span></li>
                         <li><i class="iconfont icon-xiaohongqi01"></i>{{$t("wallet.tips.actassets")}}：<span>{{$numberComma(actAssets)}}</span><span class="fr">BDC</span></li>
-                        <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{$numberComma(gameAssets)}}</span><span class="fr">CNY</span></li>   
+                        <!-- <li><i class="iconfont icon-Gameassets"></i>{{$t("wallet.tips.gameassets")}}：<span>{{$numberComma(gameAssets)}}</span><span class="fr">CNY</span></li>    -->
                     </ul>
                 </div>
             </v-grid>
@@ -35,7 +35,7 @@
                         <input type="text" v-model="num" :placeholder="$t('global.entry')+feus[type]+$t('global.num')" />
                     </flexbox-item>
                 </flexbox>
-                <flexbox class="changelist line-b">
+                <!-- <flexbox class="changelist line-b">
                     <flexbox-item :span="3">
                         <div class="changename">
                             {{$t("wallet.tips.safetycode")}}：
@@ -44,7 +44,7 @@
                     <flexbox-item>
                         <input type="password" v-model="password" :placeholder="$t('wallet.tips.inputcode')" />
                     </flexbox-item>
-                </flexbox>
+                </flexbox> -->
                 <div class="change-rate" v-if="type!=1">
                     <div class="rate line-b"><span>BDC{{$t('global.price')}}:</span>{{$numberComma(PriceBDC)}}</div>
                     <div class="rate line-b"><span>{{$t('global.exchange')}}:</span>{{DHL}}</div>
@@ -55,8 +55,20 @@
                 </div>
             </div>
             </v-grid>
-            <button @click="TransferAssets()" class="btn btn-block btn-round mr30">{{$t('wallet.tips.btntransfor')}}</button>
+            <button @click="showPWD()" class="btn btn-block btn-round mr30">{{$t('wallet.tips.btntransfor')}}</button>
 		</div>
+        <Modal v-model="showPSwed" :mask-closable="false" @on-ok="TransferAssets()">
+            <div slot="header">
+                {{$t('wallet.tips.safetycode')}}
+            </div>
+            <div class="modal-body security">
+                <group>
+                    <x-input class="test" :type="pdtype?'text':'password'" :title="$t('discovery.OTC.sell.security')" v-model="password" :placeholder="$t('wallet.tips.inputcode')">
+                        <i slot="right" @click="changType()" :class="['iconfont',type?'icon-17yanjing':'icon-Close']"></i>
+                    </x-input>
+                </group>
+            </div>
+        </Modal>
         <v-footer :isIndex="$route.meta.isIndex"></v-footer>
     </div>
 </template>
@@ -70,7 +82,7 @@ export default {
             fixedAssets :   '',                                                         // 固定资产
             actAssets   :   '',                                                         // 通证资产
             gameAssets  :   '',                                                         // 游戏资产 
-            type        :   '2',                                                        // 转换类型
+            type        :   '1',                                                        // 转换类型
             num         :   '',                                                         // 兑换的数量
             matchprice  :   '0',                                                        // 计算的结果
             meus        :   ['','BDC','CNY','BDC'],
@@ -81,19 +93,21 @@ export default {
             X           :   '',
             password    :   '',
             key         :   '',
+            showPSwed   :   false,
+            pdtype      :   false,
             dlist       :   [
-                // {
-                //     value: '1',
-                //     label: this.$t("wallet.transfor.type1")
-                // },
                 {
-                    value: '2',
-                    label: this.$t("wallet.transfor.type2")
+                    value: '1',
+                    label: this.$t("wallet.transfor.type1")
                 },
-                {
-                    value: '3',
-                    label: this.$t("wallet.transfor.type3")
-                }
+                // {
+                //     value: '2',
+                //     label: this.$t("wallet.transfor.type2")
+                // },
+                // {
+                //     value: '3',
+                //     label: this.$t("wallet.transfor.type3")
+                // }
             ],
 		}
     },
@@ -170,6 +184,21 @@ export default {
                     this.key      = data.key
 				}
 			})
+        },
+        showPWD(){
+            // 表单限制
+            if(this.num==''&&this.num <= 0){
+                // 数量不能为空
+                this.$vux.toast.show({
+                    text: this.$t('wallet.transfor.error1'),
+                    type: 'warn'
+                })
+                return;
+            }
+            this.showPSwed = true
+        },
+        changType(){
+			this.pdtype = !this.pdtype
         },
         TransferAssets(){
             // 表单限制
