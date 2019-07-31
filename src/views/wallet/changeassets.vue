@@ -4,9 +4,9 @@
 		<div class="main-container">
             <flexbox class="chagngeshow">
                 <flexbox-item class="grid">
-                    <div class="i">
+                    <!-- <div class="i">
                         <i class="iconfont icon-Passingassets"></i>
-                    </div>
+                    </div> -->
                     <div class="t">
                         {{$t("wallet.tips.capitalassets")}}
                     </div>
@@ -19,9 +19,9 @@
                     <i class="iconfont icon-Conversion"></i>
                 </flexbox-item>
                 <flexbox-item class="grid">
-                    <div class="i">
+                    <!-- <div class="i">
                         <i class="iconfont icon-xiaohongqi01"></i>
-                    </div>
+                    </div> -->
                     <div class="t">
                         {{$t("wallet.tips.actassets")}}
                     </div>
