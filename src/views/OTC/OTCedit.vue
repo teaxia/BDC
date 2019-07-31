@@ -14,7 +14,7 @@
                         {{cName}}
                     </div>
                     <div class="showtime" v-if="ShowTime">
-                        <b>于{{ShowTime}}后在场内显示</b>
+                        <b>于{{ShowTime}}后在场内上架</b>
                     </div>
                 </div>
                 <div class="font">
