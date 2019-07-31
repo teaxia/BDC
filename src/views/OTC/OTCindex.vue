@@ -60,6 +60,11 @@
 						name	:	'OTC'+this.$t('OTC.menu.Profit'),
 						url		:	'/OTC/Profit',
 						status	:	true
+					},
+					{
+						name	:	'OTC'+this.$t('OTC.menu.Report'),
+						url		:	'/OTC/Report', 
+						status	:	true
 					}
 				],
 				type	:	'',					// 接收订单列表的传参，用来显示下标

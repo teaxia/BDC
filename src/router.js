@@ -52,6 +52,7 @@ import wallet from './views/wallet.vue'
         import OTCcomplaiontList from './views/OTC/OTCComplaiontList.vue'                 // 投诉界面列表
         import OTCcomplaiontView from './views/OTC/OTCcomplaiontView.vue'                 // 投诉详情页
         import OTCRank from './views/OTC/OTCRank.vue'                         // 排行榜
+        import OTCReport from './views/OTC/OTCReport.vue'                         // 排行榜
 
 // 我的
 import myhome from './views/mine'
@@ -187,6 +188,7 @@ let routes = [
                     { path: '/OTC/MyOrderHistory', component: OTCMyOrderByHistory, name: 'OTCMyOrderByHistory',meta:{isIndex: 1,bindex:4}},
                     { path: '/OTC/ComplaiontList', component: OTCcomplaiontList, name: 'OTCcomplaiontList',meta:{isIndex: 1,bindex:5}},
                     { path: '/OTC/Profit', component: OTCMyProfit, name: 'OTCMyProfit',meta:{isIndex: 1,bindex:6}},
+                    { path: '/OTC/Report', component: OTCReport, name: 'OTCReport',meta:{isIndex: 1,bindex:7}},
                 ]
             },
             { path: '/OTC/buy', component: OTCbuy, name: 'OTCbuy',meta:{isIndex: 1}},

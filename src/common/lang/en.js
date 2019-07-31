@@ -513,6 +513,7 @@ export const en = {
             History         :   'History',
             Complaint       :   'Complaint',
             Profit          :   'Profit',
+            Report          :   'Report',
         },
         sellBuy:{
             pricebuy        :   'Purchase at price',
@@ -537,6 +538,15 @@ export const en = {
                 bdcnum      :   'Buying quantity cannot be empty',
                 sellnum     :   'Sales cannot be empty',
             }
+        },
+        report:{
+            BuyNum          :   'BuyNum',
+            SellNumCN       :   'Sell in app',
+            SystemJia       :   'System Supplement',
+            Profit          :   'Profit',
+            SellNumCW       :   'Sell out',
+            SystemJian      :   'System deduction',
+            BBDHNum         :   'exchange',
         },
         order:{
             ok              :   'Pay',

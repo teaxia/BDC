@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import { types } from 'util';
 	export default {
 		name:'OTCList',
 		data() {

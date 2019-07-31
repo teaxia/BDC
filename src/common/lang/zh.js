@@ -515,6 +515,7 @@ export const zh = {
             History         :   '历史订单',
             Complaint       :   '申诉订单',
             Profit          :   '收益',
+            Report          :   '报表',
         },
         sellBuy:{
             pricebuy        :   '按价格购买',
@@ -539,6 +540,15 @@ export const zh = {
                 bdcnum      :   '购买数量不能为空',
                 sellnum     :   '出售数量不能为空',
             }
+        },
+        report:{
+            BuyNum          :   '购币数量',
+            SellNumCN       :   '场内出售数量',
+            SystemJia       :   '系统补币',
+            Profit          :   'OTC收益',
+            SellNumCW       :   '场外出售数量',
+            SystemJian      :   '系统扣币',
+            BBDHNum         :   '通证币币兑换',
         },
         order:{
             ok              :   '确认支付',
