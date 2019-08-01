@@ -120,12 +120,14 @@
 				let year = date.getFullYear()
 				let month = date.getMonth() + 1
 				let day = date.getDate()
-				let Yestsweek = new Date(date.getTime() - 144*60*60*1000);
-				let Yestmonth = Yestsweek.getMonth() + 1
-				let Yestday = Yestsweek.getDate()
-				this.stardate = (year+'/'+Yestmonth+'/'+Yestday)
+				// let Yestsweek = new Date(date.getTime() - 144*60*60*1000);
+				// let Yestmonth = Yestsweek.getMonth() + 1
+				// let Yestday = Yestsweek.getDate()
+				// this.stardate = (year+'/'+Yestmonth+'/'+Yestday)
+				this.stardate = (year+'/'+month+'/'+day)
 				this.enddate = (year+'/'+month+'/'+day)
-				this.start = (year+'/'+Yestmonth+'/'+Yestday)
+				// this.start = (year+'/'+Yestmonth+'/'+Yestday)
+				this.start = (year+'/'+month+'/'+day)
 				this.end = (year+'/'+month+'/'+day)
 			},
 			Query(){
