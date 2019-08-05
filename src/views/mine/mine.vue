@@ -47,7 +47,7 @@
 							</span>
 						</cell>
 					</div>
-					<cell link="/mine/area" is-link class="cell-hei">
+					<cell link="/mine/area" is-link class="cell-hei" v-if="IsShowGroup">
 						<span slot="title">
 							<i class="iconfont icon-tianjiakuangquchengyuan"></i>
 							<span>{{$t('mine.menus.members')}}</span>
@@ -125,6 +125,7 @@ export default {
 			messageNum	:	'',
 			ParentName	:	'',
 			kfurl		:	'',
+			IsShowGroup	:	false,								// 是否显示矿区
 		}
 		// 版本更新说明 
 		// @版本号 @更新人 @更新时间 @更新内容
@@ -199,7 +200,8 @@ export default {
 				Count   : 0
 			}).then(data => {
 				if(data){
-					this.messageNum = data.Result;
+					this.messageNum 	= 	data.Result;
+					this.IsShowGroup 	=	data.IsShowGroup 
 				}else{
 					this.GetLetterMessageCount()	
 				}
