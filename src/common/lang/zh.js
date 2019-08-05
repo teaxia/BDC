@@ -653,7 +653,7 @@ export const zh = {
             spread          :   '推广APP',
             website         :   '进入官网',
             members         :   '矿区成员',
-            question        :   '常见问题',
+            question        :   'OTC操作指南',
             feedback        :   '意见反馈',
             realname        :   '实名认证',
             server          :   '在线客服',
