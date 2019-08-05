@@ -49,6 +49,7 @@
                                 <!-- <th>{{$t("mine.mycard.No")}}</th> -->
                                 <th>{{$t("mine.setting.nickname")}}</th>
                                 <th>{{$t("mine.mycard.time")}}</th>
+                                <th>绑定城市</th>
                                 <th>{{$t("mine.area.edit")}}</th>
                             </tr>
                         </thead>
@@ -57,6 +58,7 @@
                                 <!-- <td>{{index+1}}</td> -->
                                 <td>{{v.thirdNickName}}</td>
                                 <td>{{v.CreateTime}}</td>
+                                <td>{{v.CityInfo}}</td>
                                 <td>
                                     <button @click ="delConfirm(v.Id,index)" class="btn btn-del btn-round">{{$t("mine.setting.delete")}}</button>
                                 </td>
