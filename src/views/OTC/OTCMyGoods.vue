@@ -10,6 +10,9 @@
 					<span class="font font-success">{{$t('OTC.order.OnSellNum')}}：</span>
 					<span class="font font-success">{{stillOnSellNum}}</span>
 				</div>
+				<button class="btn btn-round btn-xs btn-search" @click="GetMyGoods()">
+					刷新
+				</button>
 			</div>
 			<div class="goods-list">
 				<div class="otc-item" @click="edit(v.Id,v.GoodsType)" v-for="(v,index) in MyGoods" v-if="v.Id" :key="index">
@@ -152,8 +155,15 @@
 	padding:20px;
 	margin-bottom: 20px;
 	border-radius: 8px;
+	position: relative;
 	&-pick{
 		font-size:28px;
+	}
+	.btn-search{
+		position: absolute;
+		right:40px;
+		top:30px;
+		height: 60px;
 	}
 }
 </style>

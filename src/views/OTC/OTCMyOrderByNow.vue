@@ -1,9 +1,13 @@
 <template>
 	<div class="orderList" v-cloak>
-		<div class="search">
-			<search v-model="search" ref="search" @on-blur="Query()" @on-submit="Query()" :placeholder="$t('discovery.OTC.orderlist.SorderIdorId')" position="absolute" :auto-fixed='false'>
-			</search>
-		</div>
+		<flexbox class="search">
+            <flexbox-item>
+                <search v-model="search" ref="search" @on-blur="Query()" @on-submit="Query()" :placeholder="$t('discovery.OTC.orderlist.SorderIdorId')" position="absolute" :auto-fixed='false'></search>
+            </flexbox-item>
+            <flexbox-item :span="2">
+                   <button @click="Query()" class="btn btn-xs btn-round search-btn">刷新</button>
+            </flexbox-item>
+        </flexbox>
         <flexbox class="time">
             <flexbox-item>
                 <DatePicker class="center" @on-change="startime" type="date" v-model="stardate" format="yyyy/MM/dd" placement="bottom-start" :placeholder="$t('discovery.bill.begin')"></DatePicker>
@@ -244,4 +248,8 @@
 
 <style scoped lang="scss">
 @import "../../scss/views/otc/otclist";
+.search-btn{
+	height: 0.74rem;
+	width: 95%;
+}
 </style>
