@@ -88,6 +88,7 @@
 				<button v-if="data.Status==5" class="btn btn-block btn-success btn-round-mx btn-disabled mr20" disabled>{{$t('discovery.OTC.myorder.doneorder')}}</button>
 				<!-- showF -->
 				<div class="order-done-tips" v-if="data.Status==2&&!isSS&&this.cType=='sell'&&!showF">等待买家付款，剩余{{m}}分{{s}}秒超时自动取消</div>
+				<!-- 不可发币状态以及未完成支付状态 -->
 				<button v-if="showF&&!isFb" class="btn btn-block btn-round-mx mr20" disabled>{{m}}分{{s}}秒后可强制发币</button>
 				<button v-if="showF&&isFb" class="btn btn-block btn-round-mx mr20" @click="directOk()">已收到款，直接发币</button>
 			</div>
@@ -119,10 +120,11 @@
                     <div class="title-psw wd">
                         转账方式
                     </div>
-                    <div class="psw">
+                    <div class="psw qzfb">
                         <RadioGroup v-model="mode">
                             <Radio label="wx" class="label-info">微信</Radio>
                             <Radio label="zfb" class="label-info">支付宝</Radio>
+							<Radio label="card" class="label-info">银行卡</Radio>
                         </RadioGroup>
                     </div>
                 </div>

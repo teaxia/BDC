@@ -329,6 +329,12 @@ input{
 .label-info{
     font-size:0.45rem;
 }
+// 强制发币的弹窗labal
+.qzfb{
+    .label-info{
+        font-size:0.42rem !important;
+    }
+}
 /*flex*/
 .flex-table{
     display: flex;

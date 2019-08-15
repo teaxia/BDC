@@ -7,20 +7,20 @@
 </template>
 
 <script>
-	export default {
-        name:'mine',
-		data() {
-			return {
-				
-			}
-		},
-		methods: {
-			
-		},
-		mounted() {
+export default {
+	name:'mine',
+	data() {
+		return {
 			
 		}
+	},
+	methods: {
+		
+	},
+	mounted() {
+		
 	}
+}
 
 </script>
 
