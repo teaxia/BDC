@@ -66,13 +66,13 @@
 						url		:	'/OTC/Report', 
 						status	:	true
 					},
-					{
-						name	:	'直推统计',
-						url		:	'/OTC/Statistics', 
-						status	:	true
-					}
+					// {
+					// 	name	:	'直推统计',
+					// 	url		:	'/OTC/Statistics', 
+					// 	status	:	true
+					// }
 				],
-				type	:	'',					// 接收订单列表的传参，用来显示下标
+				type		:	'',					// 接收订单列表的传参，用来显示下标
 				OTCrouter	:	'',				// 商家发布，我的发布权限控制
 			}
 		},
